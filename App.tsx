@@ -4,8 +4,8 @@ import SignInScreen from './src/screens/auth/signin';
 
 export default function App() {
   return (
-    <SafeAreaView style={{flex:1}}>
-      <View style={{flex:1}}>
+    <SafeAreaView style={{flex: 1}}>
+      <View style={{flex: 1}}>
         <SignInScreen />
       </View>
     </SafeAreaView>

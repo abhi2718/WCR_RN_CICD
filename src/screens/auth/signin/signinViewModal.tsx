@@ -5,7 +5,7 @@ export const useViewModal = () => {
   const signInRepository = new SignInRepository();
   const fetchData = async () => {
     try {
-      const data = await signInRepository.getUsers();
+      const data = await signInRepository.getUsers(2);
       console.log(data);
     } catch (error) {
       console.log(error);
