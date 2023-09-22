@@ -1,21 +1,18 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {View, Text, Button} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
-export default function Navigator() {
-  return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
-  );
-}
-
 const Login = (props: any) => {
   const {navigation} = props;
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+      }}>
       <Text>Login</Text>
       <Button
         title="Go to SignUp"
@@ -25,31 +22,46 @@ const Login = (props: any) => {
   );
 };
 
-const SignUp = () => {
+const SignUp = (props: any) => {
+  const {navigation} = props;
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>SignUp</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
     </View>
   );
 };
 
-const Profile = () => {
+const Profile = (props: any) => {
+  const {navigation} = props;
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Profile</Text>
+      <Button
+        title="Go to Settings"
+        onPress={() => navigation.navigate('Settings')}
+      />
     </View>
   );
 };
 
-const Settings = () => {
+const Settings = (props: any) => {
+  const {navigation} = props;
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Settings</Text>
+      <Button
+        title="Go to Login"
+        onPress={() => navigation.navigate('Login')}
+      />
     </View>
   );
 };
 
-const StackNavigator = () => {
+export const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Login" component={Login} />
