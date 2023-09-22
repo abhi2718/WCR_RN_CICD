@@ -7,7 +7,7 @@ export default function SignInScreen() {
   if (loading) {
     return (
       <View style={styles.containerStyle}>
-        <ActivityIndicator color={"blue"}/>
+        <ActivityIndicator color={'blue'} />
       </View>
     );
   }
