@@ -1,4 +1,5 @@
+import {config} from '../config';
 export class AppUrl {
-  public static readonly BASE_URL = 'https://reqres.in/api';
+  public static readonly BASE_URL = config.API_URL;
   public static userEndPoint = `${this.BASE_URL}/users`;
 }
