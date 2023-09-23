@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {SignInRepository} from '../../../repository/signin.repository';
+import {SignInRepository} from '../../../repository/signin.repo';
 
 export const useViewModal = () => {
   const signInRepository = new SignInRepository();
