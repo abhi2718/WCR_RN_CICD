@@ -5,7 +5,7 @@ const Stack = createNativeStackNavigator();
 import {useDispatch, useSelector} from 'react-redux';
 import {addTodo} from '../../store/reducers/todo.reducer';
 import {addProduct} from '../../store/reducers/product.reducer';
-
+console.log("Hello world");
 const Login = (props: any) => {
   const {navigation} = props;
   const dispatch = useDispatch();
