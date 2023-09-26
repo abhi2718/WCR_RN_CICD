@@ -1,21 +1,35 @@
 import React from 'react';
-import {View, Text, Button, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
+import EmailLogin from './components';
+import {Button} from '../../../components/button';
 export default function SignInScreen() {
-  let {count, updateCount, loading} = useViewModal();
-  if (loading) {
-    return (
-      <View style={styles.containerStyle}>
-        <ActivityIndicator color={'blue'} />
-      </View>
-    );
-  }
+  let {
+    count,
+    updateCount,
+    loading,
+    _googleSignIn,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    signInWithEmailPassword,
+  } = useViewModal();
   return (
     <View style={styles.containerStyle}>
-      <Text style={styles.titleStyle}>SignIn</Text>
-      <Text style={styles.countStyle}>{count}</Text>
-      <Button title="Count" onPress={updateCount} />
+      <EmailLogin
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        signInWithEmailPassword={signInWithEmailPassword}
+      />
+      <Button
+        isLoading={loading}
+        title="Google Login"
+        onPress={_googleSignIn}
+      />
     </View>
   );
 }

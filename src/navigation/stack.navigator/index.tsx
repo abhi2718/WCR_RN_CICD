@@ -5,13 +5,17 @@ const Stack = createNativeStackNavigator();
 import {useDispatch, useSelector} from 'react-redux';
 import {addTodo} from '../../store/reducers/todo.reducer';
 import {addProduct} from '../../store/reducers/product.reducer';
-console.log("Hello world");
+import styled from 'styled-components/native';
+import SignInScreen from '../../screens/auth/signin';
+const HeadingText = styled.Text`
+  font-size: 22px;
+`;
 const Login = (props: any) => {
   const {navigation} = props;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(addTodo('Jay Bhole Nath'));
-    dispatch(addProduct('Ji'));
+    dispatch(addTodo('Test'));
+    dispatch(addProduct('P1'));
   }, []);
   return (
     <View
@@ -21,7 +25,8 @@ const Login = (props: any) => {
         alignItems: 'center',
         backgroundColor: '#fff',
       }}>
-      <Text>Login</Text>
+      <Text>Login1</Text>
+      <HeadingText>Okay Bro</HeadingText>
       <Button
         title="Go to SignUp"
         onPress={() => navigation.navigate('SignUp')}
@@ -55,7 +60,7 @@ const Profile = (props: any) => {
   const {navigation} = props;
   const {products} = useSelector(({productState}) => productState);
   const {todos} = useSelector(({todoState}) => todoState);
-  useEffect(() => { 
+  useEffect(() => {
     console.log('todos Profile--->', todos);
     console.log('products Profile--->', products);
   });
@@ -86,7 +91,7 @@ const Settings = (props: any) => {
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} />
