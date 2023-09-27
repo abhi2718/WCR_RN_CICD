@@ -1,4 +1,5 @@
 #import <Firebase.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
@@ -8,6 +9,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
   self.moduleName = @"wcr";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.

@@ -1,7 +1,7 @@
 import {showMessage, MessageType} from 'react-native-flash-message';
 
 export const ShowFlashMessage = (
-  message: string = 'Alert',
+  message: string,
   description: string,
   type: MessageType = 'info',
 ) =>

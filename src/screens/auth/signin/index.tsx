@@ -4,6 +4,7 @@ import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import EmailLogin from './components';
 import {Button} from '../../../components/button';
+import {isAndroid, Spacer} from '../../../components/tools';
 export default function SignInScreen() {
   let {
     count,
@@ -15,21 +16,37 @@ export default function SignInScreen() {
     password,
     setPassword,
     signInWithEmailPassword,
+    handleAppleSignIn,
+    _onFbLogIn,
   } = useViewModal();
   return (
     <View style={styles.containerStyle}>
-      <EmailLogin
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        signInWithEmailPassword={signInWithEmailPassword}
-      />
-      <Button
-        isLoading={loading}
-        title="Google Login"
-        onPress={_googleSignIn}
-      />
+      <Spacer position="bottom" size={16}>
+        <EmailLogin
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          signInWithEmailPassword={signInWithEmailPassword}
+        />
+      </Spacer>
+      <Spacer position="bottom" size={16}>
+        <Button
+          isLoading={loading}
+          title="Google Login"
+          onPress={_googleSignIn}
+        />
+      </Spacer>
+      {!isAndroid && (
+        <Button
+          isLoading={loading}
+          title="Apple Login"
+          onPress={handleAppleSignIn}
+        />
+      )}
+      <Spacer position="top" size={16}>
+        <Button isLoading={loading} title="Fb Login" onPress={_onFbLogIn} />
+      </Spacer>
     </View>
   );
 }

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "646347262122",
+    "project_id": "wcr-prod",
+    "storage_bucket": "wcr-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646347262122:android:a2aa54f210dde9f0f4a8d3",
+        "android_client_info": {
+          "package_name": "com.whitecoatromance.staging.twa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646347262122-glp62152t6tmcadi6csknrvrq09ktm9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whitecoatromance.staging.twa",
+            "certificate_hash": "76f2dd83f2c592bd2cd961f13345a2e68c223cbc"
+          }
+        },
+        {
+          "client_id": "646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4W9W6H3C6HroAPv2yACjn5_SjqWeSPkc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "646347262122-46r8131jadqafhs4rot3n9t8bsncp9rh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whitecoatromance.app",
+                "app_store_id": "1580685084"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

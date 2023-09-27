@@ -9,7 +9,7 @@ export const Button = (props: ButtonProps) => {
     <>
       {isLoading ? (
         <View style={styles.container}>
-          <ActivityIndicator color="#fff" />
+          <ActivityIndicator size={16} color="#fff" />
         </View>
       ) : (
         <View style={styles.container}>
@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
+    fontSize: 16,
   },
 });

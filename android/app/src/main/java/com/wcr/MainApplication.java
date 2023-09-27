@@ -1,4 +1,4 @@
-package com.wcr;
+package com.whitecoatromance.staging.twa;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
