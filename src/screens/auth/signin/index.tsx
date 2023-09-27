@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator, Text} from 'react-native';
 import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import EmailLogin from './components';
@@ -30,6 +30,13 @@ export default function SignInScreen() {
           signInWithEmailPassword={signInWithEmailPassword}
         />
       </Spacer>
+      <Text
+        style={{
+          fontFamily: 'Roboto-BlackItalic',
+          fontSize: 30,
+        }}>
+        Adding Custom FontFamily
+      </Text>
       <Spacer position="bottom" size={16}>
         <Button
           isLoading={loading}

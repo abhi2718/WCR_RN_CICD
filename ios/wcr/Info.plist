@@ -27,26 +27,22 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-        <string>fb1225181204925113</string>
+				<string>fb1225181204925113</string>
 				<string>com.googleusercontent.apps.646347262122-46r8131jadqafhs4rot3n9t8bsncp9rh</string>
 			</array>
 		</dict>
 	</array>
-  
- 
-  <key>FacebookAppID</key>
-  <string>1225181204925113</string>
-  <key>c50a9aa3670d3361a24048d09abb9bf3</key>
-  <string>CLIENT-TOKEN</string>
-  <key>FacebookDisplayName</key>
-  <string>WCR</string>
-  
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fbapi</string>
-    <string>fb-messenger-share-api</string>
-  </array>
-  
+	<key>FacebookAppID</key>
+	<string>1225181204925113</string>
+	<key>c50a9aa3670d3361a24048d09abb9bf3</key>
+	<string>CLIENT-TOKEN</string>
+	<key>FacebookDisplayName</key>
+	<string>WCR</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -63,7 +59,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -78,5 +74,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-BlackItalic.ttf</string>
+		<string>Montserrat-Italic-VariableFont_wght.ttf</string>
+		<string>Montserrat-VariableFont_wght.ttf</string>
+	</array>
 </dict>
 </plist>

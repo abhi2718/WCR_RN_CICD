@@ -9,7 +9,6 @@ import {
   GraphRequest,
   GraphRequestManager,
   AccessToken,
-  GraphRequestCallback,
 } from 'react-native-fbsdk';
 import {ShowFlashMessage} from '../../components/flashBar';
 import {config} from '../../utils/config';
@@ -170,5 +169,29 @@ export class FirebaseService {
       ShowFlashMessage('Alert', 'Something went wrong ', 'danger');
     }
   }
-  async signInWithFb() {}
+  async signInWithFb() {
+    LoginManager.logOut();
+    const loginResult = await LoginManager.logInWithPermissions([
+      'email',
+      'public_profile',
+    ]);
+    if (
+      loginResult.declinedPermissions &&
+      loginResult.declinedPermissions.includes('email')
+    ) {
+      return ShowFlashMessage('Alert', 'Email is required', 'danger');
+    }
+    if (loginResult.isCancelled) {
+      return ShowFlashMessage('Alert', 'You Cancelled ', 'danger');
+    }
+    const infoRequest = new GraphRequest('/me?fields=email,name,picture');
+    new GraphRequestManager().addRequest(infoRequest).start();
+    const data = await AccessToken.getCurrentAccessToken();
+    if (data?.accessToken) {
+      const facebookCredential = auth.FacebookAuthProvider.credential(
+        data?.accessToken,
+      );
+      return await this.signInWithCredential(facebookCredential);
+    }
+  }
 }

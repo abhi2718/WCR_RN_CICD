@@ -1,13 +1,5 @@
 import {useEffect, useState} from 'react';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {
-  LoginManager,
-  GraphRequest,
-  GraphRequestManager,
-  AccessToken,
-  GraphRequestCallback,
-} from 'react-native-fbsdk';
-import auth from '@react-native-firebase/auth';
 import {SignInRepository} from '../../../repository/signin.repo';
 import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
@@ -71,54 +63,11 @@ export const useViewModal = () => {
     const data = await firebaseService.appleSignIn();
     console.log(data);
   };
-  const _fbLogin = (
-    resCallback: GraphRequestCallback | ((arg: string) => void) | undefined,
-  ) => {
-    LoginManager.logOut();
-    return LoginManager.logInWithPermissions(['email', 'public_profile']).then(
-      result => {
-        if (
-          result.declinedPermissions &&
-          result.declinedPermissions.includes('email')
-        ) {
-          resCallback('Email is required');
-        }
-        if (result.isCancelled) {
-        } else {
-          const infoRequest = new GraphRequest(
-            '/me?fields=email,name,picture',
-            null,
-            resCallback,
-          );
-          new GraphRequestManager().addRequest(infoRequest).start();
-        }
-      },
-      error => {
-        ShowFlashMessage('Something went wrong ', 'danger');
-      },
-    );
-  };
-  const _responseInfoCallback = async (error, result) => {
-    if (error) {
-      ShowFlashMessage('Something went wrong ', 'danger');
-    } else {
-      const data = await AccessToken.getCurrentAccessToken();
-      if (data?.accessToken) {
-        const facebookCredential = auth.FacebookAuthProvider.credential(
-          data?.accessToken,
-        );
-        const response = await firebaseService.signInWithCredential(
-          facebookCredential,
-        );
-        if (response) {
-          console.log('response -->', response);
-        }
-      }
-    }
-  };
+
   const _onFbLogIn = async () => {
     try {
-      await _fbLogin(_responseInfoCallback);
+      const data = await firebaseService.signInWithFb();
+      console.log(data);
     } catch (e) {
       ShowFlashMessage('Something went wrong !', 'danger');
     }
