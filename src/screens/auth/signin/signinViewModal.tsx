@@ -53,7 +53,7 @@ export const useViewModal = () => {
         'danger',
       );
     }
-    const data = firebaseService.signInWithEmailPassword(email, password);
+    const data = await firebaseService.signInWithEmailPassword(email, password);
     if (!data) {
       return;
     }

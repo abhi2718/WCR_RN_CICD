@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, ActivityIndicator, Text} from 'react-native';
+import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import EmailLogin from './components';
@@ -54,6 +55,12 @@ export default function SignInScreen() {
       <Spacer position="top" size={16}>
         <Button isLoading={loading} title="Fb Login" onPress={_onFbLogIn} />
       </Spacer>
+      <PaperButton
+        icon="camera"
+        mode="text"
+        onPress={() => console.log('Pressed')}>
+        Press me
+      </PaperButton>
     </View>
   );
 }
