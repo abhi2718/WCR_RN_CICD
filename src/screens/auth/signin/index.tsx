@@ -1,11 +1,20 @@
 import React from 'react';
-import {View, ActivityIndicator, Text} from 'react-native';
+import {View, ActivityIndicator, Text, TouchableOpacity} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import EmailLogin from './components';
 import {Button} from '../../../components/button';
-import {isAndroid, Spacer} from '../../../components/tools';
+import {ImageContainer, dimensions} from '../../../components/tools';
+import {
+  Column,
+  FullLoader,
+  InlineLoader,
+  InputBox,
+  isAndroid,
+  Row,
+  Spacer,
+} from '../../../components/tools';
 export default function SignInScreen() {
   let {
     count,
@@ -22,45 +31,53 @@ export default function SignInScreen() {
   } = useViewModal();
   return (
     <View style={styles.containerStyle}>
-      <Spacer position="bottom" size={16}>
-        <EmailLogin
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          signInWithEmailPassword={signInWithEmailPassword}
-        />
+      <ImageContainer
+        width={72}
+        height={54}
+        marginTop={50}
+        source={require('../../../assets/images/logo.png')}
+      />
+      <Text style={styles.headingText}>Login to Your Account</Text>
+      <Spacer position="bottom" size={20}>
+        <Spacer position="top" size={20}>
+          <EmailLogin
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            signInWithEmailPassword={signInWithEmailPassword}
+          />
+        </Spacer>
       </Spacer>
-      <Text
-        style={{
-          fontFamily: 'Roboto-BlackItalic',
-          fontSize: 30,
-        }}>
-        Adding Custom FontFamily
-      </Text>
-      <Spacer position="bottom" size={16}>
-        <Button
-          isLoading={loading}
-          title="Google Login"
-          onPress={_googleSignIn}
+      <Row style={styles.continueText}>
+        <Text style={styles.emptyText}></Text>
+        <Text>Or continue with</Text>
+        <Text />
+      </Row>
+      <Row justifyContent="center" style={styles.socialLogin}>
+        <ImageContainer
+          width={30}
+          height={35}
+          source={require('../../../assets/images/facebookLogo.png')}
         />
-      </Spacer>
-      {!isAndroid && (
-        <Button
-          isLoading={loading}
-          title="Apple Login"
-          onPress={handleAppleSignIn}
+        <ImageContainer
+          width={30}
+          height={35}
+          source={require('../../../assets/images/googleLogo.png')}
         />
-      )}
-      <Spacer position="top" size={16}>
-        <Button isLoading={loading} title="Fb Login" onPress={_onFbLogIn} />
-      </Spacer>
-      <PaperButton
-        icon="camera"
-        mode="text"
-        onPress={() => console.log('Pressed')}>
-        Press me
-      </PaperButton>
+        {!isAndroid && (
+          <TouchableOpacity onPress={_googleSignIn}>
+            <ImageContainer
+              width={30}
+              height={35}
+              // onPress={_googleSignIn}
+              source={require('../../../assets/images/appleLogo.png')}
+            />
+          </TouchableOpacity>
+        )}
+
+        {/* <Button title="Google Login" onPress={_googleSignIn} /> */}
+      </Row>
     </View>
   );
 }
