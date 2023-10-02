@@ -3,7 +3,7 @@ import {View, ActivityIndicator, Text, TouchableOpacity} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
-import EmailLogin from './components';
+import EmailLogin from '../components';
 import {Button} from '../../../components/button';
 import {ImageContainer, dimensions} from '../../../components/tools';
 import {
@@ -21,6 +21,7 @@ export default function SignInScreen() {
     updateCount,
     loading,
     _googleSignIn,
+    handleSignUpPress,
     email,
     setEmail,
     password,
@@ -45,7 +46,8 @@ export default function SignInScreen() {
             setEmail={setEmail}
             password={password}
             setPassword={setPassword}
-            signInWithEmailPassword={signInWithEmailPassword}
+            onPress={signInWithEmailPassword}
+            title="Login"
           />
         </Spacer>
       </Spacer>
@@ -55,29 +57,42 @@ export default function SignInScreen() {
         <Text />
       </Row>
       <Row justifyContent="center" style={styles.socialLogin}>
-        <ImageContainer
-          width={30}
-          height={35}
-          source={require('../../../assets/images/facebookLogo.png')}
-        />
-        <ImageContainer
-          width={30}
-          height={35}
-          source={require('../../../assets/images/googleLogo.png')}
-        />
+        <TouchableOpacity onPress={_onFbLogIn}>
+          <ImageContainer
+            width={30}
+            height={35}
+            source={require('../../../assets/images/facebookLogo.png')}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={_googleSignIn}>
+          <ImageContainer
+            width={30}
+            height={35}
+            source={require('../../../assets/images/googleLogo.png')}
+          />
+        </TouchableOpacity>
+
         {!isAndroid && (
-          <TouchableOpacity onPress={_googleSignIn}>
+          <TouchableOpacity onPress={handleAppleSignIn}>
             <ImageContainer
               width={30}
               height={35}
-              // onPress={_googleSignIn}
+              //
               source={require('../../../assets/images/appleLogo.png')}
             />
           </TouchableOpacity>
         )}
-
-        {/* <Button title="Google Login" onPress={_googleSignIn} /> */}
       </Row>
+
+      <Spacer position="top" size={20}>
+        <Row>
+          <Text style={styles.footerText}>Don’t have an account ?</Text>
+          <TouchableOpacity onPress={handleSignUpPress}>
+            <Text style={styles.linkText}> Sign Up </Text>
+          </TouchableOpacity>
+        </Row>
+      </Spacer>
     </View>
   );
 }

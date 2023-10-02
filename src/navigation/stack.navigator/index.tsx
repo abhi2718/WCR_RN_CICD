@@ -7,6 +7,7 @@ import {addTodo} from '../../store/reducers/todo.reducer';
 import {addProduct} from '../../store/reducers/product.reducer';
 import styled from 'styled-components/native';
 import SignInScreen from '../../screens/auth/signin';
+import SignUpScreen from '../../screens/auth/signup';
 const HeadingText = styled.Text`
   font-size: 22px;
 `;
@@ -35,35 +36,11 @@ const Login = (props: any) => {
   );
 };
 
-const SignUp = (props: any) => {
-  const {navigation} = props;
-  const {products} = useSelector(({productState}) => productState);
-  const {todos} = useSelector(({todoState}) => todoState);
-  console.log('todos --->', todos);
-  console.log('products --->', products);
-  const dispatch = useDispatch();
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>SignUp</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => {
-          dispatch({type: 'USER_LOGOUT'});
-          navigation.navigate('Profile');
-        }}
-      />
-    </View>
-  );
-};
-
 const Profile = (props: any) => {
   const {navigation} = props;
   const {products} = useSelector(({productState}) => productState);
   const {todos} = useSelector(({todoState}) => todoState);
-  useEffect(() => {
-    console.log('todos Profile--->', todos);
-    console.log('products Profile--->', products);
-  });
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Profile</Text>
@@ -91,8 +68,16 @@ const Settings = (props: any) => {
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SignIn" component={SignInScreen} />
-      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="SignIn"
+        component={SignInScreen}
+      />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="SignUp"
+        component={SignUpScreen}
+      />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>

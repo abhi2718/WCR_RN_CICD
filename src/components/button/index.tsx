@@ -26,16 +26,14 @@ export const Button = (props: ButtonProps) => {
 
 export const RedButton = (props: ButtonProps) => {
   const {title, onPress, btnColor} = props;
-  console.log(btnColor, 'color');
   return (
     <View
+      onPress={onPress}
       style={{
         ...styles.redButton,
         backgroundColor: btnColor ? btnColor : '#FA5672',
       }}>
-      <Pressable onPress={onPress}>
-        <Text style={styles.bntText}>{title}</Text>
-      </Pressable>
+      <Text style={styles.bntText}>{title}</Text>
     </View>
   );
 };

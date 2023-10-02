@@ -3,6 +3,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {SignInRepository} from '../../../repository/signin.repo';
 import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
+import {useNavigation} from '@react-navigation/native';
 
 export const useViewModal = () => {
   const signInRepository = new SignInRepository();
@@ -11,13 +12,13 @@ export const useViewModal = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
   const fetchData = async () => {
     try {
       setLoading(true);
       const data = await signInRepository.getUsers(2);
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
@@ -43,7 +44,6 @@ export const useViewModal = () => {
       } = data.profile;
     }
     setLoading(false);
-    console.log(data);
   };
   const signInWithEmailPassword = async () => {
     if (!email.length || !password.length) {
@@ -57,21 +57,24 @@ export const useViewModal = () => {
     if (!data) {
       return;
     }
-    console.log('data is', data);
   };
   const handleAppleSignIn = async () => {
     const data = await firebaseService.appleSignIn();
-    console.log(data);
   };
 
   const _onFbLogIn = async () => {
     try {
       const data = await firebaseService.signInWithFb();
-      console.log(data);
     } catch (e) {
       ShowFlashMessage('Something went wrong !', 'danger');
     }
   };
+
+  const handleSignUpPress = () => {
+    // Navigate to the signup page here
+    navigation.navigate('SignUp');
+  };
+
   return {
     count,
     updateCount,
@@ -84,5 +87,6 @@ export const useViewModal = () => {
     signInWithEmailPassword,
     handleAppleSignIn,
     _onFbLogIn,
+    handleSignUpPress,
   };
 };

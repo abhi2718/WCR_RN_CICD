@@ -6,12 +6,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {RedButton, Button} from '../../../../components/button';
-import {Spacer, dimensions} from '../../../../components/tools';
+import {RedButton, Button} from '../../../components/button';
+import {Spacer, dimensions} from '../../../components/tools';
 
 const EmailLogin = (props: any) => {
-  const {email, setEmail, password, setPassword, signInWithEmailPassword} =
-    props;
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    signInWithEmailPassword,
+    onPress,
+    title,
+  } = props;
   return (
     <View style={styles.container}>
       <View style={styles.inputDiv}>
@@ -33,7 +40,9 @@ const EmailLogin = (props: any) => {
       </View>
 
       <Spacer style={styles.spacerStyle} position="top" size={25}>
-        <RedButton title="Login" onPress={signInWithEmailPassword} />
+        <TouchableOpacity onPress={onPress}>
+          <RedButton title={title} />
+        </TouchableOpacity>
       </Spacer>
     </View>
   );
