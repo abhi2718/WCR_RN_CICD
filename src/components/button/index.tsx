@@ -1,9 +1,14 @@
 import React from 'react';
-import {View, Pressable, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Pressable,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import {ActivityIndicator} from 'react-native-paper';
 import {ButtonProps} from '../../types/components/button.type';
 import styled from 'styled-components';
-import {dimensions} from '../tools';
 
 export const Button = (props: ButtonProps) => {
   const {title, onPress, isLoading} = props;
@@ -24,17 +29,22 @@ export const Button = (props: ButtonProps) => {
   );
 };
 
-export const RedButton = (props: ButtonProps) => {
-  const {title, onPress, btnColor} = props;
+export const PrimaryButton = (props: ButtonProps) => {
+  const {title, onPress, isLoading, btnColor} = props;
+
   return (
-    <View
-      onPress={onPress}
+    <TouchableOpacity
+      onPress={isLoading ? undefined : onPress}
       style={{
         ...styles.redButton,
-        backgroundColor: btnColor ? btnColor : '#FA5672',
+        backgroundColor: btnColor || '#FA5672',
       }}>
-      <Text style={styles.bntText}>{title}</Text>
-    </View>
+      {isLoading ? (
+        <ActivityIndicator size="small" color="#fff" />
+      ) : (
+        <Text style={styles.btnText}>{title}</Text>
+      )}
+    </TouchableOpacity>
   );
 };
 
@@ -64,7 +74,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1, // iOS box shadow opacity
     shadowRadius: 18, // iOS box shadow radius
   },
-  bntText: {
+  btnText: {
     color: '#FEFBFD',
     fontSize: 16,
     fontStyle: 'normal',

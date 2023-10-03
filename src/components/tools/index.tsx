@@ -1,41 +1,66 @@
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
-import {Platform, Dimensions, TextInput, Image} from 'react-native';
+import {
+  Platform,
+  Dimensions,
+  TextInput,
+  Image,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  ImageSourcePropType,
+} from 'react-native';
 import {InputProps} from '../../types/components/input.type';
 import {ActivityIndicator} from 'react-native-paper';
 import {rowColumnProps} from '../../types/components/rowColumn.type';
 import {imageProps} from '../../types/components/image.type';
 
+// Screen Wrapper
+interface ScreenContainerProps {
+  children: ReactNode;
+}
+export const ScreenContainer: React.FC<ScreenContainerProps> = ({children}) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>{children}</View>
+    </SafeAreaView>
+  );
+};
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    flex: 1,
+  },
+  innerContainer: {
+    textAlign: 'center',
+    flex: 1,
+    padding: 16,
+  },
+});
+
 // Input Box with dynamic Styling
-const InputContainer = styled.View<InputProps>`
-  border: 1px solid black;
-  height: ${({height}) => `${height}px`};
-  width: ${({width}) => `${width}px`};
-  padding: 5px;
+const InputContainer = styled.TextInput<InputProps>`
+  padding: 15px;
+  width: 100%;
 `;
 
 export const InputBox: React.FC<InputProps> = props => {
-  const {placeholder} = props;
-
-  return (
-    <InputContainer {...props}>
-      <TextInput placeholder={placeholder} />
-    </InputContainer>
-  );
+  return <InputContainer {...props} />;
 };
 
 // ---- ImageContainer
 
 const ImageProps = styled.Image<imageProps>`
-  height: ${({height}) => `${height}px`};
-  width: ${({width}) => `${width}px`};
-  margin-top: ${({marginTop}) => `${marginTop}px`};
-  margin-bottom: ${({marginBottom}) => `${marginBottom}px`};
-  overflow: 'visible';
+  height: ${({height = 50}) => `${height}px`};
+  width: ${({width = 50}) => `${width}px`};
+  margin-top: ${({marginTop = 10}) => `${marginTop}px`};
+  margin-bottom: ${({marginBottom = 10}) => `${marginBottom}px`};
+  overflow: visible;
 `;
 
 export const ImageContainer: React.FC<imageProps> = props => {
-  return <ImageProps {...props} />;
+  const {source, ...otherProps} = props;
+  return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
 };
 
 // --- FullLoader
@@ -159,5 +184,4 @@ export const Spacer = (props: spacerProos) => {
 
 export const isAndroid = Platform.OS === 'android';
 const {width, height} = Dimensions.get('screen');
-
 export const dimensions = {width, height};

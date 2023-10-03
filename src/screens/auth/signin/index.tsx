@@ -5,16 +5,8 @@ import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import EmailLogin from '../components';
 import {Button} from '../../../components/button';
-import {ImageContainer, dimensions} from '../../../components/tools';
-import {
-  Column,
-  FullLoader,
-  InlineLoader,
-  InputBox,
-  isAndroid,
-  Row,
-  Spacer,
-} from '../../../components/tools';
+import {ImageContainer, ScreenContainer} from '../../../components/tools';
+import {isAndroid, Row, Spacer} from '../../../components/tools';
 export default function SignInScreen() {
   let {
     count,
@@ -31,14 +23,17 @@ export default function SignInScreen() {
     _onFbLogIn,
   } = useViewModal();
   return (
-    <View style={styles.containerStyle}>
-      <ImageContainer
-        width={72}
-        height={54}
-        marginTop={50}
-        source={require('../../../assets/images/logo.png')}
-      />
+    <ScreenContainer>
+      <View style={styles.viewDiv}>
+        <ImageContainer
+          width={72}
+          height={54}
+          marginTop={50}
+          source={require('../../../assets/images/logo.png')}
+        />
+      </View>
       <Text style={styles.headingText}>Login to Your Account</Text>
+
       <Spacer position="bottom" size={20}>
         <Spacer position="top" size={20}>
           <EmailLogin
@@ -48,13 +43,12 @@ export default function SignInScreen() {
             setPassword={setPassword}
             onPress={signInWithEmailPassword}
             title="Login"
+            isLoading={loading}
           />
         </Spacer>
       </Spacer>
-      <Row style={styles.continueText}>
-        <Text style={styles.emptyText}></Text>
-        <Text>Or continue with</Text>
-        <Text />
+      <Row justifyContent="center">
+        <Text style={styles.centerText}>Or continue with</Text>
       </Row>
       <Row justifyContent="center" style={styles.socialLogin}>
         <TouchableOpacity onPress={_onFbLogIn}>
@@ -78,7 +72,6 @@ export default function SignInScreen() {
             <ImageContainer
               width={30}
               height={35}
-              //
               source={require('../../../assets/images/appleLogo.png')}
             />
           </TouchableOpacity>
@@ -86,13 +79,13 @@ export default function SignInScreen() {
       </Row>
 
       <Spacer position="top" size={20}>
-        <Row>
+        <Row justifyContent="center">
           <Text style={styles.footerText}>Don’t have an account ?</Text>
           <TouchableOpacity onPress={handleSignUpPress}>
             <Text style={styles.linkText}> Sign Up </Text>
           </TouchableOpacity>
         </Row>
       </Spacer>
-    </View>
+    </ScreenContainer>
   );
 }

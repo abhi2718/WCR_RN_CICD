@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {RedButton, Button} from '../../../components/button';
-import {Spacer, dimensions} from '../../../components/tools';
+import {PrimaryButton, Button} from '../../../components/button';
+import {InputBox, Spacer} from '../../../components/tools';
 
 const EmailLogin = (props: any) => {
   const {
@@ -18,57 +18,48 @@ const EmailLogin = (props: any) => {
     signInWithEmailPassword,
     onPress,
     title,
+    isLoading,
   } = props;
   return (
-    <View style={styles.container}>
+    <View>
       <View style={styles.inputDiv}>
-        <TextInput
+        <InputBox
           style={styles.input}
           placeholder="Email"
           value={email}
-          onChangeText={text => setEmail(text)}
+          onChangeText={(text: any) => setEmail(text)}
         />
       </View>
       <View style={styles.inputDiv}>
-        <TextInput
+        <InputBox
           style={styles.input}
           placeholder="Password"
           value={password}
-          onChangeText={text => setPassword(text)}
+          onChangeText={(text: any) => setPassword(text)}
           secureTextEntry
         />
       </View>
 
       <Spacer style={styles.spacerStyle} position="top" size={25}>
         <TouchableOpacity onPress={onPress}>
-          <RedButton title={title} />
+          <PrimaryButton title={title} isLoading={isLoading} />
         </TouchableOpacity>
       </Spacer>
     </View>
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    width: dimensions.width,
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   inputDiv: {
-    alignSelf: 'stretch',
     backgroundColor: '#f8f8f9',
     borderRadius: 14,
     height: 56,
-    padding: 15,
-    marginTop: 24,
+    marginBottom: 10,
+    justifyContent: 'center',
   },
   input: {
-    alignSelf: 'stretch',
     fontSize: 18,
     borderWidth: 0,
     borderColor: 'transparent',
-    autoCapitalize: 'none',
   },
   spacerStyle: {
     alignSelf: 'stretch',
