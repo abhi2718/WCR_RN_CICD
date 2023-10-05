@@ -47,4 +47,31 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
     fontWeight: 'bold',
   },
+
+
+  emailInputBox: {
+    flex: 1,
+    color: '#333',
+  },
+
+  emailIconStyle: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(35, 35, 35, 0.03)', // Grey background color
+    borderRadius: 62,
+    paddingHorizontal: 16,
+    marginVertical: 10,
+    width: '100%',
+    marginTop: 100,
+  },
 });
+
+
+ 
+  

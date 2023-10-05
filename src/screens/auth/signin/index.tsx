@@ -1,10 +1,21 @@
 import React from 'react';
-import {View, ActivityIndicator, Text, TouchableOpacity} from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import EmailLogin from '../components';
-import {Button} from '../../../components/button';
+import {
+  Button,
+  RoundedButtonWithIconAndText,
+  RedButton,
+} from '../../../components/button';
 import {ImageContainer, dimensions} from '../../../components/tools';
 import {
   Column,
@@ -33,66 +44,45 @@ export default function SignInScreen() {
   return (
     <View style={styles.containerStyle}>
       <ImageContainer
-        width={72}
         height={54}
+        width={72}
         marginTop={50}
+        marginBottom={150}
         source={require('../../../assets/images/logo.png')}
       />
-      <Text style={styles.headingText}>Login to Your Account</Text>
-      <Spacer position="bottom" size={20}>
-        <Spacer position="top" size={20}>
-          <EmailLogin
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            onPress={signInWithEmailPassword}
-            title="Login"
-          />
-        </Spacer>
-      </Spacer>
-      <Row style={styles.continueText}>
-        <Text style={styles.emptyText}></Text>
-        <Text>Or continue with</Text>
-        <Text />
-      </Row>
-      <Row justifyContent="center" style={styles.socialLogin}>
-        <TouchableOpacity onPress={_onFbLogIn}>
-          <ImageContainer
-            width={30}
-            height={35}
-            source={require('../../../assets/images/facebookLogo.png')}
-          />
-        </TouchableOpacity>
 
-        <TouchableOpacity onPress={_googleSignIn}>
-          <ImageContainer
-            width={30}
-            height={35}
-            source={require('../../../assets/images/googleLogo.png')}
-          />
-        </TouchableOpacity>
+      <RoundedButtonWithIconAndText
+         onPress={_onFbLogIn}
+        text={'Continue with Facebook'}
+        iconSource={require('../../../assets/images/facebookLogo.png')}
+      />
+      <RoundedButtonWithIconAndText
+        onPress={_googleSignIn}
+        text={'Continue with Google'}
+        iconSource={require('../../../assets/images/googleLogo.png')}
+      />
+      {!isAndroid && (
+        <RoundedButtonWithIconAndText
+          onPress={handleAppleSignIn}
+          text={'Continue with Apple'}
+          iconSource={require('../../../assets/images/appleLogo.png')}
+        />
+      )}
 
-        {!isAndroid && (
-          <TouchableOpacity onPress={handleAppleSignIn}>
-            <ImageContainer
-              width={30}
-              height={35}
-              //
-              source={require('../../../assets/images/appleLogo.png')}
-            />
-          </TouchableOpacity>
-        )}
-      </Row>
+      <View style={styles.inputContainer}>
+        <ImageContainer
+          source={require('../../../assets/images/Email-icon.png')}
+          style={styles.emailIconStyle}
+        />
+        <TextInput
+          style={styles.emailInputBox}
+          placeholder={'Email'}
+          placeholderTextColor="rgba(35, 35, 35, 0.4)" // Adjust the placeholder text color
+        
+        />
+      </View>
 
-      <Spacer position="top" size={20}>
-        <Row>
-          <Text style={styles.footerText}>Don’t have an account ?</Text>
-          <TouchableOpacity onPress={navigateToSignUPScreen}>
-            <Text style={styles.linkText}> Sign Up </Text>
-          </TouchableOpacity>
-        </Row>
-      </Spacer>
+      <RedButton title={'Continue'} onPress={() => {}} />
     </View>
   );
 }
