@@ -1,10 +1,16 @@
 import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
+import {theme} from '../../../infrastructure/theme';
 
+export const ErrorText = styled.Text`
+  color: ${props => props.theme.colors.text.error};
+  font-family: ${props => props.theme.fontFamily.roboto};
+`;
 export const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.bg.primary,
     paddingTop: 5,
     paddingBottom: 5,
     paddingRight: 15,
@@ -15,27 +21,28 @@ export const styles = StyleSheet.create({
     alignItems: 'center', // Center horizontally
   },
   headingText: {
-    marginTop: 50,
-    fontSize: 24,
-    fontWeight: 'bold',
-    fontFamily: 'Roboto-BlackItalic',
+    marginTop: theme.space[3],
+    fontSize: theme.sizes[2],
+    fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fontFamily.roboto,
     textAlign: 'center',
   },
   centerText: {
     textAlign: 'center',
     alignItems: 'center',
+    color: theme.colors.text.error,
+    fontWeight: `${theme.fontWeights.medium}`,
+    fontFamily: theme.fontFamily.roboto,
   },
   emptyText: {
     paddingBottom: 5,
     width: 10,
   },
   socialLogin: {
-    // flex: 1,
     alignSelf: 'stretch',
     gap: 50,
     marginTop: 20,
   },
-
   footerText: {
     textAlign: 'center',
     fontSize: 16,

@@ -2,11 +2,19 @@ import React from 'react';
 import {View, ActivityIndicator, Text, TouchableOpacity} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
-import {styles} from './signInStyle';
+import {ErrorText, styles} from './signInStyle';
 import EmailLogin from '../components';
 import {Button} from '../../../components/button';
 import {ImageContainer, ScreenContainer} from '../../../components/tools';
 import {isAndroid, Row, Spacer} from '../../../components/tools';
+import {MyText} from '../../../components/typography/text.component';
+enum Variants {
+  Body = 'body',
+  Label = 'label',
+  Caption = 'caption',
+  Error = 'error',
+  Hint = 'hint',
+}
 export default function SignInScreen() {
   let {
     count,
@@ -32,8 +40,8 @@ export default function SignInScreen() {
           source={require('../../../assets/images/logo.png')}
         />
       </View>
-      <Text style={styles.headingText}>Login to Your Account</Text>
-
+      <MyText variant={Variants.Error}>Hello world</MyText>
+      {/* <Text style={styles.headingText}>Login to Your Account</Text> */}
       <Spacer position="bottom" size={20}>
         <Spacer position="top" size={20}>
           <EmailLogin
@@ -47,6 +55,7 @@ export default function SignInScreen() {
           />
         </Spacer>
       </Spacer>
+      <ErrorText>Error</ErrorText>
       <Row justifyContent="center">
         <Text style={styles.centerText}>Or continue with</Text>
       </Row>
