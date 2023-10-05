@@ -1,5 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
-import {dimensions} from '../../../components/tools';
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   containerStyle: {
@@ -11,21 +10,22 @@ export const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
   },
-  countStyle: {
-    fontSize: 26,
-    color: 'red',
+  viewDiv: {
+    justifyContent: 'center', // Center vertically
+    alignItems: 'center', // Center horizontally
   },
-
   headingText: {
     marginTop: 50,
     fontSize: 24,
     fontWeight: 'bold',
     fontFamily: 'Roboto-BlackItalic',
-    fontStyle: 'normal',
+    textAlign: 'center',
+  },
+  centerText: {
+    textAlign: 'center',
+    alignItems: 'center',
   },
   emptyText: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'red',
     paddingBottom: 5,
     width: 10,
   },
@@ -35,10 +35,9 @@ export const styles = StyleSheet.create({
     gap: 50,
     marginTop: 20,
   },
-  continueText: {
-    fontSize: 24,
-  },
+
   footerText: {
+    textAlign: 'center',
     fontSize: 16,
   },
   linkText: {
