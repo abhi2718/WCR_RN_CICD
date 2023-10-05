@@ -9,16 +9,17 @@ import {
 import {RedButton, Button} from '../../../components/button';
 import {Spacer, dimensions} from '../../../components/tools';
 
-const EmailLogin = (props: any) => {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    signInWithEmailPassword,
-    onPress,
-    title,
-  } = props;
+type EmailProps = {
+  setEmail: (text: string) => void;
+  title?: string;
+  email: string;
+  setPassword: (text: string) => void;
+  password: string;
+  onPress: () => void;
+};
+
+const EmailLogin = (props: EmailProps) => {
+  const {email, setEmail, password, setPassword, onPress, title} = props;
   return (
     <View style={styles.container}>
       <View style={styles.inputDiv}>
@@ -41,7 +42,7 @@ const EmailLogin = (props: any) => {
 
       <Spacer style={styles.spacerStyle} position="top" size={25}>
         <TouchableOpacity onPress={onPress}>
-          <RedButton title={title} />
+          <RedButton title={title!} />
         </TouchableOpacity>
       </Spacer>
     </View>
@@ -60,7 +61,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f9',
     borderRadius: 14,
     height: 56,
-    padding: 15,
     marginTop: 24,
   },
   input: {

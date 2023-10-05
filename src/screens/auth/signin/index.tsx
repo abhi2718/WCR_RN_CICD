@@ -21,7 +21,7 @@ export default function SignInScreen() {
     updateCount,
     loading,
     _googleSignIn,
-    handleSignUpPress,
+    navigateToSignUPScreen,
     email,
     setEmail,
     password,
@@ -88,7 +88,7 @@ export default function SignInScreen() {
       <Spacer position="top" size={20}>
         <Row>
           <Text style={styles.footerText}>Don’t have an account ?</Text>
-          <TouchableOpacity onPress={handleSignUpPress}>
+          <TouchableOpacity onPress={navigateToSignUPScreen}>
             <Text style={styles.linkText}> Sign Up </Text>
           </TouchableOpacity>
         </Row>

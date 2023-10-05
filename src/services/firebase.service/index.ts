@@ -12,13 +12,12 @@ import {
 } from 'react-native-fbsdk';
 import {ShowFlashMessage} from '../../components/flashBar';
 import {config} from '../../utils/config';
-
 export class FirebaseService {
   constructor() {}
   async signInWithGoogle(setLoading: (loadingState: boolean) => void) {
     try {
       GoogleSignin.configure({
-        webClientId: config.CLIENTID,
+        webClientId: '646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com',
       });
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signIn();
@@ -135,6 +134,38 @@ export class FirebaseService {
       }
     }
   }
+  async signUpWithEmailPassword(email: string, password: string) {
+    try {
+      return await auth().createUserWithEmailAndPassword(email, password);
+    } catch (error: any) {
+      console.log('error::',error)
+      switch (error.code) {
+        case 'auth/invalid-email':
+          ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
+          break;
+        case 'auth/wrong-password':
+          ShowFlashMessage(
+            'Alert',
+            'The password is invalid or the user does not have a password',
+            'danger',
+          );
+          break;
+        case 'auth/user-not-found':
+          ShowFlashMessage(
+            'Alert',
+            'No account found, please sign up and try again.',
+            'danger',
+          );
+          break;
+        default:
+          return ShowFlashMessage(
+            'Alert',
+            'The password is invalid or the user does not have an account.',
+            'danger',
+          );
+      }
+    }
+  }
   async appleSignIn() {
     try {
       const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -195,3 +226,14 @@ export class FirebaseService {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+

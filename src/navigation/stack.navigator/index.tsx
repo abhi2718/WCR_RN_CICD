@@ -8,61 +8,68 @@ import {addProduct} from '../../store/reducers/product.reducer';
 import styled from 'styled-components/native';
 import SignInScreen from '../../screens/auth/signin';
 import SignUpScreen from '../../screens/auth/signup';
+import Profile from '../../screens/auth/components/profile';
 const HeadingText = styled.Text`
   font-size: 22px;
 `;
-const Login = (props: any) => {
-  const {navigation} = props;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(addTodo('Test'));
-    dispatch(addProduct('P1'));
-  }, []);
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-      }}>
-      <Text>Login1</Text>
-      <HeadingText>Okay Bro</HeadingText>
-      <Button
-        title="Go to SignUp"
-        onPress={() => navigation.navigate('SignUp')}
-      />
-    </View>
-  );
-};
+// const Login = (props: any) => {
+//   const {navigation} = props;
+//   const dispatch = useDispatch();
+//   useEffect(() => {
+//     dispatch(addTodo('Test'));
+//     dispatch(addProduct('P1'));
+//   }, []);
+//   return (
+//     <View
+//       style={{
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         backgroundColor: '#fff',
+//       }}>
+//       <Text>Login1</Text>
+//       <HeadingText>Okay Bro</HeadingText>
+//       <Button
+//         title="Go to SignUp"
+//         onPress={() => navigation.navigate('SignUp')}
+//       />
+//     </View>
+//   );
+// };
 
-const Profile = (props: any) => {
-  const {navigation} = props;
-  const {products} = useSelector(({productState}) => productState);
-  const {todos} = useSelector(({todoState}) => todoState);
+// const Profile = (props: any) => {
+//   const {navigation} = props;
+//   const {products} = useSelector(({productState}) => productState);
+//   const {todos} = useSelector(({todoState}) => todoState);
 
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Profile</Text>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
-    </View>
-  );
-};
+//   return (
+//     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+//       <Text>Profile</Text>
+//       <Button
+//         title="Go to Settings"
+//         onPress={() => navigation.navigate('Settings')}
+//       />
+//     </View>
+//   );
+// };
 
-const Settings = (props: any) => {
-  const {navigation} = props;
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings</Text>
-      <Button
-        title="Go to Login"
-        onPress={() => navigation.navigate('Login')}
-      />
-    </View>
-  );
+// const Settings = (props: any) => {
+//   const {navigation} = props;
+//   return (
+//     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+//       <Text>Settings</Text>
+//       <Button
+//         title="Go to Login"
+//         onPress={() => navigation.navigate('Login')}
+//       />
+//     </View>
+//   );
+// };
+
+export enum ROUTES {
+  SignIn = 'SignIn',
+  Profile = "Profile",
+  SignUp = "SignUp",
 };
 
 export const StackNavigator = () => {
@@ -70,16 +77,21 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={{headerShown: false}}
-        name="SignIn"
+        name={ROUTES.SignIn}
         component={SignInScreen}
       />
       <Stack.Screen
         options={{headerShown: false}}
-        name="SignUp"
+        name={ROUTES.SignUp}
         component={SignUpScreen}
       />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen
+        options={{headerShown: true}}
+        name={ROUTES.Profile}
+        component={Profile}
+      />
+      {/* <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>
   );
 };
