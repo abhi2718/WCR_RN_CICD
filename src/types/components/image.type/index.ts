@@ -1,9 +1,9 @@
-import {GestureResponderEvent} from 'react-native';
+import {GestureResponderEvent, ImageSourcePropType} from 'react-native';
 
 export type imageProps = {
   width?: number;
   height?: number;
-  source?: string;
+  source?: ImageSourcePropType | null | undefined;
   marginTop?: number;
   marginBottom?: number;
   style?: any;

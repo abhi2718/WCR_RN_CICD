@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
-import {styles} from './signInStyle';
+import {ErrorText, styles} from './signInStyle';
 import EmailLogin from '../components';
 import {
   Button,

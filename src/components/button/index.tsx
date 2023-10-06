@@ -37,7 +37,6 @@ export const RedButton = (props: ButtonProps) => {
   const {title, onPress, btnColor} = props;
   return (
     <View
-      onPress={onPress}
       style={{
         ...styles.redButton,
         backgroundColor: btnColor ? btnColor : '#FA5672',

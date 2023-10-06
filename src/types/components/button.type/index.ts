@@ -1,8 +1,8 @@
 import {GestureResponderEvent} from 'react-native';
 export type ButtonProps = {
   title: string;
-  onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
+  onPress?: (event: GestureResponderEvent) => void;
   isLoading?: Boolean;
   style?: any;
-  btnColor?: String;
+  btnColor?: any;
 };
