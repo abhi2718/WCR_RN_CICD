@@ -11,6 +11,7 @@ import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
 import {ErrorText, styles} from './signInStyle';
 import EmailLogin from '../components';
+import {Variants} from '../../../components/typography';
 import {
   Button,
   RoundedButtonWithIconAndText,
@@ -32,12 +33,10 @@ export default function SignInScreen() {
     updateCount,
     loading,
     _googleSignIn,
-    navigateToSignUPScreen,
     email,
+    navigateToOtpScreen,
     setEmail,
-    password,
-    setPassword,
-    signInWithEmailPassword,
+    getOtpToVerifyEmail,
     handleAppleSignIn,
     _onFbLogIn,
   } = useViewModal();
@@ -50,9 +49,8 @@ export default function SignInScreen() {
         marginBottom={150}
         source={require('../../../assets/images/logo.png')}
       />
-
       <RoundedButtonWithIconAndText
-         onPress={_onFbLogIn}
+        onPress={_onFbLogIn}
         text={'Continue with Facebook'}
         iconSource={require('../../../assets/images/facebookLogo.png')}
       />
@@ -77,12 +75,20 @@ export default function SignInScreen() {
         <TextInput
           style={styles.emailInputBox}
           placeholder={'Email'}
+          value={email}
+          onChangeText={(email: string) => {
+            setEmail(email);
+          }}
           placeholderTextColor="rgba(35, 35, 35, 0.4)" // Adjust the placeholder text color
-        
         />
       </View>
 
-      <RedButton title={'Continue'} onPress={() => {}} />
+      <RedButton
+        title={'Continue'}
+        onPress={() => {
+          getOtpToVerifyEmail();
+        }}
+      />
     </View>
   );
 }

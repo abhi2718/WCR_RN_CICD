@@ -36,13 +36,16 @@ export const Button = (props: ButtonProps) => {
 export const RedButton = (props: ButtonProps) => {
   const {title, onPress, btnColor} = props;
   return (
-    <View
+    <TouchableOpacity
       style={{
         ...styles.redButton,
         backgroundColor: btnColor ? btnColor : '#FA5672',
-      }}>
-      <Text style={styles.bntText}>{title}</Text>
-    </View>
+      }}
+      onPress={onPress}>
+      <View>
+        <Text style={styles.bntText}>{title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -77,8 +80,7 @@ const roundStyles = StyleSheet.create({
     width: '100%', // Set width to 100% to make it full width
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:10
-    
+    marginTop: 10,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -121,9 +123,8 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 3, height: 21}, // iOS box shadow offset
     shadowOpacity: 1, // iOS box shadow opacity
     shadowRadius: 18, // iOS box shadow radius
-    width:'100%',
-    marginTop:10
-   
+    width: '100%',
+    marginTop: 10,
   },
   bntText: {
     color: '#FEFBFD',

@@ -9,6 +9,7 @@ import styled from 'styled-components/native';
 import SignInScreen from '../../screens/auth/signin';
 import SignUpScreen from '../../screens/auth/signup';
 import Profile from '../../screens/auth/components/profile';
+import EmailAuthByOtpScreeen from '../../screens/auth/components/emailauth';
 const HeadingText = styled.Text`
   font-size: 22px;
 `;
@@ -68,9 +69,10 @@ const HeadingText = styled.Text`
 
 export enum ROUTES {
   SignIn = 'SignIn',
-  Profile = "Profile",
-  SignUp = "SignUp",
-};
+  Profile = 'Profile',
+  SignUp = 'SignUp',
+  Emailauth = 'Email-auth',
+}
 
 export const StackNavigator = () => {
   return (
@@ -84,6 +86,11 @@ export const StackNavigator = () => {
         options={{headerShown: false}}
         name={ROUTES.SignUp}
         component={SignUpScreen}
+      />
+      <Stack.Screen
+        options={{headerShown: true}}
+        name={ROUTES.Emailauth}
+        component={EmailAuthByOtpScreeen}
       />
       <Stack.Screen
         options={{headerShown: true}}
