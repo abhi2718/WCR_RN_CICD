@@ -4,7 +4,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-
+import jwt_decode from "jwt-decode";
 import {
   LoginManager,
   GraphRequest,
@@ -15,13 +15,19 @@ import {ShowFlashMessage} from '../../components/flashBar';
 import {config} from '../../utils/config';
 import {useViewModal} from '../../screens/auth/signin/signinViewModal';
 
-
 export class FirebaseService {
   constructor() {}
 
   async signInWithGoogle(
     setLoading: (loadingState: boolean) => void,
-    socialSignInSignUp:  SocialSignInSignUp
+    socialSignInSignUp: ({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+    }: socialSignInSignUpPayload) => Promise<any>,
   ) {
     try {
       GoogleSignin.configure({
@@ -29,11 +35,17 @@ export class FirebaseService {
           '646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com',
       });
       await GoogleSignin.hasPlayServices();
-      await GoogleSignin.signIn();
+      const {user} = await GoogleSignin.signIn();
+      console.log('user is --->', user);
       setLoading(true);
       const {idToken} = await GoogleSignin.getTokens();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      const response = await this.signInWithCredential(googleCredential,{socialSignInSignUp}:  SocialSignInSignUp);
+      const response = await this.signInWithCredential(
+        googleCredential,
+        socialSignInSignUp,
+        user.email,
+      );
+
       if (!response?.additionalUserInfo) {
         return {
           isNewUser: null,
@@ -81,13 +93,26 @@ export class FirebaseService {
       }
     }
   }
-  async signInWithCredential(credential: FirebaseAuthTypes.AuthCredential,socialSignInSignUp:  SocialSignInSignUp) {
+  async signInWithCredential(
+    credential: FirebaseAuthTypes.AuthCredential,
+    socialSignInSignUp: ({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+    }: socialSignInSignUpPayload) => Promise<any>,
+    email?: string | undefined,
+  ) {
     try {
       return await auth().signInWithCredential(credential);
     } catch (error: any) {
       switch (error.code) {
-        // call outh api
         case 'auth/account-exists-with-different-credential':
+          if (email) {
+            return await socialSignInSignUp({email});
+          }
           break;
         case 'auth/email-already-in-use':
           ShowFlashMessage(
@@ -113,18 +138,16 @@ export class FirebaseService {
     try {
       return await auth().signInWithEmailAndPassword(email, password);
     } catch (error: any) {
-      console.log('errorLLL', error);
       switch (error.code) {
         case 'auth/invalid-email':
           ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
           break;
         case 'auth/wrong-password':
+          // handle edge case when given email is not found in db
           return await socialSignInSignUp({email});
-          // need to call social auth
           break;
         case 'auth/user-not-found':
           return await this.signUpWithEmailPassword(email, password);
-
           break;
         default:
           return ShowFlashMessage(
@@ -139,7 +162,6 @@ export class FirebaseService {
     try {
       return await auth().createUserWithEmailAndPassword(email, password);
     } catch (error: any) {
-      console.log('error::', error);
       switch (error.code) {
         case 'auth/invalid-email':
           ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
@@ -167,8 +189,27 @@ export class FirebaseService {
       }
     }
   }
-  async appleSignIn() {
+  getParsedJwt(
+    token: string,
+  ){
     try {
+      return jwt_decode(token)
+    } catch {
+      return undefined
+    }
+  }
+  async appleSignIn(
+    socialSignInSignUp: ({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+    }: socialSignInSignUpPayload) => Promise<any>,
+  ) {
+    try {
+      let email;
       const appleAuthRequestResponse = await appleAuth.performRequest({
         requestedOperation: appleAuth.Operation.LOGIN,
         requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
@@ -178,11 +219,19 @@ export class FirebaseService {
       );
       if (credentialState === appleAuth.State.AUTHORIZED) {
         const {identityToken, nonce} = appleAuthRequestResponse;
+        if (identityToken) {
+          const useInfo = this.getParsedJwt(identityToken);
+          email = useInfo?.email
+        }
         const appleCredential = auth.AppleAuthProvider.credential(
           identityToken,
           nonce,
         );
-        const response = await this.signInWithCredential(appleCredential,socialSignInSignUp:  SocialSignInSignUp);
+        const response = await this.signInWithCredential(
+          appleCredential,
+          socialSignInSignUp,
+          email
+        );
         if (!response?.additionalUserInfo) {
           return {
             isNewUser: null,
@@ -201,7 +250,16 @@ export class FirebaseService {
       ShowFlashMessage('Alert', 'Something went wrong ', 'danger');
     }
   }
-  async signInWithFb() {
+  async signInWithFb(
+    socialSignInSignUp: ({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+    }: socialSignInSignUpPayload) => Promise<any>,
+  ) {
     LoginManager.logOut();
     const loginResult = await LoginManager.logInWithPermissions([
       'email',
@@ -216,14 +274,25 @@ export class FirebaseService {
     if (loginResult.isCancelled) {
       return ShowFlashMessage('Alert', 'You Cancelled ', 'danger');
     }
-    const infoRequest = new GraphRequest('/me?fields=email,name,picture');
+    const callBack = async (err: any, result: any) => {
+      const email = result?.email;
+      const data = await AccessToken.getCurrentAccessToken();
+      if (data?.accessToken) {
+        const facebookCredential = auth.FacebookAuthProvider.credential(
+          data?.accessToken,
+        );
+        return await this.signInWithCredential(
+          facebookCredential,
+          socialSignInSignUp,
+          email,
+        );
+      }
+    };
+    const infoRequest = new GraphRequest(
+      '/me?fields=email,name,picture',
+      null,
+      callBack,
+    );
     new GraphRequestManager().addRequest(infoRequest).start();
-    const data = await AccessToken.getCurrentAccessToken();
-    if (data?.accessToken) {
-      const facebookCredential = auth.FacebookAuthProvider.credential(
-        data?.accessToken,
-      );
-      return await this.signInWithCredential(facebookCredential,socialSignInSignUp:  SocialSignInSignUp);
-    }
   }
 }

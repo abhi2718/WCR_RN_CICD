@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {AuthRepository} from '../../../repository/auth.repo';
+import {useNavigation} from '@react-navigation/native';
+import { AuthRepository } from '../../../repository/auth.repo';
 import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
-import {useNavigation} from '@react-navigation/native';
 import {ROUTES} from '../../../navigation/stack.navigator';
 import {OtpRepository} from '../../../repository/otp.repo';
 
-export const useViewModal = () => {
+export const useViewModal = (navigation:any) => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
@@ -18,7 +18,6 @@ export const useViewModal = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const navigation = useNavigation();
   const [secondName, setSecondName] = useState('');
 
   const socialSignInSignUp = async ({
@@ -28,14 +27,7 @@ export const useViewModal = () => {
     lastName,
     dob,
     displayName,
-  }: {
-    firebaseUid?: string;
-    email: string;
-    firstName?: string;
-    lastName?: string;
-    dob?: string;
-    displayName?: string;
-  }) => {
+  }:socialSignInSignUpPayload) => {
     try {
       setLoading(true);
       const data = await signInRepository.socialSignInSignUp({
@@ -81,7 +73,7 @@ export const useViewModal = () => {
   const _setLoaging = (loadingState: boolean) => setLoading(loadingState);
   const _googleSignIn = async () => {
     const data = await firebaseService.signInWithGoogle(_setLoaging,socialSignInSignUp);
-    console.log('data from google::',data);
+   // console.log('data from google::',data);
     if (data?.profile && data?.user) {
       const {
         email: userEmail,
@@ -92,7 +84,6 @@ export const useViewModal = () => {
         isNewUser,
       } = data.profile;
     }
-
     setLoading(false);
   };
 
@@ -140,12 +131,12 @@ export const useViewModal = () => {
     // }
   };
   const handleAppleSignIn = async () => {
-    const data = await firebaseService.appleSignIn();
+    const data = await firebaseService.appleSignIn(socialSignInSignUp);
   };
 
   const _onFbLogIn = async () => {
     try {
-      const data = await firebaseService.signInWithFb();
+      const data = await firebaseService.signInWithFb(socialSignInSignUp);
     } catch (e) {
       ShowFlashMessage('Something went wrong !', 'danger');
     }

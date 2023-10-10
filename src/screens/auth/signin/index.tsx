@@ -28,7 +28,7 @@ import {
   Row,
   Spacer,
 } from '../../../components/tools';
-export default function SignInScreen() {
+export default function SignInScreen({navigation}:any) {
   const {
     _onFbLogIn,
     _googleSignIn,
@@ -36,7 +36,7 @@ export default function SignInScreen() {
     handleAppleSignIn,
     email,
     setEmail,
-  } = useViewModal();
+  } = useViewModal(navigation);
   return (
     <View style={styles.containerStyle}>
       <ImageContainer
