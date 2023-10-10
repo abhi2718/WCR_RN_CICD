@@ -11,7 +11,6 @@ export const useViewModal = () => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
-  const [count, setCount] = useState(0);
   const [displayName, setDisplayName] = useState('');
   const [dob, setDob] = useState('');
   const [mobileNo, setMobileNo] = useState('');
@@ -30,7 +29,7 @@ export const useViewModal = () => {
     dob,
     displayName,
   }: {
-    firebaseUid: string;
+    firebaseUid?: string;
     email: string;
     firstName?: string;
     lastName?: string;
@@ -67,25 +66,22 @@ export const useViewModal = () => {
     try {
       setLoading(true);
       const data = await otpInRepository.verifytOtp({email, code});
-      console.log(`Verifying::`, data);
-      
+      console.log(data.data.message==='Verified')
+      if (data.data.message==='Verified') {
+        checkIsNewUser(email);
+      }
+
       setLoading(false);
       return data;
     } catch (error) {
       setLoading(false);
     }
   };
-  const updateCount = () => {
-    setCount(count + 1);
-  };
-  useEffect(() => {}, []);
 
-  useEffect(() => {
-    GoogleSignin.configure();
-  }, []);
   const _setLoaging = (loadingState: boolean) => setLoading(loadingState);
   const _googleSignIn = async () => {
-    const data = await firebaseService.signInWithGoogle(_setLoaging);
+    const data = await firebaseService.signInWithGoogle(_setLoaging,socialSignInSignUp);
+    console.log('data from google::',data);
     if (data?.profile && data?.user) {
       const {
         email: userEmail,
@@ -95,32 +91,18 @@ export const useViewModal = () => {
         picture,
         isNewUser,
       } = data.profile;
-
-      if (isNewUser) {
-        const password = `Sh${email}3@`;
-        console.log(userEmail, password);
-        const data = await firebaseService.signUpWithEmailPassword(
-          email,
-          password,
-        );
-      } else {
-        navigateToProfile({
-          email: userEmail,
-          firebaseUid: data.user.uid,
-          firstName: given_name,
-          lastName: family_name,
-        });
-      }
     }
 
     setLoading(false);
   };
-  const getOtpToVerifyEmail = async () => {
-    console.log(
-      '🚀 ~ file: signinViewModal.tsx:108 ~ getOtpToVerifyEmail ~ email:',
-      email,
-    );
 
+  const checkIsNewUser = async (email: string) => {
+    const password = `Sh${email}3@`;
+    console.log(password, email);
+    const data = await firebaseService.signInWithEmailPassword(email, password);
+    console.log('from email password ::::',data);
+  };
+  const getOtpToVerifyEmail = async () => {
     if (!email.length) {
       return ShowFlashMessage(
         'Alert',
@@ -129,8 +111,8 @@ export const useViewModal = () => {
       );
     }
     const data = await getOtpOnEmail(email);
-
-    navigateToOtpScreen({email: data.data.email, otp: data.data.code});
+    console.log('data::',data);
+    navigateToOtpScreen({email: data.data.email});
 
     // const data = await firebaseService.signInWithEmailPassword(email,password);
     // if (!data) {
@@ -237,8 +219,6 @@ export const useViewModal = () => {
   };
 
   return {
-    count,
-    updateCount,
     loading,
     _googleSignIn,
     email,

@@ -4,6 +4,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+
 import {
   LoginManager,
   GraphRequest,
@@ -12,19 +13,27 @@ import {
 } from 'react-native-fbsdk';
 import {ShowFlashMessage} from '../../components/flashBar';
 import {config} from '../../utils/config';
+import {useViewModal} from '../../screens/auth/signin/signinViewModal';
+
+
 export class FirebaseService {
   constructor() {}
-  async signInWithGoogle(setLoading: (loadingState: boolean) => void) {
+
+  async signInWithGoogle(
+    setLoading: (loadingState: boolean) => void,
+    socialSignInSignUp:  SocialSignInSignUp
+  ) {
     try {
       GoogleSignin.configure({
-        webClientId: '646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com',
+        webClientId:
+          '646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com',
       });
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signIn();
       setLoading(true);
       const {idToken} = await GoogleSignin.getTokens();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      const response = await this.signInWithCredential(googleCredential);
+      const response = await this.signInWithCredential(googleCredential,{socialSignInSignUp}:  SocialSignInSignUp);
       if (!response?.additionalUserInfo) {
         return {
           isNewUser: null,
@@ -72,17 +81,13 @@ export class FirebaseService {
       }
     }
   }
-  async signInWithCredential(credential: FirebaseAuthTypes.AuthCredential) {
+  async signInWithCredential(credential: FirebaseAuthTypes.AuthCredential,socialSignInSignUp:  SocialSignInSignUp) {
     try {
       return await auth().signInWithCredential(credential);
     } catch (error: any) {
       switch (error.code) {
+        // call outh api
         case 'auth/account-exists-with-different-credential':
-          ShowFlashMessage(
-            'Alert',
-            'An account already exists with the same email address but different sign-in credentials.',
-            'danger',
-          );
           break;
         case 'auth/email-already-in-use':
           ShowFlashMessage(
@@ -104,26 +109,22 @@ export class FirebaseService {
     }
   }
   async signInWithEmailPassword(email: string, password: string) {
+    const {socialSignInSignUp} = useViewModal();
     try {
       return await auth().signInWithEmailAndPassword(email, password);
     } catch (error: any) {
+      console.log('errorLLL', error);
       switch (error.code) {
         case 'auth/invalid-email':
           ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
           break;
         case 'auth/wrong-password':
-          ShowFlashMessage(
-            'Alert',
-            'The password is invalid or the user does not have a password',
-            'danger',
-          );
+          return await socialSignInSignUp({email});
+          // need to call social auth
           break;
         case 'auth/user-not-found':
-          ShowFlashMessage(
-            'Alert',
-            'No account found, please sign up and try again.',
-            'danger',
-          );
+          return await this.signUpWithEmailPassword(email, password);
+
           break;
         default:
           return ShowFlashMessage(
@@ -138,7 +139,7 @@ export class FirebaseService {
     try {
       return await auth().createUserWithEmailAndPassword(email, password);
     } catch (error: any) {
-      console.log('error::',error)
+      console.log('error::', error);
       switch (error.code) {
         case 'auth/invalid-email':
           ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
@@ -181,7 +182,7 @@ export class FirebaseService {
           identityToken,
           nonce,
         );
-        const response = await this.signInWithCredential(appleCredential);
+        const response = await this.signInWithCredential(appleCredential,socialSignInSignUp:  SocialSignInSignUp);
         if (!response?.additionalUserInfo) {
           return {
             isNewUser: null,
@@ -222,18 +223,7 @@ export class FirebaseService {
       const facebookCredential = auth.FacebookAuthProvider.credential(
         data?.accessToken,
       );
-      return await this.signInWithCredential(facebookCredential);
+      return await this.signInWithCredential(facebookCredential,socialSignInSignUp:  SocialSignInSignUp);
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-

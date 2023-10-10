@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
+
 import {ErrorText, styles} from './signInStyle';
 import EmailLogin from '../components';
 import {Variants} from '../../../components/typography';
@@ -28,17 +29,13 @@ import {
   Spacer,
 } from '../../../components/tools';
 export default function SignInScreen() {
-  let {
-    count,
-    updateCount,
-    loading,
+  const {
+    _onFbLogIn,
     _googleSignIn,
-    email,
-    navigateToOtpScreen,
-    setEmail,
     getOtpToVerifyEmail,
     handleAppleSignIn,
-    _onFbLogIn,
+    email,
+    setEmail,
   } = useViewModal();
   return (
     <View style={styles.containerStyle}>
