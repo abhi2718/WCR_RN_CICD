@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useNavigation} from '@react-navigation/native';
-import { AuthRepository } from '../../../repository/auth.repo';
+import {AuthRepository} from '../../../repository/auth.repo';
 import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
 import {ROUTES} from '../../../navigation/stack.navigator';
 import {OtpRepository} from '../../../repository/otp.repo';
 
-export const useViewModal = (navigation:any) => {
+export const useViewModal = (navigation: any) => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
@@ -27,7 +27,7 @@ export const useViewModal = (navigation:any) => {
     lastName,
     dob,
     displayName,
-  }:socialSignInSignUpPayload) => {
+  }: socialSignInSignUpPayload) => {
     try {
       setLoading(true);
       const data = await signInRepository.socialSignInSignUp({
@@ -38,6 +38,7 @@ export const useViewModal = (navigation:any) => {
         dob,
         displayName,
       });
+      console.log(data, data);
       setLoading(false);
       return data;
     } catch (error) {
@@ -58,9 +59,10 @@ export const useViewModal = (navigation:any) => {
     try {
       setLoading(true);
       const data = await otpInRepository.verifytOtp({email, code});
-      console.log(data.data.message==='Verified')
-      if (data.data.message==='Verified') {
+      if (data.data.message === 'Verified') {
         checkIsNewUser(email);
+      } else {
+        console.log('otp is incorrect');
       }
 
       setLoading(false);
@@ -72,8 +74,11 @@ export const useViewModal = (navigation:any) => {
 
   const _setLoaging = (loadingState: boolean) => setLoading(loadingState);
   const _googleSignIn = async () => {
-    const data = await firebaseService.signInWithGoogle(_setLoaging,socialSignInSignUp);
-   // console.log('data from google::',data);
+    const data = await firebaseService.signInWithGoogle(
+      _setLoaging,
+      socialSignInSignUp,
+    );
+    // console.log('data from google::',data);
     if (data?.profile && data?.user) {
       const {
         email: userEmail,
@@ -88,10 +93,13 @@ export const useViewModal = (navigation:any) => {
   };
 
   const checkIsNewUser = async (email: string) => {
-    const password = `Sh${email}3@`;
-    console.log(password, email);
-    const data = await firebaseService.signInWithEmailPassword(email, password);
-    console.log('from email password ::::',data);
+    const data = await socialSignInSignUp({email});
+    if (data.message === 'firebase uid is required') {
+      navigateToProfile({email});
+    }
+
+    // const data = await firebaseService.signInWithEmailPassword(email, password);
+    console.log('from mongo backend::::', data.message);
   };
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -102,7 +110,7 @@ export const useViewModal = (navigation:any) => {
       );
     }
     const data = await getOtpOnEmail(email);
-    console.log('data::',data);
+    console.log('data::', data);
     navigateToOtpScreen({email: data.data.email});
 
     // const data = await firebaseService.signInWithEmailPassword(email,password);
@@ -130,6 +138,25 @@ export const useViewModal = (navigation:any) => {
 
     // }
   };
+
+  const newUserSignUp = async (email:string) => {
+    console.log('function called');
+    const password = `$Sg{email}9%`;
+    console.log(password,email);
+    const data = await firebaseService.signUpWithEmailPassword(email, password);
+    console.log('data::', data?.user?.uid);
+    //   if (data?.profile && data?.user) {
+    //     const {
+    //       email: userEmail,
+    //       family_name,
+    //       given_name,
+    //       name,
+    //       picture,
+    //       isNewUser,
+    //     } = data.profile;
+    // }
+  };
+
   const handleAppleSignIn = async () => {
     const data = await firebaseService.appleSignIn(socialSignInSignUp);
   };
@@ -169,12 +196,11 @@ export const useViewModal = (navigation:any) => {
     lastName,
     firebaseUid,
   }: {
-    email?: string;
+    email: string;
     firstName?: string;
     lastName?: string;
-    firebaseUid: string;
+    firebaseUid?: string;
   }) => {
-    // Navigate to the signup page here
     navigation.navigate(ROUTES.Profile, {
       data: {
         email: email,
@@ -222,6 +248,7 @@ export const useViewModal = (navigation:any) => {
     setDisplayName,
     getOtpToVerifyEmail,
     mobileNo,
+    newUserSignUp,
     setMobileNo,
     dob,
     setDob,

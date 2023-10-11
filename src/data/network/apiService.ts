@@ -70,6 +70,8 @@ export class ApiService {
         throw new AppExcaptions(body.message, 'Bad Request');
       case 404:
         throw new AppExcaptions(body.message, 'Not found');
+      case 422:
+        throw new AppExcaptions(body.message, 'Validation Error'); 
       case 500:
         throw new AppExcaptions(body.message, 'Internal server error ');
       default:

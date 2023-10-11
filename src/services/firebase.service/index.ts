@@ -13,7 +13,6 @@ import {
 } from 'react-native-fbsdk';
 import {ShowFlashMessage} from '../../components/flashBar';
 import {config} from '../../utils/config';
-import {useViewModal} from '../../screens/auth/signin/signinViewModal';
 
 export class FirebaseService {
   constructor() {}
@@ -46,13 +45,21 @@ export class FirebaseService {
         user.email,
       );
 
+      if (response?._id) {
+        return {
+          isNewUser: false,
+          profile: null,
+          user: null,
+        };
+      }
+
       if (!response?.additionalUserInfo) {
         return {
           isNewUser: null,
           profile: null,
           user: null,
         };
-      }
+      }     
       const {isNewUser, profile} = response.additionalUserInfo;
       return {
         isNewUser,
@@ -134,7 +141,7 @@ export class FirebaseService {
     }
   }
   async signInWithEmailPassword(email: string, password: string) {
-    const {socialSignInSignUp} = useViewModal();
+   
     try {
       return await auth().signInWithEmailAndPassword(email, password);
     } catch (error: any) {
@@ -144,7 +151,6 @@ export class FirebaseService {
           break;
         case 'auth/wrong-password':
           // handle edge case when given email is not found in db
-          return await socialSignInSignUp({email});
           break;
         case 'auth/user-not-found':
           return await this.signUpWithEmailPassword(email, password);
@@ -220,8 +226,8 @@ export class FirebaseService {
       if (credentialState === appleAuth.State.AUTHORIZED) {
         const {identityToken, nonce} = appleAuthRequestResponse;
         if (identityToken) {
-          const useInfo = this.getParsedJwt(identityToken);
-          email = useInfo?.email
+          const userInfo = this.getParsedJwt(identityToken);
+          email = userInfo?.email
         }
         const appleCredential = auth.AppleAuthProvider.credential(
           identityToken,
@@ -232,6 +238,14 @@ export class FirebaseService {
           socialSignInSignUp,
           email
         );
+        if (response?._id) {
+          return {
+            isNewUser: false,
+            profile: null,
+            user: null,
+          };
+        }
+
         if (!response?.additionalUserInfo) {
           return {
             isNewUser: null,
@@ -275,6 +289,7 @@ export class FirebaseService {
       return ShowFlashMessage('Alert', 'You Cancelled ', 'danger');
     }
     const callBack = async (err: any, result: any) => {
+      // result constains the user info
       const email = result?.email;
       const data = await AccessToken.getCurrentAccessToken();
       if (data?.accessToken) {

@@ -11,10 +11,11 @@ import {styles} from './emailauthStyle';
 import {RedButton} from '../../../../components/button';
 import {useViewModal} from './../../signin/signinViewModal';
 
-export default function (props: any) {
+export default function EmailAuthByOtpScreeen(props: any) {
+  const navigation = props.navigation;
   const receivedData = props.route?.params?.data || 'No data received';
   const email: string = receivedData?.email;
-  let {otp, setOtp, verifyEmail} = useViewModal();
+  let {otp, setOtp, verifyEmail} = useViewModal(navigation);
 
   return (
     <View style={styles.containerStyle}>

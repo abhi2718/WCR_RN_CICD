@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ScrollView,
 } from 'react-native';
 //import {useViewModal} from './../../signIn/signInViewModal';
 import {RedButton, Button} from '../../../../components/button';
@@ -23,6 +24,7 @@ import {useViewModal} from '../../signin/signinViewModal';
 
 const Profile = (props: any) => {
   const receivedData = props.route?.params?.data || 'No data received';
+  const {navigation} = props;
   let firstName = receivedData.firstName;
   let lastName = receivedData.lastName;
   let email = receivedData.email;
@@ -32,6 +34,7 @@ const Profile = (props: any) => {
     displayName,
     setDisplayName,
     mobileNo,
+    newUserSignUp,
     setMobileNo,
     dob,
     setDob,
@@ -39,78 +42,80 @@ const Profile = (props: any) => {
     secondName,
     setSecondName,
     setName,
-  } = useViewModal();
+  } = useViewModal(navigation);
 
   return (
     <View style={styles.container}>
-      <ImageContainer
-        height={56}
-        width={56}
-        marginTop={50}
-        marginBottom={50}
-        source={require('../../../../assets/images/logo.png')}
-      />
-
-      <View style={styles.inputDiv}>
-        <TextInput
-          style={styles.input}
-          placeholder=" First Name"
-          value={receivedData?.firstName ? receivedData?.firstName : name}
-          onChangeText={(text) => setName(text)}
+      <ScrollView>
+        <ImageContainer
+          height={56}
+          width={56}
+          marginTop={50}
+          marginBottom={50}
+          source={require('../../../../assets/images/logo.png')}
         />
-      </View>
-      <View style={styles.inputDiv}>
-        <TextInput
-          style={styles.input}
-          placeholder="Last Name"
-          value={receivedData?.lastName ? receivedData?.lastName : secondName}
-          onChangeText={(text) => setSecondName(text)}
-        />
-      </View>
 
-      <View style={styles.inputDiv}>
-        <TextInput
-          style={styles.input}
-          placeholder="Display Name"
-          value={displayName}
-          onChangeText={(text) => setDisplayName(text)}
-        />
-      </View>
+        <View style={styles.inputDiv}>
+          <TextInput
+            style={styles.input}
+            placeholder=" First Name"
+            value={receivedData?.firstName ? receivedData?.firstName : name}
+            onChangeText={(text) => setName(text)}
+          />
+        </View>
+        <View style={styles.inputDiv}>
+          <TextInput
+            style={styles.input}
+            placeholder="Last Name"
+            value={receivedData?.lastName ? receivedData?.lastName : secondName}
+            onChangeText={(text) => setSecondName(text)}
+          />
+        </View>
 
-      <View style={styles.inputDiv}>
-        <TextInput
-          style={styles.input}
-          placeholder="Mobile No"
-          value={mobileNo}
-          onChangeText={(text) => setMobileNo(text)}
-        />
-      </View>
+        <View style={styles.inputDiv}>
+          <TextInput
+            style={styles.input}
+            placeholder="Display Name"
+            value={displayName}
+            onChangeText={(text) => setDisplayName(text)}
+          />
+        </View>
 
-      <View style={styles.inputDiv}>
-        <TextInput
-          style={styles.input}
-          editable={receivedData?.email ? false : true}
-          placeholder="Email"
-          value={receivedData?.email}
-          //  onChangeText={(text) => setEmailId(text)}
-        />
-      </View>
+        <View style={styles.inputDiv}>
+          <TextInput
+            style={styles.input}
+            placeholder="Mobile No"
+            value={mobileNo}
+            onChangeText={(text) => setMobileNo(text)}
+          />
+        </View>
 
-      <View style={styles.inputDiv}>
-        <TextInput
-          style={styles.input}
-          placeholder="Date of birth"
-          value={dob}
-          onChangeText={(text) => setDob(text)}
-        />
-      </View>
+        <View style={styles.inputDiv}>
+          <TextInput
+            style={styles.input}
+            editable={receivedData?.email ? false : true}
+            placeholder="Email"
+            value={receivedData?.email}
+            //  onChangeText={(text) => setEmailId(text)}
+          />
+        </View>
 
-      <Spacer style={styles.spacerStyle} position="top" size={25}>
-        <TouchableOpacity
-          onPress={() => socialSignInSignUp({email, firebaseUid,dob,displayName})}>
-          <RedButton title="Submit" />
-        </TouchableOpacity>
-      </Spacer>
+        <View style={styles.inputDiv}>
+          <TextInput
+            style={styles.input}
+            placeholder="Date of birth"
+            value={dob}
+            onChangeText={(text) => setDob(text)}
+          />
+        </View>
+
+        <Spacer style={styles.spacerStyle} position="top" size={25}>
+          <RedButton
+            title="Submit"
+            onPress={() =>newUserSignUp(receivedData?.email)}
+          />
+        </Spacer>
+      </ScrollView>
     </View>
   );
 };
