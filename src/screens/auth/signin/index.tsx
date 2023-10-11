@@ -28,7 +28,15 @@ import {
   Row,
   Spacer,
 } from '../../../components/tools';
-export default function SignInScreen({navigation}:any) {
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+type navigationProps = {
+  navigation:{
+    navigate: (route: string, params?: any) => void
+  }
+}
+export default function SignInScreen({
+  navigation,
+}: navigationProps) {
   const {
     _onFbLogIn,
     _googleSignIn,

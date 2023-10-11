@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useNavigation} from '@react-navigation/native';
 import { AuthRepository } from '../../../repository/auth.repo';
 import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
 import {ROUTES} from '../../../navigation/stack.navigator';
 import {OtpRepository} from '../../../repository/otp.repo';
 
-export const useViewModal = (navigation:any) => {
+export const useViewModal = (navigation:{
+  navigate: (route: string, params?: any) => void
+}) => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
