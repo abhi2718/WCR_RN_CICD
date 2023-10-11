@@ -6,19 +6,65 @@ import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
 import {ROUTES} from '../../../navigation/stack.navigator';
 import {OtpRepository} from '../../../repository/otp.repo';
-
+export type FormTypes = {
+  firstName: string;
+  lastName: string;
+  displayName: string;
+  mobile: string;
+  email: string;
+  dob: string;
+};
 export const useViewModal = (navigation: any) => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
-  const [displayName, setDisplayName] = useState('');
-  const [dob, setDob] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
-  const [name, setName] = useState('');
+
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const [secondName, setSecondName] = useState('');
+
+  const [formData, setFormData] = useState<FormTypes>({
+    firstName: '',
+    lastName: '',
+    displayName: '',
+    mobile: '',
+    email: '',
+    dob: '',
+  });
+  const [validationErrors, setValidationErrors] = useState<Partial<FormTypes>>(
+    {},
+  );
+
+  const handleInputChange = (name: keyof FormTypes, value: string) => {
+    setFormData({...formData, [name]: value});
+  };
+
+  const handleSubmit = async () => {
+    // Do something with the form data, e.g., make an API request
+    const errors: Partial<FormTypes> = {};
+    const phonePattern = /^\d{10}$/; // This is a basic example for a 10-digit number.
+
+    if (!formData?.firstName) {
+      errors.firstName = 'Please enter your name';
+    }
+    if (formData.lastName.trim().length == 0) {
+      errors.lastName = 'Please enter your last name';
+    }
+    if (!phonePattern.test(formData.mobile)) {
+      errors.mobile = 'Please enter a valid 10-digit phone number';
+    }
+    if (formData.dob.trim().length == 0) {
+      errors.dob = 'Please enter your date of birth';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+    } else {
+      setValidationErrors({});
+      // Proceed with form submission
+      await newUserSignUp(formData.email);
+    }
+  };
 
   const socialSignInSignUp = async ({
     firebaseUid,
@@ -38,7 +84,6 @@ export const useViewModal = (navigation: any) => {
         dob,
         displayName,
       });
-      console.log(data, data);
       setLoading(false);
       return data;
     } catch (error) {
@@ -62,7 +107,7 @@ export const useViewModal = (navigation: any) => {
       if (data.data.message === 'Verified') {
         checkIsNewUser(email);
       } else {
-        console.log('otp is incorrect');
+        return ShowFlashMessage('Alert', 'OTP is incorrect', 'danger');
       }
 
       setLoading(false);
@@ -72,13 +117,19 @@ export const useViewModal = (navigation: any) => {
     }
   };
 
+  const resendOtp = async (email: string) => {
+    try {
+      setLoading(true);
+      const data = await otpInRepository.resendOtp(email);
+    } catch (error) {}
+  };
+
   const _setLoaging = (loadingState: boolean) => setLoading(loadingState);
   const _googleSignIn = async () => {
     const data = await firebaseService.signInWithGoogle(
       _setLoaging,
       socialSignInSignUp,
     );
-    // console.log('data from google::',data);
     if (data?.profile && data?.user) {
       const {
         email: userEmail,
@@ -96,10 +147,9 @@ export const useViewModal = (navigation: any) => {
     const data = await socialSignInSignUp({email});
     if (data.message === 'firebase uid is required') {
       navigateToProfile({email});
+    } else {
+      return ShowFlashMessage('info', 'log In successfully', 'success');
     }
-
-    // const data = await firebaseService.signInWithEmailPassword(email, password);
-    console.log('from mongo backend::::', data.message);
   };
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -110,7 +160,6 @@ export const useViewModal = (navigation: any) => {
       );
     }
     const data = await getOtpOnEmail(email);
-    console.log('data::', data);
     navigateToOtpScreen({email: data.data.email});
 
     // const data = await firebaseService.signInWithEmailPassword(email,password);
@@ -139,22 +188,22 @@ export const useViewModal = (navigation: any) => {
     // }
   };
 
-  const newUserSignUp = async (email:string) => {
-    console.log('function called');
+  const newUserSignUp = async (email: string) => {
     const password = `$Sg{email}9%`;
-    console.log(password,email);
     const data = await firebaseService.signUpWithEmailPassword(email, password);
-    console.log('data::', data?.user?.uid);
-    //   if (data?.profile && data?.user) {
-    //     const {
-    //       email: userEmail,
-    //       family_name,
-    //       given_name,
-    //       name,
-    //       picture,
-    //       isNewUser,
-    //     } = data.profile;
-    // }
+
+    const payload = {
+      email: email,
+      firebaseUid: data?.user?.uid,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      displayName: formData.displayName,
+      mobile: formData.mobile,
+      dob: formData.dob,
+    };
+    const dataMo̥ngo = await socialSignInSignUp(payload);
+    if (dataMo̥ngo.message === 'Registered Successfully')
+      return ShowFlashMessage('info', 'Registered Successfully', 'success');
   };
 
   const handleAppleSignIn = async () => {
@@ -244,20 +293,17 @@ export const useViewModal = (navigation: any) => {
     navigateToOtpScreen,
     handleAppleSignIn,
     _onFbLogIn,
-    displayName,
-    setDisplayName,
     getOtpToVerifyEmail,
-    mobileNo,
     newUserSignUp,
-    setMobileNo,
-    dob,
-    setDob,
-    name,
     otp,
     setOtp,
-    setName,
-    secondName,
     verifyEmail,
-    setSecondName,
+    resendOtp,
+    formData,
+    setFormData,
+    handleInputChange,
+    handleSubmit,
+    validationErrors,
+    setValidationErrors,
   };
 };

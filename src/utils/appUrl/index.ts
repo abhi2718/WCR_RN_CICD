@@ -4,4 +4,5 @@ export class AppUrl {
   public static userEndPoint = `${this.BASE_URL}/users`;
   public static authEndPoint = `${this.BASE_URL}/auth`;
   public static otpEndPoint = `${this.BASE_URL}/otp`;
+  public static resendOtpEndPoint = `${this.BASE_URL}/otp/resend`;
 }

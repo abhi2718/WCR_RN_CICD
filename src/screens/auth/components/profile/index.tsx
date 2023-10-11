@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -31,22 +31,21 @@ const Profile = (props: any) => {
   let firebaseUid = receivedData.firebaseUid;
   let {
     socialSignInSignUp,
-    displayName,
-    setDisplayName,
-    mobileNo,
     newUserSignUp,
-    setMobileNo,
-    dob,
-    setDob,
-    name,
-    secondName,
-    setSecondName,
-    setName,
+    formData,
+    setFormData,
+    handleInputChange,
+    handleSubmit,
+    validationErrors,
+    setValidationErrors,
   } = useViewModal(navigation);
 
+  useEffect(() => {
+    handleInputChange('email', email);
+  }, [email]);
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ImageContainer
           height={56}
           width={56}
@@ -59,25 +58,36 @@ const Profile = (props: any) => {
           <TextInput
             style={styles.input}
             placeholder=" First Name"
-            value={receivedData?.firstName ? receivedData?.firstName : name}
-            onChangeText={(text) => setName(text)}
+            // value={
+            //   receivedData?.firstName
+            //     ? receivedData?.firstName
+            //     : formData.firstName
+            // }
+            value={formData.firstName}
+            onChangeText={(text) => handleInputChange('firstName', text)}
           />
+          {validationErrors.firstName && (
+            <Text style={styles.errorText}>{validationErrors.firstName}</Text>
+          )}
         </View>
         <View style={styles.inputDiv}>
           <TextInput
             style={styles.input}
             placeholder="Last Name"
-            value={receivedData?.lastName ? receivedData?.lastName : secondName}
-            onChangeText={(text) => setSecondName(text)}
+            value={formData.lastName}
+            onChangeText={(text) => handleInputChange('lastName', text)}
           />
+          {validationErrors.lastName && (
+            <Text style={styles.errorText}>{validationErrors.lastName}</Text>
+          )}
         </View>
 
         <View style={styles.inputDiv}>
           <TextInput
             style={styles.input}
             placeholder="Display Name"
-            value={displayName}
-            onChangeText={(text) => setDisplayName(text)}
+            value={formData.displayName}
+            onChangeText={(text) => handleInputChange('displayName', text)}
           />
         </View>
 
@@ -85,9 +95,12 @@ const Profile = (props: any) => {
           <TextInput
             style={styles.input}
             placeholder="Mobile No"
-            value={mobileNo}
-            onChangeText={(text) => setMobileNo(text)}
+            value={formData.mobile}
+            onChangeText={(text) => handleInputChange('mobile', text)}
           />
+          {validationErrors.mobile && (
+            <Text style={styles.errorText}>{validationErrors.mobile}</Text>
+          )}
         </View>
 
         <View style={styles.inputDiv}>
@@ -95,7 +108,7 @@ const Profile = (props: any) => {
             style={styles.input}
             editable={receivedData?.email ? false : true}
             placeholder="Email"
-            value={receivedData?.email}
+            value={formData.email}
             //  onChangeText={(text) => setEmailId(text)}
           />
         </View>
@@ -104,15 +117,19 @@ const Profile = (props: any) => {
           <TextInput
             style={styles.input}
             placeholder="Date of birth"
-            value={dob}
-            onChangeText={(text) => setDob(text)}
+            value={formData.dob}
+            onChangeText={(text) => handleInputChange('dob', text)}
           />
+          {validationErrors.dob && (
+            <Text style={styles.errorText}>{validationErrors.dob}</Text>
+          )}
         </View>
 
         <Spacer style={styles.spacerStyle} position="top" size={25}>
           <RedButton
             title="Submit"
-            onPress={() =>newUserSignUp(receivedData?.email)}
+            // onPress={() => newUserSignUp(receivedData?.email)}
+            onPress={() => handleSubmit()}
           />
         </Spacer>
       </ScrollView>
@@ -133,6 +150,9 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     height: 56,
     marginTop: 24,
+  },
+  errorText: {
+    color: 'red',
   },
   input: {
     alignSelf: 'stretch',

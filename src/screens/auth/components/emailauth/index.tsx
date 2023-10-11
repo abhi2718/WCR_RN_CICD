@@ -15,7 +15,7 @@ export default function EmailAuthByOtpScreeen(props: any) {
   const navigation = props.navigation;
   const receivedData = props.route?.params?.data || 'No data received';
   const email: string = receivedData?.email;
-  let {otp, setOtp, verifyEmail} = useViewModal(navigation);
+  let {otp, setOtp, verifyEmail,resendOtp} = useViewModal(navigation);
 
   return (
     <View style={styles.containerStyle}>
@@ -47,7 +47,7 @@ export default function EmailAuthByOtpScreeen(props: any) {
             verifyEmail({email: email, code: otp});
           }}
         />
-        <TouchableOpacity onPress={() => {}} style={{marginTop: 10}}>
+        <TouchableOpacity onPress={() => resendOtp(email)} style={{marginTop: 10}}>
           <Text>Resend otp</Text>
         </TouchableOpacity>
       </ScrollView>
