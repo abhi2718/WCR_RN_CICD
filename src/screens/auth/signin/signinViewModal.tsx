@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useNavigation} from '@react-navigation/native';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AuthRepository} from '../../../repository/auth.repo';
 import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
@@ -21,6 +20,7 @@ export const useViewModal = (navigation: any) => {
 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const [emailInput, setEmailInput] = useState('');
   const [otp, setOtp] = useState('');
 
   const [formData, setFormData] = useState<FormTypes>({
@@ -39,7 +39,7 @@ export const useViewModal = (navigation: any) => {
     setFormData({...formData, [name]: value});
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (credential: FirebaseAuthTypes.AuthCredential) => {
     // Do something with the form data, e.g., make an API request
     const errors: Partial<FormTypes> = {};
     const phonePattern = /^\d{10}$/; // This is a basic example for a 10-digit number.
@@ -50,9 +50,9 @@ export const useViewModal = (navigation: any) => {
     if (formData.lastName.trim().length == 0) {
       errors.lastName = 'Please enter your last name';
     }
-    if (!phonePattern.test(formData.mobile)) {
-      errors.mobile = 'Please enter a valid 10-digit phone number';
-    }
+    // if (!phonePattern.test(formData.mobile)) {
+    //   errors.mobile = 'Please enter a valid 10-digit phone number';
+    // }
     if (formData.dob.trim().length == 0) {
       errors.dob = 'Please enter your date of birth';
     }
@@ -62,7 +62,7 @@ export const useViewModal = (navigation: any) => {
     } else {
       setValidationErrors({});
       // Proceed with form submission
-      await newUserSignUp(formData.email);
+      await newUserSignUp(formData.email, credential);
     }
   };
 
@@ -73,6 +73,7 @@ export const useViewModal = (navigation: any) => {
     lastName,
     dob,
     displayName,
+    mobile,
   }: socialSignInSignUpPayload) => {
     try {
       setLoading(true);
@@ -83,6 +84,7 @@ export const useViewModal = (navigation: any) => {
         lastName,
         dob,
         displayName,
+        mobile,
       });
       setLoading(false);
       return data;
@@ -131,15 +133,25 @@ export const useViewModal = (navigation: any) => {
       socialSignInSignUp,
     );
     if (data?.profile && data?.user) {
-      const {
-        email: userEmail,
-        family_name,
-        given_name,
-        name,
-        picture,
-        isNewUser,
-      } = data.profile;
+      const {email, family_name, given_name, name, picture} = data.profile;
+      if (data.isNewUser) {
+        await firebaseService.deleteUserFromFirebase();
+        navigateToProfile({
+          email,
+          firstName: given_name,
+          lastName: family_name,
+          credential: data.googleCredential,
+        });
+      } else {
+        const data = await socialSignInSignUp({email});
+        console.log('inside else google sign :: ', data);
+
+        if (data.message === 'Logged In') {
+          return ShowFlashMessage('info', 'log In successfully', 'success');
+        }
+      }
     }
+
     setLoading(false);
   };
 
@@ -188,23 +200,72 @@ export const useViewModal = (navigation: any) => {
     // }
   };
 
-  const newUserSignUp = async (email: string) => {
+  const newUserSignUp = async (
+    email?: string,
+    credential?: FirebaseAuthTypes.AuthCredential,
+  ) => {
     const password = `$Sg{email}9%`;
-    const data = await firebaseService.signUpWithEmailPassword(email, password);
+    if (credential) {
+      const data = await firebaseService.signInWithCredential(credential);
+      createUser({
+        email: email!,
+        firebaseUid: data?.user?.uid,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        displayName: formData.displayName,
+        mobile: formData.mobile,
+        dob: formData.dob,
+      });
+      return;
+    }
 
-    const payload = {
-      email: email,
-      firebaseUid: data?.user?.uid,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      displayName: formData.displayName,
-      mobile: formData.mobile,
-      dob: formData.dob,
-    };
-    const dataMo̥ngo = await socialSignInSignUp(payload);
-    if (dataMo̥ngo.message === 'Registered Successfully')
-      return ShowFlashMessage('info', 'Registered Successfully', 'success');
+    if (!email) {
+      return ShowFlashMessage('Alert', 'Email is required', 'danger');
+    }
+
+    const emailData = await firebaseService.signUpWithEmailPassword(
+      email,
+      password,
+    );
+
+    if (emailData) {
+      createUser({
+        email: email!,
+        firebaseUid: emailData?.user?.uid,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        displayName: formData.displayName,
+        mobile: formData.mobile,
+        dob: formData.dob,
+      });
+    }
   };
+
+  async function createUser({
+    firebaseUid,
+    email,
+    firstName,
+    lastName,
+    dob,
+    displayName,
+    mobile,
+  }: socialSignInSignUpPayload) {
+    const dataMango = await socialSignInSignUp({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+      mobile,
+    });
+    console.log(
+      '🚀 ~ file: signinViewModal.tsx:262 ~ useViewModal ~ dat̥aMo̥ngo:',
+      dataMango,
+    );
+    if (dataMango.message === 'Registered Successfully')
+      return ShowFlashMessage('info', 'Registered Successfully', 'success');
+  }
 
   const handleAppleSignIn = async () => {
     const data = await firebaseService.appleSignIn(socialSignInSignUp);
@@ -244,11 +305,13 @@ export const useViewModal = (navigation: any) => {
     firstName,
     lastName,
     firebaseUid,
+    credential,
   }: {
     email: string;
     firstName?: string;
     lastName?: string;
     firebaseUid?: string;
+    credential?: FirebaseAuthTypes.AuthCredential;
   }) => {
     navigation.navigate(ROUTES.Profile, {
       data: {
@@ -256,6 +319,7 @@ export const useViewModal = (navigation: any) => {
         firstName: firstName,
         lastName: lastName,
         firebaseUid: firebaseUid,
+        credential: credential,
       },
     });
   };
@@ -305,5 +369,7 @@ export const useViewModal = (navigation: any) => {
     handleSubmit,
     validationErrors,
     setValidationErrors,
+    emailInput,
+    setEmailInput,
   };
 };

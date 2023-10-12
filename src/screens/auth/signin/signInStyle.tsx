@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 import {theme} from '../../../infrastructure/theme';
 
 export const ErrorText = styled.Text`
-  color: ${props => props.theme.colors.text.error};
-  font-family: ${props => props.theme.fontFamily.roboto};
+  color: ${(props) => props.theme.colors.text.error};
+  font-family: ${(props) => props.theme.fontFamily.roboto};
 `;
 export const styles = StyleSheet.create({
   containerStyle: {
@@ -54,7 +54,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-
   emailInputBox: {
     flex: 1,
     color: '#333',
@@ -77,7 +76,3 @@ export const styles = StyleSheet.create({
     marginTop: 100,
   },
 });
-
-
- 
-  
