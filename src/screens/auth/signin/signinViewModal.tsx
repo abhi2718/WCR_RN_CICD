@@ -273,7 +273,39 @@ export const useViewModal = (navigation: any) => {
 
   const _onFbLogIn = async () => {
     try {
-      const data = await firebaseService.signInWithFb(socialSignInSignUp);
+      const data: any = await firebaseService.signInWithFb(socialSignInSignUp);
+      console.log('data', data);
+      // if account is createed by other provider
+      if (data?.message === 'Logged In') {
+        // naviagte to respectve screen
+        return ShowFlashMessage('info', 'log In successfully', 'success');
+      }
+
+      if (data?.profile && data?.user) {
+        const {email, family_name, given_name} = data.profile;
+
+        if (data.isNewUser) {
+          if (email) {
+            // const data = await getOtpOnEmail(email);
+            await firebaseService.deleteUserFromFirebase();
+            navigateToProfile({
+              email,
+              firstName: given_name,
+              lastName: family_name,
+              credential: data.googleCredential,
+            });
+          } else {
+            navigateToOtpScreen({});
+          }
+        } else {
+          const data = await socialSignInSignUp({email});
+          console.log('inside else google sign :: ', data);
+
+          if (data.message === 'Logged In') {
+            return ShowFlashMessage('info', 'log In successfully', 'success');
+          }
+        }
+      }
     } catch (e) {
       ShowFlashMessage('Something went wrong !', 'danger');
     }
