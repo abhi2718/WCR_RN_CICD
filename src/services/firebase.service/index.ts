@@ -4,7 +4,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 import {
   LoginManager,
   GraphRequest,
@@ -13,7 +13,6 @@ import {
 } from 'react-native-fbsdk';
 import {ShowFlashMessage} from '../../components/flashBar';
 import {config} from '../../utils/config';
-import {useViewModal} from '../../screens/auth/signin/signinViewModal';
 
 export class FirebaseService {
   constructor() {}
@@ -27,6 +26,7 @@ export class FirebaseService {
       lastName,
       dob,
       displayName,
+      mobile,
     }: socialSignInSignUpPayload) => Promise<any>,
   ) {
     try {
@@ -36,7 +36,6 @@ export class FirebaseService {
       });
       await GoogleSignin.hasPlayServices();
       const {user} = await GoogleSignin.signIn();
-      console.log('user is --->', user);
       setLoading(true);
       const {idToken} = await GoogleSignin.getTokens();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
@@ -45,6 +44,14 @@ export class FirebaseService {
         socialSignInSignUp,
         user.email,
       );
+
+      if (response?._id) {
+        return {
+          isNewUser: false,
+          profile: null,
+          user: null,
+        };
+      }
 
       if (!response?.additionalUserInfo) {
         return {
@@ -58,6 +65,7 @@ export class FirebaseService {
         isNewUser,
         profile,
         user: response.user,
+        googleCredential,
       };
     } catch (error: any) {
       switch (error.code) {
@@ -95,13 +103,14 @@ export class FirebaseService {
   }
   async signInWithCredential(
     credential: FirebaseAuthTypes.AuthCredential,
-    socialSignInSignUp: ({
+    socialSignInSignUp?: ({
       firebaseUid,
       email,
       firstName,
       lastName,
       dob,
       displayName,
+      mobile,
     }: socialSignInSignUpPayload) => Promise<any>,
     email?: string | undefined,
   ) {
@@ -110,7 +119,7 @@ export class FirebaseService {
     } catch (error: any) {
       switch (error.code) {
         case 'auth/account-exists-with-different-credential':
-          if (email) {
+          if (socialSignInSignUp && email) {
             return await socialSignInSignUp({email});
           }
           break;
@@ -134,7 +143,6 @@ export class FirebaseService {
     }
   }
   async signInWithEmailPassword(email: string, password: string) {
-    const {socialSignInSignUp} = useViewModal();
     try {
       return await auth().signInWithEmailAndPassword(email, password);
     } catch (error: any) {
@@ -144,7 +152,6 @@ export class FirebaseService {
           break;
         case 'auth/wrong-password':
           // handle edge case when given email is not found in db
-          return await socialSignInSignUp({email});
           break;
         case 'auth/user-not-found':
           return await this.signUpWithEmailPassword(email, password);
@@ -158,6 +165,14 @@ export class FirebaseService {
       }
     }
   }
+  async deleteUserFromFirebase() {
+    let user = auth().currentUser;
+    user
+      ?.delete()
+      .then(() => console.log('User deleted', user))
+      .catch((error) => console.log(error));
+  }
+
   async signUpWithEmailPassword(email: string, password: string) {
     try {
       return await auth().createUserWithEmailAndPassword(email, password);
@@ -189,13 +204,11 @@ export class FirebaseService {
       }
     }
   }
-  getParsedJwt(
-    token: string,
-  ){
+  getParsedJwt(token: string) {
     try {
-      return jwt_decode(token)
+      return jwt_decode(token);
     } catch {
-      return undefined
+      return undefined;
     }
   }
   async appleSignIn(
@@ -220,8 +233,8 @@ export class FirebaseService {
       if (credentialState === appleAuth.State.AUTHORIZED) {
         const {identityToken, nonce} = appleAuthRequestResponse;
         if (identityToken) {
-          const useInfo = this.getParsedJwt(identityToken);
-          email = useInfo?.email
+          const userInfo: any = this.getParsedJwt(identityToken);
+          email = userInfo?.email;
         }
         const appleCredential = auth.AppleAuthProvider.credential(
           identityToken,
@@ -230,8 +243,16 @@ export class FirebaseService {
         const response = await this.signInWithCredential(
           appleCredential,
           socialSignInSignUp,
-          email
+          email,
         );
+        if (response?._id) {
+          return {
+            isNewUser: false,
+            profile: null,
+            user: null,
+          };
+        }
+
         if (!response?.additionalUserInfo) {
           return {
             isNewUser: null,
@@ -244,6 +265,7 @@ export class FirebaseService {
           isNewUser,
           profile,
           user: response.user,
+          appleCredential: appleCredential,
         };
       }
     } catch (error) {
@@ -259,7 +281,9 @@ export class FirebaseService {
       dob,
       displayName,
     }: socialSignInSignUpPayload) => Promise<any>,
+    setFbData: (payload: any) => void
   ) {
+
     LoginManager.logOut();
     const loginResult = await LoginManager.logInWithPermissions([
       'email',
@@ -275,17 +299,41 @@ export class FirebaseService {
       return ShowFlashMessage('Alert', 'You Cancelled ', 'danger');
     }
     const callBack = async (err: any, result: any) => {
+      // result constains the user info
+      let res;
       const email = result?.email;
       const data = await AccessToken.getCurrentAccessToken();
       if (data?.accessToken) {
         const facebookCredential = auth.FacebookAuthProvider.credential(
           data?.accessToken,
         );
-        return await this.signInWithCredential(
+        const response = await this.signInWithCredential(
           facebookCredential,
           socialSignInSignUp,
           email,
         );
+        if (response?._id) {
+          res = {
+            isNewUser: false,
+            profile: null,
+            user: null,
+          };
+        }
+        if (!response?.additionalUserInfo) {
+          res = {
+            isNewUser: null,
+            profile: null,
+            user: null,
+          };
+        }
+        const {isNewUser, profile} = response.additionalUserInfo;
+        res = {
+          isNewUser,
+          profile,
+          user: response.user,
+          facebookCredential: facebookCredential,
+        };
+        setFbData(res);
       }
     };
     const infoRequest = new GraphRequest(
@@ -294,5 +342,6 @@ export class FirebaseService {
       callBack,
     );
     new GraphRequestManager().addRequest(infoRequest).start();
+    
   }
 }

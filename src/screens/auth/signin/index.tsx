@@ -28,15 +28,13 @@ import {
   Row,
   Spacer,
 } from '../../../components/tools';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 type navigationProps = {
-  navigation:{
-    navigate: (route: string, params?: any) => void
-  }
-}
-export default function SignInScreen({
-  navigation,
-}: navigationProps) {
+  navigation: {
+    navigate: (route: string, params?: any) => void;
+  };
+};
+export default function SignInScreen({navigation}: navigationProps) {
   const {
     _onFbLogIn,
     _googleSignIn,
@@ -71,7 +69,6 @@ export default function SignInScreen({
           iconSource={require('../../../assets/images/appleLogo.png')}
         />
       )}
-
       <View style={styles.inputContainer}>
         <ImageContainer
           source={require('../../../assets/images/Email-icon.png')}
@@ -87,7 +84,6 @@ export default function SignInScreen({
           placeholderTextColor="rgba(35, 35, 35, 0.4)" // Adjust the placeholder text color
         />
       </View>
-
       <RedButton
         title={'Continue'}
         onPress={() => {
