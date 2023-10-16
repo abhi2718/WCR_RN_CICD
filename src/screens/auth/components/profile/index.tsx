@@ -3,6 +3,7 @@ import {Text, TextInput, View, ScrollView} from 'react-native';
 import {RedButton} from '../../../../components/button';
 import {ImageContainer, Spacer, dimensions} from '../../../../components/tools';
 import {useViewModal} from '../../signin/signinViewModal';
+import {profileUseViewModal} from './profileViewModal';
 import {profileStyles} from './profileStyle';
 
 const Profile = (props: any) => {
@@ -13,8 +14,14 @@ const Profile = (props: any) => {
   let email = receivedData.email;
   let firebaseUid = receivedData.firebaseUid;
   let credential = receivedData.credential;
-  let {formData, handleInputChange, handleSubmit, validationErrors} =
-    useViewModal(navigation);
+  let {
+    formData,
+    handleInputChange,
+    handleSubmit,
+    validationErrors,
+    toUpperFirstName,
+    formatMobile,
+  } = profileUseViewModal(navigation);
 
   useEffect(() => {
     handleInputChange('email', email);
@@ -36,7 +43,7 @@ const Profile = (props: any) => {
             style={profileStyles.input}
             placeholder=" First Name"
             value={formData.firstName}
-            onChangeText={(text) => handleInputChange('firstName', text)}
+            onChangeText={(text) => handleInputChange('firstName', toUpperFirstName(text))}
           />
           {validationErrors.firstName && (
             <Text style={profileStyles.errorText}>
@@ -49,7 +56,7 @@ const Profile = (props: any) => {
             style={profileStyles.input}
             placeholder="Last Name"
             value={formData.lastName}
-            onChangeText={(text) => handleInputChange('lastName', text)}
+            onChangeText={(text) => handleInputChange('lastName', toUpperFirstName(text))}
           />
           {validationErrors.lastName && (
             <Text style={profileStyles.errorText}>
@@ -72,7 +79,7 @@ const Profile = (props: any) => {
             style={profileStyles.input}
             placeholder="Mobile No"
             value={formData.mobile}
-            onChangeText={(text) => handleInputChange('mobile', text)}
+            onChangeText={(text) => handleInputChange('mobile', formatMobile(text))}
           />
           {validationErrors.mobile && (
             <Text style={profileStyles.errorText}>
