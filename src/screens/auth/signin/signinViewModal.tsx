@@ -201,6 +201,10 @@ export const useViewModal = (navigation: any) => {
     // }
   };
 
+  const otpScreen = () => {
+    navigation.navigate(ROUTES.Emailauth);
+  };
+
   const newUserSignUp = async (
     email?: string,
     credential?: FirebaseAuthTypes.AuthCredential,
@@ -271,10 +275,10 @@ export const useViewModal = (navigation: any) => {
   const handleAppleSignIn = async () => {
     const data = await firebaseService.appleSignIn(socialSignInSignUp);
   };
-  const _setFbData = (payload:any)=> setFbData(payload)
+  const _setFbData = (payload: any) => setFbData(payload);
   const _onFbLogIn = async () => {
     try {
-       await firebaseService.signInWithFb(socialSignInSignUp,_setFbData);
+      await firebaseService.signInWithFb(socialSignInSignUp, _setFbData);
     } catch (e) {
       ShowFlashMessage('Something went wrong !', 'danger');
     }
@@ -284,7 +288,7 @@ export const useViewModal = (navigation: any) => {
       return ShowFlashMessage('info', 'log In successfully', 'success');
     }
     if (data?.profile && data?.user) {
-      const { email, family_name, given_name } = data.profile;
+      const {email, family_name, given_name} = data.profile;
       if (data.isNewUser) {
         if (email) {
           await firebaseService.deleteUserFromFirebase();
@@ -298,7 +302,7 @@ export const useViewModal = (navigation: any) => {
           navigateToOtpScreen({});
         }
       } else {
-        const res = await socialSignInSignUp({ email });
+        const res = await socialSignInSignUp({email});
         if (res.message === 'Logged In') {
           return ShowFlashMessage('info', 'log In successfully', 'success');
         }
@@ -309,7 +313,7 @@ export const useViewModal = (navigation: any) => {
     if (fbdata) {
       handleNavigationAfterFbLogin(fbdata);
     }
-  },[fbdata])
+  }, [fbdata]);
   const navigateToEmailAuth = ({
     email,
     firstName,
@@ -402,5 +406,6 @@ export const useViewModal = (navigation: any) => {
     setValidationErrors,
     emailInput,
     setEmailInput,
+    otpScreen,
   };
 };

@@ -5,4 +5,5 @@ export type InputProps = {
   value?: any;
   onChangeText?: any;
   secureTextEntry?: any;
+  keyboardType?: string;
 };
