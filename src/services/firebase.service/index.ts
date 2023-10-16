@@ -281,9 +281,8 @@ export class FirebaseService {
       dob,
       displayName,
     }: socialSignInSignUpPayload) => Promise<any>,
-    setFbData: (payload: any) => void
+    setFbData: (payload: any) => void,
   ) {
-
     LoginManager.logOut();
     const loginResult = await LoginManager.logInWithPermissions([
       'email',
@@ -326,11 +325,13 @@ export class FirebaseService {
             user: null,
           };
         }
-        const {isNewUser, profile} = response.additionalUserInfo;
+        const isNewUser = response?.additionalUserInfo?.isNewUser;
+        const profile = response?.additionalUserInfo?.profile;
         res = {
           isNewUser,
           profile,
           user: response.user,
+          message: response.message,
           facebookCredential: facebookCredential,
         };
         setFbData(res);
@@ -342,6 +343,5 @@ export class FirebaseService {
       callBack,
     );
     new GraphRequestManager().addRequest(infoRequest).start();
-    
   }
 }

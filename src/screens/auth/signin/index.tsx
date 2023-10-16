@@ -12,23 +12,12 @@ import {useViewModal} from './signinViewModal';
 
 import {ErrorText, styles} from './signInStyle';
 import EmailLogin from '../components';
-import {Variants} from '../../../components/typography';
 import {
-  Button,
   RoundedButtonWithIconAndText,
   RedButton,
 } from '../../../components/button';
 import {ImageContainer, dimensions} from '../../../components/tools';
-import {
-  Column,
-  FullLoader,
-  InlineLoader,
-  InputBox,
-  isAndroid,
-  Row,
-  Spacer,
-} from '../../../components/tools';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {isAndroid} from '../../../components/tools';
 type navigationProps = {
   navigation: {
     navigate: (route: string, params?: any) => void;
