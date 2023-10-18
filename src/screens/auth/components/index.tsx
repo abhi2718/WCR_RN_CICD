@@ -6,20 +6,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {PrimaryButton, Button} from '../../../components/button';
+import { Button} from '../../../components/button';
 import {InputBox, Spacer} from '../../../components/tools';
 
-const EmailLogin = (props: any) => {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    signInWithEmailPassword,
-    onPress,
-    title,
-    isLoading,
-  } = props;
+type EmailProps = {
+  setEmail: (text: string) => void;
+  title?: string;
+  email: string;
+  setPassword: (text: string) => void;
+  password: string;
+  onPress: () => void;
+};
+
+const EmailLogin = (props: EmailProps) => {
+  const {email, setEmail, password, setPassword, onPress, title} = props;
   return (
     <View>
       <View style={styles.inputDiv}>
@@ -42,7 +42,7 @@ const EmailLogin = (props: any) => {
 
       <Spacer style={styles.spacerStyle} position="top" size={25}>
         <TouchableOpacity onPress={onPress}>
-          <PrimaryButton title={title} isLoading={isLoading} />
+          {/* <RedButton title={title!} /> */}
         </TouchableOpacity>
       </Spacer>
     </View>
@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f9',
     borderRadius: 14,
     height: 56,
-    marginBottom: 10,
-    justifyContent: 'center',
+    marginTop: 24,
   },
   input: {
     fontSize: 18,

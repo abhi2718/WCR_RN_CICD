@@ -1,91 +1,95 @@
 import React from 'react';
-import {View, ActivityIndicator, Text, TouchableOpacity} from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
-import {styles} from './signInStyle';
+
+import {ErrorText, styles} from './signInStyle';
 import EmailLogin from '../components';
-import {Button} from '../../../components/button';
-import {ImageContainer, ScreenContainer} from '../../../components/tools';
-import {isAndroid, Row, Spacer} from '../../../components/tools';
-export default function SignInScreen() {
-  let {
-    count,
-    updateCount,
-    loading,
+import {Variants} from '../../../components/typography';
+import {
+  Button,
+  RoundedButtonWithIconAndText,
+  RedButton,
+} from '../../../components/button';
+import {ImageContainer, dimensions} from '../../../components/tools';
+import {
+  Column,
+  FullLoader,
+  InlineLoader,
+  InputBox,
+  isAndroid,
+  Row,
+  Spacer,
+} from '../../../components/tools';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+type navigationProps = {
+  navigation: {
+    navigate: (route: string, params?: any) => void;
+  };
+};
+export default function SignInScreen({navigation}: navigationProps) {
+  const {
+    _onFbLogIn,
     _googleSignIn,
-    handleSignUpPress,
+    getOtpToVerifyEmail,
+    handleAppleSignIn,
     email,
     setEmail,
-    password,
-    setPassword,
-    signInWithEmailPassword,
-    handleAppleSignIn,
-    _onFbLogIn,
-  } = useViewModal();
+  } = useViewModal(navigation);
   return (
-    <ScreenContainer>
-      <View style={styles.viewDiv}>
+    <View style={styles.containerStyle}>
+      <ImageContainer
+        height={54}
+        width={72}
+        marginTop={50}
+        marginBottom={150}
+        source={require('../../../assets/images/logo.png')}
+      />
+      <RoundedButtonWithIconAndText
+        onPress={_onFbLogIn}
+        text={'Continue with Facebook'}
+        iconSource={require('../../../assets/images/facebookLogo.png')}
+      />
+      <RoundedButtonWithIconAndText
+        onPress={_googleSignIn}
+        text={'Continue with Google'}
+        iconSource={require('../../../assets/images/googleLogo.png')}
+      />
+      {!isAndroid && (
+        <RoundedButtonWithIconAndText
+          onPress={handleAppleSignIn}
+          text={'Continue with Apple'}
+          iconSource={require('../../../assets/images/appleLogo.png')}
+        />
+      )}
+      <View style={styles.inputContainer}>
         <ImageContainer
-          width={72}
-          height={54}
-          marginTop={50}
-          source={require('../../../assets/images/logo.png')}
+          source={require('../../../assets/images/Email-icon.png')}
+          style={styles.emailIconStyle}
+        />
+        <TextInput
+          style={styles.emailInputBox}
+          placeholder={'Email'}
+          value={email}
+          onChangeText={(email: string) => {
+            setEmail(email);
+          }}
+          placeholderTextColor="rgba(35, 35, 35, 0.4)" // Adjust the placeholder text color
         />
       </View>
-      <Text style={styles.headingText}>Login to Your Account</Text>
-
-      <Spacer position="bottom" size={20}>
-        <Spacer position="top" size={20}>
-          <EmailLogin
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            onPress={signInWithEmailPassword}
-            title="Login"
-            isLoading={loading}
-          />
-        </Spacer>
-      </Spacer>
-      <Row justifyContent="center">
-        <Text style={styles.centerText}>Or continue with</Text>
-      </Row>
-      <Row justifyContent="center" style={styles.socialLogin}>
-        <TouchableOpacity onPress={_onFbLogIn}>
-          <ImageContainer
-            width={30}
-            height={35}
-            source={require('../../../assets/images/facebookLogo.png')}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={_googleSignIn}>
-          <ImageContainer
-            width={30}
-            height={35}
-            source={require('../../../assets/images/googleLogo.png')}
-          />
-        </TouchableOpacity>
-
-        {!isAndroid && (
-          <TouchableOpacity onPress={handleAppleSignIn}>
-            <ImageContainer
-              width={30}
-              height={35}
-              source={require('../../../assets/images/appleLogo.png')}
-            />
-          </TouchableOpacity>
-        )}
-      </Row>
-
-      <Spacer position="top" size={20}>
-        <Row justifyContent="center">
-          <Text style={styles.footerText}>Don’t have an account ?</Text>
-          <TouchableOpacity onPress={handleSignUpPress}>
-            <Text style={styles.linkText}> Sign Up </Text>
-          </TouchableOpacity>
-        </Row>
-      </Spacer>
-    </ScreenContainer>
+      <RedButton
+        title={'Continue'}
+        onPress={() => {
+          getOtpToVerifyEmail();
+        }}
+      />
+    </View>
   );
 }
