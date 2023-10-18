@@ -6,17 +6,14 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {ImageContainer} from '../../../../components/tools';
+import {ImageContainer} from '../../../../../components/tools';
 import {EmailAuthScreenStyles} from './emailauthStyle';
-import {RedButton} from '../../../../components/button';
-import {useViewModal} from './../../signin/signinViewModal';
+import {RedButton} from '../../../../../components/button';
+import { emailAuthViewModal } from './emailauthViewModal';
 
 export default function EmailAuthByOtpScreeen(props: any) {
-  const navigation = props.navigation;
-  const receivedData = props.route?.params?.data || 'No data received';
-  const email: string = receivedData?.email;
-  let {otp, setOtp, verifyEmail, resendOtp, emailInput, setEmailInput} =
-    useViewModal(navigation);
+  let {otp, setOtp, verifyEmail, resendOtp, emailInput, setEmailInput,email} =
+  emailAuthViewModal(props);
 
   return (
     <View style={EmailAuthScreenStyles.containerStyle}>
@@ -26,7 +23,7 @@ export default function EmailAuthByOtpScreeen(props: any) {
           width={72}
           marginTop={50}
           marginBottom={150}
-          source={require('../../../../assets/images/logo.png')}
+          source={require('../../../../../assets/images/logo.png')}
         />
 
         <Text style={EmailAuthScreenStyles.titleStyle}>

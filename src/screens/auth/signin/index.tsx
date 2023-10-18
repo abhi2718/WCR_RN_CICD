@@ -1,34 +1,16 @@
 import React from 'react';
 import {
   View,
-  ActivityIndicator,
-  Text,
-  TouchableOpacity,
   TextInput,
-  StyleSheet,
 } from 'react-native';
-import {Button as PaperButton} from 'react-native-paper';
 import {useViewModal} from './signinViewModal';
-
-import {ErrorText, styles} from './signInStyle';
-import EmailLogin from '../components';
-import {Variants} from '../../../components/typography';
+import {styles} from './signInStyle';
 import {
-  Button,
   RoundedButtonWithIconAndText,
   RedButton,
 } from '../../../components/button';
 import {ImageContainer, dimensions} from '../../../components/tools';
-import {
-  Column,
-  FullLoader,
-  InlineLoader,
-  InputBox,
-  isAndroid,
-  Row,
-  Spacer,
-} from '../../../components/tools';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {isAndroid} from '../../../components/tools';
 type navigationProps = {
   navigation: {
     navigate: (route: string, params?: any) => void;
@@ -41,6 +23,7 @@ export default function SignInScreen({navigation}: navigationProps) {
     getOtpToVerifyEmail,
     handleAppleSignIn,
     email,
+    navigateToP,
     setEmail,
   } = useViewModal(navigation);
   return (
@@ -88,6 +71,12 @@ export default function SignInScreen({navigation}: navigationProps) {
         title={'Continue'}
         onPress={() => {
           getOtpToVerifyEmail();
+        }}
+      />
+      <RedButton
+        title={'profile'}
+        onPress={() => {
+          navigateToP();
         }}
       />
     </View>

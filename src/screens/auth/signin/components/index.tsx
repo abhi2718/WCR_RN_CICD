@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Button} from '../../../components/button';
-import {InputBox, Spacer} from '../../../components/tools';
+import { Button} from '../../../../components/button';
+import {InputBox, Spacer} from '../../../../components/tools';
 
 type EmailProps = {
   setEmail: (text: string) => void;

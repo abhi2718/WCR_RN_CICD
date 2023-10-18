@@ -1,5 +1,5 @@
 import React from 'react';
-import {theme} from '../../../../infrastructure/theme';
+import {theme} from '../../../../../infrastructure/theme';
 import {StyleSheet} from 'react-native';
 
 export const EmailAuthScreenStyles = StyleSheet.create({
