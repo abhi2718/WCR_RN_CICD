@@ -1,23 +1,36 @@
 import React, {useEffect} from 'react';
-import {Text, TextInput, View, ScrollView} from 'react-native';
+import {
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {RedButton} from '../../../../components/button';
 import {ImageContainer, Spacer, dimensions} from '../../../../components/tools';
 import {useViewModal} from '../../signin/signinViewModal';
 import {profileUseViewModal} from './profileViewModal';
 import {profileStyles} from './profileStyle';
+import DatePicker from 'react-native-date-picker';
+import Modal from 'react-native-modal';
+import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
 
 const Profile = (props: any) => {
-  const receivedData = props.route?.params?.data || 'No data received';
   const {navigation} = props;
-  let firstName = receivedData.firstName;
-  let lastName = receivedData.lastName;
-  let email = receivedData.email;
-  let firebaseUid = receivedData.firebaseUid;
-  let credential = receivedData.credential;
+
   let {
     formData,
     handleInputChange,
+    handleDateChange,
     handleSubmit,
+    email,
+    toggleModal,
+    errorMessage,
+    setErrorMessage,
+    selectedDate,
+    formateDOB,
+    credential,
+    isModalVisible,
     validationErrors,
     toUpperFirstName,
     formatMobile,
@@ -43,7 +56,9 @@ const Profile = (props: any) => {
             style={profileStyles.input}
             placeholder=" First Name"
             value={formData.firstName}
-            onChangeText={(text) => handleInputChange('firstName', toUpperFirstName(text))}
+            onChangeText={(text) =>
+              handleInputChange('firstName', toUpperFirstName(text))
+            }
           />
           {validationErrors.firstName && (
             <Text style={profileStyles.errorText}>
@@ -56,7 +71,9 @@ const Profile = (props: any) => {
             style={profileStyles.input}
             placeholder="Last Name"
             value={formData.lastName}
-            onChangeText={(text) => handleInputChange('lastName', toUpperFirstName(text))}
+            onChangeText={(text) =>
+              handleInputChange('lastName', toUpperFirstName(text))
+            }
           />
           {validationErrors.lastName && (
             <Text style={profileStyles.errorText}>
@@ -79,7 +96,9 @@ const Profile = (props: any) => {
             style={profileStyles.input}
             placeholder="Mobile No"
             value={formData.mobile}
-            onChangeText={(text) => handleInputChange('mobile', formatMobile(text))}
+            onChangeText={(text) =>
+              handleInputChange('mobile', formatMobile(text))
+            }
           />
           {validationErrors.mobile && (
             <Text style={profileStyles.errorText}>
@@ -91,7 +110,7 @@ const Profile = (props: any) => {
         <View style={profileStyles.inputDiv}>
           <TextInput
             style={profileStyles.input}
-            editable={receivedData?.email ? false : true}
+            editable={email ? false : true}
             placeholder="Email"
             value={formData.email}
             onChangeText={(text) => handleInputChange('email', text)}
@@ -99,11 +118,32 @@ const Profile = (props: any) => {
         </View>
 
         <View style={profileStyles.inputDiv}>
+          <TouchableOpacity onPress={toggleModal}>
+            <Text style={profileStyles.openButton}>Selecte Date</Text>
+          </TouchableOpacity>
+          <Modal isVisible={isModalVisible}>
+            <View style={profileStyles.modalContainer}>
+              <Text style={profileStyles.label}>Select a Date:</Text>
+              {errorMessage && (
+                <Text style={profileStyles.error}>{errorMessage}</Text>
+              )}
+              <DatePicker
+                mode="date"
+                maximumDate={calculateDateLessThan18YearsAgo(new Date())}
+                date={selectedDate}
+                onDateChange={handleDateChange}
+              />
+              <TouchableOpacity onPress={toggleModal}>
+                <Text style={profileStyles.closeButton}>OK</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
           <TextInput
+            editable={true}
             style={profileStyles.input}
-            placeholder="Date of birth"
+            placeholder="MM/DD-YYY"
             value={formData.dob}
-            onChangeText={(text) => handleInputChange('dob', text)}
+            onChangeText={(text) => handleInputChange('dob', formateDOB(text))}
           />
           {validationErrors.dob && (
             <Text style={profileStyles.errorText}>{validationErrors.dob}</Text>

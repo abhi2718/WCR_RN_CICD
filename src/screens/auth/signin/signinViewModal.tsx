@@ -201,6 +201,9 @@ export const useViewModal = (navigation: any) => {
       },
     });
   };
+  const navigateToP = () => {
+    navigation.navigate(ROUTES.Profile);
+  };
   const navigateToOtpScreen = ({
     email,
     firstName,
@@ -236,7 +239,7 @@ export const useViewModal = (navigation: any) => {
     handleAppleSignIn,
     _onFbLogIn,
     getOtpToVerifyEmail,
-
+    navigateToP,
     setLoading,
 
     checkIsNewUser,

@@ -3,6 +3,8 @@ import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {useViewModal} from '../../signin/signinViewModal';
 import {ShowFlashMessage} from '../../../../components/flashBar';
 import {FirebaseService} from '../../../../services/firebase.service';
+import {isDate18YearsOrAbove} from '../../../../utils/common.functions';
+import moment from 'moment';
 export type FormTypes = {
   firstName: string;
   lastName: string;
@@ -18,6 +20,9 @@ export const profileUseViewModal = (props: any) => {
   let firstName = receivedData.firstName;
   let lastName = receivedData.lastName;
   let email = receivedData.email;
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [errorMessage, setErrorMessage] = useState('');
   let firebaseUid = receivedData.firebaseUid;
   let credential = receivedData.credential;
   const firebaseService = new FirebaseService();
@@ -27,8 +32,13 @@ export const profileUseViewModal = (props: any) => {
     handleInputChange('email', email);
   }, [email]);
 
-  const capitalizeFirstLetter = (text: string) => {
-    return text.charAt(0).toUpperCase() + text.slice(1);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+  const handleDateChange = (newDate: Date) => {
+    setSelectedDate(newDate);
+    const date = newDate ? moment(newDate).format('MM/DD/YYYY') : 'N/A';
+    handleInputChange('dob', date);
   };
 
   const toUpperFirstName = (text: string) => {
@@ -63,6 +73,27 @@ export const profileUseViewModal = (props: any) => {
     return result;
   };
 
+  const formateDOB = (text: string) => {
+    if (!text) return '';
+    // Remove any non-numeric characters
+    const numericText = text.replace(/[^0-9]/g, '');
+    // Format the date string with slashes (MM/DD/YYYY)
+    // Add slashes to format the date
+    // Format the date with slashes
+    let formattedDate = '';
+    if (numericText.length <= 2) {
+      formattedDate = numericText;
+    } else if (numericText.length <= 4) {
+      formattedDate = `${numericText.slice(0, 2)}/${numericText.slice(2)}`;
+    } else {
+      formattedDate = `${numericText.slice(0, 2)}/${numericText.slice(
+        2,
+        4,
+      )}/${numericText.slice(4, 8)}`;
+    }
+    return formattedDate;
+  };
+
   const [formData, setFormData] = useState<FormTypes>({
     firstName: '',
     lastName: '',
@@ -82,7 +113,7 @@ export const profileUseViewModal = (props: any) => {
   const handleSubmit = async (credential: FirebaseAuthTypes.AuthCredential) => {
     // Do something with the form data, e.g., make an API request
     const errors: Partial<FormTypes> = {};
-    const phonePattern = /^\d{10}$/; // This is a basic example for a 10-digit number.
+    const phonePattern = /\(\d{3}\) \d{3}-\d{4}/; // This is a basic example for a 10-digit number.
 
     if (!formData?.firstName) {
       errors.firstName = 'Please enter your name';
@@ -90,11 +121,13 @@ export const profileUseViewModal = (props: any) => {
     if (formData.lastName.trim().length == 0) {
       errors.lastName = 'Please enter your last name';
     }
-    // if (!phonePattern.test(formData.mobile)) {
-    //   errors.mobile = 'Please enter a valid 10-digit phone number';
-    // }
+    if (!phonePattern.test(formData.mobile)) {
+      errors.mobile = 'Please enter a valid 10-digit phone number';
+    }
     if (formData.dob.trim().length == 0) {
       errors.dob = 'Please enter your date of birth';
+    } else if (!isDate18YearsOrAbove(formData.dob)) {
+      errors.dob = 'You must be at-least 18 yrs old';
     }
 
     if (Object.keys(errors).length > 0) {
@@ -102,7 +135,7 @@ export const profileUseViewModal = (props: any) => {
     } else {
       setValidationErrors({});
       // Proceed with form submission
-      await newUserSignUp(formData.email, credential);
+      // await newUserSignUp(formData.email, credential);
     }
   };
 
@@ -174,9 +207,18 @@ export const profileUseViewModal = (props: any) => {
     handleSubmit,
     validationErrors,
     email,
+    credential,
     formData,
+    toggleModal,
+    isModalVisible,
+    setModalVisible,
     toUpperFirstName,
-    capitalizeFirstLetter,
-    formatMobile
+    errorMessage,
+    setErrorMessage,
+    selectedDate,
+    setSelectedDate,
+    formatMobile,
+    handleDateChange,
+    formateDOB,
   };
 };

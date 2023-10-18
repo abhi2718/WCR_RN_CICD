@@ -30,6 +30,7 @@ export default function SignInScreen({navigation}: navigationProps) {
     getOtpToVerifyEmail,
     handleAppleSignIn,
     email,
+    navigateToP,
     setEmail,
   } = useViewModal(navigation);
   return (
@@ -77,6 +78,12 @@ export default function SignInScreen({navigation}: navigationProps) {
         title={'Continue'}
         onPress={() => {
           getOtpToVerifyEmail();
+        }}
+      />
+      <RedButton
+        title={'profile'}
+        onPress={() => {
+          navigateToP();
         }}
       />
     </View>

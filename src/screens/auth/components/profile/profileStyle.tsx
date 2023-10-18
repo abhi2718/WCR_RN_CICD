@@ -37,4 +37,32 @@ export const profileStyles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+
+  datePickercontainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  openButton: {
+    fontSize: 18,
+    color: 'blue',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  closeButton: {
+    fontSize: 18,
+    color: 'blue',
+    alignSelf: 'flex-end',
+  },
 });
