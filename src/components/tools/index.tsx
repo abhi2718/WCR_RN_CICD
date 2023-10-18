@@ -1,5 +1,6 @@
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
+import {ActivityIndicator} from 'react-native-paper';
 import {
   Platform,
   Dimensions,
@@ -9,13 +10,12 @@ import {
   View,
   StyleSheet,
   ImageSourcePropType,
+  StatusBar,
 } from 'react-native';
 import {InputProps} from '../../types/components/input.type';
-import {ActivityIndicator} from 'react-native-paper';
 import {rowColumnProps} from '../../types/components/rowColumn.type';
 import {imageProps} from '../../types/components/image.type';
 
-// Screen Wrapper
 interface ScreenContainerProps {
   children: ReactNode;
 }
@@ -26,19 +26,8 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = ({children}) => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-  },
-  innerContainer: {
-    textAlign: 'center',
-    flex: 1,
-    padding: 16,
-  },
-});
 
-// Input Box with dynamic Styling
+
 const InputContainer = styled.TextInput<InputProps>`
   padding: 15px;
   width: 100%;
@@ -47,8 +36,6 @@ const InputContainer = styled.TextInput<InputProps>`
 export const InputBox: React.FC<InputProps> = props => {
   return <InputContainer {...props} />;
 };
-
-// ---- ImageContainer
 
 const ImageProps = styled.Image<imageProps>`
   height: ${({height = 50}) => `${height}px`};
@@ -63,7 +50,6 @@ export const ImageContainer: React.FC<imageProps> = props => {
   return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
 };
 
-// --- FullLoader
 const PageLoaderContainer = styled.View`
   flex: 1;
   justify-content: center;
@@ -77,7 +63,6 @@ export const FullLoader = () => {
   );
 };
 
-// --- Inline Loader
 const InlineLoaderContainer = styled.View`
   justify-content: center;
   align-items: center;
@@ -90,8 +75,6 @@ export const InlineLoader = () => {
     </InlineLoaderContainer>
   );
 };
-
-// ----Row And Column
 
 const ChildContainer = styled.View<rowColumnProps>`
   flex-direction: ${({flexDirection}) => flexDirection};
@@ -141,7 +124,6 @@ export const Column: React.FC<rowColumnProps> = ({
   );
 };
 
-// -------------------------------------------------------
 const positionVariant = {
   top: 'marginTop',
   left: 'marginLeft',
@@ -183,5 +165,20 @@ export const Spacer = (props: spacerProos) => {
 };
 
 export const isAndroid = Platform.OS === 'android';
-const {width, height} = Dimensions.get('screen');
-export const dimensions = {width, height};
+const { width, height } = Dimensions.get('window');
+const statusBarHeight = StatusBar.currentHeight || 0;
+export const dimensions = { width, height,statusBarHeight };
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    flex: 1,
+  },
+  innerContainer: {
+    textAlign: 'center',
+    flex: 1,
+    padding: 16,
+  },
+});

@@ -3,19 +3,18 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignInScreen from '../../screens/auth/signin';
 import Profile from '../../screens/auth/components/profile';
 import EmailAuthByOtpScreeen from '../../screens/auth/components/emailauth';
-
+import { TabNavigator } from '../tab.navigator';
+import { ROUTES } from '../';
 const Stack = createNativeStackNavigator();
-
-export enum ROUTES {
-  SignIn = 'SignIn',
-  Profile = 'Profile',
-  SignUp = 'SignUp',
-  Emailauth = 'Email-auth',
-}
 
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
       <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.SignIn}

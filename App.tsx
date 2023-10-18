@@ -1,4 +1,5 @@
 import React from 'react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {ThemeProvider} from 'styled-components/native';
@@ -10,16 +11,18 @@ import {theme} from './src/infrastructure/theme';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.containerStyle}>
-      <Provider store={store}>
-        <CombinedProviders>
-          <ThemeProvider theme={theme}>
-            <Navigator />
-          </ThemeProvider>
-        </CombinedProviders>
-      </Provider>
-      <FlashMessage position="top" />
-    </SafeAreaView>
+    <GestureHandlerRootView style={styles.containerStyle}>
+      <SafeAreaView style={styles.containerStyle}>
+        <Provider store={store}>
+          <CombinedProviders>
+            <ThemeProvider theme={theme}>
+              <Navigator />
+            </ThemeProvider>
+          </CombinedProviders>
+        </Provider>
+        <FlashMessage position="top" />
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 
