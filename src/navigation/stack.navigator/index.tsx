@@ -8,6 +8,7 @@ import {addProduct} from '../../store/reducers/product.reducer';
 import styled from 'styled-components/native';
 import SignInScreen from '../../screens/auth/signin';
 import SignUpScreen from '../../screens/auth/signup';
+import Onboarding from '../../screens/onBoarding';
 const HeadingText = styled.Text`
   font-size: 22px;
 `;
@@ -68,6 +69,11 @@ const Settings = (props: any) => {
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="onboading"
+        component={Onboarding}
+      />
       <Stack.Screen
         options={{headerShown: false}}
         name="SignIn"

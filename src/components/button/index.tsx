@@ -37,7 +37,8 @@ export const PrimaryButton = (props: ButtonProps) => {
       onPress={isLoading ? undefined : onPress}
       style={{
         ...styles.redButton,
-        backgroundColor: btnColor || '#FA5672',
+        backgroundColor: btnColor || '#BB0000',
+        width: '100%',
       }}>
       {isLoading ? (
         <ActivityIndicator size="small" color="#fff" />
