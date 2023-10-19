@@ -1,13 +1,11 @@
 import React from 'react';
+import {Text, TouchableOpacity, View, ScrollView} from 'react-native';
 import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from 'react-native';
-import {ImageContainer} from '../../../../components/tools';
-import {EmailAuthScreenStyles} from './emailauthStyle';
+  ImageContainer,
+  InputBox,
+  ScreenContainer,
+} from '../../../../components/tools';
+import {styles} from './emailauthStyle';
 import {RedButton} from '../../../../components/button';
 import {useViewModal} from './../../signin/signinViewModal';
 import { emailAuthViewModal } from './emailauthViewModal';
@@ -18,41 +16,38 @@ export default function EmailAuthByOtpScreeen(props: any) {
   emailAuthViewModal(props);
 
   return (
-    <View style={EmailAuthScreenStyles.containerStyle}>
-      <ScrollView>
-        <ImageContainer
-          height={54}
-          width={72}
-          marginTop={50}
-          marginBottom={150}
-          source={require('../../../../assets/images/logo.png')}
-        />
-
-        <Text style={EmailAuthScreenStyles.titleStyle}>
-          Enter the code we have shared to your email
-        </Text>
-        <View style={EmailAuthScreenStyles.inputContainer}>
-          <TextInput
-            style={EmailAuthScreenStyles.emailInputBox}
-            placeholder={'Enter code'}
-            keyboardType="phone-pad"
-            value={otp}
-            onChangeText={(value: string) => setOtp(value)}
-            placeholderTextColor="rgba(35, 35, 35, 0.4)" // Adjust the placeholder text color
+    <ScreenContainer>
+      <ScrollView contentContainerStyle={styles.scrollDiv}>
+        <View>
+          <ImageContainer
+            height={65}
+            width={65}
+            marginBottom={35}
+            source={require('../../../../assets/images/logo.png')}
           />
         </View>
-        {!email && (
+        <View style={styles.viewBox}>
+          <Text>Enter the code we have shared to your email</Text>
           <View>
-            <Text style={EmailAuthScreenStyles.titleStyle}>
-              Enter the code email id
-            </Text>
-            <View style={EmailAuthScreenStyles.inputContainer}>
-              <TextInput
-                style={EmailAuthScreenStyles.emailInputBox}
+            <InputBox
+              style={styles.inputBox}
+              placeholder={'Enter code'}
+              keyboardType="phone-pad"
+              value={otp}
+              onChangeText={(value: string) => setOtp(value)}
+            />
+          </View>
+        </View>
+
+        {!email && (
+          <View style={styles.viewBox}>
+            <Text>Enter the code email id</Text>
+            <View>
+              <InputBox
+                style={styles.inputBox}
                 placeholder={'Enter email'}
                 value={emailInput}
                 onChangeText={(value: string) => setEmailInput(value)}
-                placeholderTextColor="rgba(35, 35, 35, 0.4)" // Adjust the placeholder text color
               />
             </View>
           </View>
@@ -65,10 +60,10 @@ export default function EmailAuthByOtpScreeen(props: any) {
         />
         <TouchableOpacity
           onPress={() => resendOtp(email)}
-          style={{marginTop: 10}}>
-          <Text>Resend otp</Text>
+          style={{marginTop: 20}}>
+          <Text>Resend code</Text>
         </TouchableOpacity>
       </ScrollView>
-    </View>
+    </ScreenContainer>
   );
 }

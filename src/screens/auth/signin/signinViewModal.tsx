@@ -139,8 +139,10 @@ export const useViewModal = (navigation: any) => {
     }
   };
   const _setFbData = (payload: any) => setFbData(payload);
+
   const _onFbLogIn = async () => {
     try {
+      await firebaseService.signInWithFb(socialSignInSignUp, _setFbData);
       await firebaseService.signInWithFb(socialSignInSignUp, _setFbData);
     } catch (e) {
       ShowFlashMessage('Something went wrong !', 'danger');
@@ -166,6 +168,7 @@ export const useViewModal = (navigation: any) => {
         }
       } else {
         const res = await socialSignInSignUp({email});
+       
         if (res.message === 'Logged In') {
           return ShowFlashMessage('info', 'log In successfully', 'success');
         }
