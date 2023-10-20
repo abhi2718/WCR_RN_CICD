@@ -5,4 +5,5 @@ export type ButtonProps = {
   isLoading?: Boolean;
   style?: any;
   btnColor?: any;
+  iconSource?: any;
 };

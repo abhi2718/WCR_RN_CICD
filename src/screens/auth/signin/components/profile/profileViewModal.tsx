@@ -15,22 +15,17 @@ export type FormTypes = {
 };
 
 export const profileUseViewModal = (props: any) => {
-  const receivedData = props.route?.params?.data || 'No data received';
   const {navigation} = props;
-  let firstName = receivedData.firstName;
-  let lastName = receivedData.lastName;
-  let email = receivedData.email;
+ 
+ 
+  const [isWelcomeModalVisible, setWelcomeModalVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [errorMessage, setErrorMessage] = useState('');
-  let firebaseUid = receivedData.firebaseUid;
-  let credential = receivedData.credential;
   const firebaseService = new FirebaseService();
   let {socialSignInSignUp} = useViewModal(navigation);
 
-  useEffect(() => {
-    handleInputChange('email', email);
-  }, [email]);
+ 
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -134,9 +129,17 @@ export const profileUseViewModal = (props: any) => {
       setValidationErrors(errors);
     } else {
       setValidationErrors({});
-      // Proceed with form submission
-      // await newUserSignUp(formData.email, credential);
+     // Proceed with form submission
+      await newUserSignUp(formData.email, credential);
     }
+  };
+
+  const openModal = () => {
+    setWelcomeModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setWelcomeModalVisible(false);
   };
 
   const newUserSignUp = async (
@@ -206,18 +209,19 @@ export const profileUseViewModal = (props: any) => {
     handleInputChange,
     handleSubmit,
     validationErrors,
-    email,
-    credential,
     formData,
     toggleModal,
     isModalVisible,
     setModalVisible,
     toUpperFirstName,
+    isWelcomeModalVisible, setWelcomeModalVisible,
     errorMessage,
     setErrorMessage,
     selectedDate,
     setSelectedDate,
     formatMobile,
+    openModal,
+    closeModal,
     handleDateChange,
     formateDOB,
   };

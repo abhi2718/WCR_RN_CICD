@@ -13,35 +13,46 @@ import {profileUseViewModal} from './profileViewModal';
 import {profileStyles} from './profileStyle';
 import DatePicker from 'react-native-date-picker';
 import Modal from 'react-native-modal';
-import {calculateDateLessThan18YearsAgo} from '../../../../../utils/common.functions';
+import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
+import {ModalComponent} from '../../../../components/modal/index';
+import moment from 'moment';
 
 const Profile = (props: any) => {
   const {navigation} = props;
+  const receivedData = props.route?.params?.data || 'No data received';
 
+  let credential = receivedData.credential;
+  let email = receivedData.email;
   let {
     formData,
     handleInputChange,
     handleDateChange,
     handleSubmit,
-    email,
+    isWelcomeModalVisible,
+    setWelcomeModalVisible,
     toggleModal,
     errorMessage,
     setErrorMessage,
     selectedDate,
     formateDOB,
-    credential,
     isModalVisible,
     validationErrors,
     toUpperFirstName,
     formatMobile,
+    openModal,
+    closeModal,
   } = profileUseViewModal(navigation);
 
   useEffect(() => {
     handleInputChange('email', email);
   }, [email]);
+  useEffect(() => {
+    openModal();
+  }, []);
 
   return (
     <View style={profileStyles.container}>
+      <ModalComponent isVisible={isWelcomeModalVisible} onClose={closeModal} />
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ImageContainer
           height={56}
@@ -121,27 +132,25 @@ const Profile = (props: any) => {
           <TouchableOpacity onPress={toggleModal}>
             <Text style={profileStyles.openButton}>Selecte Date</Text>
           </TouchableOpacity>
-          <Modal isVisible={isModalVisible}>
-            <View style={profileStyles.modalContainer}>
-              <Text style={profileStyles.label}>Select a Date:</Text>
-              {errorMessage && (
-                <Text style={profileStyles.error}>{errorMessage}</Text>
-              )}
-              <DatePicker
-                mode="date"
-                maximumDate={calculateDateLessThan18YearsAgo(new Date())}
-                date={selectedDate}
-                onDateChange={handleDateChange}
-              />
-              <TouchableOpacity onPress={toggleModal}>
-                <Text style={profileStyles.closeButton}>OK</Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
+          <DatePicker
+            modal
+            mode="date"
+            open={isModalVisible}
+            maximumDate={calculateDateLessThan18YearsAgo(new Date())}
+            date={selectedDate}
+            onDateChange={handleDateChange}
+            onConfirm={(date) => {
+              toggleModal();
+              handleDateChange(date);
+            }}
+            onCancel={() => {
+              toggleModal();
+            }}
+          />
           <TextInput
             editable={true}
             style={profileStyles.input}
-            placeholder="MM/DD-YYY"
+            placeholder="MM/DD/YYYY"
             value={formData.dob}
             onChangeText={(text) => handleInputChange('dob', formateDOB(text))}
           />
