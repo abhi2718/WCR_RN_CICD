@@ -16,17 +16,12 @@ export type FormTypes = {
 
 export const profileUseViewModal = (props: any) => {
   const {navigation} = props;
- 
- 
   const [isWelcomeModalVisible, setWelcomeModalVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [errorMessage, setErrorMessage] = useState('');
   const firebaseService = new FirebaseService();
   let {socialSignInSignUp} = useViewModal(navigation);
-
- 
-
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -105,15 +100,14 @@ export const profileUseViewModal = (props: any) => {
     setFormData({...formData, [name]: value});
   };
 
-  const handleSubmit = async (credential: FirebaseAuthTypes.AuthCredential) => {
-    // Do something with the form data, e.g., make an API request
+  const handleSubmit = async (credential: FirebaseAuthTypes.AuthCredential,appleId?:string) => {
     const errors: Partial<FormTypes> = {};
-    const phonePattern = /\(\d{3}\) \d{3}-\d{4}/; // This is a basic example for a 10-digit number.
-
+    // Plese try to put it in switch case
+    const phonePattern = /\(\d{3}\) \d{3}-\d{4}/;
     if (!formData?.firstName) {
       errors.firstName = 'Please enter your name';
     }
-    if (formData.lastName.trim().length == 0) {
+    if (!formData.lastName.trim().length) {
       errors.lastName = 'Please enter your last name';
     }
     if (!phonePattern.test(formData.mobile)) {
@@ -124,13 +118,11 @@ export const profileUseViewModal = (props: any) => {
     } else if (!isDate18YearsOrAbove(formData.dob)) {
       errors.dob = 'You must be at-least 18 yrs old';
     }
-
-    if (Object.keys(errors).length > 0) {
-      setValidationErrors(errors);
+    if (Object.keys(errors).length) {
+     return setValidationErrors(errors);
     } else {
       setValidationErrors({});
-     // Proceed with form submission
-      await newUserSignUp(formData.email, credential);
+      await newUserSignUp(formData.email, credential, appleId);
     }
   };
 
@@ -145,20 +137,23 @@ export const profileUseViewModal = (props: any) => {
   const newUserSignUp = async (
     email?: string,
     credential?: FirebaseAuthTypes.AuthCredential,
+    appleId?:string
   ) => {
     const password = `$Sg{email}9%`;
     if (credential) {
-      const data = await firebaseService.signInWithCredential(credential);
-      createUser({
+      let data 
+      if (!appleId) {
+        data = await firebaseService.signInWithCredential(credential);
+      }
+      return createUser({
         email: email!,
-        firebaseUid: data?.user?.uid,
+        firebaseUid: appleId?appleId:data?.user?.uid,
         firstName: formData.firstName,
         lastName: formData.lastName,
         displayName: formData.displayName,
         mobile: formData.mobile,
         dob: formData.dob,
       });
-      return;
     }
 
     if (!email) {
@@ -191,6 +186,7 @@ export const profileUseViewModal = (props: any) => {
     dob,
     displayName,
     mobile,
+    appleId
   }: socialSignInSignUpPayload) {
     const dataMango = await socialSignInSignUp({
       firebaseUid,
@@ -200,7 +196,9 @@ export const profileUseViewModal = (props: any) => {
       dob,
       displayName,
       mobile,
+      appleId
     });
+
     if (dataMango.message === 'Registered Successfully')
       return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }

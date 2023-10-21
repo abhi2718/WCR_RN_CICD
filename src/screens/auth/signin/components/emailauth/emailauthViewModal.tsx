@@ -15,28 +15,25 @@ export const emailAuthViewModal = (props: any) => {
   const [emailInput, setEmailInput] = useState('');
   const [otp, setOtp] = useState('');
 
+  let {setLoading, checkIsNewUser} = useViewModal(navigation);
 
-  let {setLoading, checkIsNewUser} =
-    useViewModal(navigation);
-
-  const verifyEmail = async ({email, code}: {email: string; code: string}) => {
+  const verifyEmail = async () => {
     try {
       setLoading(true);
-      const data = await otpInRepository.verifytOtp({email, code});
-      if (data.data.message === 'Verified') {
+      const {data} = await otpInRepository.verifytOtp({email, code:otp});
+      setLoading(false);
+      if (data?.message === 'Verified') {
         checkIsNewUser(email);
       } else {
         return ShowFlashMessage('Alert', 'OTP is incorrect', 'danger');
       }
-
-      setLoading(false);
       return data;
     } catch (error) {
       setLoading(false);
     }
   };
 
-  const resendOtp = async (email: string) => {
+  const resendOtp = async () => {
     try {
       setLoading(true);
       const data = await otpInRepository.resendOtp(email);

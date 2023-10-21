@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   inputBox: {
     borderRadius: 62,
     backgroundColor: 'rgba(35, 35, 35, 0.03)',
-    backdropFilter: 'blur(5px)',
     marginTop: 15,
     marginBottom: 15,
   },

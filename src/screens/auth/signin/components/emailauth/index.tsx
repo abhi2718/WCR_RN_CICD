@@ -4,15 +4,16 @@ import {
   ImageContainer,
   InputBox,
   ScreenContainer,
-} from '../../../../components/tools';
+} from '../../../../../components/tools';
 import {styles} from './emailauthStyle';
-import {RedButton} from '../../../../components/button';
-import {useViewModal} from './../../signin/signinViewModal';
-import { emailAuthViewModal } from './emailauthViewModal';
+import {RedButton} from '../../../../../components/button';
+// for viewModal use use key word
+import {emailAuthViewModal} from './emailauthViewModal';
 
+// remove any
 export default function EmailAuthByOtpScreeen(props: any) {
-  let {otp, setOtp, verifyEmail, resendOtp, emailInput, setEmailInput,email} =
-  emailAuthViewModal(props);
+  let {otp, setOtp, verifyEmail, resendOtp, emailInput, setEmailInput, email} =
+    emailAuthViewModal(props);
 
   return (
     <ScreenContainer>
@@ -22,9 +23,10 @@ export default function EmailAuthByOtpScreeen(props: any) {
             height={65}
             width={65}
             marginBottom={35}
-            source={require('../../../../assets/images/logo.png')}
+            source={require('../../../../../assets/images/logo.png')}
           />
         </View>
+        {/* Show this block on condation basis  */}
         <View style={styles.viewBox}>
           <Text>Enter the code we have shared to your email</Text>
           <View>
@@ -33,11 +35,11 @@ export default function EmailAuthByOtpScreeen(props: any) {
               placeholder={'Enter code'}
               keyboardType="phone-pad"
               value={otp}
+              // put otp validator (6digits)
               onChangeText={(value: string) => setOtp(value)}
             />
           </View>
         </View>
-
         {!email && (
           <View style={styles.viewBox}>
             <Text>Enter the code email id</Text>
@@ -51,15 +53,8 @@ export default function EmailAuthByOtpScreeen(props: any) {
             </View>
           </View>
         )}
-        <RedButton
-          title={'Continue'}
-          onPress={() => {
-            verifyEmail({email: email, code: otp});
-          }}
-        />
-        <TouchableOpacity
-          onPress={() => resendOtp(email)}
-          style={{marginTop: 20}}>
+        <RedButton title={'Continue'} onPress={verifyEmail} />
+        <TouchableOpacity onPress={resendOtp} style={{marginTop: 20}}>
           <Text>Resend code</Text>
         </TouchableOpacity>
       </ScrollView>

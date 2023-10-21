@@ -8,9 +8,9 @@ const Stack = createNativeStackNavigator();
 
 export enum ROUTES {
   SignIn = 'SignIn',
-  Profile = 'Profile',
+  Profile = '/profile',
   SignUp = 'SignUp',
-  Emailauth = 'Email-auth',
+  EmailAuth = '/email-auth',
 }
 
 export const StackNavigator = () => {
@@ -23,7 +23,7 @@ export const StackNavigator = () => {
       />
       <Stack.Screen
         options={{headerShown: true}}
-        name={ROUTES.Emailauth}
+        name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
       <Stack.Screen

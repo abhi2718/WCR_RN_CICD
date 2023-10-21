@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, TextInput, ScrollView} from 'react-native';
 import {useViewModal} from './signinViewModal';
-
 import {styles} from './signInStyle';
 import {
   RoundedButtonWithIconAndText,
@@ -52,27 +51,27 @@ export default function SignInScreen({navigation}: navigationProps) {
             iconSource={require('../../../assets/images/appleLogo.png')}
           />
         )}
-
         <View style={styles.inputContainerr}>
           <ImageContainer
             source={require('../../../assets/images/Email-icon.png')}
             style={styles.emailIconStyle}
           />
+          {/* Make a common component */}
           <TextInput
             style={styles.emailInputBox}
             placeholder={'Email'}
             value={email}
+            // put it in viewModal
+            // put email regex on each key stoke
             onChangeText={(email: string) => {
               setEmail(email);
             }}
-            placeholderTextColor="rgba(35, 35, 35, 0.4)" // Adjust the placeholder text color
+            placeholderTextColor="rgba(35, 35, 35, 0.4)" 
           />
         </View>
         <RedButton
-          title={'Continue'}
-          onPress={() => {
-            getOtpToVerifyEmail();
-          }}
+          title='Continue'
+          onPress={getOtpToVerifyEmail}
         />
       </ScrollView>
     </ScreenContainer>

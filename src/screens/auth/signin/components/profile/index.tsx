@@ -13,16 +13,19 @@ import {profileUseViewModal} from './profileViewModal';
 import {profileStyles} from './profileStyle';
 import DatePicker from 'react-native-date-picker';
 import Modal from 'react-native-modal';
-import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
-import {ModalComponent} from '../../../../components/modal/index';
+//import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
+//import {ModalComponent} from '../../../../components/modal/index';
 import moment from 'moment';
+import { ModalComponent } from '../../../../../components/modal';
+import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.functions';
 
 const Profile = (props: any) => {
-  const {navigation} = props;
+  const { navigation } = props;
+  // put logic in viewModal
   const receivedData = props.route?.params?.data || 'No data received';
-
   let credential = receivedData.credential;
   let email = receivedData.email;
+  let appleId = receivedData?.appleId
   let {
     formData,
     handleInputChange,
@@ -42,7 +45,7 @@ const Profile = (props: any) => {
     openModal,
     closeModal,
   } = profileUseViewModal(navigation);
-
+ // put in viewModal
   useEffect(() => {
     handleInputChange('email', email);
   }, [email]);
@@ -61,11 +64,10 @@ const Profile = (props: any) => {
           marginBottom={50}
           source={require('../../../../../assets/images/logo.png')}
         />
-
         <View style={profileStyles.inputDiv}>
           <TextInput
             style={profileStyles.input}
-            placeholder=" First Name"
+            placeholder="First Name"
             value={formData.firstName}
             onChangeText={(text) =>
               handleInputChange('firstName', toUpperFirstName(text))
@@ -92,7 +94,6 @@ const Profile = (props: any) => {
             </Text>
           )}
         </View>
-
         <View style={profileStyles.inputDiv}>
           <TextInput
             style={profileStyles.input}
@@ -101,7 +102,6 @@ const Profile = (props: any) => {
             onChangeText={(text) => handleInputChange('displayName', text)}
           />
         </View>
-
         <View style={profileStyles.inputDiv}>
           <TextInput
             style={profileStyles.input}
@@ -117,7 +117,6 @@ const Profile = (props: any) => {
             </Text>
           )}
         </View>
-
         <View style={profileStyles.inputDiv}>
           <TextInput
             style={profileStyles.input}
@@ -127,7 +126,6 @@ const Profile = (props: any) => {
             onChangeText={(text) => handleInputChange('email', text)}
           />
         </View>
-
         <View style={profileStyles.inputDiv}>
           <TouchableOpacity onPress={toggleModal}>
             <Text style={profileStyles.openButton}>Selecte Date</Text>
@@ -140,10 +138,12 @@ const Profile = (props: any) => {
             date={selectedDate}
             onDateChange={handleDateChange}
             onConfirm={(date) => {
+              // put inviewModal
               toggleModal();
               handleDateChange(date);
             }}
             onCancel={() => {
+              // put inviewModal
               toggleModal();
             }}
           />
@@ -158,12 +158,10 @@ const Profile = (props: any) => {
             <Text style={profileStyles.errorText}>{validationErrors.dob}</Text>
           )}
         </View>
-
         <Spacer style={profileStyles.spacerStyle} position="top" size={25}>
           <RedButton
             title="Submit"
-            // onPress={() => newUserSignUp(receivedData?.email)}
-            onPress={() => handleSubmit(credential)}
+            onPress={() => handleSubmit(credential,appleId)}
           />
         </Spacer>
       </ScrollView>
