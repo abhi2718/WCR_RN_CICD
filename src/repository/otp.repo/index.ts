@@ -11,12 +11,10 @@ export class OtpRepository {
   }
   async verifytOtp(payload: any) {
     const url = `${AppUrl.otpEndPoint}`;
-
     return this.apiService.getPostApiResponse(url, payload);
   }
   async resendOtp(email: string) {
     const url = `${AppUrl.resendOtpEndPoint}?email=${email}`;
-
     return this.apiService.getGetApiResponse(url);
   }
 }

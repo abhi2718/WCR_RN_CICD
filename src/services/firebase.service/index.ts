@@ -16,7 +16,6 @@ import {config} from '../../utils/config';
 
 export class FirebaseService {
   constructor() {}
-
   async signInWithGoogle(
     setLoading: (loadingState: boolean) => void,
     socialSignInSignUp: ({
@@ -45,7 +44,7 @@ export class FirebaseService {
         user.email,
       );
 
-      if (response?._id) {
+      if (response?.token) {
         return {
           isNewUser: false,
           profile: null,
@@ -55,12 +54,12 @@ export class FirebaseService {
 
       if (!response?.additionalUserInfo) {
         return {
-          isNewUser: null,
+          isNewUser: false,
           profile: null,
           user: null,
         };
       }
-      const {isNewUser, profile} = response.additionalUserInfo;
+      const { isNewUser, profile } = response.additionalUserInfo;
       return {
         isNewUser,
         profile,
@@ -121,6 +120,8 @@ export class FirebaseService {
         case 'auth/account-exists-with-different-credential':
           if (socialSignInSignUp && email) {
             return await socialSignInSignUp({email});
+          } else {
+            // if user is not having email with fb send them on email verification page
           }
           break;
         case 'auth/email-already-in-use':
@@ -151,7 +152,6 @@ export class FirebaseService {
           ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
           break;
         case 'auth/wrong-password':
-          // handle edge case when given email is not found in db
           break;
         case 'auth/user-not-found':
           return await this.signUpWithEmailPassword(email, password);
@@ -167,12 +167,8 @@ export class FirebaseService {
   }
   async deleteUserFromFirebase() {
     let user = auth().currentUser;
-    user
-      ?.delete()
-      .then(() => console.log('User deleted', user))
-      .catch((error) => console.log(error));
+    return user?.delete();
   }
-
   async signUpWithEmailPassword(email: string, password: string) {
     try {
       return await auth().createUserWithEmailAndPassword(email, password);
@@ -212,14 +208,8 @@ export class FirebaseService {
     }
   }
   async appleSignIn(
-    socialSignInSignUp: ({
-      firebaseUid,
-      email,
-      firstName,
-      lastName,
-      dob,
-      displayName,
-    }: socialSignInSignUpPayload) => Promise<any>,
+    checkAppleUser: (appleId: string) => Promise<any>,
+    provider?: string,
   ) {
     try {
       let email;
@@ -240,32 +230,19 @@ export class FirebaseService {
           identityToken,
           nonce,
         );
-        const response = await this.signInWithCredential(
-          appleCredential,
-          socialSignInSignUp,
-          email,
-        );
-        if (response?._id) {
+        const {user} = await this.signInWithCredential(appleCredential);
+        const data = await checkAppleUser(user?.uid);
+        if (data?.isNewUser) {
           return {
-            isNewUser: false,
-            profile: null,
-            user: null,
+            isNewUser: true,
+            email,
+            appleId: user?.uid,
+            appleCredential
           };
         }
-
-        if (!response?.additionalUserInfo) {
-          return {
-            isNewUser: null,
-            profile: null,
-            user: null,
-          };
-        }
-        const {isNewUser, profile} = response.additionalUserInfo;
         return {
-          isNewUser,
-          profile,
-          user: response.user,
-          appleCredential: appleCredential,
+          isNewUser: false,
+          ...data,
         };
       }
     } catch (error) {
@@ -281,9 +258,8 @@ export class FirebaseService {
       dob,
       displayName,
     }: socialSignInSignUpPayload) => Promise<any>,
-    setFbData: (payload: any) => void
+    setFbData: (payload: any) => void,
   ) {
-
     LoginManager.logOut();
     const loginResult = await LoginManager.logInWithPermissions([
       'email',
@@ -295,11 +271,7 @@ export class FirebaseService {
     ) {
       return ShowFlashMessage('Alert', 'Email is required', 'danger');
     }
-    if (loginResult.isCancelled) {
-      return ShowFlashMessage('Alert', 'You Cancelled ', 'danger');
-    }
     const callBack = async (err: any, result: any) => {
-      // result constains the user info
       let res;
       const email = result?.email;
       const data = await AccessToken.getCurrentAccessToken();
@@ -312,27 +284,23 @@ export class FirebaseService {
           socialSignInSignUp,
           email,
         );
-        if (response?._id) {
+        if (response?.token) {
           res = {
             isNewUser: false,
-            profile: null,
-            user: null,
+            ...response,
           };
         }
-        if (!response?.additionalUserInfo) {
+        if (response?.additionalUserInfo) {
+          const isNewUser = response?.additionalUserInfo?.isNewUser;
+          const profile = response?.additionalUserInfo?.profile;
           res = {
-            isNewUser: null,
-            profile: null,
-            user: null,
+            isNewUser,
+            profile,
+            user: response.user,
+            message: response.message,
+            facebookCredential: facebookCredential,
           };
         }
-        const {isNewUser, profile} = response.additionalUserInfo;
-        res = {
-          isNewUser,
-          profile,
-          user: response.user,
-          facebookCredential: facebookCredential,
-        };
         setFbData(res);
       }
     };
@@ -342,6 +310,5 @@ export class FirebaseService {
       callBack,
     );
     new GraphRequestManager().addRequest(infoRequest).start();
-    
   }
 }

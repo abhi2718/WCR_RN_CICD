@@ -5,9 +5,9 @@ import { useCometChatInit } from '../services/cometChat.service';
 
 export enum ROUTES {
   SignIn = 'SignIn',
-  Profile = 'Profile',
+  Profile = '/profile',
   SignUp = 'SignUp',
-  Emailauth = 'Email-auth',
+  EmailAuth = '/email-auth',
   Tab = '/tabs',
   CommunityChat = '/community-chat',
   CommunityChatMessageList = '/community-chat-messagelist'

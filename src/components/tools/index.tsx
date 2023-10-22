@@ -33,7 +33,7 @@ const InputContainer = styled.TextInput<InputProps>`
   width: 100%;
 `;
 
-export const InputBox: React.FC<InputProps> = props => {
+export const InputBox: React.FC<InputProps> = (props) => {
   return <InputContainer {...props} />;
 };
 
@@ -45,7 +45,7 @@ const ImageProps = styled.Image<imageProps>`
   overflow: visible;
 `;
 
-export const ImageContainer: React.FC<imageProps> = props => {
+export const ImageContainer: React.FC<imageProps> = (props) => {
   const {source, ...otherProps} = props;
   return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
 };
