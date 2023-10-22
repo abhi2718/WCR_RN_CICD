@@ -6,6 +6,7 @@ type socialSignInSignUpPayload = {
   dob?: string | undefined;
   displayName?: string | undefined;
   mobile?: string | undefined;
+  appleId?: string | undefined | null;
 };
 
 type SocialSignInSignUp = {
@@ -16,6 +17,7 @@ type SocialSignInSignUp = {
     lastName,
     dob,
     displayName,
-    mobile
+    mobile,
+    appleId
   }: socialSignInSignUpPayload) => Promise<any>;
 }

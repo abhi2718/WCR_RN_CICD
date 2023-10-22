@@ -13,7 +13,7 @@ export default function CardCompoent({item}) {
   const tabBarHeight = useBottomTabBarHeight();
   const height = imageStyle(tabBarHeight).height;
   return (
-    <View style={{backgroundColor:"black"}}>
+    <View style={{backgroundColor:"#fff"}}>
       <Card style={{height}}>
         <View style={imageStyle(tabBarHeight).height}>
           <ScrollView bounces={false} style={imageStyle(tabBarHeight).height}>
