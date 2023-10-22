@@ -11,16 +11,6 @@ const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
-        options={{headerShown: false}}
-        name={ROUTES.Tab}
-        component={TabNavigator}
-      />
-      <Stack.Screen
-        options={{headerShown: false}}
-        name={ROUTES.CommunityChatMessageList}
-        component={CommunityChatMessageList}
-      /> */}
       <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.SignIn}
@@ -35,6 +25,16 @@ export const StackNavigator = () => {
         options={{headerShown: true}}
         name={ROUTES.Profile}
         component={Profile}
+      />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.CommunityChatMessageList}
+        component={CommunityChatMessageList}
       />
     </Stack.Navigator>
   );
