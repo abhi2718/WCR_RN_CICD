@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   heading: {
     fontWeight: 'bold',
     fontSize: 34,
-    color: '253245',
+    color: '#253245',
   },
   subHeading: {
     paddingVertical: 16,
