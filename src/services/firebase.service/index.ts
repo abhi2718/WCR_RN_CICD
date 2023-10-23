@@ -4,6 +4,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import jwt_decode from 'jwt-decode';
 import {
   LoginManager,
   GraphRequest,
@@ -15,29 +16,55 @@ import {config} from '../../utils/config';
 
 export class FirebaseService {
   constructor() {}
-  async signInWithGoogle(setLoading: (loadingState: boolean) => void) {
+  async signInWithGoogle(
+    setLoading: (loadingState: boolean) => void,
+    socialSignInSignUp: ({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+      mobile,
+    }: socialSignInSignUpPayload) => Promise<any>,
+  ) {
     try {
       GoogleSignin.configure({
-        webClientId: config.CLIENTID,
+        webClientId:
+          '646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com',
       });
       await GoogleSignin.hasPlayServices();
-      await GoogleSignin.signIn();
+      const {user} = await GoogleSignin.signIn();
       setLoading(true);
       const {idToken} = await GoogleSignin.getTokens();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      const response = await this.signInWithCredential(googleCredential);
-      if (!response?.additionalUserInfo) {
+      const response = await this.signInWithCredential(
+        googleCredential,
+        socialSignInSignUp,
+        user.email,
+      );
+
+      if (response?.token) {
         return {
-          isNewUser: null,
+          isNewUser: false,
           profile: null,
           user: null,
         };
       }
-      const {isNewUser, profile} = response.additionalUserInfo;
+
+      if (!response?.additionalUserInfo) {
+        return {
+          isNewUser: false,
+          profile: null,
+          user: null,
+        };
+      }
+      const { isNewUser, profile } = response.additionalUserInfo;
       return {
         isNewUser,
         profile,
         user: response.user,
+        googleCredential,
       };
     } catch (error: any) {
       switch (error.code) {
@@ -73,17 +100,29 @@ export class FirebaseService {
       }
     }
   }
-  async signInWithCredential(credential: FirebaseAuthTypes.AuthCredential) {
+  async signInWithCredential(
+    credential: FirebaseAuthTypes.AuthCredential,
+    socialSignInSignUp?: ({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+      mobile,
+    }: socialSignInSignUpPayload) => Promise<any>,
+    email?: string | undefined,
+  ) {
     try {
       return await auth().signInWithCredential(credential);
     } catch (error: any) {
       switch (error.code) {
         case 'auth/account-exists-with-different-credential':
-          ShowFlashMessage(
-            'Alert',
-            'An account already exists with the same email address but different sign-in credentials.',
-            'danger',
-          );
+          if (socialSignInSignUp && email) {
+            return await socialSignInSignUp({email});
+          } else {
+            // if user is not having email with fb send them on email verification page
+          }
           break;
         case 'auth/email-already-in-use':
           ShowFlashMessage(
@@ -113,6 +152,32 @@ export class FirebaseService {
           ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
           break;
         case 'auth/wrong-password':
+          break;
+        case 'auth/user-not-found':
+          return await this.signUpWithEmailPassword(email, password);
+          break;
+        default:
+          return ShowFlashMessage(
+            'Alert',
+            'The password is invalid or the user does not have an account.',
+            'danger',
+          );
+      }
+    }
+  }
+  async deleteUserFromFirebase() {
+    let user = auth().currentUser;
+    return user?.delete();
+  }
+  async signUpWithEmailPassword(email: string, password: string) {
+    try {
+      return await auth().createUserWithEmailAndPassword(email, password);
+    } catch (error: any) {
+      switch (error.code) {
+        case 'auth/invalid-email':
+          ShowFlashMessage('Alert', 'That email address is invalid!', 'danger');
+          break;
+        case 'auth/wrong-password':
           ShowFlashMessage(
             'Alert',
             'The password is invalid or the user does not have a password',
@@ -135,8 +200,19 @@ export class FirebaseService {
       }
     }
   }
-  async appleSignIn() {
+  getParsedJwt(token: string) {
     try {
+      return jwt_decode(token);
+    } catch {
+      return undefined;
+    }
+  }
+  async appleSignIn(
+    checkAppleUser: (appleId: string) => Promise<any>,
+    provider?: string,
+  ) {
+    try {
+      let email;
       const appleAuthRequestResponse = await appleAuth.performRequest({
         requestedOperation: appleAuth.Operation.LOGIN,
         requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
@@ -146,30 +222,44 @@ export class FirebaseService {
       );
       if (credentialState === appleAuth.State.AUTHORIZED) {
         const {identityToken, nonce} = appleAuthRequestResponse;
+        if (identityToken) {
+          const userInfo: any = this.getParsedJwt(identityToken);
+          email = userInfo?.email;
+        }
         const appleCredential = auth.AppleAuthProvider.credential(
           identityToken,
           nonce,
         );
-        const response = await this.signInWithCredential(appleCredential);
-        if (!response?.additionalUserInfo) {
+        const {user} = await this.signInWithCredential(appleCredential);
+        const data = await checkAppleUser(user?.uid);
+        if (data?.isNewUser) {
           return {
-            isNewUser: null,
-            profile: null,
-            user: null,
+            isNewUser: true,
+            email,
+            appleId: user?.uid,
+            appleCredential
           };
         }
-        const {isNewUser, profile} = response.additionalUserInfo;
         return {
-          isNewUser,
-          profile,
-          user: response.user,
+          isNewUser: false,
+          ...data,
         };
       }
     } catch (error) {
       ShowFlashMessage('Alert', 'Something went wrong ', 'danger');
     }
   }
-  async signInWithFb() {
+  async signInWithFb(
+    socialSignInSignUp: ({
+      firebaseUid,
+      email,
+      firstName,
+      lastName,
+      dob,
+      displayName,
+    }: socialSignInSignUpPayload) => Promise<any>,
+    setFbData: (payload: any) => void,
+  ) {
     LoginManager.logOut();
     const loginResult = await LoginManager.logInWithPermissions([
       'email',
@@ -181,17 +271,44 @@ export class FirebaseService {
     ) {
       return ShowFlashMessage('Alert', 'Email is required', 'danger');
     }
-    if (loginResult.isCancelled) {
-      return ShowFlashMessage('Alert', 'You Cancelled ', 'danger');
-    }
-    const infoRequest = new GraphRequest('/me?fields=email,name,picture');
+    const callBack = async (err: any, result: any) => {
+      let res;
+      const email = result?.email;
+      const data = await AccessToken.getCurrentAccessToken();
+      if (data?.accessToken) {
+        const facebookCredential = auth.FacebookAuthProvider.credential(
+          data?.accessToken,
+        );
+        const response = await this.signInWithCredential(
+          facebookCredential,
+          socialSignInSignUp,
+          email,
+        );
+        if (response?.token) {
+          res = {
+            isNewUser: false,
+            ...response,
+          };
+        }
+        if (response?.additionalUserInfo) {
+          const isNewUser = response?.additionalUserInfo?.isNewUser;
+          const profile = response?.additionalUserInfo?.profile;
+          res = {
+            isNewUser,
+            profile,
+            user: response.user,
+            message: response.message,
+            facebookCredential: facebookCredential,
+          };
+        }
+        setFbData(res);
+      }
+    };
+    const infoRequest = new GraphRequest(
+      '/me?fields=email,name,picture',
+      null,
+      callBack,
+    );
     new GraphRequestManager().addRequest(infoRequest).start();
-    const data = await AccessToken.getCurrentAccessToken();
-    if (data?.accessToken) {
-      const facebookCredential = auth.FacebookAuthProvider.credential(
-        data?.accessToken,
-      );
-      return await this.signInWithCredential(facebookCredential);
-    }
   }
 }

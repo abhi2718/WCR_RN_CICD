@@ -5,10 +5,14 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Image,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import {ActivityIndicator} from 'react-native-paper';
 import {ButtonProps} from '../../types/components/button.type';
 import styled from 'styled-components';
+import {dimensions} from '../tools';
 
 export const Button = (props: ButtonProps) => {
   const {title, onPress, isLoading} = props;
@@ -29,25 +33,60 @@ export const Button = (props: ButtonProps) => {
   );
 };
 
-export const PrimaryButton = (props: ButtonProps) => {
-  const {title, onPress, isLoading, btnColor} = props;
-
+export const RedButton = (props: ButtonProps) => {
+  const {title, onPress, btnColor} = props;
   return (
     <TouchableOpacity
-      onPress={isLoading ? undefined : onPress}
       style={{
         ...styles.redButton,
-        backgroundColor: btnColor || '#BB0000',
-        width: '100%',
-      }}>
-      {isLoading ? (
-        <ActivityIndicator size="small" color="#fff" />
-      ) : (
-        <Text style={styles.btnText}>{title}</Text>
-      )}
+        backgroundColor: btnColor ? btnColor : '#BB0000',
+      }}
+      onPress={onPress}>
+      <View>
+        <Text style={styles.bntText}>{title}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
+
+export const RoundedButtonWithIconAndText = (props: ButtonProps) => {
+  const {title, onPress, btnColor, iconSource} = props;
+  return (
+    <TouchableOpacity style={roundStyles.button} onPress={onPress}>
+      <View style={roundStyles.buttonContainer}>
+        <Image source={iconSource} style={roundStyles.icon} />
+        <Text style={roundStyles.buttonText}>{title}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+const roundStyles = StyleSheet.create({
+  button: {
+    borderRadius: 62,
+    backgroundColor: '#fff',
+    borderColor: 'rgba(35, 35, 35, 0.10)',
+    borderWidth: 1,
+    padding: 12,
+    width: '100%',
+    paddingLeft: '18%',
+    marginBottom: 24,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 25,
+    height: 25,
+    marginRight: 10,
+    overflow: 'visible',
+  },
+  buttonText: {
+    color: '#000',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -68,14 +107,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FA5672',
-    // alignSelf: 'stretch',
-    elevation: 5, // Android box shadow
+    elevation: 5,
     shadowColor: 'rgba(250, 86, 114, 0.15)', // iOS box shadow color
     shadowOffset: {width: 3, height: 21}, // iOS box shadow offset
     shadowOpacity: 1, // iOS box shadow opacity
     shadowRadius: 18, // iOS box shadow radius
+    width: '100%',
+    marginTop: 10,
   },
-  btnText: {
+  bntText: {
     color: '#FEFBFD',
     fontSize: 16,
     fontStyle: 'normal',
