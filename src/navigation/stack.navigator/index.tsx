@@ -6,6 +6,7 @@ import EmailAuthByOtpScreeen from '../../screens/auth/signin/components/emailaut
 import {TabNavigator} from '../tab.navigator';
 import {ROUTES} from '../';
 import CommunityChatMessageList from '../../screens/tab.screens/chat/community/components/messageList';
+import Gender from '../../screens/auth/signin/components/profile/gender';
 
 const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
@@ -20,6 +21,11 @@ export const StackNavigator = () => {
         options={{headerShown: true}}
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
+      /> */}
+      {/* <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.Gender}
+        component={Gender}
       /> */}
       <Stack.Screen
         options={{headerShown: false}}
