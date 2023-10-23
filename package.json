@@ -7,8 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest",
-    "prestart": "nvm use 18.17.1"
+    "test": "jest"
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.2.2",

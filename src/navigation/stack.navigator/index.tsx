@@ -16,7 +16,7 @@ export enum ROUTES {
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.SignIn}
         component={SignInScreen}
@@ -25,9 +25,9 @@ export const StackNavigator = () => {
         options={{headerShown: true}}
         name={ROUTES.Emailauth}
         component={EmailAuthByOtpScreeen}
-      />
+      /> */}
       <Stack.Screen
-        options={{headerShown: true}}
+        options={{headerShown: false}}
         name={ROUTES.Profile}
         component={Profile}
       />

@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   redButton: {
-    padding: 16,
+    padding: 15,
     borderRadius: 28,
     justifyContent: 'center',
     alignItems: 'center',
@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 1, // iOS box shadow opacity
     shadowRadius: 18, // iOS box shadow radius
     width: '100%',
-    marginTop: 10,
   },
   bntText: {
     color: '#FEFBFD',
