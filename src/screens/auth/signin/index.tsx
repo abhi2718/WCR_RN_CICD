@@ -4,7 +4,7 @@ import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import {
   RoundedButtonWithIconAndText,
-  RedButton,
+  PrimaryButton,
 } from '../../../components/button';
 import {ImageContainer, ScreenContainer} from '../../../components/tools';
 import {isAndroid} from '../../../components/tools';
@@ -66,13 +66,10 @@ export default function SignInScreen({navigation}: navigationProps) {
             onChangeText={(email: string) => {
               setEmail(email);
             }}
-            placeholderTextColor="rgba(35, 35, 35, 0.4)" 
+            placeholderTextColor="rgba(35, 35, 35, 0.4)"
           />
         </View>
-        <RedButton
-          title='Continue'
-          onPress={getOtpToVerifyEmail}
-        />
+        <PrimaryButton title="Continue" onPress={getOtpToVerifyEmail} />
       </ScrollView>
     </ScreenContainer>
   );
