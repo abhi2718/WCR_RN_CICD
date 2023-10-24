@@ -22,11 +22,11 @@ export const StackNavigator = () => {
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       /> */}
-      {/* <Stack.Screen
+      <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.Gender}
         component={Gender}
-      /> */}
+      />
       <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.Profile}
