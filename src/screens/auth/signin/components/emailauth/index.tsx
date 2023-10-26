@@ -8,12 +8,12 @@ import {
 import {styles} from './emailauthStyle';
 import {RedButton} from '../../../../../components/button';
 // for viewModal use use key word
-import {emailAuthViewModal} from './emailauthViewModal';
+import {useEmailAuthViewModal} from './emailauthViewModal';
 
 // remove any
 export default function EmailAuthByOtpScreeen(props: any) {
   let {otp, setOtp, verifyEmail, resendOtp, emailInput, setEmailInput, email} =
-    emailAuthViewModal(props);
+  useEmailAuthViewModal(props);
 
   return (
     <ScreenContainer>

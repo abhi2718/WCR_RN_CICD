@@ -21,12 +21,11 @@ export default function SignInScreen({navigation}: navigationProps) {
     getOtpToVerifyEmail,
     handleAppleSignIn,
     email,
-    navigateToP,
     setEmail,
   } = useViewModal(navigation);
   return (
     <ScreenContainer>
-      <ScrollView contentContainerStyle={styles.scrollDiv}>
+      <ScrollView contentContainerStyle={styles.scrollDiv} keyboardShouldPersistTaps="always">
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <ImageContainer
             height={65}

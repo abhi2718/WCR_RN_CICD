@@ -7,56 +7,50 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {RedButton} from '../../../../../components/button';
-import {ImageContainer, Spacer, dimensions} from '../../../../../components/tools';
+import {
+  ImageContainer,
+  Spacer,
+  dimensions,
+} from '../../../../../components/tools';
 import {useViewModal} from '../../signinViewModal';
-import {profileUseViewModal} from './profileViewModal';
+import {useProfileUseViewModal} from './profileViewModal';
 import {profileStyles} from './profileStyle';
 import DatePicker from 'react-native-date-picker';
 import Modal from 'react-native-modal';
 //import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
 //import {ModalComponent} from '../../../../components/modal/index';
 import moment from 'moment';
-import { ModalComponent } from '../../../../../components/modal';
-import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.functions';
+import {ModalComponent} from '../../../../../components/modal';
+import {calculateDateLessThan18YearsAgo} from '../../../../../utils/common.functions';
 
 const Profile = (props: any) => {
-  const { navigation } = props;
-  // put logic in viewModal
-  const receivedData = props.route?.params?.data || 'No data received';
-  let credential = receivedData.credential;
-  let email = receivedData.email;
-  let appleId = receivedData?.appleId
   let {
     formData,
+    credential,
+    email,
+    firebaseUid,
+    fbId,
+    handleConfirm,
     handleInputChange,
     handleDateChange,
     handleSubmit,
     isWelcomeModalVisible,
-    setWelcomeModalVisible,
+
     toggleModal,
-    errorMessage,
-    setErrorMessage,
+
     selectedDate,
     formateDOB,
     isModalVisible,
     validationErrors,
     toUpperFirstName,
     formatMobile,
-    openModal,
     closeModal,
-  } = profileUseViewModal(navigation);
- // put in viewModal
-  useEffect(() => {
-    handleInputChange('email', email);
-  }, [email]);
-  useEffect(() => {
-    openModal();
-  }, []);
-
+  } = useProfileUseViewModal(props);
+  
   return (
     <View style={profileStyles.container}>
       <ModalComponent isVisible={isWelcomeModalVisible} onClose={closeModal} />
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}} keyboardShouldPersistTaps="always">
         <ImageContainer
           height={56}
           width={56}
@@ -137,15 +131,9 @@ const Profile = (props: any) => {
             maximumDate={calculateDateLessThan18YearsAgo(new Date())}
             date={selectedDate}
             onDateChange={handleDateChange}
-            onConfirm={(date) => {
-              // put inviewModal
-              toggleModal();
-              handleDateChange(date);
-            }}
-            onCancel={() => {
-              // put inviewModal
-              toggleModal();
-            }}
+            onConfirm={handleConfirm}
+            onCancel={toggleModal
+            }
           />
           <TextInput
             editable={true}
@@ -161,7 +149,7 @@ const Profile = (props: any) => {
         <Spacer style={profileStyles.spacerStyle} position="top" size={25}>
           <RedButton
             title="Submit"
-            onPress={() => handleSubmit(credential,appleId)}
+            onPress={() => handleSubmit(credential, firebaseUid)}
           />
         </Spacer>
       </ScrollView>

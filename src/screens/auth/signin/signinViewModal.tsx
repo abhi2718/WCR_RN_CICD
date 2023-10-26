@@ -1,10 +1,14 @@
 import {useEffect, useState} from 'react';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AuthRepository} from '../../../repository/auth.repo';
 import {FirebaseService} from '../../../services/firebase.service';
 import {ShowFlashMessage} from '../../../components/flashBar';
 import {OtpRepository} from '../../../repository/otp.repo';
-import { ROUTES } from '../../../navigation';
+import {ROUTES} from '../../../navigation';
+import {
+  socialSignInSignUpPayload,
+  navigateToProfilepagepayload,
+  navigateToOtppagepayload,
+} from '../../../types/services.types/firebase.service';
 
 export const useViewModal = (navigation: any) => {
   const signInRepository = new AuthRepository();
@@ -21,7 +25,7 @@ export const useViewModal = (navigation: any) => {
     dob,
     displayName,
     mobile,
-    appleId
+    fbId,
   }: socialSignInSignUpPayload) => {
     try {
       setLoading(true);
@@ -33,7 +37,7 @@ export const useViewModal = (navigation: any) => {
         dob,
         displayName,
         mobile,
-        appleId
+        fbId,
       });
       setLoading(false);
       return data;
@@ -79,11 +83,11 @@ export const useViewModal = (navigation: any) => {
 
   const checkIsNewUser = async (email: string) => {
     const _email = email.toLowerCase();
-    const data = await socialSignInSignUp({ email: _email });
+    const data = await socialSignInSignUp({email: _email});
     if (data?.token) {
-     return ShowFlashMessage('info', 'logIn successfully', 'success');
+      return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
-    navigateToProfile({ email: _email });
+    navigateToProfile({email: _email});
   };
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -96,9 +100,16 @@ export const useViewModal = (navigation: any) => {
     const {data} = await getOtpOnEmail(email);
     navigateToOtpScreen({email: data.email});
   };
-  const checkAppleUser = async (appleId: string) => {
+  const checkAppleUser = async (firebaseUid: string) => {
     try {
-      return await signInRepository.getAppleUser(appleId);
+      return await signInRepository.getAppleUser(firebaseUid);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const checFbUser = async (fbId: string) => {
+    try {
+      return await signInRepository.getfbUser(fbId);
     } catch (error) {
       console.log(error);
     }
@@ -114,8 +125,11 @@ export const useViewModal = (navigation: any) => {
             appleId: data.appleId,
           });
         } else {
-          // plese implement it 
-          navigateToOtpScreen({});
+          // plese implement it
+          navigateToOtpScreen({
+            credential: data.appleCredential,
+            firebaseUid: data.firebaseUid,
+          });
         }
       } else {
         if (data?.token) {
@@ -129,7 +143,11 @@ export const useViewModal = (navigation: any) => {
   const _setFbData = (payload: any) => setFbData(payload);
   const _onFbLogIn = async () => {
     try {
-      await firebaseService.signInWithFb(socialSignInSignUp, _setFbData);
+      await firebaseService.signInWithFb(
+        socialSignInSignUp,
+        _setFbData,
+        checFbUser,
+      );
     } catch (e) {
       ShowFlashMessage('Something went wrong !', 'danger');
     }
@@ -151,15 +169,24 @@ export const useViewModal = (navigation: any) => {
             credential: data.facebookCredential,
           });
         } else {
-           // handle this flow 
-          navigateToOtpScreen({});
+          // handle this flow
+          navigateToOtpScreen({
+            firstName: given_name,
+            lastName: family_name,
+            credential: data.facebookCredential,
+          });
         }
       } else {
         // login path if user had created account with fb
         if (!email) {
+          navigateToOtpScreen({
+            firstName: given_name,
+            lastName: family_name,
+            credential: data.facebookCredential,
+          });
           // send user on email verification screen
           return;
-        } 
+        }
         const res = await socialSignInSignUp({email});
         if (res.token) {
           return ShowFlashMessage('info', 'logIn successfully', 'success');
@@ -180,14 +207,7 @@ export const useViewModal = (navigation: any) => {
     firebaseUid,
     credential,
     appleId,
-  }: {
-    email: string;
-    firstName?: string;
-    lastName?: string;
-    firebaseUid?: string;
-    credential?: FirebaseAuthTypes.AuthCredential;
-    appleId?: string;
-  }) => {
+  }: navigateToProfilepagepayload) => {
     navigation.navigate(ROUTES.Profile, {
       data: {
         email,
@@ -195,26 +215,19 @@ export const useViewModal = (navigation: any) => {
         lastName,
         firebaseUid,
         credential,
-        appleId
+        appleId,
       },
     });
   };
-  const navigateToP = () => {
-    navigation.navigate(ROUTES.Profile);
-  };
+
   const navigateToOtpScreen = ({
     email,
     firstName,
     lastName,
     firebaseUid,
     otp,
-  }: {
-    email?: string;
-    firstName?: string;
-    lastName?: string;
-    firebaseUid?: string;
-    otp?: string;
-  }) => {
+    credential,
+  }: navigateToOtppagepayload) => {
     navigation.navigate(ROUTES.EmailAuth, {
       data: {
         email: email,
@@ -222,9 +235,10 @@ export const useViewModal = (navigation: any) => {
         lastName: lastName,
         firebaseUid: firebaseUid,
         otp: otp,
+        credential: credential,
       },
     });
- };
+  };
 
   return {
     loading,
@@ -236,7 +250,6 @@ export const useViewModal = (navigation: any) => {
     handleAppleSignIn,
     _onFbLogIn,
     getOtpToVerifyEmail,
-    navigateToP,
     setLoading,
     checkIsNewUser,
   };

@@ -8,8 +8,12 @@ export class AuthRepository {
     const url = `${AppUrl.authEndPoint}/social-signin-signup`;
     return this.apiService.getPostApiResponse(url, paylod);
   }
-  async getAppleUser(appleId:string) {
-    const url = `${AppUrl.authEndPoint}/apple-user/${appleId}`;
+  async getAppleUser(firebaseUid:string) {
+    const url = `${AppUrl.authEndPoint}/apple-user/${firebaseUid}`;
+    return this.apiService.getGetApiResponse(url);
+  }
+  async getfbUser(fbId:string) {
+    const url = `${AppUrl.authEndPoint}/apple-user/${fbId}`;
     return this.apiService.getGetApiResponse(url);
   }
 }
