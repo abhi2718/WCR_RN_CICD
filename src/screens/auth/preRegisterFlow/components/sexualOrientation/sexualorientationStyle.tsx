@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {dimensions} from '../../../../../components/tools';
-
-export const profileStyles = StyleSheet.create({
+export const SexualOrientationStyle = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -11,7 +10,7 @@ export const profileStyles = StyleSheet.create({
   },
 
   rowHeader: {
-    width: dimensions.width,
+    width: dimensions.width, 
     maxWidth: '100%',
   },
   subHeader: {
@@ -20,16 +19,17 @@ export const profileStyles = StyleSheet.create({
     fontSize: 24,
     marginTop: 10,
   },
-
-  datePickerContainer: {
-    flex: 1,
-    position: 'relative',
-    width: '100%',
+  radioButtonContainer: {
+    // borderColor: 'red',
+    // borderWidth: 2,
+    marginTop: 25,
   },
-  openButton: {
-    position: 'absolute',
-    right: 10,
-    top: 12,
-    zIndex: 1,
+  btnText: {
+    marginLeft: 15,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  rowView: {
+    marginBottom: 10,
   },
 });

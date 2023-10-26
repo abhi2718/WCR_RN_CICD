@@ -6,11 +6,31 @@ import EmailAuthByOtpScreeen from '../../screens/auth/signin/components/emailaut
 import {TabNavigator} from '../tab.navigator';
 import {ROUTES} from '../';
 import CommunityChatMessageList from '../../screens/tab.screens/chat/community/components/messageList';
+import Gender from './../../screens/auth/preRegisterFlow';
+import GenderProunoun from '../../screens/auth/preRegisterFlow/components/genderPronoun';
+import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
 
 const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      {/* <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.SexualOrientation}
+        component={SexualOrientation}
+      />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.GenderPronoun}
+        component={GenderProunoun}
+      /> */}
+
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.Gender}
+        component={Gender}
+      />
+
       <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.SignIn}
@@ -21,8 +41,9 @@ export const StackNavigator = () => {
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
+
       <Stack.Screen
-        options={{headerShown: true}}
+        options={{headerShown: false}}
         name={ROUTES.Profile}
         component={Profile}
       />
