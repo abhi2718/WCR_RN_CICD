@@ -33,12 +33,12 @@ export const Button = (props: ButtonProps) => {
   );
 };
 
-export const RedButton = (props: ButtonProps) => {
+export const PrimaryButton = (props: ButtonProps) => {
   const {title, onPress, btnColor} = props;
   return (
     <TouchableOpacity
       style={{
-        ...styles.redButton,
+        ...styles.primaryButton,
         backgroundColor: btnColor ? btnColor : '#BB0000',
       }}
       onPress={onPress}>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
-  redButton: {
+  primaryButton: {
     padding: 16,
     borderRadius: 28,
     justifyContent: 'center',
