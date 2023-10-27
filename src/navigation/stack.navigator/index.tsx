@@ -18,23 +18,23 @@ export const StackNavigator = () => {
         options={{headerShown: false}}
         name={ROUTES.SexualOrientation}
         component={SexualOrientation}
-      />
-      <Stack.Screen
+      /> */}
+      {/* <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       /> */}
 
       <Stack.Screen
-        options={{headerShown: false}}
-        name={ROUTES.Gender}
-        component={Gender}
+        options={{headerShown: true}}
+        name={ROUTES.SignIn}
+        component={SignInScreen}
       />
 
       <Stack.Screen
-        options={{headerShown: false}}
-        name={ROUTES.SignIn}
-        component={SignInScreen}
+        options={{headerShown: true}}
+        name={ROUTES.Gender}
+        component={Gender}
       />
       <Stack.Screen
         options={{headerShown: true}}
@@ -43,7 +43,7 @@ export const StackNavigator = () => {
       />
 
       <Stack.Screen
-        options={{headerShown: false}}
+        options={{headerShown: true}}
         name={ROUTES.Profile}
         component={Profile}
       />

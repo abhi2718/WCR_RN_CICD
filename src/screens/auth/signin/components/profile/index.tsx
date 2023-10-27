@@ -29,7 +29,6 @@ import {FlatInput} from '../../../../../components/inputBox/index';
 import {ErrorText} from '../../signInStyle';
 
 const Profile = (props: any) => {
-  const {navigation} = props;
   // put logic in viewModal
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
@@ -37,7 +36,6 @@ const Profile = (props: any) => {
   let appleId = receivedData?.appleId;
   let {
     formData,
-  
     firebaseUid,
     fbId,
     handleConfirm,
@@ -55,9 +53,8 @@ const Profile = (props: any) => {
     toUpperFirstName,
     formatMobile,
     closeModal,
-  } = useProfileUseViewModal(navigation);
+  } = useProfileUseViewModal(props);
   // put in viewModal
- 
 
   return (
     <ScreenContainer>
@@ -94,7 +91,7 @@ const Profile = (props: any) => {
             <FlatInput
               label="First Name"
               value={formData.firstName}
-              onChangeText={(text:string) =>
+              onChangeText={(text: string) =>
                 handleInputChange('firstName', toUpperFirstName(text))
               }
               error={validationErrors.firstName}
@@ -106,7 +103,7 @@ const Profile = (props: any) => {
             <FlatInput
               label="Last Name"
               value={formData.lastName}
-              onChangeText={(text:string) =>
+              onChangeText={(text: string) =>
                 handleInputChange('lastName', toUpperFirstName(text))
               }
               error={validationErrors.lastName}
@@ -118,13 +115,15 @@ const Profile = (props: any) => {
             <FlatInput
               label="Display Name"
               value={formData.displayName}
-              onChangeText={(text:string) => handleInputChange('displayName', text)}
+              onChangeText={(text: string) =>
+                handleInputChange('displayName', text)
+              }
             />
 
             <FlatInput
               label="Mobile No"
               value={formData.mobile}
-              onChangeText={(text:string) =>
+              onChangeText={(text: string) =>
                 handleInputChange('mobile', formatMobile(text))
               }
               error={validationErrors.mobile}
@@ -136,7 +135,7 @@ const Profile = (props: any) => {
             <FlatInput
               editable={email ? false : true}
               value={formData.email}
-              onChangeText={(text:string) => handleInputChange('email', text)}
+              onChangeText={(text: string) => handleInputChange('email', text)}
               label="Email"
               theme={{colors: {primary: 'red'}}}
             />
@@ -171,7 +170,7 @@ const Profile = (props: any) => {
                 editable={true}
                 label="MM/DD/YYYY"
                 value={formData.dob}
-                onChangeText={(text:string) =>
+                onChangeText={(text: string) =>
                   handleInputChange('dob', formateDOB(text))
                 }
                 error={validationErrors.dob}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {Checkbox, RadioButton, Text} from 'react-native-paper';
+import {RadioButton, Text} from 'react-native-paper';
 import {RedButton} from '../../../../../components/button';
 import {
   ImageContainer,
@@ -8,26 +8,32 @@ import {
   ScreenContainer,
   Spacer,
 } from '../../../../../components/tools';
-import {genderStyle} from './genderPronounStyle';
+import {genderPronounStyle} from './genderPronounStyle';
+import {useGenderPronounViewModal} from './genderPronounViewModal';
+import {genderPronounArray} from '../../../../../utils/constanst';
 
-const GenderProunoun = () => {
+const GenderProunoun = (props: any) => {
+  const {
+    genderPronoun,
+    handleGenderPronounValue,
+    updateUserDetails,
+    loggInUserId,
+  } = useGenderPronounViewModal(props);
   const [value, setValue] = useState('male');
 
-  const [currentView, setCurrentView] = useState(1);
-
-  const switchView = () => {
-    setCurrentView((prevView) => (prevView % 3) + 1);
-  };
+  // const switchView = () => {
+  //   setCurrentView((prevView) => (prevView % 3) + 1);
+  // };
 
   return (
     <ScreenContainer>
-      <View style={genderStyle.container}>
-        <View style={genderStyle.innerView}>
+      <View style={genderPronounStyle.container}>
+        <View style={genderPronounStyle.innerView}>
           <View style={{flex: 1}}>
             <Row
               alignItems="center"
               justifyContent="space-between"
-              style={genderStyle.rowHeader}>
+              style={genderPronounStyle.rowHeader}>
               <ImageContainer
                 height={30}
                 width={30}
@@ -42,35 +48,29 @@ const GenderProunoun = () => {
               <View />
             </Row>
 
-            <Text style={genderStyle.subHeader}>Select gender pronoun</Text>
+            <Text style={genderPronounStyle.subHeader}>
+            How would you like to be addressed?
+            </Text>
 
-            <View style={genderStyle.radioButtonContainer}>
-              <RadioButton.Group
-                onValueChange={(newValue) => setValue(newValue)}
-                value={value}>
-                <Row style={genderStyle.rowView} alignItems="center">
-                  <RadioButton value="He/Him" />
-                  <Text style={genderStyle.btnText}>He/Him</Text>
-                </Row>
-                <Row style={genderStyle.rowView} alignItems="center">
-                  <RadioButton value="She/Her" />
-                  <Text style={genderStyle.btnText}>She/Her</Text>
-                </Row>
-                <Row style={genderStyle.rowView} alignItems="center">
-                  <RadioButton value="They/Him" />
-                  <Text style={genderStyle.btnText}>They/Him</Text>
-                </Row>
-
-                <Row style={genderStyle.rowView} alignItems="center">
-                  <RadioButton value="Prefer not to say" />
-                  <Text style={genderStyle.btnText}>Prefer not to say</Text>
-                </Row>
-              </RadioButton.Group>
+            <View style={genderPronounStyle.radioButtonContainer}>
+              {genderPronounArray.map((option) => (
+                <RadioButton.Group
+                  onValueChange={handleGenderPronounValue}
+                  value={genderPronoun}>
+                  <Row style={genderPronounStyle.rowView} alignItems="center">
+                    <RadioButton value={option} />
+                    <Text style={genderPronounStyle.btnText}>{option}</Text>
+                  </Row>
+                </RadioButton.Group>
+              ))}
             </View>
           </View>
 
           <View>
-            <RedButton onPress={switchView} title="Next" />
+            <RedButton
+              onPress={() => updateUserDetails(loggInUserId, genderPronoun)}
+              title="Next"
+            />
           </View>
         </View>
       </View>

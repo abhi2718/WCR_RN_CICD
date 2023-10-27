@@ -6,7 +6,6 @@ import {useViewModal} from '../../signinViewModal';
 export const useEmailAuthViewModal = (props: any) => {
   const {navigation} = props;
   const receivedData = props.route?.params?.data || 'No data received';
-
   let fbId = receivedData?.fbId;
 
   let email = receivedData.email;

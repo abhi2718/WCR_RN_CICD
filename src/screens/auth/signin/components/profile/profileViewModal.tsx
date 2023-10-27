@@ -6,6 +6,7 @@ import {FirebaseService} from '../../../../../services/firebase.service';
 import {isDate18YearsOrAbove} from '../../../../../utils/common.functions';
 import {socialSignInSignUpPayload} from './../../../../../types/services.types/firebase.service';
 import moment from 'moment';
+import {ROUTES} from '../../../../../navigation';
 export type FormTypes = {
   firstName: string;
   lastName: string;
@@ -27,15 +28,15 @@ export const useProfileUseViewModal = (props: any) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [errorMessage, setErrorMessage] = useState('');
   const firebaseService = new FirebaseService();
-  let {socialSignInSignUp} = useViewModal(navigation);
+  let {socialSignInSignUp,navigateToGenderPronounScreen} = useViewModal(navigation);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleConfirm = (date:Date) => {
+  const handleConfirm = (date: Date) => {
     toggleModal();
     handleDateChange(date);
-  }
+  };
 
   useEffect(() => {
     handleInputChange('email', email);
@@ -151,6 +152,7 @@ export const useProfileUseViewModal = (props: any) => {
     setWelcomeModalVisible(false);
   };
 
+
   const newUserSignUp = async (
     email?: string,
     credential?: FirebaseAuthTypes.AuthCredential,
@@ -215,9 +217,11 @@ export const useProfileUseViewModal = (props: any) => {
       mobile,
       fbId,
     });
-
+    console.log('------->datamango', dataMango);
     if (dataMango.message === 'Registered Successfully')
-      return ShowFlashMessage('info', 'Registered Successfully', 'success');
+    console.log(dataMango.user._id);
+      navigateToGenderPronounScreen(dataMango.user._id);
+    return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }
 
   return {

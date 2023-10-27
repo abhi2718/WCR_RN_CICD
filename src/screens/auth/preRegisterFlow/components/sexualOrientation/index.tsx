@@ -8,17 +8,22 @@ import {
   ScreenContainer,
   Spacer,
 } from '../../../../../components/tools';
-import { SexualOrientationStyle } from './sexualorientationStyle';
+import {SexualOrientationStyle} from './sexualorientationStyle';
+import {useSexualOrientationViewModal} from './sexualorientationViewModal';
+import {sexualOrientationArray} from '../../../../../utils/constanst';
 
+const SexualOrientation = (props: any) => {
+  const {
+    sexualOrientation,
+    setSexualOrientation,
+    handleSexualOrientationValue,
+    updateUserDetails,
+    loggInUserId,
+  } = useSexualOrientationViewModal(props);
 
-const SexualOrientation = () => {
-  const [value, setValue] = useState('male');
-
-  const [currentView, setCurrentView] = useState(1);
-
-  const switchView = () => {
-    setCurrentView((prevView) => (prevView % 3) + 1);
-  };
+  // const switchView = () => {
+  //   setCurrentView((prevView) => (prevView % 3) + 1);
+  // };
 
   return (
     <ScreenContainer>
@@ -44,53 +49,22 @@ const SexualOrientation = () => {
             </Row>
 
             <Text style={SexualOrientationStyle.subHeader}>
-              Your sexual orientation
+            Share your sexual orientation OR Your unique flavour of love
             </Text>
 
             <View style={SexualOrientationStyle.radioButtonContainer}>
-              <RadioButton.Group
-                onValueChange={(newValue) => setValue(newValue)}
-                value={value}>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Straight" />
-                  <Text style={SexualOrientationStyle.btnText}>Straight</Text>
-                </Row>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Gay" />
-                  <Text style={SexualOrientationStyle.btnText}>Gay</Text>
-                </Row>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Lesbian" />
-                  <Text style={SexualOrientationStyle.btnText}>Lesbian</Text>
-                </Row>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Bisexual" />
-                  <Text style={SexualOrientationStyle.btnText}>Bisexual</Text>
-                </Row>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Pansexual" />
-                  <Text style={SexualOrientationStyle.btnText}>Pansexual</Text>
-                </Row>
-
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Queer" />
-                  <Text style={SexualOrientationStyle.btnText}>Queer</Text>
-                </Row>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Questioning" />
-                  <Text style={SexualOrientationStyle.btnText}>
-                    Questioning
-                  </Text>
-                </Row>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Asexual" />
-                  <Text style={SexualOrientationStyle.btnText}>Asexual</Text>
-                </Row>
-                <Row style={SexualOrientationStyle.rowView} alignItems="center">
-                  <RadioButton value="Demisexual" />
-                  <Text style={SexualOrientationStyle.btnText}>Demisexual</Text>
-                </Row>
-              </RadioButton.Group>
+              {sexualOrientationArray.map((option) => (
+                <RadioButton.Group
+                  onValueChange={handleSexualOrientationValue}
+                  value={sexualOrientation}>
+                  <Row
+                    style={SexualOrientationStyle.rowView}
+                    alignItems="center">
+                    <RadioButton value={option} />
+                    <Text style={SexualOrientationStyle.btnText}>{option}</Text>
+                  </Row>
+                </RadioButton.Group>
+              ))}
             </View>
           </View>
 
@@ -101,7 +75,10 @@ const SexualOrientation = () => {
                 Visible on profile
               </Text>
             </Row>
-            <RedButton onPress={switchView} title="Next" />
+            <RedButton
+              onPress={() => updateUserDetails(loggInUserId, sexualOrientation)}
+              title="Next"
+            />
           </View>
         </View>
       </View>

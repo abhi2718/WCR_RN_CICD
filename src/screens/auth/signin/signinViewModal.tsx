@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {AuthRepository} from '../../../repository/auth.repo';
 import {FirebaseService} from '../../../services/firebase.service';
-import {ShowFlashMessage} from '../../../components/flashBar';
+import {FlashMessageType, ShowFlashMessage} from '../../../components/flashBar';
 import {OtpRepository} from '../../../repository/otp.repo';
 import {ROUTES} from '../../../navigation';
 import {
@@ -10,10 +10,11 @@ import {
   navigateToOtppagepayload,
 } from '../../../types/services.types/firebase.service';
 
-export const useViewModal = (navigation: any) => {
+export const useViewModal = (props: any) => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
+  const {navigation} = props;
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
@@ -55,36 +56,57 @@ export const useViewModal = (navigation: any) => {
       setLoading(false);
     }
   };
-  const _setLoaging = (loadingState: boolean) => setLoading(loadingState);
+  const _setLoading = (loadingState: boolean) => setLoading(loadingState);
   const _googleSignIn = async () => {
-    const data = await firebaseService.signInWithGoogle(
-      _setLoaging,
-      socialSignInSignUp,
-    );
-    if (data?.profile && data?.user) {
-      const {email, family_name, given_name, name, picture} = data?.profile;
-      if (data?.isNewUser) {
-        await firebaseService.deleteUserFromFirebase();
-        navigateToProfile({
-          email,
-          firstName: given_name,
-          lastName: family_name,
-          credential: data.googleCredential,
-        });
-      } else {
-        const data = await socialSignInSignUp({email});
-        if (data?.token) {
-          return ShowFlashMessage('info', 'logIn successfully', 'success');
+    try {
+      const data = await firebaseService.signInWithGoogle(
+        _setLoading,
+        socialSignInSignUp,
+      );
+      if (data?.profile && data?.user) {
+        const {email, family_name, given_name, name, picture} = data?.profile;
+        if (data?.isNewUser) {
+          await firebaseService.deleteUserFromFirebase();
+          navigateToProfile({
+            email,
+            firstName: given_name,
+            lastName: family_name,
+            credential: data.googleCredential,
+          });
+        } else {
+          const data = await socialSignInSignUp({email});
+          //console.log('data :: ', data);
+          console.log(data.user._id);
+          if (data?.token) {
+            navigateToGenderPronounScreen(data.user._id);
+            return ShowFlashMessage(
+              'info',
+              'logIn successfully',
+              FlashMessageType.SUCCESS,
+            );
+          } else {
+            return ShowFlashMessage(
+              'warn',
+              'logIn  unsuccessfully',
+              FlashMessageType.WARNING,
+            );
+          }
         }
       }
+      setLoading(false);
+    } catch (err) {
+      console.log('err data :: ', err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const checkIsNewUser = async (email: string) => {
     const _email = email.toLowerCase();
     const data = await socialSignInSignUp({email: _email});
     if (data?.token) {
+      console.log(data.user._id);
+      navigateToGenderPronounScreen(data.user._id);
       return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
     navigateToProfile({email: _email});
@@ -154,6 +176,8 @@ export const useViewModal = (navigation: any) => {
   };
   const handleNavigationAfterFbLogin = async (data: any) => {
     if (data?.token) {
+      console.log(data.user._id);
+      navigateToGenderPronounScreen(data.user._id);
       // login path if user had created account with other provider
       return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
@@ -199,6 +223,10 @@ export const useViewModal = (navigation: any) => {
       handleNavigationAfterFbLogin(fbdata);
     }
   }, [fbdata]);
+
+  const navigateToGenderPronounScreen = (id:string) => {
+    navigation.navigate(ROUTES.Gender,{data:id});
+  };
 
   const navigateToProfile = ({
     email,
@@ -252,5 +280,6 @@ export const useViewModal = (navigation: any) => {
     getOtpToVerifyEmail,
     setLoading,
     checkIsNewUser,
+    navigateToGenderPronounScreen,
   };
 };

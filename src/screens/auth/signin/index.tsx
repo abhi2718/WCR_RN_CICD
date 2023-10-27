@@ -2,6 +2,7 @@ import React from 'react';
 import {View, TextInput, ScrollView} from 'react-native';
 import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
+
 import {
   RoundedButtonWithIconAndText,
   RedButton,
@@ -9,12 +10,13 @@ import {
 import {ImageContainer, ScreenContainer} from '../../../components/tools';
 import {isAndroid} from '../../../components/tools';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import Loader from '../../../components/loader/loader';
 type navigationProps = {
   navigation: {
     navigate: (route: string, params?: any) => void;
   };
 };
-export default function SignInScreen({navigation}: navigationProps) {
+export default function SignInScreen(props: any) {
   const {
     _onFbLogIn,
     _googleSignIn,
@@ -22,10 +24,15 @@ export default function SignInScreen({navigation}: navigationProps) {
     handleAppleSignIn,
     email,
     setEmail,
-  } = useViewModal(navigation);
+    loading
+  } = useViewModal(props);
   return (
     <ScreenContainer>
-      <ScrollView contentContainerStyle={styles.scrollDiv} keyboardShouldPersistTaps="always">
+      <Loader isLoading={loading} />
+
+      <ScrollView
+        contentContainerStyle={styles.scrollDiv}
+        keyboardShouldPersistTaps="always">
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <ImageContainer
             height={65}
@@ -65,13 +72,10 @@ export default function SignInScreen({navigation}: navigationProps) {
             onChangeText={(email: string) => {
               setEmail(email);
             }}
-            placeholderTextColor="rgba(35, 35, 35, 0.4)" 
+            placeholderTextColor="rgba(35, 35, 35, 0.4)"
           />
         </View>
-        <RedButton
-          title='Continue'
-          onPress={getOtpToVerifyEmail}
-        />
+        <RedButton title="Continue" onPress={getOtpToVerifyEmail} />
       </ScrollView>
     </ScreenContainer>
   );

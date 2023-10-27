@@ -9,9 +9,12 @@ import {
   Spacer,
 } from '../../../components/tools';
 import {genderStyle} from './genderStyle';
+import {genderArray} from '../../../utils/constanst';
+import {useGenderViewModal} from './gender.ViewModal';
 
-const Gender = () => {
-  const [value, setValue] = useState('male');
+const Gender = (props: any) => {
+  const {gender, handleGenderValue, updateUserDetails, loggInUserId} =
+    useGenderViewModal(props);
 
   const [currentView, setCurrentView] = useState(1);
 
@@ -43,33 +46,21 @@ const Gender = () => {
                 <View />
               </Row>
 
-              <Text style={genderStyle.subHeader}>Pick your gender</Text>
+              <Text style={genderStyle.subHeader}>
+                Choose your gender identity
+              </Text>
 
               <View style={genderStyle.radioButtonContainer}>
-                <RadioButton.Group
-                  onValueChange={(newValue) => setValue(newValue)}
-                  value={value}>
-                  <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton value="male" />
-                    <Text style={genderStyle.btnText}>Male</Text>
-                  </Row>
-                  <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton value="female" />
-                    <Text style={genderStyle.btnText}>Female</Text>
-                  </Row>
-                  <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton value="transman" />
-                    <Text style={genderStyle.btnText}>Transman</Text>
-                  </Row>
-                  <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton value="transwomen" />
-                    <Text style={genderStyle.btnText}>Transwomen</Text>
-                  </Row>
-                  <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton value="non-Binary" />
-                    <Text style={genderStyle.btnText}>Non-Binary</Text>
-                  </Row>
-                </RadioButton.Group>
+                {genderArray.map((option) => (
+                  <RadioButton.Group
+                    onValueChange={handleGenderValue}
+                    value={gender}>
+                    <Row style={genderStyle.rowView} alignItems="center">
+                      <RadioButton value={option} />
+                      <Text style={genderStyle.btnText}>{option}</Text>
+                    </Row>
+                  </RadioButton.Group>
+                ))}
               </View>
             </View>
 
@@ -78,7 +69,10 @@ const Gender = () => {
                 <Checkbox status="checked" />
                 <Text style={genderStyle.btnText}>Visible on profile</Text>
               </Row>
-              <RedButton onPress={switchView} title="Next" />
+              <RedButton
+                onPress={() => updateUserDetails(loggInUserId, gender)}
+                title="Next"
+              />
             </View>
           </View>
         </View>

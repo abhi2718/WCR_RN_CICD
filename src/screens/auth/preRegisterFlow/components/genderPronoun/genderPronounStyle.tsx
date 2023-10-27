@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {dimensions} from '../../../../../components/tools';
-export const genderStyle = StyleSheet.create({
+export const genderPronounStyle = StyleSheet.create({
   container: {
     flex: 1,
   },
