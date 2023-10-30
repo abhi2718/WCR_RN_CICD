@@ -8,7 +8,7 @@ const Onboarding = () => {
   const [currentView, setCurrentView] = useState(1);
 
   const switchView = () => {
-    setCurrentView(prevView => (prevView % 3) + 1);
+    setCurrentView((prevView) => (prevView % 3) + 1);
   };
 
   return (
@@ -24,7 +24,7 @@ const Onboarding = () => {
           <View style={styles.rowTwo}>
             <View>
               <Text style={styles.heading}>
-                Find your ideal healthcare match
+                Find your ideal {`\n`} healthcare match
               </Text>
               <Text style={styles.subHeading}>
                 Verified profiles, shared interests
