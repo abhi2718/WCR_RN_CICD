@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../infrastructure/theme/colors';
+import {sizes} from '../../infrastructure/theme/sizes';
+import {fontWeights, fonts} from '../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
   container: {
-    // borderColor: 'red',
-    // borderWidth: 1,
     flex: 1,
     width: '100%',
   },
@@ -21,20 +22,21 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   heading: {
-    color: '#2A2827',
+    color: colors.ui.text,
     textAlign: 'center',
-    fontSize: 28,
-    fontWeight: '700',
-    marginTop: 20,
+    fontSize: sizes[6],
+    fontWeight: fontWeights.bold,
+    marginTop: sizes[3],
+    fontFamily: fonts.body,
   },
   subHeading: {
-    color: '#2A2827',
+    color: colors.ui.text,
     textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '400',
-    marginTop: 15,
+    fontSize: sizes[4],
+    fontWeight: fontWeights.regular,
+    marginTop: sizes[2],
   },
   scrollImg: {
-    height: 8,
+    height: sizes[1],
   },
 });

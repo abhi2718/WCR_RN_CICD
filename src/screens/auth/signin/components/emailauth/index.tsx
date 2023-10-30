@@ -9,6 +9,7 @@ import {styles} from './emailauthStyle';
 import {PrimaryButton} from '../../../../../components/button';
 // for viewModal use use key word
 import {emailAuthViewModal} from './emailauthViewModal';
+import {sizes} from '../../../../../infrastructure/theme/sizes';
 
 // remove any
 export default function EmailAuthByOtpScreeen(props: any) {
@@ -20,9 +21,9 @@ export default function EmailAuthByOtpScreeen(props: any) {
       <ScrollView contentContainerStyle={styles.scrollDiv}>
         <View>
           <ImageContainer
-            height={65}
-            width={65}
-            marginBottom={35}
+            height={sizes[8]}
+            width={sizes[8]}
+            marginBottom={sizes[7]}
             source={require('../../../../../assets/images/logo.png')}
           />
         </View>
