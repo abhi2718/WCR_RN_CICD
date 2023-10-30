@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {RadioButton, Text} from 'react-native-paper';
 import {RedButton} from '../../../../../components/button';
 import {
@@ -18,6 +19,9 @@ const GenderProunoun = (props: any) => {
     handleGenderPronounValue,
     updateUserDetails,
     loggInUserId,
+    checkboxState,
+    setCheckboxState,
+    handleCheckboxChange,
   } = useGenderPronounViewModal(props);
   const [value, setValue] = useState('male');
 
@@ -67,6 +71,16 @@ const GenderProunoun = (props: any) => {
           </View>
 
           <View>
+          <Row style={genderPronounStyle.rowView} alignItems="center">
+                <BouncyCheckbox
+                  onPress={handleCheckboxChange}
+                  isChecked={checkboxState}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                />
+                {/* <Checkbox status="checked" /> */}
+                <Text style={genderPronounStyle.btnText}>Visible on profile</Text>
+              </Row>
             <RedButton
               onPress={() => updateUserDetails(loggInUserId, genderPronoun)}
               title="Next"

@@ -9,9 +9,14 @@ export const useGenderViewModal = (props: any) => {
 
   const { navigation } = props;
   const [gender, setGender] = useState('Male');
+  const [checkboxState, setCheckboxState] = useState(true);
 
   const handleGenderValue = (value: string) => {
     setGender(value);
+  };
+
+  const handleCheckboxChange = () => {
+    setCheckboxState(!checkboxState);
   };
 
   const navigateToGenderPronounScreen = (id:string) => {
@@ -23,12 +28,13 @@ export const useGenderViewModal = (props: any) => {
       const genderData = {
         profile: {
           gender: update,
+          showGender:checkboxState
         },
       };
       const data = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderData,
       });
-      console.log('after saved the gender', data);
+    //  console.log('after saved the gender', data);
       navigateToGenderPronounScreen(loggInUserId)
     } catch (err) {
       console.log(err);
@@ -41,5 +47,7 @@ export const useGenderViewModal = (props: any) => {
     loggInUserId,
     handleGenderValue,
     updateUserDetails,
+    handleCheckboxChange,
+    checkboxState, setCheckboxState
   };
 };

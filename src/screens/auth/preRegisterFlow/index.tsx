@@ -1,20 +1,28 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
-import {Checkbox, RadioButton, Text} from 'react-native-paper';
-import {RedButton} from '../../../components/button';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { Checkbox, RadioButton, Text } from 'react-native-paper';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { RedButton } from '../../../components/button';
 import {
   ImageContainer,
   Row,
   ScreenContainer,
   Spacer,
 } from '../../../components/tools';
-import {genderStyle} from './genderStyle';
-import {genderArray} from '../../../utils/constanst';
-import {useGenderViewModal} from './gender.ViewModal';
+import { genderStyle } from './genderStyle';
+import { genderArray } from '../../../utils/constanst';
+import { useGenderViewModal } from './gender.ViewModal';
 
 const Gender = (props: any) => {
-  const {gender, handleGenderValue, updateUserDetails, loggInUserId} =
-    useGenderViewModal(props);
+  const {
+    gender,
+    handleGenderValue,
+    updateUserDetails,
+    loggInUserId,
+    checkboxState,
+    setCheckboxState,
+    handleCheckboxChange,
+  } = useGenderViewModal(props);
 
   const [currentView, setCurrentView] = useState(1);
 
@@ -27,11 +35,12 @@ const Gender = (props: any) => {
       {currentView === 1 && (
         <View style={genderStyle.container}>
           <View style={genderStyle.innerView}>
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
               <Row
                 alignItems="center"
                 justifyContent="space-between"
-                style={genderStyle.rowHeader}>
+                style={genderStyle.rowHeader}
+              >
                 <ImageContainer
                   height={30}
                   width={30}
@@ -54,7 +63,8 @@ const Gender = (props: any) => {
                 {genderArray.map((option) => (
                   <RadioButton.Group
                     onValueChange={handleGenderValue}
-                    value={gender}>
+                    value={gender}
+                  >
                     <Row style={genderStyle.rowView} alignItems="center">
                       <RadioButton value={option} />
                       <Text style={genderStyle.btnText}>{option}</Text>
@@ -66,7 +76,13 @@ const Gender = (props: any) => {
 
             <View>
               <Row style={genderStyle.rowView} alignItems="center">
-                <Checkbox status="checked" />
+                <BouncyCheckbox
+                  onPress={handleCheckboxChange}
+                  isChecked={checkboxState}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                />
+                {/* <Checkbox status="checked" /> */}
                 <Text style={genderStyle.btnText}>Visible on profile</Text>
               </Row>
               <RedButton

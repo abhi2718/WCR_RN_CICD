@@ -9,9 +9,14 @@ export const useSexualOrientationViewModal = (props: any) => {
 
   const { navigation } = props;
   const [sexualOrientation, setSexualOrientation] = useState('Male');
+  const [checkboxState, setCheckboxState] = useState(true);
 
   const handleSexualOrientationValue = (value: string) => {
     setSexualOrientation(value);
+  };
+
+  const handleCheckboxChange = () => {
+    setCheckboxState(!checkboxState);
   };
 
   //   const navigateToGenderPronounScreen = () => {
@@ -20,7 +25,8 @@ export const useSexualOrientationViewModal = (props: any) => {
 
   const updateUserDetails = async (id: string, update: string) => {
     try {
-      const genderData = { profile: { sexualPreference: update } };
+      const genderData = { profile: { sexualPreference: update,
+        showSexualPreference:checkboxState } };
       const data = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderData,
       });
@@ -36,5 +42,7 @@ export const useSexualOrientationViewModal = (props: any) => {
     loggInUserId,
     handleSexualOrientationValue,
     updateUserDetails,
+    handleCheckboxChange,
+    checkboxState, setCheckboxState
   };
 };

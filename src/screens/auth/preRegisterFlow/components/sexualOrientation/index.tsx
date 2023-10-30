@@ -11,14 +11,16 @@ import {
 import {SexualOrientationStyle} from './sexualorientationStyle';
 import {useSexualOrientationViewModal} from './sexualorientationViewModal';
 import {sexualOrientationArray} from '../../../../../utils/constanst';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const SexualOrientation = (props: any) => {
   const {
     sexualOrientation,
-    setSexualOrientation,
     handleSexualOrientationValue,
     updateUserDetails,
     loggInUserId,
+    handleCheckboxChange,
+    checkboxState, setCheckboxState
   } = useSexualOrientationViewModal(props);
 
   // const switchView = () => {
@@ -70,7 +72,12 @@ const SexualOrientation = (props: any) => {
 
           <View>
             <Row style={SexualOrientationStyle.rowView} alignItems="center">
-              <Checkbox status="checked" />
+            <BouncyCheckbox
+                  onPress={handleCheckboxChange}
+                  isChecked={checkboxState}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                />
               <Text style={SexualOrientationStyle.btnText}>
                 Visible on profile
               </Text>
