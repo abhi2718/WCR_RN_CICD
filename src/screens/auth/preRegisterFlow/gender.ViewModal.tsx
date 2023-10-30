@@ -14,8 +14,8 @@ export const useGenderViewModal = (props: any) => {
     setGender(value);
   };
 
-  const navigateToGenderPronounScreen = () => {
-    navigation.navigate(ROUTES.Gender);
+  const navigateToGenderPronounScreen = (id:string) => {
+    navigation.navigate(ROUTES.GenderPronoun,{data:id});
   };
 
   const updateUserDetails = async (id: string, update: string) => {
@@ -29,7 +29,7 @@ export const useGenderViewModal = (props: any) => {
         update: genderData,
       });
       console.log('after saved the gender', data);
-      // navigateToGenderPronoounScreen()
+      navigateToGenderPronounScreen(loggInUserId)
     } catch (err) {
       console.log(err);
     }

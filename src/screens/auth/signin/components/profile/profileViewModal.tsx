@@ -28,7 +28,7 @@ export const useProfileUseViewModal = (props: any) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [errorMessage, setErrorMessage] = useState('');
   const firebaseService = new FirebaseService();
-  let {socialSignInSignUp,navigateToGenderPronounScreen} = useViewModal(navigation);
+  let {socialSignInSignUp,navigateToGenderScreen} = useViewModal(navigation);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -220,7 +220,7 @@ export const useProfileUseViewModal = (props: any) => {
     console.log('------->datamango', dataMango);
     if (dataMango.message === 'Registered Successfully')
     console.log(dataMango.user._id);
-      navigateToGenderPronounScreen(dataMango.user._id);
+    navigateToGenderScreen(dataMango.user._id);
     return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }
 

@@ -14,22 +14,21 @@ export const useGenderPronounViewModal = (props: any) => {
     setGenderPrPronoun(value);
   };
 
-  const navigateToSexualOrientationScreen = () => {
-    navigation.navigate(ROUTES.SexualOrientation);
+  const navigateToSexualOrientationScreen = (id:string) => {
+    navigation.navigate(ROUTES.SexualOrientation,{data:id});
   };
 
   const updateUserDetails = async (id: string, update: string) => {
     try {
-      const genderData = {
+      const genderPronounData = {
         profile: {
-          gender: 'Male',
+          genderPronoun: update,
         },
       };
       const data = await updateUserDetailsRepository.updateUserDetails(id, {
-        update: genderData,
+        update: genderPronounData,
       });
-      console.log('after saved the gender', data);
-      // navigateToGenderPronoounScreen()
+     navigateToSexualOrientationScreen(loggInUserId)
     } catch (err) {
       console.log(err);
     }

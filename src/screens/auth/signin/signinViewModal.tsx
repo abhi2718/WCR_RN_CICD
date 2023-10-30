@@ -78,7 +78,7 @@ export const useViewModal = (props: any) => {
           //console.log('data :: ', data);
           console.log(data.user._id);
           if (data?.token) {
-            navigateToGenderPronounScreen(data.user._id);
+            navigateToGenderScreen(data.user._id);
             return ShowFlashMessage(
               'info',
               'logIn successfully',
@@ -106,7 +106,7 @@ export const useViewModal = (props: any) => {
     const data = await socialSignInSignUp({email: _email});
     if (data?.token) {
       console.log(data.user._id);
-      navigateToGenderPronounScreen(data.user._id);
+      navigateToGenderScreen(data.user._id);
       return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
     navigateToProfile({email: _email});
@@ -177,7 +177,7 @@ export const useViewModal = (props: any) => {
   const handleNavigationAfterFbLogin = async (data: any) => {
     if (data?.token) {
       console.log(data.user._id);
-      navigateToGenderPronounScreen(data.user._id);
+      navigateToGenderScreen(data.user._id);
       // login path if user had created account with other provider
       return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
@@ -224,7 +224,7 @@ export const useViewModal = (props: any) => {
     }
   }, [fbdata]);
 
-  const navigateToGenderPronounScreen = (id:string) => {
+  const navigateToGenderScreen = (id:string) => {
     navigation.navigate(ROUTES.Gender,{data:id});
   };
 
@@ -280,6 +280,6 @@ export const useViewModal = (props: any) => {
     getOtpToVerifyEmail,
     setLoading,
     checkIsNewUser,
-    navigateToGenderPronounScreen,
+    navigateToGenderScreen,
   };
 };
