@@ -5,6 +5,7 @@ import {
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import jwt_decode from 'jwt-decode';
+import { socialSignInSignUpPayload,} from './../../types/services.types/firebase.service';
 import {
   LoginManager,
   GraphRequest,
@@ -112,6 +113,8 @@ export class FirebaseService {
       mobile,
     }: socialSignInSignUpPayload) => Promise<any>,
     email?: string | undefined,
+    checFbUser?:(fbId:string) => Promise<any>,
+    fbId?: string | undefined,
   ) {
     try {
       return await auth().signInWithCredential(credential);
@@ -121,7 +124,9 @@ export class FirebaseService {
           if (socialSignInSignUp && email) {
             return await socialSignInSignUp({email});
           } else {
-            // if user is not having email with fb send them on email verification page
+            if(checFbUser && fbId){
+              return await checFbUser(fbId)
+            }
           }
           break;
         case 'auth/email-already-in-use':
@@ -259,6 +264,7 @@ export class FirebaseService {
       displayName,
     }: socialSignInSignUpPayload) => Promise<any>,
     setFbData: (payload: any) => void,
+    checFbUser:(fbId:string) => Promise<any>
   ) {
     LoginManager.logOut();
     const loginResult = await LoginManager.logInWithPermissions([
@@ -274,6 +280,7 @@ export class FirebaseService {
     const callBack = async (err: any, result: any) => {
       let res;
       const email = result?.email;
+      const fbId = result?.fbId;
       const data = await AccessToken.getCurrentAccessToken();
       if (data?.accessToken) {
         const facebookCredential = auth.FacebookAuthProvider.credential(
@@ -283,6 +290,8 @@ export class FirebaseService {
           facebookCredential,
           socialSignInSignUp,
           email,
+          checFbUser,
+          fbId
         );
         if (response?.token) {
           res = {

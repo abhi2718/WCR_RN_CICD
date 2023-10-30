@@ -6,6 +6,9 @@ import {useCometChatInit} from '../services/cometChat.service';
 export enum ROUTES {
   SignIn = 'SignIn',
   Profile = '/profile',
+  Gender = '/gender',
+  GenderPronoun = '/genderPronoun',
+  SexualOrientation = '/sexualOrientation',
   SignUp = 'SignUp',
   EmailAuth = '/email-auth',
   Tab = '/tabs',

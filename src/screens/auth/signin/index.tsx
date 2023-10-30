@@ -1,34 +1,44 @@
 import React from 'react';
-import {View, TextInput, ScrollView} from 'react-native';
-import {useViewModal} from './signinViewModal';
-import {styles} from './signInStyle';
+import { View, TextInput, ScrollView } from 'react-native';
+import { useViewModal } from './signinViewModal';
+import { styles } from './signInStyle';
+
 import {
   RoundedButtonWithIconAndText,
   PrimaryButton,
 } from '../../../components/button';
-import {ImageContainer, ScreenContainer} from '../../../components/tools';
-import {isAndroid} from '../../../components/tools';
-import {sizes} from '../../../infrastructure/theme/sizes';
+import { ImageContainer, ScreenContainer } from '../../../components/tools';
+import { isAndroid } from '../../../components/tools';
+import { sizes } from '../../../infrastructure/theme/sizes';
 
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import Loader from '../../../components/loader/loader';
 type navigationProps = {
   navigation: {
     navigate: (route: string, params?: any) => void;
   };
 };
-export default function SignInScreen({navigation}: navigationProps) {
+export default function SignInScreen(props: any) {
   const {
     _onFbLogIn,
     _googleSignIn,
     getOtpToVerifyEmail,
     handleAppleSignIn,
     email,
-    navigateToP,
     setEmail,
-  } = useViewModal(navigation);
+    loading,
+  } = useViewModal(props);
   return (
     <ScreenContainer>
-      <ScrollView contentContainerStyle={styles.scrollDiv}>
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Loader isLoading={loading} />
+
+      <ScrollView
+        contentContainerStyle={styles.scrollDiv}
+        keyboardShouldPersistTaps="always"
+      >
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
           <ImageContainer
             height={sizes[8]}
             width={sizes[8]}

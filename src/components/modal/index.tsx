@@ -1,40 +1,72 @@
 import React, {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import {ModalProps} from './../../types/components/modal.type';
+import {ImageContainer, Row} from '../tools';
+import {RedButton} from '../button';
 
 export const ModalComponent = (props: ModalProps) => {
   const {isVisible, onClose} = props;
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isVisible}
-        onRequestClose={() => onClose()}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>WELCOME</Text>
-            <Text style={styles.listItemStyle}>
-              1. Use your real name that matches your degree (only First Name
-              shown by default), or add a display name.
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={isVisible}
+      onRequestClose={() => onClose()}>
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.heading}>WELCOME</Text>
+          <Text style={styles.subHeading}>
+            Before you start,{'\n'}here’s what you need to know:
+          </Text>
+
+          <Row style={styles.row}>
+            <ImageContainer
+              height={24}
+              width={24}
+              source={require('../../assets/images/icons/userProfile.png')}
+            />
+
+            <Text>
+              Use your real name that matches your degree only First Name shown
+              by default, or add a display name.
             </Text>
-            <Text style={styles.listItemStyle}>
-              2. Once you verify, you can't change First Name, Last Name (not
-              shown on profile), Email, DOB, or Gender.
+          </Row>
+
+          <Row style={styles.row}>
+            <ImageContainer
+              height={24}
+              width={24}
+              source={require('../../assets/images/icons/blockUser.png')}
+            />
+
+            <Text>
+              Your profile picture shows your face clearly - no shades, masks,
+              or obstructions
             </Text>
-            <Text style={styles.listItemStyle}>
-              3. Your profile picture shows your face clearly - no shades,
-              masks, or obstructions
+          </Row>
+
+          <Row style={styles.row}>
+            <ImageContainer
+              height={24}
+              width={24}
+              source={require('../../assets/images/icons/blackCheck.png')}
+            />
+
+            <Text>
+              Use your real name that matches your degree only First Name shown
+              by default, or add a display name.
             </Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => onClose()}>
-              <Text style={styles.textStyle}>close</Text>
-            </Pressable>
-          </View>
+          </Row>
+
+          <Text style={styles.footerText}>
+            Now, let's find your perfect match!
+          </Text>
+          <Row>
+            <RedButton onPress={() => onClose()} title="Continue" />
+          </Row>
         </View>
-      </Modal>
-    </View>
+      </View>
+    </Modal>
   );
 };
 
@@ -43,15 +75,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    backgroundColor: 'background: rgba(0,0,0, 0.7)',
   },
   modalView: {
-    margin: 20,
+    margin: 28,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
+    paddingTop: 26,
+    paddingBottom: 20,
+    paddingHorizontal: 18,
     shadowColor: '#000',
+
     shadowOffset: {
       width: 0,
       height: 2,
@@ -60,31 +94,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
+  heading: {
     fontWeight: 'bold',
-    textAlign: 'center',
+    fontSize: 34,
+    color: '#253245',
   },
-  modalText: {
-    fontSize: 32,
-    marginBottom: 15,
+  subHeading: {
+    paddingVertical: 16,
+    color: '#656565',
+    fontSize: 15,
+  },
+  row: {
+    gap: 10,
+    width: '100%',
+    marginVertical: 10,
+  },
+  footerText: {
+    textAlign: 'center',
     fontWeight: 'bold',
-    textAlign: 'center',
-  },
-
-  listItemStyle: {
-    marginLeft: 20,
-    fontSize: 16,
+    fontSize: 20,
   },
 });

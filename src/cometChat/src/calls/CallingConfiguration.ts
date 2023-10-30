@@ -1,5 +1,3 @@
 export class CallingConfiguration {
-    constructor() {
-        
-    }
+  constructor() {}
 }

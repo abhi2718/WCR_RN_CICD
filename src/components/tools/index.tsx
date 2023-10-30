@@ -27,7 +27,6 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = ({children}) => {
   );
 };
 
-
 const InputContainer = styled.TextInput<InputProps>`
   padding: 15px;
   width: 100%;
@@ -155,7 +154,7 @@ const SpacerView = styled.View``;
 type spacerProos = {
   position: string;
   size: number;
-  children: ReactNode;
+  children?: ReactNode;
   style?: object;
 };
 export const Spacer = (props: spacerProos) => {
@@ -165,11 +164,9 @@ export const Spacer = (props: spacerProos) => {
 };
 
 export const isAndroid = Platform.OS === 'android';
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
-export const dimensions = { width, height,statusBarHeight };
-
-
+export const dimensions = {width, height, statusBarHeight};
 
 const styles = StyleSheet.create({
   container: {

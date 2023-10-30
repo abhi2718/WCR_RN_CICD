@@ -1,4 +1,6 @@
-type socialSignInSignUpPayload = {
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+
+export type socialSignInSignUpPayload = {
   firebaseUid?: string | undefined;
   email: string;
   firstName?: string | undefined;
@@ -6,10 +8,27 @@ type socialSignInSignUpPayload = {
   dob?: string | undefined;
   displayName?: string | undefined;
   mobile?: string | undefined;
-  appleId?: string | undefined | null;
+  fbId?: string | undefined | null;
 };
 
-type SocialSignInSignUp = {
+export type navigateToOtppagepayload = {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  firebaseUid?: string;
+  otp?: string;
+  credential?:string
+}
+
+export type navigateToProfilepagepayload= {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  firebaseUid?: string;
+  credential?: FirebaseAuthTypes.AuthCredential;
+  appleId?: string;
+} 
+export type SocialSignInSignUp = {
   socialSignInSignUp: ({
     firebaseUid,
     email,
@@ -18,6 +37,6 @@ type SocialSignInSignUp = {
     dob,
     displayName,
     mobile,
-    appleId
+    fbId
   }: socialSignInSignUpPayload) => Promise<any>;
 }

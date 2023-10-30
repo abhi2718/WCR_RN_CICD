@@ -9,13 +9,13 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import {ActivityIndicator} from 'react-native-paper';
-import {ButtonProps} from '../../types/components/button.type';
+import { ActivityIndicator } from 'react-native-paper';
+import { ButtonProps } from '../../types/components/button.type';
 import styled from 'styled-components';
-import {dimensions} from '../tools';
+import { dimensions } from '../tools';
 
 export const Button = (props: ButtonProps) => {
-  const {title, onPress, isLoading} = props;
+  const { title, onPress, isLoading } = props;
   return (
     <>
       {isLoading ? (
@@ -34,14 +34,15 @@ export const Button = (props: ButtonProps) => {
 };
 
 export const PrimaryButton = (props: ButtonProps) => {
-  const {title, onPress, btnColor} = props;
+  const { title, onPress, btnColor } = props;
   return (
     <TouchableOpacity
       style={{
         ...styles.primaryButton,
         backgroundColor: btnColor ? btnColor : '#BB0000',
       }}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       <View>
         <Text style={styles.bntText}>{title}</Text>
       </View>
@@ -50,7 +51,7 @@ export const PrimaryButton = (props: ButtonProps) => {
 };
 
 export const RoundedButtonWithIconAndText = (props: ButtonProps) => {
-  const {title, onPress, btnColor, iconSource} = props;
+  const { title, onPress, btnColor, iconSource } = props;
   return (
     <TouchableOpacity style={roundStyles.button} onPress={onPress}>
       <View style={roundStyles.buttonContainer}>
@@ -109,11 +110,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FA5672',
     elevation: 5,
     shadowColor: 'rgba(250, 86, 114, 0.15)', // iOS box shadow color
-    shadowOffset: {width: 3, height: 21}, // iOS box shadow offset
+    shadowOffset: { width: 3, height: 21 }, // iOS box shadow offset
     shadowOpacity: 1, // iOS box shadow opacity
     shadowRadius: 18, // iOS box shadow radius
     width: '100%',
-    marginTop: 10,
   },
   bntText: {
     color: '#FEFBFD',

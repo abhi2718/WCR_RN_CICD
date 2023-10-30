@@ -1,20 +1,27 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, ScrollView} from 'react-native';
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import {
   ImageContainer,
   InputBox,
   ScreenContainer,
 } from '../../../../../components/tools';
-import {styles} from './emailauthStyle';
-import {PrimaryButton} from '../../../../../components/button';
+import { styles } from './emailauthStyle';
+import { PrimaryButton } from '../../../../../components/button';
 // for viewModal use use key word
-import {emailAuthViewModal} from './emailauthViewModal';
-import {sizes} from '../../../../../infrastructure/theme/sizes';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { useEmailAuthViewModal } from './emailauthViewModal';
 
 // remove any
 export default function EmailAuthByOtpScreeen(props: any) {
-  let {otp, setOtp, verifyEmail, resendOtp, emailInput, setEmailInput, email} =
-    emailAuthViewModal(props);
+  let {
+    otp,
+    setOtp,
+    verifyEmail,
+    resendOtp,
+    emailInput,
+    setEmailInput,
+    email,
+  } = useEmailAuthViewModal(props);
 
   return (
     <ScreenContainer>
@@ -55,7 +62,7 @@ export default function EmailAuthByOtpScreeen(props: any) {
           </View>
         )}
         <PrimaryButton title={'Continue'} onPress={verifyEmail} />
-        <TouchableOpacity onPress={resendOtp} style={{marginTop: 20}}>
+        <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
           <Text>Resend code</Text>
         </TouchableOpacity>
       </ScrollView>
