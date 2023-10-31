@@ -10,15 +10,27 @@ import Onboarding from '../../screens/onBoarding';
 import Gender from './../../screens/auth/preRegisterFlow';
 import GenderProunoun from '../../screens/auth/preRegisterFlow/components/genderPronoun';
 import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
+import Location from '../../screens/auth/preRegisterFlow/components/location';
+import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 
 const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         options={{ headerShown: false }}
         name={ROUTES.Onboarding}
         component={Onboarding}
+      /> */}
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name={ROUTES.Profession}
+        component={Profession}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name={ROUTES.Location}
+        component={Location}
       />
       <Stack.Screen
         options={{ headerShown: false }}
@@ -43,7 +55,7 @@ export const StackNavigator = () => {
         component={Gender}
       />
       <Stack.Screen
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />

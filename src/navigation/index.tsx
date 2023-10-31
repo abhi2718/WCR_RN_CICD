@@ -1,7 +1,7 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {StackNavigator} from './stack.navigator';
-import {useCometChatInit} from '../services/cometChat.service';
+import { NavigationContainer } from '@react-navigation/native';
+import { StackNavigator } from './stack.navigator';
+import { useCometChatInit } from '../services/cometChat.service';
 
 export enum ROUTES {
   SignIn = 'SignIn',
@@ -15,6 +15,8 @@ export enum ROUTES {
   Onboarding = '/onboarding',
   CommunityChat = '/community-chat',
   CommunityChatMessageList = '/community-chat-messagelist',
+  Location = '/location',
+  Profession = '/profession',
 }
 export default function Navigator() {
   useCometChatInit();

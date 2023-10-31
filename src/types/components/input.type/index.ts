@@ -12,4 +12,10 @@ export type InputProps = {
   theme?: any;
   editable?: boolean;
   marginTop?: number;
+  visible?: any;
+  onDismiss?: any;
+  showDropDown?: any;
+  setValue?: any;
+  list?: any;
+  dropDownStyle?: any;
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Checkbox, RadioButton, Text } from 'react-native-paper';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { RedButton } from '../../../components/button';
+import { PrimaryButton } from '../../../components/button';
 import {
   ImageContainer,
   Row,
@@ -85,7 +85,7 @@ const Gender = (props: any) => {
                 {/* <Checkbox status="checked" /> */}
                 <Text style={genderStyle.btnText}>Visible on profile</Text>
               </Row>
-              <RedButton
+              <PrimaryButton
                 onPress={() => updateUserDetails(loggInUserId, gender)}
                 title="Next"
               />
