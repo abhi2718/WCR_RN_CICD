@@ -28,6 +28,7 @@ import { ModalComponent } from '../../../../../components/modal';
 import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.functions';
 import { FlatInput } from '../../../../../components/inputBox/index';
 import { ErrorText } from '../../signInStyle';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 const Profile = (props: any) => {
   // put logic in viewModal
@@ -73,8 +74,8 @@ const Profile = (props: any) => {
               style={profileStyles.rowHeader}
             >
               <ImageContainer
-                height={30}
-                width={30}
+                height={sizes[7]}
+                width={sizes[7]}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
 
@@ -148,8 +149,8 @@ const Profile = (props: any) => {
                 onPress={toggleModal}
               >
                 <ImageContainer
-                  height={12}
-                  width={22}
+                  height={sizes[2]}
+                  width={sizes[5]}
                   source={require('../../../../../assets/images/icons/calender.png')}
                 />
               </TouchableOpacity>

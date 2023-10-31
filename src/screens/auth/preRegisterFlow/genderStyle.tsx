@@ -1,5 +1,8 @@
-import {StyleSheet} from 'react-native';
-import {dimensions} from '../../../components/tools';
+import { StyleSheet } from 'react-native';
+import { dimensions } from '../../../components/tools';
+import { colors } from '../../../infrastructure/theme/colors';
+import { fontSizes } from '../../../infrastructure/theme/fonts';
+import { sizes } from '../../../infrastructure/theme/sizes';
 export const genderStyle = StyleSheet.create({
   container: {
     flex: 1,
@@ -10,26 +13,24 @@ export const genderStyle = StyleSheet.create({
   },
 
   rowHeader: {
-    width: dimensions.width, 
+    width: dimensions.width,
     maxWidth: '100%',
   },
   subHeader: {
-    color: '#49454F',
+    color: colors.ui.text,
     fontWeight: '700',
-    fontSize: 24,
-    marginTop: 10,
+    fontSize: fontSizes.h5,
+    marginTop: sizes[1],
   },
   radioButtonContainer: {
-    // borderColor: 'red',
-    // borderWidth: 2,
-    marginTop: 25,
+    marginTop: sizes[6],
   },
   btnText: {
-    marginLeft: 15,
-    fontSize: 16,
+    marginLeft: sizes[3],
+    fontSize: sizes[3],
     fontWeight: '500',
   },
   rowView: {
-    marginBottom: 10,
+    marginBottom: sizes[1],
   },
 });

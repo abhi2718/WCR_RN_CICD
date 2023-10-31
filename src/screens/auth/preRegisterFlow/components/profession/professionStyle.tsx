@@ -26,7 +26,7 @@ export const profession = StyleSheet.create({
   },
   subHeader: {
     color: colors.ui.text,
-    fontWeight: fontWeights.bold,
+    fontWeight: '700',
     fontSize: fontSizes.h5,
     marginTop: sizes[1],
   },

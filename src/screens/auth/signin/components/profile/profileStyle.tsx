@@ -1,5 +1,8 @@
-import {StyleSheet} from 'react-native';
-import {dimensions} from '../../../../../components/tools';
+import { StyleSheet } from 'react-native';
+import { dimensions } from '../../../../../components/tools';
+import { colors } from '../../../../../infrastructure/theme/colors';
+import { fontSizes } from '../../../../../infrastructure/theme/fonts';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 export const profileStyles = StyleSheet.create({
   container: {
@@ -15,10 +18,10 @@ export const profileStyles = StyleSheet.create({
     maxWidth: '100%',
   },
   subHeader: {
-    color: '#49454F',
+    color: colors.ui.text,
     fontWeight: '700',
-    fontSize: 24,
-    marginTop: 10,
+    fontSize: fontSizes.h5,
+    marginTop: sizes[0],
   },
 
   datePickerContainer: {
@@ -28,8 +31,8 @@ export const profileStyles = StyleSheet.create({
   },
   openButton: {
     position: 'absolute',
-    right: 10,
-    top: 12,
+    right: sizes[1],
+    top: sizes[2],
     zIndex: 1,
   },
 });

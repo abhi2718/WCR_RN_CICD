@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../infrastructure/theme/colors';
-import {sizes} from '../../infrastructure/theme/sizes';
-import {fontWeights, fonts} from '../../infrastructure/theme/fonts';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../infrastructure/theme/colors';
+import { sizes } from '../../infrastructure/theme/sizes';
+import { fontWeights, fonts } from '../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
   container: {
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     textAlign: 'center',
     fontSize: sizes[6],
-    fontWeight: fontWeights.bold,
+    fontWeight: '700',
     marginTop: sizes[3],
     fontFamily: fonts.body,
   },
@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     textAlign: 'center',
     fontSize: sizes[4],
-    fontWeight: fontWeights.regular,
+    fontWeight: '400',
     marginTop: sizes[2],
   },
   scrollImg: {

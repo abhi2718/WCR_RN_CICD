@@ -28,8 +28,8 @@ export default function EmailAuthByOtpScreeen(props: any) {
       <ScrollView contentContainerStyle={styles.scrollDiv}>
         <View>
           <ImageContainer
-            height={sizes[8]}
-            width={sizes[8]}
+            height={sizes[10]}
+            width={sizes[10]}
             marginBottom={sizes[7]}
             source={require('../../../../../assets/images/logo.png')}
           />

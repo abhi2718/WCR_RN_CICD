@@ -4,7 +4,7 @@ import {
   Row,
   ScreenContainer,
 } from '../../../../../components/tools';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { PrimaryButton } from '../../../../../components/button';
 import { Surface } from 'react-native-paper';
@@ -13,24 +13,30 @@ import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import DropDown from 'react-native-paper-dropdown';
 import { colors } from '../../../../../infrastructure/theme/colors';
+import { Dropdown } from 'react-native-element-dropdown';
+// import AntDesign from '@expo/vector-icons/AntDesign';
 
 const Profession = (props: any) => {
-  const [showDropDown, setShowDropDown] = useState(false);
-  const [gender, setGender] = useState('');
-  const genderList = [
-    {
-      label: 'Male',
-      value: 'male',
-    },
-    {
-      label: 'Female',
-      value: 'female',
-    },
-    {
-      label: 'Others',
-      value: 'others',
-    },
+  const data = [
+    { label: 'Item 1', value: '1' },
+    { label: 'Item 2', value: '2' },
+    { label: 'Item 3', value: '3' },
+    { label: 'Item 4', value: '4' },
+    { label: 'Item 5', value: '5' },
+    { label: 'Item 6', value: '6' },
+    { label: 'Item 7', value: '7' },
+    { label: 'Item 8', value: '8' },
   ];
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState();
+
+  const renderLabel = () => {
+    if (value || isFocus) {
+      return <Text style={[styles.label]}>Select degree category</Text>;
+    }
+    return null;
+  };
+
   return (
     <ScreenContainer>
       <View style={profession.container}>
@@ -55,23 +61,36 @@ const Profession = (props: any) => {
               Tell us about your profession
             </Text>
             <View>
-              <View>
-                <DropdownInput
-                  label={'Select degree category'}
-                  // mode={'outlined'}
-                  visible={showDropDown}
-                  showDropDown={() => setShowDropDown(true)}
-                  onDismiss={() => setShowDropDown(false)}
-                  value={gender}
-                  setValue={setGender}
-                  list={genderList}
-                  dropDownStyle={{ backgroundColor: '#fff' }}
-                  style={profession.inputField}
-                />
-              </View>
-              <FlatInput label="Select degree category" />
+              {renderLabel()}
+              <DropdownInput
+                data={data}
+                onFocus={() => setIsFocus(true)}
+                // search
+                // maxHeight={150}
+                labelField="label"
+                valueField="value"
+                placeholder="Select degree category"
+                value={value}
+                onChange={(item) => {
+                  setValue(item.value);
+                }}
+              />
 
-              <FlatInput label="Select degree type" />
+              {renderLabel()}
+              <DropdownInput
+                data={data}
+                onFocus={() => setIsFocus(true)}
+                // search
+                // maxHeight={200}
+                labelField="label"
+                valueField="value"
+                placeholder="Select degree type"
+                value={value}
+                onChange={(item) => {
+                  setValue(item.value);
+                }}
+              />
+
               <FlatInput label="Job Title" />
               <FlatInput label="Institution/School/Practice Name" />
             </View>
@@ -87,3 +106,14 @@ const Profession = (props: any) => {
 };
 
 export default Profession;
+
+const styles = StyleSheet.create({
+  label: {
+    backgroundColor: 'white',
+    left: 3,
+    top: 20,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 12,
+  },
+});

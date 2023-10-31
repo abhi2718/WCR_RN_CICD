@@ -17,11 +17,11 @@ const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
         options={{ headerShown: false }}
         name={ROUTES.Onboarding}
         component={Onboarding}
-      /> */}
+      />
       <Stack.Screen
         options={{ headerShown: false }}
         name={ROUTES.Profession}
@@ -39,18 +39,18 @@ export const StackNavigator = () => {
       />
 
       <Stack.Screen
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
 
       <Stack.Screen
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
         name={ROUTES.SexualOrientation}
         component={SexualOrientation}
       />
       <Stack.Screen
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
         name={ROUTES.Gender}
         component={Gender}
       />
@@ -61,7 +61,7 @@ export const StackNavigator = () => {
       />
 
       <Stack.Screen
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
         name={ROUTES.Profile}
         component={Profile}
       />

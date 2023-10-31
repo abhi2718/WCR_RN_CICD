@@ -18,4 +18,16 @@ export type InputProps = {
   setValue?: any;
   list?: any;
   dropDownStyle?: any;
+  labelStyle?: any;
+  selectedTextStyle?: any;
+  placeholderStyle?: any;
+  inputSearchStyle?: any;
+  data?: any;
+  iconStyle?: any;
+  labelField?: string;
+  valueField?: any;
+  onChange?: any;
+  maxHeight?: number;
+  onFocus?: any;
+  labelColor?: string;
 };

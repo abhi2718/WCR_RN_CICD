@@ -8,6 +8,7 @@ export const colors = {
     error: '#D0421B',
     success: '#138000',
     inputBg: 'rgba(35, 35, 35, 0.03)',
+    placeholder: 'gray',
   },
   bg: {
     primary: '#FFFFFF',

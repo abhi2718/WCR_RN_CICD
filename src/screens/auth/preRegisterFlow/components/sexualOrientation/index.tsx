@@ -12,6 +12,7 @@ import { SexualOrientationStyle } from './sexualorientationStyle';
 import { useSexualOrientationViewModal } from './sexualorientationViewModal';
 import { sexualOrientationArray } from '../../../../../utils/constanst';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 const SexualOrientation = (props: any) => {
   const {
@@ -45,8 +46,8 @@ const SexualOrientation = (props: any) => {
               />
 
               <ImageContainer
-                height={40}
-                width={40}
+                height={sizes[9]}
+                width={sizes[9]}
                 source={require('../../../../../assets/images/logo.png')}
               />
               <View />

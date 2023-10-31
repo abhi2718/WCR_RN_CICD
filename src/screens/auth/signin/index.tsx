@@ -40,8 +40,8 @@ export default function SignInScreen(props: any) {
           style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
         >
           <ImageContainer
-            height={sizes[8]}
-            width={sizes[8]}
+            height={sizes[10]}
+            width={sizes[10]}
             source={require('../../../assets/images/logo.png')}
           />
         </View>

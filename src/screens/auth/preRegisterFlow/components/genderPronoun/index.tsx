@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {RadioButton, Text} from 'react-native-paper';
-import {RedButton} from '../../../../../components/button';
+import { RadioButton, Text } from 'react-native-paper';
+import { PrimaryButton } from '../../../../../components/button';
 import {
   ImageContainer,
   Row,
   ScreenContainer,
   Spacer,
 } from '../../../../../components/tools';
-import {genderPronounStyle} from './genderPronounStyle';
-import {useGenderPronounViewModal} from './genderPronounViewModal';
-import {genderPronounArray} from '../../../../../utils/constanst';
+import { genderPronounStyle } from './genderPronounStyle';
+import { useGenderPronounViewModal } from './genderPronounViewModal';
+import { genderPronounArray } from '../../../../../utils/constanst';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 const GenderProunoun = (props: any) => {
   const {
@@ -33,34 +34,35 @@ const GenderProunoun = (props: any) => {
     <ScreenContainer>
       <View style={genderPronounStyle.container}>
         <View style={genderPronounStyle.innerView}>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <Row
-              alignItems="center"
               justifyContent="space-between"
-              style={genderPronounStyle.rowHeader}>
+              style={genderPronounStyle.rowHeader}
+            >
               <ImageContainer
-                height={30}
-                width={30}
+                height={sizes[7]}
+                width={sizes[7]}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
 
               <ImageContainer
-                height={40}
-                width={40}
+                height={sizes[9]}
+                width={sizes[9]}
                 source={require('../../../../../assets/images/logo.png')}
               />
               <View />
             </Row>
 
             <Text style={genderPronounStyle.subHeader}>
-            How would you like to be addressed?
+              How would you like to be addressed?
             </Text>
 
             <View style={genderPronounStyle.radioButtonContainer}>
               {genderPronounArray.map((option) => (
                 <RadioButton.Group
                   onValueChange={handleGenderPronounValue}
-                  value={genderPronoun}>
+                  value={genderPronoun}
+                >
                   <Row style={genderPronounStyle.rowView} alignItems="center">
                     <RadioButton value={option} />
                     <Text style={genderPronounStyle.btnText}>{option}</Text>
@@ -71,17 +73,17 @@ const GenderProunoun = (props: any) => {
           </View>
 
           <View>
-          <Row style={genderPronounStyle.rowView} alignItems="center">
-                <BouncyCheckbox
-                  onPress={handleCheckboxChange}
-                  isChecked={checkboxState}
-                  fillColor="red"
-                  unfillColor="#FFFFFF"
-                />
-                {/* <Checkbox status="checked" /> */}
-                <Text style={genderPronounStyle.btnText}>Visible on profile</Text>
-              </Row>
-            <RedButton
+            <Row style={genderPronounStyle.rowView} alignItems="center">
+              <BouncyCheckbox
+                onPress={handleCheckboxChange}
+                isChecked={checkboxState}
+                fillColor="red"
+                unfillColor="#FFFFFF"
+              />
+              {/* <Checkbox status="checked" /> */}
+              <Text style={genderPronounStyle.btnText}>Visible on profile</Text>
+            </Row>
+            <PrimaryButton
               onPress={() => updateUserDetails(loggInUserId, genderPronoun)}
               title="Next"
             />

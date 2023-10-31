@@ -12,6 +12,7 @@ import {
 import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
+import { sizes } from '../../../infrastructure/theme/sizes';
 
 const Gender = (props: any) => {
   const {
@@ -42,14 +43,14 @@ const Gender = (props: any) => {
                 style={genderStyle.rowHeader}
               >
                 <ImageContainer
-                  height={30}
-                  width={30}
+                  height={sizes[6]}
+                  width={sizes[6]}
                   source={require('./../../../assets/images/icons/arrow.png')}
                 />
 
                 <ImageContainer
-                  height={40}
-                  width={40}
+                  height={sizes[9]}
+                  width={sizes[9]}
                   source={require('./../../../assets/images/logo.png')}
                 />
                 <View />
