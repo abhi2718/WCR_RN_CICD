@@ -1,3 +1,4 @@
+import { Column, Row, Spacer } from './../../../components/tools/index';
 import React from "react";
 import { View, Text, Alert, TouchableOpacity, Image, Modal } from "react-native";
 import { kickIcon, banIcon, downArrowIcon, rightTickIcon } from "./resources";
@@ -254,7 +255,7 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
                 CometChatUIEventHandler.emitGroupEvent(CometChatGroupsEvents.ccGroupMemberBanned, { message: action, kickedUser: user, kickedBy: loggedInUser.current, kickedFrom: group });
             })
             .catch((err) => {
-                console.log("ban user", err);
+                //console.log("ban user", err);
                 onError(err);
             })
     }
@@ -281,7 +282,7 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
                 CometChatUIEventHandler.emitGroupEvent(CometChatGroupsEvents.ccGroupMemberKicked, { message: action, kickedUser: user, kickedBy: loggedInUser.current, kickedFrom: group });
             })
             .catch((err) => {
-                console.log("kick user", err);
+               // console.log("kick user", err);
                 onError(err);
             })
     }
@@ -319,6 +320,16 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
     }
 
     const ItemView = ({ item: member, ...props }) => {
+        return (<Spacer position='bottom' size={16}>
+            <View>
+            <Row alignItems='center'>
+              <Image style={{width:50,height:50,borderRadius:25}} source={{uri:member.avatar}} />
+                  <Spacer position='left' size={10}>
+                  <Text>{member.name} </Text>
+                  </Spacer>
+                < /Row>
+            </View>
+            </Spacer>)
         if (ListItemView)
             return <ListItemView {...member} />
 
@@ -385,7 +396,7 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
                     CometChatUIEventHandler.emitGroupEvent(CometChatGroupsEvents.ccGroupMemberScopeChanged, { action, updatedUser: updatedMember, scopeChangedTo: newScope, scopeChangedFrom: member.scope, group });
                 })
                 .catch(err => {
-                    console.log("Error:", err);
+                    //console.log("Error:", err);
                     setShowChangeScope(false);
                     onError && onError(err);
                 });
@@ -602,7 +613,6 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
             CometChat.removeUserListener(groupMemberListenerId);
         }
     }, []);
-
     return <CometChatList
         ref={groupRef}
         listItemKey={"uid"}

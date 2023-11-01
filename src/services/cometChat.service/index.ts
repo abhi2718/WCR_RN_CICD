@@ -20,7 +20,7 @@ export const useCometChatInit = () => {
         await CometChatUIKit.login({uid: uid});
         setIsInitialized(true);
       } catch (error) {
-        console.log('Initialization failed with exception:', error);
+       // console.log('Initialization failed with exception:', error);
       }
     };
     inItCometChat();

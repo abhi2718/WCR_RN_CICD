@@ -50,7 +50,7 @@ export const CometChatCollaborativeBubble = (props: CollaborativeBubbleProps) =>
          if(props.onPress!=undefined){
             props.onPress(props.url)    
         } else {
-            console.log("opening uRL , ", props.url);
+          
             WebView.openUrl(props.url);
         }
            

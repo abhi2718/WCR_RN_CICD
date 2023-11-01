@@ -1,5 +1,16 @@
-Finding Message FaltList -> CometChatMessageList -> FlatList
-Finding RenderMessageItem -> CometChatMessageList -> RenderMessageItem
+Finding Message FaltList -> CometChatMessages-> CometChatMessageList -> FlatList
+Finding RenderMessageItem -> CometChatMessages-> CometChatMessageList -> RenderMessageItem
 
+Finding MessageView --->CometChatMessages->  CometChatMessageList -> RenderMessageItem ---> MessageView 
 
-Finding MessageView --->  CometChatMessageList -> RenderMessageItem ---> MessageView 
+CometChatMessageReactions ---> cometChat/extensions/Reactions/CometChatMessageReactions
+
+Finding All CometChatGroups --> CometChatList
+All view component like bubble,avator,are inside /cometChat/src/shared/views
+
+ComentChatGroupMember ---> comentChat/src/ComentChatGroupMember/ComentChatGroupMember
+
+ComentChatGroupMember And Finding  ItemView of Flatlist --->comentChat/src/ComentChatGroupMember/ComentChatGroupMember/ItemView
+
+See Group Details 
+comentChat/src/CometChatDetails

@@ -158,7 +158,7 @@ export class ReactionsExtensionDecorator extends DataSourceDecorator {
         emoji: emoji,
       }
     ).catch((error) => {
-      console.log('error', error);
+      //console.log('error', error);
     });
   };
 }

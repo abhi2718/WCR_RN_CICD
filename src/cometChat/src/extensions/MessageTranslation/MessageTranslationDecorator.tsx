@@ -170,7 +170,7 @@ export class MessageTranslationExtensionDecorator extends DataSourceDecorator {
         }
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   };
 

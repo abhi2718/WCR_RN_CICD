@@ -38,7 +38,7 @@ export class CollaborativeWhiteboardExtensionDecorator extends DataSourceDecorat
 
         CometChat.getLoggedinUser()
             .then(u => { this.loggedInUser = u })
-            .catch(err => console.log(err));
+            .catch(err => {});
     }
 
 
@@ -133,9 +133,7 @@ export class CollaborativeWhiteboardExtensionDecorator extends DataSourceDecorat
             receiverType: receiverType,
           }
         ).then(response => {
-           console.log("extension sent ",response )
         }).catch((error) => {
-            console.log("error", error);
             CometChatUIEventHandler.emitMessageEvent(MessageEvents.ccMessageError, error);
         });
       }

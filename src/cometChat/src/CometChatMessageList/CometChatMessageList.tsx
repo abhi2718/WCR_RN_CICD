@@ -61,6 +61,7 @@ import {CometChatMessageTemplate} from '../shared/modals/CometChatMessageTemplat
 import {CometChatSoundManager} from '../shared';
 import {MessageEvents} from '../shared/events/messages';
 import {ChatConfigurator} from '../shared/framework/ChatConfigurator';
+import {CometChatMessageReactions} from '../extensions/Reactions/';
 import {
   CometChatActionSheet,
   ActionSheetStyles,
@@ -78,6 +79,8 @@ import Clipboard from '@react-native-community/clipboard';
 import {CometChatMessageInformation} from '../CometChatMessageInformation/CometChatMessageInformation';
 // import { CometChatContacts, ForwardMessageConfigurationInterface } from "../CometChatContacts";
 import {MessageInformationConfigurationInterface} from '../CometChatMessageInformation';
+import {CometChatBottomBubbleView} from '../../../screens/tab.screens/chat/community/components/cometChatBottomBubbleView';
+import ChatAvatorModal from '../../../screens/tab.screens/chat/community/components/cometChatAvatrModal';
 
 let templatesMap = new Map<string, CometChatMessageTemplate>();
 
@@ -371,7 +374,7 @@ export const CometChatMessageList = forwardRef<
     // TODO: this condition is applied because somewhere from whiteboard extention group scope is set to undefined.
     if (group != undefined && group['scope'] == undefined) {
       let fetchedGroup = await CometChat.getGroup(group['guid']).catch((e) => {
-        console.log('Error: fetching group', e);
+        //console.log('Error: fetching group', e);
         onError && onError(e);
       });
       group['scope'] = fetchedGroup['scope'];
@@ -430,7 +433,7 @@ export const CometChatMessageList = forwardRef<
       .catch((e) => {
         if (messagesList.length == 0) setListState('error');
         else setLoadingMessages(false);
-        console.log(e);
+        //console.log(e);
         onError && onError(e);
       });
   };
@@ -461,7 +464,7 @@ export const CometChatMessageList = forwardRef<
         // setMessagesList(tmpList);
         getNewMessages(tmpList);
       })
-      .catch((e) => console.log('error while fetching updated msgs', e));
+      .catch((e) => {});
   };
 
   const getNewMessages = (updatedList) => {
@@ -491,11 +494,10 @@ export const CometChatMessageList = forwardRef<
         setMessagesList(tmpList);
         markMessageAsRead(tmpList[0]);
         if (newMessages.length === 30) {
-          console.log('Looping..........');
           getNewMessages(tmpList);
         }
       })
-      .catch((e) => console.log('error while fetching updated msgs', e));
+      .catch((e) => {});
   };
 
   const loadTemplates = () => {
@@ -543,7 +545,7 @@ export const CometChatMessageList = forwardRef<
         message,
       });
       CometChat.markAsRead(message).catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onError && onError(error);
         // errorHandler(error);
       });
@@ -675,7 +677,7 @@ export const CometChatMessageList = forwardRef<
         setShowMessageOptions([]);
       })
       .catch((rej) => {
-        console.log(rej);
+        //console.log(rej);
         onError && onError(rej);
       });
   };
@@ -907,17 +909,13 @@ export const CometChatMessageList = forwardRef<
       connectionListenerId,
       new CometChat.ConnectionListener({
         onConnected: () => {
-          console.log(
-            'ConnectionListener => On Connected - Message List',
-            messagesList.length,
-          );
           getUpdatedPreviousMessages();
         },
         inConnecting: () => {
-          console.log('ConnectionListener => In connecting');
+          //console.log('ConnectionListener => In connecting');
         },
         onDisconnected: () => {
-          console.log('ConnectionListener => On Disconnected');
+          //console.log('ConnectionListener => On Disconnected');
           if (!messagesList[0].id) {
             for (let i = 0; i < messagesList.length; i++) {
               if (messagesList[i].id) {
@@ -965,7 +963,7 @@ export const CometChatMessageList = forwardRef<
         loadTemplates();
       })
       .catch((e) => {
-        console.log('Error while getting loggedInUser');
+        // console.log('Error while getting loggedInUser');
         onError && onError(e);
         loggedInUser.current = null;
       });
@@ -989,6 +987,11 @@ export const CometChatMessageList = forwardRef<
 
   // functions returning view
   const getLeadingView = (item: CometChat.BaseMessage) => {
+    const image = item.getSender().getAvatar()
+    ? {uri: item.getSender().getAvatar()}
+      : undefined
+    const name = item.getSender().getName();
+    const senderId = item.getSender()?.getUid();
     if (
       showAvatar &&
       (item.getSender()?.getUid() || item['sender']['uid']) !==
@@ -996,15 +999,17 @@ export const CometChatMessageList = forwardRef<
       item['category'] != MessageCategoryConstants.action
     ) {
       return (
+        <ChatAvatorModal image={image} name={name} senderId={senderId}>
+        <View>
         <CometChatAvatar
           image={
-            item.getSender().getAvatar()
-              ? {uri: item.getSender().getAvatar()}
-              : undefined
+            image
           }
-          name={item.getSender().getName()}
+          name={name}
           style={_avatarStyle}
         />
+        </View>
+        </ChatAvatorModal>
       );
     }
     return null;
@@ -1191,7 +1196,7 @@ export const CometChatMessageList = forwardRef<
     setShowMessageOptions([]);
     CometChat.getUser(item.getSender().getUid())
       .then((user) => {
-        console.log({user});
+        //console.log({user});
         CometChatUIEventHandler.emitUIEvent('openChat', {user, group});
       })
       .catch((e) => {
@@ -1222,7 +1227,7 @@ export const CometChatMessageList = forwardRef<
     };
 
     NativeModules.FileManager.shareMessage(shareObj, (callback) => {
-      console.log('shareMessage Callback', callback);
+      //console.log('shareMessage Callback', callback);
     });
   };
 
@@ -1309,38 +1314,44 @@ export const CometChatMessageList = forwardRef<
     }
     if (hasTemplate) {
       if (hasTemplate.BubbleView) return hasTemplate.BubbleView(message);
-
       let bubbleAlignment: MessageBubbleAlignmentType = getAlignment(message);
-
       return (
         <>
-          <TouchableOpacity
-            onLongPress={() =>
-              showOptions
-                ? openOptionsForMessage(message, hasTemplate)
-                : undefined
-            }>
-            <CometChatMessageBubble
-              id={`${message.getId()}`}
-              LeadingView={() => !isThreaded && getLeadingView(message)}
-              HeaderView={() => !isThreaded && getHeaderView(message)}
-              FooterView={() => getFooterView(message, bubbleAlignment)}
-              alignment={isThreaded ? 'left' : bubbleAlignment}
-              ContentView={hasTemplate.ContentView?.bind(
+          <CometChatMessageBubble
+            id={`${message.getId()}`}
+            // Avator view
+            LeadingView={() => !isThreaded && getLeadingView(message)}
+            // Name View
+            HeaderView={() => !isThreaded && getHeaderView(message)}
+            FooterView={() => getFooterView(message, bubbleAlignment)}
+            alignment={isThreaded ? 'left' : bubbleAlignment}
+            ContentView={() => {
+              const ContentView = hasTemplate.ContentView?.bind(
                 this,
                 message,
                 bubbleAlignment,
-              )}
-              ThreadView={() => !isThreaded && getThreadView(message)}
-              BottomView={() =>
-                ChatConfigurator.dataSource.getBottomView(
-                  message,
-                  bubbleAlignment,
-                )
-              } // Note please rewrite this
-              style={getStyle(message)}
-            />
-          </TouchableOpacity>
+              );
+              return (
+                <TouchableOpacity
+                  onLongPress={() => {
+                    showOptions
+                      ? openOptionsForMessage(message, hasTemplate)
+                      : undefined;
+                  }}>
+                  <View>{ContentView && <ContentView />}</View>
+                </TouchableOpacity>
+              );
+            }}
+            ThreadView={() => !isThreaded && getThreadView(message)}
+            BottomView={() =>
+              // ChatConfigurator.dataSource.getBottomView(
+              //   message,
+              //   bubbleAlignment,
+              // )
+              CometChatMessageReactions(message, loggedInUser)
+            }
+            style={getStyle(message)}
+          />
         </>
       );
     } else {

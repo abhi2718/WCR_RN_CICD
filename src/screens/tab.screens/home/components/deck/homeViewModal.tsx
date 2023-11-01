@@ -11,7 +11,7 @@ export const useViewModal = () => {
         setImages(data.message);
         setLoading(false);
       })
-      .catch((error) => console.error('Error fetching dog images:', error));
+      .catch((error) => {});
   }
   useEffect(() => {
     fetchDogImages();

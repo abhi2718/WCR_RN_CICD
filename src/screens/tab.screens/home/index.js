@@ -1,10 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {View, Image} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import Deck from './components/deck';
+import { styles } from "./styles";
 
 export default function HomeTab() {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.containerStyle}>
       <Deck />
     </View>
   );

@@ -51,6 +51,9 @@ export const ImageContainer: React.FC<imageProps> = (props) => {
   const { source, ...otherProps } = props;
   return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
 };
+export const Logo = ({width,height}:{width?:number,height?:number}) => {
+  return <ImageContainer style={{width,height}} source={require("../../assets/images/logo.png")} />
+}
 
 const PageLoaderContainer = styled.View`
   flex: 1;

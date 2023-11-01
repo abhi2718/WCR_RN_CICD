@@ -36,6 +36,7 @@ import {CometChatThreadedMessages} from '../CometChatThreadedMessages';
 import {infoIcon} from './resources';
 import {Style} from './style';
 import {CometChatUIEventHandler} from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
+import { Text } from 'react-native-paper';
 
 const currentTime = new Date().getTime();
 const msgListenerId = 'messages_' + currentTime;
@@ -192,7 +193,7 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
         loggedInUser.current = user;
       })
       .catch((e) => {
-        console.log('unable to get logged in user');
+        //console.log('unable to get logged in user');
       });
 
     CometChatUIEventHandler.addGroupListener(uiEventListener, {
@@ -252,12 +253,7 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
     group: CometChat.Group;
   }) => {
     return (
-      <View style={Style.appBarStyle}>
-        {ChatConfigurator.dataSource.getAuxiliaryHeaderAppbarOptions(
-          user,
-          group,
-          theme,
-        )}
+      <View style= { Style.appBarStyle } >
         {AuxilaryAppBarOptions && (
           <AuxilaryAppBarOptions group={groupObject} user={userObject} />
         )}

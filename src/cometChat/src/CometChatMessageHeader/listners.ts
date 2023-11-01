@@ -22,12 +22,12 @@ export const listners = {
         msgTypingListenerId,
         new CometChat.MessageListener({
           onTypingStarted: (typistDetails) => {
-            console.log('onTypingStarted', typistDetails);
+            //console.log('onTypingStarted', typistDetails);
 
             msgTypingIndicator(typistDetails, 'typing');
           },
           onTypingEnded: (typistDetails) => {
-            console.log('onTypingEnded', typistDetails);
+            //console.log('onTypingEnded', typistDetails);
             msgTypingIndicator(typistDetails, '');
           },
         })
