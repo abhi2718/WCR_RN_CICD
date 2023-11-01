@@ -13,6 +13,8 @@ import { ActivityIndicator } from 'react-native-paper';
 import { ButtonProps } from '../../types/components/button.type';
 import styled from 'styled-components';
 import { dimensions } from '../tools';
+import { colors } from '../../infrastructure/theme/colors';
+import { sizes } from '../../infrastructure/theme/sizes';
 
 export const Button = (props: ButtonProps) => {
   const { title, onPress, isLoading } = props;
@@ -39,7 +41,7 @@ export const PrimaryButton = (props: ButtonProps) => {
     <TouchableOpacity
       style={{
         ...styles.primaryButton,
-        backgroundColor: btnColor ? btnColor : '#BB0000',
+        backgroundColor: btnColor ? btnColor : colors.ui.primary,
       }}
       onPress={onPress}
     >
@@ -63,28 +65,28 @@ export const RoundedButtonWithIconAndText = (props: ButtonProps) => {
 };
 const roundStyles = StyleSheet.create({
   button: {
-    borderRadius: 62,
-    backgroundColor: '#fff',
+    borderRadius: sizes[15],
+    backgroundColor: colors.bg.primary,
     borderColor: 'rgba(35, 35, 35, 0.10)',
     borderWidth: 1,
-    padding: 12,
+    padding: sizes[2],
     width: '100%',
     paddingLeft: '18%',
-    marginBottom: 24,
+    marginBottom: sizes[5],
   },
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   icon: {
-    width: 25,
-    height: 25,
-    marginRight: 10,
+    width: sizes[5],
+    height: sizes[5],
+    marginRight: sizes[1],
     overflow: 'visible',
   },
   buttonText: {
     color: '#000',
-    fontSize: 16,
+    fontSize: sizes[3],
     fontWeight: '500',
   },
 });
@@ -93,31 +95,30 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'blue',
     width: 200,
-    padding: 16,
-    borderRadius: 16,
+    padding: sizes[3],
+    borderRadius: sizes[3],
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: sizes[3],
   },
   primaryButton: {
-    padding: 16,
-    borderRadius: 28,
+    padding: sizes[3],
+    borderRadius: sizes[6],
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FA5672',
-    elevation: 5,
+    elevation: sizes[0],
     shadowColor: 'rgba(250, 86, 114, 0.15)', // iOS box shadow color
-    shadowOffset: { width: 3, height: 21 }, // iOS box shadow offset
+    shadowOffset: { width: sizes[0], height: sizes[4] }, // iOS box shadow offset
     shadowOpacity: 1, // iOS box shadow opacity
-    shadowRadius: 18, // iOS box shadow radius
+    shadowRadius: sizes[4], // iOS box shadow radius
     width: '100%',
   },
   bntText: {
     color: '#FEFBFD',
-    fontSize: 16,
+    fontSize: sizes[3],
     fontStyle: 'normal',
     fontWeight: '700',
   },

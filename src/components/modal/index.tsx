@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
-import {ModalProps} from './../../types/components/modal.type';
-import {ImageContainer, Row} from '../tools';
-import {RedButton} from '../button';
+import React, { useState } from 'react';
+import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
+import { ModalProps } from './../../types/components/modal.type';
+import { ImageContainer, Row } from '../tools';
+import { PrimaryButton } from '../button';
+import { colors } from '../../infrastructure/theme/colors';
+import { sizes } from '../../infrastructure/theme/sizes';
 
 export const ModalComponent = (props: ModalProps) => {
-  const {isVisible, onClose} = props;
+  const { isVisible, onClose } = props;
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={isVisible}
-      onRequestClose={() => onClose()}>
+      onRequestClose={() => onClose()}
+    >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.heading}>WELCOME</Text>
@@ -21,8 +24,8 @@ export const ModalComponent = (props: ModalProps) => {
 
           <Row style={styles.row}>
             <ImageContainer
-              height={24}
-              width={24}
+              height={sizes[5]}
+              width={sizes[5]}
               source={require('../../assets/images/icons/userProfile.png')}
             />
 
@@ -34,8 +37,8 @@ export const ModalComponent = (props: ModalProps) => {
 
           <Row style={styles.row}>
             <ImageContainer
-              height={24}
-              width={24}
+              height={sizes[5]}
+              width={sizes[5]}
               source={require('../../assets/images/icons/blockUser.png')}
             />
 
@@ -47,8 +50,8 @@ export const ModalComponent = (props: ModalProps) => {
 
           <Row style={styles.row}>
             <ImageContainer
-              height={24}
-              width={24}
+              height={sizes[5]}
+              width={sizes[5]}
               source={require('../../assets/images/icons/blackCheck.png')}
             />
 
@@ -62,7 +65,7 @@ export const ModalComponent = (props: ModalProps) => {
             Now, let's find your perfect match!
           </Text>
           <Row>
-            <RedButton onPress={() => onClose()} title="Continue" />
+            <PrimaryButton onPress={() => onClose()} title="Continue" />
           </Row>
         </View>
       </View>
@@ -75,43 +78,43 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'background: rgba(0,0,0, 0.7)',
+    backgroundColor: colors.ui.opacity,
   },
   modalView: {
-    margin: 28,
+    margin: sizes[6],
     backgroundColor: 'white',
-    borderRadius: 20,
-    paddingTop: 26,
-    paddingBottom: 20,
-    paddingHorizontal: 18,
-    shadowColor: '#000',
+    borderRadius: sizes[4],
+    paddingTop: sizes[5],
+    paddingBottom: sizes[4],
+    paddingHorizontal: sizes[4],
+    shadowColor: colors.ui.black,
 
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowRadius: sizes[0],
+    elevation: sizes[0],
   },
   heading: {
     fontWeight: 'bold',
-    fontSize: 34,
-    color: '#253245',
+    fontSize: sizes[7],
+    color: colors.ui.text,
   },
   subHeading: {
     paddingVertical: 16,
-    color: '#656565',
-    fontSize: 15,
+    color: colors.ui.secondary,
+    fontSize: sizes[3],
   },
   row: {
-    gap: 10,
+    gap: sizes[1],
     width: '100%',
-    marginVertical: 10,
+    marginVertical: sizes[1],
   },
   footerText: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: sizes[4],
   },
 });

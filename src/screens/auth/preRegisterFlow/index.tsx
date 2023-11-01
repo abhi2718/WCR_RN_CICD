@@ -36,7 +36,7 @@ const Gender = (props: any) => {
       {currentView === 1 && (
         <View style={genderStyle.container}>
           <View style={genderStyle.innerView}>
-            <View style={{ flex: 1 }}>
+            <View style={genderStyle.innerView}>
               <Row
                 alignItems="center"
                 justifyContent="space-between"

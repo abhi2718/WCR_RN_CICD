@@ -6,22 +6,23 @@ import { colors } from '../../infrastructure/theme/colors';
 import { Dropdown } from 'react-native-element-dropdown';
 import { StyleSheet } from 'react-native';
 import { inputBoxStyle } from './inputBoxStyle';
+import { sizes } from '../../infrastructure/theme/sizes';
 const ChildContainer = styled(TextInput)<InputProps>``;
 
 export const FlatInput: React.FC<InputProps> = (props) => {
   return (
     <ChildContainer
-      underlineColor="#49454F"
-      activeUnderlineColor="#000"
-      backgroundColor="#fff"
-      textColor="#000"
+      underlineColor={colors.ui.text}
+      activeUnderlineColor={colors.ui.black}
+      backgroundColor={colors.bg.primary}
+      textColor={colors.ui.black}
       {...props}
     />
   );
 };
 
 const DropdownChildContainer = styled(Dropdown)<InputProps>`
-  margin-top: ${({ marginTop = 10 }) => `${marginTop}px`};
+  margin-top: ${({ marginTop = sizes[1] }) => `${marginTop}px`};
 `;
 
 export const DropdownInput: React.FC<InputProps> = (props) => {

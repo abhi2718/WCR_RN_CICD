@@ -1,6 +1,6 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
-import {ActivityIndicator} from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import {
   Platform,
   Dimensions,
@@ -12,14 +12,17 @@ import {
   ImageSourcePropType,
   StatusBar,
 } from 'react-native';
-import {InputProps} from '../../types/components/input.type';
-import {rowColumnProps} from '../../types/components/rowColumn.type';
-import {imageProps} from '../../types/components/image.type';
+import { InputProps } from '../../types/components/input.type';
+import { rowColumnProps } from '../../types/components/rowColumn.type';
+import { imageProps } from '../../types/components/image.type';
+import { sizes } from '../../infrastructure/theme/sizes';
 
 interface ScreenContainerProps {
   children: ReactNode;
 }
-export const ScreenContainer: React.FC<ScreenContainerProps> = ({children}) => {
+export const ScreenContainer: React.FC<ScreenContainerProps> = ({
+  children,
+}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>{children}</View>
@@ -37,15 +40,15 @@ export const InputBox: React.FC<InputProps> = (props) => {
 };
 
 const ImageProps = styled.Image<imageProps>`
-  height: ${({height = 50}) => `${height}px`};
-  width: ${({width = 50}) => `${width}px`};
-  margin-top: ${({marginTop = 10}) => `${marginTop}px`};
-  margin-bottom: ${({marginBottom = 10}) => `${marginBottom}px`};
+  height: ${({ height = sizes[12] }) => `${height}px`};
+  width: ${({ width = sizes[12] }) => `${width}px`};
+  margin-top: ${({ marginTop = sizes[1] }) => `${marginTop}px`};
+  margin-bottom: ${({ marginBottom = sizes[1] }) => `${marginBottom}px`};
   overflow: visible;
 `;
 
 export const ImageContainer: React.FC<imageProps> = (props) => {
-  const {source, ...otherProps} = props;
+  const { source, ...otherProps } = props;
   return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
 };
 
@@ -76,10 +79,10 @@ export const InlineLoader = () => {
 };
 
 const ChildContainer = styled.View<rowColumnProps>`
-  flex-direction: ${({flexDirection}) => flexDirection};
-  justify-content: ${({justifyContent}) => justifyContent};
-  align-items: ${({alignItems}) => alignItems};
-  flex-wrap: ${({flexWrap}) => flexWrap};
+  flex-direction: ${({ flexDirection }) => flexDirection};
+  justify-content: ${({ justifyContent }) => justifyContent};
+  align-items: ${({ alignItems }) => alignItems};
+  flex-wrap: ${({ flexWrap }) => flexWrap};
 `;
 
 export const Row: React.FC<rowColumnProps> = ({
@@ -158,15 +161,15 @@ type spacerProos = {
   style?: object;
 };
 export const Spacer = (props: spacerProos) => {
-  const {position, size, children, style} = props;
+  const { position, size, children, style } = props;
   const computedStyle = getVariant(position, size);
   return <SpacerView style={[computedStyle, style]}>{children}</SpacerView>;
 };
 
 export const isAndroid = Platform.OS === 'android';
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
-export const dimensions = {width, height, statusBarHeight};
+export const dimensions = { width, height, statusBarHeight };
 
 const styles = StyleSheet.create({
   container: {
@@ -176,6 +179,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     textAlign: 'center',
     flex: 1,
-    padding: 16,
+    padding: sizes[3],
   },
 });
