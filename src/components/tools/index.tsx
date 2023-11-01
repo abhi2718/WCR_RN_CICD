@@ -39,21 +39,26 @@ export const InputBox: React.FC<InputProps> = (props) => {
   return <InputContainer {...props} />;
 };
 
-const ImageProps = styled.Image<imageProps>`
-  height: ${({ height = sizes[12] }) => `${height}px`};
-  width: ${({ width = sizes[12] }) => `${width}px`};
-  margin-top: ${({ marginTop = sizes[1] }) => `${marginTop}px`};
-  margin-bottom: ${({ marginBottom = sizes[1] }) => `${marginBottom}px`};
-  overflow: visible;
-`;
+const ImageProps = styled.Image<imageProps>``;
 
 export const ImageContainer: React.FC<imageProps> = (props) => {
   const { source, ...otherProps } = props;
   return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
 };
-export const Logo = ({width,height}:{width?:number,height?:number}) => {
-  return <ImageContainer style={{width,height}} source={require("../../assets/images/logo.png")} />
-}
+export const Logo = ({
+  width,
+  height,
+}: {
+  width?: number;
+  height?: number;
+}) => {
+  return (
+    <ImageContainer
+      style={{ width, height }}
+      source={require('../../assets/images/logo.png')}
+    />
+  );
+};
 
 const PageLoaderContainer = styled.View`
   flex: 1;

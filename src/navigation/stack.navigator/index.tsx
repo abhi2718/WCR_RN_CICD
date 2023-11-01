@@ -12,12 +12,19 @@ import GenderProunoun from '../../screens/auth/preRegisterFlow/components/gender
 import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
 import Location from '../../screens/auth/preRegisterFlow/components/location';
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
+import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
 
 const Stack = createNativeStackNavigator();
 const optins = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.ProfilePic}
+        component={AddProfilePic}
+      />
+
       <Stack.Screen
         options={optins}
         name={ROUTES.Onboarding}

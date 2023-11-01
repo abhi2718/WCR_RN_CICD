@@ -22,6 +22,8 @@ export enum ROUTES {
   PrivateChatTab = '/private-chat-tab',
   ProfileTab = '/profile-tab',
   LikeTabs = '/like-tabs',
+  ProfilePic = '/profile-pic',
+  UploadedPic = '/uploaded-pic',
   CommunityChatMessage = '/community-chat-message',
 }
 export default function Navigator() {
