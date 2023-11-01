@@ -169,7 +169,7 @@ export const CometChatMessageInformation = (props: CometChatMessageInformationIn
                     setListState("done");
                 })
                 .catch(er => {
-                    console.log("Unable to get message receipts", er);
+                    //console.log("Unable to get message receipts", er);
                     onError && onError(er);
                     setListState("error");
                 });

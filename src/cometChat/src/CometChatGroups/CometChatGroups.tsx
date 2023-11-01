@@ -1,13 +1,10 @@
-//@ts-ignore
 import React, { useState, useRef } from "react";
-//@ts-ignore
 import { Text, View } from "react-native";
 import {
     backIcon, searchIcon,
     passwordGroupIcon, privateGroupIcon,
     rightTickIcon,
 } from "./resources";
-//@ts-ignore
 import { CometChat } from "@cometchat/chat-sdk-react-native";
 import { GroupsStyle, GroupsStyleInterface } from "./GroupsStyle";
 import { Style } from "./style";
@@ -160,7 +157,6 @@ export interface CometChatGroupsInterface {
 const groupListenerId = "grouplist_" + new Date().getTime();
 
 export const CometChatGroups = React.forwardRef((props: CometChatGroupsInterface, ref: any) => {
-
     const {
         SubtitleView,
         ListItemView,
@@ -198,9 +194,7 @@ export const CometChatGroups = React.forwardRef((props: CometChatGroupsInterface
 
     //context values
     const {theme} = React.useContext<CometChatContextType>(CometChatContext);
-
     const groupListRef = useRef<CometChatListActionsInterface>(null);
-
     const [selecting, setSelecting] = useState(selectionMode != 'none' ? true : false);
     const [selectedGroups, setSelectedGroups] = useState([]);
 
@@ -462,7 +456,7 @@ export const CometChatGroups = React.forwardRef((props: CometChatGroupsInterface
                 ccGroupLeft: ({leftGroup}) => {
                     leftGroup['hasJoined'] = false;
                     leftGroup['membersCount'] = leftGroup['membersCount'] - 1;
-                    console.log(leftGroup);
+                    //console.log(leftGroup);
                     if (leftGroup['type'] == CometChat.GROUP_TYPE.PRIVATE) {
                         groupListRef.current?.removeItemFromList(leftGroup.getGuid());
                     } else {
@@ -548,7 +542,7 @@ export const CometChatGroups = React.forwardRef((props: CometChatGroupsInterface
     return (
         <View style={[Style.container, {backgroundColor: _groupsStyle.backgroundColor}]}>
             <CometChatList
-                title={title}
+                title={""}
                 LoadingStateView={LoadingStateView}
                 searchPlaceholderText={searchPlaceHolderText}
                 ref={groupListRef}

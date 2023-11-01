@@ -70,7 +70,7 @@ export const CometChatFileBubble = ({
 
         setProcessing(true);
         FileManager.checkAndDownload(fileUrl, getFileName(), async (storedFilePath) => {
-            console.log(storedFilePath);
+           // console.log(storedFilePath);
             setProcessing(false);
         });
     }
@@ -80,7 +80,7 @@ export const CometChatFileBubble = ({
 
         setProcessing(true);
         FileManager.openFile(fileUrl, getFileName(), async (isOpened: string) => {
-            console.log(isOpened);
+            //console.log(isOpened);
             setProcessing(false);
         });
     }

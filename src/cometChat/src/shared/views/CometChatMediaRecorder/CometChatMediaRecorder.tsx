@@ -82,7 +82,7 @@ export const CometChatMediaRecorder = (props: CometChatMediaRecorderInterface) =
 
     const _onStop = () => {
         NativeModules.FileManager.releaseMediaResources((result) => {
-            console.log(time, "Filepath _stopRecorderAudio", result);
+            //console.log(time, "Filepath _stopRecorderAudio", result);
             recordedTime = time;
             setRecordedFile(JSON.parse(result)?.file);
             onStop && onStop(JSON.parse(result)?.file);
@@ -98,9 +98,9 @@ export const CometChatMediaRecorder = (props: CometChatMediaRecorderInterface) =
         setRecordedFile("");
         setRecordedPlaying(false);
         NativeModules.FileManager.deleteFile((success) => {
-            console.log("Filepath delete", success)
+            //console.log("Filepath delete", success)
             NativeModules.FileManager.startRecording((result) => {
-                console.log("Filepath onRecorderAudioStarted", result);
+                //console.log("Filepath onRecorderAudioStarted", result);
             })
         });
         onPause && onPause();
@@ -109,7 +109,7 @@ export const CometChatMediaRecorder = (props: CometChatMediaRecorderInterface) =
 
     const _onPlay = () => {
         NativeModules.FileManager.playAudio((filepath) => {
-            console.log(recordedTime, "Filepath _playRecorderAudio", filepath);
+           // console.log(recordedTime, "Filepath _playRecorderAudio", filepath);
             onPlay && onPlay();
             setRecordedPlaying(true);
             stopRecordingIntervalId = setTimeout(() => {
@@ -122,11 +122,11 @@ export const CometChatMediaRecorder = (props: CometChatMediaRecorderInterface) =
 
     const _onPause = () => {
         NativeModules.FileManager.pausePlaying((filepath) => {
-            console.log("Filepath onRecorderAudioPaused", filepath);
+           // console.log("Filepath onRecorderAudioPaused", filepath);
             onPause && onPause();
             setRecordedPlaying(false);
             clearTimeout(stopRecordingIntervalId);
-            console.log("timeout cleared", stopRecordingIntervalId)
+           // console.log("timeout cleared", stopRecordingIntervalId)
         })
     }
 
@@ -135,14 +135,14 @@ export const CometChatMediaRecorder = (props: CometChatMediaRecorderInterface) =
         setRecordedFile("");
         setRecordedPlaying(false);
         NativeModules.FileManager.releaseMediaResources((filepath) => {
-            console.log("Filepath onClose", filepath);
+          // console.log("Filepath onClose", filepath);
         })
         onClose && onClose();
     }
 
     const _onSend = () => {
         NativeModules.FileManager.releaseMediaResources((result) => {
-            console.log("Filepath _stopRecorderAudio", result);
+           // console.log("Filepath _stopRecorderAudio", result);
         })
         onSend && onSend(recordedFile);
     }
@@ -167,14 +167,11 @@ export const CometChatMediaRecorder = (props: CometChatMediaRecorderInterface) =
         )
     }
 
-    console.log("timer", time)
     if (time === 1200 && !recordedFile) {
         _onStop();
     }
 
     let soundBars = Array.from(Array(time).keys());
-
-    console.log("soundBars", soundBars)
 
     return (
         <View style={Style.container}>

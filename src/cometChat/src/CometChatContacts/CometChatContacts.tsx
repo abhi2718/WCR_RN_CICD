@@ -190,7 +190,7 @@ export const CometChatContacts = (props: CometChatContactsInterface) => {
 
     return (
         <View style={[{ flex: 1 }, border, [height, width, backgroundColor, borderRadius]]}>
-            <Header
+            {/* <Header
                 AppBarOptions={MakeSelection}
                 showBackButton={true}
                 title={title}
@@ -202,7 +202,7 @@ export const CometChatContacts = (props: CometChatContactsInterface) => {
                 titleFontStyle={titleTextFont}
                 selectionIcon={submitIcon}
                 selectionIconTint={selectionIconTint}
-            />
+            /> */}
             <CometChatTabs
                 tabAlignment='top'
                 keepAlive={true}

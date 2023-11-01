@@ -5,43 +5,43 @@ import Profile from '../../screens/auth/signin/components/profile';
 import EmailAuthByOtpScreeen from '../../screens/auth/signin/components/emailauth';
 import {TabNavigator} from '../tab.navigator';
 import {ROUTES} from '../';
-import CommunityChatMessageList from '../../screens/tab.screens/chat/community/components/messageList';
+import {MessageList} from '../../cometChat/src/CometChatConversationsWithMessages/CometChatConversationsWithMessages';
 import Onboarding from '../../screens/onBoarding';
 
 const Stack = createNativeStackNavigator();
+const optins = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        options={{headerShown: false}}
+        options={optins}
+        name={ROUTES.SignIn}
+        component={SignInScreen}
+      />
+      <Stack.Screen
+        options={optins}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
       <Stack.Screen
-        options={{headerShown: false}}
-        name={ROUTES.SignIn}
-        component={SignInScreen}
-      />
-
-      <Stack.Screen
-        options={{headerShown: true}}
-        name={ROUTES.EmailAuth}
-        component={EmailAuthByOtpScreeen}
-      />
-      <Stack.Screen
-        options={{headerShown: true}}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
-      <Stack.Screen
-        options={{headerShown: false}}
+        options={optins}
         name={ROUTES.Tab}
         component={TabNavigator}
       />
       <Stack.Screen
-        options={{headerShown: false}}
-        name={ROUTES.CommunityChatMessageList}
-        component={CommunityChatMessageList}
+        options={optins}
+        name={ROUTES.EmailAuth}
+        component={EmailAuthByOtpScreeen}
+      />
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.Profile}
+        component={Profile}
+      />
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.CommunityChatMessage}
+        component={MessageList}
       />
     </Stack.Navigator>
   );

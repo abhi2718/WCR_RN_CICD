@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import {dimensions, FullLoader} from '../../../../../../../components/tools';
+import {dimensions} from '../../../../../../../components/tools';
 export const styles = StyleSheet.create({
     imageStyle: {
         width: dimensions.width - 16,

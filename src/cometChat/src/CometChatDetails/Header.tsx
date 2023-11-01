@@ -10,6 +10,7 @@ const Header = (props) => {
     onPress,
     titleStyle,
     closeIconTint,
+    group
   } = props;
   return (
     <View style={styles.container}>

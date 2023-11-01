@@ -79,7 +79,7 @@ class Sound {
 
   registerOnPlay() {
     if (this.onPlaySubscription != null) {
-      console.warn('On Play change event listener is already registered');
+      //console.warn('On Play change event listener is already registered');
       return;
     }
 

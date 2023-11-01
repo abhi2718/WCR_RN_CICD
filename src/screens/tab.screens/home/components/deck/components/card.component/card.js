@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React from 'react';
 import {
   View,
   Image,
@@ -7,7 +7,7 @@ import {
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {dimensions, isAndroid} from '../../../../../../../components/tools';
 import {styles} from './cardStyle';
-import { Card } from '../../../../swiper';
+import { Card } from '../swiper';
 
 export default function CardCompoent({item}) {
   const tabBarHeight = useBottomTabBarHeight();

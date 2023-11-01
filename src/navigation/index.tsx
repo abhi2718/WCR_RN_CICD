@@ -12,6 +12,12 @@ export enum ROUTES {
   Onboarding = '/onboarding',
   CommunityChat = '/community-chat',
   CommunityChatMessageList = '/community-chat-messagelist',
+  DeckTab = '/deck-tab',
+  CommunityChatTab = '/community-chat-tab',
+  PrivateChatTab = '/private-chat-tab',
+  ProfileTab = '/profile-tab',
+  LikeTabs = '/like-tabs',
+  CommunityChatMessage = '/community-chat-message'
 }
 export default function Navigator() {
   useCometChatInit();

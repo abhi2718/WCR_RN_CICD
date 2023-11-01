@@ -31,7 +31,7 @@ export class CometChatUIKit {
         CometChatUIKit.uiKitSettings = {
             ...uiKitSettings
         };
-console.log(uiKitSettings?.overrideAdminHost,uiKitSettings.overrideClientHost)
+//console.log(uiKitSettings?.overrideAdminHost,uiKitSettings.overrideClientHost)
         var appSetting = new CometChat.AppSettingsBuilder()
             .subscribePresenceForAllUsers()
             .autoEstablishSocketConnection(uiKitSettings.autoEstablishSocketConnection)
@@ -179,7 +179,7 @@ console.log(uiKitSettings?.overrideAdminHost,uiKitSettings.overrideClientHost)
         try {
             hasAttachment = message.getAttachment();
         } catch (error) {
-            console.log("no attachment found");
+           // console.log("no attachment found");
         }
         if (hasAttachment == undefined) {
             let file = message['files'][0];

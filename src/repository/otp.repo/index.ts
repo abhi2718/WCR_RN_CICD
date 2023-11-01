@@ -6,7 +6,6 @@ export class OtpRepository {
 
   async getOtp(email: string) {
     const url = `${AppUrl.otpEndPoint}?email=${email}`;
-    console.log(url);
     return this.apiService.getGetApiResponse(url);
   }
   async verifytOtp(payload: any) {

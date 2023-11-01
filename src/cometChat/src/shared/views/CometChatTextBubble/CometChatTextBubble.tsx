@@ -14,11 +14,10 @@ const Link = ({ text, url, style }) => {
                     Linking.openURL(finalUrl);
                     return;
                 } 
-                console.log("Can not open link", finalUrl);
+                
             })
             .catch(err => {
-                console.log({url});
-                console.log("Error:", err);
+               
             })
     }} >{text}</Text>
 }
