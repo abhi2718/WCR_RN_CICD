@@ -1,18 +1,34 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {CometChat} from '@cometchat/chat-sdk-react-native';
-import {CometChatConversations} from '../../../../cometChat/src';
+import {View, Image} from 'react-native';
+import {CometChatConversationsWithMessages} from '../../../../cometChat/src';
 import {useViewModal} from './useViewModal';
-export default function CommunityChat({navigation}) {
-  const {onItemPress} = useViewModal(navigation);
+import SwitchButton from './components/switchButton';
+import AllGroups from './components/allGroups';
+import {Logo, Row} from '../../../../components/tools';
+import {styles} from './styles';
+
+export default function CommunityChat() {
+  const {state, setState} = useViewModal();
   return (
     <View style={styles.container}>
-      <CometChatConversations title="" onItemPress={onItemPress} />
+      <View style={styles.switchContainerStyle}>
+        <Row
+          alignItems="center"
+          justifyContent="space-between"
+          style={styles.rowStyle}>
+          <Image
+            style={styles.bellStyle}
+            source={require('../../../../assets/images/Bell.png')}
+          />
+          <Logo width={40} height={40} />
+          <Image
+            style={styles.searchBarStyle}
+            source={require('../../../../assets/images/Magnifier.png')}
+          />
+        </Row>
+        <SwitchButton stage={state} setStage={setState} />
+      </View>
+      {state === 0 ? <CometChatConversationsWithMessages /> : <AllGroups />}
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

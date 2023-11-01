@@ -12,8 +12,15 @@ import { CometChatEmojiKeyboard } from '../../../shared/views/CometChatEmojiKeyb
 //@ts-ignore
 import { CometChat } from '@cometchat/chat-sdk-react-native';
 
+// export interface MessageReactionsInterface {
+//   messageObject?: CometChat.BaseMessage;
+//   loggedInUser?: CometChat.User;
+//   updateReaction?: (messageObject, emoji) => void;
+//   style?: { iconTint?: string; textFont?: FontStyleInterface };
+//   onReactionClick?: (emoji, messageObject) => void;
+// }
 export interface MessageReactionsInterface {
-  messageObject?: CometChat.BaseMessage;
+  messageObject?: any;
   loggedInUser?: CometChat.User;
   updateReaction?: (messageObject, emoji) => void;
   style?: { iconTint?: string; textFont?: FontStyleInterface };
@@ -77,7 +84,6 @@ const CometChatMessageReactions = (props: MessageReactionsInterface) => {
   const reactionView = (reactionObject, reactionData) => {
     const userList = [];
     let count;
-
     for (const reaction in reactionObject) {
       const tempReactionData = reactionObject[reaction];
       count = Object.keys(tempReactionData).length;
@@ -85,7 +91,6 @@ const CometChatMessageReactions = (props: MessageReactionsInterface) => {
         userList.push(tempReactionData[user]['name']);
       }
     }
-
     let reactionTitle = '';
     if (userList.length) {
       reactionTitle = userList.join(',');

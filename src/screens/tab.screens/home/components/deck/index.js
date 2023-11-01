@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View,Text} from 'react-native';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {styles} from './homeStyle';
 import {useViewModal} from './homeViewModal';
-import {dimensions, FullLoader, Spacer,isAndroid} from '../../../../../components/tools';
+import {FullLoader, Spacer,isAndroid} from '../../../../../components/tools';
 import CardCompoent from './components/card.component/card';
-import CardStack, {Card} from '../../swiper';
+import CardStack from './components/swiper';
+
 export default function Deck() {
   const {images, isLoading} = useViewModal();
   const tabBarHeight = useBottomTabBarHeight();
@@ -19,7 +20,7 @@ export default function Deck() {
   return (
     <View style={styles.container}>
       <View style={styles.headerViewStyle}>
-        <Text style={{textAlign: 'center'}}>Header View</Text>
+        <Text style={styles.textStyle}>Header View</Text>
       </View>
       <Spacer position="bottom" size={8} />
       <CardStack horizontalThreshold={isAndroid?0:0}  verticalSwipe={false}>

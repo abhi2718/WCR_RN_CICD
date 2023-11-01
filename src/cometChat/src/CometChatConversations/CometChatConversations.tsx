@@ -355,7 +355,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
                         status
                     }
                 }
-                console.log(JSON.stringify(updatedConversation));
+               // console.log(JSON.stringify(updatedConversation));
                 conversationListRef.current.updateList(updatedConversation);
             }
         }
@@ -406,7 +406,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
                 conversationListRef.current.updateAndMoveToFirst(oldConversation);
             })
             .catch(err => {
-                console.log("Error", err);
+              
             })
     }
 
@@ -523,7 +523,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
                 conversationListRef.current.removeItemFromList(id);
                 removeItemFromSelectionList(id);
             })
-            .catch(err => console.log(err))
+            .catch(err => {})
     }
 
     const getMessagePreview = (conversations: CometChat.Conversation, uid) => {
@@ -642,17 +642,15 @@ export const CometChatConversations = (props: ConversationInterface) => {
     React.useEffect(() => {
         CometChat.getLoggedinUser()
             .then(u => { loggedInUser.current = u })
-            .catch(err => console.log(err));
+            .catch(err => {});
 
         CometChat.addUserListener(
             userListenerId,
             new CometChat.UserListener({
                 onUserOnline: (onlineUser: any) => {
-                    console.log(onlineUser);
                     userEventHandler(onlineUser);
                 },
                 onUserOffline: (offlineUser: any) => {
-                    console.log(offlineUser);
                     userEventHandler(offlineUser);
                 },
             })
@@ -784,7 +782,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
                                 removeItemFromSelectionList(conversation.getConversationId())
                             })
                             .catch(err => {
-                                console.log("Error", err);
+                              //  console.log("Error", err);
                             });
                     }
             }
@@ -978,7 +976,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
             SubtitleView={(SubtitleView && SubtitleView.bind(this, conversation)) || (() => <LastMessageView conversations={conversation} typingText={conversation?.['lastMessage']?.['typing']} />)
             }
             title={name}
-            statusIndicatorIcon={image}
+           statusIndicatorIcon={image}
             statusIndicatorColor={disableUsersPresence ? "transparent" : backgroundColor}
             listItemStyle={_listItemStyle}
             TailView={() => <TailView
@@ -1005,7 +1003,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
                 onError={onError}
                 ref={conversationListRef}
                 requestBuilder={conversationsRequestBuilder || new CometChat.ConversationsRequestBuilder().setLimit(30)}
-                title={title}
+                title={''}
                 hideSearch={true}
                 hideSubmitIcon={hideSubmitIcon}
                 listItemKey={"conversationId"}

@@ -1,8 +1,8 @@
 //@ts-ignore
-import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, Image} from 'react-native';
 import React from 'react';
 import styles from './styles';
-import { ICONS } from './resources';
+import {ICONS} from './resources';
 
 export default function Header({
   backButtonIcon,
@@ -42,7 +42,7 @@ export default function Header({
                 <Image
                   source={
                     typeof backButtonIcon == 'string'
-                      ? { uri: backButtonIcon }
+                      ? {uri: backButtonIcon}
                       : typeof backButtonIcon == 'object' ||
                         typeof backButtonIcon == 'number'
                       ? backButtonIcon
@@ -50,7 +50,7 @@ export default function Header({
                   }
                   style={[
                     styles.backButtonStyle,
-                    { tintColor: backIconTint ?? '' },
+                    {tintColor: backIconTint ?? ''},
                   ]}
                 />
               </TouchableOpacity>
@@ -60,26 +60,23 @@ export default function Header({
               numberOfLines={1}
               style={[
                 styles.titleStyle,
-                { color: titleColor ?? '' },
+                {color: titleColor ?? ''},
                 titleFontStyle ?? {},
-              ]}
-            >
+              ]}>
               {title}
             </Text>
           </View>
         )}
         {AppBarOptions && !shouldSelect && (
-          <View>
-            <AppBarOptions />
-          </View>
+          <View>{/* <AppBarOptions />*/}</View>
         )}
-        {shouldSelect && !hideSubmitIcon &&(
+        {shouldSelect && !hideSubmitIcon && (
           <View>
             <TouchableOpacity onPress={onSelectionHandler}>
               <Image
                 source={
                   typeof selectionIcon == 'string'
-                    ? { uri: selectionIcon }
+                    ? {uri: selectionIcon}
                     : typeof selectionIcon == 'object' ||
                       typeof selectionIcon == 'number'
                     ? selectionIcon
@@ -87,7 +84,7 @@ export default function Header({
                 }
                 style={[
                   styles.backButtonStyle,
-                  { tintColor: selectionIconTint ?? '' },
+                  {tintColor: selectionIconTint ?? ''},
                 ]}
               />
             </TouchableOpacity>
@@ -103,12 +100,11 @@ export default function Header({
               backgroundColor: searchBackground ?? '',
             },
             searchBorderStyle ?? {},
-          ]}
-        >
+          ]}>
           <Image
             source={
               typeof searchBoxIcon == 'string'
-                ? { uri: searchBoxIcon }
+                ? {uri: searchBoxIcon}
                 : typeof searchBoxIcon == 'object' ||
                   typeof searchBoxIcon == 'number'
                 ? searchBoxIcon
@@ -116,7 +112,7 @@ export default function Header({
             }
             style={[
               styles.searchButtonStyle,
-              { tintColor: searchIconTint ?? '' },
+              {tintColor: searchIconTint ?? ''},
             ]}
           />
           <TextInput
@@ -128,7 +124,7 @@ export default function Header({
             style={[
               styles.searchTextStyle,
               searchTextFontStyle ?? {},
-              { color: searchTextColor ?? '' },
+              {color: searchTextColor ?? ''},
             ]}
             onSubmitEditing={onSubmitEditing}
           />

@@ -5,12 +5,17 @@ import Profile from '../../screens/auth/signin/components/profile';
 import EmailAuthByOtpScreeen from '../../screens/auth/signin/components/emailauth';
 import {TabNavigator} from '../tab.navigator';
 import {ROUTES} from '../';
-import CommunityChatMessageList from '../../screens/tab.screens/chat/community/components/messageList';
+import {MessageList} from '../../cometChat/src/CometChatConversationsWithMessages/CometChatConversationsWithMessages';
 
 const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
       <Stack.Screen
         options={{headerShown: false}}
         name={ROUTES.SignIn}
@@ -28,13 +33,8 @@ export const StackNavigator = () => {
       />
       <Stack.Screen
         options={{headerShown: false}}
-        name={ROUTES.Tab}
-        component={TabNavigator}
-      />
-      <Stack.Screen
-        options={{headerShown: false}}
-        name={ROUTES.CommunityChatMessageList}
-        component={CommunityChatMessageList}
+        name={ROUTES.CommunityChatMessage}
+        component={MessageList}
       />
     </Stack.Navigator>
   );

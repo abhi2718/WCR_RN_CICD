@@ -13,6 +13,7 @@ import {
   StyleProp,
   ViewStyle,
   ListRenderItem,
+  ActivityIndicator,
   //@ts-ignore
 } from 'react-native';
 import { CometChatContext } from '../../CometChatContext';
@@ -554,13 +555,7 @@ export const CometChatList = React.forwardRef<
       if (LoadingStateView) return <LoadingStateView />;
       messageContainer = (
         <View style={styles.msgContainerStyle}>
-          <Image
-            style={{
-              tintColor:
-                listStyle?.loadingIconTint ?? theme.palette.getAccent600(),
-            }}
-            source={ICONS.SPINNER}
-          />
+          <ActivityIndicator size={"large"} />
         </View>
       );
     } else if (
@@ -652,7 +647,6 @@ export const CometChatList = React.forwardRef<
         );
       }
     }
-
     return messageContainer;
   };
 
@@ -669,8 +663,8 @@ export const CometChatList = React.forwardRef<
         },
         listStyle.border ?? {},
       ]}
-    >
-      <Header
+  >
+       <Header
         backButtonIcon={backButtonIcon}
         showBackButton={showBackButton}
         onBack={onBack}
@@ -701,7 +695,7 @@ export const CometChatList = React.forwardRef<
         searchBackground={
           listStyle.searchBackground ?? theme.palette.getAccent50()
         }
-      />
+      /> 
       <View style={styles.container}>{getMessageContainer()}</View>
     </View>
   );

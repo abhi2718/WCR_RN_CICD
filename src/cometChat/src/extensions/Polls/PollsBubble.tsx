@@ -128,11 +128,11 @@ export const PollsBubble = (props: PollsBubbleInterface) => {
       id: pollId ?? optionsMetaData.id,
     })
       .then((s) => {
-        console.log('success', s);
+       // console.log('success', s);
         getResult(false, optionsMetaData);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   };
 

@@ -1,17 +1,9 @@
-import {CometChat} from '@cometchat/chat-sdk-react-native';
-import {ROUTES} from '../../../../navigation';
+import { useState } from 'react';
 
-export const useViewModal = (navigation) => {
-  const onItemPress = async (item: CometChat.Conversation) => {
-    const userOrGroup = item.getConversationWith();
-    const name = userOrGroup.getName();
-    const conversationId = item.getConversationId();
-    navigation.navigate(ROUTES.CommunityChatMessageList, {
-      gid: `group_${conversationId.split('group_group_')[1]}`,
-      name,
-    });
-  };
+export const useViewModal = () => {
+  const [state, setState] = useState(0);
   return {
-    onItemPress,
+    state,
+    setState
   };
 };

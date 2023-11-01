@@ -1,5 +1,5 @@
-import { View, StyleSheet } from 'react-native';
-import {dimensions, FullLoader} from '../../../../../components/tools';
+import {StyleSheet } from 'react-native';
+import {dimensions} from '../../../../../components/tools';
 
 export const styles = StyleSheet.create({
     container: {
@@ -12,5 +12,8 @@ export const styles = StyleSheet.create({
         height: 40,
         backgroundColor: "red",
         justifyContent: "center",
+    },
+    textStyle: {
+        textAlign: 'center'
     }
 })
