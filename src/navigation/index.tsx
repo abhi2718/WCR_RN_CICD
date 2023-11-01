@@ -9,6 +9,7 @@ export enum ROUTES {
   SignUp = 'SignUp',
   EmailAuth = '/email-auth',
   Tab = '/tabs',
+  Onboarding = '/onboarding',
   CommunityChat = '/community-chat',
   CommunityChatMessageList = '/community-chat-messagelist',
   DeckTab = '/deck-tab',

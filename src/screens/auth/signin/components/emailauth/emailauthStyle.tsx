@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import {sizes} from '../../../../../infrastructure/theme/sizes';
+import {colors} from '../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
   scrollDiv: {
@@ -10,9 +12,9 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   inputBox: {
-    borderRadius: 62,
-    backgroundColor: 'rgba(35, 35, 35, 0.03)',
-    marginTop: 15,
-    marginBottom: 15,
+    borderRadius: sizes[9],
+    backgroundColor: colors.ui.inputBg,
+    marginTop: sizes[4],
+    marginBottom: sizes[4],
   },
 });

@@ -6,8 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {RedButton} from '../../../../../components/button';
-import {ImageContainer, Spacer, dimensions} from '../../../../../components/tools';
+import {PrimaryButton} from '../../../../../components/button';
+import {
+  ImageContainer,
+  Spacer,
+  dimensions,
+} from '../../../../../components/tools';
 import {useViewModal} from '../../signinViewModal';
 import {profileUseViewModal} from './profileViewModal';
 import {profileStyles} from './profileStyle';
@@ -16,16 +20,16 @@ import Modal from 'react-native-modal';
 //import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
 //import {ModalComponent} from '../../../../components/modal/index';
 import moment from 'moment';
-import { ModalComponent } from '../../../../../components/modal';
-import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.functions';
+import {ModalComponent} from '../../../../../components/modal';
+import {calculateDateLessThan18YearsAgo} from '../../../../../utils/common.functions';
 
 const Profile = (props: any) => {
-  const { navigation } = props;
+  const {navigation} = props;
   // put logic in viewModal
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
   let email = receivedData.email;
-  let appleId = receivedData?.appleId
+  let appleId = receivedData?.appleId;
   let {
     formData,
     handleInputChange,
@@ -45,7 +49,7 @@ const Profile = (props: any) => {
     openModal,
     closeModal,
   } = profileUseViewModal(navigation);
- // put in viewModal
+  // put in viewModal
   useEffect(() => {
     handleInputChange('email', email);
   }, [email]);
@@ -159,9 +163,9 @@ const Profile = (props: any) => {
           )}
         </View>
         <Spacer style={profileStyles.spacerStyle} position="top" size={25}>
-          <RedButton
+          <PrimaryButton
             title="Submit"
-            onPress={() => handleSubmit(credential,appleId)}
+            onPress={() => handleSubmit(credential, appleId)}
           />
         </Spacer>
       </ScrollView>

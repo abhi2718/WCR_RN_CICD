@@ -4,11 +4,12 @@ import {useViewModal} from './signinViewModal';
 import {styles} from './signInStyle';
 import {
   RoundedButtonWithIconAndText,
-  RedButton,
+  PrimaryButton,
 } from '../../../components/button';
 import {ImageContainer, ScreenContainer} from '../../../components/tools';
 import {isAndroid} from '../../../components/tools';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {sizes} from '../../../infrastructure/theme/sizes';
+
 type navigationProps = {
   navigation: {
     navigate: (route: string, params?: any) => void;
@@ -29,8 +30,8 @@ export default function SignInScreen({navigation}: navigationProps) {
       <ScrollView contentContainerStyle={styles.scrollDiv}>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <ImageContainer
-            height={65}
-            width={65}
+            height={sizes[8]}
+            width={sizes[8]}
             source={require('../../../assets/images/logo.png')}
           />
         </View>
@@ -66,13 +67,10 @@ export default function SignInScreen({navigation}: navigationProps) {
             onChangeText={(email: string) => {
               setEmail(email);
             }}
-            placeholderTextColor="rgba(35, 35, 35, 0.4)" 
+            placeholderTextColor="rgba(35, 35, 35, 0.4)"
           />
         </View>
-        <RedButton
-          title='Continue'
-          onPress={getOtpToVerifyEmail}
-        />
+        <PrimaryButton title="Continue" onPress={getOtpToVerifyEmail} />
       </ScrollView>
     </ScreenContainer>
   );
