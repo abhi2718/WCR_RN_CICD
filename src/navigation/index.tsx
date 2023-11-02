@@ -24,6 +24,7 @@ export enum ROUTES {
   LikeTabs = '/like-tabs',
   ProfilePic = '/profile-pic',
   UploadedPic = '/uploaded-pic',
+  AddEthnicity = '/addEthnicity',
   CommunityChatMessage = '/community-chat-message',
 }
 export default function Navigator() {
