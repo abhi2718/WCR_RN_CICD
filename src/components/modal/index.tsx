@@ -5,6 +5,7 @@ import { ImageContainer, Row } from '../tools';
 import { PrimaryButton } from '../button';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
+import { fontWeights } from '../../infrastructure/theme/fonts';
 
 export const ModalComponent = (props: ModalProps) => {
   const { isVisible, onClose } = props;
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     elevation: sizes[0],
   },
   heading: {
-    fontWeight: 'bold',
+    fontWeight: fontWeights.bold,
     fontSize: sizes[7],
     color: colors.ui.text,
   },
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: fontWeights.bold,
     fontSize: sizes[4],
   },
 });

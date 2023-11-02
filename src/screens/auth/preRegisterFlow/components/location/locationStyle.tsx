@@ -22,7 +22,7 @@ export const location = StyleSheet.create({
   },
   subHeader: {
     color: colors.ui.text,
-    fontWeight: '700',
+    fontWeight: fontWeights.bold,
     fontSize: fontSizes.h5,
     marginTop: sizes[1],
   },

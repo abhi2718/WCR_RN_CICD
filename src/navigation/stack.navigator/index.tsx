@@ -18,11 +18,11 @@ const optins = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         options={optins}
         name={ROUTES.Onboarding}
         component={Onboarding}
-      />
+      /> */}
       <Stack.Screen
         options={optins}
         name={ROUTES.SignIn}

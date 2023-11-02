@@ -2,7 +2,10 @@ import { StyleSheet } from 'react-native';
 import { dimensions } from '../../../../../components/tools';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { fontSizes } from '../../../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+} from '../../../../../infrastructure/theme/fonts';
 export const SexualOrientationStyle = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,7 +21,7 @@ export const SexualOrientationStyle = StyleSheet.create({
   },
   subHeader: {
     color: colors.ui.text,
-    fontWeight: '700',
+    fontWeight: fontWeights.bold,
     fontSize: fontSizes.h6,
     marginTop: sizes[1],
   },
@@ -30,7 +33,7 @@ export const SexualOrientationStyle = StyleSheet.create({
   btnText: {
     marginLeft: sizes[3],
     fontSize: fontSizes.text,
-    fontWeight: '500',
+    fontWeight: fontWeights.medium,
   },
   rowView: {
     marginBottom: sizes[1],
