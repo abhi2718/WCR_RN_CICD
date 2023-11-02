@@ -12,4 +12,11 @@ export const ShowFlashMessage = (
     color: '#fff',
   });
 
+export enum FlashMessageType {
+  SUCCESS = 'success',
+  WARNING = 'warning',
+  DANGER = 'danger',
+  INFO = 'info',
+  DEFAULT = 'default',
+}
 // "success" (green), "warning" (orange), "danger" (red), "info" (blue) and "default" (gray)

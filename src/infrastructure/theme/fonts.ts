@@ -1,7 +1,7 @@
 export const fonts = {
   body: 'Urbanist',
 };
-export const fontWeights = {
+export const fontWeights: { [key: string]: any } = {
   regular: '400',
   medium: '500',
   semiBold: '600',

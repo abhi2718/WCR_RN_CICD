@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Image, ScrollView, Text, View} from 'react-native';
-import {ImageContainer, ScreenContainer} from '../../components/tools';
-import {PrimaryButton} from '../../components/button';
-import {styles} from './onBoardingStyle';
+import React, { useState } from 'react';
+import { Image, ScrollView, Text, View } from 'react-native';
+import { ImageContainer, ScreenContainer } from '../../components/tools';
+import { PrimaryButton } from '../../components/button';
+import { styles } from './onBoardingStyle';
 
 const Onboarding = () => {
   const [currentView, setCurrentView] = useState(1);

@@ -1,10 +1,12 @@
-import {useEffect, useState} from 'react';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {useViewModal} from '../../signinViewModal';
-import {ShowFlashMessage} from '../../../../../components/flashBar';
-import {FirebaseService} from '../../../../../services/firebase.service';
-import {isDate18YearsOrAbove} from '../../../../../utils/common.functions';
+import { useEffect, useState } from 'react';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { useViewModal } from '../../signinViewModal';
+import { ShowFlashMessage } from '../../../../../components/flashBar';
+import { FirebaseService } from '../../../../../services/firebase.service';
+import { isDate18YearsOrAbove } from '../../../../../utils/common.functions';
+import { socialSignInSignUpPayload } from './../../../../../types/services.types/firebase.service';
 import moment from 'moment';
+import { ROUTES } from '../../../../../navigation';
 export type FormTypes = {
   firstName: string;
   lastName: string;
@@ -14,17 +16,35 @@ export type FormTypes = {
   dob: string;
 };
 
-export const profileUseViewModal = (props: any) => {
-  const {navigation} = props;
+export const useProfileUseViewModal = (props: any) => {
+  const receivedData = props.route?.params?.data || 'No data received';
+  let credential = receivedData.credential;
+  let email = receivedData.email;
+  let firebaseUid = receivedData.firebaseUid;
+  let fbId = receivedData?.fbId;
+  const { navigation } = props;
   const [isWelcomeModalVisible, setWelcomeModalVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [errorMessage, setErrorMessage] = useState('');
   const firebaseService = new FirebaseService();
-  let {socialSignInSignUp} = useViewModal(navigation);
+  let { socialSignInSignUp, navigateToGenderScreen } = useViewModal(navigation);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
+  const handleConfirm = (date: Date) => {
+    toggleModal();
+    handleDateChange(date);
+  };
+
+  useEffect(() => {
+    handleInputChange('email', email);
+  }, [email]);
+  useEffect(() => {
+    openModal();
+  }, []);
+
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
     const date = newDate ? moment(newDate).format('MM/DD/YYYY') : 'N/A';
@@ -65,11 +85,7 @@ export const profileUseViewModal = (props: any) => {
 
   const formateDOB = (text: string) => {
     if (!text) return '';
-    // Remove any non-numeric characters
     const numericText = text.replace(/[^0-9]/g, '');
-    // Format the date string with slashes (MM/DD/YYYY)
-    // Add slashes to format the date
-    // Format the date with slashes
     let formattedDate = '';
     if (numericText.length <= 2) {
       formattedDate = numericText;
@@ -97,12 +113,14 @@ export const profileUseViewModal = (props: any) => {
   );
 
   const handleInputChange = (name: keyof FormTypes, value: string) => {
-    setFormData({...formData, [name]: value});
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (credential: FirebaseAuthTypes.AuthCredential,appleId?:string) => {
+  const handleSubmit = async (
+    credential: FirebaseAuthTypes.AuthCredential,
+    firebaseUid?: string,
+  ) => {
     const errors: Partial<FormTypes> = {};
-    // Plese try to put it in switch case
     const phonePattern = /\(\d{3}\) \d{3}-\d{4}/;
     if (!formData?.firstName) {
       errors.firstName = 'Please enter your name';
@@ -119,10 +137,10 @@ export const profileUseViewModal = (props: any) => {
       errors.dob = 'You must be at-least 18 yrs old';
     }
     if (Object.keys(errors).length) {
-     return setValidationErrors(errors);
+      return setValidationErrors(errors);
     } else {
       setValidationErrors({});
-      await newUserSignUp(formData.email, credential, appleId);
+      await newUserSignUp(formData.email, credential, firebaseUid);
     }
   };
 
@@ -137,17 +155,17 @@ export const profileUseViewModal = (props: any) => {
   const newUserSignUp = async (
     email?: string,
     credential?: FirebaseAuthTypes.AuthCredential,
-    appleId?:string
+    firebaseUid?: string,
   ) => {
     const password = `$Sg{email}9%`;
     if (credential) {
-      let data 
-      if (!appleId) {
+      let data;
+      if (!firebaseUid) {
         data = await firebaseService.signInWithCredential(credential);
       }
       return createUser({
         email: email!,
-        firebaseUid: appleId?appleId:data?.user?.uid,
+        firebaseUid: firebaseUid ? firebaseUid : data?.user?.uid,
         firstName: formData.firstName,
         lastName: formData.lastName,
         displayName: formData.displayName,
@@ -186,7 +204,7 @@ export const profileUseViewModal = (props: any) => {
     dob,
     displayName,
     mobile,
-    appleId
+    fbId,
   }: socialSignInSignUpPayload) {
     const dataMango = await socialSignInSignUp({
       firebaseUid,
@@ -196,11 +214,13 @@ export const profileUseViewModal = (props: any) => {
       dob,
       displayName,
       mobile,
-      appleId
+      fbId,
     });
-
+    console.log('------->datamango', dataMango);
     if (dataMango.message === 'Registered Successfully')
-      return ShowFlashMessage('info', 'Registered Successfully', 'success');
+      console.log(dataMango.user._id);
+    navigateToGenderScreen(dataMango.user._id);
+    return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }
 
   return {
@@ -212,7 +232,8 @@ export const profileUseViewModal = (props: any) => {
     isModalVisible,
     setModalVisible,
     toUpperFirstName,
-    isWelcomeModalVisible, setWelcomeModalVisible,
+    isWelcomeModalVisible,
+    setWelcomeModalVisible,
     errorMessage,
     setErrorMessage,
     selectedDate,
@@ -222,5 +243,10 @@ export const profileUseViewModal = (props: any) => {
     closeModal,
     handleDateChange,
     formateDOB,
+    credential,
+    email,
+    handleConfirm,
+    fbId,
+    firebaseUid,
   };
 };
