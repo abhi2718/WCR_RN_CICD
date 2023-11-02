@@ -14,12 +14,19 @@ import Location from '../../screens/auth/preRegisterFlow/components/location';
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
 import AddEthnicity from '../../screens/auth/preRegisterFlow/components/addEthnicity';
+import LookingFor from '../../screens/auth/preRegisterFlow/components/lookingFor';
 
 const Stack = createNativeStackNavigator();
 const optins = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.LookingFor}
+        component={LookingFor}
+      />
+
       <Stack.Screen
         options={optins}
         name={ROUTES.AddEthnicity}

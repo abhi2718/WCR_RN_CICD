@@ -1,17 +1,9 @@
 import React from 'react';
-import { Button, Image, ScrollView, Text, View } from 'react-native';
-import {
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../../../../components/tools';
+import { Image, Text, View } from 'react-native';
+import { Row, ScreenContainer } from '../../../../../components/tools';
 import { addEthnicityStyle } from './AddEthnicityStyle';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { PrimaryButton } from '../../../../../components/button';
-import { Checkbox } from 'react-native-paper';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { fontSizes } from '../../../../../infrastructure/theme/fonts';
-import { colors } from '../../../../../infrastructure/theme/colors';
+import { CheckBox } from '../../../../../components/inputBox';
 
 const AddEthnicity = () => {
   return (
@@ -32,62 +24,43 @@ const AddEthnicity = () => {
           <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
 
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox
+            <CheckBox
+              onPress={(isChecked: boolean) => {}}
               text="American Indian or Alaska Native"
-              iconStyle={{ borderColor: 'gray', borderRadius: 0 }}
-              fillColor="#BB0000"
-              unfillColor="#fff"
-              innerIconStyle={{
-                borderRadius: 1,
-              }}
-              textStyle={{
-                fontWeight: '600',
-                fontSize: fontSizes.text,
-                color: colors.ui.text,
-                textDecorationLine: 'none',
-              }}
             />
-            <Text style={addEthnicityStyle.checkboxText}></Text>
           </Row>
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>East Asian</Text>
+            <CheckBox onPress={(isChecked: boolean) => {}} text="East Asian" />
           </Row>
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>South Asian</Text>
+            <CheckBox onPress={(isChecked: boolean) => {}} text="South Asian" />
           </Row>
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>
-              Black or African American
-            </Text>
+            <CheckBox
+              onPress={(isChecked: boolean) => {}}
+              text="Black or African American"
+            />
           </Row>
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>Middle Eastern</Text>
+            <CheckBox
+              onPress={(isChecked: boolean) => {}}
+              text="Middle Eastern"
+            />
           </Row>
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>
-              Hispanic or Latino
-            </Text>
+            <CheckBox
+              onPress={(isChecked: boolean) => {}}
+              text=" Hispanic or Latino"
+            />
           </Row>
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>
-              Native Hawaiian or Pacific Island
-            </Text>
+            <CheckBox
+              onPress={(isChecked: boolean) => {}}
+              text="White or Caucasion"
+            />
           </Row>
           <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>
-              White or Caucasion
-            </Text>
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <BouncyCheckbox fillColor="#BB0000" unfillColor="#FFFFFF" />
-            <Text style={addEthnicityStyle.checkboxText}>Other</Text>
+            <CheckBox onPress={(isChecked: boolean) => {}} text="Other" />
           </Row>
         </View>
         <PrimaryButton title="Next" />
