@@ -19,8 +19,8 @@ export const useGenderPronounViewModal = (props: any) => {
     setCheckboxState(!checkboxState);
   };
 
-  const navigateToSexualOrientationScreen = (id:string) => {
-    navigation.navigate(ROUTES.SexualOrientation,{data:id});
+  const navigateToSexualOrientationScreen = (id: string) => {
+    navigation.navigate(ROUTES.SexualOrientation, { data: id });
   };
 
   const updateUserDetails = async (id: string, update: string) => {
@@ -28,14 +28,14 @@ export const useGenderPronounViewModal = (props: any) => {
       const genderPronounData = {
         profile: {
           genderPronoun: update,
-          showGenderPronoun:checkboxState
+          showGenderPronoun: checkboxState,
         },
       };
       const data = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderPronounData,
       });
-     navigateToSexualOrientationScreen(loggInUserId)
-    } catch (err) {
+      navigateToSexualOrientationScreen(loggInUserId);
+    } catch (err:any) {
       console.log(err);
     }
   };

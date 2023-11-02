@@ -31,7 +31,7 @@ import { ErrorText } from '../../signInStyle';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 const Profile = (props: any) => {
-  // put logic in viewModal
+  console.log('Profile props:::', props);
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
   let email = receivedData.email;

@@ -1,9 +1,6 @@
-import {useEffect, useState} from 'react';
-import {
-  CometChatUIKit,
-  UIKitSettings,
-} from '../../cometChat/src';
-import {config} from '../../utils/config';
+import { useEffect, useState } from 'react';
+import { CometChatUIKit, UIKitSettings } from '../../cometChat/src';
+import { config } from '../../utils/config';
 
 export const useCometChatInit = () => {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
@@ -17,10 +14,10 @@ export const useCometChatInit = () => {
       try {
         await CometChatUIKit.init(uikitSettings);
         let uid = '6499476d12c6b5d6b1093b2a';
-        await CometChatUIKit.login({uid: uid});
+        await CometChatUIKit.login({ uid: uid });
         setIsInitialized(true);
       } catch (error) {
-       // console.log('Initialization failed with exception:', error);
+        // console.log('Initialization failed with exception:', error);
       }
     };
     inItCometChat();

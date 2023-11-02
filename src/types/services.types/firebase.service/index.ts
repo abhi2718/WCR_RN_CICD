@@ -28,6 +28,10 @@ export type navigateToProfilepagepayload= {
   credential?: FirebaseAuthTypes.AuthCredential;
   appleId?: string;
 } 
+export type ScreenParams = {
+ navigation:any;
+ route:any;
+};
 export type SocialSignInSignUp = {
   socialSignInSignUp: ({
     firebaseUid,

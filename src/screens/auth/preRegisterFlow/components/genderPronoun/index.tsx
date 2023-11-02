@@ -26,10 +26,6 @@ const GenderProunoun = (props: any) => {
   } = useGenderPronounViewModal(props);
   const [value, setValue] = useState('male');
 
-  // const switchView = () => {
-  //   setCurrentView((prevView) => (prevView % 3) + 1);
-  // };
-
   return (
     <ScreenContainer>
       <View style={genderPronounStyle.container}>
@@ -60,6 +56,7 @@ const GenderProunoun = (props: any) => {
             <View style={genderPronounStyle.radioButtonContainer}>
               {genderPronounArray.map((option) => (
                 <RadioButton.Group
+                  key={option}
                   onValueChange={handleGenderPronounValue}
                   value={genderPronoun}
                 >

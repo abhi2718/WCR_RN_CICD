@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
-import { ROUTES } from '../../../../../navigation';
 
 export const useSexualOrientationViewModal = (props: any) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
@@ -25,13 +24,17 @@ export const useSexualOrientationViewModal = (props: any) => {
 
   const updateUserDetails = async (id: string, update: string) => {
     try {
-      const genderData = { profile: { sexualPreference: update,
-        showSexualPreference:checkboxState } };
+      const genderData = {
+        profile: {
+          sexualPreference: update,
+          showSexualPreference: checkboxState,
+        },
+      };
       const data = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderData,
       });
       // navigateToGenderPronoounScreen()
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
     }
   };
@@ -43,6 +46,7 @@ export const useSexualOrientationViewModal = (props: any) => {
     handleSexualOrientationValue,
     updateUserDetails,
     handleCheckboxChange,
-    checkboxState, setCheckboxState
+    checkboxState,
+    setCheckboxState,
   };
 };

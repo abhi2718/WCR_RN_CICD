@@ -13,11 +13,6 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Loader from '../../../components/loader/loader';
-type navigationProps = {
-  navigation: {
-    navigate: (route: string, params?: any) => void;
-  };
-};
 export default function SignInScreen(props: any) {
   const {
     _onFbLogIn,

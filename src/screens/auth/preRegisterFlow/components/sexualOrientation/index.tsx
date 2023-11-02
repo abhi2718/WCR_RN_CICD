@@ -25,10 +25,6 @@ const SexualOrientation = (props: any) => {
     setCheckboxState,
   } = useSexualOrientationViewModal(props);
 
-  // const switchView = () => {
-  //   setCurrentView((prevView) => (prevView % 3) + 1);
-  // };
-
   return (
     <ScreenContainer>
       <View style={SexualOrientationStyle.container}>

@@ -21,7 +21,7 @@ export const SexualOrientationStyle = StyleSheet.create({
   },
   subHeader: {
     color: colors.ui.text,
-    fontWeight: fontWeights.bold,
+    //fontWeight: fontWeights.bold,
     fontSize: fontSizes.h6,
     marginTop: sizes[1],
   },

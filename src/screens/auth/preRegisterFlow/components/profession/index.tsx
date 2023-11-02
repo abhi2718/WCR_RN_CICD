@@ -28,7 +28,7 @@ const Profession = (props: any) => {
     { label: 'Item 8', value: '8' },
   ];
   const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState();
+  const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -71,7 +71,7 @@ const Profession = (props: any) => {
                 valueField="value"
                 placeholder="Select degree category"
                 value={value}
-                onChange={(item) => {
+                onChange={(item:any) => {
                   setValue(item.value);
                 }}
               />
@@ -86,7 +86,7 @@ const Profession = (props: any) => {
                 valueField="value"
                 placeholder="Select degree type"
                 value={value}
-                onChange={(item) => {
+                onChange={(item:any) => {
                   setValue(item.value);
                 }}
               />

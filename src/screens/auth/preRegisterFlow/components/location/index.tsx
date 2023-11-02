@@ -25,7 +25,7 @@ const Location = (props: any) => {
     { label: 'Item 8', value: '8' },
   ];
   const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState();
+  const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -67,7 +67,7 @@ const Location = (props: any) => {
                 valueField="value"
                 placeholder="Country"
                 value={value}
-                onChange={(item) => {
+                onChange={(item:any) => {
                   setValue(item.value);
                 }}
               />

@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {useViewModal} from '../../signinViewModal';
-import {ShowFlashMessage} from '../../../../../components/flashBar';
-import {FirebaseService} from '../../../../../services/firebase.service';
-import {isDate18YearsOrAbove} from '../../../../../utils/common.functions';
-import {socialSignInSignUpPayload} from './../../../../../types/services.types/firebase.service';
+import { useEffect, useState } from 'react';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { useViewModal } from '../../signinViewModal';
+import { ShowFlashMessage } from '../../../../../components/flashBar';
+import { FirebaseService } from '../../../../../services/firebase.service';
+import { isDate18YearsOrAbove } from '../../../../../utils/common.functions';
+import { socialSignInSignUpPayload } from './../../../../../types/services.types/firebase.service';
 import moment from 'moment';
-import {ROUTES} from '../../../../../navigation';
+import { ROUTES } from '../../../../../navigation';
 export type FormTypes = {
   firstName: string;
   lastName: string;
@@ -22,13 +22,13 @@ export const useProfileUseViewModal = (props: any) => {
   let email = receivedData.email;
   let firebaseUid = receivedData.firebaseUid;
   let fbId = receivedData?.fbId;
-  const {navigation} = props;
+  const { navigation } = props;
   const [isWelcomeModalVisible, setWelcomeModalVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [errorMessage, setErrorMessage] = useState('');
   const firebaseService = new FirebaseService();
-  let {socialSignInSignUp,navigateToGenderScreen} = useViewModal(navigation);
+  let { socialSignInSignUp, navigateToGenderScreen } = useViewModal(navigation);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -113,7 +113,7 @@ export const useProfileUseViewModal = (props: any) => {
   );
 
   const handleInputChange = (name: keyof FormTypes, value: string) => {
-    setFormData({...formData, [name]: value});
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (
@@ -151,7 +151,6 @@ export const useProfileUseViewModal = (props: any) => {
   const closeModal = () => {
     setWelcomeModalVisible(false);
   };
-
 
   const newUserSignUp = async (
     email?: string,
@@ -219,7 +218,7 @@ export const useProfileUseViewModal = (props: any) => {
     });
     console.log('------->datamango', dataMango);
     if (dataMango.message === 'Registered Successfully')
-    console.log(dataMango.user._id);
+      console.log(dataMango.user._id);
     navigateToGenderScreen(dataMango.user._id);
     return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }
