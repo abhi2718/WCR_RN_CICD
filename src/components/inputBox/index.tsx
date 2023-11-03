@@ -36,3 +36,15 @@ export const DropdownInput: React.FC<InputProps> = (props) => {
     />
   );
 };
+export const SearchableDropdownInput: React.FC<InputProps> = (props) => {
+  return (
+    <DropdownChildContainer
+      {...props}
+      search
+      selectedTextStyle={inputBoxStyle.selectedTextStyle}
+      style={inputBoxStyle.dropdown}
+      placeholderStyle={inputBoxStyle.placeholderStyle}
+      iconStyle={inputBoxStyle.iconStyle}
+    />
+  );
+};

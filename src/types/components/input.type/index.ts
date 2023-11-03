@@ -30,4 +30,5 @@ export type InputProps = {
   maxHeight?: number;
   onFocus?: any;
   labelColor?: string;
+  maxLength?: number;
 };

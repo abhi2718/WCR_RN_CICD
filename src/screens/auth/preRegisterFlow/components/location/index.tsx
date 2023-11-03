@@ -5,34 +5,35 @@ import {
   ScreenContainer,
 } from '../../../../../components/tools';
 import { StyleSheet, Text, View } from 'react-native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { PrimaryButton } from '../../../../../components/button';
-import { RadioButton } from 'react-native-paper';
 import { location } from './locationStyle';
-import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
+import {
+  DropdownInput,
+  FlatInput,
+  SearchableDropdownInput,
+} from '../../../../../components/inputBox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
-import { colors } from '../../../../../infrastructure/theme/colors';
+import { country } from '../../../../../utils/constanst';
+import { useLocationViewModal } from './locationViewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-const Location = (props: any) => {
-  const data = [
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-  ];
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
+const LocationScreen = (props: ScreenParams) => {
+  const {
+    updateUserDetails,
+    setIsFocus,
+    selectedCountry,
+    zipPlaceHolder,
+    handleCountry,
+    selectedState,
+    setState,
+    getStatesOptions,
+    selectedCity,
+    handleCity,
+    loggInUserId,
+    handleZipcode,
+    selectedZipcode,
+  } = useLocationViewModal(props);
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return <Text style={[styles.label]}>Country</Text>;
-    }
-    return null;
-  };
   return (
     <ScreenContainer>
       <View style={location.container}>
@@ -44,7 +45,6 @@ const Location = (props: any) => {
                 width={sizes[6]}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
-
               <ImageContainer
                 height={sizes[9]}
                 width={9}
@@ -59,27 +59,50 @@ const Location = (props: any) => {
               OR {`\n`}Tell us where you call home
             </Text>
             <View>
-              {renderLabel()}
               <DropdownInput
-                data={data}
+                data={country}
                 onFocus={() => setIsFocus(true)}
                 labelField="label"
                 valueField="value"
                 placeholder="Country"
-                value={value}
-                onChange={(item:any) => {
-                  setValue(item.value);
+                value={selectedCountry}
+                onChange={(country: any) => {
+                  handleCountry(country.value);
                 }}
               />
 
-              <FlatInput label="State/territory" />
-              <FlatInput label="City" />
-              <FlatInput  label="Zip code" />
+              <SearchableDropdownInput
+                data={getStatesOptions()}
+                onFocus={() => setIsFocus(true)}
+                labelField="label"
+                valueField="value"
+                placeholder="State/territory"
+                value={selectedState}
+                onChange={(state: any) => {
+                  setState(state.value);
+                }}
+              />
+
+              <FlatInput
+                label="City"
+                value={selectedCity}
+                onChangeText={(text: string) => handleCity(text)}
+              />
+
+              <FlatInput
+                label="Zip code"
+                placeholder={zipPlaceHolder}
+                maxLength={selectedCountry === 'USA' ? 5 : 6}
+                value={selectedZipcode}
+                onChangeText={(zipcode: string) => handleZipcode(zipcode)}
+              />
             </View>
           </View>
 
           <View>
-            <PrimaryButton title="Next" />
+            <PrimaryButton title="Next"
+            onPress={() => updateUserDetails(loggInUserId)}
+            />
           </View>
         </View>
       </View>
@@ -87,7 +110,7 @@ const Location = (props: any) => {
   );
 };
 
-export default Location;
+export default LocationScreen;
 
 const styles = StyleSheet.create({
   label: {
