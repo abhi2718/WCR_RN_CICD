@@ -5,8 +5,7 @@ import {sizes} from '../../../infrastructure/theme/sizes';
 import {colors} from '../../../infrastructure/theme/colors';
 
 export const ErrorText = styled.Text`
-  color: ${(props) => props.theme.colors.text.error};
-  font-family: ${(props) => props.theme.fontFamily.roboto};
+  color: red;
 `;
 export const styles = StyleSheet.create({
   scrollDiv: {

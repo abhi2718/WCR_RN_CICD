@@ -1,37 +1,85 @@
 import { useEffect, useRef, useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
-import { ScreenParams } from '../../../../../types/services.types/firebase.service';
-import { ROUTES } from '../../../../../navigation';
-import SelectDropdown from 'react-native-select-dropdown';
+import {
+  addressTypes,
+  ScreenParams,
+} from '../../../../../types/services.types/firebase.service';
 import { statesOption } from '../../../../../utils/constanst';
+import {
+  FlashMessageType,
+  ShowFlashMessage,
+} from '../../../../../components/flashBar';
 
 export const useLocationViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
-  const [selectedCountry, setCountry] = useState('USA');
-  const [selectedCity, setCity] = useState('');
   const [stateOption, setStatesOption] = useState([]);
-  const dropdownRef = useRef<SelectDropdown>(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const [selectedState, setState] = useState<string | null>(null);
+  const [locationForm, setLocationForm] = useState<addressTypes>({
+    country: 'USA',
+    state: '',
+    city: '',
+    zipcode: '',
+  });
+
+  const [validationErrors, setValidationErrors] = useState<
+    Partial<addressTypes>
+  >({});
+
+  const handleInputChange = (name: keyof addressTypes, value: string) => {
+   
+    setLocationForm((oldLocationData) => {
+      
+
+      if (name === 'country' && oldLocationData?.country != value) {
+        return { ...locationForm, [name]: value, city: '', zipcode: '' };
+      } else {
+        return { ...locationForm, [name]: value };
+      }
+    });
+   
+  };
+
   const [zipPlaceHolder, setPlaceholder] = useState('Ex: 55555');
-  const [selectedZipcode, setSelectedZipcode] = useState('');
 
   useEffect(() => {
-    setStatesOption(statesOption[selectedCountry]);
     getStatesOptions();
   }, []);
+  useEffect(() => {
+    setStatesOption(statesOption[locationForm.country]);
+  }, [locationForm.country]);
 
   const handleCountry = (selectedItem: string) => {
-    setCountry(selectedItem);
-    setStatesOption(statesOption[selectedItem]);
-    dropdownRef?.current?.reset();
-    setCity('');
-    setSelectedZipcode('');
+    handleInputChange('country', selectedItem);
+    getStatesOptions();
     handleZipPlaceHolder(selectedItem);
+  };
+
+  const handleSubmit = async () => {
+    const errors: Partial<addressTypes> = {};
+
+    if (!locationForm?.country) {
+      errors.country = 'Please enter country';
+    }
+    if (!locationForm.state?.trim()?.length) {
+      errors.state = 'Please enter state';
+    }
+    if (!locationForm.city?.trim()?.length) {
+      errors.city = 'Please enter city';
+    }
+    if (!locationForm.zipcode?.trim()?.length) {
+      errors.zipcode = 'Please enter zipcode';
+    }
+
+    if (Object.keys(errors).length) {
+      return setValidationErrors(errors);
+    } else {
+      setValidationErrors({});
+    }
+    await updateUserDetails(loggInUserId);
   };
 
   const handleZipPlaceHolder = (country: string) => {
@@ -42,44 +90,66 @@ export const useLocationViewModal = (props: ScreenParams) => {
     }
   };
 
+  const validateZipcode = async () => {
+    const USER = {
+      address: {
+        zipcode: locationForm.zipcode,
+        location: {
+          type: '',
+          coordinates: [],
+        },
+      },
+    };
+
+    return await updateUserDetailsRepository.validateZipcode({ user: USER });
+  };
+
   const getStatesOptions = () => {
-    const states = statesOption[selectedCountry];
-    if (states === null || states.length === 0) {
+    const states = statesOption[locationForm.country];
+    if (states === null || states?.length === 0) {
       return [];
     }
-    const updatedStates = states.map((state: string) => {
+    const updatedStates = states?.map((state: string) => {
       return { label: state, value: state };
     });
     return updatedStates;
-  };
-
-  const handleCity = (city: string) => {
-    setCity(city);
-  };
-  const handleZipcode = (zipcode: string) => {
-    setSelectedZipcode(zipcode);
   };
 
   // const navigateToGenderPronounScreen = (id: string) => {
   //   navigation.navigate(ROUTES.GenderPronoun, { data: id });
   // };
 
-  const updateUserDetails = async (id:string)  => {
+  const updateUserDetails = async (id: string) => {
     try {
       const addressData = {
         address: {
-          country: selectedCountry,
-          state: selectedState,
-          city: selectedCity,
-          zipcode: selectedZipcode,
-          location:{}
+          country: locationForm.country,
+          state: locationForm.state,
+          city: locationForm.city,
+          zipcode: locationForm.zipcode,
+          location: {},
         },
       };
-      console.log("addressData::",addressData);
-      const data = await updateUserDetailsRepository.updateUserDetails('653a9ad26b7a2255d03bf4fd', {
+
+      const validateZipcodeData = await validateZipcode();
+
+      if (
+        validateZipcodeData?.user != null &&
+        validateZipcodeData?.user['address.zipcode']['message'] ===
+          'Zip code is not valid'
+      ) {
+        return ShowFlashMessage(
+          'warning',
+          'Zip code is not valid',
+          FlashMessageType.DANGER,
+        );
+      }
+
+     
+      const data = await updateUserDetailsRepository.updateUserDetails(id, {
         update: addressData,
       });
-      console.log('after saved the address', data);
+      
       // navigateToGenderPronounScreen(loggInUserId);
     } catch (err: any) {
       console.log(err.toString(), err);
@@ -87,26 +157,21 @@ export const useLocationViewModal = (props: ScreenParams) => {
   };
 
   return {
-    selectedCountry,
-    setCountry,
     handleCountry,
     stateOption,
     setStatesOption,
-    selectedState,
-    setState,
-    dropdownRef,
-    selectedCity,
-    setCity,
+
+    locationForm,
     updateUserDetails,
-    handleCity,
-    selectedZipcode,
-    setSelectedZipcode,
+
     zipPlaceHolder,
     setPlaceholder,
     isFocus,
     loggInUserId,
     setIsFocus,
-    handleZipcode,
+    validationErrors,
     getStatesOptions,
+    handleSubmit,
+    handleInputChange,
   };
 };

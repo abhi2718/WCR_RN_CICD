@@ -16,22 +16,19 @@ import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { country } from '../../../../../utils/constanst';
 import { useLocationViewModal } from './locationViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { ErrorText } from '../../../signin/signInStyle';
 
 const LocationScreen = (props: ScreenParams) => {
   const {
-    updateUserDetails,
     setIsFocus,
-    selectedCountry,
-    zipPlaceHolder,
     handleCountry,
-    selectedState,
-    setState,
+    zipPlaceHolder,
+    validationErrors,
+    locationForm,
     getStatesOptions,
-    selectedCity,
-    handleCity,
-    loggInUserId,
-    handleZipcode,
-    selectedZipcode,
+
+    handleSubmit,
+    handleInputChange,
   } = useLocationViewModal(props);
 
   return (
@@ -65,11 +62,12 @@ const LocationScreen = (props: ScreenParams) => {
                 labelField="label"
                 valueField="value"
                 placeholder="Country"
-                value={selectedCountry}
-                onChange={(country: any) => {
-                  handleCountry(country.value);
-                }}
+                value={locationForm.country}
+                onChange={(text: any) => handleCountry(text.value)}
               />
+              {validationErrors.country && (
+                <ErrorText> {validationErrors.country}</ErrorText>
+              )}
 
               <SearchableDropdownInput
                 data={getStatesOptions()}
@@ -77,32 +75,43 @@ const LocationScreen = (props: ScreenParams) => {
                 labelField="label"
                 valueField="value"
                 placeholder="State/territory"
-                value={selectedState}
-                onChange={(state: any) => {
-                  setState(state.value);
-                }}
+                value={locationForm.state}
+                onChange={(text: any) => handleInputChange('state', text.value)}
               />
+              {validationErrors.state && (
+                <ErrorText> {validationErrors.state}</ErrorText>
+              )}
 
               <FlatInput
                 label="City"
-                value={selectedCity}
-                onChangeText={(text: string) => handleCity(text)}
+                value={locationForm.city}
+                onChangeText={(text: any) =>
+                  handleInputChange('city', text)
+                }
+                error={validationErrors.city}
               />
+              {validationErrors.city && (
+                <ErrorText> {validationErrors.city}</ErrorText>
+              )}
 
               <FlatInput
                 label="Zip code"
                 placeholder={zipPlaceHolder}
-                maxLength={selectedCountry === 'USA' ? 5 : 6}
-                value={selectedZipcode}
-                onChangeText={(zipcode: string) => handleZipcode(zipcode)}
+                maxLength={locationForm.country === 'USA' ? 5 : 6}
+                value={locationForm.zipcode}
+                onChangeText={(text: any) =>
+                  handleInputChange('zipcode', text)
+                }
+                error={validationErrors.zipcode}
               />
+              {validationErrors.zipcode && (
+                <ErrorText> {validationErrors.zipcode}</ErrorText>
+              )}
             </View>
           </View>
 
           <View>
-            <PrimaryButton title="Next"
-            onPress={() => updateUserDetails(loggInUserId)}
-            />
+            <PrimaryButton title="Next" onPress={() => handleSubmit()} />
           </View>
         </View>
       </View>

@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "prestart": "nvm use 18.17.1"
   },
   "dependencies": {
     "@cometchat/chat-sdk-react-native": "^4.0.1",
@@ -39,6 +40,7 @@
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-safe-area-context": "^4.7.2",
     "react-native-screens": "^3.25.0",
+    "react-native-select-dropdown": "^3.4.0",
     "react-native-vector-icons": "^10.0.1",
     "react-redux": "^8.1.2",
     "styled-components": "^6.0.8"

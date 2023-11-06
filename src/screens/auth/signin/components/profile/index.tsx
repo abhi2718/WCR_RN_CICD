@@ -38,16 +38,11 @@ const Profile = (props: any) => {
   let appleId = receivedData?.appleId;
   let {
     formData,
-    firebaseUid,
-    fbId,
-    handleConfirm,
     handleInputChange,
     handleDateChange,
     handleSubmit,
     isWelcomeModalVisible,
-
     toggleModal,
-
     selectedDate,
     formateDOB,
     isModalVisible,
