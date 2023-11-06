@@ -104,7 +104,6 @@ export const CometChatAudioBubble = ({
                         setStatus("paused");
                     }
                 } catch (ex) {
-                    //console.log(ex);
                 };
             });
             return;
@@ -125,7 +124,6 @@ export const CometChatAudioBubble = ({
     React.useEffect(() => {
         return () => {
             SoundPlayer.pause((s) => {
-               // console.log(s);
             });
         }
     }, []);

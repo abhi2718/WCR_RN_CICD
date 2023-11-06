@@ -48,12 +48,11 @@ export class CometChatSoundManager {
           if (loop) {
             CometChatSoundManager.audio.setNumberOfLoops(-1);
           }
-          CometChatSoundManager.audio.play((e) => { console.log({ e }) });
+          CometChatSoundManager.audio.play((e) => { });
         }, 500);
 
       }
     } catch (error) {
-      //console.log("error : ", error);
     }
   };
 

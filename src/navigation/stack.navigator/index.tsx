@@ -9,10 +9,15 @@ import {MessageList} from '../../cometChat/src/CometChatConversationsWithMessage
 import Onboarding from '../../screens/onBoarding';
 
 const Stack = createNativeStackNavigator();
-const optins = { headerShown: false };
+const optins = {headerShown: false};
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
       <Stack.Screen
         options={optins}
         name={ROUTES.SignIn}
@@ -22,11 +27,6 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.Onboarding}
         component={Onboarding}
-      />
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.Tab}
-        component={TabNavigator}
       />
       <Stack.Screen
         options={optins}

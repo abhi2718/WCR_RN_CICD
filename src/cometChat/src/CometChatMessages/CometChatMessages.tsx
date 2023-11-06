@@ -193,7 +193,6 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
         loggedInUser.current = user;
       })
       .catch((e) => {
-        //console.log('unable to get logged in user');
       });
 
     CometChatUIEventHandler.addGroupListener(uiEventListener, {

@@ -86,7 +86,6 @@ export class CometChatUIEventHandler {
                 new CallListener(name, callHandler)
             ];
         } catch (err) {
-            //console.log("addCallListener", err);
         }
     }
 
@@ -96,7 +95,6 @@ export class CometChatUIEventHandler {
                 return listener._name !== name;
             });
         } catch (err) {
-            //console.log("removeCallListener", err);
         }
     }
 
@@ -141,7 +139,6 @@ export class CometChatUIEventHandler {
                 new MessageListener(name, messageHandler)
             ];
         } catch (err) {
-            //console.log("addMessageListener", err);
         }
     }
 
@@ -151,7 +148,6 @@ export class CometChatUIEventHandler {
                 return listener._name !== name;
             });
         } catch (err) {
-            //console.log("removeMessageListener", err);
         }
     }
 
@@ -175,7 +171,6 @@ export class CometChatUIEventHandler {
                 new ConversationListener(name, conversationHandler)
             ];
         } catch (err) {
-            //console.log("addConversationListener", err);
         }
     }
 
@@ -185,7 +180,6 @@ export class CometChatUIEventHandler {
                 return listener._name !== name;
             });
         } catch (err) {
-            //console.log("removeConversationListener", err);
         }
     }
 
@@ -236,7 +230,6 @@ export class CometChatUIEventHandler {
                 new GroupListener(name, groupHandler)
             ];
         } catch (err) {
-           // console.log("addGrouplistener", err);
         }
     }
 
@@ -246,7 +239,6 @@ export class CometChatUIEventHandler {
                 return listener._name !== name;
             });
         } catch (err) {
-            //console.log("removeGroupListener", err);
         }
     }
 
@@ -273,7 +265,6 @@ export class CometChatUIEventHandler {
                 new UserListener(name, userHandler)
             ];
         } catch (err) {
-            //console.log("addUserListener", err);
         }
     }
 
@@ -283,7 +274,6 @@ export class CometChatUIEventHandler {
                 return listener._name !== name;
             });
         } catch (err) {
-            //console.log("removeUserListener", err);
         }
     }
 
@@ -318,7 +308,6 @@ export class CometChatUIEventHandler {
                 new UIListener(name, uiHandlers)
             ];
         } catch (err) {
-           // console.log("addUserListener", err);
         }
     }
 
@@ -328,7 +317,6 @@ export class CometChatUIEventHandler {
                 return listener._name !== name;
             });
         } catch (err) {
-           // console.log("removeUserListener", err);
         }
     }
 }

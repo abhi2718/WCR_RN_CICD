@@ -1,6 +1,6 @@
+import { colors } from './../../infrastructure/theme/colors';
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
-import {ActivityIndicator} from 'react-native-paper';
 import {
   Platform,
   Dimensions,
@@ -11,6 +11,7 @@ import {
   StyleSheet,
   ImageSourcePropType,
   StatusBar,
+  ActivityIndicator
 } from 'react-native';
 import {InputProps} from '../../types/components/input.type';
 import {rowColumnProps} from '../../types/components/rowColumn.type';
@@ -44,7 +45,12 @@ const ImageProps = styled.Image<imageProps>`
   margin-bottom: ${({marginBottom = 10}) => `${marginBottom}px`};
   overflow: visible;
 `;
-
+type NormalTextProps = {
+  color: string;
+}
+export const NormalText = styled.Text<NormalTextProps>`
+color: ${({theme,color})=>`${color?color:theme.colors.ui.primary}`};
+`;
 export const ImageContainer: React.FC<imageProps> = (props) => {
   const {source, ...otherProps} = props;
   return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
@@ -57,11 +63,12 @@ const PageLoaderContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: white;
 `;
 export const FullLoader = () => {
   return (
     <PageLoaderContainer>
-      <ActivityIndicator size="small" color="blue" />
+      <ActivityIndicator size="large" />
     </PageLoaderContainer>
   );
 };
@@ -180,7 +187,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
-    textAlign: 'center',
     flex: 1,
     padding: 16,
   },

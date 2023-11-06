@@ -374,7 +374,6 @@ export const CometChatMessageList = forwardRef<
     // TODO: this condition is applied because somewhere from whiteboard extention group scope is set to undefined.
     if (group != undefined && group['scope'] == undefined) {
       let fetchedGroup = await CometChat.getGroup(group['guid']).catch((e) => {
-        //console.log('Error: fetching group', e);
         onError && onError(e);
       });
       group['scope'] = fetchedGroup['scope'];
@@ -433,7 +432,6 @@ export const CometChatMessageList = forwardRef<
       .catch((e) => {
         if (messagesList.length == 0) setListState('error');
         else setLoadingMessages(false);
-        //console.log(e);
         onError && onError(e);
       });
   };
@@ -460,7 +458,6 @@ export const CometChatMessageList = forwardRef<
             tmpList[msgIndex] = updatedMessages[i]?.actionOn;
           }
         }
-        // console.log("UPDATES LIST LENGTH", tmpList.length)
         // setMessagesList(tmpList);
         getNewMessages(tmpList);
       })
@@ -481,7 +478,6 @@ export const CometChatMessageList = forwardRef<
           if (cleanUpdatedList[i].id == undefined)
             cleanUpdatedList.splice(i, 1);
         }
-        // console.log("newMessages", newMessages.length, JSON.stringify(newMessages))
         if (cleanUpdatedList?.length > 0 && cleanUpdatedList?.[0]?.['muid']) {
           let localFileExists = newMessages.findIndex(
             (msg) => msg?.['muid'] == cleanUpdatedList?.[0]?.['muid'],
@@ -545,9 +541,7 @@ export const CometChatMessageList = forwardRef<
         message,
       });
       CometChat.markAsRead(message).catch((error) => {
-        //console.log('Error', error);
         onError && onError(error);
-        // errorHandler(error);
       });
     }
   };
@@ -677,7 +671,6 @@ export const CometChatMessageList = forwardRef<
         setShowMessageOptions([]);
       })
       .catch((rej) => {
-        //console.log(rej);
         onError && onError(rej);
       });
   };
@@ -911,11 +904,8 @@ export const CometChatMessageList = forwardRef<
         onConnected: () => {
           getUpdatedPreviousMessages();
         },
-        inConnecting: () => {
-          //console.log('ConnectionListener => In connecting');
-        },
+        inConnecting: () => {},
         onDisconnected: () => {
-          //console.log('ConnectionListener => On Disconnected');
           if (!messagesList[0].id) {
             for (let i = 0; i < messagesList.length; i++) {
               if (messagesList[i].id) {
@@ -963,7 +953,6 @@ export const CometChatMessageList = forwardRef<
         loadTemplates();
       })
       .catch((e) => {
-        // console.log('Error while getting loggedInUser');
         onError && onError(e);
         loggedInUser.current = null;
       });
@@ -987,29 +976,31 @@ export const CometChatMessageList = forwardRef<
 
   // functions returning view
   const getLeadingView = (item: CometChat.BaseMessage) => {
-    const image = item.getSender().getAvatar()
-    ? {uri: item.getSender().getAvatar()}
-      : undefined
-    const name = item.getSender().getName();
-    const senderId = item.getSender()?.getUid();
+    const image = item?.getSender()?.getAvatar()
+      ? {uri: item?.getSender()?.getAvatar()}
+      : undefined;
+    const name = item?.getSender()?.getName();
+    const senderId = item?.getSender()?.getUid();
     if (
       showAvatar &&
-      (item.getSender()?.getUid() || item['sender']['uid']) !==
+      (item?.getSender()?.getUid() || item['sender']['uid']) !==
         loggedInUser.current['uid'] &&
       item['category'] != MessageCategoryConstants.action
     ) {
       return (
-        <ChatAvatorModal image={image} name={name} senderId={senderId}>
         <View>
-        <CometChatAvatar
-          image={
-            image
-          }
-          name={name}
-          style={_avatarStyle}
-        />
+          {image && name && (
+            <ChatAvatorModal image={image} name={name} senderId={senderId}>
+              <View>
+                <CometChatAvatar
+                  image={image}
+                  name={name}
+                  style={_avatarStyle}
+                />
+              </View>
+            </ChatAvatorModal>
+          )}
         </View>
-        </ChatAvatorModal>
       );
     }
     return null;
@@ -1196,7 +1187,6 @@ export const CometChatMessageList = forwardRef<
     setShowMessageOptions([]);
     CometChat.getUser(item.getSender().getUid())
       .then((user) => {
-        //console.log({user});
         CometChatUIEventHandler.emitUIEvent('openChat', {user, group});
       })
       .catch((e) => {
@@ -1226,9 +1216,7 @@ export const CometChatMessageList = forwardRef<
           : messageObject?.getAttachment()?.getMimeType(), // get Mime Type
     };
 
-    NativeModules.FileManager.shareMessage(shareObj, (callback) => {
-      //console.log('shareMessage Callback', callback);
-    });
+    NativeModules.FileManager.shareMessage(shareObj, (callback) => {});
   };
 
   const getStyle = (item: CometChat.BaseMessage): BaseStyleInterface => {
@@ -1251,9 +1239,15 @@ export const CometChatMessageList = forwardRef<
     item: CometChat.BaseMessage,
     template: CometChatMessageTemplate,
   ) => {
-    let options = template?.options
+    console.log('mytem--->', item?.metadata?.['@injected']);
+    let options: any = template?.options
       ? template.options(loggedInUser.current, item, group)
       : [];
+    options.push({
+      icon: 64,
+      id: 'reactToMessage',
+      title: 'React To Message',
+    });
     let optionsWithPressHandling = options.map((option) => {
       if (!option.onPress)
         switch (option.id) {
@@ -1284,17 +1278,32 @@ export const CometChatMessageList = forwardRef<
         }
       if (option.id === MessageOptionConstants.reactToMessage) {
         option.onPress = () => {
-          if (option.CustomView) {
-            let view = option.CustomView(item);
-            setExtensionsComponent(() => view);
-          }
+          const _item: any = item.getRawMessage();
+          CometChat.callExtension('reactions', 'POST', 'v1/react', {
+            msgId: _item.id,
+            emoji: '😊',
+          })
+            .then((response) => {
+            })
+            .catch((error) => {
+            });
+          // const vi = MyView;Asset validation failed
+          //Missing required icon file. The bundle does not contain an app icon for iPad of exactly '167x167' pixels, in .png format for iOS versions supporting iPad Pro. To support older operating systems, the icon may be required in the bundle outside of an asset catalog. Make sure the Info.plist file includes appropriate entries referencing the file. See https://developer.apple.com/documentation/bundleresources/information_property_list/user_interface (ID: e5f4d0be-4d46-4e97-9842-328aa9492464)
+          // setExtensionsComponent(() => vi);
+          //This bundle does not support one or more of the devices supported by the previous app version. Your app update must continue to support all devices previously supported. You declare supported devices in Xcode with the Targeted Device Family build setting. Refer to QA1623 for additional information: https://developer.apple.com/library/ios/#qa/qa1623/_index.html (ID: dbda4565-df5d-41d1-80e6-9ff66c5dc096)
         };
       }
       return option;
     });
     setShowMessageOptions(optionsWithPressHandling);
   };
-
+  const MyView = () => {
+    return (
+      <View style={{height: 300, backgroundColor: 'red'}}>
+        <Text>My View</Text>
+      </View>
+    );
+  };
   const MessageView = (params: {
     message: CometChat.BaseMessage;
     showOptions?: boolean;
@@ -1343,13 +1352,14 @@ export const CometChatMessageList = forwardRef<
               );
             }}
             ThreadView={() => !isThreaded && getThreadView(message)}
-            BottomView={() =>
+            BottomView={() => {
               // ChatConfigurator.dataSource.getBottomView(
               //   message,
               //   bubbleAlignment,
               // )
-              CometChatMessageReactions(message, loggedInUser)
-            }
+              //CometChatMessageReactions(message, loggedInUser)
+              getBottomView(message);
+            }}
             style={getStyle(message)}
           />
         </>
@@ -1358,7 +1368,13 @@ export const CometChatMessageList = forwardRef<
       return null;
     }
   };
-
+  const getBottomView = (item) => {
+    return (
+      <View>
+        <Text>Bootm View</Text>
+      </View>
+    );
+  };
   const getSentAtTimestamp = (item) => {
     if (!item['sentAt']) {
       return item['_composedAt'];

@@ -121,7 +121,6 @@ const CometChatCallHistory = (props: CometChatCallHistoryInterface) => {
     setListState("loading");
     callRequestBuilderRef.current.fetchPrevious()
       .then(callLogs => {
-        console.log(callLogs.length);
         setList([...list, ...callLogs.reverse()]);
         setListState("done");
       })

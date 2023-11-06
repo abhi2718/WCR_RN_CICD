@@ -36,7 +36,7 @@ export class SmartRepliesDecorator extends DataSourceDecorator {
       .then((u) => {
         this.loggedInUser = u;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
 
     CometChat.addMessageListener(
       this.messageListenerId,

@@ -179,7 +179,6 @@ export const CometChatIncomingCall = (props: CometChatIncomingCallInterface) => 
         }
     },
       onUserJoined: user => {
-        console.log("user joined:", user);
     },
     onUserLeft: user => {
       if(checkIfDefualtCall(call)) {
@@ -188,7 +187,6 @@ export const CometChatIncomingCall = (props: CometChatIncomingCallInterface) => 
           CometChatUIEventHandler.emitCallEvent(CallUIEvents.ccCallEnded, {call: endedCall2})
         })
         .catch(err => {
-          console.log("Error", err);
         });
       }
     },

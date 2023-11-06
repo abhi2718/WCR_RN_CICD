@@ -100,7 +100,6 @@ export const useViewModal = (navigation: any) => {
     try {
       return await signInRepository.getAppleUser(appleId);
     } catch (error) {
-      console.log(error);
     }
   };
   const handleAppleSignIn = async () => {

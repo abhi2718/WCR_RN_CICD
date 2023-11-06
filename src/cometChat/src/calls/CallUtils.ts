@@ -63,9 +63,7 @@ export class CallUtils {
         }
         break;
     }
-    if (callMessageText == undefined || callMessageText == "undefined")
-        console.log(message, loggedInUser);
-        
+    if (callMessageText == undefined || callMessageText == "undefined") 
     return callMessageText;
   }
 }

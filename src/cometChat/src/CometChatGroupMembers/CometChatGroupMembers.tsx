@@ -255,7 +255,6 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
                 CometChatUIEventHandler.emitGroupEvent(CometChatGroupsEvents.ccGroupMemberBanned, { message: action, kickedUser: user, kickedBy: loggedInUser.current, kickedFrom: group });
             })
             .catch((err) => {
-                //console.log("ban user", err);
                 onError(err);
             })
     }
@@ -282,7 +281,6 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
                 CometChatUIEventHandler.emitGroupEvent(CometChatGroupsEvents.ccGroupMemberKicked, { message: action, kickedUser: user, kickedBy: loggedInUser.current, kickedFrom: group });
             })
             .catch((err) => {
-               // console.log("kick user", err);
                 onError(err);
             })
     }
@@ -396,7 +394,6 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
                     CometChatUIEventHandler.emitGroupEvent(CometChatGroupsEvents.ccGroupMemberScopeChanged, { action, updatedUser: updatedMember, scopeChangedTo: newScope, scopeChangedFrom: member.scope, group });
                 })
                 .catch(err => {
-                    //console.log("Error:", err);
                     setShowChangeScope(false);
                     onError && onError(err);
                 });
@@ -540,7 +537,7 @@ export const CometChatGroupsMembers = (props: CometChatGroupsMembersInterface) =
     React.useEffect(() => {
         CometChat.getLoggedinUser()
             .then(u => loggedInUser.current = u)
-            .catch(e => console.log(e));
+            .catch(e => {});
         CometChat.addUserListener(
             groupMemberListenerId,
             new CometChat.UserListener({

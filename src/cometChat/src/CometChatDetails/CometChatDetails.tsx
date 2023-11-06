@@ -41,6 +41,7 @@ import {CometChatContextType} from '../shared/base/Types';
 import {CometChatUIEventHandler} from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
 import {CometChatTransferOwnershipInterface} from '../CometChatTransferOwnership/CometChatTransferOwnership';
 import {Column, Row} from '../../../components/tools';
+import { MediaMessage } from '../../../screens/tab.screens/chat/community/components/mediaMessages';
 
 export interface ModalDetailsInterface {
   title: string;
@@ -562,7 +563,6 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       onClick,
     } = item;
     let handleInternalClick;
-    console.log(' title --->', title);
     if (!onClick) {
       handleInternalClick = handleOnClickFncDeclaration(item);
     }
@@ -910,6 +910,9 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
           data={detailsList}
           renderItem={ListSection}
         />
+      </View>
+      <View>
+        <MediaMessage guid={groupDetails?.getGuid()} />
       </View>
     </View>
   );

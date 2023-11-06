@@ -40,7 +40,7 @@ export class PollsExtensionDecorator extends DataSourceDecorator {
       .then((u) => {
         this.loggedInUser = u;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }
 
   isDeletedMessage(message: CometChat.BaseMessage): boolean {

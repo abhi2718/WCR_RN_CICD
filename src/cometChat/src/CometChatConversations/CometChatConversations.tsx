@@ -355,7 +355,6 @@ export const CometChatConversations = (props: ConversationInterface) => {
                         status
                     }
                 }
-               // console.log(JSON.stringify(updatedConversation));
                 conversationListRef.current.updateList(updatedConversation);
             }
         }
@@ -366,9 +365,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
      * @param  {...any} args 
      */
     const typingEventHandler = (...args) => {
-        // console.log("typing event", args[1], args[0].receiverId);
         let conversation = conversationListRef.current.getListItem(`${args[0]['receiverType']}_${args[0]['receiverId']}`);
-        // console.log("typing event", conversation);
         let isTyping = args[1];
         let newConversation = conversation
         if (isTyping) {
@@ -782,7 +779,6 @@ export const CometChatConversations = (props: ConversationInterface) => {
                                 removeItemFromSelectionList(conversation.getConversationId())
                             })
                             .catch(err => {
-                              //  console.log("Error", err);
                             });
                     }
             }

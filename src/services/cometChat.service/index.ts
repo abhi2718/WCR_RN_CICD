@@ -1,8 +1,10 @@
+import { CometChatUIKit, UIKitSettings,ReactionsExtension } from '@cometchat/chat-uikit-react-native';
 import {useEffect, useState} from 'react';
-import {
-  CometChatUIKit,
-  UIKitSettings,
-} from '../../cometChat/src';
+// import {
+//   CometChatUIKit,
+//   UIKitSettings,
+//   ReactionExtension
+// } from '../../cometChat/src';
 import {config} from '../../utils/config';
 
 export const useCometChatInit = () => {
@@ -11,6 +13,8 @@ export const useCometChatInit = () => {
     appId: config.APP_ID,
     authKey: config.AUTH_KEY,
     region: config.REGION,
+   extensions:[new ReactionsExtension()]
+
   };
   useEffect(() => {
     const inItCometChat = async () => {
@@ -20,7 +24,6 @@ export const useCometChatInit = () => {
         await CometChatUIKit.login({uid: uid});
         setIsInitialized(true);
       } catch (error) {
-       // console.log('Initialization failed with exception:', error);
       }
     };
     inItCometChat();

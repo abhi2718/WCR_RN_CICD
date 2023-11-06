@@ -171,7 +171,6 @@ export const CometChatCallButtons = (props: CometChatCallButtonsInterface) => {
                         CometChatUIEventHandler.emitCallEvent(CallUIEvents.ccOutgoingCall, { call: res });
                     },
                     (rej) => {
-                        console.log("custom msg error", rej);
                         onError && onError(rej);
                     }
                 );
@@ -190,14 +189,12 @@ export const CometChatCallButtons = (props: CometChatCallButtonsInterface) => {
                         CometChatUIEventHandler.emitCallEvent(CallUIEvents.ccOutgoingCall, { call: outGoingCall.current });
                     },
                     error => {
-                        console.log("Call initialization failed with exception:", error);
                         CometChatUIEventHandler.emitCallEvent(CallUIEvents.ccCallFailled, { call });
                         onError && onError(error);
                     }
                 );
             }
         } else {
-            console.log("Invalid call type.", type, CallTypeConstants.audio, type != CallTypeConstants.audio || type != CallTypeConstants.video);
             return;
         }
     }
@@ -240,7 +237,6 @@ export const CometChatCallButtons = (props: CometChatCallButtonsInterface) => {
                     setCallReceived(call);
                 },
                 onOutgoingCallAccepted: (call) => {
-                    console.log("call accepted");
                 },
                 onOutgoingCallRejected: (call) => {
                     setShowOutgoingCallScreen(false);
