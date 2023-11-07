@@ -215,7 +215,8 @@ export interface ConversationInterface {
     /**
      * style object for confirm dialog
      */
-    confirmDialogStyle?: CometChatConfirmDialogStyleInterface
+    confirmDialogStyle?: CometChatConfirmDialogStyleInterface,
+    isUserWindow?:Boolean
 }
 
 /**
@@ -261,6 +262,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
         onError,
         onBack,
         conversationsStyle,
+        isUserWindow
     } = props;
 
     //context
@@ -995,6 +997,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
         <View style={Style.container}>
             <ConfirmDeletionDialog />
             <CometChatList
+                isUserWindow={isUserWindow}
                 AppBarOptions={AppBarOption}
                 onError={onError}
                 ref={conversationListRef}

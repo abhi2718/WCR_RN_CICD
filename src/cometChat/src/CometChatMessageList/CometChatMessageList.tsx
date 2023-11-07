@@ -1239,7 +1239,6 @@ export const CometChatMessageList = forwardRef<
     item: CometChat.BaseMessage,
     template: CometChatMessageTemplate,
   ) => {
-    console.log('mytem--->', item?.metadata?.['@injected']);
     let options: any = template?.options
       ? template.options(loggedInUser.current, item, group)
       : [];

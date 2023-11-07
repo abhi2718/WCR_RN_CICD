@@ -92,7 +92,9 @@ export interface CometChatMessagesInterface {
   }: {
     user?: CometChat.User;
     group?: CometChat.Group;
-  }) => JSX.Element;
+    }) => JSX.Element;
+  handleBackBtn?:()=>void
+  
 }
 
 export const CometChatMessages = (props: CometChatMessagesInterface) => {
@@ -116,6 +118,7 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
     threadedMessagesConfiguration,
     MessageListView,
     hideDetails,
+    handleBackBtn
   } = props;
 
   const {theme} = useContext(CometChatContext);
@@ -328,7 +331,12 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
               <DetailViewIcon user={user} group={group} />
             )}
             disableTyping={disableTyping}
-            onBack={() => setShowComponent(ComponentNames.Default)}
+              onBack={() => {
+                if (handleBackBtn) {
+                  handleBackBtn()
+                }
+                setShowComponent(ComponentNames.Default)
+            }}
             {..._headerConfiguration}
           />
         )}

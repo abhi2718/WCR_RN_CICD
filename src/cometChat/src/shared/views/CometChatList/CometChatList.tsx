@@ -106,7 +106,8 @@ export interface CometChatListProps {
   bodyViewContainerStyle?: StyleProp<ViewStyle>;
   tailViewContainerStyle?: StyleProp<ViewStyle>;
   listStyle?: CometChatListStylesInterface;
-  hideSubmitIcon?: boolean
+  hideSubmitIcon?: boolean,
+  isUserWindow?:Boolean,
 }
 let lastCall;
 let lastReject: Function;
@@ -165,6 +166,7 @@ export const CometChatList = React.forwardRef<
     tailViewContainerStyle,
     listStyle,
     hideSubmitIcon,
+    isUserWindow
   } = props;
 
   // functions which can be access by parents
@@ -606,7 +608,9 @@ export const CometChatList = React.forwardRef<
       let currentLetter = '';
       const listWithHeaders = [];
       if (list.length) {
-        list.forEach((listItem: any) => {
+        list.forEach((listItem: any, index: number) => {
+          // console.log("isUserWindow -->",isUserWindow)
+          // console.log("listItem -->",listItem.conversationType)
           const chr = listItem?.name && listItem.name[0].toUpperCase();
           if (chr !== currentLetter && !hideSeparator && !ListItemView) {
             currentLetter = chr;
@@ -615,7 +619,16 @@ export const CometChatList = React.forwardRef<
               header: true,
             });
           }
-          listWithHeaders.push({ value: listItem, header: false });
+          if (isUserWindow) {
+            if (listItem.conversationType === "user") {
+              listWithHeaders.push({ value: listItem, header: false });
+            }
+          } else {
+            if (listItem.conversationType === "group") {
+              listWithHeaders.push({ value: listItem, header: false });
+            }
+          }
+         
         });
 
         messageContainer = (

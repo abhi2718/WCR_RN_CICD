@@ -15,3 +15,5 @@ All view component like bubble,avator,are inside /cometChat/src/shared/views
 ComentChatGroupMember ---> comentChat/src/ComentChatGroupMember/ComentChatGroupMember
 
 ComentChatGroupMember And Finding  ItemView of Flatlist --->comentChat/src/ComentChatGroupMember/ComentChatGroupMember/ItemView
+
+Finding community details screen with view Memebres , Media -->comentChat/src/CometChatDetails

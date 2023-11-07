@@ -46,6 +46,7 @@ export interface CometChatConversationsWithMessagesInterface {
   messagesConfigurations?: MessagesConfigurationInterface;
   startConversationConfiguration?: StartConversationConfigurationInterface;
   onError?: (e: CometChat.CometChatException) => void;
+  isUserWindow?:Boolean
 }
 
 export const CometChatConversationsWithMessages = (
@@ -58,6 +59,7 @@ export const CometChatConversationsWithMessages = (
     messagesConfigurations,
     startConversationConfiguration,
     onError,
+    isUserWindow
   } = props;
   const {theme} = useContext(CometChatContext);
   const [showComponent, setShowComponent] = useState(
@@ -89,7 +91,11 @@ export const CometChatConversationsWithMessages = (
     ...messagesConfigurations,
     messageHeaderConfiguration: {
       onBack: () => {
-        navigation.navigate(ROUTES.CommunityChatTab);
+        if (isUserWindow) {
+          navigation.navigate(ROUTES.PrivateChatTab)
+        } else {
+          navigation.navigate(ROUTES.CommunityChatTab)
+        }
         setShowComponent(ComponentNames.ConversationList)
       },
       ...messagesConfigurations?.messageHeaderConfiguration,
@@ -214,6 +220,7 @@ export const CometChatConversationsWithMessages = (
   return (
     <View>
       <CometChatConversations
+         isUserWindow={isUserWindow}
         {..._conversationsConfig}
         AppBarOption={_conversationsConfig.AppBarOption || NewConversation}
       />
