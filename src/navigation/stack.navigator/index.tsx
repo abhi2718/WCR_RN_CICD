@@ -23,18 +23,18 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.Onboarding}
         component={Onboarding}
-      /> */}
-      {/* <Stack.Screen
+      />
+      <Stack.Screen
         options={optins}
         name={ROUTES.SignIn}
         component={SignInScreen}
-      />
+      /> */}
 
       <Stack.Screen
         options={optins}
         name={ROUTES.Profession}
         component={Profession}
-      /> */}
+      />
       <Stack.Screen
         options={optins}
         name={ROUTES.Location}

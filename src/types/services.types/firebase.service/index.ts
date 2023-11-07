@@ -34,6 +34,12 @@ export type addressTypes = {
   city: string;
   zipcode: string;
 };
+export type professionTypes = {
+  userDegree: string;
+  primaryDegree: string;
+  institution?: string;
+  title: string;
+};
 
 export type navigateToProfilepagepayload = {
   email: string;
