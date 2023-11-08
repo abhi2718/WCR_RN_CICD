@@ -31,7 +31,7 @@ export const country = [
   { label: 'Canada', value: 'Canada' },
 ];
 
-export const statesOption: { USA: string[]; Canada: string[] } = {
+export const statesOption:any = {
   USA: [
     'Alabama (AL)',
     'Alaska (AK)',
@@ -131,7 +131,7 @@ export const userDegree = [
   },
 ];
 
-export const primaryDegree = {
+export const primaryDegree :any= {
   'Healthcare Doctorate Degree': [
     'Doctor of Acupuncture (DAc)',
     'Doctor of Athletic Training (DAT)',

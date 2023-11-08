@@ -1,24 +1,32 @@
 import { useEffect, useState } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 import {
   ScreenParams,
   professionTypes,
 } from '../../../../../types/services.types/firebase.service';
 import { primaryDegree } from '../../../../../utils/constanst';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
+import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useProfessionModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const [isFocus, setIsFocus] = useState(false);
   const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
 
+  const {user} = useSelector(({userState}) => userState);
+  const dispatch = useDispatch()
+
   const [professionForm, setProfessionForm] = useState<professionTypes>({
-    userDegree: '',
+    userDegree: user?.designation?.userDegree ? user?.designation?.userDegree : '',
     primaryDegree: '',
     institution: '',
     title: '',
   });
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+  useEffect(() => {
+    me();
+  }, []);
 
   const [validationErrors, setValidationErrors] = useState<
     Partial<professionTypes>
@@ -32,6 +40,16 @@ export const useProfessionModal = (props: ScreenParams) => {
 
   const handleInputChange = (name: keyof professionTypes, value: string) => {
     setProfessionForm({ ...professionForm, [name]: value });
+  };
+
+  const me = async () => {
+    const user = await updateUserDetailsRepository.me(
+      '653a9ad26b7a2255d03bf4fd',
+    );
+    const data ={
+      user:user
+    }
+    dispatch(addUser(data));
   };
 
   const handleSubmit = async () => {
@@ -52,7 +70,7 @@ export const useProfessionModal = (props: ScreenParams) => {
     } else {
       setValidationErrors({});
     }
-    updateUserDetails(loggInUserId)
+    updateUserDetails(loggInUserId);
   };
 
   const updateUserDetails = async (id: string) => {
@@ -62,15 +80,15 @@ export const useProfessionModal = (props: ScreenParams) => {
           userDegree: professionForm.userDegree,
           primaryDegree: professionForm.primaryDegree,
           title: professionForm.title,
-          
         },
         institution: professionForm.institution,
       };
-      const data = await updateUserDetailsRepository.updateUserDetails('653a9ad26b7a2255d03bf4fd', {
-        update: professionData,
-      });
-    
-      // navigateToGenderPronounScreen(loggInUserId);
+      const data = await updateUserDetailsRepository.updateUserDetails(
+        '653a9ad26b7a2255d03bf4fd',
+        {
+          update: professionData,
+        },
+      );
 
     } catch (err: any) {
       console.log(err.toString(), err);

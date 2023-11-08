@@ -13,17 +13,9 @@ import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
 import { sizes } from '../../../infrastructure/theme/sizes';
-import { NavigationProp, RouteProp } from '@react-navigation/native';
+
 import { ScreenParams } from '../../../types/services.types/firebase.service';
-import { ROUTES } from '../../../navigation';
 
-// type GenderRoute = RouteProp<ScreenParams, ROUTES.Gender>;
-// type MyScreenNavigation = NavigationProp<ScreenParams, ROUTES.Gender>;
-
-// interface MyScreenProps {
-//   route: GenderRoute;
-//   navigation: MyScreenNavigation;
-// }
 const Gender = (props: ScreenParams) => {
   const {
     gender,
@@ -31,7 +23,7 @@ const Gender = (props: ScreenParams) => {
     updateUserDetails,
     loggInUserId,
     checkboxState,
-    setCheckboxState,
+
     handleCheckboxChange,
   } = useGenderViewModal(props);
 
@@ -87,7 +79,7 @@ const Gender = (props: ScreenParams) => {
                 fillColor="red"
                 unfillColor="#FFFFFF"
               />
-              {/* <Checkbox status="checked" /> */}
+
               <Text style={genderStyle.btnText}>Visible on profile</Text>
             </Row>
             <PrimaryButton

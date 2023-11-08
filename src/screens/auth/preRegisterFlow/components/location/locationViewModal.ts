@@ -9,11 +9,18 @@ import {
   FlashMessageType,
   ShowFlashMessage,
 } from '../../../../../components/flashBar';
+import { ROUTES } from '../../../../../navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useLocationViewModal = (props: ScreenParams) => {
+  const { navigation } = props;
   const loggInUserId = props.route?.params?.data || 'No data received';
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+
+  const { user } = useSelector((state: any) => state.userState);
+  const dispatch = useDispatch();
 
   const [stateOption, setStatesOption] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
@@ -30,17 +37,13 @@ export const useLocationViewModal = (props: ScreenParams) => {
   >({});
 
   const handleInputChange = (name: keyof addressTypes, value: string) => {
-   
     setLocationForm((oldLocationData) => {
-      
-
       if (name === 'country' && oldLocationData?.country != value) {
         return { ...locationForm, [name]: value, city: '', zipcode: '' };
       } else {
         return { ...locationForm, [name]: value };
       }
     });
-   
   };
 
   const [zipPlaceHolder, setPlaceholder] = useState('Ex: 55555');
@@ -115,9 +118,9 @@ export const useLocationViewModal = (props: ScreenParams) => {
     return updatedStates;
   };
 
-  // const navigateToGenderPronounScreen = (id: string) => {
-  //   navigation.navigate(ROUTES.GenderPronoun, { data: id });
-  // };
+  const navigateToProfessionScreen = (id: string) => {
+    navigation.navigate(ROUTES.Profession, { data: id });
+  };
 
   const updateUserDetails = async (id: string) => {
     try {
@@ -145,12 +148,14 @@ export const useLocationViewModal = (props: ScreenParams) => {
         );
       }
 
-     
-      const data = await updateUserDetailsRepository.updateUserDetails(id, {
+      const user = await updateUserDetailsRepository.updateUserDetails(id, {
         update: addressData,
       });
-      
-      // navigateToGenderPronounScreen(loggInUserId);
+      const data = {
+        user: user,
+      };
+      dispatch(addUser(data));
+      navigateToProfessionScreen(loggInUserId);
     } catch (err: any) {
       console.log(err.toString(), err);
     }

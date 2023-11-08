@@ -5,13 +5,16 @@ import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { FirebaseService } from '../../../../../services/firebase.service';
 import { isDate18YearsOrAbove } from '../../../../../utils/common.functions';
 import {
+  ScreenParams,
   profileTypes,
   socialSignInSignUpPayload,
 } from './../../../../../types/services.types/firebase.service';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../../../store/reducers/user.reducer';
 
 
-export const useProfileUseViewModal = (props: any) => {
+export const useProfileUseViewModal = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
   let email = receivedData.email;
@@ -23,10 +26,13 @@ export const useProfileUseViewModal = (props: any) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const firebaseService = new FirebaseService();
-  let { socialSignInSignUp, navigateToGenderScreen } = useViewModal(navigation);
+  let { socialSignInSignUp, navigateToGenderScreen } = useViewModal(props);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
+  const {user} = useSelector((state: any) => state.userState);
+    const dispatch = useDispatch()
 
   const handleConfirm = (date: Date) => {
     toggleModal();
@@ -212,9 +218,9 @@ export const useProfileUseViewModal = (props: any) => {
       mobile,
       fbId,
     });
-    console.log('------->datamango', dataMango);
+    
+    dispatch(addUser(dataMango));
     if (dataMango.message === 'Registered Successfully')
-      console.log(dataMango.user._id);
     navigateToGenderScreen(dataMango.user._id);
     return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }

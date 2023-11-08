@@ -13,65 +13,65 @@ import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sex
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 import LocationScreen from '../../screens/auth/preRegisterFlow/components/location';
 
-
 const Stack = createNativeStackNavigator();
-const optins = { headerShown: false };
+const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
-        options={optins}
+      <Stack.Screen
+        options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.SignIn}
         component={SignInScreen}
-      /> */}
+      />
+
+      <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
 
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.Profession}
         component={Profession}
       />
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.Location}
         component={LocationScreen}
       />
 
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
 
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.SexualOrientation}
         component={SexualOrientation}
       />
-      <Stack.Screen options={optins} name={ROUTES.Gender} component={Gender} />
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
 
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
       />
 
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.Profile}
         component={Profile}
       />
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.CommunityChatMessage}
         component={MessageList}
       />

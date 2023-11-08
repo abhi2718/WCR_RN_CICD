@@ -13,8 +13,9 @@ import { useSexualOrientationViewModal } from './sexualorientationViewModal';
 import { sexualOrientationArray } from '../../../../../utils/constanst';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-const SexualOrientation = (props: any) => {
+const SexualOrientation = (props: ScreenParams) => {
   const {
     sexualOrientation,
     handleSexualOrientationValue,
