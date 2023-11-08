@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { dimensions } from '../../../../../components/tools';
-import { colors } from '../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
-import { fontSizes } from '../../../../../infrastructure/theme/fonts';
-export const genderPronounStyle = StyleSheet.create({
+import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
+import { colors } from '../../../../../infrastructure/theme/colors';
+
+export const addEthnicityStyle = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
@@ -12,7 +12,7 @@ export const genderPronounStyle = StyleSheet.create({
     height: sizes[4],
   },
   logo: {
-    marginLeft: -35,
+    marginLeft: -5,
     width: sizes[11],
     height: sizes[8],
     overflow: 'visible',
@@ -32,21 +32,12 @@ export const genderPronounStyle = StyleSheet.create({
     color: colors.ui.text,
     marginTop: sizes[5],
   },
-
-  innerView: {
-    flex: 1,
-  },
-
-  rowHeader: {
-    width: dimensions.width,
-    maxWidth: '100%',
-  },
-  btnText: {
-    marginLeft: sizes[3],
-    fontSize: sizes[3],
-    fontWeight: '500',
-  },
   rowView: {
-    marginBottom: sizes[1],
+    marginVertical: 10,
+  },
+  checkboxText: {
+    fontSize: fontSizes.text,
+    color: colors.ui.text,
+    fontWeight: '600',
   },
 });

@@ -12,12 +12,71 @@ import GenderProunoun from '../../screens/auth/preRegisterFlow/components/gender
 import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 import LocationScreen from '../../screens/auth/preRegisterFlow/components/location';
+import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
+import AddEthnicity from '../../screens/auth/preRegisterFlow/components/addEthnicity';
+import LookingFor from '../../screens/auth/preRegisterFlow/components/lookingFor';
+import MaritalStatus from '../../screens/auth/preRegisterFlow/components/maritalStatus';
+import Kids from '../../screens/auth/preRegisterFlow/components/kids';
+import Habits from '../../screens/auth/preRegisterFlow/components/habits';
+import About from '../../screens/auth/preRegisterFlow/components/about';
+import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 
 const Stack = createNativeStackNavigator();
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Profile}
+        component={Profile}
+      />
+      <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.GenderPronoun}
+        component={GenderProunoun}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.SexualOrientation}
+        component={SexualOrientation}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.LookingFor}
+        component={LookingFor}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.MaritalStatus}
+        component={MaritalStatus}
+      />
+      <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
+
+      <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
+
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Hobbies}
+        component={Hobbies}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.AddEthnicity}
+        component={AddEthnicity}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.ProfilePic}
+        component={AddProfilePic}
+      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}

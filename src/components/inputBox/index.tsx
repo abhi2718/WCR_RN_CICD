@@ -7,8 +7,9 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { StyleSheet } from 'react-native';
 import { inputBoxStyle } from './inputBoxStyle';
 import { sizes } from '../../infrastructure/theme/sizes';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { fontSizes } from '../../infrastructure/theme/fonts';
 const ChildContainer = styled(TextInput)<InputProps>``;
-
 export const FlatInput: React.FC<InputProps> = (props) => {
   return (
     <ChildContainer
@@ -20,11 +21,9 @@ export const FlatInput: React.FC<InputProps> = (props) => {
     />
   );
 };
-
 const DropdownChildContainer = styled(Dropdown)<InputProps>`
   margin-top: ${({ marginTop = sizes[1] }) => `${marginTop}px`};
 `;
-
 export const DropdownInput: React.FC<InputProps> = (props) => {
   return (
     <DropdownChildContainer
@@ -36,6 +35,27 @@ export const DropdownInput: React.FC<InputProps> = (props) => {
     />
   );
 };
+export const CheckBox: React.FC<InputProps> = (props) => {
+  return (
+    <BouncyCheckbox
+      {...props}
+      iconStyle={{ borderColor: 'gray', borderRadius: 0 }}
+      fillColor="#BB0000"
+      unfillColor="#fff"
+      innerIconStyle={{
+        borderRadius: 2,
+        borderColor: '#49454F',
+      }}
+      textStyle={{
+        fontWeight: '600',
+        fontSize: fontSizes.text,
+        color: colors.ui.text,
+        textDecorationLine: 'none',
+      }}
+    />
+  );
+};
+
 export const SearchableDropdownInput: React.FC<InputProps> = (props) => {
   return (
     <DropdownChildContainer

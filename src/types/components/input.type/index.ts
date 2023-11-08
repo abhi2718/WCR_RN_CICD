@@ -2,6 +2,7 @@ export type InputProps = {
   height?: number;
   placeholder?: string;
   style?: any;
+  text?: string;
   value?: any;
   onChangeText?: any;
   secureTextEntry?: any;
@@ -31,4 +32,5 @@ export type InputProps = {
   onFocus?: any;
   labelColor?: string;
   maxLength?: number;
+  onPress?: any;
 };
