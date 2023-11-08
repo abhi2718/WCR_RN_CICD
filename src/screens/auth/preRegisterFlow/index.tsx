@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Checkbox, RadioButton, Text } from 'react-native-paper';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { PrimaryButton } from '../../../components/button';
@@ -37,21 +37,14 @@ const Gender = (props: any) => {
         <View style={genderStyle.container}>
           <View style={genderStyle.innerView}>
             <View style={genderStyle.innerView}>
-              <Row
-                alignItems="center"
-                justifyContent="space-between"
-                style={genderStyle.rowHeader}
-              >
-                <ImageContainer
-                  height={sizes[6]}
-                  width={sizes[6]}
-                  source={require('./../../../assets/images/icons/arrow.png')}
+              <Row justifyContent="space-between" alignItems="center">
+                <Image
+                  style={genderStyle.arrow}
+                  source={require('../../../assets/images/icons/arrow.png')}
                 />
-
-                <ImageContainer
-                  height={sizes[9]}
-                  width={sizes[9]}
-                  source={require('./../../../assets/images/logo.png')}
+                <Image
+                  style={genderStyle.logo}
+                  source={require('../../../assets/images/logo.png')}
                 />
                 <View />
               </Row>
@@ -60,7 +53,7 @@ const Gender = (props: any) => {
                 Choose your gender identity
               </Text>
 
-              <View style={genderStyle.radioButtonContainer}>
+              <View>
                 {genderArray.map((option) => (
                   <RadioButton.Group
                     onValueChange={handleGenderValue}

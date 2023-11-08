@@ -15,6 +15,11 @@ import Profession from '../../screens/auth/preRegisterFlow/components/profession
 import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
 import AddEthnicity from '../../screens/auth/preRegisterFlow/components/addEthnicity';
 import LookingFor from '../../screens/auth/preRegisterFlow/components/lookingFor';
+import MaritalStatus from '../../screens/auth/preRegisterFlow/components/maritalStatus';
+import Kids from '../../screens/auth/preRegisterFlow/components/kids';
+import Habits from '../../screens/auth/preRegisterFlow/components/habits';
+import About from '../../screens/auth/preRegisterFlow/components/about';
+import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 
 const Stack = createNativeStackNavigator();
 const optins = { headerShown: false };
@@ -23,8 +28,41 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={optins}
+        name={ROUTES.Profile}
+        component={Profile}
+      />
+      <Stack.Screen options={optins} name={ROUTES.Gender} component={Gender} />
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.GenderPronoun}
+        component={GenderProunoun}
+      />
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.SexualOrientation}
+        component={SexualOrientation}
+      />
+      <Stack.Screen
+        options={optins}
         name={ROUTES.LookingFor}
         component={LookingFor}
+      />
+
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.MaritalStatus}
+        component={MaritalStatus}
+      />
+      <Stack.Screen options={optins} name={ROUTES.Kids} component={Kids} />
+
+      <Stack.Screen options={optins} name={ROUTES.Habits} component={Habits} />
+
+      <Stack.Screen options={optins} name={ROUTES.About} component={About} />
+
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.Hobbies}
+        component={Hobbies}
       />
 
       <Stack.Screen
@@ -63,18 +101,6 @@ export const StackNavigator = () => {
 
       <Stack.Screen
         options={optins}
-        name={ROUTES.GenderPronoun}
-        component={GenderProunoun}
-      />
-
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.SexualOrientation}
-        component={SexualOrientation}
-      />
-      <Stack.Screen options={optins} name={ROUTES.Gender} component={Gender} />
-      <Stack.Screen
-        options={optins}
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
@@ -85,11 +111,6 @@ export const StackNavigator = () => {
         component={TabNavigator}
       />
 
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
       <Stack.Screen
         options={optins}
         name={ROUTES.CommunityChatMessage}

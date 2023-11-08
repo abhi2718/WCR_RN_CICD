@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1, // iOS box shadow opacity
     shadowRadius: sizes[4], // iOS box shadow radius
     width: '100%',
+    zIndex: 9999,
   },
   bntText: {
     color: '#FEFBFD',

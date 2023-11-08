@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { RadioButton, Text } from 'react-native-paper';
 import { PrimaryButton } from '../../../../../components/button';
@@ -35,19 +35,13 @@ const GenderProunoun = (props: any) => {
       <View style={genderPronounStyle.container}>
         <View style={genderPronounStyle.innerView}>
           <View style={{ flex: 1 }}>
-            <Row
-              justifyContent="space-between"
-              style={genderPronounStyle.rowHeader}
-            >
-              <ImageContainer
-                height={sizes[7]}
-                width={sizes[7]}
+            <Row justifyContent="space-between" alignItems="center">
+              <Image
+                style={genderPronounStyle.arrow}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
-
-              <ImageContainer
-                height={sizes[9]}
-                width={sizes[9]}
+              <Image
+                style={genderPronounStyle.logo}
                 source={require('../../../../../assets/images/logo.png')}
               />
               <View />
@@ -57,7 +51,7 @@ const GenderProunoun = (props: any) => {
               How would you like to be addressed?
             </Text>
 
-            <View style={genderPronounStyle.radioButtonContainer}>
+            <View>
               {genderPronounArray.map((option) => (
                 <RadioButton.Group
                   onValueChange={handleGenderPronounValue}

@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import { PrimaryButton } from '../../../../../components/button';
@@ -62,33 +63,26 @@ const Profile = (props: any) => {
     <ScreenContainer>
       <View style={profileStyles.container}>
         <View style={profileStyles.innerView}>
-          <ModalComponent
+          {/* <ModalComponent
             isVisible={isWelcomeModalVisible}
             onClose={closeModal}
-          />
+          /> */}
 
           <View style={{ flex: 1 }}>
-            <Row
-              alignItems="center"
-              justifyContent="space-between"
-              style={profileStyles.rowHeader}
-            >
-              <ImageContainer
-                height={sizes[7]}
-                width={sizes[7]}
+            <Row justifyContent="space-between" alignItems="center">
+              <Image
+                style={profileStyles.arrow}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
-
-              <ImageContainer
-                height={40}
-                width={40}
+              <Image
+                style={profileStyles.logo}
                 source={require('../../../../../assets/images/logo.png')}
               />
               <View />
             </Row>
 
             <Text style={profileStyles.subHeader}>
-              Let us know a little about you.
+              Let's get started!{`\n`}Tell us a little about you.
             </Text>
 
             <FlatInput
@@ -148,9 +142,8 @@ const Profile = (props: any) => {
                 style={profileStyles.openButton}
                 onPress={toggleModal}
               >
-                <ImageContainer
-                  height={sizes[2]}
-                  width={sizes[5]}
+                <Image
+                  style={profileStyles.openButtonImg}
                   source={require('../../../../../assets/images/icons/calender.png')}
                 />
               </TouchableOpacity>

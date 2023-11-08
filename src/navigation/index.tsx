@@ -27,6 +27,11 @@ export enum ROUTES {
   AddEthnicity = '/addEthnicity',
   LookingFor = '/looking-for',
   CommunityChatMessage = '/community-chat-message',
+  MaritalStatus = '/maritalStatus',
+  Kids = '/kids',
+  Habits = '/habits',
+  About = '/about',
+  Hobbies = '/hobbies',
 }
 export default function Navigator() {
   useCometChatInit();

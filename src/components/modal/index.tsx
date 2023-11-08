@@ -5,6 +5,7 @@ import { ImageContainer, Row } from '../tools';
 import { PrimaryButton } from '../button';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
+import { fontSizes } from '../../infrastructure/theme/fonts';
 
 export const ModalComponent = (props: ModalProps) => {
   const { isVisible, onClose } = props;
@@ -24,12 +25,11 @@ export const ModalComponent = (props: ModalProps) => {
 
           <Row style={styles.row}>
             <ImageContainer
-              height={sizes[5]}
-              width={sizes[5]}
+              style={styles.icon}
               source={require('../../assets/images/icons/userProfile.png')}
             />
 
-            <Text>
+            <Text style={styles.text}>
               Use your real name that matches your degree only First Name shown
               by default, or add a display name.
             </Text>
@@ -37,12 +37,11 @@ export const ModalComponent = (props: ModalProps) => {
 
           <Row style={styles.row}>
             <ImageContainer
-              height={sizes[5]}
-              width={sizes[5]}
+              style={styles.icon}
               source={require('../../assets/images/icons/blockUser.png')}
             />
 
-            <Text>
+            <Text style={styles.text}>
               Your profile picture shows your face clearly - no shades, masks,
               or obstructions
             </Text>
@@ -50,12 +49,11 @@ export const ModalComponent = (props: ModalProps) => {
 
           <Row style={styles.row}>
             <ImageContainer
-              height={sizes[5]}
-              width={sizes[5]}
+              style={styles.icon}
               source={require('../../assets/images/icons/blackCheck.png')}
             />
 
-            <Text>
+            <Text style={styles.text}>
               Use your real name that matches your degree only First Name shown
               by default, or add a display name.
             </Text>
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: sizes[4],
     paddingTop: sizes[5],
     paddingBottom: sizes[4],
-    paddingHorizontal: sizes[4],
+    paddingHorizontal: sizes[3],
     shadowColor: colors.ui.black,
 
     shadowOffset: {
@@ -112,9 +110,19 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: sizes[1],
   },
+  text: {
+    color: colors.ui.text,
+    fontSize: fontSizes.text,
+  },
+  icon: {
+    width: sizes[5],
+    height: sizes[5],
+  },
   footerText: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: sizes[4],
+    marginVertical: sizes[3],
+    color: colors.ui.black,
   },
 });
