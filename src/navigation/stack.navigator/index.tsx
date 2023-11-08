@@ -28,6 +28,22 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={options}
+        name={ROUTES.Profession}
+        component={Profession}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.AddEthnicity}
+        component={AddEthnicity}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Onboarding}
+        component={Onboarding}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.Profile}
         component={Profile}
       />
@@ -67,51 +83,22 @@ export const StackNavigator = () => {
 
       <Stack.Screen
         options={options}
-        name={ROUTES.AddEthnicity}
-        component={AddEthnicity}
-      />
-
-      <Stack.Screen
-        options={options}
         name={ROUTES.ProfilePic}
         component={AddProfilePic}
       />
 
       <Stack.Screen
         options={options}
-        name={ROUTES.Onboarding}
-        component={Onboarding}
-      />
-      <Stack.Screen
-        options={options}
         name={ROUTES.SignIn}
         component={SignInScreen}
       />
 
-      <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
-
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Profession}
-        component={Profession}
-      />
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
         component={LocationScreen}
       />
 
-      <Stack.Screen
-        options={options}
-        name={ROUTES.GenderPronoun}
-        component={GenderProunoun}
-      />
-
-      <Stack.Screen
-        options={options}
-        name={ROUTES.SexualOrientation}
-        component={SexualOrientation}
-      />
       <Stack.Screen
         options={options}
         name={ROUTES.EmailAuth}
@@ -124,11 +111,6 @@ export const StackNavigator = () => {
         component={TabNavigator}
       />
 
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
       <Stack.Screen
         options={options}
         name={ROUTES.CommunityChatMessage}

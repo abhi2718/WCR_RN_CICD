@@ -4,7 +4,7 @@ import {
   Row,
   ScreenContainer,
 } from '../../../../../components/tools';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { profession } from './professionStyle';
 import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
@@ -33,21 +33,17 @@ const Profession = (props: ScreenParams) => {
       <View style={profession.container}>
         <View style={profession.innerView}>
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" style={profession.rowHeader}>
-              <ImageContainer
-                height={sizes[7]}
-                width={sizes[7]}
+            <Row justifyContent="space-between" alignItems="center">
+              <Image
+                style={profession.arrow}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
-
-              <ImageContainer
-                height={sizes[9]}
-                width={sizes[9]}
+              <Image
+                style={profession.logo}
                 source={require('../../../../../assets/images/logo.png')}
               />
-              <View />
+              <Text style={profession.skipBtn}>Skip</Text>
             </Row>
-
             <Text style={profession.subHeader}>
               Tell us about your profession
             </Text>

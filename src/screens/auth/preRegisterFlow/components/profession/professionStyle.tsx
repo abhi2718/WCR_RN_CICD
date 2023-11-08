@@ -10,8 +10,32 @@ import { sizes } from '../../../../../infrastructure/theme/sizes';
 export const profession = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
   },
-
+  arrow: {
+    height: sizes[4],
+  },
+  logo: {
+    marginLeft: -5,
+    width: sizes[11],
+    height: sizes[8],
+    overflow: 'visible',
+  },
+  skipBtn: {
+    fontSize: 20,
+    color: colors.ui.text,
+  },
+  subHeader: {
+    fontSize: fontSizes.title,
+    fontWeight: '700',
+    color: colors.ui.text,
+    marginVertical: sizes[6],
+  },
+  text: {
+    fontSize: fontSizes.text,
+    color: colors.ui.text,
+    marginTop: sizes[5],
+  },
   innerView: {
     flex: 1,
   },
@@ -23,11 +47,5 @@ export const profession = StyleSheet.create({
   rowHeader: {
     width: dimensions.width,
     maxWidth: '100%',
-  },
-  subHeader: {
-    color: colors.ui.text,
-    fontWeight: fontWeights.bold,
-    fontSize: fontSizes.h5,
-    marginTop: sizes[1],
   },
 });
