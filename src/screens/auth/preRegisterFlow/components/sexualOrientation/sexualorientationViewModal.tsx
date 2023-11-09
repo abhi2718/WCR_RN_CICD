@@ -4,6 +4,10 @@ import { ROUTES } from '../../../../../navigation';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import {
+  FlashMessageType,
+  ShowFlashMessage,
+} from '../../../../../components/flashBar';
 
 export const useSexualOrientationViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
@@ -14,7 +18,8 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
   const dispatch = useDispatch();
 
   const { navigation } = props;
-  const [sexualOrientation, setSexualOrientation] = useState('Male');
+  const updatedOrientation = user?.profile?.sexualPreference ?? ''
+  const [sexualOrientation, setSexualOrientation] = useState(updatedOrientation);
   const [checkboxState, setCheckboxState] = useState(true);
 
   const handleSexualOrientationValue = (value: string) => {
@@ -26,11 +31,18 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
   };
 
   const navigateTolocationCreen = (id: string) => {
-    navigation.navigate(ROUTES.Location,{ data: id });
+    navigation.navigate(ROUTES.Location, { data: id });
   };
 
   const updateUserDetails = async (id: string, update: string) => {
     try {
+      if (!update) {
+        return ShowFlashMessage(
+          'Warning',
+          'Please select Sexual Orientation!',
+          FlashMessageType.DANGER,
+        );
+      }
       const genderData = {
         profile: {
           sexualPreference: update,
@@ -40,9 +52,9 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
       const user = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderData,
       });
-      const data ={
-        user:user
-      }
+      const data = {
+        user: user,
+      };
       dispatch(addUser(data));
       navigateTolocationCreen(loggInUserId);
     } catch (err: any) {

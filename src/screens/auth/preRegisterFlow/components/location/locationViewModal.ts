@@ -26,10 +26,10 @@ export const useLocationViewModal = (props: ScreenParams) => {
   const [isFocus, setIsFocus] = useState(false);
 
   const [locationForm, setLocationForm] = useState<addressTypes>({
-    country: 'USA',
-    state: '',
-    city: '',
-    zipcode: '',
+    country: user.address.country ? user.address.country: 'USA',
+    state: user.address.state ? user.address.state: '',
+    city: user.address.city ? user.address.city: '',
+    zipcode: user.address.zipcode ? user.address.zipcode: '',
   });
 
   const [validationErrors, setValidationErrors] = useState<
@@ -142,7 +142,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
           'Zip code is not valid'
       ) {
         return ShowFlashMessage(
-          'warning',
+          'Warning',
           'Zip code is not valid',
           FlashMessageType.DANGER,
         );

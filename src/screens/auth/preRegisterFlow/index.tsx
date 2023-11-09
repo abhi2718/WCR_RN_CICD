@@ -13,6 +13,7 @@ import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
+import { HeaderBar } from '../../../components/header';
 const Gender = (props: ScreenParams) => {
   const {
     gender,
@@ -28,17 +29,7 @@ const Gender = (props: ScreenParams) => {
         <View style={genderStyle.container}>
           <View style={genderStyle.innerView}>
             <View style={genderStyle.innerView}>
-              <Row justifyContent="space-between" alignItems="center">
-                <Image
-                  style={genderStyle.arrow}
-                  source={require('../../../assets/images/icons/arrow.png')}
-                />
-                <Image
-                  style={genderStyle.logo}
-                  source={require('../../../assets/images/logo.png')}
-                />
-                <View />
-              </Row>
+            <HeaderBar></HeaderBar>
               <Text style={genderStyle.subHeader}>
                 Choose your gender identity
               </Text>

@@ -13,6 +13,8 @@ import { userDegree } from '../../../../../utils/constanst';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useProfessionModal } from './professionViewModal';
 import { ErrorText } from '../../../signin/signInStyle';
+import { Header } from '@cometchat/chat-uikit-react-native/src/CometChatContacts/Header';
+import { HeaderBar } from '../../../../../components/header';
 
 // import AntDesign from '@expo/vector-icons/AntDesign';
 
@@ -33,17 +35,7 @@ const Profession = (props: ScreenParams) => {
       <View style={profession.container}>
         <View style={profession.innerView}>
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" alignItems="center">
-              <Image
-                style={profession.arrow}
-                source={require('../../../../../assets/images/icons/arrow.png')}
-              />
-              <Image
-                style={profession.logo}
-                source={require('../../../../../assets/images/logo.png')}
-              />
-              <Text style={profession.skipBtn}>Skip</Text>
-            </Row>
+            <HeaderBar></HeaderBar>
             <Text style={profession.subHeader}>
               Tell us about your profession
             </Text>

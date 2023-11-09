@@ -14,6 +14,7 @@ import { sexualOrientationArray } from '../../../../../utils/constanst';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { HeaderBar } from '../../../../../components/header';
 
 const SexualOrientation = (props: ScreenParams) => {
   const {
@@ -31,24 +32,13 @@ const SexualOrientation = (props: ScreenParams) => {
       <View style={SexualOrientationStyle.container}>
         <View style={SexualOrientationStyle.innerView}>
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" alignItems="center">
-              <Image
-                style={SexualOrientationStyle.arrow}
-                source={require('../../../../../assets/images/icons/arrow.png')}
-              />
-              <Image
-                style={SexualOrientationStyle.logo}
-                source={require('../../../../../assets/images/logo.png')}
-              />
-              <View />
-            </Row>
-
+            <HeaderBar></HeaderBar>
             <Text style={SexualOrientationStyle.subHeader}>
               Your flavor of love
             </Text>
 
             <View>
-              {sexualOrientationArray.map((option,index) => (
+              {sexualOrientationArray.map((option, index) => (
                 <RadioButton.Group
                   key={index}
                   onValueChange={handleSexualOrientationValue}
