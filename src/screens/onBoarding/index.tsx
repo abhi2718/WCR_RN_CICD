@@ -3,6 +3,7 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import {
   dimensions,
   ImageContainer,
+  Row,
   ScreenContainer,
 } from '../../components/tools';
 import { PrimaryButton } from '../../components/button';
@@ -33,7 +34,8 @@ const Onboarding = (props: ScreenParams) => {
                 Verified profiles, shared interests
               </Text>
             </View>
-            <ImageContainer
+            <Image
+              resizeMode="contain"
               style={styles.scrollImg}
               source={require('../../assets/images/icons/scroll1.png')}
             />
@@ -44,7 +46,7 @@ const Onboarding = (props: ScreenParams) => {
       {currentView === 2 && (
         <View style={styles.container}>
           <View style={styles.rowOne}>
-             <Image
+            <Image
               resizeMode="contain"
               style={{ width: dimensions.width }}
               source={require('../../assets/images/onBoardingTwo.png')}
@@ -59,7 +61,8 @@ const Onboarding = (props: ScreenParams) => {
                 Build meaningful relationships
               </Text>
             </View>
-            <ImageContainer
+            <Image
+              resizeMode="contain"
               style={styles.scrollImg}
               source={require('../../assets/images/icons/scroll2.png')}
             />
@@ -70,7 +73,7 @@ const Onboarding = (props: ScreenParams) => {
       {currentView === 3 && (
         <View style={styles.container}>
           <View style={styles.rowOne}>
-              <Image
+            <Image
               resizeMode="contain"
               style={{ width: dimensions.width }}
               source={require('../../assets/images/onBoardingThree.png')}
@@ -85,7 +88,8 @@ const Onboarding = (props: ScreenParams) => {
                 No more waiting - let's get started!
               </Text>
             </View>
-            <ImageContainer
+            <Image
+              resizeMode="contain"
               style={styles.scrollImg}
               source={require('../../assets/images/icons/scroll3.png')}
             />

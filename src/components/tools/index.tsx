@@ -10,7 +10,7 @@ import {
   StyleSheet,
   ImageSourcePropType,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { InputProps } from '../../types/components/input.type';
 import { rowColumnProps } from '../../types/components/rowColumn.type';
@@ -53,7 +53,8 @@ export const Logo = ({
   height?: number;
 }) => {
   return (
-    <ImageContainer
+    <Image
+      resizeMode="contain"
       style={{ width, height }}
       source={require('../../assets/images/logo.png')}
     />

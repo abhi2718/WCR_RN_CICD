@@ -41,5 +41,7 @@ export const styles = StyleSheet.create({
   },
   scrollImg: {
     height: sizes[1],
+    width: '100%',
+    overflow: 'visible',
   },
 });

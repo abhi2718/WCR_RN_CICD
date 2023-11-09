@@ -13,6 +13,7 @@ import { genderPronounStyle } from './genderPronounStyle';
 import { useGenderPronounViewModal } from './genderPronounViewModal';
 import { genderPronounArray } from '../../../../../utils/constanst';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { colors } from '../../../../../infrastructure/theme/colors';
 
 const GenderProunoun = (props: any) => {
   const {
@@ -44,14 +45,14 @@ const GenderProunoun = (props: any) => {
               How would you like to be addressed?
             </Text>
             <View>
-              {genderPronounArray.map((option,index) => (
+              {genderPronounArray.map((option, index) => (
                 <RadioButton.Group
                   key={index}
                   onValueChange={handleGenderPronounValue}
                   value={genderPronoun}
                 >
                   <Row style={genderPronounStyle.rowView} alignItems="center">
-                    <RadioButton value={option} />
+                    <RadioButton color={colors.ui.primary} value={option} />
                     <Text style={genderPronounStyle.btnText}>{option}</Text>
                   </Row>
                 </RadioButton.Group>
@@ -64,7 +65,7 @@ const GenderProunoun = (props: any) => {
               <BouncyCheckbox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
-                fillColor="red"
+                fillColor={colors.ui.primary}
                 unfillColor="#FFFFFF"
               />
               {/* <Checkbox status="checked" /> */}

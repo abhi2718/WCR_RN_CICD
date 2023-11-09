@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   ScreenParams,
   professionTypes,
@@ -13,11 +13,13 @@ export const useProfessionModal = (props: ScreenParams) => {
   const [isFocus, setIsFocus] = useState(false);
   const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
 
-  const {user} = useSelector(({userState}) => userState);
-  const dispatch = useDispatch()
+  const { user } = useSelector(({ userState }) => userState);
+  const dispatch = useDispatch();
 
   const [professionForm, setProfessionForm] = useState<professionTypes>({
-    userDegree: user?.designation?.userDegree ? user?.designation?.userDegree : '',
+    userDegree: user?.designation?.userDegree
+      ? user?.designation?.userDegree
+      : '',
     primaryDegree: '',
     institution: '',
     title: '',
@@ -46,9 +48,9 @@ export const useProfessionModal = (props: ScreenParams) => {
     const user = await updateUserDetailsRepository.me(
       '653a9ad26b7a2255d03bf4fd',
     );
-    const data ={
-      user:user
-    }
+    const data = {
+      user: user,
+    };
     dispatch(addUser(data));
   };
 
@@ -89,7 +91,6 @@ export const useProfessionModal = (props: ScreenParams) => {
           update: professionData,
         },
       );
-
     } catch (err: any) {
       console.log(err.toString(), err);
     }

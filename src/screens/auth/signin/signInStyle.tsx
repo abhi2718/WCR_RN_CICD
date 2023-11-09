@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
+import { fontSizes } from '../../../infrastructure/theme/fonts';
 
 export const ErrorText = styled.Text`
   color: red;
@@ -14,8 +15,9 @@ export const styles = StyleSheet.create({
 
   emailInputBox: {
     flex: 1,
+    fontSize: fontSizes.text,
     color: colors.ui.text,
-    paddingVertical: sizes[2],
+    paddingVertical: sizes[3],
   },
   emailIconStyle: {
     height: sizes[5],

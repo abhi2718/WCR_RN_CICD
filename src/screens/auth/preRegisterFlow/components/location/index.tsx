@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
-import {
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../../../../components/tools';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Row, ScreenContainer } from '../../../../../components/tools';
+import { Image, Text, View } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { location } from './locationStyle';
 import {
@@ -12,7 +8,6 @@ import {
   FlatInput,
   SearchableDropdownInput,
 } from '../../../../../components/inputBox';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { country } from '../../../../../utils/constanst';
 import { useLocationViewModal } from './locationViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
@@ -35,16 +30,14 @@ const LocationScreen = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={location.container}>
         <View style={location.innerView}>
-          <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" style={location.rowHeader}>
-              <ImageContainer
-                height={sizes[6]}
-                width={sizes[6]}
+          <View style={location.innerView}>
+            <Row justifyContent="space-between" alignItems="center">
+              <Image
+                style={location.arrow}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
-              <ImageContainer
-                height={sizes[9]}
-                width={9}
+              <Image
+                style={location.logo}
                 source={require('../../../../../assets/images/logo.png')}
               />
               <View />
@@ -85,9 +78,7 @@ const LocationScreen = (props: ScreenParams) => {
               <FlatInput
                 label="City"
                 value={locationForm.city}
-                onChangeText={(text: any) =>
-                  handleInputChange('city', text)
-                }
+                onChangeText={(text: any) => handleInputChange('city', text)}
                 error={validationErrors.city}
               />
               {validationErrors.city && (
@@ -99,9 +90,7 @@ const LocationScreen = (props: ScreenParams) => {
                 placeholder={zipPlaceHolder}
                 maxLength={locationForm.country === 'USA' ? 5 : 6}
                 value={locationForm.zipcode}
-                onChangeText={(text: any) =>
-                  handleInputChange('zipcode', text)
-                }
+                onChangeText={(text: any) => handleInputChange('zipcode', text)}
                 error={validationErrors.zipcode}
               />
               {validationErrors.zipcode && (
@@ -120,14 +109,3 @@ const LocationScreen = (props: ScreenParams) => {
 };
 
 export default LocationScreen;
-
-const styles = StyleSheet.create({
-  label: {
-    backgroundColor: 'white',
-    left: 3,
-    top: 20,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 12,
-  },
-});
