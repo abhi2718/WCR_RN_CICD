@@ -9,13 +9,16 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import {ActivityIndicator} from 'react-native-paper';
-import {ButtonProps} from '../../types/components/button.type';
+import { ActivityIndicator } from 'react-native-paper';
+import { ButtonProps } from '../../types/components/button.type';
 import styled from 'styled-components';
-import {dimensions} from '../tools';
+import { dimensions } from '../tools';
+import { colors } from '../../infrastructure/theme/colors';
+import { sizes } from '../../infrastructure/theme/sizes';
+import { fontWeights } from '../../infrastructure/theme/fonts';
 
 export const Button = (props: ButtonProps) => {
-  const {title, onPress, isLoading} = props;
+  const { title, onPress, isLoading } = props;
   return (
     <>
       {isLoading ? (
@@ -34,14 +37,15 @@ export const Button = (props: ButtonProps) => {
 };
 
 export const PrimaryButton = (props: ButtonProps) => {
-  const {title, onPress, btnColor} = props;
+  const { title, onPress, btnColor } = props;
   return (
     <TouchableOpacity
       style={{
         ...styles.primaryButton,
-        backgroundColor: btnColor ? btnColor : '#BB0000',
+        backgroundColor: btnColor ? btnColor : colors.ui.primary,
       }}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       <View>
         <Text style={styles.bntText}>{title}</Text>
       </View>
@@ -50,7 +54,7 @@ export const PrimaryButton = (props: ButtonProps) => {
 };
 
 export const RoundedButtonWithIconAndText = (props: ButtonProps) => {
-  const {title, onPress, btnColor, iconSource} = props;
+  const { title, onPress, btnColor, iconSource } = props;
   return (
     <TouchableOpacity style={roundStyles.button} onPress={onPress}>
       <View style={roundStyles.buttonContainer}>
@@ -62,29 +66,29 @@ export const RoundedButtonWithIconAndText = (props: ButtonProps) => {
 };
 const roundStyles = StyleSheet.create({
   button: {
-    borderRadius: 62,
-    backgroundColor: '#fff',
+    borderRadius: sizes[15],
+    backgroundColor: colors.bg.primary,
     borderColor: 'rgba(35, 35, 35, 0.10)',
     borderWidth: 1,
-    padding: 12,
+    padding: sizes[2],
     width: '100%',
     paddingLeft: '18%',
-    marginBottom: 24,
+    marginBottom: sizes[5],
   },
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   icon: {
-    width: 25,
-    height: 25,
-    marginRight: 10,
+    width: sizes[5],
+    height: sizes[5],
+    marginRight: sizes[1],
     overflow: 'visible',
   },
   buttonText: {
     color: '#000',
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: sizes[3],
+    fontWeight: fontWeights.medium,
   },
 });
 
@@ -92,33 +96,32 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'blue',
     width: 200,
-    padding: 16,
-    borderRadius: 16,
+    padding: sizes[3],
+    borderRadius: sizes[3],
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: sizes[3],
   },
   primaryButton: {
-    padding: 16,
-    borderRadius: 28,
+    padding: sizes[3],
+    borderRadius: sizes[6],
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FA5672',
-    elevation: 5,
+    elevation: sizes[0],
     shadowColor: 'rgba(250, 86, 114, 0.15)', // iOS box shadow color
-    shadowOffset: {width: 3, height: 21}, // iOS box shadow offset
+    shadowOffset: { width: sizes[0], height: sizes[4] }, // iOS box shadow offset
     shadowOpacity: 1, // iOS box shadow opacity
-    shadowRadius: 18, // iOS box shadow radius
+    shadowRadius: sizes[4], // iOS box shadow radius
     width: '100%',
-    marginTop: 10,
+    zIndex: 9999,
   },
   bntText: {
     color: '#FEFBFD',
-    fontSize: 16,
+    fontSize: sizes[3],
     fontStyle: 'normal',
-    fontWeight: '700',
+    fontWeight: fontWeights.bold,
   },
 });

@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {sizes} from '../../../../../infrastructure/theme/sizes';
-import {colors} from '../../../../../infrastructure/theme/colors';
+import { StyleSheet } from 'react-native';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { colors } from '../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
   scrollDiv: {

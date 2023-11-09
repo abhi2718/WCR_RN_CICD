@@ -1,68 +1,64 @@
-import {StyleSheet} from 'react-native';
-import {dimensions} from '../../../../../components/tools';
+import { StyleSheet } from 'react-native';
+import { dimensions } from '../../../../../components/tools';
+import { colors } from '../../../../../infrastructure/theme/colors';
+import {
+  fontSizes,
+  fontWeights,
+} from '../../../../../infrastructure/theme/fonts';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 export const profileStyles = StyleSheet.create({
   container: {
-    // flex: 1,
-    width: dimensions.width,
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'space-between',
   },
-  inputDiv: {
-    alignSelf: 'stretch',
-    backgroundColor: '#f8f8f9',
-    borderRadius: 14,
-    height: 56,
-    marginTop: 24,
+  arrow: {
+    height: sizes[4],
   },
-  datePicker: {
-    width: '100%',
-    marginBottom: 20,
+  logo: {
+    marginLeft: -45,
+    width: sizes[11],
+    height: sizes[8],
+    overflow: 'visible',
   },
-  errorText: {
-    color: 'red',
+  skipBtn: {
+    fontSize: 20,
+    color: colors.ui.text,
   },
-  input: {
-    alignSelf: 'stretch',
-    fontSize: 18,
-    borderWidth: 0,
-    borderColor: 'transparent',
+  subHeader: {
+    fontSize: fontSizes.title,
+    fontWeight: '700',
+    color: colors.ui.text,
+    marginVertical: sizes[6],
   },
-  spacerStyle: {
-    alignSelf: 'stretch',
-  },
-  buttonText: {
-    color: '#FEFBFD',
-    fontSize: 16,
-    textAlign: 'center',
+  text: {
+    fontSize: fontSizes.text,
+    color: colors.ui.text,
+    marginTop: sizes[5],
   },
 
-  datePickercontainer: {
+  innerView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+
+  rowHeader: {
+    width: dimensions.width,
+    maxWidth: '100%',
+  },
+
+  datePickerContainer: {
+    flex: 1,
+    position: 'relative',
+    width: '100%',
   },
   openButton: {
-    fontSize: 18,
-    color: 'blue',
+    position: 'absolute',
+    right: 0,
+    top: sizes[3],
+    zIndex: 1,
   },
-  modalContainer: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  error: {
-    color: 'red',
-    marginBottom: 10,
-  },
-  closeButton: {
-    fontSize: 18,
-    color: 'blue',
-    alignSelf: 'flex-end',
+  openButtonImg: {
+    width: sizes[7],
+    height: sizes[7],
   },
 });

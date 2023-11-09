@@ -1,31 +1,38 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
+
 import {
   Text,
   TextInput,
   View,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import {PrimaryButton} from '../../../../../components/button';
+
+import { PrimaryButton } from '../../../../../components/button';
 import {
   ImageContainer,
+  Row,
+  ScreenContainer,
   Spacer,
   dimensions,
 } from '../../../../../components/tools';
-import {useViewModal} from '../../signinViewModal';
-import {profileUseViewModal} from './profileViewModal';
-import {profileStyles} from './profileStyle';
+import { useViewModal } from '../../signinViewModal';
+import { useProfileUseViewModal } from './profileViewModal';
+import { profileStyles } from './profileStyle';
 import DatePicker from 'react-native-date-picker';
 import Modal from 'react-native-modal';
 //import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
 //import {ModalComponent} from '../../../../components/modal/index';
 import moment from 'moment';
-import {ModalComponent} from '../../../../../components/modal';
-import {calculateDateLessThan18YearsAgo} from '../../../../../utils/common.functions';
+import { ModalComponent } from '../../../../../components/modal';
+import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.functions';
+import { FlatInput } from '../../../../../components/inputBox/index';
+import { ErrorText } from '../../signInStyle';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-const Profile = (props: any) => {
-  const {navigation} = props;
-  // put logic in viewModal
+const Profile = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
   let email = receivedData.email;
@@ -36,140 +43,147 @@ const Profile = (props: any) => {
     handleDateChange,
     handleSubmit,
     isWelcomeModalVisible,
-    setWelcomeModalVisible,
     toggleModal,
-    errorMessage,
-    setErrorMessage,
     selectedDate,
     formateDOB,
     isModalVisible,
     validationErrors,
     toUpperFirstName,
     formatMobile,
-    openModal,
     closeModal,
-  } = profileUseViewModal(navigation);
-  // put in viewModal
-  useEffect(() => {
-    handleInputChange('email', email);
-  }, [email]);
-  useEffect(() => {
-    openModal();
-  }, []);
+  } = useProfileUseViewModal(props);
 
   return (
-    <View style={profileStyles.container}>
-      <ModalComponent isVisible={isWelcomeModalVisible} onClose={closeModal} />
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <ImageContainer
-          height={56}
-          width={56}
-          marginTop={50}
-          marginBottom={50}
-          source={require('../../../../../assets/images/logo.png')}
-        />
-        <View style={profileStyles.inputDiv}>
-          <TextInput
-            style={profileStyles.input}
-            placeholder="First Name"
-            value={formData.firstName}
-            onChangeText={(text) =>
-              handleInputChange('firstName', toUpperFirstName(text))
-            }
-          />
-          {validationErrors.firstName && (
-            <Text style={profileStyles.errorText}>
-              {validationErrors.firstName}
+    <ScreenContainer>
+      <View style={profileStyles.container}>
+        <View style={profileStyles.innerView}>
+          {/* <ModalComponent
+            isVisible={isWelcomeModalVisible}
+            onClose={closeModal}
+          /> */}
+
+          <View style={{ flex: 1 }}>
+            <Row justifyContent="space-between" alignItems="center">
+              <Image
+                style={profileStyles.arrow}
+                source={require('../../../../../assets/images/icons/arrow.png')}
+              />
+              <Image
+                style={profileStyles.logo}
+                source={require('../../../../../assets/images/logo.png')}
+              />
+              <View />
+            </Row>
+
+            <Text style={profileStyles.subHeader}>
+              Let's get started!{`\n`}Tell us a little about you.
             </Text>
-          )}
+
+            <FlatInput
+              label="First Name"
+              value={formData.firstName}
+              onChangeText={(text: string) =>
+                handleInputChange('firstName', toUpperFirstName(text))
+              }
+              error={validationErrors.firstName}
+            />
+            {validationErrors.firstName && (
+              <ErrorText> {validationErrors.firstName}</ErrorText>
+            )}
+
+            <FlatInput
+              label="Last Name"
+              value={formData.lastName}
+              onChangeText={(text: string) =>
+                handleInputChange('lastName', toUpperFirstName(text))
+              }
+              error={validationErrors.lastName}
+            />
+            {validationErrors.lastName && (
+              <ErrorText> {validationErrors.lastName}</ErrorText>
+            )}
+
+            <FlatInput
+              label="Display Name"
+              value={formData.displayName}
+              onChangeText={(text: string) =>
+                handleInputChange('displayName', text)
+              }
+            />
+
+            <FlatInput
+              label="Mobile No"
+              value={formData.mobile}
+              onChangeText={(text: string) =>
+                handleInputChange('mobile', formatMobile(text))
+              }
+              error={validationErrors.mobile}
+            />
+            {validationErrors.mobile && (
+              <ErrorText> {validationErrors.mobile}</ErrorText>
+            )}
+
+            <FlatInput
+              editable={email ? false : true}
+              value={formData.email}
+              onChangeText={(text: string) => handleInputChange('email', text)}
+              label="Email"
+              theme={{ colors: { primary: 'red' } }}
+            />
+
+            <View style={profileStyles.datePickerContainer}>
+              <TouchableOpacity
+                style={profileStyles.openButton}
+                onPress={toggleModal}
+              >
+                <Image
+                  style={profileStyles.openButtonImg}
+                  source={require('../../../../../assets/images/icons/calender.png')}
+                />
+              </TouchableOpacity>
+
+              <DatePicker
+                modal
+                mode="date"
+                open={isModalVisible}
+                maximumDate={calculateDateLessThan18YearsAgo(new Date())}
+                date={selectedDate}
+                onDateChange={handleDateChange}
+                onConfirm={(date) => {
+                  toggleModal();
+                  handleDateChange(date);
+                }}
+                onCancel={() => {
+                  toggleModal();
+                }}
+              />
+              <FlatInput
+                editable={true}
+                label="MM/DD/YYYY"
+                value={formData.dob}
+                onChangeText={(text: string) =>
+                  handleInputChange('dob', formateDOB(text))
+                }
+                error={validationErrors.dob}
+              />
+              {validationErrors.dob && (
+                <ErrorText> {validationErrors.dob}</ErrorText>
+              )}
+            </View>
+          </View>
+
+          <View>
+            <Spacer position="top" size={25}>
+              <PrimaryButton
+                title="Submit"
+                // onPress={() => newUserSignUp(receivedData?.email)}
+                onPress={() => handleSubmit(credential)}
+              />
+            </Spacer>
+          </View>
         </View>
-        <View style={profileStyles.inputDiv}>
-          <TextInput
-            style={profileStyles.input}
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChangeText={(text) =>
-              handleInputChange('lastName', toUpperFirstName(text))
-            }
-          />
-          {validationErrors.lastName && (
-            <Text style={profileStyles.errorText}>
-              {validationErrors.lastName}
-            </Text>
-          )}
-        </View>
-        <View style={profileStyles.inputDiv}>
-          <TextInput
-            style={profileStyles.input}
-            placeholder="Display Name"
-            value={formData.displayName}
-            onChangeText={(text) => handleInputChange('displayName', text)}
-          />
-        </View>
-        <View style={profileStyles.inputDiv}>
-          <TextInput
-            style={profileStyles.input}
-            placeholder="Mobile No"
-            value={formData.mobile}
-            onChangeText={(text) =>
-              handleInputChange('mobile', formatMobile(text))
-            }
-          />
-          {validationErrors.mobile && (
-            <Text style={profileStyles.errorText}>
-              {validationErrors.mobile}
-            </Text>
-          )}
-        </View>
-        <View style={profileStyles.inputDiv}>
-          <TextInput
-            style={profileStyles.input}
-            editable={email ? false : true}
-            placeholder="Email"
-            value={formData.email}
-            onChangeText={(text) => handleInputChange('email', text)}
-          />
-        </View>
-        <View style={profileStyles.inputDiv}>
-          <TouchableOpacity onPress={toggleModal}>
-            <Text style={profileStyles.openButton}>Selecte Date</Text>
-          </TouchableOpacity>
-          <DatePicker
-            modal
-            mode="date"
-            open={isModalVisible}
-            maximumDate={calculateDateLessThan18YearsAgo(new Date())}
-            date={selectedDate}
-            onDateChange={handleDateChange}
-            onConfirm={(date) => {
-              // put inviewModal
-              toggleModal();
-              handleDateChange(date);
-            }}
-            onCancel={() => {
-              // put inviewModal
-              toggleModal();
-            }}
-          />
-          <TextInput
-            editable={true}
-            style={profileStyles.input}
-            placeholder="MM/DD/YYYY"
-            value={formData.dob}
-            onChangeText={(text) => handleInputChange('dob', formateDOB(text))}
-          />
-          {validationErrors.dob && (
-            <Text style={profileStyles.errorText}>{validationErrors.dob}</Text>
-          )}
-        </View>
-        <Spacer style={profileStyles.spacerStyle} position="top" size={25}>
-          <PrimaryButton
-            title="Submit"
-            onPress={() => handleSubmit(credential, appleId)}
-          />
-        </Spacer>
-      </ScrollView>
-    </View>
+      </View>
+    </ScreenContainer>
   );
 };
 

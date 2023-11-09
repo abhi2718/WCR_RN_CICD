@@ -71,8 +71,7 @@ export class ApiService {
       case 404:
         throw new AppExcaptions(body.message, 'Not found');
       case 422:
-        throw new AppExcaptions(body.message, 'Validation Error'); 
-      case 500:
+        throw new AppExcaptions(body.message, 'Validation Error');    case 500:
         throw new AppExcaptions(body.message, 'Internal server error ');
       default:
         throw new Error('Something went wrong while fetching data');

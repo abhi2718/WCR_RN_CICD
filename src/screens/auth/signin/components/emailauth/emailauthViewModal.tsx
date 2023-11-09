@@ -2,12 +2,13 @@ import {useState} from 'react';
 import {OtpRepository} from '../../../../../repository/otp.repo';
 import {ShowFlashMessage} from '../../../../../components/flashBar';
 import {useViewModal} from '../../signinViewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-export const emailAuthViewModal = (props: any) => {
+export const useEmailAuthViewModal = (props: ScreenParams) => {
   const {navigation} = props;
   const receivedData = props.route?.params?.data || 'No data received';
-  let firstName = receivedData.firstName;
-  let lastName = receivedData.lastName;
+  let fbId = receivedData?.fbId;
+
   let email = receivedData.email;
   let firebaseUid = receivedData.firebaseUid;
   let credential = receivedData.credential;
@@ -15,12 +16,12 @@ export const emailAuthViewModal = (props: any) => {
   const [emailInput, setEmailInput] = useState('');
   const [otp, setOtp] = useState('');
 
-  let {setLoading, checkIsNewUser} = useViewModal(navigation);
+  let {setLoading, checkIsNewUser} = useViewModal(props);
 
   const verifyEmail = async () => {
     try {
       setLoading(true);
-      const {data} = await otpInRepository.verifytOtp({email, code:otp});
+      const {data} = await otpInRepository.verifytOtp({email, code: otp});
       setLoading(false);
       if (data?.message === 'Verified') {
         checkIsNewUser(email);
@@ -48,5 +49,8 @@ export const emailAuthViewModal = (props: any) => {
     otp,
     email,
     setOtp,
+    credential,
+    fbId,
+    firebaseUid,
   };
 };

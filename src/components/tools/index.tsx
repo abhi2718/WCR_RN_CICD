@@ -1,5 +1,4 @@
-import { colors } from './../../infrastructure/theme/colors';
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
 import {
   Platform,
@@ -13,21 +12,23 @@ import {
   StatusBar,
   ActivityIndicator
 } from 'react-native';
-import {InputProps} from '../../types/components/input.type';
-import {rowColumnProps} from '../../types/components/rowColumn.type';
-import {imageProps} from '../../types/components/image.type';
+import { InputProps } from '../../types/components/input.type';
+import { rowColumnProps } from '../../types/components/rowColumn.type';
+import { imageProps } from '../../types/components/image.type';
+import { sizes } from '../../infrastructure/theme/sizes';
 
 interface ScreenContainerProps {
   children: ReactNode;
 }
-export const ScreenContainer: React.FC<ScreenContainerProps> = ({children}) => {
+export const ScreenContainer: React.FC<ScreenContainerProps> = ({
+  children,
+}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>{children}</View>
     </SafeAreaView>
   );
 };
-
 
 const InputContainer = styled.TextInput<InputProps>`
   padding: 15px;
@@ -38,26 +39,26 @@ export const InputBox: React.FC<InputProps> = (props) => {
   return <InputContainer {...props} />;
 };
 
-const ImageProps = styled.Image<imageProps>`
-  height: ${({height = 50}) => `${height}px`};
-  width: ${({width = 50}) => `${width}px`};
-  margin-top: ${({marginTop = 10}) => `${marginTop}px`};
-  margin-bottom: ${({marginBottom = 10}) => `${marginBottom}px`};
-  overflow: visible;
-`;
-type NormalTextProps = {
-  color: string;
-}
-export const NormalText = styled.Text<NormalTextProps>`
-color: ${({theme,color})=>`${color?color:theme.colors.ui.primary}`};
-`;
+const ImageProps = styled.Image<imageProps>``;
+
 export const ImageContainer: React.FC<imageProps> = (props) => {
-  const {source, ...otherProps} = props;
+  const { source, ...otherProps } = props;
   return <ImageProps source={source as ImageSourcePropType} {...otherProps} />;
 };
-export const Logo = ({width,height}:{width?:number,height?:number}) => {
-  return <ImageContainer style={{width,height}} source={require("../../assets/images/logo.png")} />
-}
+export const Logo = ({
+  width,
+  height,
+}: {
+  width?: number;
+  height?: number;
+}) => {
+  return (
+    <ImageContainer
+      style={{ width, height }}
+      source={require('../../assets/images/logo.png')}
+    />
+  );
+};
 
 const PageLoaderContainer = styled.View`
   flex: 1;
@@ -87,10 +88,10 @@ export const InlineLoader = () => {
 };
 
 const ChildContainer = styled.View<rowColumnProps>`
-  flex-direction: ${({flexDirection}) => flexDirection};
-  justify-content: ${({justifyContent}) => justifyContent};
-  align-items: ${({alignItems}) => alignItems};
-  flex-wrap: ${({flexWrap}) => flexWrap};
+  flex-direction: ${({ flexDirection }) => flexDirection};
+  justify-content: ${({ justifyContent }) => justifyContent};
+  align-items: ${({ alignItems }) => alignItems};
+  flex-wrap: ${({ flexWrap }) => flexWrap};
 `;
 
 export const Row: React.FC<rowColumnProps> = ({
@@ -98,12 +99,10 @@ export const Row: React.FC<rowColumnProps> = ({
   alignItems = 'stretch',
   children,
   style,
-  flexWrap = 'nowrap',
 }) => {
   const styleProps = {
     justifyContent,
     alignItems,
-    flexWrap,
     flexDirection: 'row',
   };
 
@@ -165,11 +164,11 @@ const SpacerView = styled.View``;
 type spacerProos = {
   position: string;
   size: number;
-  children: ReactNode;
+  children?: ReactNode;
   style?: object;
 };
 export const Spacer = (props: spacerProos) => {
-  const {position, size, children, style} = props;
+  const { position, size, children, style } = props;
   const computedStyle = getVariant(position, size);
   return <SpacerView style={[computedStyle, style]}>{children}</SpacerView>;
 };
@@ -177,9 +176,7 @@ export const Spacer = (props: spacerProos) => {
 export const isAndroid = Platform.OS === 'android';
 const { width, height } = Dimensions.get('window');
 const statusBarHeight = StatusBar.currentHeight || 0;
-export const dimensions = { width, height,statusBarHeight };
-
-
+export const dimensions = { width, height, statusBarHeight };
 
 const styles = StyleSheet.create({
   container: {
@@ -188,6 +185,6 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    padding: 16,
+    padding: sizes[3],
   },
 });
