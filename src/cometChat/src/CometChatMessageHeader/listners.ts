@@ -22,12 +22,9 @@ export const listners = {
         msgTypingListenerId,
         new CometChat.MessageListener({
           onTypingStarted: (typistDetails) => {
-            //console.log('onTypingStarted', typistDetails);
-
             msgTypingIndicator(typistDetails, 'typing');
           },
           onTypingEnded: (typistDetails) => {
-            //console.log('onTypingEnded', typistDetails);
             msgTypingIndicator(typistDetails, '');
           },
         })
@@ -48,7 +45,6 @@ export const listners = {
             userAddedBy,
             userAddedIn
           ) => {
-            console.log('onMemberAddedToGroup', userAddedIn);
             handleGroupListener(userAddedIn);
           },
           onGroupMemberLeft: (message, leavingUser, group) => {

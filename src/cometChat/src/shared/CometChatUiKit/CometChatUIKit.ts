@@ -26,12 +26,9 @@ export class CometChatUIKit {
     static uiKitSettings: UIKitSettings;
    static aiFeatures:AIEnabler
     static init(uiKitSettings: UIKitSettings): Promise<boolean> {
-
-        //perform sdk init taking values from uiKitSettings
         CometChatUIKit.uiKitSettings = {
             ...uiKitSettings
         };
-//console.log(uiKitSettings?.overrideAdminHost,uiKitSettings.overrideClientHost)
         var appSetting = new CometChat.AppSettingsBuilder()
             .subscribePresenceForAllUsers()
             .autoEstablishSocketConnection(uiKitSettings.autoEstablishSocketConnection)
@@ -45,7 +42,7 @@ export class CometChatUIKit {
             () => {
                 CometChat.setSource("uikit-v4", Platform.OS, "react-native")
             }, error => {
-                // console.log("Initialization failed with error:", error);
+                
             }
         );
     }
@@ -179,7 +176,6 @@ export class CometChatUIKit {
         try {
             hasAttachment = message.getAttachment();
         } catch (error) {
-           // console.log("no attachment found");
         }
         if (hasAttachment == undefined) {
             let file = message['files'][0];

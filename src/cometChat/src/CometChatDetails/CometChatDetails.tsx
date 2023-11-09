@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   FlatList,
   BackHandler,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import Header from './Header';
 import {CometChatContext, CometChatListItem} from '../shared';
 import {ICONS} from './resources';
@@ -40,7 +40,10 @@ import {CometChatGroupsMembers} from '../CometChatGroupMembers';
 import {CometChatContextType} from '../shared/base/Types';
 import {CometChatUIEventHandler} from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
 import {CometChatTransferOwnershipInterface} from '../CometChatTransferOwnership/CometChatTransferOwnership';
-import {Column, Row} from '../../../components/tools';
+import {Column, dimensions, Row, Spacer} from '../../../components/tools';
+import {MediaMessage, MediaTab} from '../../../screens/tab.screens/chat/community/components/mediaMessages';
+import {CommunityMembers} from '../../../screens/tab.screens/chat/community/components/communityMembers';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export interface ModalDetailsInterface {
   title: string;
@@ -562,7 +565,6 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       onClick,
     } = item;
     let handleInternalClick;
-    console.log(' title --->', title);
     if (!onClick) {
       handleInternalClick = handleOnClickFncDeclaration(item);
     }
@@ -839,19 +841,85 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...transferOwnershipConfiguration}
       />
     );
+  if (group) {
+    return (
+      <View>
+        <View style={{height: 200}}>
+          <Header
+            title={title}
+            showCloseButton={showCloseButton}
+            closeButtonIcon={closeButtonIcon}
+            onPress={() => {
+              onBack && onBack();
+            }}
+            titleStyle={{
+              color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+              ...(detailsStyle?.titleFont
+                ? detailsStyle?.titleFont
+                : theme.typography.heading),
+            }}
+            closeIconTint={
+              detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+            }
+          />
+          {groupDetails && (
+            <Row>
+              <Image
+                style={myStyles.imageStyle}
+                source={{uri: groupDetails?.getIcon()}}
+              />
+              <Column>
+                <Text>{groupDetails.getName()}</Text>
+                <Text>{groupDetails.getDescription()} </Text>
+              </Column>
+            </Row>
+          )}
+          {/* <Pressable onPress={handleLeaveGroup}>
+            <Text>Leave Group</Text>
+          </Pressable> */}
+        </View>
+        <View style={{height: dimensions.height - 200,backgroundColor:"#fff"}}>
+          <View style={myStyles.menuOptins}>
+            <CommunityMembers group={groupDetails} />
+          </View>
+          <MediaTab guid={groupDetails?.getGuid()}/>
+          {/* <ScrollView>
+            <Spacer position={'bottom'} size={200}>
+            <MediaMessage guid={groupDetails?.getGuid()} />
+            </Spacer>
+          </ScrollView> */}
+        </View>
+      </View>
+    );
+  }
+  if (user) {
+    return (
+      <View>
+        <View style={{height: 200}}>
+          <Header
+            title={title}
+            showCloseButton={showCloseButton}
+            closeButtonIcon={closeButtonIcon}
+            onPress={() => {
+              onBack && onBack();
+            }}
+            titleStyle={{
+              color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+              ...(detailsStyle?.titleFont
+                ? detailsStyle?.titleFont
+                : theme.typography.heading),
+            }}
+            closeIconTint={
+              detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+            }
+          />
+        </View>
+        <View style={{height: dimensions.height - 200}}></View>
+      </View>
+    );
+  }
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          width: detailsStyle?.width ?? '100%',
-          height: detailsStyle?.height ?? '100%',
-          backgroundColor:
-            detailsStyle?.backgroundColor ?? theme.palette.getBackgroundColor(),
-          borderRadius: detailsStyle?.borderRadius ?? 0,
-        },
-        detailsStyle?.border ? detailsStyle?.border : {},
-      ]}>
+    <View style={{padding: 16}}>
       <Header
         title={title}
         showCloseButton={showCloseButton}
@@ -903,17 +971,16 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
           )}
         </>
       )}
-      {/* View to show all menu like leave group */}
       <View style={myStyles.menuOptins}>
-        <FlatList
-          keyExtractor={(_, i) => i.toString()}
-          data={detailsList}
-          renderItem={ListSection}
-        />
+        <CommunityMembers group={groupDetails} />
+      </View>
+      <View>
+        <MediaMessage guid={groupDetails?.getGuid()} />
       </View>
     </View>
   );
 };
+
 const myStyles = StyleSheet.create({
   imageStyle: {
     width: 50,
@@ -921,6 +988,6 @@ const myStyles = StyleSheet.create({
     borderRadius: 25,
   },
   menuOptins: {
-    height: 200,
+    height: 50,
   },
 });

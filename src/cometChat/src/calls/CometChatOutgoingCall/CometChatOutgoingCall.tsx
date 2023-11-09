@@ -116,8 +116,7 @@ export const CometChatOutgoingCall = (props: CometChatOutgoingCallInterface) => 
           (call as CometChat.Call).setStatus("ended");
           CometChatUIEventHandler.emitCallEvent(CallUIEvents.ccCallEnded,{call});
         })
-        .catch(err => {
-          console.log("Error", err);})
+        .catch(err => {})
     }
   }
   
@@ -178,7 +177,6 @@ export const CometChatOutgoingCall = (props: CometChatOutgoingCallInterface) => 
         }
     },
       onUserJoined: user => {
-        console.log("user joined:", user);
     },
     onUserLeft: user => {
       endCallIfRequired();

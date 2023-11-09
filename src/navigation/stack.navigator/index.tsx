@@ -7,6 +7,10 @@ import { TabNavigator } from '../tab.navigator';
 import { ROUTES } from '../';
 import { MessageList } from '../../cometChat/src/CometChatConversationsWithMessages/CometChatConversationsWithMessages';
 import Onboarding from '../../screens/onBoarding';
+import { PrivateChatWindowWrapper } from '../../screens/tab.screens/chat/community/components/cometChatAvatrModal/components/modalSheet';
+
+const Stack = createNativeStackNavigator();
+const optins = { headerShown: false };
 import Gender from './../../screens/auth/preRegisterFlow';
 import GenderProunoun from '../../screens/auth/preRegisterFlow/components/genderPronoun';
 import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
@@ -21,11 +25,20 @@ import Habits from '../../screens/auth/preRegisterFlow/components/habits';
 import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 
-const Stack = createNativeStackNavigator();
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Onboarding}
+        component={Onboarding}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.SignIn}
+        component={SignInScreen}
+      />
       <Stack.Screen
         options={options}
         name={ROUTES.Profession}
@@ -39,8 +52,8 @@ export const StackNavigator = () => {
 
       <Stack.Screen
         options={options}
-        name={ROUTES.Onboarding}
-        component={Onboarding}
+        name={ROUTES.EmailAuth}
+        component={EmailAuthByOtpScreeen}
       />
       <Stack.Screen
         options={options}
@@ -63,18 +76,14 @@ export const StackNavigator = () => {
         name={ROUTES.LookingFor}
         component={LookingFor}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.MaritalStatus}
         component={MaritalStatus}
       />
       <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
-
       <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
-
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}
@@ -86,35 +95,25 @@ export const StackNavigator = () => {
         name={ROUTES.ProfilePic}
         component={AddProfilePic}
       />
-
-      <Stack.Screen
-        options={options}
-        name={ROUTES.SignIn}
-        component={SignInScreen}
-      />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
         component={LocationScreen}
       />
-
-      <Stack.Screen
-        options={options}
-        name={ROUTES.EmailAuth}
-        component={EmailAuthByOtpScreeen}
-      />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.CommunityChatMessage}
         component={MessageList}
+      />
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.CommunityPrivateChat}
+        component={PrivateChatWindowWrapper}
       />
     </Stack.Navigator>
   );

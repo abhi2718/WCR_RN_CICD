@@ -48,8 +48,9 @@ const SexualOrientation = (props: ScreenParams) => {
             </Text>
 
             <View>
-              {sexualOrientationArray.map((option) => (
+              {sexualOrientationArray.map((option,index) => (
                 <RadioButton.Group
+                  key={index}
                   onValueChange={handleSexualOrientationValue}
                   value={sexualOrientation}
                 >

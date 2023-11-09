@@ -12,9 +12,7 @@ import {
 import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
-
 import { ScreenParams } from '../../../types/services.types/firebase.service';
-
 const Gender = (props: ScreenParams) => {
   const {
     gender,
@@ -22,13 +20,11 @@ const Gender = (props: ScreenParams) => {
     updateUserDetails,
     loggInUserId,
     checkboxState,
-
     handleCheckboxChange,
   } = useGenderViewModal(props);
 
   return (
     <ScreenContainer>
-      
         <View style={genderStyle.container}>
           <View style={genderStyle.innerView}>
             <View style={genderStyle.innerView}>
@@ -47,9 +43,9 @@ const Gender = (props: ScreenParams) => {
                 Choose your gender identity
               </Text>
               <View>
-                {genderArray.map((option) => (
+                {genderArray.map((option,index) => (
                   <RadioButton.Group
-                  key={option}
+                  key={index}
                     onValueChange={handleGenderValue}
                     value={gender}
                   >
@@ -78,7 +74,6 @@ const Gender = (props: ScreenParams) => {
             </View>
           </View>
         </View>
-      
     </ScreenContainer>
   );
 };

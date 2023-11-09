@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, FlatList, Text, Image, Pressable} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {Column, Row, Spacer} from '../../../../../../../../components/tools';
 import {
   GroupProps,
   GroupsListProps,
 } from '../../../../../../../../types/screen.type/communityChat';
-import { styles } from './styles';
+import {styles} from './styles';
 
 const GroupsList = (props: GroupsListProps) => {
   const {groups, handleJoinGroup} = props;
@@ -28,7 +29,10 @@ const Group = (props: GroupProps) => {
     <View style={styles.container}>
       <Row justifyContent="space-between">
         <Row>
-          <Image style={styles.imageStyle} source={{uri: group.getIcon()}} />
+          <FastImage
+            style={styles.imageStyle}
+            source={{uri: group.getIcon()}}
+          />
           <Spacer position="left" size={16}>
             <Column>
               <Text>{group.getName()}</Text>

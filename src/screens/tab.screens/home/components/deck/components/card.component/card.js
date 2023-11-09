@@ -4,6 +4,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {dimensions, isAndroid} from '../../../../../../../components/tools';
 import {styles} from './cardStyle';
@@ -17,8 +18,8 @@ export default function CardCompoent({item}) {
       <Card style={{height}}>
         <View style={imageStyle(tabBarHeight).height}>
           <ScrollView bounces={false} style={imageStyle(tabBarHeight).height}>
-            <Image style={imageStyle(tabBarHeight)} source={{uri: item}} />
-            <Image
+            <FastImage style={imageStyle(tabBarHeight)} source={{ uri: item }} />
+            <FastImage
               style={imageStyle(tabBarHeight)}
               source={{uri: 'https://placekitten.com/300/400'}}
             />

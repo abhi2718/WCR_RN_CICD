@@ -35,15 +35,13 @@ export const useViewModal = () => {
       await CometChat.joinGroup(guid);
       const updatedGroups = groups.map((group) => {
         if (group.getGuid() === guid) {
-          group.setHasJoined(true)
-          group.setMembersCount(group.getMembersCount() + 1)
+          group.setHasJoined(true);
+          group.setMembersCount(group.getMembersCount() + 1);
         }
         return group;
       });
       setGroups(updatedGroups);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
   return {
     groups,

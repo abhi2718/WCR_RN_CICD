@@ -28,7 +28,9 @@ export default function CommunityChat() {
         </Row>
         <SwitchButton stage={state} setStage={setState} />
       </View>
-      {state === 0 ? <CometChatConversationsWithMessages /> : <AllGroups />}
+      {state === 0 ? <CometChatConversationsWithMessages
+        isUserWindow={false}
+      /> : <AllGroups />}
     </View>
   );
 }

@@ -33,7 +33,7 @@ export class ReactionsExtensionDecorator extends DataSourceDecorator {
       .then((u) => {
         this.loggedInUser = u;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
     if (imageModerationConfiguration != undefined) {
       this.imageModerationConfiguration = imageModerationConfiguration;
     }
@@ -158,7 +158,6 @@ export class ReactionsExtensionDecorator extends DataSourceDecorator {
         emoji: emoji,
       }
     ).catch((error) => {
-      //console.log('error', error);
     });
   };
 }

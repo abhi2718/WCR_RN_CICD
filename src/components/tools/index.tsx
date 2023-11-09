@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
-import { ActivityIndicator } from 'react-native-paper';
 import {
   Platform,
   Dimensions,
@@ -11,6 +10,7 @@ import {
   StyleSheet,
   ImageSourcePropType,
   StatusBar,
+  ActivityIndicator
 } from 'react-native';
 import { InputProps } from '../../types/components/input.type';
 import { rowColumnProps } from '../../types/components/rowColumn.type';
@@ -64,11 +64,12 @@ const PageLoaderContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: white;
 `;
 export const FullLoader = () => {
   return (
     <PageLoaderContainer>
-      <ActivityIndicator size="small" color="blue" />
+      <ActivityIndicator size="large" />
     </PageLoaderContainer>
   );
 };
@@ -183,7 +184,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
-    textAlign: 'center',
     flex: 1,
     padding: sizes[3],
   },

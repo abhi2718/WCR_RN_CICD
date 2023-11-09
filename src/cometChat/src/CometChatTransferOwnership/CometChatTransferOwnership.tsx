@@ -93,7 +93,6 @@ export const CometChatTransferOwnership = (
       },
       (error) => {
         onError && onError(error);
-        //console.log('Could not transfer ownership of the group: ', error);
       }
     );
   };

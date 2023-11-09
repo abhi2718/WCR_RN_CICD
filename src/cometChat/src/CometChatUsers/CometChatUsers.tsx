@@ -152,7 +152,7 @@ export const CometChatUsers = React.forwardRef<
       <CometChatList
         listItemKey="uid"
         ref={ref}
-        title={'Users'}
+        title={''}
         requestBuilder={usersRequestBuilder}
         listStyle={usersStyle}
         {...newProps}
