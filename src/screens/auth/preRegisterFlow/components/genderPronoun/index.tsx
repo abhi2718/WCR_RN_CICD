@@ -25,6 +25,7 @@ const GenderProunoun = (props: any) => {
     checkboxState,
     setCheckboxState,
     handleCheckboxChange,
+    loading,
   } = useGenderPronounViewModal(props);
   return (
     <ScreenContainer>
@@ -36,7 +37,7 @@ const GenderProunoun = (props: any) => {
               How would you like to be addressed?
             </Text>
             <View>
-              {genderPronounArray.map((option,index) => (
+              {genderPronounArray.map((option, index) => (
                 <RadioButton.Group
                   key={index}
                   onValueChange={handleGenderPronounValue}
@@ -65,6 +66,7 @@ const GenderProunoun = (props: any) => {
             <PrimaryButton
               onPress={() => updateUserDetails(loggInUserId, genderPronoun)}
               title="Next"
+              isLoading={loading}
             />
           </View>
         </View>

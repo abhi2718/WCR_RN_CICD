@@ -12,6 +12,7 @@ export const useProfessionModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const [isFocus, setIsFocus] = useState(false);
   const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { user } = useSelector(({ userState }) => userState);
   const dispatch = useDispatch();
@@ -76,17 +77,17 @@ export const useProfessionModal = (props: ScreenParams) => {
         },
         institution: professionForm.institution,
       };
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        '653a9ad26b7a2255d03bf4fd',
-        {
-          update: professionData,
-        },
-      );
+      setLoading(true);
+      const user = await updateUserDetailsRepository.updateUserDetails(id, {
+        update: professionData,
+      });
       const data = {
         user: user,
       };
       dispatch(addUser(data));
+      setLoading(false);
     } catch (err: any) {
+      setLoading(false);
       console.log(err.toString(), err);
     }
   };
@@ -104,6 +105,7 @@ export const useProfessionModal = (props: ScreenParams) => {
     return;
   };
   return {
+    loading,
     isFocus,
     setIsFocus,
     validationErrors,

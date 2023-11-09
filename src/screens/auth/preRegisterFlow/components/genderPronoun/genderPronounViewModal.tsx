@@ -12,6 +12,7 @@ export const useGenderPronounViewModal = (props: any) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+  const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export const useGenderPronounViewModal = (props: any) => {
           FlashMessageType.DANGER,
         );
       }
+      setLoading(true);
       const genderPronounData = {
         profile: {
           genderPronoun: update,
@@ -56,13 +58,18 @@ export const useGenderPronounViewModal = (props: any) => {
       };
       console.log('data at pronoun', data);
       dispatch(addUser(data));
+      setLoading(false);
+
       navigateToSexualOrientationScreen(loggInUserId);
     } catch (err: any) {
+      setLoading(false);
+
       console.log(err);
     }
   };
 
   return {
+    loading,
     genderPronoun,
     setGenderPrPronoun,
     loggInUserId,

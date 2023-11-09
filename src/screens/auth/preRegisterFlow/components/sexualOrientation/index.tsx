@@ -24,7 +24,7 @@ const SexualOrientation = (props: ScreenParams) => {
     loggInUserId,
     handleCheckboxChange,
     checkboxState,
-    setCheckboxState,
+    loading,
   } = useSexualOrientationViewModal(props);
 
   return (
@@ -71,6 +71,7 @@ const SexualOrientation = (props: ScreenParams) => {
             <PrimaryButton
               onPress={() => updateUserDetails(loggInUserId, sexualOrientation)}
               title="Next"
+              isLoading={loading}
             />
           </View>
         </View>

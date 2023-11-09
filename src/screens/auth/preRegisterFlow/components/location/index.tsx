@@ -27,7 +27,7 @@ const LocationScreen = (props: ScreenParams) => {
     validationErrors,
     locationForm,
     getStatesOptions,
-
+    loading,
     handleSubmit,
     handleInputChange,
   } = useLocationViewModal(props);
@@ -95,7 +95,11 @@ const LocationScreen = (props: ScreenParams) => {
           </View>
 
           <View>
-            <PrimaryButton title="Next" onPress={() => handleSubmit()} />
+            <PrimaryButton
+              title="Next"
+              onPress={() => handleSubmit()}
+              isLoading={loading}
+            />
           </View>
         </View>
       </View>

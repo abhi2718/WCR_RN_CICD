@@ -1,26 +1,18 @@
-import React, { useState } from 'react';
-import {
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../../../../components/tools';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import React from 'react';
+import { ScreenContainer } from '../../../../../components/tools';
+import { Text, View, StyleSheet } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { profession } from './professionStyle';
 import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { userDegree } from '../../../../../utils/constanst';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useProfessionModal } from './professionViewModal';
 import { ErrorText } from '../../../signin/signInStyle';
-import { Header } from '@cometchat/chat-uikit-react-native/src/CometChatContacts/Header';
 import { HeaderBar } from '../../../../../components/header';
-
-// import AntDesign from '@expo/vector-icons/AntDesign';
 
 const Profession = (props: ScreenParams) => {
   const {
-    isFocus,
+    loading,
     setIsFocus,
     handleSubmit,
     handleInputChange,
@@ -93,7 +85,11 @@ const Profession = (props: ScreenParams) => {
           </View>
 
           <View>
-            <PrimaryButton title="Next" onPress={() => handleSubmit()} />
+            <PrimaryButton
+              title="Next"
+              onPress={() => handleSubmit()}
+              isLoading={loading}
+            />
           </View>
         </View>
       </View>

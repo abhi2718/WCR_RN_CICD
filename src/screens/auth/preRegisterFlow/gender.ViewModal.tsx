@@ -11,6 +11,7 @@ import {
 
 export const useGenderViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
+  const [loading, setLoading] = useState(false);
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
@@ -45,6 +46,8 @@ export const useGenderViewModal = (props: ScreenParams) => {
           FlashMessageType.DANGER,
         );
       }
+      setLoading(true);
+
       const genderData = {
         profile: {
           gender: update,
@@ -59,13 +62,17 @@ export const useGenderViewModal = (props: ScreenParams) => {
         user: user,
       };
       dispatch(addUser(data));
+      setLoading(false);
+
       navigateToGenderPronounScreen(loggInUserId);
     } catch (err: any) {
+      setLoading(false);
       console.log(err.toString());
     }
   };
 
   return {
+    loading,
     gender,
     setGender,
     loggInUserId,
