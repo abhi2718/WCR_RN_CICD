@@ -1,8 +1,7 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import {theme} from '../../../infrastructure/theme';
-import {sizes} from '../../../infrastructure/theme/sizes';
-import {colors} from '../../../infrastructure/theme/colors';
+import { sizes } from '../../../infrastructure/theme/sizes';
+import { colors } from '../../../infrastructure/theme/colors';
 
 export const ErrorText = styled.Text`
   color: ${(props) => props.theme.colors.text.error};
@@ -17,10 +16,11 @@ export const styles = StyleSheet.create({
   emailInputBox: {
     flex: 1,
     color: colors.ui.text,
+    paddingVertical: sizes[2],
   },
   emailIconStyle: {
-    width: sizes[5],
     height: sizes[5],
+    width: sizes[5],
     marginRight: sizes[2],
   },
   inputContainerr: {
