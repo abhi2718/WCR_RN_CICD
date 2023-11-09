@@ -32,10 +32,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>1225181204925113</string>
-	<key>c50a9aa3670d3361a24048d09abb9bf3</key>
-	<string>CLIENT-TOKEN</string>
 	<key>FacebookDisplayName</key>
 	<string>WCR</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -43,8 +43,6 @@
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -58,8 +56,23 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>WCR uses the camera to take profile pictures.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>WCR want to access your microphone</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow access to save photos to your device from WCR. </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to photos to upload in message on the app or to update your account profile picture. </string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Urbanist-Bold.ttf</string>
+		<string>Urbanist-Medium.ttf</string>
+		<string>Urbanist-Regular.ttf</string>
+		<string>Urbanist-SemiBold.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -69,21 +82,17 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Urbanist-Bold.ttf</string>
-		<string>Urbanist-Medium.ttf</string>
-		<string>Urbanist-Regular.ttf</string>
-		<string>Urbanist-SemiBold.ttf</string>
-	</array>
-  <key>NSCameraUsageDescription</key>
-  <string>This is for Camera permission</string>
-  <key>NSMicrophoneUsageDescription</key>
-  <string>This is for Mic permission</string>
+	<key>c50a9aa3670d3361a24048d09abb9bf3</key>
+	<string>CLIENT-TOKEN</string>
 </dict>
 </plist>

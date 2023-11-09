@@ -37,24 +37,7 @@ export class ImageModerationExtensionDecorator extends DataSourceDecorator {
     );
   }
 
-  // getImageMessageContentView(
-  //   message: CometChat.BaseMessage,
-  //   alignment: MessageBubbleAlignmentType,
-  //   theme: CometChatTheme
-  // ): JSX.Element {
-  //   // console.log('message', message);
-  //   let attachment = message.getAttachment();
-
-  //   return this.getImageMessageBubble(
-  //     attachment.getUrl(),
-  //     attachment.getName(),
-  //     {},
-  //     message,
-  //     theme
-  //   );
-  // }
-
-  getImageMessageBubble(
+    getImageMessageBubble(
     imageUrl: string,
     caption: string,
     style: ImageBubbleStyleInterface,

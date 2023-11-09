@@ -30,25 +30,20 @@ import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.fun
 import { FlatInput } from '../../../../../components/inputBox/index';
 import { ErrorText } from '../../signInStyle';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-const Profile = (props: any) => {
-  // put logic in viewModal
+const Profile = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
   let email = receivedData.email;
   let appleId = receivedData?.appleId;
   let {
     formData,
-    firebaseUid,
-    fbId,
-    handleConfirm,
     handleInputChange,
     handleDateChange,
     handleSubmit,
     isWelcomeModalVisible,
-
     toggleModal,
-
     selectedDate,
     formateDOB,
     isModalVisible,
@@ -57,7 +52,6 @@ const Profile = (props: any) => {
     formatMobile,
     closeModal,
   } = useProfileUseViewModal(props);
-  // put in viewModal
 
   return (
     <ScreenContainer>

@@ -7,11 +7,15 @@ import { TabNavigator } from '../tab.navigator';
 import { ROUTES } from '../';
 import { MessageList } from '../../cometChat/src/CometChatConversationsWithMessages/CometChatConversationsWithMessages';
 import Onboarding from '../../screens/onBoarding';
+import { PrivateChatWindowWrapper } from '../../screens/tab.screens/chat/community/components/cometChatAvatrModal/components/modalSheet';
+
+const Stack = createNativeStackNavigator();
+const optins = { headerShown: false };
 import Gender from './../../screens/auth/preRegisterFlow';
 import GenderProunoun from '../../screens/auth/preRegisterFlow/components/genderPronoun';
 import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
-import Location from '../../screens/auth/preRegisterFlow/components/location';
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
+import LocationScreen from '../../screens/auth/preRegisterFlow/components/location';
 import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
 import AddEthnicity from '../../screens/auth/preRegisterFlow/components/addEthnicity';
 import LookingFor from '../../screens/auth/preRegisterFlow/components/lookingFor';
@@ -21,100 +25,95 @@ import Habits from '../../screens/auth/preRegisterFlow/components/habits';
 import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 
-const Stack = createNativeStackNavigator();
-const optins = { headerShown: false };
+const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        options={optins}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
-      <Stack.Screen options={optins} name={ROUTES.Gender} component={Gender} />
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.GenderPronoun}
-        component={GenderProunoun}
+        options={options}
+        name={ROUTES.Onboarding}
+        component={Onboarding}
       />
       <Stack.Screen
-        options={optins}
-        name={ROUTES.SexualOrientation}
-        component={SexualOrientation}
+        options={options}
+        name={ROUTES.SignIn}
+        component={SignInScreen}
       />
       <Stack.Screen
-        options={optins}
-        name={ROUTES.LookingFor}
-        component={LookingFor}
+        options={options}
+        name={ROUTES.Profession}
+        component={Profession}
       />
-
       <Stack.Screen
-        options={optins}
-        name={ROUTES.MaritalStatus}
-        component={MaritalStatus}
-      />
-      <Stack.Screen options={optins} name={ROUTES.Kids} component={Kids} />
-
-      <Stack.Screen options={optins} name={ROUTES.Habits} component={Habits} />
-
-      <Stack.Screen options={optins} name={ROUTES.About} component={About} />
-
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.Hobbies}
-        component={Hobbies}
-      />
-
-      <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.AddEthnicity}
         component={AddEthnicity}
       />
 
       <Stack.Screen
-        options={optins}
-        name={ROUTES.ProfilePic}
-        component={AddProfilePic}
-      />
-
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.Onboarding}
-        component={Onboarding}
-      />
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.SignIn}
-        component={SignInScreen}
-      />
-
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.Profession}
-        component={Profession}
-      />
-      <Stack.Screen
-        options={optins}
-        name={ROUTES.Location}
-        component={Location}
-      />
-
-      <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
-
       <Stack.Screen
-        options={optins}
-        name={ROUTES.Tab}
-        component={TabNavigator}
+        options={options}
+        name={ROUTES.Profile}
+        component={Profile}
+      />
+      <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.GenderPronoun}
+        component={GenderProunoun}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.SexualOrientation}
+        component={SexualOrientation}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.LookingFor}
+        component={LookingFor}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.MaritalStatus}
+        component={MaritalStatus}
+      />
+      <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
+      <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Hobbies}
+        component={Hobbies}
       />
 
       <Stack.Screen
-        options={optins}
+        options={options}
+        name={ROUTES.ProfilePic}
+        component={AddProfilePic}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Location}
+        component={LocationScreen}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.CommunityChatMessage}
         component={MessageList}
+      />
+      <Stack.Screen
+        options={optins}
+        name={ROUTES.CommunityPrivateChat}
+        component={PrivateChatWindowWrapper}
       />
     </Stack.Navigator>
   );

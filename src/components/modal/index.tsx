@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     elevation: sizes[0],
   },
   heading: {
-    fontWeight: 'bold',
+    fontWeight: '600',
     fontSize: sizes[7],
     color: colors.ui.text,
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: '600',
     fontSize: sizes[4],
     marginVertical: sizes[3],
     color: colors.ui.black,

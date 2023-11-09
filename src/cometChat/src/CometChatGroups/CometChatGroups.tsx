@@ -456,7 +456,6 @@ export const CometChatGroups = React.forwardRef((props: CometChatGroupsInterface
                 ccGroupLeft: ({leftGroup}) => {
                     leftGroup['hasJoined'] = false;
                     leftGroup['membersCount'] = leftGroup['membersCount'] - 1;
-                    //console.log(leftGroup);
                     if (leftGroup['type'] == CometChat.GROUP_TYPE.PRIVATE) {
                         groupListRef.current?.removeItemFromList(leftGroup.getGuid());
                     } else {

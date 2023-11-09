@@ -10,9 +10,10 @@ import { PrimaryButton } from '../../../../../components/button';
 // for viewModal use use key word
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { useEmailAuthViewModal } from './emailauthViewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
 // remove any
-export default function EmailAuthByOtpScreeen(props: any) {
+export default function EmailAuthByOtpScreeen(props: ScreenParams) {
   let {
     otp,
     setOtp,
@@ -24,9 +25,9 @@ export default function EmailAuthByOtpScreeen(props: any) {
   } = useEmailAuthViewModal(props);
 
   return (
-    <ScreenContainer>
-      <ScrollView contentContainerStyle={styles.scrollDiv}>
-        <View>
+    <ScreenContainer >
+      <ScrollView contentContainerStyle={styles.scrollDiv} keyboardShouldPersistTaps="always">
+        <View >
           <ImageContainer
             height={sizes[10]}
             width={sizes[10]}
@@ -34,7 +35,6 @@ export default function EmailAuthByOtpScreeen(props: any) {
             source={require('../../../../../assets/images/logo.png')}
           />
         </View>
-        {/* Show this block on condation basis  */}
         <View style={styles.viewBox}>
           <Text>Enter the code we have shared to your email</Text>
           <View>

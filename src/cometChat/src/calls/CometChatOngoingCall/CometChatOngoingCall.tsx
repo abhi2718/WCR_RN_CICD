@@ -42,7 +42,6 @@ export const CometChatOngoingCall = (props: CometChatOngoingCallInterface) => {
                     })
             })
             .catch(rej => {
-                console.log("Error", rej);
                 onError && onError(rej);
             });
         return () => {

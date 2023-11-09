@@ -9,6 +9,7 @@ import SolidLikesImage, { VectorLikesImage } from './components/likes';
 import SolidCommunityImage, { VectorCommunityImage } from './components/community';
 import SolidPrivateChatImage, { VectorPrivateChatImage } from './components/private';
 import SolidProfileImageImage from './components/profile';
+import { PrivateChatScreen } from '../../screens/tab.screens/chat/private';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,13 +37,7 @@ const LikeScreen = () => {
     </View>
   );
 };
-const PrivateChatScreen = () => {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Private Chat Screen</Text>
-    </View>
-  );
-};
+
 const ProfileScreen = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

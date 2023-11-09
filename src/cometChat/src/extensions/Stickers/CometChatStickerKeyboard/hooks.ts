@@ -54,7 +54,6 @@ export const Hooks = (
       })
 
       .catch((error) => {
-        //console.log(error);
         setDecoratorMessage(props?.errorText || localize("SOMETHING_WRONG"));
         CometChatUIEventHandler.emitMessageEvent(
           MessageEvents.ccMessageError,

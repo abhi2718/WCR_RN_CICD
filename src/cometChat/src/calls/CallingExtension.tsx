@@ -28,10 +28,8 @@ export class CallingExtension extends ExtensionsDataSource {
 
             CometChatCalls.init(callAppSettings).then(
                 () => {
-                    console.log('CometChatCalls initialization completed successfully');
                 },
                 error => {
-                    console.log('CometChatCalls initialization failed with error:', error);
                 },
             );
             return new CallingExtensionDecorator({

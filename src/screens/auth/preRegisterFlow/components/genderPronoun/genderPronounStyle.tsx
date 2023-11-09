@@ -41,7 +41,6 @@ export const genderPronounStyle = StyleSheet.create({
     width: dimensions.width,
     maxWidth: '100%',
   },
-
   btnText: {
     marginLeft: sizes[3],
     fontSize: sizes[3],

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Image, View } from 'react-native';
-import { Checkbox, RadioButton, Text } from 'react-native-paper';
+import { RadioButton, Text } from 'react-native-paper';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { PrimaryButton } from '../../../components/button';
 import {
@@ -12,28 +12,19 @@ import {
 import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
-import { sizes } from '../../../infrastructure/theme/sizes';
-
-const Gender = (props: any) => {
+import { ScreenParams } from '../../../types/services.types/firebase.service';
+const Gender = (props: ScreenParams) => {
   const {
     gender,
     handleGenderValue,
     updateUserDetails,
     loggInUserId,
     checkboxState,
-    setCheckboxState,
     handleCheckboxChange,
   } = useGenderViewModal(props);
 
-  const [currentView, setCurrentView] = useState(1);
-
-  const switchView = () => {
-    setCurrentView((prevView) => (prevView % 3) + 1);
-  };
-
   return (
     <ScreenContainer>
-      {currentView === 1 && (
         <View style={genderStyle.container}>
           <View style={genderStyle.innerView}>
             <View style={genderStyle.innerView}>
@@ -48,14 +39,13 @@ const Gender = (props: any) => {
                 />
                 <View />
               </Row>
-
               <Text style={genderStyle.subHeader}>
                 Choose your gender identity
               </Text>
-
               <View>
-                {genderArray.map((option) => (
+                {genderArray.map((option,index) => (
                   <RadioButton.Group
+                  key={index}
                     onValueChange={handleGenderValue}
                     value={gender}
                   >
@@ -67,7 +57,6 @@ const Gender = (props: any) => {
                 ))}
               </View>
             </View>
-
             <View>
               <Row style={genderStyle.rowView} alignItems="center">
                 <BouncyCheckbox
@@ -76,7 +65,6 @@ const Gender = (props: any) => {
                   fillColor="red"
                   unfillColor="#FFFFFF"
                 />
-                {/* <Checkbox status="checked" /> */}
                 <Text style={genderStyle.btnText}>Visible on profile</Text>
               </Row>
               <PrimaryButton
@@ -86,7 +74,6 @@ const Gender = (props: any) => {
             </View>
           </View>
         </View>
-      )}
     </ScreenContainer>
   );
 };

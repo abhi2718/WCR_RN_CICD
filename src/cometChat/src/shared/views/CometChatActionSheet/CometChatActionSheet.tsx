@@ -166,20 +166,21 @@ export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
 
   const _render = ({ item }) => {
     return (
-      <OptionListView key={item.id} {...item} iconUrl={item.icon || item.iconUrl} theme={theme} style={style} />
+      <OptionListView  {...item} iconUrl={item.icon || item.iconUrl} theme={theme} style={style} />
     );
   };
   const _renderGrid = ({ item }) => (
-    <OptionGridView key={item.id} {...item} iconUrl={item.icon || item.iconUrl} theme={theme} style={style} />
+    <OptionGridView  {...item} iconUrl={item.icon || item.iconUrl} theme={theme} style={style} />
   );
 
   const getList = () => {
+ 
     if (listMode) {
       return (
         <View style={Style.listContainer}>
           <FlatList
             key={'list'}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item,index) => index.toString()}
             data={actionList}
             numColumns={1}
             renderItem={_render}

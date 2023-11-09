@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../../../navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useGenderPronounViewModal = (props: any) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+
+  const {user} = useSelector((state: any) => state.userState);
+  const dispatch = useDispatch()
 
   const { navigation } = props;
   const [genderPronoun, setGenderPrPronoun] = useState('Male');
@@ -19,8 +24,8 @@ export const useGenderPronounViewModal = (props: any) => {
     setCheckboxState(!checkboxState);
   };
 
-  const navigateToSexualOrientationScreen = (id:string) => {
-    navigation.navigate(ROUTES.SexualOrientation,{data:id});
+  const navigateToSexualOrientationScreen = (id: string) => {
+    navigation.navigate(ROUTES.SexualOrientation, { data: id });
   };
 
   const updateUserDetails = async (id: string, update: string) => {
@@ -28,14 +33,19 @@ export const useGenderPronounViewModal = (props: any) => {
       const genderPronounData = {
         profile: {
           genderPronoun: update,
-          showGenderPronoun:checkboxState
+          showGenderPronoun: checkboxState,
         },
       };
-      const data = await updateUserDetailsRepository.updateUserDetails(id, {
+      const user = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderPronounData,
       });
-     navigateToSexualOrientationScreen(loggInUserId)
-    } catch (err) {
+      const data ={
+        user:user
+      }
+      console.log('data at pronoun',data)
+      dispatch(addUser(data));
+      navigateToSexualOrientationScreen(loggInUserId);
+    } catch (err:any) {
       console.log(err);
     }
   };

@@ -16,6 +16,7 @@ export const inputBoxStyle = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: sizes[3],
+    color: colors.ui.black,
     paddingLeft: sizes[3],
   },
   iconStyle: {

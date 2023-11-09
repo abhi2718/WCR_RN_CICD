@@ -29,7 +29,6 @@ export class CallingExtensionDecorator extends DataSourceDecorator {
             this.loggedInUser = user;
         })
         .catch(err => {
-            console.log("unable to get logged in user.");
         })
         if (props.configuration) {
             this.configuration = props.configuration;

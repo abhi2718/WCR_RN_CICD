@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../navigation';
+import { ScreenParams } from '../../../types/services.types/firebase.service';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../store/reducers/user.reducer';
 
-export const useGenderViewModal = (props: any) => {
+export const useGenderViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+
+  const { user } = useSelector((state: any) => state.userState);
+  const dispatch = useDispatch();
 
   const { navigation } = props;
   const [gender, setGender] = useState('Male');
@@ -19,8 +25,8 @@ export const useGenderViewModal = (props: any) => {
     setCheckboxState(!checkboxState);
   };
 
-  const navigateToGenderPronounScreen = (id:string) => {
-    navigation.navigate(ROUTES.GenderPronoun,{data:id});
+  const navigateToGenderPronounScreen = (id: string) => {
+    navigation.navigate(ROUTES.GenderPronoun, { data: id });
   };
 
   const updateUserDetails = async (id: string, update: string) => {
@@ -28,16 +34,20 @@ export const useGenderViewModal = (props: any) => {
       const genderData = {
         profile: {
           gender: update,
-          showGender:checkboxState
+          showGender: checkboxState,
         },
       };
-      const data = await updateUserDetailsRepository.updateUserDetails(id, {
+      
+      const user = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderData,
       });
-    //  console.log('after saved the gender', data);
-      navigateToGenderPronounScreen(loggInUserId)
-    } catch (err) {
-      console.log(err);
+      const data ={
+        user:user
+      }
+      dispatch(addUser(data));
+      navigateToGenderPronounScreen(loggInUserId);
+    } catch (err: any) {
+      console.log(err.toString());
     }
   };
 
@@ -48,6 +58,7 @@ export const useGenderViewModal = (props: any) => {
     handleGenderValue,
     updateUserDetails,
     handleCheckboxChange,
-    checkboxState, setCheckboxState
+    checkboxState,
+    setCheckboxState,
   };
 };

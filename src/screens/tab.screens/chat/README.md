@@ -5,6 +5,10 @@ Finding MessageView --->CometChatMessages->  CometChatMessageList -> RenderMessa
 
 CometChatMessageReactions ---> cometChat/extensions/Reactions/CometChatMessageReactions
 
+See Group Details 
+comentChat/src/CometChatDetails
+
+
 Finding All CometChatGroups --> CometChatList
 All view component like bubble,avator,are inside /cometChat/src/shared/views
 
@@ -12,5 +16,4 @@ ComentChatGroupMember ---> comentChat/src/ComentChatGroupMember/ComentChatGroupM
 
 ComentChatGroupMember And Finding  ItemView of Flatlist --->comentChat/src/ComentChatGroupMember/ComentChatGroupMember/ItemView
 
-See Group Details 
-comentChat/src/CometChatDetails
+Finding community details screen with view Memebres , Media -->comentChat/src/CometChatDetails

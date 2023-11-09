@@ -1,23 +1,32 @@
-import {useEffect, useState} from 'react';
-import {AuthRepository} from '../../../repository/auth.repo';
-import {FirebaseService} from '../../../services/firebase.service';
-import {FlashMessageType, ShowFlashMessage} from '../../../components/flashBar';
-import {OtpRepository} from '../../../repository/otp.repo';
-import {ROUTES} from '../../../navigation';
+import { useEffect, useState } from 'react';
+import { AuthRepository } from '../../../repository/auth.repo';
+import { FirebaseService } from '../../../services/firebase.service';
+import {
+  FlashMessageType,
+  ShowFlashMessage,
+} from '../../../components/flashBar';
+import { OtpRepository } from '../../../repository/otp.repo';
+import { ROUTES } from '../../../navigation';
 import {
   socialSignInSignUpPayload,
   navigateToProfilepagepayload,
   navigateToOtppagepayload,
+  ScreenParams,
 } from '../../../types/services.types/firebase.service';
+import { addUser } from '../../../store/reducers/user.reducer';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const useViewModal = (props: any) => {
+export const useViewModal = (props: ScreenParams) => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
-  const {navigation} = props;
+  const { navigation } = props;
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
+
+    const dispatch = useDispatch()
+
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
@@ -64,7 +73,7 @@ export const useViewModal = (props: any) => {
         socialSignInSignUp,
       );
       if (data?.profile && data?.user) {
-        const {email, family_name, given_name, name, picture} = data?.profile;
+        const { email, family_name, given_name, name, picture } = data?.profile;
         if (data?.isNewUser) {
           await firebaseService.deleteUserFromFirebase();
           navigateToProfile({
@@ -74,10 +83,9 @@ export const useViewModal = (props: any) => {
             credential: data.googleCredential,
           });
         } else {
-          const data = await socialSignInSignUp({email});
-          //console.log('data :: ', data);
-          console.log(data.user._id);
+          const data = await socialSignInSignUp({ email });
           if (data?.token) {
+            dispatch(addUser(data));
             navigateToGenderScreen(data.user._id);
             return ShowFlashMessage(
               'info',
@@ -94,8 +102,8 @@ export const useViewModal = (props: any) => {
         }
       }
       setLoading(false);
-    } catch (err) {
-      console.log('err data :: ', err);
+    } catch (err: any) {
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -103,13 +111,13 @@ export const useViewModal = (props: any) => {
 
   const checkIsNewUser = async (email: string) => {
     const _email = email.toLowerCase();
-    const data = await socialSignInSignUp({email: _email});
+    const data = await socialSignInSignUp({ email: _email });
     if (data?.token) {
-      console.log(data.user._id);
+      dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
       return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
-    navigateToProfile({email: _email});
+    navigateToProfile({ email: _email });
   };
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -119,20 +127,20 @@ export const useViewModal = (props: any) => {
         'danger',
       );
     }
-    const {data} = await getOtpOnEmail(email);
-    navigateToOtpScreen({email: data.email});
+    const { data } = await getOtpOnEmail(email);
+    navigateToOtpScreen({ email: data.email });
   };
   const checkAppleUser = async (firebaseUid: string) => {
     try {
       return await signInRepository.getAppleUser(firebaseUid);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
     }
   };
   const checFbUser = async (fbId: string) => {
     try {
       return await signInRepository.getfbUser(fbId);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
     }
   };
@@ -176,13 +184,13 @@ export const useViewModal = (props: any) => {
   };
   const handleNavigationAfterFbLogin = async (data: any) => {
     if (data?.token) {
-      console.log(data.user._id);
+      dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
       // login path if user had created account with other provider
       return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
     if (data?.profile && data?.user) {
-      const {email, family_name, given_name} = data?.profile;
+      const { email, family_name, given_name } = data?.profile;
       if (data?.isNewUser) {
         if (email) {
           await firebaseService.deleteUserFromFirebase();
@@ -211,7 +219,7 @@ export const useViewModal = (props: any) => {
           // send user on email verification screen
           return;
         }
-        const res = await socialSignInSignUp({email});
+        const res = await socialSignInSignUp({ email });
         if (res.token) {
           return ShowFlashMessage('info', 'logIn successfully', 'success');
         }
@@ -224,8 +232,8 @@ export const useViewModal = (props: any) => {
     }
   }, [fbdata]);
 
-  const navigateToGenderScreen = (id:string) => {
-    navigation.navigate(ROUTES.Gender,{data:id});
+  const navigateToGenderScreen = (id: string) => {
+    navigation.navigate(ROUTES.Gender, { data: id });
   };
 
   const navigateToProfile = ({
@@ -283,3 +291,5 @@ export const useViewModal = (props: any) => {
     navigateToGenderScreen,
   };
 };
+
+

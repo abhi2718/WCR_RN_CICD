@@ -32,7 +32,7 @@ setTimeout(() => {
   .then((u) => {
     this.loggedInUser = u;
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {});
 
   CometChatUIEventHandler.addMessageListener(
     MessageEvents.ccActiveChatChanged,
@@ -72,9 +72,7 @@ setTimeout(() => {
 
       })
         .catch((err) => {
-          console.log(err);
           this.showDefaultPanel(State.error)
-
         })
      }
       },

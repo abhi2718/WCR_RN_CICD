@@ -15,6 +15,7 @@ import styled from 'styled-components';
 import { dimensions } from '../tools';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
+import { fontWeights } from '../../infrastructure/theme/fonts';
 
 export const Button = (props: ButtonProps) => {
   const { title, onPress, isLoading } = props;
@@ -87,7 +88,7 @@ const roundStyles = StyleSheet.create({
   buttonText: {
     color: '#000',
     fontSize: sizes[3],
-    fontWeight: '500',
+    fontWeight: fontWeights.medium,
   },
 });
 
@@ -121,6 +122,6 @@ const styles = StyleSheet.create({
     color: '#FEFBFD',
     fontSize: sizes[3],
     fontStyle: 'normal',
-    fontWeight: '700',
+    fontWeight: fontWeights.bold,
   },
 });

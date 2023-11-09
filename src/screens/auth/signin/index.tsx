@@ -11,14 +11,9 @@ import { ImageContainer, ScreenContainer } from '../../../components/tools';
 import { isAndroid } from '../../../components/tools';
 import { sizes } from '../../../infrastructure/theme/sizes';
 
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Loader from '../../../components/loader/loader';
-type navigationProps = {
-  navigation: {
-    navigate: (route: string, params?: any) => void;
-  };
-};
-export default function SignInScreen(props: any) {
+import { ScreenParams } from '../../../types/services.types/firebase.service';
+export default function SignInScreen(props: ScreenParams) {
   const {
     _onFbLogIn,
     _googleSignIn,
@@ -72,8 +67,8 @@ export default function SignInScreen(props: any) {
             style={styles.emailInputBox}
             placeholder={'Email'}
             value={email}
-            // put it in viewModal
-            // put email regex on each key stoke
+      
+            
             onChangeText={(email: string) => {
               setEmail(email);
             }}

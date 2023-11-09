@@ -60,7 +60,6 @@ export const CometChatAddMembers = (props: CometChatAddMembersInterface) => {
         );
       },
       (error) => {
-        //console.log('Something went wrong', error);
       }
     );
   };
