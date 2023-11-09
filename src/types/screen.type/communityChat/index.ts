@@ -1,5 +1,5 @@
 import {CometChat} from '@cometchat/chat-sdk-react-native';
-import { ReactNode } from 'react';
+import {ReactNode} from 'react';
 
 export type GroupsListProps = {
   groups: [] | CometChat.Group[];
@@ -10,8 +10,8 @@ export type GroupProps = {
   handleJoinGroup: (guid: string) => Promise<void>;
 };
 export type SearchGroupProps = {
-    handleTextChange:(text: string) => void
-}
+  handleTextChange: (text: string) => void;
+};
 export type SwitchButtonProps = {
   stage: number;
   setStage: (stage: number) => void;
@@ -19,8 +19,33 @@ export type SwitchButtonProps = {
 export type ChatAvatorModalProps = {
   name: string;
   image: {
-    uri: string
+    uri: string;
   };
   senderId: string;
   children: ReactNode;
+};
+
+export type membersTypes = {
+  avatar: string;
+  blockedByMe: boolean;
+  deactivatedAt: number;
+  guid: string;
+  hasBlockedMe: boolean;
+  joinedAt: number;
+  lastActiveAt: number;
+  name: string;
+  role: string;
+  scope: string;
+  status: string;
+  uid: string;
+};
+export type MediaMessageProps = {
+  guid?: string;
+  type?: string;
+};
+export type CommunityMembersProps = {
+  group?: CometChat.Group;
+};
+export type MemberProps = {
+  member:CometChat.GroupMember
 };

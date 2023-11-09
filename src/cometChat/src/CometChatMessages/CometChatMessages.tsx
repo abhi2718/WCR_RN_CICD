@@ -36,8 +36,6 @@ import {CometChatThreadedMessages} from '../CometChatThreadedMessages';
 import {infoIcon} from './resources';
 import {Style} from './style';
 import {CometChatUIEventHandler} from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
-import { Text } from 'react-native-paper';
-
 const currentTime = new Date().getTime();
 const msgListenerId = 'messages_' + currentTime;
 const uiEventListener = 'uiEvent_' + new Date().getTime();
@@ -289,8 +287,6 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
       ]}>
       {showComponent == ComponentNames.Details && (
         <View style={[Style.stackMe, {backgroundColor, borderRadius}]}>
-          {/* showComponent == ComponentNames.Details &&
-             <View style={{flex: 1}}> */}
           <CometChatDetails
             user={detailsData.current.user}
             group={detailsData.current.group}

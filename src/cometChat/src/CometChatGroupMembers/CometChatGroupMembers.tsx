@@ -5,7 +5,6 @@ import { kickIcon, banIcon, downArrowIcon, rightTickIcon } from "./resources";
 import { CometChatOptions } from "../shared/modals/CometChatOptions";
 import { AvatarStyle, AvatarStyleInterface, CometChatContext, ListItemStyle, ListItemStyleInterface, StatusIndicatorStyle } from "../shared";
 import { GroupMembersStyle, GroupMembersStyleInterface } from "./GroupMemberStyle";
-//@ts-ignore
 import { CometChat } from "@cometchat/chat-sdk-react-native";
 import { CometChatListItem } from "../shared";
 import { CometChatList, CometChatListProps } from "../shared";

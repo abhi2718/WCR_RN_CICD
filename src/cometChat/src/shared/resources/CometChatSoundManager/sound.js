@@ -73,13 +73,11 @@ class Sound {
         this._loaded = true;
         this.registerOnPlay();
       }
-     // onError && onError(error, props);
     });
   }
 
   registerOnPlay() {
     if (this.onPlaySubscription != null) {
-      //console.warn('On Play change event listener is already registered');
       return;
     }
 

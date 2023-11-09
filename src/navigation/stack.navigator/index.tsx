@@ -7,6 +7,7 @@ import {TabNavigator} from '../tab.navigator';
 import {ROUTES} from '../';
 import {MessageList} from '../../cometChat/src/CometChatConversationsWithMessages/CometChatConversationsWithMessages';
 import Onboarding from '../../screens/onBoarding';
+import { PrivateChatWindowWrapper } from '../../screens/tab.screens/chat/community/components/cometChatAvatrModal/components/modalSheet';
 
 const Stack = createNativeStackNavigator();
 const optins = {headerShown: false};
@@ -42,6 +43,11 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.CommunityChatMessage}
         component={MessageList}
+      />
+       <Stack.Screen
+        options={optins}
+        name={ROUTES.CommunityPrivateChat}
+        component={PrivateChatWindowWrapper}
       />
     </Stack.Navigator>
   );

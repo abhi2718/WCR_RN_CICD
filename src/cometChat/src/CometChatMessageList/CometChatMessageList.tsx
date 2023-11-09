@@ -987,9 +987,10 @@ export const CometChatMessageList = forwardRef<
         loggedInUser.current['uid'] &&
       item['category'] != MessageCategoryConstants.action
     ) {
+      
       return (
         <View>
-          {image && name && (
+          {image && name && group &&(
             <ChatAvatorModal image={image} name={name} senderId={senderId}>
               <View>
                 <CometChatAvatar
@@ -999,6 +1000,15 @@ export const CometChatMessageList = forwardRef<
                 />
               </View>
             </ChatAvatorModal>
+          )}
+          {image && name && user &&(
+            <View>
+            <CometChatAvatar
+              image={image}
+              name={name}
+              style={_avatarStyle}
+            />
+          </View>
           )}
         </View>
       );

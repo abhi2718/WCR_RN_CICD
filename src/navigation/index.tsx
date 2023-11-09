@@ -17,7 +17,8 @@ export enum ROUTES {
   PrivateChatTab = '/private-chat-tab',
   ProfileTab = '/profile-tab',
   LikeTabs = '/like-tabs',
-  CommunityChatMessage = '/community-chat-message'
+  CommunityChatMessage = '/community-chat-message',
+  CommunityPrivateChat='/community-private-chat'
 }
 export default function Navigator() {
   useCometChatInit();

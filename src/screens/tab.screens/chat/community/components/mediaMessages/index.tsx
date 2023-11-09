@@ -1,7 +1,7 @@
-import {CometChat} from '@cometchat/chat-sdk-react-native';
-import React, {useEffect, useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import FastImage from 'react-native-fast-image';
 import {
   dimensions,
   FullLoader,
@@ -10,81 +10,89 @@ import {
   Spacer,
 } from '../../../../../../components/tools';
 const type = ['image', 'video', 'audio', 'file'];
-export const MediaMessage = (props) => {
-  const {guid} = props;
-  const [loading, setLoading] = useState(false);
-  const [images, setImage] = useState<Array<string>>([]);
-  const isImage = (mimeType: string) => {
-    const imageMimeTypes = [
-      'image/jpeg',
-      'image/png',
-      'image/gif',
-      'image/bmp',
-      'image/webp',
-    ];
-    return imageMimeTypes.includes(mimeType);
-  };
-  const mediaMessageRequestBuilder = async () => {
-    try {
-      setLoading(true);
-      const currentDate = new Date();
-      const timestampInSeconds = Math.floor(currentDate.getTime() / 1000);
-      const imageCollectios: Array<String> = [];
-      let GUID: string = guid,
-        limit: number = 30,
-        categories: Array<String> = ['message', 'custom'],
-        types: Array<String> = [type[0], type[1]],
-        messagesRequest: CometChat.MessagesRequest =
-          new CometChat.MessagesRequestBuilder()
-            .setGUID(GUID)
-            .setCategories(categories)
-            .setTimestamp(timestampInSeconds)
-            .setTypes(types)
-            .setLimit(limit)
-            .build();
-      const data = await messagesRequest.fetchPrevious();
-      data.forEach((item) => {
-        const rawMessage: any = item.getRawMessage();
-        const {attachments} = rawMessage.data;
-        attachments.forEach((media: any) => {
-          const isImageFile = isImage(media.mimeType);
-          if (isImageFile) {
-            imageCollectios.push(media.url);
-          }
-        });
-      });
-      setImage(imageCollectios);
-      setLoading(false);
-    } catch (error) {
+import {useViewModal} from './useViewModal';
+import {MediaMessageProps} from '../../../../../../types/screen.type/communityChat';
+import VedioPlayer from './components/video-player';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {styles} from './styles';
 
-    }
+const Tab = createMaterialTopTabNavigator();
+
+export const MediaTab = (props: MediaMessageProps) => {
+  let parentProps = props;
+  const GetImageMessage = () => {
+    return (
+      <View>
+        <ImageMessage {...parentProps} type="image" />
+      </View>
+    );
   };
-  useEffect(() => {
-    mediaMessageRequestBuilder();
-  }, []);
-  if (loading) {
-    return <FullLoader />;
-  }
+  const GetVideoMessage = () => {
+    return (
+      <View>
+        <ViedoMessage {...parentProps} type="image" />
+      </View>
+    );
+  };
   return (
-    <View>
-      <Text>Media</Text>
-      <ScrollView>
-        {images &&
-          images.map((imgUrl, index) => (
-            <Spacer key={index} position="bottom" size={10}>
-              <Row  justifyContent="space-between">
-              <Image
-                style={{width: (dimensions.width - 48) / 2, height: 140}}
-                source={{uri: imgUrl}}
-              />
-              <Image
-                style={{width: (dimensions.width - 48) / 2, height: 140}}
-                source={{uri: imgUrl}}
-              />
-            </Row>
-            </Spacer>
-          ))}
-      </ScrollView>
+    <Tab.Navigator>
+      <Tab.Screen name="Image" component={GetImageMessage} />
+      <Tab.Screen name="Video" component={GetVideoMessage} />
+    </Tab.Navigator>
+  );
+};
+const ViedoMessage = (props: MediaMessageProps) => {
+  const { loading, videos } = useViewModal(props);
+  return (
+    <View style={styles.container}>
+      {loading ? (
+        <FullLoader />
+      ) : (
+        <>
+          <ScrollView style={{backgroundColor:"#fff"}}>
+            {
+              ["https://vjs.zencdn.net/v/oceans.mp4"].map((imgUrl, index) => (
+                <Spacer key={index} position="bottom" size={10}>
+                  <View style={{height: 300, flex: 1}}>
+                    <View style={{height: 300, flex: 1}}>
+                      <VedioPlayer url="https://vjs.zencdn.net/v/oceans.mp4" />
+                    </View>
+                  </View>
+                </Spacer>
+              ))}
+          </ScrollView>
+        </>
+      )}
+    </View>
+  );
+};
+const ImageMessage = (props: MediaMessageProps) => {
+  const {loading, images, videos} = useViewModal(props);
+  return (
+    <View style={styles.container}>
+      {loading ? (
+        <FullLoader />
+      ) : (
+        <>
+          <ScrollView>
+            {images &&
+              images.map((imgUrl, index) => (
+                <Spacer key={index} position="bottom" size={10}>
+                  <Row justifyContent="space-between">
+                    <FastImage
+                      style={{width: (dimensions.width - 48) / 2, height: 140}}
+                      source={{uri: imgUrl}}
+                    />
+                    <FastImage
+                      style={{width: (dimensions.width - 48) / 2, height: 140}}
+                      source={{uri: imgUrl}}
+                    />
+                  </Row>
+                </Spacer>
+              ))}
+          </ScrollView>
+        </>
+      )}
     </View>
   );
 };
