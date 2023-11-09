@@ -4,19 +4,17 @@ import { useViewModal } from '../../signinViewModal';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { FirebaseService } from '../../../../../services/firebase.service';
 import { isDate18YearsOrAbove } from '../../../../../utils/common.functions';
-import { socialSignInSignUpPayload } from './../../../../../types/services.types/firebase.service';
+import {
+  ScreenParams,
+  profileTypes,
+  socialSignInSignUpPayload,
+} from './../../../../../types/services.types/firebase.service';
 import moment from 'moment';
-import { ROUTES } from '../../../../../navigation';
-export type FormTypes = {
-  firstName: string;
-  lastName: string;
-  displayName: string;
-  mobile: string;
-  email: string;
-  dob: string;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../../../store/reducers/user.reducer';
 
-export const useProfileUseViewModal = (props: any) => {
+
+export const useProfileUseViewModal = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
   let email = receivedData.email;
@@ -26,12 +24,15 @@ export const useProfileUseViewModal = (props: any) => {
   const [isWelcomeModalVisible, setWelcomeModalVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [errorMessage, setErrorMessage] = useState('');
+
   const firebaseService = new FirebaseService();
-  let { socialSignInSignUp, navigateToGenderScreen } = useViewModal(navigation);
+  let { socialSignInSignUp, navigateToGenderScreen } = useViewModal(props);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
+  const {user} = useSelector((state: any) => state.userState);
+    const dispatch = useDispatch()
 
   const handleConfirm = (date: Date) => {
     toggleModal();
@@ -100,7 +101,7 @@ export const useProfileUseViewModal = (props: any) => {
     return formattedDate;
   };
 
-  const [formData, setFormData] = useState<FormTypes>({
+  const [formData, setFormData] = useState<profileTypes>({
     firstName: '',
     lastName: '',
     displayName: '',
@@ -108,11 +109,12 @@ export const useProfileUseViewModal = (props: any) => {
     email: '',
     dob: '',
   });
-  const [validationErrors, setValidationErrors] = useState<Partial<FormTypes>>(
-    {},
-  );
+  
+  const [validationErrors, setValidationErrors] = useState<
+    Partial<profileTypes>
+  >({});
 
-  const handleInputChange = (name: keyof FormTypes, value: string) => {
+  const handleInputChange = (name: keyof profileTypes, value: string) => {
     setFormData({ ...formData, [name]: value });
   };
 
@@ -120,7 +122,7 @@ export const useProfileUseViewModal = (props: any) => {
     credential: FirebaseAuthTypes.AuthCredential,
     firebaseUid?: string,
   ) => {
-    const errors: Partial<FormTypes> = {};
+    const errors: Partial<profileTypes> = {};
     const phonePattern = /\(\d{3}\) \d{3}-\d{4}/;
     if (!formData?.firstName) {
       errors.firstName = 'Please enter your name';
@@ -216,9 +218,9 @@ export const useProfileUseViewModal = (props: any) => {
       mobile,
       fbId,
     });
-    console.log('------->datamango', dataMango);
+    
+    dispatch(addUser(dataMango));
     if (dataMango.message === 'Registered Successfully')
-      console.log(dataMango.user._id);
     navigateToGenderScreen(dataMango.user._id);
     return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }
@@ -234,8 +236,7 @@ export const useProfileUseViewModal = (props: any) => {
     toUpperFirstName,
     isWelcomeModalVisible,
     setWelcomeModalVisible,
-    errorMessage,
-    setErrorMessage,
+
     selectedDate,
     setSelectedDate,
     formatMobile,

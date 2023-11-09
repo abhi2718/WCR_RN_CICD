@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Checkbox, RadioButton, Text } from 'react-native-paper';
 import { PrimaryButton } from '../../../../../components/button';
 import {
@@ -13,8 +13,9 @@ import { useSexualOrientationViewModal } from './sexualorientationViewModal';
 import { sexualOrientationArray } from '../../../../../utils/constanst';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-const SexualOrientation = (props: any) => {
+const SexualOrientation = (props: ScreenParams) => {
   const {
     sexualOrientation,
     handleSexualOrientationValue,
@@ -30,30 +31,23 @@ const SexualOrientation = (props: any) => {
       <View style={SexualOrientationStyle.container}>
         <View style={SexualOrientationStyle.innerView}>
           <View style={{ flex: 1 }}>
-            <Row
-              alignItems="center"
-              justifyContent="space-between"
-              style={SexualOrientationStyle.rowHeader}
-            >
-              <ImageContainer
-                height={30}
-                width={30}
+            <Row justifyContent="space-between" alignItems="center">
+              <Image
+                style={SexualOrientationStyle.arrow}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
-
-              <ImageContainer
-                height={sizes[9]}
-                width={sizes[9]}
+              <Image
+                style={SexualOrientationStyle.logo}
                 source={require('../../../../../assets/images/logo.png')}
               />
               <View />
             </Row>
 
             <Text style={SexualOrientationStyle.subHeader}>
-              Share your sexual orientation OR Your unique flavour of love
+              Your flavor of love
             </Text>
 
-            <View style={SexualOrientationStyle.radioButtonContainer}>
+            <View>
               {sexualOrientationArray.map((option) => (
                 <RadioButton.Group
                   onValueChange={handleSexualOrientationValue}

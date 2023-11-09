@@ -11,9 +11,12 @@ import {
   socialSignInSignUpPayload,
   navigateToProfilepagepayload,
   navigateToOtppagepayload,
+  ScreenParams,
 } from '../../../types/services.types/firebase.service';
+import { addUser } from '../../../store/reducers/user.reducer';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const useViewModal = (props: any) => {
+export const useViewModal = (props: ScreenParams) => {
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
@@ -21,6 +24,9 @@ export const useViewModal = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
+
+    const dispatch = useDispatch()
+
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
@@ -78,9 +84,8 @@ export const useViewModal = (props: any) => {
           });
         } else {
           const data = await socialSignInSignUp({ email });
-          //console.log('data :: ', data);
-          console.log(data.user._id);
           if (data?.token) {
+            dispatch(addUser(data));
             navigateToGenderScreen(data.user._id);
             return ShowFlashMessage(
               'info',
@@ -108,7 +113,7 @@ export const useViewModal = (props: any) => {
     const _email = email.toLowerCase();
     const data = await socialSignInSignUp({ email: _email });
     if (data?.token) {
-      console.log(data.user._id);
+      dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
       return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
@@ -179,7 +184,7 @@ export const useViewModal = (props: any) => {
   };
   const handleNavigationAfterFbLogin = async (data: any) => {
     if (data?.token) {
-      console.log(data.user._id);
+      dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
       // login path if user had created account with other provider
       return ShowFlashMessage('info', 'logIn successfully', 'success');
@@ -286,3 +291,5 @@ export const useViewModal = (props: any) => {
     navigateToGenderScreen,
   };
 };
+
+

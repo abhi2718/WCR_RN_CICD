@@ -3,13 +3,11 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { ImageContainer, ScreenContainer } from '../../components/tools';
 import { PrimaryButton } from '../../components/button';
 import { styles } from './onBoardingStyle';
+import { useonBoardingViewModal } from './boardingViwModal';
+import { ScreenParams } from '../../types/services.types/firebase.service';
 
-const Onboarding = () => {
-  const [currentView, setCurrentView] = useState(1);
-
-  const switchView = () => {
-    setCurrentView((prevView) => (prevView % 3) + 1);
-  };
+const Onboarding = (props:ScreenParams) => {
+  const { currentView, switchView } = useonBoardingViewModal(props);
 
   return (
     <ScreenContainer>

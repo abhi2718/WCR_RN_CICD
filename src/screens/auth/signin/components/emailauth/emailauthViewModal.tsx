@@ -2,8 +2,9 @@ import {useState} from 'react';
 import {OtpRepository} from '../../../../../repository/otp.repo';
 import {ShowFlashMessage} from '../../../../../components/flashBar';
 import {useViewModal} from '../../signinViewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-export const useEmailAuthViewModal = (props: any) => {
+export const useEmailAuthViewModal = (props: ScreenParams) => {
   const {navigation} = props;
   const receivedData = props.route?.params?.data || 'No data received';
   let fbId = receivedData?.fbId;
@@ -15,7 +16,7 @@ export const useEmailAuthViewModal = (props: any) => {
   const [emailInput, setEmailInput] = useState('');
   const [otp, setOtp] = useState('');
 
-  let {setLoading, checkIsNewUser} = useViewModal(navigation);
+  let {setLoading, checkIsNewUser} = useViewModal(props);
 
   const verifyEmail = async () => {
     try {

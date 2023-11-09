@@ -9,6 +9,31 @@ import {
 export const SexualOrientationStyle = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
+  },
+  arrow: {
+    height: sizes[4],
+  },
+  logo: {
+    marginLeft: -35,
+    width: sizes[11],
+    height: sizes[8],
+    overflow: 'visible',
+  },
+  skipBtn: {
+    fontSize: 20,
+    color: colors.ui.text,
+  },
+  subHeader: {
+    fontSize: fontSizes.title,
+    fontWeight: '700',
+    color: colors.ui.text,
+    marginVertical: sizes[6],
+  },
+  text: {
+    fontSize: fontSizes.text,
+    color: colors.ui.text,
+    marginTop: sizes[5],
   },
 
   innerView: {
@@ -18,17 +43,6 @@ export const SexualOrientationStyle = StyleSheet.create({
   rowHeader: {
     width: dimensions.width,
     maxWidth: '100%',
-  },
-  subHeader: {
-    color: colors.ui.text,
-    //fontWeight: fontWeights.bold,
-    fontSize: fontSizes.h6,
-    marginTop: sizes[1],
-  },
-  radioButtonContainer: {
-    // borderColor: 'red',
-    // borderWidth: 2,
-    marginTop: sizes[5],
   },
   btnText: {
     marginLeft: sizes[3],

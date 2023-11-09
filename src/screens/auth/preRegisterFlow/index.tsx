@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Checkbox, RadioButton, Text } from 'react-native-paper';
+import React from 'react';
+import { Image, View } from 'react-native';
+import { RadioButton, Text } from 'react-native-paper';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { PrimaryButton } from '../../../components/button';
 import {
@@ -12,18 +12,9 @@ import {
 import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
-import { sizes } from '../../../infrastructure/theme/sizes';
-import { NavigationProp, RouteProp } from '@react-navigation/native';
+
 import { ScreenParams } from '../../../types/services.types/firebase.service';
-import { ROUTES } from '../../../navigation';
 
-// type GenderRoute = RouteProp<ScreenParams, ROUTES.Gender>;
-// type MyScreenNavigation = NavigationProp<ScreenParams, ROUTES.Gender>;
-
-// interface MyScreenProps {
-//   route: GenderRoute;
-//   navigation: MyScreenNavigation;
-// }
 const Gender = (props: ScreenParams) => {
   const {
     gender,
@@ -31,72 +22,63 @@ const Gender = (props: ScreenParams) => {
     updateUserDetails,
     loggInUserId,
     checkboxState,
-    setCheckboxState,
+
     handleCheckboxChange,
   } = useGenderViewModal(props);
 
   return (
     <ScreenContainer>
-      <View style={genderStyle.container}>
-        <View style={genderStyle.innerView}>
+      
+        <View style={genderStyle.container}>
           <View style={genderStyle.innerView}>
-            <Row
-              alignItems="center"
-              justifyContent="space-between"
-              style={genderStyle.rowHeader}
-            >
-              <ImageContainer
-                height={sizes[6]}
-                width={sizes[6]}
-                source={require('./../../../assets/images/icons/arrow.png')}
-              />
-
-              <ImageContainer
-                height={sizes[9]}
-                width={sizes[9]}
-                source={require('./../../../assets/images/logo.png')}
-              />
-              <View />
-            </Row>
-
-            <Text style={genderStyle.subHeader}>
-              Choose your gender identity
-            </Text>
-
-            <View style={genderStyle.radioButtonContainer}>
-              {genderArray.map((option) => (
-                <RadioButton.Group
+            <View style={genderStyle.innerView}>
+              <Row justifyContent="space-between" alignItems="center">
+                <Image
+                  style={genderStyle.arrow}
+                  source={require('../../../assets/images/icons/arrow.png')}
+                />
+                <Image
+                  style={genderStyle.logo}
+                  source={require('../../../assets/images/logo.png')}
+                />
+                <View />
+              </Row>
+              <Text style={genderStyle.subHeader}>
+                Choose your gender identity
+              </Text>
+              <View>
+                {genderArray.map((option) => (
+                  <RadioButton.Group
                   key={option}
-                  onValueChange={handleGenderValue}
-                  value={gender}
-                >
-                  <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton value={option} />
-                    <Text style={genderStyle.btnText}>{option}</Text>
-                  </Row>
-                </RadioButton.Group>
-              ))}
+                    onValueChange={handleGenderValue}
+                    value={gender}
+                  >
+                    <Row style={genderStyle.rowView} alignItems="center">
+                      <RadioButton value={option} />
+                      <Text style={genderStyle.btnText}>{option}</Text>
+                    </Row>
+                  </RadioButton.Group>
+                ))}
+              </View>
+            </View>
+            <View>
+              <Row style={genderStyle.rowView} alignItems="center">
+                <BouncyCheckbox
+                  onPress={handleCheckboxChange}
+                  isChecked={checkboxState}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                />
+                <Text style={genderStyle.btnText}>Visible on profile</Text>
+              </Row>
+              <PrimaryButton
+                onPress={() => updateUserDetails(loggInUserId, gender)}
+                title="Next"
+              />
             </View>
           </View>
-
-          <View>
-            <Row style={genderStyle.rowView} alignItems="center">
-              <BouncyCheckbox
-                onPress={handleCheckboxChange}
-                isChecked={checkboxState}
-                fillColor="red"
-                unfillColor="#FFFFFF"
-              />
-              {/* <Checkbox status="checked" /> */}
-              <Text style={genderStyle.btnText}>Visible on profile</Text>
-            </Row>
-            <PrimaryButton
-              onPress={() => updateUserDetails(loggInUserId, gender)}
-              title="Next"
-            />
-          </View>
         </View>
-      </View>
+      
     </ScreenContainer>
   );
 };

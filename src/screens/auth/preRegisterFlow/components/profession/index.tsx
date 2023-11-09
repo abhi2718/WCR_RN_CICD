@@ -4,100 +4,104 @@ import {
   Row,
   ScreenContainer,
 } from '../../../../../components/tools';
-import { Text, View, StyleSheet } from 'react-native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
-import { Surface } from 'react-native-paper';
 import { profession } from './professionStyle';
 import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
-import DropDown from 'react-native-paper-dropdown';
-import { colors } from '../../../../../infrastructure/theme/colors';
-import { Dropdown } from 'react-native-element-dropdown';
+import { userDegree } from '../../../../../utils/constanst';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { useProfessionModal } from './professionViewModal';
+import { ErrorText } from '../../../signin/signInStyle';
+
 // import AntDesign from '@expo/vector-icons/AntDesign';
 
-const Profession = (props: any) => {
-  const data = [
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-  ];
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
-
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return <Text style={[styles.label]}>Select degree category</Text>;
-    }
-    return null;
-  };
+const Profession = (props: ScreenParams) => {
+  const {
+    isFocus,
+    setIsFocus,
+    handleSubmit,
+    handleInputChange,
+    professionForm,
+    primaryDegreeOption,
+    getPrimaryDegree,
+    validationErrors,
+  } = useProfessionModal(props);
 
   return (
     <ScreenContainer>
       <View style={profession.container}>
         <View style={profession.innerView}>
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" style={profession.rowHeader}>
-              <ImageContainer
-                height={sizes[7]}
-                width={sizes[7]}
+            <Row justifyContent="space-between" alignItems="center">
+              <Image
+                style={profession.arrow}
                 source={require('../../../../../assets/images/icons/arrow.png')}
               />
-
-              <ImageContainer
-                height={sizes[9]}
-                width={sizes[9]}
+              <Image
+                style={profession.logo}
                 source={require('../../../../../assets/images/logo.png')}
               />
-              <View />
+              <Text style={profession.skipBtn}>Skip</Text>
             </Row>
-
             <Text style={profession.subHeader}>
               Tell us about your profession
             </Text>
             <View>
-              {renderLabel()}
               <DropdownInput
-                data={data}
+                data={userDegree}
                 onFocus={() => setIsFocus(true)}
-                // search
-                // maxHeight={150}
                 labelField="label"
                 valueField="value"
                 placeholder="Select degree category"
-                value={value}
-                onChange={(item:any) => {
-                  setValue(item.value);
+                value={professionForm.userDegree}
+                onChange={(item: any) => {
+                  handleInputChange('userDegree', item.value);
                 }}
               />
+              {validationErrors.userDegree && (
+                <ErrorText> {validationErrors.userDegree}</ErrorText>
+              )}
 
-              {renderLabel()}
               <DropdownInput
-                data={data}
+                data={primaryDegreeOption}
                 onFocus={() => setIsFocus(true)}
-                // search
-                // maxHeight={200}
+                maxHeight={200}
                 labelField="label"
                 valueField="value"
                 placeholder="Select degree type"
-                value={value}
-                onChange={(item:any) => {
-                  setValue(item.value);
+                value={professionForm.primaryDegree}
+                onChange={(item: any) => {
+                  handleInputChange('primaryDegree', item.value);
                 }}
               />
+              {validationErrors.primaryDegree && (
+                <ErrorText> {validationErrors.primaryDegree}</ErrorText>
+              )}
 
-              <FlatInput label="Job Title" />
-              <FlatInput label="Institution/School/Practice Name" />
+              <FlatInput
+                label="Job Title"
+                onChangeText={(jobTitle: string) =>
+                  handleInputChange('title', jobTitle)
+                }
+                value={professionForm.title}
+                error={validationErrors.title}
+              />
+              {validationErrors.title && (
+                <ErrorText> {validationErrors.title}</ErrorText>
+              )}
+              <FlatInput
+                label="Institution/School/Practice Name"
+                value={professionForm.institution}
+                onChangeText={(institute: string) =>
+                  handleInputChange('institution', institute)
+                }
+              />
             </View>
           </View>
 
           <View>
-            <PrimaryButton title="Next" />
+            <PrimaryButton title="Next" onPress={() => handleSubmit()} />
           </View>
         </View>
       </View>
