@@ -22,43 +22,36 @@ export const ModalComponent = (props: ModalProps) => {
           <Text style={styles.subHeading}>
             Before you start,{'\n'}here’s what you need to know:
           </Text>
-
           <Row style={styles.row}>
             <ImageContainer
               style={styles.icon}
               source={require('../../assets/images/icons/userProfile.png')}
             />
-
             <Text style={styles.text}>
               Use your real name that matches your degree only First Name shown
               by default, or add a display name.
             </Text>
           </Row>
-
           <Row style={styles.row}>
             <ImageContainer
               style={styles.icon}
               source={require('../../assets/images/icons/blockUser.png')}
             />
-
             <Text style={styles.text}>
               Your profile picture shows your face clearly - no shades, masks,
               or obstructions
             </Text>
           </Row>
-
           <Row style={styles.row}>
             <ImageContainer
               style={styles.icon}
               source={require('../../assets/images/icons/blackCheck.png')}
             />
-
             <Text style={styles.text}>
               Use your real name that matches your degree only First Name shown
               by default, or add a display name.
             </Text>
           </Row>
-
           <Text style={styles.footerText}>
             Now, let's find your perfect match!
           </Text>

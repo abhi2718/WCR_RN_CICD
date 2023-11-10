@@ -12,6 +12,7 @@ import { country } from '../../../../../utils/constanst';
 import { useLocationViewModal } from './locationViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ErrorText } from '../../../signin/signInStyle';
+import { HeaderBar } from '../../../../../components/header';
 
 const LocationScreen = (props: ScreenParams) => {
   const {
@@ -21,7 +22,7 @@ const LocationScreen = (props: ScreenParams) => {
     validationErrors,
     locationForm,
     getStatesOptions,
-
+    loading,
     handleSubmit,
     handleInputChange,
   } = useLocationViewModal(props);
@@ -30,19 +31,8 @@ const LocationScreen = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={location.container}>
         <View style={location.innerView}>
-          <View style={location.innerView}>
-            <Row justifyContent="space-between" alignItems="center">
-              <Image
-                style={location.arrow}
-                source={require('../../../../../assets/images/icons/arrow.png')}
-              />
-              <Image
-                style={location.logo}
-                source={require('../../../../../assets/images/logo.png')}
-              />
-              <View />
-            </Row>
-
+          <View style={{ flex: 1 }}>
+            <HeaderBar></HeaderBar>
             <Text style={location.subHeader}>
               Let's find matches near you
               {`\n`}
@@ -100,7 +90,11 @@ const LocationScreen = (props: ScreenParams) => {
           </View>
 
           <View>
-            <PrimaryButton title="Next" onPress={() => handleSubmit()} />
+            <PrimaryButton
+              title="Next"
+              onPress={() => handleSubmit()}
+              isLoading={loading}
+            />
           </View>
         </View>
       </View>

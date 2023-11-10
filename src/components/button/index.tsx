@@ -37,20 +37,39 @@ export const Button = (props: ButtonProps) => {
 };
 
 export const PrimaryButton = (props: ButtonProps) => {
-  const { title, onPress, btnColor } = props;
-  return (
-    <TouchableOpacity
-      style={{
-        ...styles.primaryButton,
-        backgroundColor: btnColor ? btnColor : colors.ui.primary,
-      }}
-      onPress={onPress}
-    >
-      <View>
-        <Text style={styles.bntText}>{title}</Text>
+  const { title, onPress, btnColor, isLoading } = props;
+  const _isLoading = isLoading ?? false;
+
+  let renderValue = null;
+
+  if (_isLoading) {
+    renderValue = (
+      <View
+        style={{
+          ...styles.primaryButton,
+          backgroundColor: btnColor ? btnColor : colors.ui.primary,
+        }}
+      >
+        <ActivityIndicator size={sizes[4]} color="#fff" />
       </View>
-    </TouchableOpacity>
-  );
+    );
+  } else {
+    renderValue = (
+      <TouchableOpacity
+        style={{
+          ...styles.primaryButton,
+          backgroundColor: btnColor ? btnColor : colors.ui.primary,
+        }}
+        onPress={onPress}
+      >
+        <View>
+          <Text style={styles.bntText}>{title}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  return renderValue;
 };
 
 export const RoundedButtonWithIconAndText = (props: ButtonProps) => {

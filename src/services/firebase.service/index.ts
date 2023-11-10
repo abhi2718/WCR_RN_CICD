@@ -69,13 +69,6 @@ export class FirebaseService {
       };
     } catch (error: any) {
       switch (error.code) {
-        case statusCodes.SIGN_IN_CANCELLED:
-          ShowFlashMessage(
-            'Alert',
-            'Something went wrong /SIGN_IN_CANCELLED/',
-            'danger',
-          );
-          break;
         case statusCodes.IN_PROGRESS:
           ShowFlashMessage(
             'Alert',
@@ -241,7 +234,7 @@ export class FirebaseService {
           return {
             isNewUser: true,
             email,
-            appleId: user?.uid,
+            firebaseUid: user?.uid,
             appleCredential
           };
         }
@@ -251,7 +244,6 @@ export class FirebaseService {
         };
       }
     } catch (error) {
-      ShowFlashMessage('Alert', 'Something went wrong ', 'danger');
     }
   }
   async signInWithFb(

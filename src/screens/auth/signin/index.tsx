@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, TextInput, ScrollView } from 'react-native';
+import {
+  View,
+  TextInput,
+  ScrollView,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { useViewModal } from './signinViewModal';
 import { styles } from './signInStyle';
 
@@ -10,8 +16,6 @@ import {
 import { ImageContainer, ScreenContainer } from '../../../components/tools';
 import { isAndroid } from '../../../components/tools';
 import { sizes } from '../../../infrastructure/theme/sizes';
-
-import Loader from '../../../components/loader/loader';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 export default function SignInScreen(props: ScreenParams) {
   const {
@@ -25,8 +29,6 @@ export default function SignInScreen(props: ScreenParams) {
   } = useViewModal(props);
   return (
     <ScreenContainer>
-      <Loader isLoading={loading} />
-
       <ScrollView
         contentContainerStyle={styles.scrollDiv}
         keyboardShouldPersistTaps="always"
@@ -41,41 +43,51 @@ export default function SignInScreen(props: ScreenParams) {
           />
         </View>
         <RoundedButtonWithIconAndText
-          onPress={_onFbLogIn}
+          onPress={loading ? () => {} : _onFbLogIn}
           title={'Continue with Facebook'}
           iconSource={require('../../../assets/images/facebookLogo.png')}
         />
         <RoundedButtonWithIconAndText
-          onPress={_googleSignIn}
+          onPress={loading ? () => {} : _googleSignIn}
           title={'Continue with Google'}
           iconSource={require('../../../assets/images/googleLogo.png')}
         />
         {!isAndroid && (
           <RoundedButtonWithIconAndText
-            onPress={handleAppleSignIn}
+            onPress={loading ? () => {} : handleAppleSignIn}
             title={'Continue with Apple'}
             iconSource={require('../../../assets/images/appleLogo.png')}
           />
         )}
-        <View style={styles.inputContainerr}>
-          <ImageContainer
-            source={require('../../../assets/images/Email-icon.png')}
-            style={styles.emailIconStyle}
-          />
-          {/* Make a common component */}
-          <TextInput
-            style={styles.emailInputBox}
-            placeholder={'Email'}
-            value={email}
-      
-            
-            onChangeText={(email: string) => {
-              setEmail(email);
-            }}
-            placeholderTextColor="rgba(35, 35, 35, 0.4)"
-          />
-        </View>
-        <PrimaryButton title="Continue" onPress={getOtpToVerifyEmail} />
+        <KeyboardAvoidingView
+          enabled
+          behavior={isAndroid ? 'height' : 'padding'}
+        >
+          <View style={styles.inputContainerr}>
+            <ImageContainer
+              source={require('../../../assets/images/Email-icon.png')}
+              style={styles.emailIconStyle}
+            />
+            <TextInput
+              style={styles.emailInputBox}
+              placeholder={'Email'}
+              value={email}
+              onChangeText={(email: string) => {
+                setEmail(email);
+              }}
+              placeholderTextColor="rgba(35, 35, 35, 0.4)"
+            />
+          </View>
+        </KeyboardAvoidingView>
+        <KeyboardAvoidingView
+          enabled
+          behavior={isAndroid ? 'height' : 'padding'}
+        ></KeyboardAvoidingView>
+        <PrimaryButton
+          title="Continue"
+          onPress={getOtpToVerifyEmail}
+          isLoading={loading}
+        />
       </ScrollView>
     </ScreenContainer>
   );

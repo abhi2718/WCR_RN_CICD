@@ -13,3 +13,7 @@ export function isDate18YearsOrAbove(date: string): boolean {
   const ageInYears = currentDate.diff(inputDate, 'years');
   return ageInYears >= 18;
 }
+
+export const goBack = (navigation:any)=>{
+  navigation.goBack();
+}

@@ -5,6 +5,7 @@ export default function SolidDeckImage() {
   return (
     <View>
       <Image
+        resizeMode="contain"
         style={styles.iconStyle}
         source={require('../../../assets/images/logo.png')}
       />

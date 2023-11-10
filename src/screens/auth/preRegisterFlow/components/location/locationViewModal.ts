@@ -21,15 +21,16 @@ export const useLocationViewModal = (props: ScreenParams) => {
 
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const [stateOption, setStatesOption] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
 
   const [locationForm, setLocationForm] = useState<addressTypes>({
-    country: 'USA',
-    state: '',
-    city: '',
-    zipcode: '',
+    country: user.address.country ? user.address.country : 'USA',
+    state: user.address.state ? user.address.state : '',
+    city: user.address.city ? user.address.city : '',
+    zipcode: user.address.zipcode ? user.address.zipcode : '',
   });
 
   const [validationErrors, setValidationErrors] = useState<
@@ -133,7 +134,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
           location: {},
         },
       };
-
+      setLoading(true);
       const validateZipcodeData = await validateZipcode();
 
       if (
@@ -141,8 +142,10 @@ export const useLocationViewModal = (props: ScreenParams) => {
         validateZipcodeData?.user['address.zipcode']['message'] ===
           'Zip code is not valid'
       ) {
+        setLoading(false);
+
         return ShowFlashMessage(
-          'warning',
+          'Warning',
           'Zip code is not valid',
           FlashMessageType.DANGER,
         );
@@ -155,13 +158,16 @@ export const useLocationViewModal = (props: ScreenParams) => {
         user: user,
       };
       dispatch(addUser(data));
+      setLoading(false);
+
       navigateToProfessionScreen(loggInUserId);
     } catch (err: any) {
-      console.log(err.toString(), err);
+      setLoading(false);
     }
   };
 
   return {
+    loading,
     handleCountry,
     stateOption,
     setStatesOption,

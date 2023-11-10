@@ -15,6 +15,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { colors } from '../../../../../infrastructure/theme/colors';
+import { HeaderBar } from '../../../../../components/header';
 
 const SexualOrientation = (props: ScreenParams) => {
   const {
@@ -24,7 +25,7 @@ const SexualOrientation = (props: ScreenParams) => {
     loggInUserId,
     handleCheckboxChange,
     checkboxState,
-    setCheckboxState,
+    loading,
   } = useSexualOrientationViewModal(props);
 
   return (
@@ -32,17 +33,7 @@ const SexualOrientation = (props: ScreenParams) => {
       <View style={SexualOrientationStyle.container}>
         <View style={SexualOrientationStyle.innerView}>
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" alignItems="center">
-              <Image
-                style={SexualOrientationStyle.arrow}
-                source={require('../../../../../assets/images/icons/arrow.png')}
-              />
-              <Image
-                style={SexualOrientationStyle.logo}
-                source={require('../../../../../assets/images/logo.png')}
-              />
-              <View />
-            </Row>
+            <HeaderBar></HeaderBar>
             <Text style={SexualOrientationStyle.subHeader}>
               Your flavor of love
             </Text>
@@ -79,6 +70,7 @@ const SexualOrientation = (props: ScreenParams) => {
             <PrimaryButton
               onPress={() => updateUserDetails(loggInUserId, sexualOrientation)}
               title="Next"
+              isLoading={loading}
             />
           </View>
         </View>

@@ -24,9 +24,7 @@ export const useViewModal = (props: ScreenParams) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
-
-    const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
@@ -87,15 +85,11 @@ export const useViewModal = (props: ScreenParams) => {
           if (data?.token) {
             dispatch(addUser(data));
             navigateToGenderScreen(data.user._id);
-            return ShowFlashMessage(
-              'info',
-              'logIn successfully',
-              FlashMessageType.SUCCESS,
-            );
+           
           } else {
             return ShowFlashMessage(
               'warn',
-              'logIn  unsuccessfully',
+              'logIn  unsuccessfull',
               FlashMessageType.WARNING,
             );
           }
@@ -103,7 +97,6 @@ export const useViewModal = (props: ScreenParams) => {
       }
       setLoading(false);
     } catch (err: any) {
-      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -115,9 +108,10 @@ export const useViewModal = (props: ScreenParams) => {
     if (data?.token) {
       dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
-      return ShowFlashMessage('info', 'logIn successfully', 'success');
+    }else{
+      navigateToProfile({ email: _email });
     }
-    navigateToProfile({ email: _email });
+   
   };
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -134,14 +128,13 @@ export const useViewModal = (props: ScreenParams) => {
     try {
       return await signInRepository.getAppleUser(firebaseUid);
     } catch (error: any) {
-      console.log(error);
     }
   };
   const checFbUser = async (fbId: string) => {
     try {
       return await signInRepository.getfbUser(fbId);
     } catch (error: any) {
-      console.log(error);
+     
     }
   };
   const handleAppleSignIn = async () => {
@@ -152,10 +145,9 @@ export const useViewModal = (props: ScreenParams) => {
           navigateToProfile({
             email: data.email,
             credential: data.appleCredential,
-            appleId: data.appleId,
+            firebaseUid: data.firebaseUid,
           });
         } else {
-          // plese implement it
           navigateToOtpScreen({
             credential: data.appleCredential,
             firebaseUid: data.firebaseUid,
@@ -163,11 +155,10 @@ export const useViewModal = (props: ScreenParams) => {
         }
       } else {
         if (data?.token) {
-          return ShowFlashMessage('info', 'logIn successfully', 'success');
+          navigateToGenderScreen(data.user._id);
         }
       }
     } catch (e) {
-      ShowFlashMessage('Something went wrong !', 'danger');
     }
   };
   const _setFbData = (payload: any) => setFbData(payload);
@@ -179,7 +170,6 @@ export const useViewModal = (props: ScreenParams) => {
         checFbUser,
       );
     } catch (e) {
-      ShowFlashMessage('Something went wrong !', 'danger');
     }
   };
   const handleNavigationAfterFbLogin = async (data: any) => {
@@ -187,7 +177,6 @@ export const useViewModal = (props: ScreenParams) => {
       dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
       // login path if user had created account with other provider
-      return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
     if (data?.profile && data?.user) {
       const { email, family_name, given_name } = data?.profile;
@@ -221,7 +210,7 @@ export const useViewModal = (props: ScreenParams) => {
         }
         const res = await socialSignInSignUp({ email });
         if (res.token) {
-          return ShowFlashMessage('info', 'logIn successfully', 'success');
+          navigateToGenderScreen(res.user._id);
         }
       }
     }
@@ -289,6 +278,7 @@ export const useViewModal = (props: ScreenParams) => {
     setLoading,
     checkIsNewUser,
     navigateToGenderScreen,
+    getOtpOnEmail
   };
 };
 

@@ -1,3 +1,5 @@
+import { ROUTES } from './../../../../../navigation/index';
+import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -12,24 +14,23 @@ export const useProfessionModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const [isFocus, setIsFocus] = useState(false);
   const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const { user } = useSelector(({ userState }) => userState);
+  const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const [professionForm, setProfessionForm] = useState<professionTypes>({
     userDegree: user?.designation?.userDegree
       ? user?.designation?.userDegree
       : '',
-    primaryDegree: '',
-    institution: '',
-    title: '',
+    primaryDegree: user?.designation?.primaryDegree
+      ? user?.designation?.primaryDegree
+      : '',
+    institution: user?.designation?.institution
+      ? user?.designation?.institution
+      : '',
+    title: user?.designation?.title ? user?.designation?.title : '',
   });
-
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-  useEffect(() => {
-    me();
-  }, []);
-
   const [validationErrors, setValidationErrors] = useState<
     Partial<professionTypes>
   >({});
@@ -42,16 +43,6 @@ export const useProfessionModal = (props: ScreenParams) => {
 
   const handleInputChange = (name: keyof professionTypes, value: string) => {
     setProfessionForm({ ...professionForm, [name]: value });
-  };
-
-  const me = async () => {
-    const user = await updateUserDetailsRepository.me(
-      '653a9ad26b7a2255d03bf4fd',
-    );
-    const data = {
-      user: user,
-    };
-    dispatch(addUser(data));
   };
 
   const handleSubmit = async () => {
@@ -85,15 +76,17 @@ export const useProfessionModal = (props: ScreenParams) => {
         },
         institution: professionForm.institution,
       };
-      const data = await updateUserDetailsRepository.updateUserDetails(
-        '653a9ad26b7a2255d03bf4fd',
-        {
-          update: professionData,
-        },
-      );
-    } catch (err: any) {
-      console.log(err.toString(), err);
-    }
+      setLoading(true);
+      const user = await updateUserDetailsRepository.updateUserDetails(id, {
+        update: professionData,
+      });
+      const data = {
+        user: user,
+      };
+      dispatch(addUser(data));
+      setLoading(false);
+      navigation.navigate(ROUTES.Tab);
+    } catch (error) {}
   };
 
   const getPrimaryDegree = () => {
@@ -109,6 +102,7 @@ export const useProfessionModal = (props: ScreenParams) => {
     return;
   };
   return {
+    loading,
     isFocus,
     setIsFocus,
     validationErrors,

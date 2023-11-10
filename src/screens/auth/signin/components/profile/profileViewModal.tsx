@@ -13,7 +13,6 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
-
 export const useProfileUseViewModal = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
@@ -30,10 +29,8 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
   const {user} = useSelector((state: any) => state.userState);
     const dispatch = useDispatch()
-
   const handleConfirm = (date: Date) => {
     toggleModal();
     handleDateChange(date);
@@ -142,7 +139,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       return setValidationErrors(errors);
     } else {
       setValidationErrors({});
-      await newUserSignUp(formData.email, credential, firebaseUid);
+     await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
     }
   };
 
@@ -222,7 +219,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     dispatch(addUser(dataMango));
     if (dataMango.message === 'Registered Successfully')
     navigateToGenderScreen(dataMango.user._id);
-    return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }
 
   return {
