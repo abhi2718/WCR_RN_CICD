@@ -16,7 +16,7 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
   const [emailInput, setEmailInput] = useState('');
   const [otp, setOtp] = useState('');
 
-  let {setLoading, checkIsNewUser} = useViewModal(props);
+  let {setLoading, checkIsNewUser,getOtpOnEmail} = useViewModal(props);
 
   const verifyEmail = async () => {
     try {
@@ -37,7 +37,7 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
   const resendOtp = async () => {
     try {
       setLoading(true);
-      const data = await otpInRepository.resendOtp(email);
+      const data = await getOtpOnEmail(email)
     } catch (error) {}
   };
 

@@ -31,6 +31,7 @@ import { FlatInput } from '../../../../../components/inputBox/index';
 import { ErrorText } from '../../signInStyle';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { HeaderBar } from '../../../../../components/header';
 
 const Profile = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
@@ -63,17 +64,7 @@ const Profile = (props: ScreenParams) => {
           /> */}
 
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" alignItems="center">
-              <Image
-                style={profileStyles.arrow}
-                source={require('../../../../../assets/images/icons/arrow.png')}
-              />
-              <Image
-                style={profileStyles.logo}
-                source={require('../../../../../assets/images/logo.png')}
-              />
-              <View />
-            </Row>
+            <HeaderBar></HeaderBar>
 
             <Text style={profileStyles.subHeader}>
               Let's get started!{`\n`}Tell us a little about you.
