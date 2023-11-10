@@ -12,8 +12,4 @@ export class OtpRepository {
     const url = `${AppUrl.otpEndPoint}`;
     return this.apiService.getPostApiResponse(url, payload);
   }
-  async resendOtp(email: string) {
-    const url = `${AppUrl.resendOtpEndPoint}?email=${email}`;
-    return this.apiService.getGetApiResponse(url);
-  }
 }
