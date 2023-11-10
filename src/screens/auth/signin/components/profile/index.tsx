@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import {
   Text,
   TextInput,
@@ -58,18 +57,11 @@ const Profile = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={profileStyles.container}>
         <View style={profileStyles.innerView}>
-          {/* <ModalComponent
-            isVisible={isWelcomeModalVisible}
-            onClose={closeModal}
-          /> */}
-
           <View style={{ flex: 1 }}>
             <HeaderBar></HeaderBar>
-
             <Text style={profileStyles.subHeader}>
               Let's get started!{`\n`}Tell us a little about you.
             </Text>
-
             <FlatInput
               label="First Name"
               value={formData.firstName}
@@ -81,7 +73,6 @@ const Profile = (props: ScreenParams) => {
             {validationErrors.firstName && (
               <ErrorText> {validationErrors.firstName}</ErrorText>
             )}
-
             <FlatInput
               label="Last Name"
               value={formData.lastName}
@@ -93,7 +84,6 @@ const Profile = (props: ScreenParams) => {
             {validationErrors.lastName && (
               <ErrorText> {validationErrors.lastName}</ErrorText>
             )}
-
             <FlatInput
               label="Display Name"
               value={formData.displayName}
@@ -101,7 +91,6 @@ const Profile = (props: ScreenParams) => {
                 handleInputChange('displayName', text)
               }
             />
-
             <FlatInput
               label="Mobile No"
               value={formData.mobile}
@@ -113,7 +102,6 @@ const Profile = (props: ScreenParams) => {
             {validationErrors.mobile && (
               <ErrorText> {validationErrors.mobile}</ErrorText>
             )}
-
             <FlatInput
               editable={email ? false : true}
               value={formData.email}
@@ -121,7 +109,6 @@ const Profile = (props: ScreenParams) => {
               label="Email"
               theme={{ colors: { primary: 'red' } }}
             />
-
             <View style={profileStyles.datePickerContainer}>
               <TouchableOpacity
                 style={profileStyles.openButton}
@@ -132,7 +119,6 @@ const Profile = (props: ScreenParams) => {
                   source={require('../../../../../assets/images/icons/calender.png')}
                 />
               </TouchableOpacity>
-
               <DatePicker
                 modal
                 mode="date"
@@ -162,7 +148,6 @@ const Profile = (props: ScreenParams) => {
               )}
             </View>
           </View>
-
           <View>
             <Spacer position="top" size={25}>
               <PrimaryButton

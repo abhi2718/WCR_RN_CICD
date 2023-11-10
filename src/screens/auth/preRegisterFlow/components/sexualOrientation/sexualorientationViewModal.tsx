@@ -64,8 +64,6 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
       navigateTolocationCreen(loggInUserId);
     } catch (err: any) {
       setLoading(false);
-
-      console.log(err);
     }
   };
 

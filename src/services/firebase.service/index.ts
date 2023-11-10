@@ -234,7 +234,7 @@ export class FirebaseService {
           return {
             isNewUser: true,
             email,
-            appleId: user?.uid,
+            firebaseUid: user?.uid,
             appleCredential
           };
         }

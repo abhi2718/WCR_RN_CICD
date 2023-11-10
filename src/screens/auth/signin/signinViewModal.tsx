@@ -145,7 +145,7 @@ export const useViewModal = (props: ScreenParams) => {
           navigateToProfile({
             email: data.email,
             credential: data.appleCredential,
-            appleId: data.appleId,
+            firebaseUid: data.firebaseUid,
           });
         } else {
           navigateToOtpScreen({
