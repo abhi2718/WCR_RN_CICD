@@ -1,25 +1,26 @@
 import { StyleSheet } from 'react-native';
 import { dimensions } from '../../../../../../components/tools';
 import { fontWeights } from '../../../../../../infrastructure/theme/fonts';
+import { colors } from '../../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
   containerStyles: {
+    marginVertical: 15,
     flexDirection: 'row',
     position: 'relative',
-    height: 40,
-    borderRadius: 40,
-    backgroundColor: '#EBF0FE',
-    marginHorizontal: 5,
+    height: 45,
+    borderRadius: 35,
+    backgroundColor: colors.ui.bgMud,
     width: dimensions.width - 32,
   },
   animatedContainerStyles: {
     position: 'absolute',
-    height: 40 - 2 * 2,
+    height: 45 - 2 * 2,
     top: 2,
     bottom: 2,
-    borderRadius: 40,
+    borderRadius: 35,
     width: (dimensions.width - 32) / 2,
-    backgroundColor: 'red',
+    backgroundColor: colors.ui.primary,
   },
   touchContainerStyle: {
     flex: 1,

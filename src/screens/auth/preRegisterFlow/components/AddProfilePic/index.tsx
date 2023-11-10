@@ -1,12 +1,7 @@
 import React from 'react';
 import { Button, Image, ScrollView, Text, View } from 'react-native';
-import {
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../../../../components/tools';
+import { Column, Row, ScreenContainer } from '../../../../../components/tools';
 import { addPicture } from './AddProfilePicStyle';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { PrimaryButton } from '../../../../../components/button';
 
 const AddProfilePic = () => {
@@ -25,17 +20,52 @@ const AddProfilePic = () => {
             />
             <View />
           </Row>
-          <Text style={addPicture.subHeader}>Time to shine!</Text>
-          <Text style={addPicture.text}>Add your best photo</Text>
-          <Row
-            justifyContent="center"
-            alignItems="center"
-            style={addPicture.imageContainer}
-          >
-            <ImageContainer
-              source={require('../../../../../assets/images/icons/camera.png')}
-            />
-          </Row>
+          <Text style={addPicture.subHeader}>Show off your best side </Text>
+          <Text style={addPicture.text}>(Add at least 2 photos)</Text>
+          <View>
+            <Row justifyContent="space-between" style={addPicture.row}>
+              <View style={addPicture.imageViewProfile}>
+                <Image
+                  style={addPicture.imageIcon}
+                  source={require('../../../../../assets/images/icons/addImg.png')}
+                />
+              </View>
+              <Column style={addPicture.columnOne}>
+                <View style={addPicture.imageView}>
+                  <Image
+                    style={addPicture.imageIcon}
+                    source={require('../../../../../assets/images/icons/addImg.png')}
+                  />
+                </View>
+                <View style={addPicture.imageView}>
+                  <Image
+                    style={addPicture.imageIcon}
+                    source={require('../../../../../assets/images/icons/addImg.png')}
+                  />
+                </View>
+              </Column>
+            </Row>
+            <Row justifyContent="space-between" style={addPicture.row}>
+              <View style={addPicture.imageView}>
+                <Image
+                  style={addPicture.imageIcon}
+                  source={require('../../../../../assets/images/icons/addImg.png')}
+                />
+              </View>
+              <View style={addPicture.imageView}>
+                <Image
+                  style={addPicture.imageIcon}
+                  source={require('../../../../../assets/images/icons/addImg.png')}
+                />
+              </View>
+              <View style={addPicture.imageView}>
+                <Image
+                  style={addPicture.imageIcon}
+                  source={require('../../../../../assets/images/icons/addImg.png')}
+                />
+              </View>
+            </Row>
+          </View>
         </View>
         <PrimaryButton title="Next" />
       </View>

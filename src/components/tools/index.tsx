@@ -10,7 +10,7 @@ import {
   StyleSheet,
   ImageSourcePropType,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { InputProps } from '../../types/components/input.type';
 import { rowColumnProps } from '../../types/components/rowColumn.type';
@@ -54,7 +54,7 @@ export const Logo = ({
 }) => {
   return (
     <Image
-    resizeMode={'contain'}
+      resizeMode="contain"
       style={{ width, height }}
       source={require('../../assets/images/logo.png')}
     />
@@ -99,10 +99,12 @@ export const Row: React.FC<rowColumnProps> = ({
   justifyContent,
   alignItems = 'stretch',
   children,
+  gap,
   style,
 }) => {
   const styleProps = {
     justifyContent,
+    gap,
     alignItems,
     flexDirection: 'row',
   };

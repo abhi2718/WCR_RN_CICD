@@ -89,7 +89,6 @@ export const useProfessionModal = (props: ScreenParams) => {
     } catch (error) {}
   };
 
-
   const getPrimaryDegree = () => {
     const primaryDegreeOptions = primaryDegree[professionForm.userDegree];
     if (!primaryDegreeOptions || primaryDegreeOptions?.length === 0) {

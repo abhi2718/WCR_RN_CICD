@@ -13,6 +13,7 @@ import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
+import { colors } from '../../../infrastructure/theme/colors';
 import { HeaderBar } from '../../../components/header';
 const Gender = (props: ScreenParams) => {
   const {
@@ -42,7 +43,7 @@ const Gender = (props: ScreenParams) => {
                   value={gender}
                 >
                   <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton value={option} />
+                    <RadioButton color={colors.ui.primary} value={option} />
                     <Text style={genderStyle.btnText}>{option}</Text>
                   </Row>
                 </RadioButton.Group>
@@ -54,7 +55,7 @@ const Gender = (props: ScreenParams) => {
               <BouncyCheckbox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
-                fillColor="red"
+                fillColor={colors.ui.primary}
                 unfillColor="#FFFFFF"
               />
               <Text style={genderStyle.btnText}>Visible on profile</Text>

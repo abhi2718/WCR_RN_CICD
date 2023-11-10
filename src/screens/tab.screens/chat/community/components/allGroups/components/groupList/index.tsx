@@ -26,30 +26,32 @@ const GroupsList = (props: GroupsListProps) => {
 const Group = (props: GroupProps) => {
   const {group, handleJoinGroup} = props;
   return (
-    <View style={styles.container}>
+    <View style={styles.singleRow}>
       <Row justifyContent="space-between">
-        <Row>
+        <Row style={styles.colOne}>
           <FastImage
             style={styles.imageStyle}
-            source={{uri: group.getIcon()}}
+            source={{ uri: group.getIcon() }}
           />
           <Spacer position="left" size={16}>
             <Column>
-              <Text>{group.getName()}</Text>
-              <Text>{group.getMembersCount()}</Text>
+              <Text style={styles.groupName}>{group.getName()}</Text>
+              <Text style={styles.groupMembers}>
+                {group.getMembersCount()} Members
+              </Text>
             </Column>
           </Spacer>
         </Row>
         <Column justifyContent="center">
           {group.getHasJoined() && (
             <>
-              <Text>Joined</Text>
+              <Text style={styles.joinedBtn}>Joined</Text>
             </>
           )}
           {!group.getHasJoined() && (
             <>
               <Pressable onPress={() => handleJoinGroup(group.getGuid())}>
-                <Text>Join</Text>
+                <Text style={styles.joinBtn}>Join</Text>
               </Pressable>
             </>
           )}

@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
 export type rowColumnProps = {
   flexDirection?: string;
@@ -7,4 +7,5 @@ export type rowColumnProps = {
   alignItems?: string;
   children?: ReactNode;
   style?: any;
+  gap?: number;
 };

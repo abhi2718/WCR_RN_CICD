@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
-import {
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../../../../components/tools';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Row, ScreenContainer } from '../../../../../components/tools';
+import { Image, Text, View } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { location } from './locationStyle';
 import {
@@ -12,7 +8,6 @@ import {
   FlatInput,
   SearchableDropdownInput,
 } from '../../../../../components/inputBox';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { country } from '../../../../../utils/constanst';
 import { useLocationViewModal } from './locationViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
@@ -108,14 +103,3 @@ const LocationScreen = (props: ScreenParams) => {
 };
 
 export default LocationScreen;
-
-const styles = StyleSheet.create({
-  label: {
-    backgroundColor: 'white',
-    left: 3,
-    top: 20,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 12,
-  },
-});

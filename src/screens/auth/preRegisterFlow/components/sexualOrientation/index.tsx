@@ -14,6 +14,7 @@ import { sexualOrientationArray } from '../../../../../utils/constanst';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeaderBar } from '../../../../../components/header';
 
 const SexualOrientation = (props: ScreenParams) => {
@@ -47,7 +48,7 @@ const SexualOrientation = (props: ScreenParams) => {
                     style={SexualOrientationStyle.rowView}
                     alignItems="center"
                   >
-                    <RadioButton value={option} />
+                    <RadioButton color={colors.ui.primary} value={option} />
                     <Text style={SexualOrientationStyle.btnText}>{option}</Text>
                   </Row>
                 </RadioButton.Group>
@@ -59,7 +60,7 @@ const SexualOrientation = (props: ScreenParams) => {
               <BouncyCheckbox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
-                fillColor="red"
+                fillColor={colors.ui.primary}
                 unfillColor="#FFFFFF"
               />
               <Text style={SexualOrientationStyle.btnText}>
