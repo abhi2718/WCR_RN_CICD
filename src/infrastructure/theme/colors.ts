@@ -9,8 +9,11 @@ export const colors = {
     success: '#138000',
     inputBg: 'rgba(35, 35, 35, 0.03)',
     placeholder: 'gray',
+    bgMud: '#e8e8e8',
     black: '#000000',
+    white: '#ffffff',
     opacity: 'background: rgba(0,0,0, 0.7)',
+    chatBorder: '#d3d3d3',
   },
   bg: {
     primary: '#FFFFFF',

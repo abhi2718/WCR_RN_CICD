@@ -1,16 +1,55 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../../../../../../infrastructure/theme/colors';
+import { dimensions } from '../../../../../../../../components/tools';
 
 export const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      paddingHorizontal: 8,
-      marginBottom: 10,
-    },
-    imageStyle: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
-    },
-  });
-  
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    marginBottom: 10,
+  },
+  imageStyle: {
+    width: 56,
+    height: 56,
+    borderRadius: 56 / 2,
+  },
+  singleRow: {
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.ui.chatBorder,
+  },
+  colOne: {
+    width: dimensions.width - 150,
+  },
+  groupName: {
+    fontSize: 16,
+    fontWeight: '700',
+    textTransform: 'capitalize',
+  },
+  groupMembers: {
+    fontWeight: '400',
+    fontSize: 12,
+    marginTop: 4,
+  },
+  joinedBtn: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    backgroundColor: '#EBEBEB',
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    textTransform: 'uppercase',
+    fontWeight: '700',
+    color: colors.ui.placeholder,
+  },
+  joinBtn: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    backgroundColor: colors.ui.primary,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    textTransform: 'uppercase',
+    fontWeight: '700',
+    color: colors.ui.white,
+  },
+});

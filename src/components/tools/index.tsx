@@ -99,10 +99,12 @@ export const Row: React.FC<rowColumnProps> = ({
   justifyContent,
   alignItems = 'stretch',
   children,
+  gap,
   style,
 }) => {
   const styleProps = {
     justifyContent,
+    gap,
     alignItems,
     flexDirection: 'row',
   };
