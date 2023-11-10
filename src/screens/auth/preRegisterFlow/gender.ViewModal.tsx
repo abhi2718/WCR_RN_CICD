@@ -67,7 +67,6 @@ export const useGenderViewModal = (props: ScreenParams) => {
       navigateToGenderPronounScreen(loggInUserId);
     } catch (err: any) {
       setLoading(false);
-      console.log(err.toString());
     }
   };
 

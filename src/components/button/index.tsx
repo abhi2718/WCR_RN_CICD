@@ -50,7 +50,7 @@ export const PrimaryButton = (props: ButtonProps) => {
           backgroundColor: btnColor ? btnColor : colors.ui.primary,
         }}
       >
-        <ActivityIndicator size="small" color="#fff" />
+        <ActivityIndicator size={sizes[4]} color="#fff" />
       </View>
     );
   } else {

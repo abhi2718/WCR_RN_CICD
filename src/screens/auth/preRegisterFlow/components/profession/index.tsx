@@ -21,7 +21,6 @@ const Profession = (props: ScreenParams) => {
     getPrimaryDegree,
     validationErrors,
   } = useProfessionModal(props);
-
   return (
     <ScreenContainer>
       <View style={profession.container}>
@@ -46,7 +45,6 @@ const Profession = (props: ScreenParams) => {
               {validationErrors.userDegree && (
                 <ErrorText> {validationErrors.userDegree}</ErrorText>
               )}
-
               <DropdownInput
                 data={primaryDegreeOption}
                 onFocus={() => setIsFocus(true)}
@@ -62,7 +60,6 @@ const Profession = (props: ScreenParams) => {
               {validationErrors.primaryDegree && (
                 <ErrorText> {validationErrors.primaryDegree}</ErrorText>
               )}
-
               <FlatInput
                 label="Job Title"
                 onChangeText={(jobTitle: string) =>
@@ -83,7 +80,6 @@ const Profession = (props: ScreenParams) => {
               />
             </View>
           </View>
-
           <View>
             <PrimaryButton
               title="Next"

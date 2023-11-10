@@ -36,7 +36,6 @@ const SexualOrientation = (props: ScreenParams) => {
             <Text style={SexualOrientationStyle.subHeader}>
               Your flavor of love
             </Text>
-
             <View>
               {sexualOrientationArray.map((option, index) => (
                 <RadioButton.Group
@@ -55,7 +54,6 @@ const SexualOrientation = (props: ScreenParams) => {
               ))}
             </View>
           </View>
-
           <View>
             <Row style={SexualOrientationStyle.rowView} alignItems="center">
               <BouncyCheckbox

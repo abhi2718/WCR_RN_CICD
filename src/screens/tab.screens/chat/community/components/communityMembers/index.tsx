@@ -12,6 +12,9 @@ import {Member} from './components';
 import {styles} from './styles';
 import {useViewMdal} from './useViewModal';
 import { CommunityMembersProps } from '../../../../../../types/screen.type/communityChat';
+import ChatAvatorModal from '../cometChatAvatrModal';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../../../../navigation';
 
 export const CommunityMembers = (props:CommunityMembersProps) => {
   const {members, showMembers, toggleSetShowMembers} = useViewMdal(props);
@@ -34,7 +37,7 @@ export const CommunityMembers = (props:CommunityMembersProps) => {
             </Pressable>
             <ScrollView>
               {members.map((member, index) => (
-                <Member key={index} member={member} />
+                <Member toggleSetShowMembers={toggleSetShowMembers} key={index}  member={member} />
               ))}
             </ScrollView>
           </SafeAreaView>

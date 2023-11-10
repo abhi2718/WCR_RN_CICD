@@ -1,8 +1,8 @@
 import {API_URL, CLIENTID} from '@env';
 export const config = {
-  API_URL:
-  //  "http://192.168.1.3:8000/api",
-    'https://b1ed-43-251-188-244.ngrok-free.app/api',
+  API_URL:"https://staging.whitecoatromance.com/api",
+ // "http://192.168.1.2:8000/api",
+  //  'https://b1ed-43-251-188-244.ngrok-free.app/api',
 
   CLIENTID,
   APP_ID: '239776c0feb68d65',

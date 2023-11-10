@@ -37,6 +37,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
 export const headerStyle = StyleSheet.create({
   arrow: {
     height: sizes[4],
+    width:sizes[2],
   },
   logo: {
     marginLeft: -5,

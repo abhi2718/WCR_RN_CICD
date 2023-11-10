@@ -30,16 +30,12 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
   const {user} = useSelector((state: any) => state.userState);
     const dispatch = useDispatch()
-
   const handleConfirm = (date: Date) => {
     toggleModal();
     handleDateChange(date);
   };
-
- 
 
   useEffect(() => {
     handleInputChange('email', email);
@@ -144,7 +140,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       return setValidationErrors(errors);
     } else {
       setValidationErrors({});
-      await newUserSignUp(formData.email, credential, firebaseUid);
+     await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
     }
   };
 

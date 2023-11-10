@@ -56,15 +56,12 @@ export const useGenderPronounViewModal = (props: any) => {
       const data = {
         user: user,
       };
-      console.log('data at pronoun', data);
       dispatch(addUser(data));
       setLoading(false);
 
       navigateToSexualOrientationScreen(loggInUserId);
     } catch (err: any) {
       setLoading(false);
-
-      console.log(err);
     }
   };
 

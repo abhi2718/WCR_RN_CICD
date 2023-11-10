@@ -163,8 +163,6 @@ export const useLocationViewModal = (props: ScreenParams) => {
       navigateToProfessionScreen(loggInUserId);
     } catch (err: any) {
       setLoading(false);
-
-      console.log(err.toString(), err);
     }
   };
 

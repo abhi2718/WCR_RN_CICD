@@ -1,3 +1,5 @@
+import { ROUTES } from './../../../../../navigation/index';
+import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -13,10 +15,9 @@ export const useProfessionModal = (props: ScreenParams) => {
   const [isFocus, setIsFocus] = useState(false);
   const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const { user } = useSelector(({ userState }) => userState);
+  const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const [professionForm, setProfessionForm] = useState<professionTypes>({
     userDegree: user?.designation?.userDegree
       ? user?.designation?.userDegree
@@ -29,9 +30,7 @@ export const useProfessionModal = (props: ScreenParams) => {
       : '',
     title: user?.designation?.title ? user?.designation?.title : '',
   });
-
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
   const [validationErrors, setValidationErrors] = useState<
     Partial<professionTypes>
   >({});
@@ -86,11 +85,10 @@ export const useProfessionModal = (props: ScreenParams) => {
       };
       dispatch(addUser(data));
       setLoading(false);
-    } catch (err: any) {
-      setLoading(false);
-      console.log(err.toString(), err);
-    }
+      navigation.navigate(ROUTES.Tab);
+    } catch (error) {}
   };
+
 
   const getPrimaryDegree = () => {
     const primaryDegreeOptions = primaryDegree[professionForm.userDegree];

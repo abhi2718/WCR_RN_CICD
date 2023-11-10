@@ -234,7 +234,7 @@ export class FirebaseService {
           return {
             isNewUser: true,
             email,
-            appleId: user?.uid,
+            firebaseUid: user?.uid,
             appleCredential
           };
         }
@@ -244,7 +244,6 @@ export class FirebaseService {
         };
       }
     } catch (error) {
-      ShowFlashMessage('Alert', 'Something went wrong ', 'danger');
     }
   }
   async signInWithFb(

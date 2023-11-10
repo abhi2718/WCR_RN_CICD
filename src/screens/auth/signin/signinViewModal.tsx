@@ -24,9 +24,7 @@ export const useViewModal = (props: ScreenParams) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
-
-    const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
@@ -99,7 +97,6 @@ export const useViewModal = (props: ScreenParams) => {
       }
       setLoading(false);
     } catch (err: any) {
-      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -111,8 +108,10 @@ export const useViewModal = (props: ScreenParams) => {
     if (data?.token) {
       dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
+    }else{
+      navigateToProfile({ email: _email });
     }
-    navigateToProfile({ email: _email });
+   
   };
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -129,14 +128,13 @@ export const useViewModal = (props: ScreenParams) => {
     try {
       return await signInRepository.getAppleUser(firebaseUid);
     } catch (error: any) {
-      console.log(error);
     }
   };
   const checFbUser = async (fbId: string) => {
     try {
       return await signInRepository.getfbUser(fbId);
     } catch (error: any) {
-      console.log(error);
+     
     }
   };
   const handleAppleSignIn = async () => {
@@ -147,10 +145,9 @@ export const useViewModal = (props: ScreenParams) => {
           navigateToProfile({
             email: data.email,
             credential: data.appleCredential,
-            appleId: data.appleId,
+            firebaseUid: data.firebaseUid,
           });
         } else {
-          // plese implement it
           navigateToOtpScreen({
             credential: data.appleCredential,
             firebaseUid: data.firebaseUid,
@@ -281,6 +278,7 @@ export const useViewModal = (props: ScreenParams) => {
     setLoading,
     checkIsNewUser,
     navigateToGenderScreen,
+    getOtpOnEmail
   };
 };
 

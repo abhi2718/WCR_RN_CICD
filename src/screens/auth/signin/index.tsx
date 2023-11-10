@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, TextInput, ScrollView } from 'react-native';
+import {
+  View,
+  TextInput,
+  ScrollView,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { useViewModal } from './signinViewModal';
 import { styles } from './signInStyle';
 
@@ -10,8 +16,6 @@ import {
 import { ImageContainer, ScreenContainer } from '../../../components/tools';
 import { isAndroid } from '../../../components/tools';
 import { sizes } from '../../../infrastructure/theme/sizes';
-
-import Loader from '../../../components/loader/loader';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 export default function SignInScreen(props: ScreenParams) {
   const {
@@ -55,22 +59,30 @@ export default function SignInScreen(props: ScreenParams) {
             iconSource={require('../../../assets/images/appleLogo.png')}
           />
         )}
-        <View style={styles.inputContainerr}>
-          <ImageContainer
-            source={require('../../../assets/images/Email-icon.png')}
-            style={styles.emailIconStyle}
-          />
-          {/* Make a common component */}
-          <TextInput
-            style={styles.emailInputBox}
-            placeholder={'Email'}
-            value={email}
-            onChangeText={(email: string) => {
-              setEmail(email);
-            }}
-            placeholderTextColor="rgba(35, 35, 35, 0.4)"
-          />
-        </View>
+        <KeyboardAvoidingView
+          enabled
+          behavior={isAndroid ? 'height' : 'padding'}
+        >
+          <View style={styles.inputContainerr}>
+            <ImageContainer
+              source={require('../../../assets/images/Email-icon.png')}
+              style={styles.emailIconStyle}
+            />
+            <TextInput
+              style={styles.emailInputBox}
+              placeholder={'Email'}
+              value={email}
+              onChangeText={(email: string) => {
+                setEmail(email);
+              }}
+              placeholderTextColor="rgba(35, 35, 35, 0.4)"
+            />
+          </View>
+        </KeyboardAvoidingView>
+        <KeyboardAvoidingView
+          enabled
+          behavior={isAndroid ? 'height' : 'padding'}
+        ></KeyboardAvoidingView>
         <PrimaryButton
           title="Continue"
           onPress={getOtpToVerifyEmail}
