@@ -53,7 +53,8 @@ export const Logo = ({
   height?: number;
 }) => {
   return (
-    <ImageContainer
+    <Image
+      resizeMode="contain"
       style={{ width, height }}
       source={require('../../assets/images/logo.png')}
     />

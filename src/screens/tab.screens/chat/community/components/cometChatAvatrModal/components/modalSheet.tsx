@@ -50,7 +50,8 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
 };
 
 export const PrivateChatWindowWrapper = ({ route }) => {
-  const {senderId, name} = route.params;
+  const { senderId, name } = route.params;
+  console.log(senderId, name)
   const navigation = useNavigation();
   let user = new CometChat.User(senderId, name);
   return (

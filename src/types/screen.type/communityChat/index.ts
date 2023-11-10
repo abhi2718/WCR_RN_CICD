@@ -47,5 +47,6 @@ export type CommunityMembersProps = {
   group?: CometChat.Group;
 };
 export type MemberProps = {
-  member:CometChat.GroupMember
+  member: CometChat.GroupMember;
+  toggleSetShowMembers: () => void;
 };

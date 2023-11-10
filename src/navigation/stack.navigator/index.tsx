@@ -8,7 +8,6 @@ import { ROUTES } from '../';
 import { MessageList } from '../../cometChat/src/CometChatConversationsWithMessages/CometChatConversationsWithMessages';
 import Onboarding from '../../screens/onBoarding';
 import { PrivateChatWindowWrapper } from '../../screens/tab.screens/chat/community/components/cometChatAvatrModal/components/modalSheet';
-
 const Stack = createNativeStackNavigator();
 const optins = { headerShown: false };
 import Gender from './../../screens/auth/preRegisterFlow';
@@ -31,6 +30,11 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={options}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
@@ -49,7 +53,6 @@ export const StackNavigator = () => {
         name={ROUTES.AddEthnicity}
         component={AddEthnicity}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.EmailAuth}
@@ -81,15 +84,26 @@ export const StackNavigator = () => {
         name={ROUTES.MaritalStatus}
         component={MaritalStatus}
       />
-      <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
-      <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
-      <Stack.Screen options={options} name={ROUTES.About} component={About} />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Kids}
+        component={Kids}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Habits}
+        component={Habits}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.About}
+        component={About}
+      />
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}
         component={Hobbies}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.ProfilePic}
@@ -99,11 +113,6 @@ export const StackNavigator = () => {
         options={options}
         name={ROUTES.Location}
         component={LocationScreen}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Tab}
-        component={TabNavigator}
       />
       <Stack.Screen
         options={options}

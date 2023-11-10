@@ -20,7 +20,7 @@ export default function CommunityChat() {
             style={styles.bellStyle}
             source={require('../../../../assets/images/Bell.png')}
           />
-          <Logo width={40} height={40} />
+          <Logo width={60} height={40} />
           <Image
             style={styles.searchBarStyle}
             source={require('../../../../assets/images/Magnifier.png')}
