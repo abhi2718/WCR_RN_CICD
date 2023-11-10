@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
-import {
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../../../../components/tools';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import React from 'react';
+import { ScreenContainer } from '../../../../../components/tools';
+import { Text, View, StyleSheet } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { profession } from './professionStyle';
 import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { userDegree } from '../../../../../utils/constanst';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useProfessionModal } from './professionViewModal';
 import { ErrorText } from '../../../signin/signInStyle';
-
-// import AntDesign from '@expo/vector-icons/AntDesign';
+import { HeaderBar } from '../../../../../components/header';
 
 const Profession = (props: ScreenParams) => {
   const {
-    isFocus,
+    loading,
     setIsFocus,
     handleSubmit,
     handleInputChange,
@@ -33,17 +27,7 @@ const Profession = (props: ScreenParams) => {
       <View style={profession.container}>
         <View style={profession.innerView}>
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" alignItems="center">
-              <Image
-                style={profession.arrow}
-                source={require('../../../../../assets/images/icons/arrow.png')}
-              />
-              <Image
-                style={profession.logo}
-                source={require('../../../../../assets/images/logo.png')}
-              />
-              <Text style={profession.skipBtn}>Skip</Text>
-            </Row>
+            <HeaderBar></HeaderBar>
             <Text style={profession.subHeader}>
               Tell us about your profession
             </Text>
@@ -101,7 +85,11 @@ const Profession = (props: ScreenParams) => {
           </View>
 
           <View>
-            <PrimaryButton title="Next" onPress={() => handleSubmit()} />
+            <PrimaryButton
+              title="Next"
+              onPress={() => handleSubmit()}
+              isLoading={loading}
+            />
           </View>
         </View>
       </View>

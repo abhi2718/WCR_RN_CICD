@@ -4,9 +4,14 @@ import { ROUTES } from '../../../navigation';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../store/reducers/user.reducer';
+import {
+  FlashMessageType,
+  ShowFlashMessage,
+} from '../../../components/flashBar';
 
 export const useGenderViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
+  const [loading, setLoading] = useState(false);
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
@@ -14,12 +19,15 @@ export const useGenderViewModal = (props: ScreenParams) => {
   const dispatch = useDispatch();
 
   const { navigation } = props;
-  const [gender, setGender] = useState('Male');
+  const updatedGender = user?.profile?.gender ??  ''
+  const [gender, setGender] = useState(updatedGender);
   const [checkboxState, setCheckboxState] = useState(true);
 
   const handleGenderValue = (value: string) => {
     setGender(value);
   };
+
+
 
   const handleCheckboxChange = () => {
     setCheckboxState(!checkboxState);
@@ -31,27 +39,40 @@ export const useGenderViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async (id: string, update: string) => {
     try {
+      if (!update) {
+        return ShowFlashMessage(
+          'Warning',
+          'Please select gender!',
+          FlashMessageType.DANGER,
+        );
+      }
+      setLoading(true);
+
       const genderData = {
         profile: {
           gender: update,
           showGender: checkboxState,
         },
       };
-      
+
       const user = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderData,
       });
-      const data ={
-        user:user
-      }
+      const data = {
+        user: user,
+      };
       dispatch(addUser(data));
+      setLoading(false);
+
       navigateToGenderPronounScreen(loggInUserId);
     } catch (err: any) {
+      setLoading(false);
       console.log(err.toString());
     }
   };
 
   return {
+    loading,
     gender,
     setGender,
     loggInUserId,

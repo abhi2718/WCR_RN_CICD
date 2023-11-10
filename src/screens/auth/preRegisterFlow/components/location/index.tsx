@@ -17,6 +17,7 @@ import { country } from '../../../../../utils/constanst';
 import { useLocationViewModal } from './locationViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ErrorText } from '../../../signin/signInStyle';
+import { HeaderBar } from '../../../../../components/header';
 
 const LocationScreen = (props: ScreenParams) => {
   const {
@@ -26,7 +27,7 @@ const LocationScreen = (props: ScreenParams) => {
     validationErrors,
     locationForm,
     getStatesOptions,
-
+    loading,
     handleSubmit,
     handleInputChange,
   } = useLocationViewModal(props);
@@ -36,20 +37,7 @@ const LocationScreen = (props: ScreenParams) => {
       <View style={location.container}>
         <View style={location.innerView}>
           <View style={{ flex: 1 }}>
-            <Row justifyContent="space-between" style={location.rowHeader}>
-              <ImageContainer
-                height={sizes[6]}
-                width={sizes[6]}
-                source={require('../../../../../assets/images/icons/arrow.png')}
-              />
-              <ImageContainer
-                height={sizes[9]}
-                width={9}
-                source={require('../../../../../assets/images/logo.png')}
-              />
-              <View />
-            </Row>
-
+            <HeaderBar></HeaderBar>
             <Text style={location.subHeader}>
               Let's find matches near you
               {`\n`}
@@ -85,9 +73,7 @@ const LocationScreen = (props: ScreenParams) => {
               <FlatInput
                 label="City"
                 value={locationForm.city}
-                onChangeText={(text: any) =>
-                  handleInputChange('city', text)
-                }
+                onChangeText={(text: any) => handleInputChange('city', text)}
                 error={validationErrors.city}
               />
               {validationErrors.city && (
@@ -99,9 +85,7 @@ const LocationScreen = (props: ScreenParams) => {
                 placeholder={zipPlaceHolder}
                 maxLength={locationForm.country === 'USA' ? 5 : 6}
                 value={locationForm.zipcode}
-                onChangeText={(text: any) =>
-                  handleInputChange('zipcode', text)
-                }
+                onChangeText={(text: any) => handleInputChange('zipcode', text)}
                 error={validationErrors.zipcode}
               />
               {validationErrors.zipcode && (
@@ -111,7 +95,11 @@ const LocationScreen = (props: ScreenParams) => {
           </View>
 
           <View>
-            <PrimaryButton title="Next" onPress={() => handleSubmit()} />
+            <PrimaryButton
+              title="Next"
+              onPress={() => handleSubmit()}
+              isLoading={loading}
+            />
           </View>
         </View>
       </View>

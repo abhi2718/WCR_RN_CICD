@@ -69,13 +69,6 @@ export class FirebaseService {
       };
     } catch (error: any) {
       switch (error.code) {
-        case statusCodes.SIGN_IN_CANCELLED:
-          ShowFlashMessage(
-            'Alert',
-            'Something went wrong /SIGN_IN_CANCELLED/',
-            'danger',
-          );
-          break;
         case statusCodes.IN_PROGRESS:
           ShowFlashMessage(
             'Alert',

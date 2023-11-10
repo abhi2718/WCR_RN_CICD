@@ -13,6 +13,7 @@ import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
+import { HeaderBar } from '../../../components/header';
 const Gender = (props: ScreenParams) => {
   const {
     gender,
@@ -21,59 +22,51 @@ const Gender = (props: ScreenParams) => {
     loggInUserId,
     checkboxState,
     handleCheckboxChange,
+    loading,
   } = useGenderViewModal(props);
 
   return (
     <ScreenContainer>
-        <View style={genderStyle.container}>
+      <View style={genderStyle.container}>
+        <View style={genderStyle.innerView}>
           <View style={genderStyle.innerView}>
-            <View style={genderStyle.innerView}>
-              <Row justifyContent="space-between" alignItems="center">
-                <Image
-                  style={genderStyle.arrow}
-                  source={require('../../../assets/images/icons/arrow.png')}
-                />
-                <Image
-                  style={genderStyle.logo}
-                  source={require('../../../assets/images/logo.png')}
-                />
-                <View />
-              </Row>
-              <Text style={genderStyle.subHeader}>
-                Choose your gender identity
-              </Text>
-              <View>
-                {genderArray.map((option,index) => (
-                  <RadioButton.Group
-                  key={index}
-                    onValueChange={handleGenderValue}
-                    value={gender}
-                  >
-                    <Row style={genderStyle.rowView} alignItems="center">
-                      <RadioButton value={option} />
-                      <Text style={genderStyle.btnText}>{option}</Text>
-                    </Row>
-                  </RadioButton.Group>
-                ))}
-              </View>
-            </View>
+            <HeaderBar></HeaderBar>
+            <Text style={genderStyle.subHeader}>
+              Choose your gender identity
+            </Text>
             <View>
-              <Row style={genderStyle.rowView} alignItems="center">
-                <BouncyCheckbox
-                  onPress={handleCheckboxChange}
-                  isChecked={checkboxState}
-                  fillColor="red"
-                  unfillColor="#FFFFFF"
-                />
-                <Text style={genderStyle.btnText}>Visible on profile</Text>
-              </Row>
-              <PrimaryButton
-                onPress={() => updateUserDetails(loggInUserId, gender)}
-                title="Next"
-              />
+              {genderArray.map((option, index) => (
+                <RadioButton.Group
+                  key={index}
+                  onValueChange={handleGenderValue}
+                  value={gender}
+                >
+                  <Row style={genderStyle.rowView} alignItems="center">
+                    <RadioButton value={option} />
+                    <Text style={genderStyle.btnText}>{option}</Text>
+                  </Row>
+                </RadioButton.Group>
+              ))}
             </View>
           </View>
+          <View>
+            <Row style={genderStyle.rowView} alignItems="center">
+              <BouncyCheckbox
+                onPress={handleCheckboxChange}
+                isChecked={checkboxState}
+                fillColor="red"
+                unfillColor="#FFFFFF"
+              />
+              <Text style={genderStyle.btnText}>Visible on profile</Text>
+            </Row>
+            <PrimaryButton
+              onPress={() => updateUserDetails(loggInUserId, gender)}
+              title="Next"
+              isLoading={loading}
+            />
+          </View>
         </View>
+      </View>
     </ScreenContainer>
   );
 };

@@ -1,8 +1,9 @@
 import {API_URL, CLIENTID} from '@env';
 export const config = {
   API_URL:
-    "http://192.168.1.2:8000/api",
-    //'https://585d-103-233-86-108.ngrok-free.app/api',
+  //  "http://192.168.1.3:8000/api",
+    'https://b1ed-43-251-188-244.ngrok-free.app/api',
+
   CLIENTID,
   APP_ID: '239776c0feb68d65',
   AUTH_KEY: 'bf02994ce40f950273890dc19da88624528b0f82',
