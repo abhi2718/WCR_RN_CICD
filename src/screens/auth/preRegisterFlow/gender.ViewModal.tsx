@@ -12,14 +12,11 @@ import {
 export const useGenderViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const [loading, setLoading] = useState(false);
-
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
-
   const { navigation } = props;
-  const updatedGender = user?.profile?.gender ??  ''
+  const updatedGender = user?.profile?.gender ??  'Male'
   const [gender, setGender] = useState(updatedGender);
   const [checkboxState, setCheckboxState] = useState(true);
 
