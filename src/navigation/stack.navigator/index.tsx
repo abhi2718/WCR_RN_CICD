@@ -30,11 +30,6 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={options}
-        name={ROUTES.Tab}
-        component={TabNavigator}
-      />
-      <Stack.Screen
-        options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
@@ -47,6 +42,11 @@ export const StackNavigator = () => {
         options={options}
         name={ROUTES.Profession}
         component={Profession}
+      />
+       <Stack.Screen
+        options={options}
+        name={ROUTES.Tab}
+        component={TabNavigator}
       />
       <Stack.Screen
         options={options}

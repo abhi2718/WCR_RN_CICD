@@ -39,6 +39,8 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     handleDateChange(date);
   };
 
+ 
+
   useEffect(() => {
     handleInputChange('email', email);
   }, [email]);
@@ -222,7 +224,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     dispatch(addUser(dataMango));
     if (dataMango.message === 'Registered Successfully')
     navigateToGenderScreen(dataMango.user._id);
-    return ShowFlashMessage('info', 'Registered Successfully', 'success');
   }
 
   return {

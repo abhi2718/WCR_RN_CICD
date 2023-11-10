@@ -24,9 +24,7 @@ export const useViewModal = (props: ScreenParams) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
-
-    const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
@@ -87,15 +85,11 @@ export const useViewModal = (props: ScreenParams) => {
           if (data?.token) {
             dispatch(addUser(data));
             navigateToGenderScreen(data.user._id);
-            return ShowFlashMessage(
-              'info',
-              'logIn successfully',
-              FlashMessageType.SUCCESS,
-            );
+           
           } else {
             return ShowFlashMessage(
               'warn',
-              'logIn  unsuccessfully',
+              'logIn  unsuccessfull',
               FlashMessageType.WARNING,
             );
           }
@@ -115,7 +109,6 @@ export const useViewModal = (props: ScreenParams) => {
     if (data?.token) {
       dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
-      return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
     navigateToProfile({ email: _email });
   };
@@ -155,7 +148,6 @@ export const useViewModal = (props: ScreenParams) => {
             appleId: data.appleId,
           });
         } else {
-          // plese implement it
           navigateToOtpScreen({
             credential: data.appleCredential,
             firebaseUid: data.firebaseUid,
@@ -163,11 +155,10 @@ export const useViewModal = (props: ScreenParams) => {
         }
       } else {
         if (data?.token) {
-          return ShowFlashMessage('info', 'logIn successfully', 'success');
+          navigateToGenderScreen(data.user._id);
         }
       }
     } catch (e) {
-      ShowFlashMessage('Something went wrong !', 'danger');
     }
   };
   const _setFbData = (payload: any) => setFbData(payload);
@@ -179,7 +170,6 @@ export const useViewModal = (props: ScreenParams) => {
         checFbUser,
       );
     } catch (e) {
-      ShowFlashMessage('Something went wrong !', 'danger');
     }
   };
   const handleNavigationAfterFbLogin = async (data: any) => {
@@ -187,7 +177,6 @@ export const useViewModal = (props: ScreenParams) => {
       dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
       // login path if user had created account with other provider
-      return ShowFlashMessage('info', 'logIn successfully', 'success');
     }
     if (data?.profile && data?.user) {
       const { email, family_name, given_name } = data?.profile;
@@ -221,7 +210,7 @@ export const useViewModal = (props: ScreenParams) => {
         }
         const res = await socialSignInSignUp({ email });
         if (res.token) {
-          return ShowFlashMessage('info', 'logIn successfully', 'success');
+          navigateToGenderScreen(res.user._id);
         }
       }
     }
