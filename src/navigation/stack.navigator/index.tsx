@@ -23,17 +23,20 @@ import Kids from '../../screens/auth/preRegisterFlow/components/kids';
 import Habits from '../../screens/auth/preRegisterFlow/components/habits';
 import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
+import Height from '../../screens/auth/preRegisterFlow/components/height';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
@@ -48,7 +51,7 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
@@ -85,21 +88,9 @@ export const StackNavigator = () => {
         name={ROUTES.MaritalStatus}
         component={MaritalStatus}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Kids}
-        component={Kids}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Habits}
-        component={Habits}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.About}
-        component={About}
-      />
+      <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
+      <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}

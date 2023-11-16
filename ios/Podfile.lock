@@ -665,6 +665,10 @@ PODS:
     - React-Core
   - RNCClipboard (1.5.1):
     - React-Core
+  - RNCPicker (2.5.1):
+    - React-Core
+  - RNDateTimePicker (7.6.1):
+    - React-Core
   - RNFastImage (8.6.3):
     - React-Core
     - SDWebImage (~> 5.11.1)
@@ -676,7 +680,7 @@ PODS:
     - Firebase/Auth (= 10.15.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.13.3):
+  - RNGestureHandler (2.13.4):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - RNGoogleSignin (10.0.1):
@@ -774,6 +778,8 @@ DEPENDENCIES:
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCClipboard (from `../node_modules/@react-native-community/clipboard`)"
+  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
@@ -918,6 +924,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCClipboard:
     :path: "../node_modules/@react-native-community/clipboard"
+  RNCPicker:
+    :path: "../node_modules/@react-native-picker/picker"
+  RNDateTimePicker:
+    :path: "../node_modules/@react-native-community/datetimepicker"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
   RNFBApp:
@@ -1015,10 +1025,12 @@ SPEC CHECKSUMS:
   RNAppleAuthentication: 0571c08da8c327ae2afc0261b48b4a515b0286a6
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
+  RNCPicker: 529d564911e93598cc399b56cc0769ce3675f8c8
+  RNDateTimePicker: 8fb39263b721223e095248acaf6f406d5b7f6713
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFBApp: cc9384746945ac0eedd4759171a8abb4c4c5309d
   RNFBAuth: cf84aa347759beb4356bf79a3092c954ecbc449a
-  RNGestureHandler: fa40ab6b6cafaa7609294d31f8e8fbbd0cce8ea6
+  RNGestureHandler: 6e46dde1f87e5f018a54fe5d40cd0e0b942b49ee
   RNGoogleSignin: ccaa4a81582cf713eea562c5dd9dc1961a715fd0
   RNScreens: 2a28f2973f4d0d4623e18629ebfc2c4adaceb39a
   RNVectorIcons: ace237de89f1574ef3c963ae9d5da3bd6fbeb02a
