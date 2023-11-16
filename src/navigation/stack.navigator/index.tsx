@@ -33,10 +33,16 @@ export const StackNavigator = () => {
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Profile}
+        component={Profile}
       />
       <Stack.Screen
         options={options}
@@ -48,7 +54,7 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
@@ -63,11 +69,7 @@ export const StackNavigator = () => {
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
+
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
 
       <Stack.Screen
@@ -85,21 +87,9 @@ export const StackNavigator = () => {
         name={ROUTES.MaritalStatus}
         component={MaritalStatus}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Kids}
-        component={Kids}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Habits}
-        component={Habits}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.About}
-        component={About}
-      />
+      <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
+      <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}

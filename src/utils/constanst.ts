@@ -31,7 +31,31 @@ export const country = [
   { label: 'Canada', value: 'Canada' },
 ];
 
-export const statesOption:any = {
+export const ethnicity = [
+  'American Indian or Alaska Native',
+
+  'East Asian',
+
+  'South Asian',
+
+  'Southeast Asian',
+
+  'Black or African American',
+
+  'Middle Eastern',
+
+  'Hispanic or Latino',
+
+  'Native Hawaiian or Pacific Island',
+
+  'White or Caucasian',
+
+  'Other',
+
+  'Prefer not to say',
+];
+
+export const statesOption: any = {
   USA: [
     'Alabama (AL)',
     'Alaska (AK)',
@@ -131,7 +155,7 @@ export const userDegree = [
   },
 ];
 
-export const primaryDegree :any= {
+export const primaryDegree: any = {
   'Healthcare Doctorate Degree': [
     'Doctor of Acupuncture (DAc)',
     'Doctor of Athletic Training (DAT)',

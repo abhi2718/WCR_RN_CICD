@@ -8,7 +8,7 @@ import { StyleSheet } from 'react-native';
 import { inputBoxStyle } from './inputBoxStyle';
 import { sizes } from '../../infrastructure/theme/sizes';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { fontSizes } from '../../infrastructure/theme/fonts';
+import { fontSizes } from '../../infrastructure/theme/fonts'
 const ChildContainer = styled(TextInput)<InputProps>``;
 export const FlatInput: React.FC<InputProps> = (props) => {
   return (
