@@ -16,7 +16,7 @@ import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sex
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 import LocationScreen from '../../screens/auth/preRegisterFlow/components/location';
 import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
-import AddEthnicity from '../../screens/auth/preRegisterFlow/components/addEthnicity';
+import AddEthnicityScreen from '../../screens/auth/preRegisterFlow/components/addEthnicity';
 import LookingFor from '../../screens/auth/preRegisterFlow/components/lookingFor';
 import MaritalStatus from '../../screens/auth/preRegisterFlow/components/maritalStatus';
 import Kids from '../../screens/auth/preRegisterFlow/components/kids';
@@ -28,6 +28,11 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={options}
+        name={ROUTES.AddEthnicity}
+        component={AddEthnicityScreen}
+      />
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
@@ -59,11 +64,7 @@ export const StackNavigator = () => {
         name={ROUTES.Tab}
         component={TabNavigator}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.AddEthnicity}
-        component={AddEthnicity}
-      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.EmailAuth}

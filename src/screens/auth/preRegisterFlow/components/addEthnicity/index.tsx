@@ -3,9 +3,12 @@ import { Image, Text, View } from 'react-native';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { addEthnicityStyle } from './AddEthnicityStyle';
 import { PrimaryButton } from '../../../../../components/button';
-import { CheckBox } from '../../../../../components/inputBox';
+import { MultiSelectCheckBoxList } from '../../../../../components/checkbox';
+import { useEthnicityViewModal } from './ethnicity.ViewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-const AddEthnicity = () => {
+const AddEthnicityScreen = (props: ScreenParams) => {
+  const { ethnicityList, handleListChange, handleSeletedList } = useEthnicityViewModal(props);
   return (
     <ScreenContainer>
       <View style={addEthnicityStyle.container}>
@@ -22,46 +25,13 @@ const AddEthnicity = () => {
             <Text style={addEthnicityStyle.skipBtn}>Skip</Text>
           </Row>
           <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
-
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="American Indian or Alaska Native"
+          <View style={{ height: 1000 }}>
+            <MultiSelectCheckBoxList
+              data={ethnicityList}
+              onChangeValue={handleSeletedList}
+              onChangeListValue={handleListChange}
             />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox onPress={(isChecked: boolean) => {}} text="East Asian" />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox onPress={(isChecked: boolean) => {}} text="South Asian" />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="Black or African American"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="Middle Eastern"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text=" Hispanic or Latino"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="White or Caucasion"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox onPress={(isChecked: boolean) => {}} text="Other" />
-          </Row>
+          </View>
         </View>
         <PrimaryButton title="Next" />
       </View>
@@ -69,4 +39,4 @@ const AddEthnicity = () => {
   );
 };
 
-export default AddEthnicity;
+export default AddEthnicityScreen;

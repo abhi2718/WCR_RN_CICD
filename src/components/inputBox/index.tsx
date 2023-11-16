@@ -4,7 +4,6 @@ import { InputProps } from '../../types/components/input.type';
 import { TextInput } from 'react-native-paper';
 import { colors } from '../../infrastructure/theme/colors';
 import { Dropdown } from 'react-native-element-dropdown';
-import { StyleSheet } from 'react-native';
 import { inputBoxStyle } from './inputBoxStyle';
 import { sizes } from '../../infrastructure/theme/sizes';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { CheckBoxDataType } from '../types/components/checkbox.type';
 
 export const calculateDateLessThan18YearsAgo = (inputDate: Date): Date => {
   const eighteenYearsAgo = new Date(inputDate);
@@ -14,6 +15,13 @@ export function isDate18YearsOrAbove(date: string): boolean {
   return ageInYears >= 18;
 }
 
-export const goBack = (navigation:any)=>{
+export const goBack = (navigation: any) => {
   navigation.goBack();
-}
+};
+
+export const transformArray = (data: string[]): CheckBoxDataType[] => {
+  const newData: CheckBoxDataType[] = data.map((item, index) => {
+    return { id: index, text: item, isChecked: false };
+  });
+  return newData;
+};
