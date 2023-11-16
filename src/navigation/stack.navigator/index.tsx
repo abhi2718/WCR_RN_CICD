@@ -30,13 +30,13 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={options}
-        name={ROUTES.GenderPronoun}
-        component={GenderProunoun}
-      />
-      <Stack.Screen
-        options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
+      />
+       <Stack.Screen
+        options={options}
+        name={ROUTES.GenderPronoun}
+        component={GenderProunoun}
       />
       <Stack.Screen
         options={options}

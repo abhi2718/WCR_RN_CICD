@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.ui.tertiary,
-    paddingVertical:sizes[2],
+   //paddingVertical:sizes[2],
     borderRadius: sizes[9],
     paddingHorizontal: sizes[3],
     marginVertical: sizes[2],
