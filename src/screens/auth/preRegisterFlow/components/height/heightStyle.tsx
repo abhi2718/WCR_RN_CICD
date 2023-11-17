@@ -9,12 +9,18 @@ export const HeightStyle = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
-
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
     color: colors.ui.text,
     marginTop: sizes[6],
     marginBottom: sizes[3],
+  },
+  switchDiv: {
+    alignItems: 'flex-end',
+    marginBottom: 40,
+  },
+  switch: {
+    width: 150,
   },
 });
