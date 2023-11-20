@@ -2,14 +2,15 @@ import react, { useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../../../navigation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useMaritalStatusViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
-
+  const dispatch = useDispatch();
   const maritalStatus =user.maritalStatus;
   const politics =user.politics;
   const religion =user.religion;
@@ -57,7 +58,7 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
       const data = {
         user: user,
       };
-      // dispatch(addUser(data));
+       dispatch(addUser(data));
       setLoading(false);
 
       navigateToKidsScreen(loggInUserId);

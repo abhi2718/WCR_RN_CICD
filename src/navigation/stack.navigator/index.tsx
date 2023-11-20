@@ -28,12 +28,13 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
+
       <Stack.Screen
         options={options}
         name={ROUTES.MaritalStatus}

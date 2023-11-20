@@ -6,33 +6,19 @@ import { PrimaryButton } from '../../../../../components/button';
 import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { useNavigation } from '@react-navigation/native';
-import { ShowFlashMessage } from '../../../../../components/flashBar';
+
 import { hobbies } from '../../../../../utils/constanst';
 import { HeaderBar } from '../../../../../components/header';
-const Hobbies = () => {
-  const navigation = useNavigation();
-  const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
- 
-  const handleHobbies = (option: string) => {
-    if (selectedHobbies.includes(option)) {
-      setSelectedHobbies(selectedHobbies.filter((item) => item !== option));
-    } else if (selectedHobbies.length < 5) {
-      setSelectedHobbies([...selectedHobbies, option]);
-    } else {
-      ShowFlashMessage(
-        'Exceeded Selection Limit',
-        'You can select a maximum of 5 hobbies.',
-        'danger',
-      );
-    }
-  };
+import { useHobbyViewModal } from './hobby.viewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+const Hobbies = (props: ScreenParams) => {
+  const { selectedHobbies, handleHobbies ,updateUserDetails,loading} = useHobbyViewModal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-         <HeaderBar></HeaderBar>
+          <HeaderBar></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>
@@ -62,7 +48,9 @@ const Hobbies = () => {
           </ScrollView>
         </View>
         <View>
-          <PrimaryButton title="Next" onPress={() => {}} />
+          <PrimaryButton title="Next"
+          isLoading= {loading}
+          onPress={() => updateUserDetails()} />
         </View>
       </View>
     </ScreenContainer>
