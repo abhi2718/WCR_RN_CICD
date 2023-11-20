@@ -11,10 +11,10 @@ export const useKidsViewmodal = (props:ScreenParams) => {
     const {navigation} = props;
     const { user } = useSelector((state: any) => state.userState);
     const dispatch = useDispatch();
-    const kids =user.kids;
-    const familyPlan =user.familyPlan;
-    const diet =user.diet;
-    const covidVaccineStatus =user.covidVaccineStatus;
+    const kids =user?.kids;
+    const familyPlan =user?.familyPlan;
+    const diet =user?.diet;
+    const covidVaccineStatus =user?.covidVaccineStatus;
   const [selectedKids, setSelectedKids] = useState<string | null>(kids ?? null);
   const [selectedFamilyPlans, setSelectedFamilyPlans] = useState<string | null>(
     familyPlan ?? null,

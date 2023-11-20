@@ -8,40 +8,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { useNavigation } from '@react-navigation/native';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
+import { hobbies } from '../../../../../utils/constanst';
+import { HeaderBar } from '../../../../../components/header';
 const Hobbies = () => {
   const navigation = useNavigation();
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
-  const hobbiesOptions = [
-    'Art',
-    'Camping',
-    'Cooking',
-    'Cultures',
-    'Concerts/festival',
-    'Dancing',
-    'DIY',
-    'Fitness',
-    'Foodie',
-    'Gardening',
-    'Hiking',
-    'Listening to music',
-    'Meditation',
-    'Movies',
-    'Playing sports',
-    'Photography',
-    'Poetry',
-    'Reading',
-    'Running',
-    'Swimming',
-    'Shopping',
-    'Social causes',
-    'Traveling',
-    'TV shows',
-    'Volunteering',
-    'Watching sports',
-    'Writing',
-    'Video games',
-  ];
-
+ 
   const handleHobbies = (option: string) => {
     if (selectedHobbies.includes(option)) {
       setSelectedHobbies(selectedHobbies.filter((item) => item !== option));
@@ -60,24 +32,14 @@ const Hobbies = () => {
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={ChipStyle.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={ChipStyle.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <Text style={ChipStyle.skipBtn}>Skip</Text>
-          </Row>
+         <HeaderBar></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>
                 What are your interests and hobbies?
               </Text>
               <Row style={ChipStyle.chipRow}>
-                {hobbiesOptions.map((option, index) => (
+                {hobbies.map((option, index) => (
                   <Chip
                     key={index}
                     style={

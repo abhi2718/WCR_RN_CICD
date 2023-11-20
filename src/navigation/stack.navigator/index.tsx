@@ -28,6 +28,7 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
@@ -93,7 +94,7 @@ export const StackNavigator = () => {
 
       <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
       <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
-      <Stack.Screen options={options} name={ROUTES.About} component={About} />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}
@@ -115,7 +116,7 @@ export const StackNavigator = () => {
         component={MessageList}
       />
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.CommunityPrivateChat}
         component={PrivateChatWindowWrapper}
       />

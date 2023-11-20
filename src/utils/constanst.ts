@@ -59,6 +59,38 @@ export const religion = [
   'Atheist',
 ];
 
+export const hobbies = [
+  'Art',
+  'Camping',
+  'Cooking',
+  'Cultures',
+  'Concerts/festival',
+  'Dancing',
+  'DIY',
+  'Fitness',
+  'Foodie',
+  'Gardening',
+  'Hiking',
+  'Listening to music',
+  'Meditation',
+  'Movies',
+  'Playing sports',
+  'Photography',
+  'Poetry',
+  'Reading',
+  'Running',
+  'Swimming',
+  'Shopping',
+  'Social causes',
+  'Traveling',
+  'TV shows',
+  'Volunteering',
+  'Watching sports',
+  'Writing',
+  'Video games',
+];
+
+
 export const smoking = ['Never', 'Sometimes', 'Regularly', 'Prefer not to say'];
 
 export const exercise = [
