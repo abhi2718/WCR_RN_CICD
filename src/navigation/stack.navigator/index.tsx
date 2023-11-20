@@ -23,12 +23,23 @@ import Kids from '../../screens/auth/preRegisterFlow/components/kids';
 import Habits from '../../screens/auth/preRegisterFlow/components/habits';
 import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
+import { SplashScreen } from '../../screens/splash.screens';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        options={options}
+        name={ROUTES.SPLASH}
+        component={SplashScreen}
+      />
+       <Stack.Screen
+        options={options}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
+       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
@@ -48,11 +59,7 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
-       <Stack.Screen
-        options={options}
-        name={ROUTES.Tab}
-        component={TabNavigator}
-      />
+      
       <Stack.Screen
         options={options}
         name={ROUTES.AddEthnicity}

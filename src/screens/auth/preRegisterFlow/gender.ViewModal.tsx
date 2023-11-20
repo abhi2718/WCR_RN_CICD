@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../navigation';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
@@ -16,7 +16,8 @@ export const useGenderViewModal = (props: ScreenParams) => {
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
   const { navigation } = props;
-  const updatedGender = user?.profile?.gender ??  'Male'
+  const updatedGender = user?.profile?.gender ?? 'Male';
+  const token = useRef(user?.token ? user?.token : null).current;
   const [gender, setGender] = useState(updatedGender);
   const [checkboxState, setCheckboxState] = useState(true);
 
@@ -55,12 +56,16 @@ export const useGenderViewModal = (props: ScreenParams) => {
       const user = await updateUserDetailsRepository.updateUserDetails(id, {
         update: genderData,
       });
-      const data = {
+      const data = token ? {
+        user: {
+          ...user,
+          token
+        },
+      }  :{
         user: user,
       };
       dispatch(addUser(data));
       setLoading(false);
-
       navigateToGenderPronounScreen(loggInUserId);
     } catch (err: any) {
       setLoading(false);

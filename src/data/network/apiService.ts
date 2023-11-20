@@ -1,10 +1,11 @@
-import {AppExcaptions} from '../appExcaptions';
+import { getDataFromAsynStorage } from '../../utils/asyncStorage';
+import { AppExcaptions } from '../appExcaptions';
 
 export class ApiService {
   jsonResponse: Promise<any> | undefined;
   async getGetApiResponse(url: string) {
     try {
-      const requestBody = this.createRequestBody('GET');
+      const requestBody = await this.createRequestBody('GET');
       const response = await fetch(url, requestBody);
       this.jsonResponse = this.returnResponse(response);
     } catch (error) {
@@ -14,7 +15,7 @@ export class ApiService {
   }
   async getPostApiResponse(url: string, payload: any) {
     try {
-      const requestBody = this.createRequestBody('POST', payload);
+      const requestBody = await this.createRequestBody('POST', payload);
       const response = await fetch(url, requestBody);
       this.jsonResponse = this.returnResponse(response);
     } catch (error) {
@@ -24,7 +25,7 @@ export class ApiService {
   }
   async getPutApiResponse(url: string, payload: any) {
     try {
-      const requestBody = this.createRequestBody('PUT', payload);
+      const requestBody = await this.createRequestBody('PUT', payload);
       const response = await fetch(url, requestBody);
       this.jsonResponse = this.returnResponse(response);
     } catch (error) {
@@ -34,7 +35,7 @@ export class ApiService {
   }
   async getDeleteApiResponse(url: string, payload: any) {
     try {
-      const requestBody = this.createRequestBody('DELETE', payload);
+      const requestBody = await this.createRequestBody('DELETE', payload);
       const response = await fetch(url, requestBody);
       this.jsonResponse = this.returnResponse(response);
     } catch (error) {
@@ -42,12 +43,13 @@ export class ApiService {
     }
     return this.jsonResponse;
   }
-  createRequestBody(method: string, payload: any = {}) {
+  async createRequestBody(method: string, payload: any = {}) {
+    const { data: token } = await getDataFromAsynStorage('token');
     const requestBody = {
       method,
       headers: {
         'Content-Type': 'application/json',
-        //Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
+        Authorization: token ? token : '',
       },
     };
 
@@ -71,7 +73,8 @@ export class ApiService {
       case 404:
         throw new AppExcaptions(body.message, 'Not found');
       case 422:
-        throw new AppExcaptions(body.message, 'Validation Error');    case 500:
+        throw new AppExcaptions(body.message, 'Validation Error');
+      case 500:
         throw new AppExcaptions(body.message, 'Internal server error ');
       default:
         throw new Error('Something went wrong while fetching data');

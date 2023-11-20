@@ -1,38 +1,86 @@
-import React from 'react';
-import {
-  View,
-  Image,
-  ScrollView,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, ScrollView, Text, Pressable } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {dimensions, isAndroid} from '../../../../../../../components/tools';
-import {styles} from './cardStyle';
+import { Row, Spacer } from '../../../../../../../components/tools';
+import { styles } from './cardStyle';
 import { Card } from '../swiper';
+import { useViewModal } from './useViewModal';
+export default function CardCompoent({ item, height, cardRef}) {
+  const heightStyle = { height, ...styles.imageStyle };
+  const {
+    handleShare,
+    profilePicture,
+    first,
+    genderPronoun,
+    designation,
+    state,
+    _handleLike,
+    _handleDisLike,
+    addFavourite,
+    handleBlockUser
+  } = useViewModal(item, cardRef);
 
-export default function CardCompoent({item}) {
-  const tabBarHeight = useBottomTabBarHeight();
-  const height = imageStyle(tabBarHeight).height;
   return (
-    <View style={{backgroundColor:"#fff"}}>
-      <Card style={{height}}>
-        <View style={imageStyle(tabBarHeight).height}>
-          <ScrollView bounces={false} style={imageStyle(tabBarHeight).height}>
-            <FastImage style={imageStyle(tabBarHeight)} source={{ uri: item }} />
-            <FastImage
-              style={imageStyle(tabBarHeight)}
-              source={{uri: 'https://placekitten.com/300/400'}}
-            />
+    <View style={{ backgroundColor: '#fff' }}>
+      <Card style={heightStyle}>
+        <View style={heightStyle}>
+          <ScrollView bounces={false} style={heightStyle}>
+            <View>
+              <FastImage
+                style={{ ...heightStyle, borderRadius: 0 }}
+                source={{ uri: profilePicture.url }}
+              />
+              <Text>
+                {first} ({genderPronoun})
+              </Text>
+              <Row>
+                <Text>{designation.userDegree}</Text>
+              </Row>
+              <Row>
+                <Text>{designation.title}</Text>
+              </Row>
+              <Row>
+                <Text>{designation.title}</Text>
+              </Row>
+              <Row>
+                <Text>{state}</Text>
+              </Row>
+              <View>
+                <Text>Vital Signs</Text>
+              </View>
+            </View>
+            {item.photos.map(({ url, _id }) => {
+              return (
+                <FastImage
+                  key={_id}
+                  style={{ ...heightStyle, borderRadius: 0 }}
+                  source={{ uri: url }}
+                />
+              );
+            })}
+            <Pressable onPress={handleShare}>
+              <Text>Share</Text>
+            </Pressable>
+            <Row justifyContent="space-between">
+              <Pressable onPress={_handleLike}>
+                <Text>Like</Text>
+              </Pressable>
+              <Pressable onPress={addFavourite}>
+                <Text>Save</Text>
+              </Pressable>
+              <Pressable onPress={_handleDisLike}>
+                <Text>DisLike</Text>
+              </Pressable>
+            </Row>
+            <Row>
+              <Pressable onPress={handleBlockUser}>
+                <Text>Block/Report</Text>
+              </Pressable>
+            </Row>
+            <Spacer position="bottom" size={60} />
           </ScrollView>
         </View>
       </Card>
     </View>
   );
 }
-
-const imageStyle = (tabBarHeight) => ({
-  ...styles.imageStyle,
-  height: isAndroid
-    ? dimensions.height - (tabBarHeight + dimensions.statusBarHeight + 64)
-    : dimensions.height - (tabBarHeight + dimensions.statusBarHeight + 100),
-});

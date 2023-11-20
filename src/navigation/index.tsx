@@ -4,6 +4,7 @@ import { StackNavigator } from './stack.navigator';
 import { useCometChatInit } from '../services/cometChat.service';
 
 export enum ROUTES {
+  SPLASH = '/splash',
   SignIn = 'SignIn',
   Profile = '/profile',
   Gender = '/gender',

@@ -152,7 +152,6 @@ const Profile = (props: ScreenParams) => {
             <Spacer position="top" size={25}>
               <PrimaryButton
                 title="Submit"
-                // onPress={() => newUserSignUp(receivedData?.email)}
                 onPress={() => handleSubmit(credential)}
               />
             </Spacer>
