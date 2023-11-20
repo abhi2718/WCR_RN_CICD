@@ -14,6 +14,8 @@ import {
   CheckBoxDataType,
   CheckBoxProps,
 } from '../../types/components/checkbox.type';
+import { preferNotToSay } from '../../utils/constanst';
+import { makeFalseDefaultValue } from '../../utils/common.functions';
 
 const CustomCheckbox = styled.View`
   width: 20px;
@@ -23,8 +25,9 @@ const CustomCheckbox = styled.View`
   align-items: center;
 `;
 
-export const MultiSelectCheckBoxList: React.FC<CheckBoxProps> = ({
+export const MultipleCheckBoxList: React.FC<CheckBoxProps> = ({
   data,
+  preferNotTosayflag,
   onChangeValue,
   onChangeListValue,
 }) => {
@@ -39,8 +42,16 @@ export const MultiSelectCheckBoxList: React.FC<CheckBoxProps> = ({
     setProducts(temp);
     onChangeListValue(temp);
     let selected = temp.filter((product) => product.isChecked);
-    onChangeValue(selected);
+    onChangeValue(products[id].text, selected);
   };
+
+  useEffect(() => {
+    if (preferNotTosayflag === preferNotToSay) {
+      setProducts(
+        makeFalseDefaultValue(products.map((product) => product.text)),
+      );
+    }
+  }, [preferNotTosayflag]);
 
   const renderFlatList = (renderData: any) => {
     return (

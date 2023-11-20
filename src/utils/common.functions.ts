@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { CheckBoxDataType } from '../types/components/checkbox.type';
+import { preferNotToSay } from './constanst';
 
 export const calculateDateLessThan18YearsAgo = (inputDate: Date): Date => {
   const eighteenYearsAgo = new Date(inputDate);
@@ -19,9 +20,41 @@ export const goBack = (navigation: any) => {
   navigation.goBack();
 };
 
-export const transformArray = (data: string[]): CheckBoxDataType[] => {
-  const newData: CheckBoxDataType[] = data.map((item, index) => {
-    return { id: index, text: item, isChecked: false };
+export const makeFalseDefaultValue = (
+  ethnicityConstantData: string[],
+): CheckBoxDataType[] => {
+  const defaultData: CheckBoxDataType[] = ethnicityConstantData.map(
+    (item, index) => {
+      if (item == preferNotToSay) {
+        return { id: index, text: item, isChecked: true };
+      }
+      return { id: index, text: item, isChecked: false };
+    },
+  );
+
+  return defaultData;
+};
+
+export const transformArray = (
+  userEthnicity: string[],
+  ethnicityConstantData: string[],
+): CheckBoxDataType[] => {
+  const defaultData: CheckBoxDataType[] = ethnicityConstantData.map(
+    (item, index) => {
+      return { id: index, text: item, isChecked: false };
+    },
+  );
+  if (!userEthnicity || userEthnicity?.length == 0) {
+    return defaultData;
+  }
+
+  userEthnicity.forEach((item) => {
+    const index: number = defaultData.findIndex(
+      (element) => element.text === item,
+    );
+    if (index != -1) {
+      defaultData[index].isChecked = true;
+    }
   });
-  return newData;
+  return defaultData;
 };

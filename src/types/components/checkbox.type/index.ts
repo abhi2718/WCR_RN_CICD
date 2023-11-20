@@ -1,5 +1,6 @@
 export type CheckBoxProps = {
   data: CheckBoxDataType[];
+  preferNotTosayflag: any;
   onChangeValue: any;
   onChangeListValue: any;
 };

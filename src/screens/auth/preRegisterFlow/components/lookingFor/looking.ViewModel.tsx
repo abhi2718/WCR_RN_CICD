@@ -1,36 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
-import { ethnicity, preferNotToSay } from '../../../../../utils/constanst';
-import { CheckBoxDataType } from '../../../../../types/components/checkbox.type';
 import {
   makeFalseDefaultValue,
   transformArray,
 } from '../../../../../utils/common.functions';
+import { useDispatch, useSelector } from 'react-redux';
+import { CheckBoxDataType } from '../../../../../types/components/checkbox.type';
+import { preferNotToSay, relationship } from '../../../../../utils/constanst';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../../../navigation';
-import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
-export const useEthnicityViewModal = (props: ScreenParams) => {
+export const useRelationshipViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
- 
-
-  const [selectedEthnicity, setSelectedEthnicity] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [ethnicityflag, setEthnicityflag] = useState<string>('');
-  const [ethnicityList, setEthnicityList] = useState<CheckBoxDataType[]>(
-    transformArray(user?.ethnicity, ethnicity),
+  const [relationshipList, setRelationshipList] = useState<CheckBoxDataType[]>(
+    transformArray(user?.relationship, relationship),
   );
 
-  const dispatch = useDispatch();
+  const [selectedRelationship, setSelectedRelationship] = useState<string[]>(
+    [],
+  );
+  const [loading, setLoading] = useState(false);
+  const [preferNotToSayflag, setpreferNotToSayflag] = useState<string>('');
 
-  useEffect(() => {
-    return () => {};
-  }, [selectedEthnicity]);
+  const dispatch = useDispatch();
 
   const handleSeletedList = (
     ethnicityValue: string,
@@ -38,27 +34,30 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
   ) => {
     const stringData = data.map((item) => item.text);
     if (stringData?.includes(preferNotToSay)) {
-      setEthnicityList(makeFalseDefaultValue(ethnicity));
-      setSelectedEthnicity([preferNotToSay]);
-      setEthnicityflag(preferNotToSay);
+      console.log('trueee ::');
+      setRelationshipList(makeFalseDefaultValue(relationship));
+      setSelectedRelationship([preferNotToSay]);
+      setpreferNotToSayflag(preferNotToSay);
       return;
     }
-    setEthnicityflag(ethnicityValue);
-    setSelectedEthnicity(stringData);
+    console.log('ethnicityValue DATA :: ', ethnicityValue);
+    setpreferNotToSayflag(ethnicityValue);
+    setSelectedRelationship(stringData);
   };
   const handleListChange = (data: CheckBoxDataType[]) => {
-    setEthnicityList(data);
+    setRelationshipList(data);
+    
   };
 
-  const navigateToRelationshipScreen = (id: string) => {
-    navigation.navigate(ROUTES.LookingFor, { data: id });
+  const navigateToMaritalStatusScreen = (id: string) => {
+    navigation.navigate(ROUTES.MaritalStatus, { data: id });
   };
 
   const updateUserDetails = async () => {
     try {
       setLoading(true);
       const selectedEthnicityData = {
-        ethnicity: selectedEthnicity,
+        relationship: selectedRelationship,
       };
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
@@ -72,19 +71,19 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
        dispatch(addUser(data));
       setLoading(false);
 
-      navigateToRelationshipScreen(loggInUserId);
+      navigateToMaritalStatusScreen(loggInUserId);
     } catch (err: any) {
       setLoading(false);
     }
   };
 
   return {
-    loading,
-    ethnicityList,
+    relationshipList,
+    preferNotToSayflag,
     handleSeletedList,
     handleListChange,
+    loading,
     updateUserDetails,
-    ethnicityflag,
-  
+    
   };
 };

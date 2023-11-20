@@ -1,40 +1,45 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { addEthnicityStyle } from './AddEthnicityStyle';
 import { PrimaryButton } from '../../../../../components/button';
-import { MultiSelectCheckBoxList } from '../../../../../components/checkbox';
+import { MultipleCheckBoxList } from '../../../../../components/checkbox';
 import { useEthnicityViewModal } from './ethnicity.ViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { HeaderBar } from '../../../../../components/header';
 
 const AddEthnicityScreen = (props: ScreenParams) => {
-  const { ethnicityList, handleListChange, handleSeletedList } = useEthnicityViewModal(props);
+  const {
+    loading,
+    ethnicityList,
+    handleListChange,
+    handleSeletedList,
+    updateUserDetails,
+    ethnicityflag,
+  } = useEthnicityViewModal(props);
   return (
     <ScreenContainer>
-      <View style={addEthnicityStyle.container}>
-        <View>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={addEthnicityStyle.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={addEthnicityStyle.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <Text style={addEthnicityStyle.skipBtn}>Skip</Text>
-          </Row>
-          <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
-          <View style={{ height: 1000 }}>
-            <MultiSelectCheckBoxList
-              data={ethnicityList}
-              onChangeValue={handleSeletedList}
-              onChangeListValue={handleListChange}
-            />
+      <ScrollView>
+        <View style={addEthnicityStyle.container}>
+          <View>
+            <HeaderBar></HeaderBar>
+            <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
+            <View style={{ height: 700 }}>
+              <MultipleCheckBoxList
+                data={ethnicityList}
+                onChangeValue={handleSeletedList}
+                onChangeListValue={handleListChange}
+                preferNotTosayflag={ethnicityflag}
+              />
+            </View>
           </View>
+          <PrimaryButton
+            onPress={() => updateUserDetails()}
+            title="Next"
+            isLoading={loading}
+          />
         </View>
-        <PrimaryButton title="Next" />
-      </View>
+      </ScrollView>
     </ScreenContainer>
   );
 };

@@ -31,6 +31,18 @@ export const country = [
   { label: 'Canada', value: 'Canada' },
 ];
 
+export const relationship = [
+  'Long Term Relationship',
+
+  'Marriage',
+
+  'Friendship',
+
+  'Casual',
+
+  'Prefer not to say',
+];
+
 export const ethnicity = [
   'American Indian or Alaska Native',
 
@@ -54,6 +66,8 @@ export const ethnicity = [
 
   'Prefer not to say',
 ];
+
+export const preferNotToSay = 'Prefer not to say';
 
 export const statesOption: any = {
   USA: [
