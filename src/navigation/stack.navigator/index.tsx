@@ -30,10 +30,15 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={options}
+        name={ROUTES.ProfilePic}
+        component={AddProfilePic}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
@@ -48,7 +53,7 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
@@ -85,31 +90,15 @@ export const StackNavigator = () => {
         name={ROUTES.MaritalStatus}
         component={MaritalStatus}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Kids}
-        component={Kids}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Habits}
-        component={Habits}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.About}
-        component={About}
-      />
+      <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
+      <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}
         component={Hobbies}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.ProfilePic}
-        component={AddProfilePic}
-      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Location}

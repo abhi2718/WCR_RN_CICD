@@ -1,25 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Image, ScrollView, Text, View } from 'react-native';
 import { Column, Row, ScreenContainer } from '../../../../../components/tools';
 import { addPicture } from './AddProfilePicStyle';
 import { PrimaryButton } from '../../../../../components/button';
+import { HeaderBar } from '../../../../../components/header';
 
 const AddProfilePic = () => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
   return (
     <ScreenContainer>
       <View style={addPicture.container}>
         <View>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={addPicture.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={addPicture.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <View />
-          </Row>
+          <HeaderBar
+            info={() => console.log('Info clicked')}
+            isModalVisible={isModalVisible}
+            setModalVisible={setModalVisible}
+          />
           <Text style={addPicture.subHeader}>Show off your best side </Text>
           <Text style={addPicture.text}>(Add at least 2 photos)</Text>
           <View>

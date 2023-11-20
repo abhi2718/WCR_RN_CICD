@@ -9,15 +9,6 @@ export const addPicture = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
-  arrow: {
-    height: sizes[4],
-  },
-  logo: {
-    marginLeft: -50,
-    width: sizes[11],
-    height: sizes[8],
-    overflow: 'visible',
-  },
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
