@@ -59,6 +59,20 @@ export const religion = [
   'Atheist',
 ];
 
+export const smoking = ['Never', 'Sometimes', 'Regularly', 'Prefer not to say'];
+
+export const exercise = [
+  'Never',
+
+  'Rarely',
+
+  'Sometimes',
+
+  'Frequently',
+
+  'Prefer not to say',
+];
+
 export const politics = [
   'Conservative',
 
@@ -67,6 +81,79 @@ export const politics = [
   'Liberal',
 
   'Non-Political',
+
+  'Prefer not to say',
+];
+
+export const diet = [
+  'No restrictions',
+
+  'Gluten-Free',
+
+  'Vegetarian',
+
+  'Vegan',
+
+  'Pescatarian',
+
+  'Halal',
+
+  'Kosher',
+
+  'Prefer not to say',
+
+  'Other',
+];
+
+export const drinking = [
+  'Never',
+
+  'Rarely',
+
+  'Sometimes',
+
+  'Frequently',
+
+  'Prefer not to say',
+];
+
+export const kids = ['None', 'Have kid(s)', 'Prefer not to say'];
+
+export const familyPlan = [
+  'Open to kid(s)',
+  'Want kid(s)',
+  "Don't want kid(s)",
+  'Undecided',
+  'Prefer not to say',
+];
+
+export const pets = [
+  'None',
+  'Cat(s)',
+  'Dog(s)',
+  'Both',
+  'Other pet(s)',
+  'Prefer not to say',
+];
+
+export const cannabis = [
+  'Never',
+  'Rarely',
+  'Sometimes',
+  'Frequently',
+  'Prefer not to say',
+];
+
+export const covidVaccineStatus = [
+  'Fully vaccinated',
+
+  'Partially vaccinated, plan to complete',
+
+  'Partially vaccinated, unable to complete',
+
+  'Unable to receive vaccine',
+
+  'Decline to receive vaccine',
 
   'Prefer not to say',
 ];

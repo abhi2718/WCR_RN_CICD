@@ -36,14 +36,14 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
     setSelectedPoliticalView(option === selectedPoliticalView ? null : option);
   };
 
-  const navigateToRelationshipScreen = (id: string) => {
+  const navigateToKidsScreen = (id: string) => {
     navigation.navigate(ROUTES.Kids, { data: id });
   };
 
   const updateUserDetails = async () => {
     try {
       setLoading(true);
-      const selectedEthnicityData = {
+      const selectedData = {
         maritalStatus: selectedMaritalStatus,
         politics: selectedPoliticalView,
         religion: selectedReligion,
@@ -51,7 +51,7 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
         {
-          update: selectedEthnicityData,
+          update: selectedData,
         },
       );
       const data = {
@@ -60,7 +60,7 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
       // dispatch(addUser(data));
       setLoading(false);
 
-      navigateToRelationshipScreen(loggInUserId);
+      navigateToKidsScreen(loggInUserId);
     } catch (err: any) {
       setLoading(false);
     }
