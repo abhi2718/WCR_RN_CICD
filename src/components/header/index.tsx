@@ -162,8 +162,8 @@ export const headerStyle = StyleSheet.create({
     color: colors.ui.text,
   },
   infoIcon: {
-    height: sizes[5],
-    width: sizes[5],
+    height: sizes[4],
+    width: sizes[4],
   },
   emptyView: {
     height: sizes[11],

@@ -33,6 +33,12 @@ export const addPicture = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  profilePic: {
+    borderRadius: sizes[4],
+    paddingTop: 20,
+    width: dimensions.width / 1.65,
+    height: dimensions.width / 1.65,
+  },
   imageView: {
     borderRadius: sizes[4],
     borderWidth: 1,
@@ -42,6 +48,12 @@ export const addPicture = StyleSheet.create({
     width: dimensions.width / 3.5,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  photo: {
+    borderRadius: sizes[4],
+    paddingTop: 20,
+    width: dimensions.width / 3.5,
+    height: dimensions.width / 3.5,
   },
   imageIcon: {
     width: 35,
