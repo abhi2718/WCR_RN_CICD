@@ -7,6 +7,7 @@ import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { useNavigation } from '@react-navigation/native';
+import { HeaderBar } from '../../../../../components/header';
 const Kids = () => {
   const navigation = useNavigation();
   const [selectedKids, setSelectedKids] = useState<string | null>(null);
@@ -74,17 +75,7 @@ const Kids = () => {
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={ChipStyle.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={ChipStyle.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <Text style={ChipStyle.skipBtn}>Skip</Text>
-          </Row>
+          <HeaderBar></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Do you have kids?</Text>

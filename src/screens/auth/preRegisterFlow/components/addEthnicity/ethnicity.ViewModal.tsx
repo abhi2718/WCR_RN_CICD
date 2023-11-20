@@ -25,7 +25,6 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
   const [ethnicityList, setEthnicityList] = useState<CheckBoxDataType[]>(
     transformArray(user?.ethnicity, ethnicity),
   );
-
   const dispatch = useDispatch();
 
   useEffect(() => {

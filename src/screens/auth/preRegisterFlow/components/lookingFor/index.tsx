@@ -23,8 +23,8 @@ const RelationShipScreen = (props: ScreenParams) => {
     <ScreenContainer>
       <ScrollView>
         <View style={LookingForStyle.container}>
+        <HeaderBar></HeaderBar>
           <View>
-            <HeaderBar></HeaderBar>
             <Text style={LookingForStyle.subHeader}>
               What are you looking for?
             </Text>

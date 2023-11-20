@@ -25,8 +25,8 @@ export const useProfessionModal = (props: ScreenParams) => {
     primaryDegree: user?.designation?.primaryDegree
       ? user?.designation?.primaryDegree
       : '',
-    institution: user?.designation?.institution
-      ? user?.designation?.institution
+      institution: user?.institution
+      ? user?.institution
       : '',
     title: user?.designation?.title ? user?.designation?.title : '',
   });

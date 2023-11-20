@@ -35,6 +35,12 @@ export const StackNavigator = () => {
       />
       <Stack.Screen
         options={options}
+        name={ROUTES.MaritalStatus}
+        component={MaritalStatus}
+      />
+
+      <Stack.Screen
+        options={options}
         name={ROUTES.LookingFor}
         component={RelationShipScreen}
       />
@@ -85,11 +91,6 @@ export const StackNavigator = () => {
         component={SexualOrientation}
       />
 
-      <Stack.Screen
-        options={options}
-        name={ROUTES.MaritalStatus}
-        component={MaritalStatus}
-      />
       <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
       <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
       <Stack.Screen options={options} name={ROUTES.About} component={About} />

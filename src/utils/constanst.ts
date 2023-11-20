@@ -14,6 +14,63 @@ export const genderPronounArray = [
 
   'Prefer not to say',
 ];
+
+export const maritalStatus = [
+  'Never Married',
+
+  'Divorced',
+
+  'Annulled',
+
+  'Separated',
+
+  'Widowed',
+
+  'Complicated',
+
+  'Prefer not to say',
+];
+
+export const religion = [
+  'Buddhist',
+
+  'Christian',
+
+  'Catholic',
+
+  'Hindu',
+
+  'Jewish',
+
+  'Muslim',
+
+  'Sikh',
+
+  'Shinto',
+
+  'Taoism',
+
+  'Spiritual',
+
+  'Agnostic',
+
+  'Prefer not to say',
+
+  'Atheist',
+];
+
+export const politics = [
+  'Conservative',
+
+  'Moderate',
+
+  'Liberal',
+
+  'Non-Political',
+
+  'Prefer not to say',
+];
+
 export const sexualOrientationArray = [
   'Straight',
   'Gay',
