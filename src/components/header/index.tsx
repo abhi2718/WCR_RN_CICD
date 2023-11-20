@@ -8,9 +8,10 @@ import { colors } from '../../infrastructure/theme/colors';
 interface HeaderBarProps {
   skip?: () => void;
   goBack?: () => void;
+  showModal?: () => void;
 }
 export const HeaderBar = (props: HeaderBarProps) => {
-  const { goBack, skip } = props;
+  const { goBack, skip,showModal } = props;
   const navigation = useNavigation();
   const _goBack = goBack ? goBack : navigation.goBack;
   return (
@@ -27,6 +28,16 @@ export const HeaderBar = (props: HeaderBarProps) => {
       {props.skip ? (
         <Pressable onPress={skip}>
           <Text style={headerStyle.skipBtn}>Skip</Text>
+        </Pressable>
+      ) : (
+        <View style={headerStyle.emptyView} />
+      )}
+      {props.showModal ? (
+        <Pressable onPress={showModal}>
+          <Text style={headerStyle.skipBtn}>
+          <Image
+            source={require('../../assets/images/icons/infoIcon.png')}
+          /></Text>
         </Pressable>
       ) : (
         <View style={headerStyle.emptyView} />

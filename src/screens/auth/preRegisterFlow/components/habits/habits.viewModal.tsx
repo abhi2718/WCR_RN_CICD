@@ -78,6 +78,6 @@ export const useHabitViewModal = (props: ScreenParams) => {
       };
     
     return({
-        handleDrinking,selectedSmokingHabits, setSelectedSmokingHabits,selectedDrinkingHabits, setSelectedDrinkingHabits,selectedExercise, setSelectedExercise,selectedPets, setSelectedPets,handleeExercise,handleSmokingHabits,handlePets,updateUserDetails,loading
+        handleDrinking,selectedSmokingHabits, setSelectedSmokingHabits,selectedDrinkingHabits, setSelectedDrinkingHabits,selectedExercise, setSelectedExercise,selectedPets, setSelectedPets,handleeExercise,handleSmokingHabits,handlePets,updateUserDetails,loading,loggInUserId,navigateToAboutScreen
     })
 }

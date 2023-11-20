@@ -7,17 +7,37 @@ import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeaderBar } from '../../../../../components/header';
-import { drinking, exercise, pets, smoking } from '../../../../../utils/constanst';
+import {
+  drinking,
+  exercise,
+  pets,
+  smoking,
+} from '../../../../../utils/constanst';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useHabitViewModal } from './habits.viewModal';
-const Habits = (props:ScreenParams) => {
- const {handleDrinking,selectedSmokingHabits,selectedDrinkingHabits,selectedExercise,selectedPets,handleeExercise,handleSmokingHabits,handlePets,loading,updateUserDetails} = useHabitViewModal(props)
+const Habits = (props: ScreenParams) => {
+  const {
+    handleDrinking,
+    selectedSmokingHabits,
+    selectedDrinkingHabits,
+    selectedExercise,
+    selectedPets,
+    handleeExercise,
+    handleSmokingHabits,
+    handlePets,
+    loading,
+    loggInUserId,
+    navigateToAboutScreen,
+    updateUserDetails,
+  } = useHabitViewModal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar></HeaderBar>
+          <HeaderBar
+            skip={() => navigateToAboutScreen(loggInUserId)}
+          ></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Drinking Habits</Text>

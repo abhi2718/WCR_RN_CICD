@@ -16,13 +16,15 @@ const AddEthnicityScreen = (props: ScreenParams) => {
     handleSeletedList,
     updateUserDetails,
     ethnicityflag,
+    loggInUserId,
+    navigateToRelationshipScreen
   } = useEthnicityViewModal(props);
   return (
     <ScreenContainer>
       <ScrollView>
         <View style={addEthnicityStyle.container}>
           <View>
-            <HeaderBar></HeaderBar>
+            <HeaderBar skip={()=>navigateToRelationshipScreen(loggInUserId)} ></HeaderBar>
             <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
             <View style={{ height: 700 }}>
               <MultipleCheckBoxList

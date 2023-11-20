@@ -6,7 +6,6 @@ import { PrimaryButton } from '../../../../../components/button';
 import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { useNavigation } from '@react-navigation/native';
 import { HeaderBar } from '../../../../../components/header';
 import {
   covidVaccineStatus,
@@ -29,13 +28,15 @@ const Kids = (props: ScreenParams) => {
     selectedDietarypreference,
     updateUserDetails,
     selectedFamilyPlans,
+    loggInUserId,
+    navigateTohabitsScreen
   } = useKidsViewmodal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar></HeaderBar>
+          <HeaderBar skip={()=>navigateTohabitsScreen(loggInUserId)}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Do you have kids?</Text>

@@ -70,11 +70,13 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
   return {
     selectedMaritalStatus,
     selectedReligion,
+    navigateToKidsScreen,
     selectedPoliticalView,
     handleMaritalStatusSelect,
     handleReligionSelect,
     handlePoliticalViewSelect,
     updateUserDetails,
-    loading
+    loading,
+    loggInUserId
   };
 };

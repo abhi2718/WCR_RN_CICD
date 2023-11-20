@@ -53,6 +53,8 @@ export const useAboutViewModal = (props: ScreenParams) => {
     handleText,
     loading,
     updateUserDetails,
-    maxLength
+    maxLength,
+    loggInUserId,
+    navigateTohabitsScreen
   };
 };

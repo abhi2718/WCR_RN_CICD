@@ -61,7 +61,7 @@ export const useHobbyViewModal = (props:ScreenParams) => {
       };
 
     return({
-        selectedHobbies,handleHobbies,updateUserDetails,loading
+        selectedHobbies,handleHobbies,updateUserDetails,loading,loggInUserId,navigateToKidsScreen
     })
 }
 

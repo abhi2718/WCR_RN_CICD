@@ -79,10 +79,12 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
 
   return {
     relationshipList,
+    loggInUserId,
     preferNotToSayflag,
     handleSeletedList,
     handleListChange,
     loading,
+    navigateToMaritalStatusScreen,
     updateUserDetails,
     
   };

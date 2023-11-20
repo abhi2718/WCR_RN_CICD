@@ -17,13 +17,15 @@ const RelationShipScreen = (props: ScreenParams) => {
     relationshipList,
     handleListChange,
     handleSeletedList,
+    loggInUserId,
+    navigateToMaritalStatusScreen,
   } = useRelationshipViewModal(props);
 
   return (
     <ScreenContainer>
       <ScrollView>
         <View style={LookingForStyle.container}>
-        <HeaderBar></HeaderBar>
+        <HeaderBar skip={()=>navigateToMaritalStatusScreen(loggInUserId)}></HeaderBar>
           <View>
             <Text style={LookingForStyle.subHeader}>
               What are you looking for?

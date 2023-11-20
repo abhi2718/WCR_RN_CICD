@@ -25,14 +25,16 @@ const MaritalStatus = (props: ScreenParams) => {
     handleReligionSelect,
     handlePoliticalViewSelect,
     updateUserDetails,
-    loading
+    loading,
+    navigateToKidsScreen,
+    loggInUserId
   } = useMaritalStatusViewModal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar></HeaderBar>
+          <HeaderBar skip={()=>navigateToKidsScreen(loggInUserId)}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>

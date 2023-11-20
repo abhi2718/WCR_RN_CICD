@@ -9,13 +9,13 @@ import { ScreenParams } from '../../../../../types/services.types/firebase.servi
 import { useAboutViewModal } from './about.viewModal';
 
 const About = (props:ScreenParams) => {
-  const {handleText,aboutText,updateUserDetails,loading,maxLength} = useAboutViewModal(props)
+  const {handleText,aboutText,loggInUserId,navigateTohabitsScreen,updateUserDetails,loading,maxLength} = useAboutViewModal(props)
 
   return (
     <ScreenContainer>
       <View style={AboutStyle.container}>
         <View style={AboutStyle.scrollContainer}>
-          <HeaderBar></HeaderBar>
+          <HeaderBar skip={() => navigateTohabitsScreen(loggInUserId)}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={AboutStyle.subHeader}>

@@ -82,7 +82,7 @@ export const useKidsViewmodal = (props:ScreenParams) => {
 
 
   return({
-    handleKidsSelect,handleFamilyPlansSelect,handleCovidVaccineStatusSelect,handleDietarypreferenceSelect,selectedKids,selectedCovidVaccineStatus,selectedDietarypreference,selectedFamilyPlans,loading,updateUserDetails
+    handleKidsSelect,handleFamilyPlansSelect,handleCovidVaccineStatusSelect,handleDietarypreferenceSelect,selectedKids,selectedCovidVaccineStatus,selectedDietarypreference,selectedFamilyPlans,loading,updateUserDetails,navigateTohabitsScreen,loggInUserId
   })
 
 }

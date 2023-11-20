@@ -84,6 +84,8 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
     handleListChange,
     updateUserDetails,
     ethnicityflag,
+    loggInUserId,
+    navigateToRelationshipScreen,
   
   };
 };
