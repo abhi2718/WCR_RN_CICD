@@ -16,6 +16,10 @@ export const HeightStyle = StyleSheet.create({
     marginTop: sizes[6],
     marginBottom: sizes[3],
   },
+  picker: {
+    backgroundColor: 'white',
+    height: 400,
+  },
   switchDiv: {
     alignItems: 'flex-end',
     marginBottom: 40,

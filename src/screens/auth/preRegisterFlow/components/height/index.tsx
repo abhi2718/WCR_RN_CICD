@@ -7,7 +7,10 @@ import { HeaderBar } from '../../../../../components/header';
 import { Picker } from 'react-native-wheel-pick';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import SwitchSelector from 'react-native-switch-selector';
-const Height = () => {
+import { heightArray } from './heightViewModal';
+const Height = (props: any) => {
+  const { feetValues, cmValues } = heightArray(props);
+
   const options = [
     { label: 'Feet', value: 'feet' },
     { label: 'Cm', value: 'cm' },
@@ -26,38 +29,14 @@ const Height = () => {
               <Text style={HeightStyle.subHeader}>What's your height?</Text>
               <Picker
                 textSize={34}
-                // textColor={colors.ui.placeholder}
                 isShowSelectBackground={false}
                 selectTextColor={colors.ui.black}
-                style={{
-                  backgroundColor: 'white',
-                  height: 400,
-                }}
+                style={HeightStyle.picker}
                 isShowSelectLine={false} // Default is true
-                pickerData={
-                  heightValue === 'feet'
-                    ? [
-                        `5'5"`,
-                        `5'6"`,
-                        `5'7"`,
-                        `5'8"`,
-                        `5'9"`,
-                        `5'10"`,
-                        `5'11"`,
-                        `6'00"`,
-                      ]
-                    : [
-                        `152.4`,
-                        `153.8`,
-                        `154.4`,
-                        `155.4`,
-                        `156.4`,
-                        `157.4"`,
-                        `158.4"`,
-                        `160"`,
-                      ]
+                pickerData={heightValue === 'feet' ? feetValues : cmValues}
+                selectedValue={
+                  heightValue === 'feet' ? feetValues[5] : cmValues[5]
                 }
-                selectedValue={`5'7"`}
                 onValueChange={(value: string) => {
                   console.log(value);
                 }}
