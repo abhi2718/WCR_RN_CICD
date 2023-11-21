@@ -686,7 +686,6 @@ PODS:
   - RNGoogleSignin (10.1.1):
     - GoogleSignIn (~> 7.0)
     - React-Core
-<<<<<<< HEAD
   - RNImageCropPicker (0.40.2):
     - React-Core
     - React-RCTImage
@@ -697,9 +696,6 @@ PODS:
     - React-RCTImage
     - TOCropViewController
   - RNScreens (3.26.0):
-=======
-  - RNScreens (3.27.0):
->>>>>>> 91b7f0bd6d966b9317d5f73e689f789f2ee004a2
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - RNVectorIcons (10.0.2):
