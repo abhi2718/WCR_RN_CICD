@@ -83,9 +83,9 @@ export const useViewModal = (props: ScreenParams) => {
         } else {
           const data = await socialSignInSignUp({ email });
           if (data?.token) {
-            dispatch(addUser(data));
+            const payload = { user: { ...data.user, token: data?.token } };
+            dispatch(addUser(payload));
             navigateToGenderScreen(data.user._id);
-           
           } else {
             return ShowFlashMessage(
               'warn',
@@ -108,10 +108,9 @@ export const useViewModal = (props: ScreenParams) => {
     if (data?.token) {
       dispatch(addUser(data));
       navigateToGenderScreen(data.user._id);
-    }else{
+    } else {
       navigateToProfile({ email: _email });
     }
-   
   };
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -127,15 +126,12 @@ export const useViewModal = (props: ScreenParams) => {
   const checkAppleUser = async (firebaseUid: string) => {
     try {
       return await signInRepository.getAppleUser(firebaseUid);
-    } catch (error: any) {
-    }
+    } catch (error: any) {}
   };
   const checFbUser = async (fbId: string) => {
     try {
       return await signInRepository.getfbUser(fbId);
-    } catch (error: any) {
-     
-    }
+    } catch (error: any) {}
   };
   const handleAppleSignIn = async () => {
     try {
@@ -158,8 +154,7 @@ export const useViewModal = (props: ScreenParams) => {
           navigateToGenderScreen(data.user._id);
         }
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   const _setFbData = (payload: any) => setFbData(payload);
   const _onFbLogIn = async () => {
@@ -169,8 +164,7 @@ export const useViewModal = (props: ScreenParams) => {
         _setFbData,
         checFbUser,
       );
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   const handleNavigationAfterFbLogin = async (data: any) => {
     if (data?.token) {
@@ -278,8 +272,6 @@ export const useViewModal = (props: ScreenParams) => {
     setLoading,
     checkIsNewUser,
     navigateToGenderScreen,
-    getOtpOnEmail
+    getOtpOnEmail,
   };
 };
-
-
