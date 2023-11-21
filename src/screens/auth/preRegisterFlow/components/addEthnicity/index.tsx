@@ -34,7 +34,7 @@ const AddEthnicityScreen = (props: ScreenParams) => {
             </View>
           </View>
           <PrimaryButton
-            onPress={() => updateUserDetails()}
+            onPress={updateUserDetails}
             title="Next"
             isLoading={loading}
           />
