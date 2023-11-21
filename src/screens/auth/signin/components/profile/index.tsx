@@ -20,7 +20,6 @@ import { useViewModal } from '../../signinViewModal';
 import { useProfileUseViewModal } from './profileViewModal';
 import { profileStyles } from './profileStyle';
 import DatePicker from 'react-native-date-picker';
-import Modal from 'react-native-modal';
 //import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
 //import {ModalComponent} from '../../../../components/modal/index';
 import moment from 'moment';
@@ -51,14 +50,19 @@ const Profile = (props: ScreenParams) => {
     toUpperFirstName,
     formatMobile,
     closeModal,
+    openModal,
   } = useProfileUseViewModal(props);
 
   return (
     <ScreenContainer>
+      <ModalComponent
+        isVisible={isWelcomeModalVisible}
+        onClose={closeModal}
+      ></ModalComponent>
       <View style={profileStyles.container}>
         <View style={profileStyles.innerView}>
           <View style={{ flex: 1 }}>
-            <HeaderBar></HeaderBar>
+            <HeaderBar showModal={openModal}></HeaderBar>
             <Text style={profileStyles.subHeader}>
               Let's get started!{`\n`}Tell us a little about you.
             </Text>

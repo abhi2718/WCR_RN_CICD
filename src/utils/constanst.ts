@@ -14,6 +14,182 @@ export const genderPronounArray = [
 
   'Prefer not to say',
 ];
+
+export const maritalStatus = [
+  'Never Married',
+
+  'Divorced',
+
+  'Annulled',
+
+  'Separated',
+
+  'Widowed',
+
+  'Complicated',
+
+  'Prefer not to say',
+];
+
+export const religion = [
+  'Buddhist',
+
+  'Christian',
+
+  'Catholic',
+
+  'Hindu',
+
+  'Jewish',
+
+  'Muslim',
+
+  'Sikh',
+
+  'Shinto',
+
+  'Taoism',
+
+  'Spiritual',
+
+  'Agnostic',
+
+  'Prefer not to say',
+
+  'Atheist',
+];
+
+export const hobbies = [
+  'Art',
+  'Camping',
+  'Cooking',
+  'Cultures',
+  'Concerts/festival',
+  'Dancing',
+  'DIY',
+  'Fitness',
+  'Foodie',
+  'Gardening',
+  'Hiking',
+  'Listening to music',
+  'Meditation',
+  'Movies',
+  'Playing sports',
+  'Photography',
+  'Poetry',
+  'Reading',
+  'Running',
+  'Swimming',
+  'Shopping',
+  'Social causes',
+  'Traveling',
+  'TV shows',
+  'Volunteering',
+  'Watching sports',
+  'Writing',
+  'Video games',
+];
+
+
+export const smoking = ['Never', 'Sometimes', 'Regularly', 'Prefer not to say'];
+
+export const exercise = [
+  'Never',
+
+  'Rarely',
+
+  'Sometimes',
+
+  'Frequently',
+
+  'Prefer not to say',
+];
+
+export const politics = [
+  'Conservative',
+
+  'Moderate',
+
+  'Liberal',
+
+  'Non-Political',
+
+  'Prefer not to say',
+];
+
+export const diet = [
+  'No restrictions',
+
+  'Gluten-Free',
+
+  'Vegetarian',
+
+  'Vegan',
+
+  'Pescatarian',
+
+  'Halal',
+
+  'Kosher',
+
+  'Prefer not to say',
+
+  'Other',
+];
+
+export const drinking = [
+  'Never',
+
+  'Rarely',
+
+  'Sometimes',
+
+  'Frequently',
+
+  'Prefer not to say',
+];
+
+export const kids = ['None', 'Have kid(s)', 'Prefer not to say'];
+
+export const familyPlan = [
+  'Open to kid(s)',
+  'Want kid(s)',
+  "Don't want kid(s)",
+  'Undecided',
+  'Prefer not to say',
+];
+
+export const pets = [
+  'None',
+  'Cat(s)',
+  'Dog(s)',
+  'Both',
+  'Other pet(s)',
+  'Prefer not to say',
+];
+
+export const cannabis = [
+  'Never',
+  'Rarely',
+  'Sometimes',
+  'Frequently',
+  'Prefer not to say',
+];
+
+export const covidVaccineStatus = [
+  'Fully vaccinated',
+
+  'Partially vaccinated, plan to complete',
+
+  'Partially vaccinated, unable to complete',
+
+  'Unable to receive vaccine',
+
+  'Decline to receive vaccine',
+
+  'Prefer not to say',
+];
+
 export const sexualOrientationArray = [
   'Straight',
   'Gay',
@@ -30,6 +206,44 @@ export const country = [
   { label: 'USA', value: 'USA' },
   { label: 'Canada', value: 'Canada' },
 ];
+
+export const relationship = [
+  'Long Term Relationship',
+
+  'Marriage',
+
+  'Friendship',
+
+  'Casual',
+
+  'Prefer not to say',
+];
+
+export const ethnicity = [
+  'American Indian or Alaska Native',
+
+  'East Asian',
+
+  'South Asian',
+
+  'Southeast Asian',
+
+  'Black or African American',
+
+  'Middle Eastern',
+
+  'Hispanic or Latino',
+
+  'Native Hawaiian or Pacific Island',
+
+  'White or Caucasian',
+
+  'Other',
+
+  'Prefer not to say',
+];
+
+export const preferNotToSay = 'Prefer not to say';
 
 export const statesOption: any = {
   USA: [

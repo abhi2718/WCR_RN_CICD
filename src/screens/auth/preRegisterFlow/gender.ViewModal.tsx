@@ -1,4 +1,4 @@
-import { useEffect, useState,useRef } from 'react';
+import {  useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../navigation';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
@@ -13,8 +13,8 @@ export const useGenderViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const [loading, setLoading] = useState(false);
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-  const { user } = useSelector((state: any) => state.userState);
-  const dispatch = useDispatch();
+    const { user } = useSelector((state: any) => state.userState);
+    const dispatch = useDispatch();
   const { navigation } = props;
   const updatedGender = user?.profile?.gender ?? 'Male';
   const token = useRef(user?.token ? user?.token : null).current;
