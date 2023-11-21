@@ -13,3 +13,8 @@ export type UserListProps = {
 export type UserItemProps = {
   user: User;
 };
+export type SearchModalProps = {
+  showSearchModal: boolean;
+  toggleSearchModal: () => void;
+  handleSetProfiles: (item:any) => void;
+};
