@@ -1,24 +1,80 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { dimensions, isAndroid } from '../../../../../components/tools';
+import { HomeDeckRepository } from '../../../../../repository/homeDeck.repo';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../../../navigation';
 
 export const useViewModal = () => {
-  const [images, setImages] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  function fetchDogImages() {
+  const homeDeckRepository = new HomeDeckRepository();
+  const tabBarHeight = useBottomTabBarHeight();
+  const androidActualHeight = useRef(dimensions.height - tabBarHeight).current;
+  const { top, bottom } = useSafeAreaInsets();
+  const cardRef = useRef();
+  const { user } = useSelector(({ userState }) => userState);
+  const { navigate } = useNavigation();
+  const iOSActualHeight = useRef(
+    dimensions.height - (top + tabBarHeight),
+  ).current;
+  const fetchProfiles = async () => {
     setLoading(true);
-    fetch('https://dog.ceo/api/breeds/image/random/20')
-      .then((response) => response.json())
-      .then((data) => {
-        setImages(data.message);
-        setLoading(false);
-      })
-      .catch((error) => {});
-  }
+    try {
+      const data = await homeDeckRepository.getProfiles();
+      setProfiles(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    fetchDogImages();
+    fetchProfiles();
   }, []);
+  const handleSetProfiles = item => setProfiles([item, ...profiles]);
+  const goToNotification = ()=> navigate(ROUTES.Notification)
+  const createPayLoafForUserAction = (index: number, action: string) => {
+    const suggestedUser = profiles[index];
+    return {
+      actionData: {
+        userId: user._id,
+        actedOn: suggestedUser._id,
+        action,
+        isMatched: false,
+      },
+    };
+  };
+  const handleLike = async (index: number) => {
+    try {
+      const payLoad = createPayLoafForUserAction(index, 'Like');
+      //const data = await homeDeckRepository.userReactin(payLoad);
+    } catch (error) {}
+  };
+  const handleDisLike = async (index: number) => {
+    try {
+      const payLoad = createPayLoafForUserAction(index, 'Dislike');
+      // const data = await homeDeckRepository.userReactin(payLoad);
+    } catch (error) {}
+  };
+  const toggleSearchModal = () => setShowSearchModal((preValue) => !preValue);
+  const handleCloseModal = () => {
+    toggleSearchModal();
+  }
   return {
-    isOpen: false,
-    images,
     isLoading,
+    profiles,
+    iOSActualHeight,
+    androidActualHeight,
+    handleLike,
+    handleDisLike,
+    cardRef,
+    toggleSearchModal,
+    showSearchModal,
+    handleCloseModal,
+    handleSetProfiles,
+    goToNotification
   };
 };

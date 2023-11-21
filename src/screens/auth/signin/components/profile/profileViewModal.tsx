@@ -205,22 +205,23 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     mobile,
     fbId,
   }: socialSignInSignUpPayload) {
-    const dataMango = await socialSignInSignUp({
-      firebaseUid,
-      email,
-      firstName,
-      lastName,
-      dob,
-      displayName,
-      mobile,
-      fbId,
-    });
-    
-    dispatch(addUser(dataMango));
-    if (dataMango.message === 'Registered Successfully')
-    navigateToGenderScreen(dataMango.user._id);
+    try {
+      const dataMango = await socialSignInSignUp({
+        firebaseUid,
+        email,
+        firstName,
+        lastName,
+        dob,
+        displayName,
+        mobile,
+        fbId,
+      });
+      dispatch(addUser(dataMango));
+      if (dataMango.message === 'Registered Successfully')
+      navigateToGenderScreen(dataMango.user._id);
+    } catch (error) {
+    }
   }
-
   return {
     handleInputChange,
     handleSubmit,
@@ -232,7 +233,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     toUpperFirstName,
     isWelcomeModalVisible,
     setWelcomeModalVisible,
-
     selectedDate,
     setSelectedDate,
     formatMobile,

@@ -18,7 +18,11 @@ export function isDate18YearsOrAbove(date: string): boolean {
 
 export const goBack = (navigation: any) => {
   navigation.goBack();
-};
+}
+export const unixToDate = (unix:string) => {
+  const date =  `${moment(unix).format('l')} ${moment(unix).format('LT')}  `  
+   return date;
+ }
 
 export const makeFalseDefaultValue = (
   ethnicityConstantData: string[],
