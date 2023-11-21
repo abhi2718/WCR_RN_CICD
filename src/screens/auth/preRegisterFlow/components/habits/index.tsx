@@ -6,89 +6,43 @@ import { PrimaryButton } from '../../../../../components/button';
 import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { useNavigation } from '@react-navigation/native';
-const Habits = () => {
-  const navigation = useNavigation();
-  const [selectedDrinkingHabits, setSelectedDrinkingHabits] = useState<
-    string | null
-  >(null);
-  const [selectedSmokingHabits, setSelectedSmokingHabits] = useState<
-    string | null
-  >(null);
-  const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
-
-  const [selectedPets, setSelectedPets] = useState<string | null>(null);
-
-  const drinkingHabitsOptions = [
-    'Never',
-    'Rarely',
-    'Sometimes',
-    'Frequently',
-    'Prefer not to say',
-  ];
-
-  const smokingHabitsOptions = [
-    'Never',
-    'Rarely',
-    'Sometimes',
-    'Frequently',
-    'Prefer not to say',
-  ];
-
-  const exerciseOption = [
-    'Never',
-    'Rarely',
-    'Sometimes',
-    'Frequently',
-    'Prefer not to say',
-  ];
-  const petsOption = [
-    'None',
-    'Cat’s',
-    'Dog’s',
-    'Both',
-    'Other Pet’s',
-    'Prefer not to say',
-  ];
-
-  const handleKidsSelect = (option: string) => {
-    setSelectedDrinkingHabits(
-      option === selectedDrinkingHabits ? null : option,
-    );
-  };
-
-  const handleFamilyPlansSelect = (option: string) => {
-    setSelectedSmokingHabits(option === selectedSmokingHabits ? null : option);
-  };
-
-  const handleCoidVaccineStatusSelect = (option: string) => {
-    setSelectedExercise(option === selectedExercise ? null : option);
-  };
-
-  const handleDietarypreferenceSelect = (option: string) => {
-    setSelectedPets(option === selectedPets ? null : option);
-  };
+import { HeaderBar } from '../../../../../components/header';
+import {
+  drinking,
+  exercise,
+  pets,
+  smoking,
+} from '../../../../../utils/constanst';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { useHabitViewModal } from './habits.viewModal';
+const Habits = (props: ScreenParams) => {
+  const {
+    handleDrinking,
+    selectedSmokingHabits,
+    selectedDrinkingHabits,
+    selectedExercise,
+    selectedPets,
+    handleeExercise,
+    handleSmokingHabits,
+    handlePets,
+    loading,
+    loggInUserId,
+    navigateToAboutScreen,
+    updateUserDetails,
+  } = useHabitViewModal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={ChipStyle.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={ChipStyle.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <Text style={ChipStyle.skipBtn}>Skip</Text>
-          </Row>
+          <HeaderBar
+            skip={() => navigateToAboutScreen(loggInUserId)}
+          ></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Drinking Habits</Text>
               <Row style={ChipStyle.chipRow}>
-                {drinkingHabitsOptions.map((option, index) => (
+                {drinking.map((option, index) => (
                   <Chip
                     key={index}
                     style={
@@ -102,7 +56,7 @@ const Habits = () => {
                           ? colors.ui.text
                           : colors.ui.placeholder,
                     }}
-                    onPress={() => handleKidsSelect(option)}
+                    onPress={() => handleDrinking(option)}
                   >
                     {option}
                   </Chip>
@@ -113,7 +67,7 @@ const Habits = () => {
             <View>
               <Text style={ChipStyle.subHeader}>Smoking Habits</Text>
               <Row style={ChipStyle.chipRow}>
-                {smokingHabitsOptions.map((option, index) => (
+                {smoking.map((option, index) => (
                   <Chip
                     key={index}
                     style={
@@ -127,7 +81,7 @@ const Habits = () => {
                           ? colors.ui.text
                           : colors.ui.placeholder,
                     }}
-                    onPress={() => handleFamilyPlansSelect(option)}
+                    onPress={() => handleSmokingHabits(option)}
                   >
                     {option}
                   </Chip>
@@ -140,7 +94,7 @@ const Habits = () => {
                 How often do you exercise?
               </Text>
               <Row style={ChipStyle.chipRow}>
-                {exerciseOption.map((option, index) => (
+                {exercise.map((option, index) => (
                   <Chip
                     key={index}
                     style={
@@ -154,7 +108,7 @@ const Habits = () => {
                           ? colors.ui.text
                           : colors.ui.placeholder,
                     }}
-                    onPress={() => handleCoidVaccineStatusSelect(option)}
+                    onPress={() => handleeExercise(option)}
                   >
                     {option}
                   </Chip>
@@ -165,7 +119,7 @@ const Habits = () => {
             <View>
               <Text style={ChipStyle.subHeader}>Do you have pets?</Text>
               <Row style={ChipStyle.chipRow}>
-                {petsOption.map((option, index) => (
+                {pets.map((option, index) => (
                   <Chip
                     key={index}
                     style={
@@ -179,7 +133,7 @@ const Habits = () => {
                           ? colors.ui.text
                           : colors.ui.placeholder,
                     }}
-                    onPress={() => handleDietarypreferenceSelect(option)}
+                    onPress={() => handlePets(option)}
                   >
                     {option}
                   </Chip>
@@ -191,9 +145,8 @@ const Habits = () => {
         <View>
           <PrimaryButton
             title="Next"
-            onPress={() => {
-              navigation.navigate('/about');
-            }}
+            isLoading={loading}
+            onPress={() => updateUserDetails()}
           />
         </View>
       </View>
