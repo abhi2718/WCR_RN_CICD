@@ -12,4 +12,5 @@ export class AppUrl {
   public static blockUserEndPoint = `${this.BASE_URL}/blocked/`;
   public static showProfileViewEndPoint = `${this.BASE_URL}/profile-view?profileViewId=`;
   public static searchUserEndPoint = `${this.BASE_URL}/user/search?searchValue=`;
+  public static notificationEndPoint = `${this.BASE_URL}/notification`;
 }

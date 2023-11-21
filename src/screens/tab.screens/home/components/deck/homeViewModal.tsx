@@ -4,6 +4,8 @@ import { dimensions, isAndroid } from '../../../../../components/tools';
 import { HomeDeckRepository } from '../../../../../repository/homeDeck.repo';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../../../navigation';
 
 export const useViewModal = () => {
   const [profiles, setProfiles] = useState([]);
@@ -15,6 +17,7 @@ export const useViewModal = () => {
   const { top, bottom } = useSafeAreaInsets();
   const cardRef = useRef();
   const { user } = useSelector(({ userState }) => userState);
+  const { navigate } = useNavigation();
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;
@@ -31,7 +34,8 @@ export const useViewModal = () => {
   useEffect(() => {
     fetchProfiles();
   }, []);
-  const handleSetProfiles = item => setProfiles([item,...profiles])
+  const handleSetProfiles = item => setProfiles([item, ...profiles]);
+  const goToNotification = ()=> navigate(ROUTES.Notification)
   const createPayLoafForUserAction = (index: number, action: string) => {
     const suggestedUser = profiles[index];
     return {
@@ -70,6 +74,7 @@ export const useViewModal = () => {
     toggleSearchModal,
     showSearchModal,
     handleCloseModal,
-    handleSetProfiles
+    handleSetProfiles,
+    goToNotification
   };
 };

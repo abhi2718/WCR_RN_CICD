@@ -34,6 +34,7 @@ export enum ROUTES {
   Habits = '/habits',
   About = '/about',
   Hobbies = '/hobbies',
+  Notification = '/notification'
 }
 export default function Navigator() {
   useCometChatInit();

@@ -12,7 +12,7 @@ import {
 } from '../../../../../components/tools';
 import CardCompoent from './components/card.component/card';
 import CardStack from './components/swiper';
-import { SearchModal } from "./components/searchModal";
+import { SearchModal } from './components/searchModal';
 
 export default function Deck() {
   const {
@@ -25,7 +25,8 @@ export default function Deck() {
     androidActualHeight,
     toggleSearchModal,
     showSearchModal,
-    handleSetProfiles
+    handleSetProfiles,
+    goToNotification,
   } = useViewModal();
   if (isLoading) {
     return <FullLoader />;
@@ -40,7 +41,7 @@ export default function Deck() {
       <View style={styles.headerViewStyle}>
         <Row justifyContent="space-between" alignItems="center">
           <Row>
-            <Pressable>
+            <Pressable onPress={goToNotification}>
               <Image
                 resizeMode="contain"
                 style={styles.iconStyle}

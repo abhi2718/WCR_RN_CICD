@@ -24,6 +24,7 @@ import Habits from '../../screens/auth/preRegisterFlow/components/habits';
 import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 import { SplashScreen } from '../../screens/splash.screens';
+import { NotificationScreen } from '../../screens/tab.screens/notification.screen';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
@@ -76,7 +77,6 @@ export const StackNavigator = () => {
         component={Profile}
       />
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
-
       <Stack.Screen
         options={options}
         name={ROUTES.SexualOrientation}
@@ -131,6 +131,11 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.CommunityPrivateChat}
         component={PrivateChatWindowWrapper}
+      />
+        <Stack.Screen
+        options={optins}
+        name={ROUTES.Notification}
+        component={NotificationScreen}
       />
     </Stack.Navigator>
   );
