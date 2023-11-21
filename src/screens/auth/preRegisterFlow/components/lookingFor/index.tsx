@@ -41,7 +41,7 @@ const RelationShipScreen = (props: ScreenParams) => {
             </View>
           </View>
           <PrimaryButton title="Next" isLoading={loading}
-           onPress={() => updateUserDetails()} />
+           onPress={updateUserDetails} />
         </View>
       </ScrollView>
     </ScreenContainer>
