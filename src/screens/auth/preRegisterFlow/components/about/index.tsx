@@ -4,25 +4,18 @@ import { Row, ScreenContainer } from '../../../../../components/tools';
 import { AboutStyle } from './aboutStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-const About = () => {
-  const navigation = useNavigation();
+import { HeaderBar } from '../../../../../components/header';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { useAboutViewModal } from './about.viewModal';
+
+const About = (props:ScreenParams) => {
+  const {handleText,aboutText,loggInUserId,navigateTohabitsScreen,updateUserDetails,loading,maxLength} = useAboutViewModal(props)
 
   return (
     <ScreenContainer>
       <View style={AboutStyle.container}>
         <View style={AboutStyle.scrollContainer}>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={AboutStyle.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={AboutStyle.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <Text>Skip</Text>
-          </Row>
+          <HeaderBar skip={() => navigateTohabitsScreen(loggInUserId)}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={AboutStyle.subHeader}>
@@ -31,11 +24,12 @@ const About = () => {
               <TextInput
                 style={AboutStyle.input}
                 multiline={true}
+                maxLength={maxLength}
                 numberOfLines={10} // Set the number of lines to display
                 placeholder="Enter here..."
                 textAlignVertical="top"
-                // value={text}
-                // onChangeText={(newText) => setText(newText)}
+                value={aboutText}
+                onChangeText={handleText}
               />
             </View>
           </ScrollView>
@@ -43,9 +37,8 @@ const About = () => {
         <View>
           <PrimaryButton
             title="Next"
-            onPress={() => {
-              navigation.navigate('/hobbies');
-            }}
+            isLoading={loading}
+            onPress={() => updateUserDetails()}
           />
         </View>
       </View>

@@ -16,7 +16,7 @@ export const useProfessionModal = (props: ScreenParams) => {
   const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useSelector(({ userState }) => userState);
-  const navigation = useNavigation();
+  const {navigation} = props;
   const dispatch = useDispatch();
   const [professionForm, setProfessionForm] = useState<professionTypes>({
     userDegree: user?.designation?.userDegree
@@ -25,8 +25,8 @@ export const useProfessionModal = (props: ScreenParams) => {
     primaryDegree: user?.designation?.primaryDegree
       ? user?.designation?.primaryDegree
       : '',
-    institution: user?.designation?.institution
-      ? user?.designation?.institution
+      institution: user?.institution
+      ? user?.institution
       : '',
     title: user?.designation?.title ? user?.designation?.title : '',
   });
@@ -44,6 +44,10 @@ export const useProfessionModal = (props: ScreenParams) => {
   const handleInputChange = (name: keyof professionTypes, value: string) => {
     setProfessionForm({ ...professionForm, [name]: value });
   };
+
+   const navigateToSexualOrientationScreen = (id: string) => {
+       navigation.navigate(ROUTES.AddEthnicity, { data: id });
+     };
 
   const handleSubmit = async () => {
     const errors: Partial<professionTypes> = {};
@@ -85,7 +89,7 @@ export const useProfessionModal = (props: ScreenParams) => {
       };
       dispatch(addUser(data));
       setLoading(false);
-      navigation.navigate(ROUTES.Tab);
+      navigateToSexualOrientationScreen(loggInUserId)
     } catch (error) {}
   };
 

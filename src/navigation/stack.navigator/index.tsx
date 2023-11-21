@@ -16,8 +16,8 @@ import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sex
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 import LocationScreen from '../../screens/auth/preRegisterFlow/components/location';
 import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
-import AddEthnicity from '../../screens/auth/preRegisterFlow/components/addEthnicity';
-import LookingFor from '../../screens/auth/preRegisterFlow/components/lookingFor';
+import AddEthnicityScreen from '../../screens/auth/preRegisterFlow/components/addEthnicity';
+import RelationShipScreen from '../../screens/auth/preRegisterFlow/components/lookingFor';
 import MaritalStatus from '../../screens/auth/preRegisterFlow/components/maritalStatus';
 import Kids from '../../screens/auth/preRegisterFlow/components/kids';
 import Habits from '../../screens/auth/preRegisterFlow/components/habits';
@@ -33,10 +33,35 @@ export const StackNavigator = () => {
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
-       <Stack.Screen
+      <Stack.Screen options={options} name={ROUTES.About} component={About} />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.MaritalStatus}
+        component={MaritalStatus}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.LookingFor}
+        component={RelationShipScreen}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.AddEthnicity}
+        component={AddEthnicityScreen}
+      />
+
+      <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Profile}
+        component={Profile}
       />
       <Stack.Screen
         options={options}
@@ -48,26 +73,18 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.AddEthnicity}
-        component={AddEthnicity}
-      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
+
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
 
       <Stack.Screen
@@ -75,31 +92,10 @@ export const StackNavigator = () => {
         name={ROUTES.SexualOrientation}
         component={SexualOrientation}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.LookingFor}
-        component={LookingFor}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.MaritalStatus}
-        component={MaritalStatus}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Kids}
-        component={Kids}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Habits}
-        component={Habits}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.About}
-        component={About}
-      />
+
+      <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
+      <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}
@@ -121,7 +117,7 @@ export const StackNavigator = () => {
         component={MessageList}
       />
       <Stack.Screen
-        options={optins}
+        options={options}
         name={ROUTES.CommunityPrivateChat}
         component={PrivateChatWindowWrapper}
       />
