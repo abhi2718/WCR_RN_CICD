@@ -6,6 +6,11 @@ export const pickPhotoFromGallary = async (
     height: 400,
   },
   cropping = false,
+  cropperCircleOverlay = true,
 ) => {
-  return await ImagePicker.openPicker({ ...options, cropping });
+  return await ImagePicker.openPicker({
+    ...options,
+    cropping,
+    cropperCircleOverlay,
+  });
 };

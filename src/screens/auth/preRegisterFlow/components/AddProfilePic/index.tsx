@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
 import {
-  Button,
   Image,
-  ScrollView,
   Text,
   ImageProps,
-  StyleSheet,
   TouchableOpacity,
   View,
+  Modal,
+  Pressable,
 } from 'react-native';
 import {
   Column,
+  Logo,
   Row,
   ScreenContainer,
-  dimensions,
 } from '../../../../../components/tools';
-import { addPicture } from './AddProfilePicStyle';
+import { addPicture, modalStyles } from './AddProfilePicStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { HeaderBar } from '../../../../../components/header';
-import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { ImageOrVideo } from 'react-native-image-crop-picker';
 import { pickPhotoFromGallary } from '../../../../../utils/uploads';
 
 interface AvatarProps extends ImageProps {
@@ -35,6 +33,10 @@ const AddProfilePic = (props: AvatarProps) => {
     const image = await pickPhotoFromGallary(null, true);
     setUri(image.path);
     props.onChange?.(image);
+    console.log(image, 'profile picture');
+  };
+  const removeProfilePic = () => {
+    setUri(null);
   };
 
   const [uris, setUris] = useState(Array(2).fill(null));
@@ -44,7 +46,7 @@ const AddProfilePic = (props: AvatarProps) => {
     const updatedUris = [...uris];
     updatedUris[index] = image.path;
     setUris(updatedUris);
-    props.onChange?.(updatedUris);
+    // props.onChange?.(updatedUris);
   };
 
   const [urisTwo, seturisTwo] = useState(Array(3).fill(null));
@@ -54,96 +56,184 @@ const AddProfilePic = (props: AvatarProps) => {
     const updatedUris = [...urisTwo];
     updatedUris[index] = image.path;
     seturisTwo(updatedUris);
-    props.onChange?.(updatedUris);
+    // props.onChange?.(updatedUris);
+  };
+
+  const removePic = (index) => {
+    const updatedUris = [...uris];
+    updatedUris[index] = null;
+    setUris(updatedUris);
+  };
+  const removePicTwo = (index) => {
+    const updatedUris = [...urisTwo];
+    updatedUris[index] = null;
+    seturisTwo(updatedUris);
+  };
+
+  // ---------Modal --------------------------------
+  const [imageModal, setImageModal] = useState(false);
+
+  const [selectedUri, setSelectedUri] = useState(null);
+
+  const toggleImageModal = (uri) => {
+    setSelectedUri(uri);
+    setImageModal(!imageModal);
   };
 
   return (
-    <ScreenContainer>
-      <View style={addPicture.container}>
-        <View>
-          <HeaderBar
-            info={() => console.log('Info clicked')}
-            isModalVisible={isModalVisible}
-            setModalVisible={setModalVisible}
-          />
-          <Text style={addPicture.subHeader}>Show off your best side </Text>
-          <Text style={addPicture.text}>(Add at least 2 photos)</Text>
+    <>
+      <ScreenContainer>
+        <View style={addPicture.container}>
           <View>
-            <Row justifyContent="space-between" style={addPicture.row}>
-              {uri ? (
-                <View>
-                  <TouchableOpacity onPress={pickProfilePicture}>
-                    <Image
-                      style={addPicture.profilePic}
-                      {...props}
-                      source={uri ? { uri } : props.source}
-                    />
-                  </TouchableOpacity>
-                </View>
-              ) : (
-                <View style={addPicture.imageViewProfile}>
-                  <TouchableOpacity onPress={pickProfilePicture}>
-                    <Image
-                      style={addPicture.imageIcon}
-                      source={require('../../../../../assets/images/icons/addImg.png')}
-                    />
-                  </TouchableOpacity>
-                </View>
-              )}
-
-              <Column style={addPicture.columnOne}>
-                {uris.map((uri, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => pickPhoto(index)}
-                  >
-                    {uri ? (
+            <HeaderBar
+              info={() => console.log('Info clicked')}
+              isModalVisible={isModalVisible}
+              setModalVisible={setModalVisible}
+            />
+            <Text style={addPicture.subHeader}>Show off your best side </Text>
+            <Text style={addPicture.text}>(Add at least 2 photos)</Text>
+            <View>
+              <Row justifyContent="space-between" style={addPicture.row}>
+                {uri ? (
+                  <View>
+                    <TouchableOpacity onPress={pickProfilePicture}>
                       <Image
-                        style={addPicture.photo}
+                        style={addPicture.profilePic}
                         {...props}
-                        source={{ uri }}
+                        source={uri ? { uri } : props.source}
                       />
-                    ) : (
-                      <View style={addPicture.imageView}>
+                      <Text style={addPicture.profilePicText}>
+                        Profile Photo
+                      </Text>
+                      <TouchableOpacity onPress={() => removeProfilePic()}>
                         <Image
-                          style={addPicture.imageIcon}
-                          source={require('../../../../../assets/images/icons/addImg.png')}
+                          style={addPicture.deletImg}
+                          source={require('../../../../../assets/images/icons/crossIcon.png')}
                         />
-                      </View>
-                    )}
-                  </TouchableOpacity>
-                ))}
-              </Column>
-            </Row>
-
-            <Row justifyContent="space-between" style={addPicture.row}>
-              {urisTwo.map((uri, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => pickPhotoTwo(index)}
-                >
-                  {uri ? (
-                    <Image
-                      style={addPicture.photo}
-                      {...props}
-                      source={{ uri }}
-                    />
-                  ) : (
-                    <View style={addPicture.imageView}>
+                      </TouchableOpacity>
+                    </TouchableOpacity>
+                  </View>
+                ) : (
+                  <View style={addPicture.imageViewProfile}>
+                    <TouchableOpacity onPress={pickProfilePicture}>
                       <Image
                         style={addPicture.imageIcon}
                         source={require('../../../../../assets/images/icons/addImg.png')}
                       />
+                    </TouchableOpacity>
+                  </View>
+                )}
+
+                <Column style={addPicture.columnOne}>
+                  {uris.map((uri, index) => (
+                    <View key={index}>
+                      {uri ? (
+                        <View>
+                          <TouchableOpacity
+                            onPress={() => toggleImageModal(uri)}
+                          >
+                            <Image
+                              style={addPicture.photo}
+                              {...props}
+                              source={{ uri }}
+                            />
+                          </TouchableOpacity>
+                          <TouchableOpacity onPress={() => removePic(index)}>
+                            <Image
+                              style={addPicture.deletImg}
+                              source={require('../../../../../assets/images/icons/crossIcon.png')}
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      ) : (
+                        <TouchableOpacity onPress={() => pickPhoto(index)}>
+                          <View style={addPicture.imageView}>
+                            <Image
+                              style={addPicture.imageIcon}
+                              source={require('../../../../../assets/images/icons/addImg.png')}
+                            />
+                          </View>
+                        </TouchableOpacity>
+                      )}
                     </View>
-                  )}
-                </TouchableOpacity>
-              ))}
-            </Row>
+                  ))}
+                </Column>
+              </Row>
+
+              <Row justifyContent="space-between" style={addPicture.row}>
+                {urisTwo.map((uri, index) => (
+                  <View key={index}>
+                    {uri ? (
+                      <View>
+                        <TouchableOpacity onPress={() => toggleImageModal(uri)}>
+                          <Image
+                            style={addPicture.photo}
+                            {...props}
+                            source={{ uri }}
+                          />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => removePicTwo(index)}>
+                          <Image
+                            style={addPicture.deletImg}
+                            source={require('../../../../../assets/images/icons/crossIcon.png')}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    ) : (
+                      <TouchableOpacity onPress={() => pickPhotoTwo(index)}>
+                        <View style={addPicture.imageView}>
+                          <Image
+                            style={addPicture.imageIcon}
+                            source={require('../../../../../assets/images/icons/addImg.png')}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                  </View>
+                ))}
+              </Row>
+            </View>
           </View>
+          <PrimaryButton title="Next" />
         </View>
-        <PrimaryButton title="Next" />
+      </ScreenContainer>
+
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={imageModal}
+          onRequestClose={toggleImageModal}
+        >
+          <View style={modalStyles.modalContent}>
+            <Row
+              style={modalStyles.row}
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Pressable onPress={toggleImageModal}>
+                <Image
+                  style={modalStyles.arrow}
+                  source={require('../../../../../assets/images/icons/arrow.png')}
+                />
+              </Pressable>
+              <Logo width={50} height={35} />
+              <View />
+            </Row>
+            <View style={modalStyles.content}>
+              <Image
+                style={modalStyles.picture}
+                source={{ uri: selectedUri }}
+              />
+              <PrimaryButton
+                style={modalStyles.button}
+                title="Set as profile"
+              />
+            </View>
+          </View>
+        </Modal>
       </View>
-    </ScreenContainer>
+    </>
   );
 };
 
