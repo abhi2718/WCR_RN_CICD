@@ -23,6 +23,7 @@ import Kids from '../../screens/auth/preRegisterFlow/components/kids';
 import Habits from '../../screens/auth/preRegisterFlow/components/habits';
 import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
+import Height from '../../screens/auth/preRegisterFlow/components/height';
 import { SplashScreen } from '../../screens/splash.screens';
 import { NotificationScreen } from '../../screens/tab.screens/notification.screen';
 
@@ -30,17 +31,19 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
+
       <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}
         component={SplashScreen}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
@@ -85,7 +88,7 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
-      
+
       <Stack.Screen
         options={options}
         name={ROUTES.EmailAuth}
@@ -127,7 +130,7 @@ export const StackNavigator = () => {
         name={ROUTES.CommunityPrivateChat}
         component={PrivateChatWindowWrapper}
       />
-        <Stack.Screen
+      <Stack.Screen
         options={optins}
         name={ROUTES.Notification}
         component={NotificationScreen}
