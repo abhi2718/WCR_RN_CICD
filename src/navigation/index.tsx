@@ -23,7 +23,7 @@ export enum ROUTES {
   PrivateChatTab = '/private-chat-tab',
   ProfileTab = '/profile-tab',
   LikeTabs = '/like-tabs',
-  CommunityPrivateChat='/community-private-chat',
+  CommunityPrivateChat = '/community-private-chat',
   ProfilePic = '/profile-pic',
   UploadedPic = '/uploaded-pic',
   AddEthnicity = '/addEthnicity',
@@ -34,7 +34,8 @@ export enum ROUTES {
   Habits = '/habits',
   About = '/about',
   Hobbies = '/hobbies',
-  Notification = '/notification'
+  Height = '/height',
+  Notification = '/notification',
 }
 export default function Navigator() {
   useCometChatInit();
