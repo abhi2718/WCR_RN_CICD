@@ -35,9 +35,10 @@ export const StackNavigator = () => {
 
       <Stack.Screen
         options={options}
-        name={ROUTES.SPLASH}
-        component={SplashScreen}
+        name={ROUTES.ProfilePic}
+        component={AddProfilePic}
       />
+      <Stack.Screen name={ROUTES.SPLASH} component={SplashScreen} />
       <Stack.Screen
         options={options}
         name={ROUTES.Tab}
@@ -110,11 +111,7 @@ export const StackNavigator = () => {
         name={ROUTES.Hobbies}
         component={Hobbies}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.ProfilePic}
-        component={AddProfilePic}
-      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
