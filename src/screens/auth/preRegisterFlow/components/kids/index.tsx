@@ -6,90 +6,42 @@ import { PrimaryButton } from '../../../../../components/button';
 import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { useNavigation } from '@react-navigation/native';
-const Kids = () => {
-  const navigation = useNavigation();
-  const [selectedKids, setSelectedKids] = useState<string | null>(null);
-  const [selectedFamilyPlans, setSelectedFamilyPlans] = useState<string | null>(
-    null,
-  );
-  const [selectedCoidVaccineStatus, setSelectedCoidVaccineStatus] = useState<
-    string | null
-  >(null);
+import { HeaderBar } from '../../../../../components/header';
+import {
+  covidVaccineStatus,
+  diet,
+  familyPlan,
+  kids,
+} from '../../../../../utils/constanst';
+import { useKidsViewmodal } from './kids.viewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-  const [selectedDietarypreference, setSelectedDietarypreference] = useState<
-    string | null
-  >(null);
-
-  const kidsOptions = ['None', 'Have kids', 'Prefer not to say'];
-
-  const familyPlansOptions = [
-    'Open to kid’s',
-    'Want kid’s',
-    'Don’t Want kid’s',
-    'Undecided',
-    'Prefer not to say',
-  ];
-
-  const covidVaccineStatusOption = [
-    'Fully',
-    'Partially',
-    'Unable to receive',
-    'Decline',
-    'Prefer not to say',
-  ];
-  const dietaryPreferenceOption = [
-    'No restrictions',
-    'Gluten-free',
-    'Vegetarian',
-    'Vegan',
-    'Pescatarian',
-    'Halal',
-    'Kosher',
-    'Prefer not to say',
-    'Other',
-  ];
-
-  const handleKidsSelect = (option: string) => {
-    setSelectedKids(option === selectedKids ? null : option);
-  };
-
-  const handleFamilyPlansSelect = (option: string) => {
-    setSelectedFamilyPlans(option === selectedFamilyPlans ? null : option);
-  };
-
-  const handleCoidVaccineStatusSelect = (option: string) => {
-    setSelectedCoidVaccineStatus(
-      option === selectedCoidVaccineStatus ? null : option,
-    );
-  };
-
-  const handleDietarypreferenceSelect = (option: string) => {
-    setSelectedDietarypreference(
-      option === selectedDietarypreference ? null : option,
-    );
-  };
+const Kids = (props: ScreenParams) => {
+  const {
+    handleKidsSelect,
+    handleFamilyPlansSelect,
+    handleCovidVaccineStatusSelect,
+    handleDietarypreferenceSelect,
+    selectedKids,
+    loading,
+    selectedCovidVaccineStatus,
+    selectedDietarypreference,
+    updateUserDetails,
+    selectedFamilyPlans,
+    loggInUserId,
+    navigateTohabitsScreen
+  } = useKidsViewmodal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={ChipStyle.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={ChipStyle.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <Text style={ChipStyle.skipBtn}>Skip</Text>
-          </Row>
+          <HeaderBar skip={()=>navigateTohabitsScreen(loggInUserId)}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Do you have kids?</Text>
               <Row style={ChipStyle.chipRow}>
-                {kidsOptions.map((option, index) => (
+                {kids.map((option, index) => (
                   <Chip
                     key={index}
                     style={
@@ -114,7 +66,7 @@ const Kids = () => {
             <View>
               <Text style={ChipStyle.subHeader}>Family Plans</Text>
               <Row style={ChipStyle.chipRow}>
-                {familyPlansOptions.map((option, index) => (
+                {familyPlan.map((option, index) => (
                   <Chip
                     key={index}
                     style={
@@ -139,21 +91,21 @@ const Kids = () => {
             <View>
               <Text style={ChipStyle.subHeader}>Covid Vaccine Status</Text>
               <Row style={ChipStyle.chipRow}>
-                {covidVaccineStatusOption.map((option, index) => (
+                {covidVaccineStatus.map((option, index) => (
                   <Chip
                     key={index}
                     style={
-                      option === selectedCoidVaccineStatus
+                      option === selectedCovidVaccineStatus
                         ? ChipStyle.chipSelected
                         : ChipStyle.chip
                     }
                     textStyle={{
                       color:
-                        option === selectedCoidVaccineStatus
+                        option === selectedCovidVaccineStatus
                           ? colors.ui.text
                           : colors.ui.placeholder,
                     }}
-                    onPress={() => handleCoidVaccineStatusSelect(option)}
+                    onPress={() => handleCovidVaccineStatusSelect(option)}
                   >
                     {option}
                   </Chip>
@@ -164,7 +116,7 @@ const Kids = () => {
             <View>
               <Text style={ChipStyle.subHeader}>Dietary preference</Text>
               <Row style={ChipStyle.chipRow}>
-                {dietaryPreferenceOption.map((option, index) => (
+                {diet.map((option, index) => (
                   <Chip
                     key={index}
                     style={
@@ -190,9 +142,8 @@ const Kids = () => {
         <View>
           <PrimaryButton
             title="Next"
-            onPress={() => {
-              navigation.navigate('/habits');
-            }}
+            onPress={() => updateUserDetails()}
+            isLoading={loading}
           />
         </View>
       </View>

@@ -1,72 +1,49 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { addEthnicityStyle } from './AddEthnicityStyle';
 import { PrimaryButton } from '../../../../../components/button';
-import { CheckBox } from '../../../../../components/inputBox';
+import { MultipleCheckBoxList } from '../../../../../components/checkbox';
+import { useEthnicityViewModal } from './ethnicity.ViewModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { HeaderBar } from '../../../../../components/header';
 
-const AddEthnicity = () => {
+const AddEthnicityScreen = (props: ScreenParams) => {
+  const {
+    loading,
+    ethnicityList,
+    handleListChange,
+    handleSeletedList,
+    updateUserDetails,
+    ethnicityflag,
+    loggInUserId,
+    navigateToRelationshipScreen
+  } = useEthnicityViewModal(props);
   return (
     <ScreenContainer>
-      <View style={addEthnicityStyle.container}>
-        <View>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={addEthnicityStyle.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={addEthnicityStyle.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <Text style={addEthnicityStyle.skipBtn}>Skip</Text>
-          </Row>
-          <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
-
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="American Indian or Alaska Native"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox onPress={(isChecked: boolean) => {}} text="East Asian" />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox onPress={(isChecked: boolean) => {}} text="South Asian" />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="Black or African American"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="Middle Eastern"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text=" Hispanic or Latino"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox
-              onPress={(isChecked: boolean) => {}}
-              text="White or Caucasion"
-            />
-          </Row>
-          <Row style={addEthnicityStyle.rowView} alignItems="center">
-            <CheckBox onPress={(isChecked: boolean) => {}} text="Other" />
-          </Row>
+      <ScrollView>
+        <View style={addEthnicityStyle.container}>
+          <View>
+            <HeaderBar skip={()=>navigateToRelationshipScreen(loggInUserId)} ></HeaderBar>
+            <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
+            <View style={{ height: 700 }}>
+              <MultipleCheckBoxList
+                data={ethnicityList}
+                onChangeValue={handleSeletedList}
+                onChangeListValue={handleListChange}
+                preferNotTosayflag={ethnicityflag}
+              />
+            </View>
+          </View>
+          <PrimaryButton
+            onPress={updateUserDetails}
+            title="Next"
+            isLoading={loading}
+          />
         </View>
-        <PrimaryButton title="Next" />
-      </View>
+      </ScrollView>
     </ScreenContainer>
   );
 };
 
-export default AddEthnicity;
+export default AddEthnicityScreen;
