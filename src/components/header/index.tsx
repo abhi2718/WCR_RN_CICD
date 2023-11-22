@@ -11,8 +11,8 @@ interface HeaderBarProps {
   skip?: () => void;
   info?: () => void;
   goBack?: () => void;
-  isModalVisible: boolean;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isModalVisible?: boolean;
+  setModalVisible?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const HeaderBar = (props: HeaderBarProps) => {
   const { goBack, skip, info, isModalVisible, setModalVisible } = props;

@@ -37,7 +37,7 @@ export const Button = (props: ButtonProps) => {
 };
 
 export const PrimaryButton = (props: ButtonProps) => {
-  const { title, onPress, btnColor, isLoading } = props;
+  const { title, onPress, btnColor, isLoading, style } = props;
   const _isLoading = isLoading ?? false;
 
   let renderValue = null;
@@ -57,6 +57,7 @@ export const PrimaryButton = (props: ButtonProps) => {
     renderValue = (
       <TouchableOpacity
         style={{
+          ...style,
           ...styles.primaryButton,
           backgroundColor: btnColor ? btnColor : colors.ui.primary,
         }}
