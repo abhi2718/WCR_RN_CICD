@@ -31,6 +31,11 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Onboarding}
+        component={Onboarding}
+      />
       <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
 
       <Stack.Screen
@@ -44,11 +49,7 @@ export const StackNavigator = () => {
         name={ROUTES.Tab}
         component={TabNavigator}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Onboarding}
-        component={Onboarding}
-      />
+
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
 
       <Stack.Screen

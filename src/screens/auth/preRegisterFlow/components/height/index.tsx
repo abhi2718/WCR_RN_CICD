@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { HeightStyle } from './heightStyle';
@@ -8,25 +8,27 @@ import { Picker } from 'react-native-wheel-pick';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import SwitchSelector from 'react-native-switch-selector';
 import { useheightViewModal } from './heightViewModal';
-import { cmValues, feetValues } from '../../../../../utils/constanst';
+import { cmValues, feetValues, options } from '../../../../../utils/constanst';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
 const Height = (props: ScreenParams) => {
-  const { navigateToSexualOrientationScreen,loggInUserId } = useheightViewModal(props);
-
-  const options = [
-    { label: 'Feet', value: 'feet' },
-    { label: 'Cm', value: 'cm' },
-  ];
-
-  const [heightValue, setheightValue] = useState('feet');
-  console.log(heightValue);
+  const {
+    navigateToEthnicityScreen,
+    loggInUserId,
+    heightFormat,
+    handleFormatChange,
+    loading,
+    updateUserDetails,
+    getSelectedHeight,
+    handleValueChange,
+    currentHeight,
+  } = useheightViewModal(props);
 
   return (
     <ScreenContainer>
       <View style={HeightStyle.container}>
         <View>
-          <HeaderBar skip={()=>navigateToSexualOrientationScreen(loggInUserId)}/>
+          <HeaderBar skip={() => navigateToEthnicityScreen(loggInUserId)} />
           <View>
             <View>
               <Text style={HeightStyle.subHeader}>What's your height?</Text>
@@ -36,13 +38,9 @@ const Height = (props: ScreenParams) => {
                 selectTextColor={colors.ui.black}
                 style={HeightStyle.picker}
                 isShowSelectLine={false} // Default is true
-                pickerData={heightValue === 'feet' ? feetValues : cmValues}
-                selectedValue={
-                  heightValue === 'feet' ? feetValues[5] : cmValues[5]
-                }
-                onValueChange={(value: string) => {
-                  console.log(value);
-                }}
+                pickerData={heightFormat === 'feet' ? feetValues : cmValues}
+                selectedValue={currentHeight}
+                onValueChange={handleValueChange}
               />
             </View>
           </View>
@@ -60,10 +58,14 @@ const Height = (props: ScreenParams) => {
               bold={true}
               options={options}
               initial={0}
-              onPress={(value:string) => setheightValue(value)}
+              onPress={(value: string) => handleFormatChange(value)}
             />
           </View>
-          <PrimaryButton title="Next" />
+          <PrimaryButton
+            onPress={updateUserDetails}
+            isLoading={loading}
+            title="Next"
+          />
         </View>
       </View>
     </ScreenContainer>

@@ -45,8 +45,8 @@ export const useProfessionModal = (props: ScreenParams) => {
     setProfessionForm({ ...professionForm, [name]: value });
   };
 
-   const navigateToSexualOrientationScreen = (id: string) => {
-       navigation.navigate(ROUTES.AddEthnicity, { data: id });
+   const navigateToPictureUploadingScreenScreen = (id: string) => {
+       navigation.navigate(ROUTES.Height, { data: id });
      };
 
   const handleSubmit = async () => {
@@ -89,7 +89,7 @@ export const useProfessionModal = (props: ScreenParams) => {
       };
       dispatch(addUser(data));
       setLoading(false);
-      navigateToSexualOrientationScreen(loggInUserId)
+      navigateToPictureUploadingScreenScreen(loggInUserId)
     } catch (error) {}
   };
 

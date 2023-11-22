@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import {  useRef, useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../navigation';
 import { ScreenParams } from '../../../types/services.types/firebase.service';

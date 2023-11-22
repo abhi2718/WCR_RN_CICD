@@ -508,7 +508,7 @@ export const primaryDegree: any = {
 };
 
 export const feetValues = [
-  `4'`,
+  `4'0"`,
   `4'1"`,
   `4'2"`,
   `4'2"`,
@@ -518,7 +518,7 @@ export const feetValues = [
   `4'7"`,
   `4'8"`,
   `4'9"`,
-  `5"`,
+  `5'0"`,
   `5'1"`,
   `5'2"`,
   `5'3"`,
@@ -530,7 +530,23 @@ export const feetValues = [
   `5'9"`,
   `5'10"`,
   `5'11"`,
-  `6'00"`,
+  `6'0"`,
+  `6'1"`,
+  `6'2"`,
+  `6'3"`,
+  `6'4"`,
+  `6'5"`,
+  `6'6"`,
+  `6'7"`,
+  `6'8"`,
+  `6'9"`,
+  `6'10"`,
+  `6'11"`,
+];
+
+export const options = [
+  { label: 'Feet', value: 'feet' },
+  { label: 'Cm', value: 'cm' },
 ];
 
 export const cmValues = [
