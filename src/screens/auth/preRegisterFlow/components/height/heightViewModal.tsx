@@ -1,62 +1,12 @@
-export const heightArray = (props: any) => {
-  const feetValues = [
-    `4'`,
-    `4'1"`,
-    `4'2"`,
-    `4'2"`,
-    `4'4"`,
-    `4'5"`,
-    `4'6"`,
-    `4'7"`,
-    `4'8"`,
-    `4'9"`,
-    `5"`,
-    `5'1"`,
-    `5'2"`,
-    `5'3"`,
-    `5'4"`,
-    `5'5"`,
-    `5'6"`,
-    `5'7"`,
-    `5'8"`,
-    `5'9"`,
-    `5'10"`,
-    `5'11"`,
-    `6'00"`,
-  ];
+import React from 'react';
+import { ScreenParams } from "../../../../../types/services.types/firebase.service";
+import { ROUTES } from '../../../../../navigation';
 
-  const cmValues = [
-    `121`,
-    `124`,
-    `128`,
-    `131`,
-    `134`,
-    `137`,
-    `134`,
-    `140`,
-    `143`,
-    `146`,
-    `152`,
-    `155`,
-    `158`,
-    `161`,
-    `164`,
-    `167`,
-    `170`,
-    `173`,
-    `176`,
-    `179`,
-    `125`,
-    `158`,
-    `188`,
-    `192`,
-    `195`,
-    `198`,
-    `201`,
-    `204`,
-    `207`,
-    `210`,
-    `213`,
-  ];
-  return { feetValues, cmValues };
+export const useheightViewModal = (props: ScreenParams) => {
+  const loggInUserId = props.route?.params?.data || 'No data received';
+  const {navigation} = props;
+  const navigateToSexualOrientationScreen = (id: string) => {
+    navigation.navigate(ROUTES.ProfilePic, { data: id });
+  };
+  return ({navigateToSexualOrientationScreen,loggInUserId});
 };

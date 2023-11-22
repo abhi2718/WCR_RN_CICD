@@ -62,7 +62,7 @@ const Profile = (props: ScreenParams) => {
       <View style={profileStyles.container}>
         <View style={profileStyles.innerView}>
           <View style={{ flex: 1 }}>
-            <HeaderBar showModal={openModal}></HeaderBar>
+            <HeaderBar info={openModal}></HeaderBar>
             <Text style={profileStyles.subHeader}>
               Let's get started!{`\n`}Tell us a little about you.
             </Text>
