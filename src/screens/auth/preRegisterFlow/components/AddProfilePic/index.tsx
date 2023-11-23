@@ -79,7 +79,7 @@ const AddProfilePic = (props: AvatarProps) => {
 
   const [selectedUri, setSelectedUri] = useState(null);
 
-  const toggleImageModal = (uri: any) => {
+  const toggleImageModal = (uri: string) => {
     setSelectedUri(uri);
     setImageModal(!imageModal);
   };
