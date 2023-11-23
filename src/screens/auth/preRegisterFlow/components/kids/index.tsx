@@ -40,7 +40,7 @@ const Kids = (props: ScreenParams) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Do you have kids?</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {kids.map((option, index) => (
                   <Chip
                     key={index}
@@ -65,7 +65,7 @@ const Kids = (props: ScreenParams) => {
 
             <View>
               <Text style={ChipStyle.subHeader}>Family Plans</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {familyPlan.map((option, index) => (
                   <Chip
                     key={index}
@@ -90,7 +90,7 @@ const Kids = (props: ScreenParams) => {
 
             <View>
               <Text style={ChipStyle.subHeader}>Covid Vaccine Status</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {covidVaccineStatus.map((option, index) => (
                   <Chip
                     key={index}
@@ -115,7 +115,7 @@ const Kids = (props: ScreenParams) => {
 
             <View>
               <Text style={ChipStyle.subHeader}>Dietary preference</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {diet.map((option, index) => (
                   <Chip
                     key={index}
