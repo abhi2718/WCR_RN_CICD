@@ -81,7 +81,7 @@ export const useheightViewModal = (props: ScreenParams) => {
   }
 
   const navigateToEthnicityScreen = (id: string) => {
-    navigation.navigate(ROUTES.ProfilePic, { data: id });
+    navigation.navigate(ROUTES.AddEthnicity, { data: id });
   };
 
   const updateUserDetails = async () => {

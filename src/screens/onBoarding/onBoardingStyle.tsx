@@ -5,6 +5,14 @@ import { fontWeights, fonts } from '../../infrastructure/theme/fonts';
 import { dimensions } from '../../components/tools';
 
 export const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: colors.ui.white,
+  },
+  background: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch' or 'contain'
+  },
   container: {
     flex: 1,
     width: '100%',
@@ -23,6 +31,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
     alignItems: 'center',
+
+    paddingHorizontal: 20,
   },
   heading: {
     color: colors.ui.text,
@@ -43,5 +53,11 @@ export const styles = StyleSheet.create({
     height: sizes[1],
     width: '100%',
     overflow: 'visible',
+  },
+  primaryBtn: {
+    marginHorizontal: 200,
+    padding: 250,
+    fontSize: 25,
+    marginBottom: 40,
   },
 });
