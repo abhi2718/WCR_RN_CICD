@@ -22,75 +22,42 @@ import { pickPhotoFromGallary } from '../../../../../utils/uploads';
 import { useAddProfilePicViewModal } from './addProfilePic.ViewModal';
 import { ProfilePicInfoModal } from '../../../../../components/profilePicInfoModal';
 
-interface AvatarProps extends ImageProps {
+export interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
   navigation: any;
   route: any;
-
 }
 
-const AddProfilePic = (props: AvatarProps) => {
- const {closeModal, openModal, isPicUploadInfoModalVisible} = useAddProfilePicViewModal(props)
-  const [uri, setUri] = React.useState(props.source?.uri || undefined);
-
-  const pickProfilePicture = async () => {
-    const image = await pickPhotoFromGallary(null, true);
-    setUri(image.path);
-    props.onChange?.(image);
-    console.log(image, 'profile picture');
-  };
-  const removeProfilePic = () => {
-    setUri(null);
-  };
-
-  const [uris, setUris] = useState(Array(2).fill(null));
-
-  const pickPhoto = async (index: number) => {
-    const image = await pickPhotoFromGallary(null, false);
-    const updatedUris = [...uris];
-    updatedUris[index] = image.path;
-    setUris(updatedUris);
-    // props.onChange?.(updatedUris);
-  };
-
-  const [urisTwo, seturisTwo] = useState(Array(3).fill(null));
-
-  const pickPhotoTwo = async (index: number) => {
-    const image = await pickPhotoFromGallary(null, false);
-    const updatedUris = [...urisTwo];
-    updatedUris[index] = image.path;
-    seturisTwo(updatedUris);
-    // props.onChange?.(updatedUris);
-  };
-
-  const removePic = (index: number) => {
-    const updatedUris = [...uris];
-    updatedUris[index] = null;
-    setUris(updatedUris);
-  };
-  const removePicTwo = (index: number) => {
-    const updatedUris = [...urisTwo];
-    updatedUris[index] = null;
-    seturisTwo(updatedUris);
-  };
-
-  // ---------Modal --------------------------------
-  const [imageModal, setImageModal] = useState(false);
-
-  const [selectedUri, setSelectedUri] = useState(null);
-
-  const toggleImageModal = (uri: string) => {
-    setSelectedUri(uri);
-    setImageModal(!imageModal);
-  };
+const AddProfilePicScreen = (props: AvatarProps) => {
+  const {
+    closeModal,
+    openModal,
+    isPicUploadInfoModalVisible,
+    pickProfilePicture,
+    profilePicUri,
+    sidePicUri,
+    setProfilePicUri,
+    removeProfilePic,
+    sidePickPhoto,
+    toggleImageModal,
+    selectedUri,
+    bottomPicPhoto,
+    removePicTwo,
+    removePic,
+    bottomUris,
+    imageModal,
+    setProfilePicFromModel,
+    sidePicConstant,
+    bottomPicConstant,
+  } = useAddProfilePicViewModal(props);
 
   return (
     <>
       <ScreenContainer>
-      <ProfilePicInfoModal
-        isVisible={isPicUploadInfoModalVisible}
-        onClose={closeModal}
-      ></ProfilePicInfoModal>
+        <ProfilePicInfoModal
+          isVisible={isPicUploadInfoModalVisible}
+          onClose={closeModal}
+        ></ProfilePicInfoModal>
         <View style={addPicture.container}>
           <View>
             <HeaderBar info={openModal}></HeaderBar>
@@ -98,13 +65,15 @@ const AddProfilePic = (props: AvatarProps) => {
             <Text style={addPicture.text}>(Add at least 2 photos)</Text>
             <View>
               <Row justifyContent="space-between" style={addPicture.row}>
-                {uri ? (
+                {profilePicUri ? (
                   <View>
                     <TouchableOpacity onPress={pickProfilePicture}>
                       <Image
                         style={addPicture.profilePic}
                         {...props}
-                        source={uri ? { uri } : props.source}
+                        source={
+                          profilePicUri ? { uri: profilePicUri } : props.source
+                        }
                       />
                       <Text style={addPicture.profilePicText}>
                         Profile Photo
@@ -129,17 +98,19 @@ const AddProfilePic = (props: AvatarProps) => {
                 )}
 
                 <Column style={addPicture.columnOne}>
-                  {uris.map((uri, index) => (
+                  {sidePicUri?.map((sidePic, index) => (
                     <View key={index}>
-                      {uri ? (
+                      {sidePic ? (
                         <View>
                           <TouchableOpacity
-                            onPress={() => toggleImageModal(uri)}
+                            onPress={() =>
+                              toggleImageModal(sidePic, sidePicConstant, index)
+                            }
                           >
                             <Image
                               style={addPicture.photo}
                               {...props}
-                              source={{ uri }}
+                              source={{ uri: sidePic }}
                             />
                           </TouchableOpacity>
                           <TouchableOpacity onPress={() => removePic(index)}>
@@ -150,7 +121,7 @@ const AddProfilePic = (props: AvatarProps) => {
                           </TouchableOpacity>
                         </View>
                       ) : (
-                        <TouchableOpacity onPress={() => pickPhoto(index)}>
+                        <TouchableOpacity onPress={() => sidePickPhoto(index)}>
                           <View style={addPicture.imageView}>
                             <Image
                               style={addPicture.imageIcon}
@@ -165,15 +136,23 @@ const AddProfilePic = (props: AvatarProps) => {
               </Row>
 
               <Row justifyContent="space-between" style={addPicture.row}>
-                {urisTwo.map((uri, index) => (
+                {bottomUris.map((bottomUri, index) => (
                   <View key={index}>
-                    {uri ? (
+                    {bottomUri ? (
                       <View>
-                        <TouchableOpacity onPress={() => toggleImageModal(uri)}>
+                        <TouchableOpacity
+                          onPress={() =>
+                            toggleImageModal(
+                              bottomUri,
+                              bottomPicConstant,
+                              index,
+                            )
+                          }
+                        >
                           <Image
                             style={addPicture.photo}
                             {...props}
-                            source={{ uri }}
+                            source={{ uri: bottomUri }}
                           />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => removePicTwo(index)}>
@@ -184,7 +163,7 @@ const AddProfilePic = (props: AvatarProps) => {
                         </TouchableOpacity>
                       </View>
                     ) : (
-                      <TouchableOpacity onPress={() => pickPhotoTwo(index)}>
+                      <TouchableOpacity onPress={() => bottomPicPhoto(index)}>
                         <View style={addPicture.imageView}>
                           <Image
                             style={addPicture.imageIcon}
@@ -207,7 +186,7 @@ const AddProfilePic = (props: AvatarProps) => {
           animationType="slide"
           transparent={true}
           visible={imageModal}
-          onRequestClose={toggleImageModal}
+          onRequestClose={() => toggleImageModal}
         >
           <View style={modalStyles.modalContent}>
             <Row
@@ -215,7 +194,7 @@ const AddProfilePic = (props: AvatarProps) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Pressable onPress={toggleImageModal}>
+              <Pressable onPress={() => toggleImageModal}>
                 <Image
                   style={modalStyles.arrow}
                   source={require('../../../../../assets/images/icons/arrow.png')}
@@ -227,9 +206,10 @@ const AddProfilePic = (props: AvatarProps) => {
             <View style={modalStyles.content}>
               <Image
                 style={modalStyles.picture}
-                source={{ uri: selectedUri }}
+                source={{ uri: selectedUri?.path }}
               />
               <PrimaryButton
+                onPress={() => setProfilePicFromModel(selectedUri!)}
                 style={modalStyles.button}
                 title="Set as profile"
               />
@@ -241,4 +221,4 @@ const AddProfilePic = (props: AvatarProps) => {
   );
 };
 
-export default AddProfilePic;
+export default AddProfilePicScreen;

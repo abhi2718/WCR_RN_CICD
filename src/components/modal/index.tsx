@@ -7,7 +7,7 @@ import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { fontSizes } from '../../infrastructure/theme/fonts';
 
-export const ModalComponent = (props: ModalProps) => {
+export const WelcomeModalComponent = (props: ModalProps) => {
   const { isVisible, onClose } = props;
   return (
     <Modal
