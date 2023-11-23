@@ -24,7 +24,7 @@ const RelationShipScreen = (props: ScreenParams) => {
   return (
     <ScreenContainer>
       <View style={LookingForStyle.container}>
-        <View style={{ flex: 1 }}>
+        <View style={LookingForStyle.flex}>
           <HeaderBar
             skip={() => navigateToMaritalStatusScreen(loggInUserId)}
           ></HeaderBar>
@@ -32,7 +32,7 @@ const RelationShipScreen = (props: ScreenParams) => {
             What are you looking for?
           </Text>
 
-          <View style={{ flex: 1 }}>
+          <View style={LookingForStyle.flex}>
             <MultipleCheckBoxList
               data={relationshipList}
               onChangeValue={handleSeletedList}
