@@ -40,7 +40,6 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
       setpreferNotToSayflag(preferNotToSay);
       return;
     }
-    console.log('ethnicityValue DATA :: ', ethnicityValue);
     setpreferNotToSayflag(ethnicityValue);
     setSelectedRelationship(stringData);
   };

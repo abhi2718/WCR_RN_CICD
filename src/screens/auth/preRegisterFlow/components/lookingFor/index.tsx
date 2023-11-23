@@ -23,27 +23,30 @@ const RelationShipScreen = (props: ScreenParams) => {
 
   return (
     <ScreenContainer>
-      <ScrollView>
-        <View style={LookingForStyle.container}>
-        <HeaderBar skip={()=>navigateToMaritalStatusScreen(loggInUserId)}></HeaderBar>
-          <View>
-            <Text style={LookingForStyle.subHeader}>
-              What are you looking for?
-            </Text>
+      <View style={LookingForStyle.container}>
+        <View style={LookingForStyle.flex}>
+          <HeaderBar
+            skip={() => navigateToMaritalStatusScreen(loggInUserId)}
+          ></HeaderBar>
+          <Text style={LookingForStyle.subHeader}>
+            What are you looking for?
+          </Text>
 
-            <View style={{ height: 700 }}>
-              <MultipleCheckBoxList
-                data={relationshipList}
-                onChangeValue={handleSeletedList}
-                onChangeListValue={handleListChange}
-                preferNotTosayflag={preferNotToSayflag}
-              />
-            </View>
+          <View style={LookingForStyle.flex}>
+            <MultipleCheckBoxList
+              data={relationshipList}
+              onChangeValue={handleSeletedList}
+              onChangeListValue={handleListChange}
+              preferNotTosayflag={preferNotToSayflag}
+            />
           </View>
-          <PrimaryButton title="Next" isLoading={loading}
-           onPress={updateUserDetails} />
+          <PrimaryButton
+            title="Next"
+            isLoading={loading}
+            onPress={updateUserDetails}
+          />
         </View>
-      </ScrollView>
+      </View>
     </ScreenContainer>
   );
 };

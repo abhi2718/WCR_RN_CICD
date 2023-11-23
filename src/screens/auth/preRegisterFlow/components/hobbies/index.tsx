@@ -24,7 +24,7 @@ const Hobbies = (props: ScreenParams) => {
               <Text style={ChipStyle.subHeader}>
                 What are your interests and hobbies?
               </Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {hobbies.map((option, index) => (
                   <Chip
                     key={index}

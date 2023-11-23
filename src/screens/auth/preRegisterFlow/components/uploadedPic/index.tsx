@@ -8,23 +8,19 @@ import {
 import { uploadedPic } from './uploadedPicStyle';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { PrimaryButton } from '../../../../../components/button';
+import { ProfilePicInfoModal } from '../../../../../components/profilePicInfoModal';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { useUploadPicViewModal } from './uploadPic.viewModal';
+import { HeaderBar } from '../../../../../components/header';
 
-const UploadedPic = () => {
+const UploadedPic = (props: ScreenParams) => {
+  const { isPicUploadInfoModalVisible, closeModal, openModal } =
+    useUploadPicViewModal(props);
   return (
     <ScreenContainer>
       <View style={uploadedPic.container}>
         <View>
-          <Row justifyContent="space-between" alignItems="center">
-            <Image
-              style={uploadedPic.arrow}
-              source={require('../../../../../assets/images/icons/arrow.png')}
-            />
-            <Image
-              style={uploadedPic.logo}
-              source={require('../../../../../assets/images/logo.png')}
-            />
-            <View />
-          </Row>
+          <HeaderBar info={openModal}></HeaderBar>
           <Text style={uploadedPic.subHeader}>Profile photo Uploaded</Text>
           <View style={uploadedPic.imageContainer}>
             <Image

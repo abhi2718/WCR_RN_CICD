@@ -19,14 +19,18 @@ import { PrimaryButton } from '../../../../../components/button';
 import { HeaderBar } from '../../../../../components/header';
 import { ImageOrVideo } from 'react-native-image-crop-picker';
 import { pickPhotoFromGallary } from '../../../../../utils/uploads';
+import { useAddProfilePicViewModal } from './addProfilePic.ViewModal';
+import { ProfilePicInfoModal } from '../../../../../components/profilePicInfoModal';
 
 interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
+  navigation: any;
+  route: any;
+
 }
 
 const AddProfilePic = (props: AvatarProps) => {
-  const [isModalVisible, setModalVisible] = useState(false);
-
+ const {closeModal, openModal, isPicUploadInfoModalVisible} = useAddProfilePicViewModal(props)
   const [uri, setUri] = React.useState(props.source?.uri || undefined);
 
   const pickProfilePicture = async () => {
@@ -41,7 +45,7 @@ const AddProfilePic = (props: AvatarProps) => {
 
   const [uris, setUris] = useState(Array(2).fill(null));
 
-  const pickPhoto = async (index) => {
+  const pickPhoto = async (index: number) => {
     const image = await pickPhotoFromGallary(null, false);
     const updatedUris = [...uris];
     updatedUris[index] = image.path;
@@ -51,7 +55,7 @@ const AddProfilePic = (props: AvatarProps) => {
 
   const [urisTwo, seturisTwo] = useState(Array(3).fill(null));
 
-  const pickPhotoTwo = async (index) => {
+  const pickPhotoTwo = async (index: number) => {
     const image = await pickPhotoFromGallary(null, false);
     const updatedUris = [...urisTwo];
     updatedUris[index] = image.path;
@@ -59,12 +63,12 @@ const AddProfilePic = (props: AvatarProps) => {
     // props.onChange?.(updatedUris);
   };
 
-  const removePic = (index) => {
+  const removePic = (index: number) => {
     const updatedUris = [...uris];
     updatedUris[index] = null;
     setUris(updatedUris);
   };
-  const removePicTwo = (index) => {
+  const removePicTwo = (index: number) => {
     const updatedUris = [...urisTwo];
     updatedUris[index] = null;
     seturisTwo(updatedUris);
@@ -75,7 +79,7 @@ const AddProfilePic = (props: AvatarProps) => {
 
   const [selectedUri, setSelectedUri] = useState(null);
 
-  const toggleImageModal = (uri) => {
+  const toggleImageModal = (uri: string) => {
     setSelectedUri(uri);
     setImageModal(!imageModal);
   };
@@ -83,13 +87,13 @@ const AddProfilePic = (props: AvatarProps) => {
   return (
     <>
       <ScreenContainer>
+      <ProfilePicInfoModal
+        isVisible={isPicUploadInfoModalVisible}
+        onClose={closeModal}
+      ></ProfilePicInfoModal>
         <View style={addPicture.container}>
           <View>
-            <HeaderBar
-              info={() => console.log('Info clicked')}
-              isModalVisible={isModalVisible}
-              setModalVisible={setModalVisible}
-            />
+            <HeaderBar info={openModal}></HeaderBar>
             <Text style={addPicture.subHeader}>Show off your best side </Text>
             <Text style={addPicture.text}>(Add at least 2 photos)</Text>
             <View>

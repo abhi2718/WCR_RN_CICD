@@ -11,20 +11,9 @@ interface HeaderBarProps {
   skip?: () => void;
   info?: () => void;
   goBack?: () => void;
-  isModalVisible: boolean;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const HeaderBar = (props: HeaderBarProps) => {
-  const { goBack, skip, info, isModalVisible, setModalVisible } = props;
-  const handleInfoPress = () => {
-    // Show the modal when info is pressed
-    setModalVisible(true);
-
-    // Call the info function if it is provided
-    if (info) {
-      info();
-    }
-  };
+  const { goBack, skip, info } = props;
 
   const navigation = useNavigation();
   const _goBack = goBack ? goBack : navigation.goBack;
@@ -44,7 +33,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
           <Text style={headerStyle.skipBtn}>Skip</Text>
         </Pressable>
       ) : props.info ? (
-        <Pressable onPress={handleInfoPress}>
+        <Pressable onPress={info}>
           <Image
             style={headerStyle.infoIcon}
             source={require('../../assets/images/icons/infoIcon.png')}
@@ -55,96 +44,9 @@ export const HeaderBar = (props: HeaderBarProps) => {
       )}
 
       {/* Profile pic info Modal */}
-
-      <Modal animationType="slide" transparent={true} visible={isModalVisible}>
-        <View style={modalStyle.centeredView}>
-          <View style={modalStyle.modalView}>
-            <View>
-              <Text style={modalStyle.heading}>Profile</Text>
-              <Row style={modalStyle.row}>
-                <Image
-                  style={modalStyle.icon}
-                  source={require('../../assets/images/icons/blackCheck.png')}
-                />
-                <Text style={modalStyle.text}>
-                  Your profile picture shows your face {`\n`} clearly - no
-                  shades, masks, or obstructions
-                </Text>
-              </Row>
-            </View>
-            <View>
-              <Text style={modalStyle.footerText}>
-                Now, let's find your perfect match!
-              </Text>
-              <Row>
-                <PrimaryButton
-                  onPress={() => setModalVisible(false)}
-                  title="Continue"
-                />
-              </Row>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </Row>
   );
 };
-
-const modalStyle = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.ui.opacity,
-  },
-  modalView: {
-    justifyContent: 'space-between',
-    margin: sizes[5],
-    backgroundColor: 'white',
-    borderRadius: sizes[4],
-    paddingTop: sizes[5],
-    paddingBottom: sizes[4],
-    paddingHorizontal: sizes[3],
-    shadowColor: colors.ui.black,
-    height: dimensions.height - 300,
-
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: sizes[0],
-    elevation: sizes[0],
-  },
-  heading: {
-    fontWeight: '600',
-    fontSize: sizes[7],
-    color: colors.ui.text,
-    marginBottom: sizes[4],
-  },
-
-  row: {
-    gap: sizes[1],
-    width: '100%',
-    marginVertical: sizes[1],
-  },
-  text: {
-    color: colors.ui.text,
-    fontSize: sizes[3],
-  },
-  icon: {
-    width: sizes[5],
-    height: sizes[5],
-    marginRight: sizes[1],
-  },
-  footerText: {
-    textAlign: 'center',
-    fontWeight: '600',
-    fontSize: sizes[4],
-    marginVertical: sizes[3],
-    color: colors.ui.black,
-  },
-});
 
 export const headerStyle = StyleSheet.create({
   arrow: {

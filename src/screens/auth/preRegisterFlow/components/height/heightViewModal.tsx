@@ -1,62 +1,124 @@
-export const heightArray = (props: any) => {
-  const feetValues = [
-    `4'`,
-    `4'1"`,
-    `4'2"`,
-    `4'2"`,
-    `4'4"`,
-    `4'5"`,
-    `4'6"`,
-    `4'7"`,
-    `4'8"`,
-    `4'9"`,
-    `5"`,
-    `5'1"`,
-    `5'2"`,
-    `5'3"`,
-    `5'4"`,
-    `5'5"`,
-    `5'6"`,
-    `5'7"`,
-    `5'8"`,
-    `5'9"`,
-    `5'10"`,
-    `5'11"`,
-    `6'00"`,
-  ];
+import React, { useEffect, useState } from 'react';
+import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { ROUTES } from '../../../../../navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
+import { addUser } from '../../../../../store/reducers/user.reducer';
+import { cmValues, feetValues } from '../../../../../utils/constanst';
+interface Measurement {
+  feet: number;
+  inch: number;
+  heightInCm?: number;
+}
+export const useheightViewModal = (props: ScreenParams) => {
+  const loggInUserId = props.route?.params?.data || 'No data received';
+  const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
-  const cmValues = [
-    `121`,
-    `124`,
-    `128`,
-    `131`,
-    `134`,
-    `137`,
-    `134`,
-    `140`,
-    `143`,
-    `146`,
-    `152`,
-    `155`,
-    `158`,
-    `161`,
-    `164`,
-    `167`,
-    `170`,
-    `173`,
-    `176`,
-    `179`,
-    `125`,
-    `158`,
-    `188`,
-    `192`,
-    `195`,
-    `198`,
-    `201`,
-    `204`,
-    `207`,
-    `210`,
-    `213`,
-  ];
-  return { feetValues, cmValues };
+  const { user } = useSelector((state: any) => state.userState);
+  const savedHeight: Measurement = user.height;
+  const dispatch = useDispatch();
+  const [heightFormat, setheightFormat] = useState('feet');
+  const [heightValue, setheightValue] = useState<Measurement>(
+    savedHeight ?? null,
+  );
+  const [loading, setLoading] = useState(false);
+  const { navigation } = props;
+
+  const getSelectedHeight = (): string => {
+    if (heightValue?.feet || heightValue?.inch) {
+      return heightFormat === 'feet'
+        ? `${heightValue?.feet}'${heightValue?.inch}"`
+        : `${Math.floor(savedHeight?.heightInCm!)}`;
+    }
+    return heightFormat === 'feet' ? feetValues[5] : cmValues[5];
+  };
+
+  const [currentHeight, setCurrentHeight] = useState(getSelectedHeight());
+
+  const handleFormatChange = (value: string) => {
+    setheightFormat(value);
+  };
+  const handleValueChange = (value: string) => {
+    setCurrentHeight(value);
+    if (heightFormat === 'feet') {
+      const height = parseMeasurement(value);
+      setheightValue(height!);
+    } else {
+      const height = convertCmToFeetAndInches(Number(value));
+      setheightValue(height!);
+    }
+  };
+
+  function parseMeasurement(measurementString: string): Measurement | null {
+    const regex = /^(\d+)\'(\d+)\"$/;
+    const match = measurementString.match(regex);
+
+    if (match) {
+      const feet = parseInt(match[1], 10);
+      const inch = Math.floor(parseInt(match[2], 10));
+
+      return { feet, inch };
+    } else {
+      console.error(
+        "Invalid measurement format. Please use the format like '4'1\"'",
+      );
+      return null;
+    }
+  }
+
+  function convertCmToFeetAndInches(cm: number): Measurement {
+    // 1 inch is approximately 2.54 cm
+    const inches = cm / 2.54;
+
+    // 1 foot is 12 inches
+    const feet = Math.floor(inches / 12);
+    const remainingInches = Math.floor(inches % 12);
+
+    return {
+      feet: feet,
+      inch: remainingInches,
+    };
+  }
+
+  const navigateToEthnicityScreen = (id: string) => {
+    navigation.navigate(ROUTES.AddEthnicity, { data: id });
+  };
+
+  const updateUserDetails = async () => {
+    try {
+      setLoading(true);
+      const heightData = {
+        height: {
+          feet: heightValue?.feet,
+          inch: heightValue?.inch,
+        },
+      };
+      const user = await updateUserDetailsRepository.updateUserDetails(
+        '653a9ad26b7a2255d03bf4fd',
+        {
+          update: heightData,
+        },
+      );
+      const data = {
+        user: user,
+      };
+      dispatch(addUser(data));
+      setLoading(false);
+
+      navigateToEthnicityScreen(loggInUserId);
+    } catch (err: any) {
+      setLoading(false);
+    }
+  };
+  return {
+    navigateToEthnicityScreen,
+    loggInUserId,
+    currentHeight,
+    heightFormat,
+    handleFormatChange,
+    handleValueChange,
+    updateUserDetails,
+    loading,
+    getSelectedHeight,
+  };
 };
