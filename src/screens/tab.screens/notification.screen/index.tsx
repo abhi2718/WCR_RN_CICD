@@ -13,7 +13,8 @@ export const NotificationScreen = () => {
     notificationLoading,
     markAsRead,
     handleEndReached,
-    flatListRef
+    flatListRef,
+    htmlTextConvertPlainText
   } = useViewModal();
   if (notificationLoading) {
     return (
@@ -40,6 +41,7 @@ export const NotificationScreen = () => {
             item={item}
             onDelete={onDeleteItem}
             markAsRead={markAsRead}
+            htmlTextConvertPlainText={htmlTextConvertPlainText}
           />
         )}
         onEndReached={() => {

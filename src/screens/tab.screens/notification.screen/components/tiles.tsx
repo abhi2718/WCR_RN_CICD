@@ -18,12 +18,14 @@ interface SwipeableListItemProps {
   item: NotificationType;
   onDelete: (key: string) => void;
   markAsRead: (id: string) => Promise<void>;
+  htmlTextConvertPlainText: (data:string)=> string;
 }
 
 export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
   item,
   onDelete,
-  markAsRead
+  markAsRead,
+  htmlTextConvertPlainText
 }) => {
   const swipeableRef = useRef<Swipeable>(null);
   const closeSwipeable = () => {};
@@ -70,10 +72,7 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
             />
             <Column justifyContent="space-between">
               <View style={{backgroundColor:item.isRead?"#fff":"red"}}>
-              <RenderHtml
-                contentWidth={200}
-                source={{ html: `${item.message}` }}
-              />
+                <Text>{htmlTextConvertPlainText(item.message) }</Text>
               </View>
               <Text>{unixToDate(item.createdAt)}</Text>
             </Column>

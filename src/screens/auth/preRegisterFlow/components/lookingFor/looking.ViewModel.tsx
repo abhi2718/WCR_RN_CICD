@@ -34,13 +34,11 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
   ) => {
     const stringData = data.map((item) => item.text);
     if (stringData?.includes(preferNotToSay)) {
-      console.log('trueee ::');
       setRelationshipList(makeFalseDefaultValue(relationship));
       setSelectedRelationship([preferNotToSay]);
       setpreferNotToSayflag(preferNotToSay);
       return;
     }
-    console.log('ethnicityValue DATA :: ', ethnicityValue);
     setpreferNotToSayflag(ethnicityValue);
     setSelectedRelationship(stringData);
   };

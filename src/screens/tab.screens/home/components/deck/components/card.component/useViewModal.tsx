@@ -1,13 +1,15 @@
+import { useContext } from 'react';
 import Share from 'react-native-share';
 import { useSelector } from 'react-redux';
+import { LikeContext } from '../../../../../../../contexts/likes.context';
 import { HomeDeckRepository } from '../../../../../../../repository/homeDeck.repo';
 import { AppUrl } from '../../../../../../../utils/appUrl';
 
 export const useViewModal = (item: any, cardRef: any) => {
   const homeDeckRepository = new HomeDeckRepository();
   const { user } = useSelector(({ userState }) => userState);
+  const { fetchAll} = useContext(LikeContext);
   const { profilePicture, first, genderPronoun, designation, state } = item;
-
   const handleShare = () => {
     try {
       const shareOptions = {
@@ -18,38 +20,14 @@ export const useViewModal = (item: any, cardRef: any) => {
       Share.open(shareOptions);
     } catch (error) {}
   };
-  const createPayLoafForUserAction = (action: string) => {
-    return {
-      actionData: {
-        userId: user._id,
-        actedOn: item._id,
-        action,
-        isMatched: false,
-      },
-    };
-  };
-  const handleLike = async () => {
-    try {
-      const payLoad = createPayLoafForUserAction('Like');
-      const data = await homeDeckRepository.userReactin(payLoad);
-    } catch (error) {}
-  };
-  const handleDisLike = async () => {
-    try {
-      const payLoad = createPayLoafForUserAction('Dislike');
-      const data = await homeDeckRepository.userReactin(payLoad);
-    } catch (error) {}
-  };
   const _handleLike = () => {
     if (cardRef) {
       cardRef?.current.swipeRight();
-      handleLike();
     }
   };
   const _handleDisLike = () => {
     if (cardRef) {
       cardRef?.current.swipeLeft();
-      handleDisLike();
     }
   };
   const addFavourite = async () => {
@@ -60,8 +38,9 @@ export const useViewModal = (item: any, cardRef: any) => {
       },
     };
     try {
-      cardRef?.current.swipeRight();
+      cardRef?.current.swipeBottom();
       await homeDeckRepository.addFavourite(payLoad);
+      fetchAll();
     } catch (error) {}
   };
   const handleBlockUser = async () => {
@@ -71,13 +50,11 @@ export const useViewModal = (item: any, cardRef: any) => {
           blockedIds: [item._id.toString()],
         },
       };
-     
       if (cardRef) {
         cardRef?.current.swipeLeft();
          await homeDeckRepository.blockUser(payLoad);
       }
     } catch (error) {
-      console.log(error)
     }
   };
   return {
