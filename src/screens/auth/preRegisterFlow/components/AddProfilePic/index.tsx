@@ -18,7 +18,6 @@ import { addPicture, modalStyles } from './AddProfilePicStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { HeaderBar } from '../../../../../components/header';
 import { ImageOrVideo } from 'react-native-image-crop-picker';
-import { pickPhotoFromGallary } from '../../../../../utils/uploads';
 import { useAddProfilePicViewModal } from './addProfilePic.ViewModal';
 import { ProfilePicInfoModal } from '../../../../../components/profilePicInfoModal';
 
@@ -30,13 +29,13 @@ export interface AvatarProps extends ImageProps {
 
 const AddProfilePicScreen = (props: AvatarProps) => {
   const {
+    loading,
     closeModal,
     openModal,
     isPicUploadInfoModalVisible,
     pickProfilePicture,
     profilePicUri,
     sidePicUri,
-    setProfilePicUri,
     removeProfilePic,
     sidePickPhoto,
     toggleImageModal,
@@ -48,6 +47,7 @@ const AddProfilePicScreen = (props: AvatarProps) => {
     imageModal,
     setProfilePicFromModel,
     sidePicConstant,
+    uploadImage,
     bottomPicConstant,
   } = useAddProfilePicViewModal(props);
 
@@ -72,7 +72,7 @@ const AddProfilePicScreen = (props: AvatarProps) => {
                         style={addPicture.profilePic}
                         {...props}
                         source={
-                          profilePicUri ? { uri: profilePicUri } : props.source
+                          profilePicUri ? { uri: profilePicUri.path } : props.source
                         }
                       />
                       <Text style={addPicture.profilePicText}>
@@ -104,13 +104,13 @@ const AddProfilePicScreen = (props: AvatarProps) => {
                         <View>
                           <TouchableOpacity
                             onPress={() =>
-                              toggleImageModal(sidePic, sidePicConstant, index)
+                              toggleImageModal(sidePic.path, sidePicConstant, index)
                             }
                           >
                             <Image
                               style={addPicture.photo}
                               {...props}
-                              source={{ uri: sidePic }}
+                              source={{ uri: sidePic.path }}
                             />
                           </TouchableOpacity>
                           <TouchableOpacity onPress={() => removePic(index)}>
@@ -136,14 +136,14 @@ const AddProfilePicScreen = (props: AvatarProps) => {
               </Row>
 
               <Row justifyContent="space-between" style={addPicture.row}>
-                {bottomUris.map((bottomUri, index) => (
+                {bottomUris?.map((bottomUri, index) => (
                   <View key={index}>
                     {bottomUri ? (
                       <View>
                         <TouchableOpacity
                           onPress={() =>
                             toggleImageModal(
-                              bottomUri,
+                              bottomUri.path,
                               bottomPicConstant,
                               index,
                             )
@@ -152,7 +152,7 @@ const AddProfilePicScreen = (props: AvatarProps) => {
                           <Image
                             style={addPicture.photo}
                             {...props}
-                            source={{ uri: bottomUri }}
+                            source={{ uri: bottomUri.path }}
                           />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => removePicTwo(index)}>
@@ -177,7 +177,11 @@ const AddProfilePicScreen = (props: AvatarProps) => {
               </Row>
             </View>
           </View>
-          <PrimaryButton title="Next" />
+          <PrimaryButton
+            onPress={() => uploadImage()}
+            title="Next"
+            isLoading={loading}
+          />
         </View>
       </ScreenContainer>
 
