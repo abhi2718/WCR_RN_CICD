@@ -1,8 +1,10 @@
 import { AppUrl } from '../../utils/appUrl';
 import { ApiService } from '../../data/network/apiService';
+import { CometChatApiService } from '../../data/network/cometChatApiService';
 
 export class LikeRepository {
   apiService = new ApiService();
+  cometChatApiService = new CometChatApiService();
 
   async getLikesReceived() {
     const url = `${AppUrl.userReactionEndPoint}/LikedReceived`;
@@ -27,5 +29,19 @@ export class LikeRepository {
   async getAllMatched() {
     const url = `${AppUrl.matchEndPoint}`;
     return this.apiService.getGetApiResponse(url);
+  }
+  async addFriend(uid: string) {
+    //const url = `${AppUrl.addFriendEndPoint}${uid}/friends`;
+    // return this.apiService.getGetApiResponse(url);
+  }
+  async getFriends(
+    userId: string,
+    conversationType: string = 'user',
+    herder?: any,
+  ) {
+    const url = `${AppUrl.comentChatFriendListUrl}?conversationType=${conversationType}&perPage=100&page=1`;
+    return this.cometChatApiService.getGetApiResponse(url, {
+      onBehalfOf: userId,
+    });
   }
 }

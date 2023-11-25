@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, {
   useCallback,
   useContext,
@@ -6,14 +7,18 @@ import React, {
   useState,
 } from 'react';
 import { useSelector } from 'react-redux';
+import { FriendContext } from '../../../contexts/friends.context';
 import { LikeContext } from '../../../contexts/likes.context';
+import { ROUTES } from '../../../navigation';
 import { HomeDeckRepository } from '../../../repository/homeDeck.repo';
 import { LikeRepository } from '../../../repository/like.repo';
 
 export const useViewModal = () => {
-  const { loading, data, setData,fetchAll } = useContext(LikeContext);
+  const { loading, data, setData, fetchAll } = useContext(LikeContext);
   const { user } = useSelector(({ userState }) => userState);
+  const { friends } = useContext(FriendContext);
   const likeRepository = new LikeRepository();
+  const navigation = useNavigation();
   const homeDeckRepository = new HomeDeckRepository();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [seeAllState, setSeeAllState] = useState<{
@@ -61,8 +66,8 @@ export const useViewModal = () => {
       handleDisLike(id);
     } catch (error) {}
   };
-  const toggleModal = () => {
-    setModalVisible((oldValue) => !oldValue);
+  const toggleModal = (state?: boolean) => {
+    setModalVisible((oldValue) => (state ? state : !oldValue));
   };
   const handleSetSeeAllState = (state: number) => {
     toggleModal();
@@ -76,13 +81,19 @@ export const useViewModal = () => {
         return setSeeAllState({ title: 'Liked', state: 1 });
       case 2:
         return setSeeAllState({ title: 'Saved', state: 2 });
-        case 3:
-          return setSeeAllState({ title: 'Match', state: 3 });
+      case 3:
+        return setSeeAllState({ title: 'Match', state: 3 });
     }
+  };
+  const startChat = (user: { senderId: string; name: string }) => {
+    navigation.navigate(ROUTES.CommunityPrivateChat, {
+      senderId: user.senderId,
+      name: user.name,
+    });
   };
   useEffect(() => {
     fetchAll(user._id);
-  },[])
+  }, []);
   return {
     loading,
     data,
@@ -92,5 +103,6 @@ export const useViewModal = () => {
     modalVisible,
     handleSetSeeAllState,
     seeAllState,
+    startChat,
   };
 };

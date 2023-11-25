@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { ScrollView } from 'react-native-gesture-handler';
 import { FullLoader, Row, Spacer } from '../../../components/tools';
 import { ProfileView } from './components/profile';
@@ -23,6 +24,7 @@ export const LikeScreen = () => {
     modalVisible,
     handleSetSeeAllState,
     seeAllState,
+    startChat,
   } = useViewModal();
   if (loading) {
     return <FullLoader />;
@@ -39,12 +41,22 @@ export const LikeScreen = () => {
               </Pressable>
             </Row>
             <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
+              <Pressable onPress={startChat}>
+              <View>
+                <FastImage
+                  style={{height:200,width:200}}
+                  source={{uri:"https://res.cloudinary.com/wcr-byldd/image/upload/v1692176659/verificationProof/hqpauxj1absd0kuou1kq.png"}}
+                />
+              </View>
+             </Pressable>
               <View>
                 {data.matchedUsersList.map((item) => (
                   <ProfileView
                     key={item._id}
                     item={item.actedOn}
                     showDeleteIcon={false}
+                    isMatch={true}
+                    startChat={startChat}
                   />
                 ))}
               </View>
@@ -66,6 +78,7 @@ export const LikeScreen = () => {
                     key={item._id}
                     item={item.actedOn}
                     showDeleteIcon={false}
+                    isLikesReceived = {true}
                   />
                 ))}
               </View>
@@ -88,6 +101,7 @@ export const LikeScreen = () => {
                     item={item.actedOn}
                     deleteLiked={deleteLiked}
                     showDeleteIcon={true}
+                    isLiked={true}
                   />
                 );
               })}
@@ -110,6 +124,7 @@ export const LikeScreen = () => {
                     item={item.favourite}
                     deleteFavourite={deleteFavourite}
                     showDeleteIcon={true}
+                    isFavourite={true}
                   />
                 );
               })}
@@ -120,7 +135,7 @@ export const LikeScreen = () => {
       <Modal visible={modalVisible}>
         <SafeAreaView style={styles.container}>
           <Row justifyContent="space-between">
-            <Pressable onPress={toggleModal}>
+            <Pressable onPress={()=>toggleModal()}>
               <Text>X</Text>
             </Pressable>
             <Text>{seeAllState.title}</Text>
@@ -135,6 +150,8 @@ export const LikeScreen = () => {
                       key={item._id}
                       item={item.actedOn}
                       showDeleteIcon={false}
+                      isLikesReceived={true}
+                      handleToggleOuterModal={toggleModal}
                     />
                   )}
                   numColumns={2}
@@ -154,6 +171,8 @@ export const LikeScreen = () => {
                       item={item.actedOn}
                       deleteLiked={deleteLiked}
                       showDeleteIcon={true}
+                      isLiked={true}
+                      handleToggleOuterModal={toggleModal}
                     />
                   )}
                   numColumns={2}
@@ -173,6 +192,8 @@ export const LikeScreen = () => {
                       item={item.favourite}
                       deleteFavourite={deleteFavourite}
                       showDeleteIcon={true}
+                      isFavourite={true}
+                      handleToggleOuterModal={toggleModal}
                     />
                   )}
                   numColumns={2}

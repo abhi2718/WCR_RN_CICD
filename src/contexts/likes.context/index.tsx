@@ -20,6 +20,7 @@ export const LikeContext = createContext<LikeContextInItState>({
     allFavourite: [],
     likesReceived: [],
     liked: [],
+    matchedUsersList: [],
   },
   setData: () => {},
 });
@@ -31,7 +32,7 @@ export const LikeContextProvider = (props: LikeContextProviderProps) => {
     allFavourite: [],
     likesReceived: [],
     liked: [],
-    matchedUsersList:[]
+    matchedUsersList: [],
   });
   const generateMatchedUsersList = (lists, userId: string) => {
     const matched = [];
@@ -60,13 +61,12 @@ export const LikeContextProvider = (props: LikeContextProviderProps) => {
       const favUserData = data[0].data.FavUserData;
       const likesReceived = data[1].data;
       const liked = data[2].data;
-      const matchedUsersList = generateMatchedUsersList(data[3].data,id);
-      console.log(matchedUsersList);
+      const matchedUsersList = generateMatchedUsersList(data[3].data, id);
       setData({
         allFavourite: favUserData,
         likesReceived: likesReceived,
         liked,
-        matchedUsersList
+        matchedUsersList,
       });
     } catch (error) {
       setLoading(false);

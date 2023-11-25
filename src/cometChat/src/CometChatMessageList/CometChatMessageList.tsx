@@ -17,10 +17,11 @@ import {
   Modal,
   SafeAreaView,
   NativeModules,
+  Pressable,
 } from 'react-native';
 //@ts-ignore
-import {CometChat} from '@cometchat/chat-sdk-react-native';
-import {loadingIcon, rightArrowIcon, backIcon} from './resources';
+import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { loadingIcon, rightArrowIcon, backIcon } from './resources';
 import {
   BaseStyle,
   BaseStyleInterface,
@@ -33,15 +34,18 @@ import {
   MessageBubbleStyle,
   MessageBubbleStyleInterface,
 } from '../shared/views/CometChatMessageBubble/MessageBubbleStyle';
-import {AvatarStyle, AvatarStyleInterface} from '../shared';
+import { AvatarStyle, AvatarStyleInterface } from '../shared';
 import {
   CometChatAvatar,
   CometChatDate,
   CometChatReceipt,
   DateStyle,
 } from '../shared';
-import {MessageListStyle, MessageListStyleInterface} from './MessageListStyle';
-import {CometChatMessageBubble} from '../shared/views/CometChatMessageBubble';
+import {
+  MessageListStyle,
+  MessageListStyleInterface,
+} from './MessageListStyle';
+import { CometChatMessageBubble } from '../shared/views/CometChatMessageBubble';
 import {
   CallTypeConstants,
   MessageBubbleAlignmentType,
@@ -54,14 +58,14 @@ import {
   ReceiverTypeConstants,
   ViewAlignment,
 } from '../shared/constants/UIKitConstants';
-import {localize} from '../shared';
-import {downArrowIcon} from './resources';
-import {Style} from './style';
-import {CometChatMessageTemplate} from '../shared/modals/CometChatMessageTemplate';
-import {CometChatSoundManager} from '../shared';
-import {MessageEvents} from '../shared/events/messages';
-import {ChatConfigurator} from '../shared/framework/ChatConfigurator';
-import {CometChatMessageReactions} from '../extensions/Reactions/';
+import { localize } from '../shared';
+import { downArrowIcon } from './resources';
+import { Style } from './style';
+import { CometChatMessageTemplate } from '../shared/modals/CometChatMessageTemplate';
+import { CometChatSoundManager } from '../shared';
+import { MessageEvents } from '../shared/events/messages';
+import { ChatConfigurator } from '../shared/framework/ChatConfigurator';
+import { CometChatMessageReactions } from '../extensions/Reactions/';
 import {
   CometChatActionSheet,
   ActionSheetStyles,
@@ -71,16 +75,31 @@ import {
   getUnixTimestamp,
   messageStatus,
 } from '../shared/utils/CometChatMessageHelper';
-import {DateStyleInterface} from '../shared/views/CometChatDate/DateStyle';
-import {CometChatContextType} from '../shared/base/Types';
-import {CometChatUIEventHandler} from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
-import {ActionSheetStylesInterface} from '../shared/views/CometChatActionSheet/ActionSheetStyle';
+import { DateStyleInterface } from '../shared/views/CometChatDate/DateStyle';
+import { CometChatContextType } from '../shared/base/Types';
+import { CometChatUIEventHandler } from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
+import { ActionSheetStylesInterface } from '../shared/views/CometChatActionSheet/ActionSheetStyle';
 import Clipboard from '@react-native-community/clipboard';
-import {CometChatMessageInformation} from '../CometChatMessageInformation/CometChatMessageInformation';
+import { CometChatMessageInformation } from '../CometChatMessageInformation/CometChatMessageInformation';
 // import { CometChatContacts, ForwardMessageConfigurationInterface } from "../CometChatContacts";
-import {MessageInformationConfigurationInterface} from '../CometChatMessageInformation';
-import {CometChatBottomBubbleView} from '../../../screens/tab.screens/chat/community/components/cometChatBottomBubbleView';
+import { MessageInformationConfigurationInterface } from '../CometChatMessageInformation';
+import { CometChatBottomBubbleView } from '../../../screens/tab.screens/chat/community/components/cometChatBottomBubbleView';
 import ChatAvatorModal from '../../../screens/tab.screens/chat/community/components/cometChatAvatrModal';
+import { CometChatEmojiKeyboard } from '../shared/views/CometChatEmojiKeyboard';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import { Row, Spacer } from '../../../components/tools';
+import FastImage from 'react-native-fast-image';
+interface EmojiInfo {
+  emoji: string;
+  count: number;
+  users: {
+    avatar: string;
+    name: string;
+    userId: string;
+  }[];
+}
+
+
 
 let templatesMap = new Map<string, CometChatMessageTemplate>();
 
@@ -126,7 +145,7 @@ export interface CometChatMessageListProps {
   }: {
     user?: CometChat.User;
     group?: CometChat.Group;
-    id?: {uid?: string; guid?: string; parentMessageId?: string};
+    id?: { uid?: string; guid?: string; parentMessageId?: string };
   }) => JSX.Element;
   FooterView?: ({
     user,
@@ -135,7 +154,7 @@ export interface CometChatMessageListProps {
   }: {
     user?: CometChat.User;
     group?: CometChat.Group;
-    id?: {uid?: string; guid?: string; parentMessageId?: string};
+    id?: { uid?: string; guid?: string; parentMessageId?: string };
   }) => JSX.Element;
   wrapperMessageBubbleStyle?: MessageBubbleStyleInterface;
   avatarStyle?: AvatarStyleInterface;
@@ -232,7 +251,7 @@ export const CometChatMessageList = forwardRef<
     ChatConfigurator.dataSource.getAllMessageCategories(),
   );
 
-  const {theme} = useContext<CometChatContextType>(CometChatContext);
+  const { theme } = useContext<CometChatContextType>(CometChatContext);
 
   // creating style based on styles from users
   const _messageListStyle = new MessageListStyle({
@@ -341,7 +360,7 @@ export const CometChatMessageList = forwardRef<
     currentScrollPosition.current = event.nativeEvent.contentOffset.y;
     if (
       currentScrollPosition.current <
-        scrollPositionForNewMessageIndicator.current &&
+      scrollPositionForNewMessageIndicator.current &&
       unreadCount > 0
     ) {
       markUnreadMessageAsRead();
@@ -355,7 +374,7 @@ export const CometChatMessageList = forwardRef<
         if (index == 0)
           CometChatUIEventHandler.emitMessageEvent(
             MessageEvents.ccMessageRead,
-            {message},
+            { message },
           );
         CometChat.markAsRead(message);
       }
@@ -420,7 +439,7 @@ export const CometChatMessageList = forwardRef<
             if (index == 0)
               CometChatUIEventHandler.emitMessageEvent(
                 MessageEvents.ccMessageRead,
-                {message},
+                { message },
               );
           } else break;
         }
@@ -461,7 +480,7 @@ export const CometChatMessageList = forwardRef<
         // setMessagesList(tmpList);
         getNewMessages(tmpList);
       })
-      .catch((e) => {});
+      .catch((e) => { });
   };
 
   const getNewMessages = (updatedList) => {
@@ -493,7 +512,7 @@ export const CometChatMessageList = forwardRef<
           getNewMessages(tmpList);
         }
       })
-      .catch((e) => {});
+      .catch((e) => { });
   };
 
   const loadTemplates = () => {
@@ -610,7 +629,7 @@ export const CometChatMessageList = forwardRef<
       if (
         !scrollToBottomOnNewMessages &&
         Math.round(currentScrollPosition.current) >=
-          scrollPositionForNewMessageIndicator.current
+        scrollPositionForNewMessageIndicator.current
       ) {
         if (baseMessage['sender']['uid'] == loggedInUser.current?.['uid']) {
           scrollToBottom();
@@ -620,7 +639,7 @@ export const CometChatMessageList = forwardRef<
         if (baseMessage.getReceiverType() == ReceiverTypeConstants.user) {
           CometChatUIEventHandler.emitMessageEvent(
             MessageEvents.ccMessageDelivered,
-            {message: newMessage},
+            { message: newMessage },
           );
         }
         setUnreadCount(unreadCount + 1);
@@ -630,7 +649,7 @@ export const CometChatMessageList = forwardRef<
           markMessageAsRead(newMessage);
           CometChatUIEventHandler.emitMessageEvent(
             MessageEvents.ccMessageRead,
-            {message: newMessage},
+            { message: newMessage },
           );
         }
       }
@@ -673,6 +692,7 @@ export const CometChatMessageList = forwardRef<
       .catch((rej) => {
         onError && onError(rej);
       });
+    _bottomSheetRef?.current?.close();
   };
 
   const showTransientMessage = (transientMessage) => {
@@ -682,7 +702,7 @@ export const CometChatMessageList = forwardRef<
     }, 1500);
   };
 
-  const createActionMessage = () => {};
+  const createActionMessage = () => { };
 
   const updateMessageReceipt = (receipt) => {
     let index = messagesList.findIndex(
@@ -777,7 +797,7 @@ export const CometChatMessageList = forwardRef<
         onGroupMemberBanned: (message) => {
           newMessage(message);
         },
-        onGroupMemberUnbanned: (message) => {},
+        onGroupMemberUnbanned: (message) => { },
         onMemberAddedToGroup: (message) => {
           newMessage(message);
         },
@@ -788,7 +808,7 @@ export const CometChatMessageList = forwardRef<
     );
 
     CometChatUIEventHandler.addMessageListener(uiEventListener, {
-      ccMessageSent: ({message, status}) => {
+      ccMessageSent: ({ message, status }) => {
         if (status == MessageStatusConstants.inprogress) {
           newMessage(message, false);
         }
@@ -797,21 +817,21 @@ export const CometChatMessageList = forwardRef<
           messageEdited(message, true);
         }
       },
-      ccMessageEdited: ({message, status}) => {
+      ccMessageEdited: ({ message, status }) => {
         if (status == messageStatus.success) messageEdited(message, false);
       },
-      ccMessageDeleted: ({message}) => {
+      ccMessageDeleted: ({ message }) => {
         messageEdited(message, false);
       },
     });
     CometChatUIEventHandler.addGroupListener(uiEventListener, {
-      ccGroupMemberUnBanned: ({message}) => {
+      ccGroupMemberUnBanned: ({ message }) => {
         newMessage(message, false);
       },
-      ccGroupMemberBanned: ({message}) => {
+      ccGroupMemberBanned: ({ message }) => {
         newMessage(message, false);
       },
-      ccGroupMemberAdded: ({message, usersAdded, userAddedIn}) => {
+      ccGroupMemberAdded: ({ message, usersAdded, userAddedIn }) => {
         usersAdded.forEach((user) => {
           message[
             'message'
@@ -821,7 +841,7 @@ export const CometChatMessageList = forwardRef<
           newMessage(message, false);
         });
       },
-      ccGroupMemberKicked: ({message}) => {
+      ccGroupMemberKicked: ({ message }) => {
         newMessage(message, false);
       },
       ccGroupMemberScopeChanged: ({
@@ -833,7 +853,7 @@ export const CometChatMessageList = forwardRef<
       }) => {
         newMessage(action, false);
       },
-      ccOwnershipChanged: ({group, message}) => {
+      ccOwnershipChanged: ({ group, message }) => {
         // newMessage(message, false); removed after discussion.
       },
     });
@@ -857,7 +877,7 @@ export const CometChatMessageList = forwardRef<
     );
 
     CometChatUIEventHandler.addCallListener(uiEventListener, {
-      ccCallInitiated: ({call}) => {
+      ccCallInitiated: ({ call }) => {
         if (
           call['type'] == CallTypeConstants.audio ||
           call['type'] == CallTypeConstants.video
@@ -865,7 +885,7 @@ export const CometChatMessageList = forwardRef<
           newMessage(call);
         }
       },
-      ccOutgoingCall: ({call}) => {
+      ccOutgoingCall: ({ call }) => {
         if (
           call['type'] == CallTypeConstants.audio ||
           call['type'] == CallTypeConstants.video
@@ -873,7 +893,7 @@ export const CometChatMessageList = forwardRef<
           newMessage(call);
         }
       },
-      ccCallAccepted: ({call}) => {
+      ccCallAccepted: ({ call }) => {
         if (
           call['type'] == CallTypeConstants.audio ||
           call['type'] == CallTypeConstants.video
@@ -881,7 +901,7 @@ export const CometChatMessageList = forwardRef<
           newMessage(call);
         }
       },
-      ccCallRejected: ({call}) => {
+      ccCallRejected: ({ call }) => {
         if (
           call['type'] == CallTypeConstants.audio ||
           call['type'] == CallTypeConstants.video
@@ -889,7 +909,7 @@ export const CometChatMessageList = forwardRef<
           newMessage(call);
         }
       },
-      ccCallEnded: ({call}) => {
+      ccCallEnded: ({ call }) => {
         if (
           call['type'] == CallTypeConstants.audio ||
           call['type'] == CallTypeConstants.video
@@ -904,7 +924,7 @@ export const CometChatMessageList = forwardRef<
         onConnected: () => {
           getUpdatedPreviousMessages();
         },
-        inConnecting: () => {},
+        inConnecting: () => { },
         onDisconnected: () => {
           if (!messagesList[0].id) {
             for (let i = 0; i < messagesList.length; i++) {
@@ -977,20 +997,19 @@ export const CometChatMessageList = forwardRef<
   // functions returning view
   const getLeadingView = (item: CometChat.BaseMessage) => {
     const image = item?.getSender()?.getAvatar()
-      ? {uri: item?.getSender()?.getAvatar()}
+      ? { uri: item?.getSender()?.getAvatar() }
       : undefined;
     const name = item?.getSender()?.getName();
     const senderId = item?.getSender()?.getUid();
     if (
       showAvatar &&
       (item?.getSender()?.getUid() || item['sender']['uid']) !==
-        loggedInUser.current['uid'] &&
+      loggedInUser.current['uid'] &&
       item['category'] != MessageCategoryConstants.action
     ) {
-      
       return (
         <View>
-          {image && name && group &&(
+          {image && name && group && (
             <ChatAvatorModal image={image} name={name} senderId={senderId}>
               <View>
                 <CometChatAvatar
@@ -1001,14 +1020,10 @@ export const CometChatMessageList = forwardRef<
               </View>
             </ChatAvatorModal>
           )}
-          {image && name && user &&(
+          {image && name && user && (
             <View>
-            <CometChatAvatar
-              image={image}
-              name={name}
-              style={_avatarStyle}
-            />
-          </View>
+              <CometChatAvatar image={image} name={name} style={_avatarStyle} />
+            </View>
           )}
         </View>
       );
@@ -1031,7 +1046,7 @@ export const CometChatMessageList = forwardRef<
       return null;
 
     return (
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <Text
           style={[
             Style.nameStyle,
@@ -1039,11 +1054,12 @@ export const CometChatMessageList = forwardRef<
               color: _messageListStyle.nameTextColor,
               ..._messageListStyle.nameTextFont,
             },
-          ]}>
+          ]}
+        >
           {senderName}
         </Text>
         {timeStampAlignment == 'bottom' ||
-        item['category'] == 'action' ? null : (
+          item['category'] == 'action' ? null : (
           <CometChatDate
             timeStamp={
               (item.getDeletedAt() ||
@@ -1086,7 +1102,8 @@ export const CometChatMessageList = forwardRef<
             justifyContent:
               bubbleAlignment === 'right' ? 'flex-end' : 'flex-start',
           },
-        ]}>
+        ]}
+      >
         <CometChatDate
           timeStamp={
             (item.getDeletedAt() ||
@@ -1120,7 +1137,7 @@ export const CometChatMessageList = forwardRef<
     if (
       alignment == 'standard' &&
       (item.getSender()?.getUid() || item['sender']['uid']) ==
-        loggedInUser.current['uid']
+      loggedInUser.current['uid']
     )
       return 'right';
     return 'left';
@@ -1144,6 +1161,7 @@ export const CometChatMessageList = forwardRef<
       );
     }
     setShowMessageOptions([]);
+    _bottomSheetRef?.current?.close();
     return onThreadRepliesPress;
   };
 
@@ -1153,11 +1171,13 @@ export const CometChatMessageList = forwardRef<
       status: messageStatus.inprogress,
     });
     setShowMessageOptions([]);
+    _bottomSheetRef?.current?.close();
   };
 
   const copyMessage = (item) => {
     Clipboard.setString(item['text']);
     setShowMessageOptions([]);
+    _bottomSheetRef?.current.close();
   };
 
   const getThreadView = (item: CometChat.BaseMessage) => {
@@ -1180,7 +1200,8 @@ export const CometChatMessageList = forwardRef<
           borderColor: theme?.palette.getAccent50(),
           justifyContent: 'space-between',
           padding: 4,
-        }}>
+        }}
+      >
         <Text style={style}>{`View ${item.getReplyCount()} replies`}</Text>
         <Image
           style={{
@@ -1195,11 +1216,13 @@ export const CometChatMessageList = forwardRef<
 
   const privateMessage = (item: CometChat.BaseMessage) => {
     setShowMessageOptions([]);
+    _bottomSheetRef?.current.close();
     CometChat.getUser(item.getSender().getUid())
       .then((user) => {
-        CometChatUIEventHandler.emitUIEvent('openChat', {user, group});
+        CometChatUIEventHandler.emitUIEvent('openChat', { user, group });
       })
       .catch((e) => {
+        console.log(e);
         onError && onError(e);
       });
   };
@@ -1226,7 +1249,7 @@ export const CometChatMessageList = forwardRef<
           : messageObject?.getAttachment()?.getMimeType(), // get Mime Type
     };
 
-    NativeModules.FileManager.shareMessage(shareObj, (callback) => {});
+    NativeModules.FileManager.shareMessage(shareObj, (callback) => { });
   };
 
   const getStyle = (item: CometChat.BaseMessage): BaseStyleInterface => {
@@ -1237,23 +1260,33 @@ export const CometChatMessageList = forwardRef<
 
     if (
       (item.getSender()?.getUid() || item['sender']['uid']) ==
-        loggedInUser.current?.['uid'] &&
+      loggedInUser.current?.['uid'] &&
       item.getCategory() == MessageCategoryConstants.message
     )
       _style.backgroundColor = theme?.palette.getPrimary();
 
     return _style;
   };
-
+  const [showReaction, setShowReaction] = useState(false);
+  const _currentMessage = useRef();
   const openOptionsForMessage = (
     item: CometChat.BaseMessage,
     template: CometChatMessageTemplate,
   ) => {
     let options: any = template?.options
-      ? template.options(loggedInUser.current, item, group)
+      ? template
+        .options(loggedInUser.current, item, group)
+        .filter((item) => item.id !== 'sendMessagePrivately')
       : [];
+    if (!user && loggedInUser.current?.getUid() === item.getSender().getUid()) {
+      options.push({
+        icon: 61,
+        id: 'deleteMessage',
+        title: 'Delete Message',
+      });
+    }
     options.push({
-      icon: 64,
+      icon: 66,
       id: 'reactToMessage',
       title: 'React To Message',
     });
@@ -1287,38 +1320,20 @@ export const CometChatMessageList = forwardRef<
         }
       if (option.id === MessageOptionConstants.reactToMessage) {
         option.onPress = () => {
-          const _item: any = item.getRawMessage();
-          CometChat.callExtension('reactions', 'POST', 'v1/react', {
-            msgId: _item.id,
-            emoji: '😊',
-          })
-            .then((response) => {
-            })
-            .catch((error) => {
-            });
-          // const vi = MyView;Asset validation failed
-          //Missing required icon file. The bundle does not contain an app icon for iPad of exactly '167x167' pixels, in .png format for iOS versions supporting iPad Pro. To support older operating systems, the icon may be required in the bundle outside of an asset catalog. Make sure the Info.plist file includes appropriate entries referencing the file. See https://developer.apple.com/documentation/bundleresources/information_property_list/user_interface (ID: e5f4d0be-4d46-4e97-9842-328aa9492464)
-          // setExtensionsComponent(() => vi);
-          //This bundle does not support one or more of the devices supported by the previous app version. Your app update must continue to support all devices previously supported. You declare supported devices in Xcode with the Targeted Device Family build setting. Refer to QA1623 for additional information: https://developer.apple.com/library/ios/#qa/qa1623/_index.html (ID: dbda4565-df5d-41d1-80e6-9ff66c5dc096)
+          setShowReaction(true);
+          _currentMessage.current = item.getRawMessage();
         };
       }
       return option;
     });
     setShowMessageOptions(optionsWithPressHandling);
   };
-  const MyView = () => {
-    return (
-      <View style={{height: 300, backgroundColor: 'red'}}>
-        <Text>My View</Text>
-      </View>
-    );
-  };
   const MessageView = (params: {
     message: CometChat.BaseMessage;
     showOptions?: boolean;
     isThreaded?: boolean;
   }) => {
-    const {message, showOptions = true, isThreaded = false} = params;
+    const { message, showOptions = true, isThreaded = false } = params;
     let hasTemplate = templatesMap.get(
       `${message.getCategory()}_${message.getType()}`,
     );
@@ -1355,7 +1370,8 @@ export const CometChatMessageList = forwardRef<
                     showOptions
                       ? openOptionsForMessage(message, hasTemplate)
                       : undefined;
-                  }}>
+                  }}
+                >
                   <View>{ContentView && <ContentView />}</View>
                 </TouchableOpacity>
               );
@@ -1367,7 +1383,7 @@ export const CometChatMessageList = forwardRef<
               //   bubbleAlignment,
               // )
               //CometChatMessageReactions(message, loggedInUser)
-              getBottomView(message);
+              return getBottomView(message);
             }}
             style={getStyle(message)}
           />
@@ -1377,10 +1393,105 @@ export const CometChatMessageList = forwardRef<
       return null;
     }
   };
+  const [openUserReactedwithEmojiModal, setOpenUserReactedwithEmojiModal] = useState(false);
+  const [selectedEmoji, setselectedEmoji] = useState(null)
   const getBottomView = (item) => {
+    function transformObject(inputObject) {
+      const emojiArray = [];
+    
+      for (const emoji in inputObject) {
+        const users = Object.values(inputObject[emoji]);
+        const usersIds = Object.keys(inputObject[emoji]);
+        if (users.length > 1) {
+          emojiArray.push({
+            emoji,
+            count: users.length,
+            users: users.map((user,index) => ({
+              avatar: user.avatar,
+              name: user.name,
+              userId:usersIds[index]
+            }))
+          });
+        }else{
+            emojiArray.push({
+            emoji,
+            count: users.length,
+            users: users.map((user,index) => ({
+              avatar: user.avatar,
+              name: user.name,
+              userId:usersIds[index]
+            }))
+          }); 
+        }
+      }
+    
+      return { emojiArray };
+    }
+    
+    const payload = item?.data?.metadata;
+    let emojiArray: EmojiInfo[] = [];
+    if (payload) {
+      const _payload = Object.values(payload);
+      if (_payload) {
+        const data = _payload[0] ? _payload[0]?.extensions?.reactions : null;
+        if (!Array.isArray(data) && data) {
+          const result = transformObject(data);
+          if (result) {
+            emojiArray = result.emojiArray;
+          }
+        }
+      }
+    }
+
     return (
       <View>
-        <Text>Bootm View</Text>
+        <Row>
+          {emojiArray.map((item, index) => {
+            return (
+              <View key={index}>
+                { item.emoji.includes(":")?<View ></View>:
+                  <Pressable onPress={() => {
+                    setselectedEmoji(item)
+                    setOpenUserReactedwithEmojiModal(true)
+                  }}>
+                    <Spacer position={'right'} size={5}>
+                  <View>
+                    <Row>
+                    <Text>{item.emoji}</Text>
+                    <Text>{item.count}</Text>
+                   </Row>
+                  </View>
+                </Spacer>
+                  </Pressable>
+                }
+              </View>
+            );
+          })}
+        </Row>
+        <Modal visible={openUserReactedwithEmojiModal}>
+          <SafeAreaView style={{ flex: 1 }}>
+            <Pressable onPress={() => {
+               setOpenUserReactedwithEmojiModal(false)
+            }}>
+              <Text>x</Text>
+            </Pressable>
+            {
+              selectedEmoji && <View>
+                {
+                  selectedEmoji?.users?.map((user, index) => (<View  key={index}>
+                    <Row alignItems="center">
+                      <FastImage
+                        source={{ uri: user.avatar }}
+                        style={{width:40,height:40,borderRadius:20}}
+                      />
+                    <Text>{user.name}</Text>
+                  </Row>
+                  </View>))
+                }
+              </View>
+         }
+          </SafeAreaView>
+        </Modal>
       </View>
     );
   };
@@ -1391,7 +1502,7 @@ export const CometChatMessageList = forwardRef<
     return item['sentAt'] * 1000;
   };
 
-  const RenderMessageItem = ({item, index}) => {
+  const RenderMessageItem = ({ item, index }) => {
     let seperatorView = null;
     const previousMessageDate = messagesList[index + 1]
       ? new Date(getSentAtTimestamp(messagesList[index + 1]))
@@ -1406,7 +1517,7 @@ export const CometChatMessageList = forwardRef<
 
     if (currentDate != undefined && previousDate !== currentDate) {
       seperatorView = (
-        <View style={{marginBottom: 10}}>
+        <View style={{ marginBottom: 10 }}>
           <CometChatDate
             timeStamp={getSentAtTimestamp(item)}
             pattern={'dayDateFormat'}
@@ -1430,7 +1541,7 @@ export const CometChatMessageList = forwardRef<
   };
 
   const keyExtractor = useCallback((item) => `${item.id}_${item.muid}`, []);
-  const itemSeperator = useCallback(() => <View style={{height: 8}} />, []);
+  const itemSeperator = useCallback(() => <View style={{ height: 8 }} />, []);
 
   const getEmptyTextView = () => {
     if (EmptyStateView) return <EmptyStateView />;
@@ -1440,7 +1551,7 @@ export const CometChatMessageList = forwardRef<
   const getErrorStateView = () => {
     if (ErrorStateView)
       return ErrorStateView(
-        new CometChat.CometChatException({message: 'Something went wrong'}),
+        new CometChat.CometChatException({ message: 'Something went wrong' }),
       );
     return (
       <View style={Style.msgContainerStyle}>
@@ -1451,7 +1562,8 @@ export const CometChatMessageList = forwardRef<
               ...messageListStyle?.errorStateTextFont,
               color: messageListStyle?.errorStateTextColor,
             },
-          ]}>
+          ]}
+        >
           {errorStateText}
         </Text>
       </View>
@@ -1471,11 +1583,38 @@ export const CometChatMessageList = forwardRef<
     );
   };
 
-  const {height, width, backgroundColor, border, borderRadius} =
+  const _bottomSheetRef = useRef(null);
+  const { height, width, backgroundColor, border, borderRadius } =
     _messageListStyle;
+  const EmojiBoard = (props: any) => {
+    const {
+      shouldShow = false,
+      onClose = () => {},
+      emojiSelection = (emoji?: any) => {},
+      ...otherProps
+    } = props;
+    const handleEmogiSelction = (emoji?: any) => {
+      if (_currentMessage?.current?.id) {
+        CometChat.callExtension('reactions', 'POST', 'v1/react', {
+          msgId: _currentMessage?.current?.id,
+          emoji,
+        })
+          .then((response) => {
+            console.log('response -->', response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      _bottomSheetRef?.current?.close();
+    };
 
+    return (
+      <CometChatEmojiKeyboard onClick={handleEmogiSelction} {...otherProps} />
+    );
+  };
   return (
-    <View style={{height, width, backgroundColor, borderRadius, ...border}}>
+    <View style={{ height, width, backgroundColor, borderRadius, ...border }}>
       {listState == 'loading' && messagesList.length == 0 ? (
         getLoadingStateView()
       ) : listState == 'error' ? (
@@ -1484,9 +1623,9 @@ export const CometChatMessageList = forwardRef<
         messagesList.length == 0 ? (
           getEmptyTextView()
         ) : (
-          <View style={{height: '100%', width: '100%'}}>
+          <View style={{ height: '100%', width: '100%' }}>
             {HeaderView && (
-              <View style={[Style.stickyHeaderFooterStyle, {top: 0}]}>
+              <View style={[Style.stickyHeaderFooterStyle, { top: 0 }]}>
                 <HeaderView
                   group={group && group['guid']}
                   user={user && user['uid']}
@@ -1521,7 +1660,7 @@ export const CometChatMessageList = forwardRef<
               }}
             />
             {FooterView && (
-              <View style={[Style.stickyHeaderFooterStyle, {bottom: 0}]}>
+              <View style={[Style.stickyHeaderFooterStyle, { bottom: 0 }]}>
                 <FooterView
                   group={group && group['guid']}
                   user={user && user['uid']}
@@ -1537,14 +1676,15 @@ export const CometChatMessageList = forwardRef<
         )
       ) : null}
       {liveReaction ? (
-        <View style={{alignItems: 'flex-end'}}>
+        <View style={{ alignItems: 'flex-end' }}>
           <CometChatLiveReactions />
         </View>
       ) : null}
       {unreadCount > 0 ? (
         <TouchableOpacity
           onPress={newMsgIndicatorPressed.bind(this)}
-          style={Style.newMessageIndicatorStyle}>
+          style={Style.newMessageIndicatorStyle}
+        >
           <Text style={[Style.newMessageIndicatorText]}>
             {newMessageIndicatorText
               ? newMessageIndicatorText
@@ -1557,16 +1697,20 @@ export const CometChatMessageList = forwardRef<
         </TouchableOpacity>
       ) : null}
       <CometChatBottomSheet
-        ref={bottomSheetRef}
+        ref={_bottomSheetRef}
         onClose={() => {
           if (ExtensionsComponent) setExtensionsComponent(null);
           setShowMessageOptions([]);
           infoObject.current = null;
           setMessageInfo(false);
+          setShowReaction(false);
         }}
         isOpen={
           showMessageOptions.length > 0 || ExtensionsComponent || messageInfo
-        }>
+        }
+        showReaction={showReaction}
+        EmojiBoard={EmojiBoard}
+      >
         {ExtensionsComponent ? (
           ExtensionsComponent
         ) : messageInfo ? (
@@ -1585,12 +1729,15 @@ export const CometChatMessageList = forwardRef<
               messageInformationConfiguration?.onBack &&
                 messageInformationConfiguration.onBack();
             }}
+            showReaction={showReaction}
           />
         ) : (
-          <CometChatActionSheet
-            actions={showMessageOptions}
-            style={_actionStyle}
-          />
+          <View>
+            <CometChatActionSheet
+              actions={showMessageOptions}
+              style={_actionStyle}
+            />
+          </View>
         )}
       </CometChatBottomSheet>
     </View>

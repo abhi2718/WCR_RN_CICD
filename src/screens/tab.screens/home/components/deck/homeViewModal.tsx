@@ -53,7 +53,7 @@ export const useViewModal = () => {
     try {
       const payLoad = createPayLoafForUserAction(index, 'Like');
       await homeDeckRepository.userReactin(payLoad);
-      fetchAll();
+      fetchAll(user._id);
     } catch (error) {}
   };
   const handleDisLike = async (index: number) => {
