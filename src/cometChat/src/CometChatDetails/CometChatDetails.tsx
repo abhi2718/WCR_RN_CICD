@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet} from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import {
   View,
   Text,
@@ -7,11 +7,11 @@ import {
   FlatList,
   BackHandler,
 } from 'react-native';
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Header from './Header';
-import {CometChatContext, CometChatListItem} from '../shared';
-import {ICONS} from './resources';
-import {localize, ImageType} from '../shared';
+import { CometChatContext, CometChatListItem } from '../shared';
+import { ICONS } from './resources';
+import { localize, ImageType } from '../shared';
 import {
   UserStatusConstants,
   GroupMemberOptionConstants,
@@ -20,29 +20,32 @@ import {
   PRIVATE_GROUP_COLOR,
 } from '../shared/constants/UIKitConstants';
 //@ts-ignore
-import {CometChat} from '@cometchat/chat-sdk-react-native';
-import {CometChatConfirmDialog, CometChatDetailsTemplate} from '../shared';
-import {getDefaultDetailsTemplate} from '../shared/utils/DetailsUtils/DetailsUtils';
-import {BorderStyleInterface, FontStyleInterface} from '../shared/base';
-import {CometChatAddMembers} from '../CometChatAddMembers';
-import {CometChatBannedMembers} from '../CometChatBannedMembers';
-import {styles} from './styles';
-import {AvatarStyleInterface} from '../shared';
-import {StatusIndicatorStyleInterface} from '../shared/views/CometChatStatusIndicator/StatusIndicatorStyle';
-import {ListItemStyleInterface} from '../shared';
-import {listners} from './listners';
-import {CometChatUIEvents, CometChatGroupsEvents} from '../shared/events';
-import {AddMembersConfigurationInterface} from '../CometChatAddMembers/AddMembersConfiguration';
-import {BannedMembersConfigurationInterface} from '../CometChatBannedMembers/BannedMembersConfiguration';
-import {CometChatTransferOwnership} from '../CometChatTransferOwnership';
-import {GroupMemberConfigurationInterface} from '../CometChatGroupMembers/GroupMemberConfiguration';
-import {CometChatGroupsMembers} from '../CometChatGroupMembers';
-import {CometChatContextType} from '../shared/base/Types';
-import {CometChatUIEventHandler} from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
-import {CometChatTransferOwnershipInterface} from '../CometChatTransferOwnership/CometChatTransferOwnership';
-import {Column, dimensions, Row, Spacer} from '../../../components/tools';
-import {MediaMessage, MediaTab} from '../../../screens/tab.screens/chat/community/components/mediaMessages';
-import {CommunityMembers} from '../../../screens/tab.screens/chat/community/components/communityMembers';
+import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { CometChatConfirmDialog, CometChatDetailsTemplate } from '../shared';
+import { getDefaultDetailsTemplate } from '../shared/utils/DetailsUtils/DetailsUtils';
+import { BorderStyleInterface, FontStyleInterface } from '../shared/base';
+import { CometChatAddMembers } from '../CometChatAddMembers';
+import { CometChatBannedMembers } from '../CometChatBannedMembers';
+import { styles } from './styles';
+import { AvatarStyleInterface } from '../shared';
+import { StatusIndicatorStyleInterface } from '../shared/views/CometChatStatusIndicator/StatusIndicatorStyle';
+import { ListItemStyleInterface } from '../shared';
+import { listners } from './listners';
+import { CometChatUIEvents, CometChatGroupsEvents } from '../shared/events';
+import { AddMembersConfigurationInterface } from '../CometChatAddMembers/AddMembersConfiguration';
+import { BannedMembersConfigurationInterface } from '../CometChatBannedMembers/BannedMembersConfiguration';
+import { CometChatTransferOwnership } from '../CometChatTransferOwnership';
+import { GroupMemberConfigurationInterface } from '../CometChatGroupMembers/GroupMemberConfiguration';
+import { CometChatGroupsMembers } from '../CometChatGroupMembers';
+import { CometChatContextType } from '../shared/base/Types';
+import { CometChatUIEventHandler } from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
+import { CometChatTransferOwnershipInterface } from '../CometChatTransferOwnership/CometChatTransferOwnership';
+import { Column, dimensions, Row, Spacer } from '../../../components/tools';
+import {
+  MediaMessage,
+  MediaTab,
+} from '../../../screens/tab.screens/chat/community/components/mediaMessages';
+import { CommunityMembers } from '../../../screens/tab.screens/chat/community/components/communityMembers';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export interface ModalDetailsInterface {
@@ -326,7 +329,7 @@ export interface CometChatDetailsInterface {
   detailsStyle?: DetailsStyleInterface;
 }
 export const CometChatDetails = (props: CometChatDetailsInterface) => {
-  const {theme} = useContext<CometChatContextType>(CometChatContext);
+  const { theme } = useContext<CometChatContextType>(CometChatContext);
   const {
     user,
     group,
@@ -376,7 +379,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [detailsList, setDetailsList] = useState(
-    (data && data({user, group})) ?? [],
+    (data && data({ user, group })) ?? [],
   );
   const [loggedInUser, setLoggedInUser] = useState<CometChat.User>();
   const [currentScreen, setCurrentScreen] = useState(null);
@@ -427,33 +430,8 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   };
 
   const handleLeaveGroup = () => {
-    if (groupDetails?.['owner'] === loggedInUser.getUid())
-      setModalDetails({
-        title: 'Transfer Ownership',
-        cancelButtonText: localize('CANCEL'),
-        confirmButtonText: localize('CONFIRM'),
-        messageText: localize('TRANSFER_CONFIRM'),
-        onCancel: () => {
-          setModalVisible(false);
-        },
-        onConfirm: () => leaveGroup(true),
-        style: {},
-      });
-    else {
-      setModalDetails({
-        title: 'Please Confirm',
-        cancelButtonText: leaveGroupCancelButtonText ?? localize('CANCEL'),
-        confirmButtonText: leaveGroupButtonText ?? localize('CONFIRM'),
-        messageText:
-          leaveGroupConfirmDialogMessage ?? localize('LEAVE_CONFIRM'),
-        onCancel: () => {
-          setModalVisible(false);
-        },
-        onConfirm: () => leaveGroup(),
-        style: leaveGroupDialogStyle ?? {},
-      });
-    }
-    setModalVisible(true);
+    leaveGroup();
+    return;
   };
 
   const deleteGroup = () => {
@@ -552,7 +530,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
     }
   };
 
-  const ListItem = ({item}) => {
+  const ListItem = ({ item }) => {
     const {
       title,
       icon,
@@ -578,14 +556,16 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         }
         style={[
           styles.listItemContainer,
-          {height: height ?? 56, backgroundColor: backgroundColor ?? ''},
-        ]}>
+          { height: height ?? 56, backgroundColor: backgroundColor ?? '' },
+        ]}
+      >
         <Text
           style={[
             styles.listItemTitle,
-            {color: theme.palette.getAccent()},
+            { color: theme.palette.getAccent() },
             titleStyle,
-          ]}>
+          ]}
+        >
           {title}
         </Text>
         {Tail ? (
@@ -596,7 +576,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
             resizeMode="contain"
             style={[
               styles.listItemTailIcon,
-              {tintColor: iconTint ?? theme.palette.getPrimary()},
+              { tintColor: iconTint ?? theme.palette.getPrimary() },
             ]}
           />
         )}
@@ -605,7 +585,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   };
 
   const ListSection = (props) => {
-    const {item} = props;
+    const { item } = props;
     const {
       title,
       titleColor,
@@ -622,8 +602,10 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         <FlatList
           keyExtractor={(_, i) => _.id}
           data={options}
-          renderItem={({item}) => (
-            <ListItem item={{hideItemSeparator, itemSeparatorColor, ...item}} />
+          renderItem={({ item }) => (
+            <ListItem
+              item={{ hideItemSeparator, itemSeparatorColor, ...item }}
+            />
           )}
           ListHeaderComponent={() => (
             <SectionHeader
@@ -643,15 +625,16 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
     );
   };
   const SectionHeader = (props) => {
-    const {title, titleColor, titleFont, titleStyle} = props;
+    const { title, titleColor, titleFont, titleStyle } = props;
     return (
       <View>
         <Text
           style={[
-            {color: titleColor ?? theme.palette.getAccent500()},
+            { color: titleColor ?? theme.palette.getAccent500() },
             titleFont ? titleFont : theme.typography.text2,
             titleStyle ? titleStyle : {},
-          ]}>
+          ]}
+        >
           {title}
         </Text>
       </View>
@@ -659,7 +642,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   };
 
   const SectionDivider = (props) => {
-    const {sectionSeparatorColor} = props;
+    const { sectionSeparatorColor } = props;
     return (
       <View
         style={[
@@ -675,7 +658,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
 
   const SubtitleViewElem = () => {
     return (
-      <Text style={{color: theme.palette.getAccent600()}}>
+      <Text style={{ color: theme.palette.getAccent600() }}>
         {userDetails.getStatus() === UserStatusConstants.online
           ? localize('ONLINE')
           : localize('OFFLINE')}
@@ -754,8 +737,8 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       handleGroupListener,
     });
     return () => {
-      listners.removeListner.removeUserListener({userStatusListenerId});
-      listners.removeListner.removeGroupListener({groupListenerId});
+      listners.removeListner.removeUserListener({ userStatusListenerId });
+      listners.removeListner.removeGroupListener({ groupListenerId });
     };
   }, []);
 
@@ -784,7 +767,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
     setCurrentScreen(null);
     handleGroupListener(userAddedIn);
   };
-  const handleOwnershipChanged = ({group, newOwner, message}) => {
+  const handleOwnershipChanged = ({ group, newOwner, message }) => {
     handleGroupListener(group);
     getTemplates();
   };
@@ -808,7 +791,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         group={groupDetails}
         onBack={handleBackButtonClick}
         selectionMode="none"
-        groupMemberStyle={{backIconTint: detailsStyle?.backIconTint ?? null}}
+        groupMemberStyle={{ backIconTint: detailsStyle?.backIconTint ?? null }}
         {...groupMembersConfiguration}
       />
     );
@@ -818,7 +801,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       <CometChatAddMembers
         group={groupDetails}
         onBack={handleBackButtonClick}
-        usersStyle={{backIconTint: detailsStyle?.backIconTint ?? null}}
+        usersStyle={{ backIconTint: detailsStyle?.backIconTint ?? null }}
         {...addMembersConfiguration}
       />
     );
@@ -828,7 +811,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       <CometChatBannedMembers
         group={groupDetails}
         onBack={handleBackButtonClick}
-        bannedMemberStyle={{backIconTint: detailsStyle?.backIconTint ?? null}}
+        bannedMemberStyle={{ backIconTint: detailsStyle?.backIconTint ?? null }}
         {...bannedMembersConfiguration}
       />
     );
@@ -844,7 +827,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   if (group) {
     return (
       <View>
-        <View style={{height: 200}}>
+        <View style={{ height: 200 }}>
           <Header
             title={title}
             showCloseButton={showCloseButton}
@@ -866,7 +849,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
             <Row>
               <Image
                 style={myStyles.imageStyle}
-                source={{uri: groupDetails?.getIcon()}}
+                source={{ uri: groupDetails?.getIcon() }}
               />
               <Column>
                 <Text>{groupDetails.getName()}</Text>
@@ -874,20 +857,17 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               </Column>
             </Row>
           )}
-          {/* <Pressable onPress={handleLeaveGroup}>
+          <Pressable onPress={handleLeaveGroup}>
             <Text>Leave Group</Text>
-          </Pressable> */}
+          </Pressable>
         </View>
-        <View style={{height: dimensions.height - 200,backgroundColor:"#fff"}}>
+        <View
+          style={{ height: dimensions.height - 200, backgroundColor: '#fff' }}
+        >
           <View style={myStyles.menuOptins}>
             <CommunityMembers group={groupDetails} />
           </View>
-          <MediaTab guid={groupDetails?.getGuid()}/>
-          {/* <ScrollView>
-            <Spacer position={'bottom'} size={200}>
-            <MediaMessage guid={groupDetails?.getGuid()} />
-            </Spacer>
-          </ScrollView> */}
+          <MediaTab guid={groupDetails?.getGuid()} />
         </View>
       </View>
     );
@@ -895,7 +875,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   if (user) {
     return (
       <View>
-        <View style={{height: 200}}>
+        <View style={{ height: 600 }}>
           <Header
             title={title}
             showCloseButton={showCloseButton}
@@ -913,13 +893,24 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
             }
           />
+          {!user.getBlockedByMe() && (
+            <Pressable onPress={() => handleUserBlockUnblock()}>
+              <Text>Block</Text>
+            </Pressable>
+          )}
+          {user.getBlockedByMe() && (
+            <Pressable onPress={() => handleUserBlockUnblock(true)}>
+              <Text>Un Block</Text>
+            </Pressable>
+          )}
+          <MediaTab uid={user.getUid()} />
         </View>
-        <View style={{height: dimensions.height - 200}}></View>
+        <View style={{ height: dimensions.height - 200 }}></View>
       </View>
     );
   }
   return (
-    <View style={{padding: 16}}>
+    <View style={{ padding: 16 }}>
       <Header
         title={title}
         showCloseButton={showCloseButton}
@@ -950,9 +941,9 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       {hideProfile ? null : CustomProfileView ? (
         <CustomProfileView
           {...(userDetails
-            ? {user: userDetails}
+            ? { user: userDetails }
             : group
-            ? {group: groupDetails}
+            ? { group: groupDetails }
             : {})}
         />
       ) : (
@@ -961,7 +952,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
             <Row>
               <Image
                 style={myStyles.imageStyle}
-                source={{uri: groupDetails?.getIcon()}}
+                source={{ uri: groupDetails?.getIcon() }}
               />
               <Column>
                 <Text>{groupDetails.getName()}</Text>

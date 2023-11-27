@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {MediaMessageProps} from '../../../../../../types/screen.type/communityChat';
 const type = ['image', 'video', 'audio', 'file'];
 export const useViewModal = (props: MediaMessageProps) => {
-  const { guid, type: mediaType } = props;
+  const { guid, type: mediaType,uid } = props;
   const [loading, setLoading] = useState(false);
   const [images, setImage] = useState<any[]>([]);
   const [videos, setVideo] = useState<any[]>(["https://vjs.zencdn.net/v/oceans.mp4"]);
@@ -19,24 +19,38 @@ export const useViewModal = (props: MediaMessageProps) => {
   };
   const mediaMessageRequestBuilder = async () => {
     try {
-      if (!guid) return;
       setLoading(true);
       const currentDate = new Date();
       const timestampInSeconds = Math.floor(currentDate.getTime() / 1000);
       const imageCollectios: Array<String> = [];
       const videoCollections: any[] = [];
-      let GUID: string = guid,
+      let GUID: string = guid!,
         limit: number = 30,
         categories: Array<String> = ['message', 'custom'],
         types: Array<String> = [type[0], type[1]],
-        messagesRequest: CometChat.MessagesRequest =
-          new CometChat.MessagesRequestBuilder()
-            .setGUID(GUID)
+       messagesRequest: CometChat.MessagesRequest | undefined;
+      if (uid) {
+      messagesRequest =
+        new CometChat.MessagesRequestBuilder()
+          .setUID(uid)
             .setCategories(categories)
             .setTimestamp(timestampInSeconds)
             .setTypes(types)
             .setLimit(limit)
-            .build();
+            .build()
+      }
+      if (GUID) {
+       messagesRequest = new CometChat.MessagesRequestBuilder()
+              .setGUID(GUID)
+              .setCategories(categories)
+              .setTimestamp(timestampInSeconds)
+              .setTypes(types)
+              .setLimit(limit)
+              .build()
+      }
+      if (!messagesRequest) {
+          return
+      }
       const data = await messagesRequest.fetchPrevious();
       data.forEach((item) => {
         const rawMessage: any = item.getRawMessage();
@@ -53,18 +67,18 @@ export const useViewModal = (props: MediaMessageProps) => {
       setImage(imageCollectios);
       setVideo(videoCollections);
       setLoading(false);
-    } catch (error) {}
+    } catch (error) {
+    }
   };
   useEffect(() => {
-    if (!images.length) {
-      mediaMessageRequestBuilder();
-    }
+    mediaMessageRequestBuilder();
   }, []);
 
   return {
     loading,
     images,
     videos,
-    mediaType
+    mediaType,
+    mediaMessageRequestBuilder
   };
 };

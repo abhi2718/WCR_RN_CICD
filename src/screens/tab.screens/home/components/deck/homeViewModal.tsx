@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../navigation';
 import { LikeContext } from '../../../../../contexts/likes.context';
-
+import {useViewModal as notificationuseViewModal } from "../../../notification.screen/useViewModal";
+import { NotificationCountContext } from '../../../../../contexts/notificationCount.context';
 export const useViewModal = () => {
   const [profiles, setProfiles] = useState([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
@@ -19,10 +20,15 @@ export const useViewModal = () => {
   const cardRef = useRef();
   const { user } = useSelector(({ userState }) => userState);
   const { fetchAll } = useContext(LikeContext);
+  const {_setCount,count} = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
+  const { unReadCount } = notificationuseViewModal();
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;
+  useEffect(() => {
+    _setCount(unReadCount);
+  },[unReadCount])
   const fetchProfiles = async () => {
     setLoading(true);
     try {
@@ -79,5 +85,6 @@ export const useViewModal = () => {
     handleCloseModal,
     handleSetProfiles,
     goToNotification,
+    count
   };
 };

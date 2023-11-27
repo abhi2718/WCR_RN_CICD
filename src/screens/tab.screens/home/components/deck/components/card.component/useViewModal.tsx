@@ -9,7 +9,7 @@ export const useViewModal = (item: any, cardRef: any) => {
   const homeDeckRepository = new HomeDeckRepository();
   const { user } = useSelector(({ userState }) => userState);
   const { fetchAll} = useContext(LikeContext);
-  const { profilePicture, first, genderPronoun, designation, state } = item;
+  const { profilePicture, first, genderPronoun, designation, state,dob } = item;
   const handleShare = () => {
     try {
       const shareOptions = {
@@ -67,6 +67,7 @@ export const useViewModal = (item: any, cardRef: any) => {
     _handleLike,
     _handleDisLike,
     addFavourite,
-    handleBlockUser
+    handleBlockUser,
+    dob
   };
 };

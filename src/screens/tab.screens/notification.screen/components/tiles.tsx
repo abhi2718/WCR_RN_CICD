@@ -71,7 +71,7 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
               source={{ uri: item.profile }}
             />
             <Column justifyContent="space-between">
-              <View style={{backgroundColor:item.isRead?"#fff":"red"}}>
+              <View style={{backgroundColor:item.isRead?"#fff":"#fff"}}>
                 <Text>{htmlTextConvertPlainText(item.message) }</Text>
               </View>
               <Text>{unixToDate(item.createdAt)}</Text>

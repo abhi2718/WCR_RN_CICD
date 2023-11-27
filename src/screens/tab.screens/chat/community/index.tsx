@@ -1,14 +1,13 @@
 import React from 'react';
-import {View, Image} from 'react-native';
+import {View, Image,Text} from 'react-native';
 import {CometChatConversationsWithMessages} from '../../../../cometChat/src';
 import {useViewModal} from './useViewModal';
 import SwitchButton from './components/switchButton';
 import AllGroups from './components/allGroups';
-import {Logo, Row} from '../../../../components/tools';
+import {Column, Logo, Row} from '../../../../components/tools';
 import {styles} from './styles';
-
 export default function CommunityChat() {
-  const {state, setState} = useViewModal();
+  const {state, setState,count} = useViewModal();
   return (
     <View style={styles.container}>
       <View style={styles.switchContainerStyle}>
@@ -16,10 +15,13 @@ export default function CommunityChat() {
           alignItems="center"
           justifyContent="space-between"
           style={styles.rowStyle}>
+          <Column>
+          <Text>{count}</Text>
           <Image
             style={styles.bellStyle}
             source={require('../../../../assets/images/Bell.png')}
           />
+          </Column>
           <Logo width={60} height={40} />
           <Image
             style={styles.searchBarStyle}

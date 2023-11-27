@@ -67,7 +67,7 @@ const ViedoMessage = (props: MediaMessageProps) => {
   );
 };
 const ImageMessage = (props: MediaMessageProps) => {
-  const {loading, images, videos} = useViewModal(props);
+  const {loading, images} = useViewModal(props);
   return (
     <View style={styles.container}>
       {loading ? (

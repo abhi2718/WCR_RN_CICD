@@ -62,7 +62,7 @@ export const useViewModal = () => {
         ...oldState,
         notifications: updatedNotifications,
       }));
-      await notificationRepository.markAsRead(id, payload);
+      const data = await notificationRepository.markAsRead(id, payload);
     } catch (error) {}
   };
   const scrollToIndex = (index) => {
