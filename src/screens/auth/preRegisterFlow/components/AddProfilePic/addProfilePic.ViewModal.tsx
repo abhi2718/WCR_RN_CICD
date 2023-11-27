@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { pickPhotoFromGallary } from '../../../../../utils/uploads';
 import { AvatarProps } from '.';
 import { CloudinaryRepository } from '../../../../../repository/cloudinary.repo';
@@ -8,6 +8,10 @@ import {
 } from '../../../../../components/flashBar';
 import { Image } from 'react-native-image-crop-picker';
 import { objects } from '../../../../../cometChat/src/shared/views/CometChatEmojiKeyboard/resources';
+import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../../../store/reducers/user.reducer';
+import { ROUTES } from '../../../../../navigation';
 
 export type ModalImageSelectedType = {
   path: string;
@@ -20,14 +24,20 @@ export type ImageDataType = {
   name: string;
 };
 export const useAddProfilePicViewModal = (props: AvatarProps) => {
+  const loggInUserId = props.route?.params?.data || 'No data received';
   const sidePicConstant = 'sidePicConstant';
   const bottomPicConstant = 'bottomPicConstant';
   const cloudinaryRepository = new CloudinaryRepository();
   const [loading, setLoading] = useState(false);
+  const { navigation } = props;
 
+  const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [isPicUploadInfoModalVisible, setPicUploadInfoModalVisible] =
     useState(false);
 
+  const { user } = useSelector((state: any) => state.userState);
+
+  const dispatch = useDispatch();
   const closeModal = () => {
     setPicUploadInfoModalVisible(false);
   };
@@ -47,7 +57,6 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
         mime: image?.mime,
         name: image?.path?.split('/').pop()!,
       };
-      console.log('resultImage-->', resultImage);
       setProfilePicUri(resultImage);
       props.onChange?.(image);
     }
@@ -90,6 +99,65 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     setBottomUris(updatedUris);
     // props.onChange?.(updatedUris);
   };
+  const fillSavedPhotos = (photos: any) => {
+    if (!photos) {
+      return [];
+    }
+
+    const newPhotos = [];
+    if (photos?.length < 6) {
+      let count = 0;
+      for (let i = 0; i < photos.length; i++) {
+        count++;
+        const photo = photos[i];
+        const resultImage: ImageDataType = {
+          path: photo?.url,
+          mime: 'image/jpeg',
+          name: photo?.url?.split('/').pop()!,
+        };
+        newPhotos.push(resultImage);
+      }
+      for (let i = count; i < 6; i++) {
+        newPhotos.push(null);
+      }
+    }
+    return newPhotos;
+  };
+
+  const getSavedPics = () => {
+    const profilePic = user?.profilePicture;
+    const photos = fillSavedPhotos(user?.photos);
+    if (profilePic?.url) {
+      const resultImage: ImageDataType = {
+        path: profilePic?.url,
+        mime: 'image/jpeg',
+        name: profilePic?.url?.split('/').pop()!,
+      };
+      setProfilePicUri(resultImage);
+    }
+
+    if (photos) {
+      let indexForBottomPics = 0;
+      const updatedUris = [...sidePicUri!];
+      const updatedBottomUris = [...bottomUris!];
+
+      photos.forEach((photo: any, index: number) => {
+        if (index < 2) {
+          updatedUris[index] = photo;
+        }
+        if (index < 5 && index >= 2) {
+          updatedBottomUris[indexForBottomPics] = photo;
+          indexForBottomPics++;
+        }
+      });
+      setSidePicUris([...updatedUris]);
+      setBottomUris([...updatedBottomUris]);
+    }
+  };
+
+  useLayoutEffect(() => {
+    getSavedPics();
+  }, []);
 
   const setProfilePicFromModel = (imageValue: ModalImageSelectedType) => {
     if (imageValue.type == sidePicConstant) {
@@ -169,7 +237,8 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
       );
     }
     try {
-      const photos: string[] = [];
+      const photos: object[] = [];
+      setLoading(true);
       const profileCloudURL = await uploadImageToCloudinary(profilePicUri);
       const profileImage = {
         url: profileCloudURL,
@@ -186,19 +255,38 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
           );
           break;
         }
-        photos.push(cloudURL!);
+        photos.push({ url: cloudURL! });
       }
 
       await updateImagesInDatabase(profileImage, photos);
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   const updateImagesInDatabase = async (
     profileImage: objects,
-    photos: string[],
-  ) => {};
+    photos: object[],
+  ) => {
+    try {
+      const user = await updateUserDetailsRepository.updateUserDetails(
+        loggInUserId,
+        {
+          update: {
+            profilePicture: profileImage,
+            photos: photos,
+          },
+        },
+      );
+      const data = {
+        user: user,
+      };
+      dispatch(addUser(data));
+      setLoading(false);
+      navigateToHeightScreen(loggInUserId);
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const uploadImageToCloudinary = async (
     imageData: ImageDataType,
@@ -221,19 +309,18 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
         if (response?.error) {
           throw response.error;
         }
-        console.warn('🚀 ~ file: addProfilePic.tsx:155 ~ ~:', response);
         return response?.secure_url;
       } else {
         return undefined;
       }
     } catch (error) {
-      console.error(
-        '🚀 ~ file: addProfilePic.ViewModal.tsx:160 ~ ~ error:',
-        error,
-      );
     } finally {
       setLoading(false);
     }
+  };
+
+  const navigateToHeightScreen = (id: string) => {
+    navigation.navigate(ROUTES.Height, { data: id });
   };
 
   return {

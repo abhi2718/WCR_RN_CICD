@@ -110,7 +110,7 @@ const AddProfilePicScreen = (props: AvatarProps) => {
                             <Image
                               style={addPicture.photo}
                               {...props}
-                              source={{ uri: sidePic.path }}
+                              source={{ uri: sidePic?.path }}
                             />
                           </TouchableOpacity>
                           <TouchableOpacity onPress={() => removePic(index)}>
