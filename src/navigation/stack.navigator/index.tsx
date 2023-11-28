@@ -26,12 +26,26 @@ import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 import Height from '../../screens/auth/preRegisterFlow/components/height';
 import { SplashScreen } from '../../screens/splash.screens';
 import { NotificationScreen } from '../../screens/tab.screens/notification.screen';
+import VerificationStepOne from '../../screens/verification/stepOne';
+import VerificationStepTwo from '../../screens/verification/stepTwo';
 import { PreviewScreen } from '../../screens/tab.screens/profile/components/preview';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      {/* <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} /> */}
+      <Stack.Screen
+        options={options}
+        name={ROUTES.VerificationStepOne}
+        component={VerificationStepOne}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.VerificationStepTwo}
+        component={VerificationStepTwo}
+      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.ProfilePic}
@@ -94,7 +108,11 @@ export const StackNavigator = () => {
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
+<<<<<<< HEAD
+
+=======
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
+>>>>>>> 0a07a6517eb67babee41cd8c7fbbabed8b2864dc
       <Stack.Screen
         options={options}
         name={ROUTES.SexualOrientation}

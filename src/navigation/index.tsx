@@ -37,6 +37,8 @@ export enum ROUTES {
   Preview = '/preview',
   Height = '/height',
   Notification = '/notification',
+  VerificationStepOne = '/verificationStepOne',
+  VerificationStepTwo = '/verificationStepTwo',
 }
 export default function Navigator() {
   useCometChatInit();

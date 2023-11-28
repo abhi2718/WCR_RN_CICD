@@ -14,3 +14,18 @@ export const pickPhotoFromGallary = async (
     cropperCircleOverlay,
   });
 };
+
+export const pickPhotoFromCammera = async (
+  options = {
+    width: 300,
+    height: 400,
+  },
+  cropping = false,
+  cropperCircleOverlay = false,
+) => {
+  return await ImagePicker.openCamera({
+    ...options,
+    cropping,
+    cropperCircleOverlay,
+  });
+};

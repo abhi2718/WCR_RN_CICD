@@ -128,6 +128,12 @@ export const modalStyles = StyleSheet.create({
     gap: sizes[3],
     justifyContent: 'space-between',
   },
+  subText: {
+    textAlign: 'center',
+    color: colors.ui.text,
+    fontSize: fontSizes.text,
+    marginBottom: sizes[1],
+  },
   picture: {
     flex: 1,
     borderRadius: sizes[4],
