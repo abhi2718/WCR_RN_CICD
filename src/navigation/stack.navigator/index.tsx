@@ -91,7 +91,7 @@ export const StackNavigator = () => {
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
-     
+
       <Stack.Screen
         options={options}
         name={ROUTES.SignIn}
@@ -108,11 +108,7 @@ export const StackNavigator = () => {
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
-<<<<<<< HEAD
-
-=======
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
->>>>>>> 0a07a6517eb67babee41cd8c7fbbabed8b2864dc
       <Stack.Screen
         options={options}
         name={ROUTES.SexualOrientation}
@@ -146,7 +142,7 @@ export const StackNavigator = () => {
         name={ROUTES.Notification}
         component={NotificationScreen}
       />
-        <Stack.Screen
+      <Stack.Screen
         options={optins}
         name={ROUTES.Preview}
         component={PreviewScreen}
