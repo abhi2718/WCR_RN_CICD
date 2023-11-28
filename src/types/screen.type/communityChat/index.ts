@@ -42,6 +42,7 @@ export type membersTypes = {
 export type MediaMessageProps = {
   guid?: string;
   type?: string;
+  uid?:string
 };
 export type CommunityMembersProps = {
   group?: CometChat.Group;

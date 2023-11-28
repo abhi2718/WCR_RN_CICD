@@ -45,6 +45,7 @@ export interface CometChatListItemInterface {
   headViewContainerStyle?: StyleProp<ViewStyle>;
   tailViewContainerStyle?: StyleProp<ViewStyle>;
   bodyViewContainerStyle?: StyleProp<ViewStyle>;
+  isUserWindow?:boolean
 }
 export const CometChatListItem = (props: CometChatListItemInterface) => {
   //state for translateX
@@ -69,6 +70,7 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
     bodyViewContainerStyle,
     onPress,
     onLongPress,
+    isUserWindow
   } = props;
 
   const defaultlistItemStyleProps = new ListItemStyle({
@@ -237,7 +239,8 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
   };
 
   return (
-    <SwipeRow
+    <View>
+       <SwipeRow
       key={id}
       onRowDidOpen={rowOpened}
       onRowDidClose={rowClosed}
@@ -295,6 +298,7 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
         </View>
       </TouchableOpacity>
     </SwipeRow>
+   </View>
   );
 };
 

@@ -17,3 +17,9 @@ ComentChatGroupMember ---> comentChat/src/ComentChatGroupMember/ComentChatGroupM
 ComentChatGroupMember And Finding  ItemView of Flatlist --->comentChat/src/ComentChatGroupMember/ComentChatGroupMember/ItemView
 
 Finding community details screen with view Memebres , Media -->comentChat/src/CometChatDetails
+
+
+
+// Friend List Item --> CometChatConversationsWithMessages -->CometChatConversations ---> CometChatListItem
+
+CometChatMessageInput ---> CometChatMessageInput

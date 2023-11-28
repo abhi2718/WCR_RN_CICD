@@ -14,6 +14,7 @@ import { FontStyleInterface } from '../../base';
 import { localize } from '../../resources/CometChatLocalize';
 import { CometChatContext } from '../../CometChatContext';
 import { CometChatContextType } from '../../base/Types';
+import { Row } from '../../../../../components/tools';
 
 export interface CometChatMessageInputStyleInterface {
   baseStyle?: StyleProp<ViewStyle>;
@@ -102,6 +103,7 @@ export interface CometChatMessageInputInterface {
    * @description ref of {TextInput}
    */
   messageInputRef?: RefObject<any>;
+  GetEmojiIconView?:React.FC;
 }
 export const CometChatMessageInput = (
   props: CometChatMessageInputInterface
@@ -118,7 +120,8 @@ export const CometChatMessageInput = (
     auxiliaryButtonAlignment,
     PrimaryButtonView,
     onSelectionChange,
-    messageInputRef
+    messageInputRef,
+    GetEmojiIconView
   } = props;
 
   return (
@@ -167,7 +170,10 @@ export const CometChatMessageInput = (
         </View>
         <View style={{ flexDirection: 'row' }}>
           {auxiliaryButtonAlignment === 'right' && AuxiliaryButtonView && (
-            <AuxiliaryButtonView />
+            <Row>
+              <AuxiliaryButtonView />
+              {GetEmojiIconView()}
+         </Row>
           )}
           {PrimaryButtonView && <PrimaryButtonView />}
         </View>

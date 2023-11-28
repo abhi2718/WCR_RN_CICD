@@ -25,17 +25,12 @@ export const useViewModal = () => {
       });
       if (fethNext) {
         const updatedNotificatins = [
-          //...notifications.notifications,
           ...data[0].data,
         ];
         setNotifications({
           currentIndex: updatedNotificatins.length - 10,
           notifications: updatedNotificatins,
         });
-        //   setTimeout(() => {
-        //     console.log(updatedNotificatins.length,updatedNotificatins.length - 10)
-        //   scrollToIndex(updatedNotificatins.length - 5);
-        // }, 1000);
       } else {
         setNotifications({
           currentIndex: 0,
@@ -49,7 +44,7 @@ export const useViewModal = () => {
     }
   };
   const onDeleteItem = (key) => {
-    console.log(`Deleting item with key ${key}`);
+
   };
   const markAsRead = async (id: string) => {
     const payload = { update: { isRead: true } };
@@ -67,7 +62,7 @@ export const useViewModal = () => {
         ...oldState,
         notifications: updatedNotifications,
       }));
-      await notificationRepository.markAsRead(id, payload);
+      const data = await notificationRepository.markAsRead(id, payload);
     } catch (error) {}
   };
   const scrollToIndex = (index) => {
@@ -79,6 +74,14 @@ export const useViewModal = () => {
       getNotifiaction(page + 1, true);
     }
   };
+  const htmlTextConvertPlainText = (data : string)=>{
+    const item =  data.replace(/<\/?[^>]+>/ig, '');
+      if(item.length > 100){
+        return item.slice(0, 100) + '...'
+      }else{
+        return item 
+      }
+  }
   useEffect(() => {
     getNotifiaction(page);
   }, []);
@@ -90,5 +93,6 @@ export const useViewModal = () => {
     markAsRead,
     handleEndReached,
     flatListRef,
+    htmlTextConvertPlainText
   };
 };

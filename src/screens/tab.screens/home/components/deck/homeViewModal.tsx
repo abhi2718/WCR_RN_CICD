@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { dimensions, isAndroid } from '../../../../../components/tools';
 import { HomeDeckRepository } from '../../../../../repository/homeDeck.repo';
@@ -6,7 +6,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../navigation';
-
+import { LikeContext } from '../../../../../contexts/likes.context';
+import {useViewModal as notificationuseViewModal } from "../../../notification.screen/useViewModal";
+import { NotificationCountContext } from '../../../../../contexts/notificationCount.context';
 export const useViewModal = () => {
   const [profiles, setProfiles] = useState([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
@@ -17,10 +19,16 @@ export const useViewModal = () => {
   const { top, bottom } = useSafeAreaInsets();
   const cardRef = useRef();
   const { user } = useSelector(({ userState }) => userState);
+  const { fetchAll } = useContext(LikeContext);
+  const {_setCount,count} = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
+  const { unReadCount } = notificationuseViewModal();
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;
+  useEffect(() => {
+    _setCount(unReadCount);
+  },[unReadCount])
   const fetchProfiles = async () => {
     setLoading(true);
     try {
@@ -34,8 +42,8 @@ export const useViewModal = () => {
   useEffect(() => {
     fetchProfiles();
   }, []);
-  const handleSetProfiles = item => setProfiles([item, ...profiles]);
-  const goToNotification = ()=> navigate(ROUTES.Notification)
+  const handleSetProfiles = (item) => setProfiles([item, ...profiles]);
+  const goToNotification = () => navigate(ROUTES.Notification);
   const createPayLoafForUserAction = (index: number, action: string) => {
     const suggestedUser = profiles[index];
     return {
@@ -50,19 +58,20 @@ export const useViewModal = () => {
   const handleLike = async (index: number) => {
     try {
       const payLoad = createPayLoafForUserAction(index, 'Like');
-      //const data = await homeDeckRepository.userReactin(payLoad);
+      await homeDeckRepository.userReactin(payLoad);
+      fetchAll(user._id);
     } catch (error) {}
   };
   const handleDisLike = async (index: number) => {
     try {
       const payLoad = createPayLoafForUserAction(index, 'Dislike');
-      // const data = await homeDeckRepository.userReactin(payLoad);
+      await homeDeckRepository.userReactin(payLoad);
     } catch (error) {}
   };
   const toggleSearchModal = () => setShowSearchModal((preValue) => !preValue);
   const handleCloseModal = () => {
     toggleSearchModal();
-  }
+  };
   return {
     isLoading,
     profiles,
@@ -75,6 +84,7 @@ export const useViewModal = () => {
     showSearchModal,
     handleCloseModal,
     handleSetProfiles,
-    goToNotification
+    goToNotification,
+    count
   };
 };

@@ -5,6 +5,7 @@ import { Row, Spacer } from '../../../../../../../components/tools';
 import { styles } from './cardStyle';
 import { Card } from '../swiper';
 import { useViewModal } from './useViewModal';
+import {calculateAge} from "../../../../../../../utils/common.functions"
 export default function CardCompoent({ item, height, cardRef}) {
   const heightStyle = { height, ...styles.imageStyle };
   const {
@@ -17,7 +18,8 @@ export default function CardCompoent({ item, height, cardRef}) {
     _handleLike,
     _handleDisLike,
     addFavourite,
-    handleBlockUser
+    handleBlockUser,
+    dob
   } = useViewModal(item, cardRef);
 
   return (
@@ -31,7 +33,7 @@ export default function CardCompoent({ item, height, cardRef}) {
                 source={{ uri: profilePicture.url }}
               />
               <Text>
-                {first} ({genderPronoun})
+                {first} ({genderPronoun}) {calculateAge(dob)}
               </Text>
               <Row>
                 <Text>{designation.userDegree}</Text>
@@ -49,7 +51,7 @@ export default function CardCompoent({ item, height, cardRef}) {
                 <Text>Vital Signs</Text>
               </View>
             </View>
-            {item.photos.map(({ url, _id }) => {
+            {item.photos.map(({ url, _id },index) => {
               return (
                 <FastImage
                   key={_id}

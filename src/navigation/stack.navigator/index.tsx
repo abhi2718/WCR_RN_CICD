@@ -26,6 +26,7 @@ import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 import Height from '../../screens/auth/preRegisterFlow/components/height';
 import { SplashScreen } from '../../screens/splash.screens';
 import { NotificationScreen } from '../../screens/tab.screens/notification.screen';
+import { PreviewScreen } from '../../screens/tab.screens/profile/components/preview';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
@@ -41,6 +42,11 @@ export const StackNavigator = () => {
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Profile}
+        component={Profile}
+      />
       <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
 
       <Stack.Screen name={ROUTES.SPLASH} component={SplashScreen} />
@@ -51,13 +57,11 @@ export const StackNavigator = () => {
       />
 
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
-
       <Stack.Screen
         options={options}
         name={ROUTES.MaritalStatus}
         component={MaritalStatus}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.LookingFor}
@@ -68,18 +72,12 @@ export const StackNavigator = () => {
         name={ROUTES.AddEthnicity}
         component={AddEthnicityScreen}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
-
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
+     
       <Stack.Screen
         options={options}
         name={ROUTES.SignIn}
@@ -96,17 +94,14 @@ export const StackNavigator = () => {
         name={ROUTES.EmailAuth}
         component={EmailAuthByOtpScreeen}
       />
-
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
       <Stack.Screen
         options={options}
         name={ROUTES.SexualOrientation}
         component={SexualOrientation}
       />
-
       <Stack.Screen options={options} name={ROUTES.Kids} component={Kids} />
       <Stack.Screen options={options} name={ROUTES.Habits} component={Habits} />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Hobbies}
@@ -132,6 +127,11 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.Notification}
         component={NotificationScreen}
+      />
+        <Stack.Screen
+        options={optins}
+        name={ROUTES.Preview}
+        component={PreviewScreen}
       />
     </Stack.Navigator>
   );
