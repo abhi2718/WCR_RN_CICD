@@ -635,10 +635,7 @@ export const CometChatMessageComposer = React.forwardRef(
             setGroupMembers(groupMembers);
           },
           (error) => {
-            console.log(
-              'Group Member list fetching failed with exception:',
-              error,
-            );
+            
           },
         );
       };

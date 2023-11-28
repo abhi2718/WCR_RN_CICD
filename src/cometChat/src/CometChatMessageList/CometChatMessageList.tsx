@@ -1222,7 +1222,6 @@ export const CometChatMessageList = forwardRef<
         CometChatUIEventHandler.emitUIEvent('openChat', { user, group });
       })
       .catch((e) => {
-        console.log(e);
         onError && onError(e);
       });
   };
@@ -1600,10 +1599,8 @@ export const CometChatMessageList = forwardRef<
           emoji,
         })
           .then((response) => {
-            console.log('response -->', response);
           })
           .catch((error) => {
-            console.log(error);
           });
       }
       _bottomSheetRef?.current?.close();
