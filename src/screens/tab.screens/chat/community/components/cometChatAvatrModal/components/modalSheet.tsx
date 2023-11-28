@@ -8,9 +8,11 @@ import { useViewMdal } from './useviewModal';
 import { ProfileModalSheetProps } from '../../../../../../../types/screen.type/privateChat';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../../navigation';
+import { ProfileModal } from '../../../../../../../components/profile.component';
 
 export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
-  const { visible, toggleVisiblity, image, name, navigateToPrivateChat } =
+  const { visible, toggleVisiblity, image, name, navigateToPrivateChat,senderId, toggleModal,
+    showModal } =
     useViewMdal(props);
   return (
     <Modal visible={visible}>
@@ -37,9 +39,17 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
               <Pressable onPress={navigateToPrivateChat}>
                 <Text style={modalStyle.messageBtn}> Message </Text>
               </Pressable>
-              <Pressable>
+              <Pressable onPress={()=>toggleModal()}>
                 <Text style={modalStyle.profileBtn}>Check Profile </Text>
               </Pressable>
+              <ProfileModal
+                showModal={showModal }
+                toggleModal={toggleModal }
+                userId={senderId}
+                showDisLike={true}
+                showLike={true}
+                showSave={true}
+              />
             </Row>
           </Column>
         </View>

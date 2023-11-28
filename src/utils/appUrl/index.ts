@@ -2,6 +2,7 @@ import { config } from '../config';
 
 export class AppUrl {
   public static readonly BASE_URL = config.API_URL;
+  public static readonly COMETCHAT_BASE_URL = `https://${config.APP_ID}.api-${config.REGION}.cometchat.io/v3`;
   public static userEndPoint = `${this.BASE_URL}/users`;
   public static authEndPoint = `${this.BASE_URL}/auth`;
   public static userUpdatedetails = `${this.BASE_URL}/user`;
@@ -13,5 +14,7 @@ export class AppUrl {
   public static showProfileViewEndPoint = `${this.BASE_URL}/profile-view?profileViewId=`;
   public static searchUserEndPoint = `${this.BASE_URL}/user/search?searchValue=`;
   public static notificationEndPoint = `${this.BASE_URL}/notification`;
+  public static matchEndPoint = `${this.BASE_URL}/matched`;
+  public static comentChatFriendListUrl = `${this.COMETCHAT_BASE_URL}/conversations`;
   public static cloudinarySignatureEndPoint = `${this.BASE_URL}/auth/signature`;
 }

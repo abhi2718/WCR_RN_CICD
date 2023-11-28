@@ -27,6 +27,7 @@ export default function Deck() {
     showSearchModal,
     handleSetProfiles,
     goToNotification,
+    count
   } = useViewModal();
   if (isLoading) {
     return <FullLoader />;
@@ -42,6 +43,7 @@ export default function Deck() {
         <Row justifyContent="space-between" alignItems="center">
           <Row>
             <Pressable onPress={goToNotification}>
+            <Text>{count}</Text>
               <Image
                 resizeMode="contain"
                 style={styles.iconStyle}

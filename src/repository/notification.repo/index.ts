@@ -10,7 +10,6 @@ export class NotificationRepository {
     }
     async markAsRead(id:string,payload:any) {
       const url = `${AppUrl.notificationEndPoint}/${id}`;
-      console.log(url);
       return this.apiService.getPutApiResponse(url,payload);
 }
 }

@@ -1,6 +1,4 @@
-import { CometChat } from '@cometchat/chat-sdk-react-native';
 import {createContext, useRef, useState} from 'react';
-
 export const MessageContext = createContext(null);
 
 export const MessageContextProvider = (props) => {

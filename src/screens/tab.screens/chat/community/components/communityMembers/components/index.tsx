@@ -6,22 +6,26 @@ import { styles } from './styles';
 import { MemberProps } from '../../../../../../../types/screen.type/communityChat';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../../navigation';
+import { ProfileModal } from '../../../../../../../components/profile.component';
 
 export const Member = (props: MemberProps) => {
-  const { member,toggleSetShowMembers } = props;
+  const { member, toggleSetShowMembers } = props;
   const [showModal, setModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const toggleModal = () => {
     setModal((oldValue) => !oldValue);
   };
+  const togglePrfileModal = (state?: boolean) =>
+    setShowProfileModal((oldValue) => (state ? state : !oldValue));
   const navigation = useNavigation();
   const navigateToChatWindow = () => {
     toggleModal();
     toggleSetShowMembers();
     navigation.navigate(ROUTES.CommunityPrivateChat, {
       senderId: member.getUid(),
-      name: member.getName()
-    }); 
-  }
+      name: member.getName(),
+    });
+  };
   return (
     <View>
       <Spacer position="bottom" size={10}>
@@ -55,14 +59,24 @@ export const Member = (props: MemberProps) => {
               <Spacer position="left" size={10}>
                 <Text>{member.getName()}</Text>
               </Spacer>
-              <Spacer position="top" size={80}>
-                <Text>View Profile</Text>
-              </Spacer>
-              <Pressable onPress={navigateToChatWindow}>
-              <Spacer position="top" size={10}>
-                <Text>Message</Text>
-              </Spacer>
+              <Pressable onPress={() => togglePrfileModal()}>
+                <Spacer position="top" size={80}>
+                  <Text>View Profile</Text>
+                </Spacer>
               </Pressable>
+              <Pressable onPress={navigateToChatWindow}>
+                <Spacer position="top" size={10}>
+                  <Text>Message</Text>
+                </Spacer>
+              </Pressable>
+              <ProfileModal
+                showModal={showProfileModal}
+                toggleModal={togglePrfileModal}
+                userId={member.getUid()}
+                showDisLike={true}
+                showLike={true}
+                showSave={true}
+              />
             </Column>
           </Spacer>
         </SafeAreaView>

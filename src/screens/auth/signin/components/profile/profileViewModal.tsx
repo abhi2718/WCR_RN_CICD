@@ -68,7 +68,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     const numericString: string = getNumericString(text);
     let result = '';
     if (numericString.length <= 3) {
-      result = `(${numericString})`;
+     result = `${numericString}`;
     } else if (numericString.length > 3 && numericString.length <= 6) {
       result = `(${numericString.substr(0, 3)}) ${numericString.substr(3)}`;
     } else if (numericString.length > 6) {

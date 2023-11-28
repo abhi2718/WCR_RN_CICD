@@ -34,6 +34,7 @@ export enum ROUTES {
   Habits = '/habits',
   About = '/about',
   Hobbies = '/hobbies',
+  Preview = '/preview',
   Height = '/height',
   Notification = '/notification',
   VerificationStepOne = '/verificationStepOne',
