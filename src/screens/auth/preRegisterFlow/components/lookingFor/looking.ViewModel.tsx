@@ -53,10 +53,15 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      setLoading(true);
+      
       const selectedEthnicityData = {
         relationship: selectedRelationship,
       };
+      if(selectedRelationship.length === 0){
+        navigateToMaritalStatusScreen(loggInUserId);
+        return 
+      }
+      setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
         {

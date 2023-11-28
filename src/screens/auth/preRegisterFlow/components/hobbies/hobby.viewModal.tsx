@@ -37,11 +37,16 @@ export const useHobbyViewModal = (props:ScreenParams) => {
 
     const updateUserDetails = async () => {
         try {
-          setLoading(true);
           const selectedInterests = {
             interests: selectedHobbies,
            
           };
+
+          if(selectedHobbies.length===0){
+            navigateToKidsScreen(loggInUserId);
+            return 
+          }
+          setLoading(true);
           const user = await updateUserDetailsRepository.updateUserDetails(
             loggInUserId,
             {

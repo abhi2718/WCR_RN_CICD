@@ -86,13 +86,18 @@ export const useheightViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      setLoading(true);
+     
       const heightData = {
         height: {
           feet: heightValue?.feet,
           inch: heightValue?.inch,
         },
       };
+      if(!heightData){
+        navigateToEthnicityScreen(loggInUserId);
+        return 
+      }
+      setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
         {
