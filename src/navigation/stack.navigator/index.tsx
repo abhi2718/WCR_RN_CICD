@@ -15,7 +15,7 @@ import GenderProunoun from '../../screens/auth/preRegisterFlow/components/gender
 import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 import LocationScreen from '../../screens/auth/preRegisterFlow/components/location';
-import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
+import AddProfilePicScreen from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
 import AddEthnicityScreen from '../../screens/auth/preRegisterFlow/components/addEthnicity';
 import RelationShipScreen from '../../screens/auth/preRegisterFlow/components/lookingFor';
 import MaritalStatus from '../../screens/auth/preRegisterFlow/components/maritalStatus';
@@ -48,16 +48,16 @@ export const StackNavigator = () => {
 
       <Stack.Screen
         options={options}
+        name={ROUTES.ProfilePic}
+        component={AddProfilePicScreen}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
       <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
 
-      <Stack.Screen
-        options={options}
-        name={ROUTES.ProfilePic}
-        component={AddProfilePic}
-      />
       <Stack.Screen name={ROUTES.SPLASH} component={SplashScreen} />
       <Stack.Screen
         options={options}

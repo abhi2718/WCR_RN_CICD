@@ -13,4 +13,5 @@ export class AppUrl {
   public static showProfileViewEndPoint = `${this.BASE_URL}/profile-view?profileViewId=`;
   public static searchUserEndPoint = `${this.BASE_URL}/user/search?searchValue=`;
   public static notificationEndPoint = `${this.BASE_URL}/notification`;
+  public static cloudinarySignatureEndPoint = `${this.BASE_URL}/auth/signature`;
 }

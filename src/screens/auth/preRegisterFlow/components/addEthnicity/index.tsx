@@ -24,7 +24,6 @@ const AddEthnicityScreen = (props: ScreenParams) => {
       <View style={addEthnicityStyle.container}>
         <View style={{ flex: 1 }}>
           <HeaderBar
-            isModalVisible={false}
             skip={() => navigateToRelationshipScreen(loggInUserId)}
           ></HeaderBar>
           <Text style={addEthnicityStyle.subHeader}>
