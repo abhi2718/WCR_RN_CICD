@@ -25,6 +25,7 @@ import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
 import { SplashScreen } from '../../screens/splash.screens';
 import { NotificationScreen } from '../../screens/tab.screens/notification.screen';
+import { PreviewScreen } from '../../screens/tab.screens/profile/components/preview';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
@@ -37,13 +38,18 @@ export const StackNavigator = () => {
       />
        <Stack.Screen
         options={options}
-        name={ROUTES.Tab}
-        component={TabNavigator}
+        name={ROUTES.Onboarding}
+        component={Onboarding}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Profile}
+        component={Profile}
       />
        <Stack.Screen
         options={options}
-        name={ROUTES.Onboarding}
-        component={Onboarding}
+        name={ROUTES.Tab}
+        component={TabNavigator}
       />
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
@@ -66,11 +72,7 @@ export const StackNavigator = () => {
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Profile}
-        component={Profile}
-      />
+     
       <Stack.Screen
         options={options}
         name={ROUTES.SignIn}
@@ -123,6 +125,11 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.Notification}
         component={NotificationScreen}
+      />
+        <Stack.Screen
+        options={optins}
+        name={ROUTES.Preview}
+        component={PreviewScreen}
       />
     </Stack.Navigator>
   );

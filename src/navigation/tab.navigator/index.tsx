@@ -11,6 +11,7 @@ import SolidPrivateChatImage, { VectorPrivateChatImage } from './components/priv
 import SolidProfileImageImage from './components/profile';
 import { PrivateChatScreen } from '../../screens/tab.screens/chat/private';
 import { LikeScreen } from '../../screens/tab.screens/like.screen';
+import { ProfileScreen } from '../../screens/tab.screens/profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,13 +33,6 @@ const screenOptions = ({route}) => ({
   },
 });
 
-const ProfileScreen = () => {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-};
 const options = {headerShown: false};
 export const TabNavigator = () => {
   return (
