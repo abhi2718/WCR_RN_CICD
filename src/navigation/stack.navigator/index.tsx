@@ -37,6 +37,11 @@ export const StackNavigator = () => {
       {/* <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} /> */}
       <Stack.Screen
         options={options}
+        name={ROUTES.Onboarding}
+        component={Onboarding}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.VerificationStepOne}
         component={VerificationStepOne}
       />
@@ -45,7 +50,6 @@ export const StackNavigator = () => {
         name={ROUTES.VerificationStepTwo}
         component={VerificationStepTwo}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.ProfilePic}
@@ -53,23 +57,16 @@ export const StackNavigator = () => {
       />
       <Stack.Screen
         options={options}
-        name={ROUTES.Onboarding}
-        component={Onboarding}
-      />
-      <Stack.Screen
-        options={options}
         name={ROUTES.Profile}
         component={Profile}
       />
       <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
-
       <Stack.Screen name={ROUTES.SPLASH} component={SplashScreen} />
       <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
       />
-
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
@@ -91,7 +88,6 @@ export const StackNavigator = () => {
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.SignIn}
@@ -102,7 +98,6 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.EmailAuth}
@@ -121,7 +116,6 @@ export const StackNavigator = () => {
         name={ROUTES.Hobbies}
         component={Hobbies}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
