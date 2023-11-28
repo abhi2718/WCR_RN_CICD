@@ -16,4 +16,5 @@ export class AppUrl {
   public static notificationEndPoint = `${this.BASE_URL}/notification`;
   public static matchEndPoint = `${this.BASE_URL}/matched`;
   public static comentChatFriendListUrl = `${this.COMETCHAT_BASE_URL}/conversations`;
+  public static cloudinarySignatureEndPoint = `${this.BASE_URL}/auth/signature`;
 }

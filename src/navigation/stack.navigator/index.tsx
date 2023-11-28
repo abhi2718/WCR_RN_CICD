@@ -15,7 +15,7 @@ import GenderProunoun from '../../screens/auth/preRegisterFlow/components/gender
 import SexualOrientation from '../../screens/auth/preRegisterFlow/components/sexualOrientation';
 import Profession from '../../screens/auth/preRegisterFlow/components/profession';
 import LocationScreen from '../../screens/auth/preRegisterFlow/components/location';
-import AddProfilePic from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
+import AddProfilePicScreen from '../../screens/auth/preRegisterFlow/components/AddProfilePic';
 import AddEthnicityScreen from '../../screens/auth/preRegisterFlow/components/addEthnicity';
 import RelationShipScreen from '../../screens/auth/preRegisterFlow/components/lookingFor';
 import MaritalStatus from '../../screens/auth/preRegisterFlow/components/maritalStatus';
@@ -23,6 +23,7 @@ import Kids from '../../screens/auth/preRegisterFlow/components/kids';
 import Habits from '../../screens/auth/preRegisterFlow/components/habits';
 import About from '../../screens/auth/preRegisterFlow/components/about';
 import Hobbies from '../../screens/auth/preRegisterFlow/components/hobbies';
+import Height from '../../screens/auth/preRegisterFlow/components/height';
 import { SplashScreen } from '../../screens/splash.screens';
 import { NotificationScreen } from '../../screens/tab.screens/notification.screen';
 import { PreviewScreen } from '../../screens/tab.screens/profile/components/preview';
@@ -33,10 +34,10 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={options}
-        name={ROUTES.SPLASH}
-        component={SplashScreen}
+        name={ROUTES.ProfilePic}
+        component={AddProfilePicScreen}
       />
-       <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
@@ -46,11 +47,15 @@ export const StackNavigator = () => {
         name={ROUTES.Profile}
         component={Profile}
       />
-       <Stack.Screen
+      <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
+
+      <Stack.Screen name={ROUTES.SPLASH} component={SplashScreen} />
+      <Stack.Screen
         options={options}
         name={ROUTES.Tab}
         component={TabNavigator}
       />
+
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
@@ -83,6 +88,7 @@ export const StackNavigator = () => {
         name={ROUTES.Profession}
         component={Profession}
       />
+
       <Stack.Screen
         options={options}
         name={ROUTES.EmailAuth}
@@ -101,11 +107,7 @@ export const StackNavigator = () => {
         name={ROUTES.Hobbies}
         component={Hobbies}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.ProfilePic}
-        component={AddProfilePic}
-      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
@@ -121,7 +123,7 @@ export const StackNavigator = () => {
         name={ROUTES.CommunityPrivateChat}
         component={PrivateChatWindowWrapper}
       />
-        <Stack.Screen
+      <Stack.Screen
         options={optins}
         name={ROUTES.Notification}
         component={NotificationScreen}

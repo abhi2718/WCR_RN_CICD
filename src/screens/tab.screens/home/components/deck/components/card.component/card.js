@@ -51,7 +51,7 @@ export default function CardCompoent({ item, height, cardRef}) {
                 <Text>Vital Signs</Text>
               </View>
             </View>
-            {item.photos.map(({ url, _id }) => {
+            {item.photos.map(({ url, _id },index) => {
               return (
                 <FastImage
                   key={_id}

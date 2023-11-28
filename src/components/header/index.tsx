@@ -1,23 +1,26 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Row, Logo } from '../tools';
+import { Image, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Row, Logo, dimensions } from '../tools';
 import { useNavigation } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
+import { fontSizes } from '../../infrastructure/theme/fonts';
+import { PrimaryButton } from '../button';
 
 interface HeaderBarProps {
   skip?: () => void;
+  info?: () => void;
   goBack?: () => void;
-  showModal?: () => void;
 }
 export const HeaderBar = (props: HeaderBarProps) => {
-  const { goBack, skip,showModal } = props;
+  const { goBack, skip, info } = props;
+
   const navigation = useNavigation();
   const _goBack = goBack ? goBack : navigation.goBack;
   return (
     <Row justifyContent="space-between" alignItems="center">
       <Pressable onPress={_goBack}>
-        <View style={headerStyle.arrowContainer} >
+        <View style={headerStyle.arrowContainer}>
           <Image
             style={headerStyle.arrow}
             source={require('../../assets/images/icons/arrow.png')}
@@ -29,26 +32,26 @@ export const HeaderBar = (props: HeaderBarProps) => {
         <Pressable onPress={skip}>
           <Text style={headerStyle.skipBtn}>Skip</Text>
         </Pressable>
-      ) : (
-        <View style={headerStyle.emptyView} />
-      )}
-      {props.showModal ? (
-        <Pressable onPress={showModal}>
-          <Text style={headerStyle.skipBtn}>
+      ) : props.info ? (
+        <Pressable onPress={info}>
           <Image
+            style={headerStyle.infoIcon}
             source={require('../../assets/images/icons/infoIcon.png')}
-          /></Text>
+          />
         </Pressable>
       ) : (
         <View style={headerStyle.emptyView} />
       )}
+
+      {/* Profile pic info Modal */}
     </Row>
   );
 };
+
 export const headerStyle = StyleSheet.create({
   arrow: {
     height: sizes[4],
-    width:sizes[2],
+    width: sizes[2],
   },
   logo: {
     marginLeft: -5,
@@ -59,6 +62,10 @@ export const headerStyle = StyleSheet.create({
   skipBtn: {
     fontSize: sizes[4],
     color: colors.ui.text,
+  },
+  infoIcon: {
+    height: sizes[4],
+    width: sizes[4],
   },
   emptyView: {
     height: sizes[11],

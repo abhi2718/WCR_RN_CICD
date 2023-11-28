@@ -41,7 +41,7 @@ const Habits = (props: ScreenParams) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Drinking Habits</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {drinking.map((option, index) => (
                   <Chip
                     key={index}
@@ -66,7 +66,7 @@ const Habits = (props: ScreenParams) => {
 
             <View>
               <Text style={ChipStyle.subHeader}>Smoking Habits</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {smoking.map((option, index) => (
                   <Chip
                     key={index}
@@ -93,7 +93,7 @@ const Habits = (props: ScreenParams) => {
               <Text style={ChipStyle.subHeader}>
                 How often do you exercise?
               </Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {exercise.map((option, index) => (
                   <Chip
                     key={index}
@@ -118,7 +118,7 @@ const Habits = (props: ScreenParams) => {
 
             <View>
               <Text style={ChipStyle.subHeader}>Do you have pets?</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {pets.map((option, index) => (
                   <Chip
                     key={index}

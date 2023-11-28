@@ -17,31 +17,33 @@ const AddEthnicityScreen = (props: ScreenParams) => {
     updateUserDetails,
     ethnicityflag,
     loggInUserId,
-    navigateToRelationshipScreen
+    navigateToRelationshipScreen,
   } = useEthnicityViewModal(props);
   return (
     <ScreenContainer>
-      <ScrollView>
-        <View style={addEthnicityStyle.container}>
-          <View>
-            <HeaderBar skip={()=>navigateToRelationshipScreen(loggInUserId)} ></HeaderBar>
-            <Text style={addEthnicityStyle.subHeader}>Your Ethnicity</Text>
-            <View style={{ height: 700 }}>
-              <MultipleCheckBoxList
-                data={ethnicityList}
-                onChangeValue={handleSeletedList}
-                onChangeListValue={handleListChange}
-                preferNotTosayflag={ethnicityflag}
-              />
-            </View>
+      <View style={addEthnicityStyle.container}>
+        <View style={{ flex: 1 }}>
+          <HeaderBar
+            skip={() => navigateToRelationshipScreen(loggInUserId)}
+          ></HeaderBar>
+          <Text style={addEthnicityStyle.subHeader}>
+            Tell us your ethnicity
+          </Text>
+          <View style={{ flex: 1 }}>
+            <MultipleCheckBoxList
+              data={ethnicityList}
+              onChangeValue={handleSeletedList}
+              onChangeListValue={handleListChange}
+              preferNotTosayflag={ethnicityflag}
+            />
           </View>
-          <PrimaryButton
-            onPress={updateUserDetails}
-            title="Next"
-            isLoading={loading}
-          />
         </View>
-      </ScrollView>
+        <PrimaryButton
+          onPress={updateUserDetails}
+          title="Next"
+          isLoading={loading}
+        />
+      </View>
     </ScreenContainer>
   );
 };

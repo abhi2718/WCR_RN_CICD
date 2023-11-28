@@ -124,5 +124,11 @@
 	<false/>
 	<key>c50a9aa3670d3361a24048d09abb9bf3</key>
 	<string>CLIENT-TOKEN</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+<string>$(PRODUCT_NAME) would like to upload photos from your photo gallery</string>
+<key>NSCameraUsageDescription</key>
+<string>$(PRODUCT_NAME) requires to access camera for uploading photos to your profile or posts</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>$(PRODUCT_NAME) requires to access Audio recording to record and uplod videos</string>
 </dict>
 </plist>

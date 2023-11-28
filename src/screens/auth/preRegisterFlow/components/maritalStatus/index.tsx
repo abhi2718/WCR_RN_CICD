@@ -40,7 +40,7 @@ const MaritalStatus = (props: ScreenParams) => {
               <Text style={ChipStyle.subHeader}>
                 What's your marital status?
               </Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {maritalStatus.map((option, index) => (
                   <Chip
                     key={index}
@@ -65,7 +65,7 @@ const MaritalStatus = (props: ScreenParams) => {
 
             <View>
               <Text style={ChipStyle.subHeader}>Religion</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {religion.map((option, index) => (
                   <Chip
                     key={index}
@@ -90,7 +90,7 @@ const MaritalStatus = (props: ScreenParams) => {
 
             <View>
               <Text style={ChipStyle.subHeader}>Political View</Text>
-              <Row style={ChipStyle.chipRow}>
+              <Row style={ChipStyle.chipRow} gap={10}>
                 {politics.map((option, index) => (
                   <Chip
                     key={index}

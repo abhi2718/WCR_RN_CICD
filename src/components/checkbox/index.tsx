@@ -16,6 +16,9 @@ import {
 } from '../../types/components/checkbox.type';
 import { preferNotToSay } from '../../utils/constanst';
 import { makeFalseDefaultValue } from '../../utils/common.functions';
+import { Row } from '../tools';
+import { sizes } from '../../infrastructure/theme/sizes';
+import { colors } from '../../infrastructure/theme/colors';
 
 const CustomCheckbox = styled.View`
   width: 20px;
@@ -23,6 +26,8 @@ const CustomCheckbox = styled.View`
   border: 1px solid blue;
   justify-content: center;
   align-items: center;
+  border-radius: 2px;
+  border: 2px solid #49454f;
 `;
 
 export const MultipleCheckBoxList: React.FC<CheckBoxProps> = ({
@@ -59,64 +64,40 @@ export const MultipleCheckBoxList: React.FC<CheckBoxProps> = ({
         data={renderData}
         renderItem={({ item }) => {
           return (
-            <Card style={{ margin: 5 }}>
-              <View style={styles.card}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    flex: 1,
-                  }}
-                >
-                  <Pressable onPress={() => handleChange(item.id)}>
-                    <CustomCheckbox>
-                      {item.isChecked && (
-                        <Image
-                          source={require('.../../../../assets/images/check-icon.png')}
-                          style={{ height: 15, width: 15 }}
-                        />
-                      )}
-                    </CustomCheckbox>
-                  </Pressable>
-                  <Text>{item.text}</Text>
-                </View>
-              </View>
-            </Card>
+            <Row style={styles.card}>
+              <Pressable onPress={() => handleChange(item.id)}>
+                <CustomCheckbox style={styles.checkBox}>
+                  {item.isChecked && (
+                    <Image
+                      style={styles.checkedBoxImg}
+                      source={require('.../../../../assets/images/icons/checkedBox.png')}
+                    />
+                  )}
+                </CustomCheckbox>
+              </Pressable>
+              <Text style={styles.text}>{item.text}</Text>
+            </Row>
           );
         }}
       />
     );
   };
-  return (
-    <View style={styles.container}>
-      <View style={{ flex: 1 }}>{renderFlatList(products)}</View>
-    </View>
-  );
+  return <View style={styles.container}>{renderFlatList(products)}</View>;
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    //  paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ECF0F1',
-    padding: 8,
   },
   card: {
-    padding: 10,
-    margin: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    marginBottom: sizes[4],
   },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 5,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    elevation: 5,
+  checkBox: {
+    marginRight: sizes[4],
   },
   text: {
-    textAlign: 'center',
+    fontSize: sizes[3],
+    color: colors.ui.text,
     fontWeight: 'bold',
   },
+  checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });
