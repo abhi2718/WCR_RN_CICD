@@ -31,7 +31,7 @@ export const useAboutViewModal = (props: ScreenParams) => {
         bio: aboutText,
       };
       const user = await updateUserDetailsRepository.updateUserDetails(
-        '653a9ad26b7a2255d03bf4fd',
+        loggInUserId,
         {
           update: bioData,
         },
