@@ -23,7 +23,7 @@ import DatePicker from 'react-native-date-picker';
 //import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
 //import {ModalComponent} from '../../../../components/modal/index';
 import moment from 'moment';
-import { ModalComponent } from '../../../../../components/modal';
+import { WelcomeModalComponent } from '../../../../../components/modal';
 import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.functions';
 import { FlatInput } from '../../../../../components/inputBox/index';
 import { ErrorText } from '../../signInStyle';
@@ -55,10 +55,10 @@ const Profile = (props: ScreenParams) => {
 
   return (
     <ScreenContainer>
-      <ModalComponent
+      <WelcomeModalComponent
         isVisible={isWelcomeModalVisible}
         onClose={closeModal}
-      ></ModalComponent>
+      ></WelcomeModalComponent>
       <View style={profileStyles.container}>
         <View style={profileStyles.innerView}>
           <View style={{ flex: 1 }}>

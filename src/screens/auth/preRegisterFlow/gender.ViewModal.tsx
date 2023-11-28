@@ -32,7 +32,7 @@ export const useGenderViewModal = (props: ScreenParams) => {
   };
 
   const navigateToGenderPronounScreen = (id: string) => {
-    navigation.navigate(ROUTES.GenderPronoun, { data: id });
+    navigation.navigate(ROUTES.ProfilePic, { data: id });
   };
 
   const updateUserDetails = async (id: string, update: string) => {
