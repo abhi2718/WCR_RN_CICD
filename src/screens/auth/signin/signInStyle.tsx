@@ -5,7 +5,7 @@ import { colors } from '../../../infrastructure/theme/colors';
 import { fontSizes } from '../../../infrastructure/theme/fonts';
 
 export const ErrorText = styled.Text`
-  color: red;
+  color: ${colors.ui.primary};
 `;
 export const styles = StyleSheet.create({
   scrollDiv: {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.ui.tertiary,
-   //paddingVertical:sizes[2],
+    //paddingVertical:sizes[2],
     borderRadius: sizes[9],
     paddingHorizontal: sizes[3],
     marginVertical: sizes[2],
