@@ -46,7 +46,7 @@ export const useProfessionModal = (props: ScreenParams) => {
   };
 
    const navigateToPictureUploadingScreenScreen = (id: string) => {
-       navigation.navigate(ROUTES.Height, { data: id });
+       navigation.navigate(ROUTES.ProfilePic, { data: id });
      };
 
   const handleSubmit = async () => {
