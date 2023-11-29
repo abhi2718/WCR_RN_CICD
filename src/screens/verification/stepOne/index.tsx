@@ -10,12 +10,17 @@ import { ErrorText } from '../../auth/signin/signInStyle';
 import { PrimaryButton } from '../../../components/button';
 import { useNavigation } from '@react-navigation/native';
 import VerificationStepTwo from '../stepTwo';
+import { ScreenParams } from '../../../types/services.types/firebase.service';
+import { useVerificationViewModal } from './stepOne.ViewModal';
 
-const VerificationStepOne = () => {
-  const navigation = useNavigation();
-  const [value, setValue] = React.useState('');
-
-  console.log(`Verification`, value);
+const VerificationStepOne = (props: ScreenParams) => {
+  const {
+    verificationOption,
+    setVerificationOption,
+    handleVerificationOption,
+    validationErrors,
+    handleInputChange,
+  } = useVerificationViewModal(props);
 
   return (
     <ScreenContainer>
@@ -23,8 +28,8 @@ const VerificationStepOne = () => {
       <Text style={verificationStyle.subHeader}>ID Verification (Step I)</Text>
       <View style={verificationStyle.container}>
         <RadioButton.Group
-          onValueChange={(newValue) => setValue(newValue)}
-          value={value}
+          onValueChange={(newValue) => setVerificationOption(newValue)}
+          value={verificationOption}
         >
           <Row style={verificationStyle.rowView} alignItems="center">
             <RadioButton color={colors.ui.primary} value="NPI Number" />
@@ -32,10 +37,17 @@ const VerificationStepOne = () => {
               NPI Number (Recommended)
             </Text>
           </Row>
-          {value === 'NPI Number' && (
+          {verificationOption === 'NPI Number' && (
             <View style={verificationStyle.textBox}>
-              <FlatInput label="Individual NPI Number" />
-              <ErrorText>Enter valid NPI Number</ErrorText>
+              <FlatInput
+                label="Individual NPI Number"
+                maxLength={10}
+                error={validationErrors.npiNumber}
+                onChangeText={(text: string) =>
+                  handleInputChange('npiNumber', text)
+                }
+              />
+              <ErrorText>{validationErrors.npiNumber}</ErrorText>
             </View>
           )}
 
@@ -43,14 +55,29 @@ const VerificationStepOne = () => {
             <RadioButton color={colors.ui.primary} value="License Number" />
             <Text style={verificationStyle.btnText}>License Number</Text>
           </Row>
-          {value === 'License Number' && (
+          {verificationOption === 'License Number' && (
             <>
               <View style={verificationStyle.textBox}>
-                <FlatInput label="License Number" />
+                <FlatInput
+                  label="License Number"
+                  maxLength={10}
+                  onChangeText={(text: string) =>
+                    handleInputChange('license', text)
+                  }
+                  error={validationErrors.license}
+                />
+                <ErrorText>{validationErrors.license}</ErrorText>
               </View>
               <View style={verificationStyle.textBox}>
-                <FlatInput label="State/Territory" />
-                <ErrorText>(max 40 characters)</ErrorText>
+                <FlatInput
+                  label="State/Territory"
+                  maxLength={40}
+                  onChangeText={(text: string) =>
+                    handleInputChange('state', text)
+                  }
+                  error={validationErrors.state}
+                />
+                <ErrorText>{validationErrors.state}</ErrorText>
               </View>
             </>
           )}
@@ -65,10 +92,7 @@ const VerificationStepOne = () => {
           </Row>
         </RadioButton.Group>
         <View style={verificationStyle.footerDiv}>
-          <PrimaryButton
-            onPress={() => navigation.navigate('/verificationStepTwo')}
-            title="Next"
-          />
+          <PrimaryButton onPress={handleVerificationOption} title="Next" />
         </View>
       </View>
     </ScreenContainer>

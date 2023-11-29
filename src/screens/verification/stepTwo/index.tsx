@@ -37,6 +37,7 @@ import { ImageOrVideo } from 'react-native-image-crop-picker';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
+import { useVerificationViewModal } from './stepTwo.ViewModal';
 
 interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
@@ -45,42 +46,24 @@ interface AvatarProps extends ImageProps {
 }
 
 const VerificationStepTwo = (props: AvatarProps) => {
-  const [visibleModal, setVisibleModal] = React.useState(false);
-  const toggleModal = () => setVisibleModal(!visibleModal);
-
-  const [documentImage, setdocumentImage] = React.useState(
-    props.source?.uri || undefined,
-  );
-  const clickPicture = async (source) => {
-    if (source === 'camera') {
-      const image = await pickPhotoFromCammera(null, true);
-      setdocumentImage(image.path);
-      props.onChange?.(image);
-
-      openPicModal();
-    } else if (source === 'library') {
-      const image = await pickPhotoFromGallary(null, false);
-      setdocumentImage(image.path);
-      props.onChange?.(image);
-      openPicModal();
-    }
-    toggleModal();
-  };
-
-  const [visiblePicModal, setVisiblePicModal] = React.useState(false);
-  const closePicModal = () => setVisiblePicModal(false);
-  const openPicModal = () => setVisiblePicModal(true);
-
-  // ----------------------------------------------------------------
-  const [isSelfie, setisSelfie] = React.useState(false);
-
-  const [selfie, setSelfie] = React.useState(props.source?.uri || undefined);
-
-  const clickSelfieImage = async () => {
-    const image = await pickPhotoFromCammera(null, true);
-    setSelfie(image.path);
-    props.onChange?.(image);
-  };
+  const {
+    verificationOption,
+    clickSelfieImage,
+    visibleModal,
+    setVisibleModal,
+    documentImage,
+    setdocumentImage,
+    clickPicture,
+    selfie,
+    setSelfie,
+    closePicModal,
+    openPicModal,
+    toggleModal,
+    visiblePicModal,
+    setVisiblePicModal,
+    isSelfie,
+    setIsSelfie,
+  } = useVerificationViewModal(props);
 
   return (
     <>
@@ -126,18 +109,40 @@ const VerificationStepTwo = (props: AvatarProps) => {
             </Row>
           </View>
           <View style={verificationStyle.footerDiv}>
-            <Text>
-              <Text style={verificationStyle.redDot}>Optional: </Text>
-              <Text style={verificationStyle.pointText}>
-                For quicker verification, please provide a website to verify
-                your degree.
+            {verificationOption === 'License Number' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For quicker verification, please provide a website to verify
+                    your degree.
+                  </Text>
+                </Text>
+                <FlatInput label="Enter website" />
+              </>
+            )}
+
+            {verificationOption === 'Student' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For faster verification, please provide your student email.
+                    We may send an email to confirm your student status and
+                    request further verification if necessary.
+                  </Text>
+                </Text>
+                <FlatInput label="Enter student email" />
+              </>
+            )}
+
+            {verificationOption === 'License Number' && (
+              <Text style={verificationStyle.footerText}>
+                We may request additional proof of degree if needed, depending
+                on the type of degree.
               </Text>
-            </Text>
-            <FlatInput label="Enter website" />
-            <Text style={verificationStyle.footerText}>
-              We may request additional proof of degree if needed, depending on
-              the type of degree.
-            </Text>
+            )}
+
             <PrimaryButton onPress={toggleModal} title="Camera" />
           </View>
         </View>
@@ -200,7 +205,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
               />
               <PrimaryButton
                 style={modalStyles.button}
-                onPress={() => setisSelfie(true)}
+                onPress={() => setIsSelfie(true)}
                 title="Next"
               />
             </View>

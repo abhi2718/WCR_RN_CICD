@@ -28,6 +28,11 @@ export type profileTypes = {
   email: string;
   dob: string;
 };
+export type verificationIdType = {
+  npiNumber: string;
+  state: string;
+  license: string
+};
 export type addressTypes = {
   country: string;
   state: string;
