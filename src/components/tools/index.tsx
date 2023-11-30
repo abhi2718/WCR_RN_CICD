@@ -49,14 +49,16 @@ export const ImageContainer: React.FC<imageProps> = (props) => {
 export const Logo = ({
   width,
   height,
+  style,
 }: {
   width?: number;
   height?: number;
+  style?: any;
 }) => {
   return (
     <Image
       resizeMode="contain"
-      style={{ width, height }}
+      style={{ width, height, ...style }}
       source={require('../../assets/images/logo.png')}
     />
   );

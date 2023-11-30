@@ -36,10 +36,14 @@ export const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={options}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.SPLASH}
         component={SplashScreen}
       />
-      {/* <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} /> */}
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
@@ -66,12 +70,7 @@ export const StackNavigator = () => {
         component={Profile}
       />
       <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
-      
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Tab}
-        component={TabNavigator}
-      />
+
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
