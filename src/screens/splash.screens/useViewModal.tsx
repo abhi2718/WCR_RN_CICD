@@ -19,7 +19,7 @@ export const useViewModal = () => {
         },
       };
       dispatch(addUser(data));
-      //return navigation.navigate(ROUTES.Tab);;
+      return navigation.navigate(ROUTES.Tab);;
     }
     navigation.navigate(ROUTES.Onboarding);
   };

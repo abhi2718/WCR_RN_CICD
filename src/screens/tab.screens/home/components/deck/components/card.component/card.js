@@ -21,7 +21,6 @@ export default function CardCompoent({ item, height, cardRef}) {
     handleBlockUser,
     dob
   } = useViewModal(item, cardRef);
-
   return (
     <View style={{ backgroundColor: '#fff' }}>
       <Card style={heightStyle}>
@@ -36,7 +35,10 @@ export default function CardCompoent({ item, height, cardRef}) {
                 {first} ({genderPronoun}) {calculateAge(dob)}
               </Text>
               <Row>
-                <Text>{designation.userDegree}</Text>
+                {
+                  designation?.userDegree && <Text>{designation.userDegree}</Text>
+                }
+                
               </Row>
               <Row>
                 <Text>{designation.title}</Text>
@@ -51,7 +53,7 @@ export default function CardCompoent({ item, height, cardRef}) {
                 <Text>Vital Signs</Text>
               </View>
             </View>
-            {item.photos.map(({ url, _id },index) => {
+            {item?.photos.map(({ url, _id },index) => {
               return (
                 <FastImage
                   key={_id}

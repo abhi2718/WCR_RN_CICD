@@ -6,7 +6,6 @@ import {
   FullLoader,
   Spacer,
   isAndroid,
-  dimensions,
   Row,
   Logo,
 } from '../../../../../components/tools';
@@ -27,7 +26,7 @@ export default function Deck() {
     showSearchModal,
     handleSetProfiles,
     goToNotification,
-    count
+    count,
   } = useViewModal();
   if (isLoading) {
     return <FullLoader />;
@@ -43,7 +42,7 @@ export default function Deck() {
         <Row justifyContent="space-between" alignItems="center">
           <Row>
             <Pressable onPress={goToNotification}>
-            <Text>{count}</Text>
+              <Text>{count}</Text>
               <Image
                 resizeMode="contain"
                 style={styles.iconStyle}
@@ -72,7 +71,7 @@ export default function Deck() {
       <CardStack
         onSwipedLeft={handleDisLike}
         onSwipedRight={handleLike}
-        horizontalThreshold={isAndroid ? 0 : 0}
+        horizontalThreshold={isAndroid ? 10 : 10}
         verticalSwipe={false}
         ref={cardRef}
       >
