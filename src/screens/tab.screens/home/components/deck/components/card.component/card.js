@@ -28,8 +28,6 @@ export default function CardCompoent({ item, height, cardRef }) {
     maritalStatus,
   } = useViewModal(item, cardRef);
 
-  console.log('item:-->', item);
-
   return (
     <View style={cardStyles.deckContainer}>
       <Card style={heightStyle}>
