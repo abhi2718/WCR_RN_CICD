@@ -1,48 +1,212 @@
 import { useState } from 'react';
-import { pickPhotoFromCammera, pickPhotoFromGallary } from '../../../utils/uploads';
+import {
+  pickPhotoFromCammera,
+  pickPhotoFromGallary,
+} from '../../../utils/uploads';
 import { AvatarProps } from '../../auth/preRegisterFlow/components/AddProfilePic';
+import { Image } from 'react-native-image-crop-picker';
+import { CloudinaryRepository } from '../../../repository/cloudinary.repo';
+import { ImageDataType } from '../../auth/preRegisterFlow/components/AddProfilePic/addProfilePic.ViewModal';
+import {
+  FlashMessageType,
+  ShowFlashMessage,
+} from '../../../components/flashBar';
+import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../../store/reducers/user.reducer';
 
-export const useVerificationViewModal = (props:AvatarProps) => {
-    const verificationOption = props.route?.params?.data || 'No data received';
+export const useVerificationViewModal = (props: AvatarProps) => {
+  const { optionData, loggInUserId, verificationOption } =
+    props.route?.params.data || 'No optionData received';
+  const [visibleModal, setVisibleModal] = useState(false);
+  const toggleModal = () => setVisibleModal(!visibleModal);
+  const [loading, setLoading] = useState(false);
+  const [website, setWebsite] = useState('');
+  const cloudinaryRepository = new CloudinaryRepository();
+  const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+  const [documentImage, setdocumentImage] = useState<ImageDataType | null>(
+    props.source?.uri || undefined,
+  );
 
-    const [visibleModal, setVisibleModal] = useState(false);
-    const toggleModal = () => setVisibleModal(!visibleModal);
-  
-    const [documentImage, setdocumentImage] = useState(
-      props.source?.uri || undefined,
-    );
-    const clickPicture = async (source) => {
-      if (source === 'camera') {
-        const image = await pickPhotoFromCammera(null, true);
-        setdocumentImage(image.path);
-        props.onChange?.(image);
-  
-        openPicModal();
-      } else if (source === 'library') {
-        const image = await pickPhotoFromGallary(null, false);
-        setdocumentImage(image.path);
+  const { user } = useSelector((state: any) => state.userState);
+
+  const dispatch = useDispatch();
+  const clickPicture = async (source: string) => {
+    if (source === 'camera') {
+      const image: Image = await pickPhotoFromCammera(undefined, true);
+      if (image?.cropRect) {
+        const resultImage: ImageDataType = {
+          path: image?.path,
+          mime: image?.mime,
+          name: image?.path?.split('/').pop()!,
+        };
+        setdocumentImage(resultImage);
         props.onChange?.(image);
         openPicModal();
       }
-      toggleModal();
-    };
-  
-    const [visiblePicModal, setVisiblePicModal] = useState(false);
-    const closePicModal = () => setVisiblePicModal(false);
-    const openPicModal = () => setVisiblePicModal(true);
-  
-    // ----------------------------------------------------------------
-     const [isSelfie, setIsSelfie] = useState(false);
-  
-    const [selfie, setSelfie] = useState(props.source?.uri || undefined);
-  
-    const clickSelfieImage = async () => {
-      const image = await pickPhotoFromCammera(null, true);
-      setSelfie(image.path);
-      props.onChange?.(image);
-    };
 
-    return({
-        verificationOption,clickSelfieImage,visibleModal, setVisibleModal,documentImage, setdocumentImage,clickPicture,selfie, setSelfie ,closePicModal,openPicModal,toggleModal,visiblePicModal, setVisiblePicModal,isSelfie, setIsSelfie
-    })
-}
+      openPicModal();
+    } else if (source === 'library') {
+      const image: Image = await pickPhotoFromGallary(null, false);
+      if (image) {
+        const resultImage: ImageDataType = {
+          path: image?.path,
+          mime: image?.mime,
+          name: image?.path?.split('/').pop()!,
+        };
+        setdocumentImage(resultImage);
+        props.onChange?.(image);
+      }
+      openPicModal();
+    }
+    toggleModal();
+  };
+
+  const handleWebsite = (website: string) => {
+    setWebsite(website);
+  };
+
+  const [visiblePicModal, setVisiblePicModal] = useState(false);
+  const closePicModal = () => setVisiblePicModal(false);
+  const openPicModal = () => setVisiblePicModal(true);
+
+  // ----------------------------------------------------------------
+  const [isSelfie, setIsSelfie] = useState(false);
+
+  const [selfie, setSelfie] = useState<ImageDataType | null>(
+    props.source?.uri || undefined,
+  );
+
+  const clickSelfieImage = async () => {
+    const image: Image = await pickPhotoFromCammera(undefined, true);
+    if (image?.cropRect) {
+      const resultImage: ImageDataType = {
+        path: image?.path,
+        mime: image?.mime,
+        name: image?.path?.split('/').pop()!,
+      };
+      setSelfie(resultImage);
+      props.onChange?.(image);
+    }
+  };
+
+  type imageObject = {
+    photo: ImageDataType;
+    caption: string;
+  };
+
+  const sumbitVerificationForm = async () => {
+    if (!documentImage?.path && !selfie?.path) {
+      return ShowFlashMessage(
+        'Warning',
+        'Pictures are not selected!',
+        FlashMessageType.DANGER,
+      );
+    }
+    const photos: imageObject[] = [
+      { photo: documentImage!, caption: 'userIdUpload' },
+      { photo: selfie!, caption: 'cameraImage' },
+    ];
+    const imageUrls: object[] = [];
+
+    for (let i = 0; i < photos.length; i++) {
+      const cloudURL = await uploadImageToCloudinary(photos[i].photo);
+      if (cloudURL) {
+        imageUrls.push({
+          url: cloudURL!,
+          section: photos[i].caption,
+        });
+      }
+    }
+
+    const verificationData = await updateImagesInDatabase(imageUrls);
+  };
+
+  const updateImagesInDatabase = async (photos: object[]) => {
+    try {
+      const user = await updateUserDetailsRepository.updateUserDetails(
+        '653a9ad26b7a2255d03bf4fd',
+        {
+          update: {
+            verificationId: {
+              idType: optionData.idType,
+              state: optionData?.state,
+              idNumber:
+                optionData?.npiNumber || optionData?.licenseNumber
+                  ? optionData?.npiNumber || optionData?.licenseNumber
+                  : '',
+              isDoctoralCandidate: optionData?.isDoctoralCandidate,
+              isPhd: optionData.isPhd,
+              licenceWebsite: optionData.licenceWebsite ? website : '',
+              studentEmail: optionData.studentEmail ? website : '',
+              userWebsite: optionData.userWebsite ? website : '',
+              photo: photos,
+            },
+          },
+        },
+      );
+      const formData = {
+        user: user,
+      };
+      dispatch(addUser(formData));
+      setLoading(false);
+      //navigateToHeightScreen(loggInUserId);
+      return user;
+    } catch (err) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const uploadImageToCloudinary = async (
+    imageData: ImageDataType,
+  ): Promise<string | undefined> => {
+    const verificationFolder = 'verificationProof';
+    try {
+      setLoading(true);
+      const responseData = await cloudinaryRepository.signature(
+        verificationFolder,
+      );
+
+      if (responseData?.data) {
+        const response = await cloudinaryRepository.uploadImage({
+          folder: verificationFolder,
+          imageData: imageData,
+          timestamp: responseData?.data?.timestamp,
+          signature: responseData?.data?.data,
+        });
+        if (response?.error) {
+          throw response.error;
+        }
+        return response?.secure_url;
+      } else {
+        return undefined;
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    loading,
+    verificationOption,
+    clickSelfieImage,
+    visibleModal,
+    setVisibleModal,
+    documentImage,
+    setdocumentImage,
+    clickPicture,
+    selfie,
+    setSelfie,
+    closePicModal,
+    openPicModal,
+    toggleModal,
+    visiblePicModal,
+    setVisiblePicModal,
+    isSelfie,
+    handleWebsite,
+    setIsSelfie,
+    sumbitVerificationForm,
+  };
+};

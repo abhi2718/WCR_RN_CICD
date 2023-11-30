@@ -29,9 +29,16 @@ export type profileTypes = {
   dob: string;
 };
 export type verificationIdType = {
-  npiNumber: string;
-  state: string;
-  license: string
+  npiNumber?: string;
+  state?: string;
+  licenseNumber?: string;
+  isDoctoralCandidate?: boolean;
+  isPhd?: boolean;
+  idType?: string;
+  idNumber?: string;
+  licenceWebsite?: string;
+  studentEmail?: string;
+  userWebsite?: string;
 };
 export type addressTypes = {
   country: string;

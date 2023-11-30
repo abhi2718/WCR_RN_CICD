@@ -50,17 +50,18 @@ const VerificationStepTwo = (props: AvatarProps) => {
     verificationOption,
     clickSelfieImage,
     visibleModal,
+    handleWebsite,
     setVisibleModal,
     documentImage,
     setdocumentImage,
     clickPicture,
     selfie,
-    setSelfie,
+    loading,
     closePicModal,
     openPicModal,
     toggleModal,
     visiblePicModal,
-    setVisiblePicModal,
+    sumbitVerificationForm,
     isSelfie,
     setIsSelfie,
   } = useVerificationViewModal(props);
@@ -118,7 +119,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     your degree.
                   </Text>
                 </Text>
-                <FlatInput label="Enter website" />
+                <FlatInput label="Enter website" 
+                onChangeText={handleWebsite}
+                />
               </>
             )}
 
@@ -132,7 +135,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     request further verification if necessary.
                   </Text>
                 </Text>
-                <FlatInput label="Enter student email" />
+                <FlatInput label="Enter student email" 
+                onChangeText={handleWebsite}
+                />
               </>
             )}
 
@@ -201,7 +206,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
               <Text style={modalStyles.subText}>Photo captured</Text>
               <Image
                 style={modalStyles.picture}
-                source={{ uri: documentImage }}
+                source={{ uri: documentImage?.path }}
               />
               <PrimaryButton
                 style={modalStyles.button}
@@ -217,8 +222,16 @@ const VerificationStepTwo = (props: AvatarProps) => {
 
               {selfie ? (
                 <>
-                  <Image style={modalStyles.picture} source={{ uri: selfie }} />
-                  <PrimaryButton style={modalStyles.button} title="Submit" />
+                  <Image
+                    style={modalStyles.picture}
+                    source={{ uri: selfie.path }}
+                  />
+                  <PrimaryButton
+                    style={modalStyles.button}
+                    title="Submit"
+                    isLoading={loading}
+                    onPress={() => sumbitVerificationForm()}
+                  />
                 </>
               ) : (
                 <>

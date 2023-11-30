@@ -16,9 +16,9 @@ import { useVerificationViewModal } from './stepOne.ViewModal';
 const VerificationStepOne = (props: ScreenParams) => {
   const {
     verificationOption,
-    setVerificationOption,
     handleVerificationOption,
     validationErrors,
+    changeVerificationOption,
     handleInputChange,
   } = useVerificationViewModal(props);
 
@@ -28,7 +28,7 @@ const VerificationStepOne = (props: ScreenParams) => {
       <Text style={verificationStyle.subHeader}>ID Verification (Step I)</Text>
       <View style={verificationStyle.container}>
         <RadioButton.Group
-          onValueChange={(newValue) => setVerificationOption(newValue)}
+          onValueChange={(newValue) => changeVerificationOption(newValue)}
           value={verificationOption}
         >
           <Row style={verificationStyle.rowView} alignItems="center">
@@ -62,11 +62,11 @@ const VerificationStepOne = (props: ScreenParams) => {
                   label="License Number"
                   maxLength={10}
                   onChangeText={(text: string) =>
-                    handleInputChange('license', text)
+                    handleInputChange('licenseNumber', text)
                   }
-                  error={validationErrors.license}
+                  error={validationErrors.licenseNumber}
                 />
-                <ErrorText>{validationErrors.license}</ErrorText>
+                <ErrorText>{validationErrors.licenseNumber}</ErrorText>
               </View>
               <View style={verificationStyle.textBox}>
                 <FlatInput
@@ -87,7 +87,7 @@ const VerificationStepOne = (props: ScreenParams) => {
           </Row>
 
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="Other" />
+            <RadioButton color={colors.ui.primary} value="Others" />
             <Text style={verificationStyle.btnText}>All Other Users</Text>
           </Row>
         </RadioButton.Group>
