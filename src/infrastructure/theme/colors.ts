@@ -14,6 +14,7 @@ export const colors = {
     white: '#ffffff',
     opacity: 'background: rgba(0,0,0, 0.7)',
     chatBorder: '#d3d3d3',
+    deckChipBgColor: 'rgba(29, 27, 32, 0.10)',
   },
   bg: {
     primary: '#FFFFFF',
