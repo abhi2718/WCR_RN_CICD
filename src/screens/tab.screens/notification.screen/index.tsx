@@ -3,7 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, Animated } from 'react-native';
 import { HeaderBar } from '../../../components/header';
 import { FullLoader } from '../../../components/tools';
 import { SwipeableListItem } from './components/tiles';
-import { styles } from './styles';
+import { notificationStyle } from './notificationStyle';
 import { useViewModal } from './useViewModal';
 
 export const NotificationScreen = () => {
@@ -14,30 +14,35 @@ export const NotificationScreen = () => {
     markAsRead,
     handleEndReached,
     flatListRef,
-    htmlTextConvertPlainText
+    htmlTextConvertPlainText,
   } = useViewModal();
   if (notificationLoading) {
     return (
-      <View>
+      <View style={notificationStyle.padding}>
         <HeaderBar />
         <FullLoader />
       </View>
     );
   }
   return (
-    <View>
-      <HeaderBar />
-      {
-        !notifications.notifications.length && (<View>
+    <View style={notificationStyle.container}>
+      <View style={notificationStyle.header}>
+        <HeaderBar />
+      </View>
+      {!notifications.notifications.length && (
+        <View>
           <Text>No new notifications!</Text>
-            <Text>Stay tuned for updates and check your settings in the meantime.</Text>
-        </View>) 
-      }
+          <Text>
+            Stay tuned for updates and check your settings in the meantime.
+          </Text>
+        </View>
+      )}
       <FlatList
         data={notifications.notifications}
         ref={flatListRef}
         renderItem={({ item }) => (
           <SwipeableListItem
+            style={notificationStyle.notifications}
             item={item}
             onDelete={onDeleteItem}
             markAsRead={markAsRead}
