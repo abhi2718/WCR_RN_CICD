@@ -26,10 +26,16 @@ export const useAboutViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      setLoading(true);
+     
       const bioData = {
         bio: aboutText,
       };
+
+      if(!aboutText){
+        navigateTohabitsScreen(loggInUserId);
+        return 
+      }
+      setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
         {

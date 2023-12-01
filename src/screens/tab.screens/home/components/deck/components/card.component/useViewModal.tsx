@@ -8,8 +8,20 @@ import { AppUrl } from '../../../../../../../utils/appUrl';
 export const useViewModal = (item: any, cardRef: any) => {
   const homeDeckRepository = new HomeDeckRepository();
   const { user } = useSelector(({ userState }) => userState);
-  const { fetchAll} = useContext(LikeContext);
-  const { profilePicture, first, genderPronoun, designation, state,dob } = item;
+  const { fetchAll } = useContext(LikeContext);
+  const {
+    profilePicture,
+    first,
+    genderPronoun,
+    designation,
+    state,
+    dob,
+    gender,
+    drinking,
+    ethnicity,
+    height: userHeight,
+    maritalStatus,
+  } = item;
   const handleShare = () => {
     try {
       const shareOptions = {
@@ -68,6 +80,11 @@ export const useViewModal = (item: any, cardRef: any) => {
     _handleDisLike,
     addFavourite,
     handleBlockUser,
-    dob
+    dob,
+    gender,
+    drinking,
+    ethnicity,
+    userHeight,
+    maritalStatus,
   };
 };

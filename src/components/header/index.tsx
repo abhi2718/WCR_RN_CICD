@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Row, Logo, dimensions } from '../tools';
+import { Row, Logo, dimensions, Spacer } from '../tools';
 import { useNavigation } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
@@ -76,5 +76,72 @@ export const headerStyle = StyleSheet.create({
     height: sizes[11],
     width: sizes[11],
     justifyContent: 'center',
+  },
+});
+
+interface HeaderDeckProps {
+  count?: number;
+  toggleSearchModal?: any;
+  goToNotification?: any;
+}
+
+export const HeaderDeck = (props: HeaderDeckProps) => {
+  const { count, toggleSearchModal, goToNotification } = props;
+  return (
+    <View>
+      <Row justifyContent="space-between" alignItems="center">
+        <Row gap={25}>
+          <Pressable onPress={goToNotification}>
+            <Text style={headerDeckStyle.count}>{count}</Text>
+            <Image
+              style={headerDeckStyle.notificationIcon}
+              resizeMode="contain"
+              source={require('../../assets/images/notification.png')}
+            />
+          </Pressable>
+          <Pressable onPress={toggleSearchModal}>
+            <Image
+              style={headerDeckStyle.searchIcon}
+              source={require('../../assets/images/Magnifier.png')}
+            />
+          </Pressable>
+        </Row>
+        <Logo width={45} height={45} />
+        <Pressable>
+          <Image
+            style={headerDeckStyle.searchIcon}
+            source={require('../../assets/images/Filter.png')}
+          />
+        </Pressable>
+      </Row>
+    </View>
+  );
+};
+
+export const headerDeckStyle = StyleSheet.create({
+  notificationIcon: {
+    width: 20,
+    height: 35,
+  },
+  searchIcon: {
+    width: 30,
+    height: 30,
+  },
+  count: {
+    position: 'absolute',
+    right: -8,
+    top: -4,
+    backgroundColor: colors.ui.primary,
+    color: colors.ui.white,
+    width: 23,
+    paddingTop: 1,
+    textAlign: 'center',
+    height: 23,
+    borderRadius: 13.5,
+    overflow: 'hidden',
+    fontSize: 12,
+    borderColor: colors.ui.white,
+    borderWidth: 2,
+    zIndex: 10,
   },
 });

@@ -7,12 +7,10 @@ import {
 } from '../../../../../components/tools';
 import { styles } from './emailauthStyle';
 import { PrimaryButton } from '../../../../../components/button';
-// for viewModal use use key word
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { useEmailAuthViewModal } from './emailauthViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
-// remove any
 export default function EmailAuthByOtpScreeen(props: ScreenParams) {
   let {
     otp,
@@ -43,7 +41,6 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
               placeholder={'Enter code'}
               keyboardType="phone-pad"
               value={otp}
-              // put otp validator (6digits)
               onChangeText={(value: string) => setOtp(value)}
             />
           </View>

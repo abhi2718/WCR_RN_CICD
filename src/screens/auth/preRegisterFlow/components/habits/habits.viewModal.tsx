@@ -52,13 +52,18 @@ export const useHabitViewModal = (props: ScreenParams) => {
     
     const updateUserDetails = async () => {
         try {
-          setLoading(true);
           const selectedData = {
             drinking: selectedDrinkingHabits,
             smoking: selectedSmokingHabits,
             excercise: selectedExercise,
             pets: selectedPets
           };
+
+          if(!selectedDrinkingHabits && !selectedSmokingHabits && !selectedExercise && !selectedPets){
+            navigateToAboutScreen(loggInUserId);
+            return 
+          }
+          setLoading(true);
           const user = await updateUserDetailsRepository.updateUserDetails(
             loggInUserId,
             {

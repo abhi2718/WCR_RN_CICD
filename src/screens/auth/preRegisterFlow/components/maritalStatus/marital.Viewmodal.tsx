@@ -43,12 +43,17 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      setLoading(true);
       const selectedData = {
         maritalStatus: selectedMaritalStatus,
         politics: selectedPoliticalView,
         religion: selectedReligion,
       };
+
+      if(!selectedMaritalStatus && !selectedPoliticalView && !selectedReligion){
+        navigateToKidsScreen(loggInUserId);
+        return 
+      }
+      setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
         {

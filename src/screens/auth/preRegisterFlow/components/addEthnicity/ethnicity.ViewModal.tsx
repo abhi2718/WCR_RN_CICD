@@ -55,10 +55,16 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      setLoading(true);
+      
       const selectedEthnicityData = {
         ethnicity: selectedEthnicity,
       };
+     
+      if(selectedEthnicity.length === 0){
+        navigateToRelationshipScreen(loggInUserId);
+        return 
+      }
+      setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
         {

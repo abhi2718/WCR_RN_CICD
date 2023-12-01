@@ -55,13 +55,18 @@ export const useKidsViewmodal = (props:ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      setLoading(true);
       const selectedData = {
         kids: selectedKids,
         familyPlan: selectedFamilyPlans,
         covidVaccineStatus: selectedCovidVaccineStatus,
         diet: selectedDietarypreference
       };
+
+      if(!selectedKids && !selectedFamilyPlans && !selectedCovidVaccineStatus && !selectedDietarypreference){
+        navigateTohabitsScreen(loggInUserId);
+        return 
+      }
+      setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
         loggInUserId,
         {

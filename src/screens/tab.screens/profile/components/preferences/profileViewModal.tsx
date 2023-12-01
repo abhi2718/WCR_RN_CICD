@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ROUTES } from '../../../../../navigation';
+
 import {
     diet,
     drinking,
@@ -161,7 +161,7 @@ export const useViewModal = () => {
     ];
 
     useEffect(() => {
-        console.log(answer);
+      
     }, [answer]);
     return {
         user,

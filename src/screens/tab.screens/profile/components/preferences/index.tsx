@@ -22,12 +22,12 @@ export const PreferencesScreen = () => {
                     data={item.option!}
                     initValue={answer[item.initValue]}
                     onChange={handleInputChange}
-                    style={styles1.modalSelector}
-                    optionContainerStyle={styles1.optionContainer}
-                    optionTextStyle={styles1.optionText}
-                    cancelStyle={styles1.cancelButton}
-                    selectedItemTextStyle={styles1.selectedItem}
-                    initValueTextStyle={styles1.initValueTextStyle}
+                    style={styles.modalSelector}
+                    optionContainerStyle={styles.optionContainer}
+                    optionTextStyle={styles.optionText}
+                    cancelStyle={styles.cancelButton}
+                    selectedItemTextStyle={styles.selectedItem}
+                    initValueTextStyle={styles.initValueTextStyle}
                   />
                 </Row>
               </Spacer>
@@ -38,33 +38,3 @@ export const PreferencesScreen = () => {
     </View>
   );
 };
-const styles1 = StyleSheet.create({
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: 'black',
-  },
-  modalSelector: {
-    borderWidth: 1,
-    borderColor: 'red',
-    borderRadius: 4,
-  },
-  optionContainer: {
-    borderRadius: 4,
-  },
-  optionText: {
-    fontSize: 18,
-    color: 'blue',
-  },
-  cancelButton: {
-    borderRadius: 4,
-    backgroundColor: '#eee',
-  },
-  selectedItem: {
-    marginTop: 10,
-    fontSize: 16,
-  },
-  initValueTextStyle: {
-    color: 'black',
-  },
-});

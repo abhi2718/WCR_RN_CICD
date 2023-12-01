@@ -106,7 +106,13 @@ export const useViewModal = (props: ScreenParams) => {
     const _email = email.toLowerCase();
     const data = await socialSignInSignUp({ email: _email });
     if (data?.token) {
-      dispatch(addUser(data));
+      const payload = {
+        user: {
+          ...data.user,
+          token: data?.token
+        }
+      };
+      dispatch(addUser(payload));
       navigateToGenderScreen(data.user._id);
     } else {
       navigateToProfile({ email: _email });
@@ -151,7 +157,11 @@ export const useViewModal = (props: ScreenParams) => {
         }
       } else {
         if (data?.token) {
-          navigateToGenderScreen(data.user._id);
+          if (data?.token) {
+            const payload = { user: { ...data.user, token: data?.token } };
+            dispatch(addUser(payload));
+            navigateToGenderScreen(data.user._id);
+          }
         }
       }
     } catch (e) {}
