@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import Image from 'react-native-fast-image';
 import { Column, Row, Spacer } from '../../../components/tools';
 import { useViewModal } from './profileViewModal';
@@ -8,14 +7,14 @@ import * as Progress from 'react-native-progress';
 import { styles } from './styles';
 
 export const ProfileScreen = () => {
-  const { user,goToPreview } = useViewModal();
+  const { user, goToPreview, goToSetting,goToPreferences } = useViewModal();
   return (
     <View style={styles.container}>
       <View></View>
       <Spacer position="bottom" size={20}>
         <Column>
           <Row>
-            <FastImage
+            <Image
               source={{
                 uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
               }}
@@ -53,7 +52,7 @@ export const ProfileScreen = () => {
         </Row>
       </Pressable>
       <Spacer position={'top'} size={20} />
-      <Pressable>
+      <Pressable onPress={goToPreferences}>
         <Row alignItems="center">
           <Image
             style={styles.iconStyle}
@@ -63,7 +62,7 @@ export const ProfileScreen = () => {
         </Row>
       </Pressable>
       <Spacer position={'top'} size={20} />
-      <Pressable>
+      <Pressable onPress={goToSetting}>
         <Row alignItems="center">
           <Image
             style={styles.iconStyle}

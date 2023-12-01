@@ -41,14 +41,14 @@ export const LikeScreen = () => {
               </Pressable>
             </Row>
             <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
-              <Pressable onPress={startChat}>
+              {/* <Pressable onPress={startChat}>
               <View>
                 <FastImage
                   style={{height:200,width:200}}
                   source={{uri:"https://res.cloudinary.com/wcr-byldd/image/upload/v1692176659/verificationProof/hqpauxj1absd0kuou1kq.png"}}
                 />
               </View>
-             </Pressable>
+             </Pressable> */}
               <View>
                 {data.matchedUsersList.map((item) => (
                   <ProfileView

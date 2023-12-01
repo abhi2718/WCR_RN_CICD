@@ -29,16 +29,17 @@ import { NotificationScreen } from '../../screens/tab.screens/notification.scree
 import VerificationStepOne from '../../screens/verification/stepOne';
 import VerificationStepTwo from '../../screens/verification/stepTwo';
 import { PreviewScreen } from '../../screens/tab.screens/profile/components/preview';
+import { SettingScreen } from '../../screens/tab.screens/profile/components/settings';
+import { AccountSettingScreen } from '../../screens/tab.screens/profile/components/settings/components/accountSettings';
+import { BlockAndUnBlock } from '../../screens/tab.screens/profile/components/settings/components/block&Unblock';
+import { ContactUs } from '../../screens/tab.screens/profile/components/settings/components/contactUs';
+import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Tab}
-        component={TabNavigator}
-      />
+      
       <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}
@@ -48,6 +49,11 @@ export const StackNavigator = () => {
         options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Tab}
+        component={TabNavigator}
       />
       <Stack.Screen
         options={options}
@@ -144,6 +150,31 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.Preview}
         component={PreviewScreen}
+      />
+      <Stack.Screen
+       // options={optins}
+        name={ROUTES.SettingScreen}
+        component={SettingScreen}
+      />
+       <Stack.Screen
+       // options={optins}
+        name={ROUTES.AccountSetting}
+        component={AccountSettingScreen}
+      />
+       <Stack.Screen
+       // options={optins}
+        name={ROUTES.BlockAndUnBlock}
+        component={BlockAndUnBlock}
+      />
+       <Stack.Screen
+       // options={optins}
+        name={ROUTES.ContactUs}
+        component={ContactUs}
+      />
+      <Stack.Screen
+        //options={optins}
+        name={ROUTES.Preferences}
+        component={PreferencesScreen}
       />
     </Stack.Navigator>
   );

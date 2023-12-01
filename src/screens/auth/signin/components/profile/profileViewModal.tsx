@@ -156,6 +156,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     credential?: FirebaseAuthTypes.AuthCredential,
     firebaseUid?: string,
   ) => {
+    console.log(credential,firebaseUid);
     const password = `$Sg{email}9%`;
     if (credential) {
       let data;
@@ -216,10 +217,17 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
         mobile,
         fbId,
       });
-      dispatch(addUser(dataMango));
-      if (dataMango.message === 'Registered Successfully')
+      const payload = {
+        user: {
+          ...dataMango.user,
+          token: dataMango?.token
+        }
+      };
+      dispatch(addUser(payload))
+      if(dataMango.token)
       navigateToGenderScreen(dataMango.user._id);
     } catch (error) {
+      console.log(error)
     }
   }
   return {

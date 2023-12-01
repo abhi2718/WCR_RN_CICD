@@ -52,7 +52,7 @@ export const useViewModal = (item: any, cardRef: any) => {
     try {
       cardRef?.current.swipeBottom();
       await homeDeckRepository.addFavourite(payLoad);
-      fetchAll();
+      fetchAll(user._id);
     } catch (error) {}
   };
   const handleBlockUser = async () => {

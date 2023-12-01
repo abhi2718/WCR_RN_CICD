@@ -6,13 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  StyleProp,
-  ViewStyle,
 } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { ButtonProps } from '../../types/components/button.type';
-import styled from 'styled-components';
-import { dimensions } from '../tools';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { fontWeights } from '../../infrastructure/theme/fonts';
