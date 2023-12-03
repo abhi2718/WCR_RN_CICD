@@ -125,7 +125,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const updateImagesInDatabase = async (photos: object[]) => {
     try {
       const user = await updateUserDetailsRepository.updateUserDetails(
-        '653a9ad26b7a2255d03bf4fd',
+        loggInUserId,
         {
           update: {
             verificationId: {
@@ -140,6 +140,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
               licenceWebsite: optionData.licenceWebsite ? website : '',
               studentEmail: optionData.studentEmail ? website : '',
               userWebsite: optionData.userWebsite ? website : '',
+              healthCareProfessionalEmail: optionData.healthCareProfessionalEmail ? website : '',
+              degreeIdentifierType:optionData?.degreeIdentifierType, 
+              territory:optionData?.teritory, 
+              degreeIdentifier:optionData?.degreeIdentifier, 
               photo: photos,
             },
           },

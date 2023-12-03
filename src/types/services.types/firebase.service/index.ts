@@ -39,6 +39,10 @@ export type verificationIdType = {
   licenceWebsite?: string;
   studentEmail?: string;
   userWebsite?: string;
+  healthCareProfessionalEmail?: string;
+  teritory?: string;
+  degreeIdentifier?: string;
+  degreeIdentifierType?: string;
 };
 export type addressTypes = {
   country: string;

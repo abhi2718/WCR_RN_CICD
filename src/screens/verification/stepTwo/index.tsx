@@ -124,6 +124,20 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 />
               </>
             )}
+            {verificationOption === 'HealthCare' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For quicker verification, please provide a website to verify
+                    your degree.
+                  </Text>
+                </Text>
+                <FlatInput label="Enter website" 
+                onChangeText={handleWebsite}
+                />
+              </>
+            )}
 
             {verificationOption === 'Student' && (
               <>

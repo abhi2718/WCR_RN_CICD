@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import VerificationStepTwo from '../stepTwo';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { useVerificationViewModal } from './stepOne.ViewModal';
+import { cleanSingle } from 'react-native-image-crop-picker';
 
 const VerificationStepOne = (props: ScreenParams) => {
   const {
@@ -20,8 +21,8 @@ const VerificationStepOne = (props: ScreenParams) => {
     validationErrors,
     changeVerificationOption,
     handleInputChange,
+    country,
   } = useVerificationViewModal(props);
-
   return (
     <ScreenContainer>
       <HeaderBar />
@@ -31,12 +32,15 @@ const VerificationStepOne = (props: ScreenParams) => {
           onValueChange={(newValue) => changeVerificationOption(newValue)}
           value={verificationOption}
         >
-          <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="NPI Number" />
-            <Text style={verificationStyle.btnText}>
-              NPI Number (Recommended)
-            </Text>
-          </Row>
+          {country === 'USA' && (
+            <Row style={verificationStyle.rowView} alignItems="center">
+              <RadioButton color={colors.ui.primary} value="NPI Number" />
+              <Text style={verificationStyle.btnText}>
+                NPI Number (Recommended)
+              </Text>
+            </Row>
+          )}
+
           {verificationOption === 'NPI Number' && (
             <View style={verificationStyle.textBox}>
               <FlatInput
@@ -50,11 +54,57 @@ const VerificationStepOne = (props: ScreenParams) => {
               <ErrorText>{validationErrors.npiNumber}</ErrorText>
             </View>
           )}
+          {country === 'Canada' && (
+            <Row style={verificationStyle.rowView} alignItems="center">
+              <RadioButton color={colors.ui.primary} value="HealthCare" />
+              <Text style={verificationStyle.btnText}>
+                Healthcare Professional
+              </Text>
+            </Row>
+          )}
+          {verificationOption === 'HealthCare' && (
+            <>
+              <View style={verificationStyle.textBox}>
+                <FlatInput
+                  label="Degree Identifier Type"
+                  onChangeText={(text: string) =>
+                    handleInputChange('degreeIdentifierType', text)
+                  }
+                  error={validationErrors.degreeIdentifierType}
+                />
+                <ErrorText>{validationErrors.degreeIdentifierType}</ErrorText>
+              </View>
+              <View style={verificationStyle.textBox}>
+                <FlatInput
+                  label="Degree Identifier"
+                  maxLength={10}
+                  onChangeText={(text: string) =>
+                    handleInputChange('degreeIdentifier', text)
+                  }
+                  error={validationErrors.degreeIdentifier}
+                />
+                <ErrorText>{validationErrors.degreeIdentifier}</ErrorText>
+              </View>
+              <View style={verificationStyle.textBox}>
+                <FlatInput
+                  label="Province/Territory"
+                  maxLength={30}
+                  onChangeText={(text: string) =>
+                    handleInputChange('teritory', text)
+                  }
+                  error={validationErrors.teritory}
+                />
+                <ErrorText>{validationErrors.teritory}</ErrorText>
+              </View>
+            </>
+          )}
 
-          <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="License Number" />
-            <Text style={verificationStyle.btnText}>License Number</Text>
-          </Row>
+          {country === 'USA' && (
+            <Row style={verificationStyle.rowView} alignItems="center">
+              <RadioButton color={colors.ui.primary} value="License Number" />
+              <Text style={verificationStyle.btnText}>License Number</Text>
+            </Row>
+          )}
           {verificationOption === 'License Number' && (
             <>
               <View style={verificationStyle.textBox}>

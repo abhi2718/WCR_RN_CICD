@@ -8,12 +8,16 @@ import {
   ShowFlashMessage,
 } from '../../../components/flashBar';
 import { ROUTES } from '../../../navigation';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const useVerificationViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const { navigation } = props;
   const [verificationOption, setVerificationOption] = useState('');
 
+  const { user } = useSelector((state: any) => state.userState);
+  const country = user.address.country
+  const dispatch = useDispatch();
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
     state: '',
@@ -24,12 +28,15 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     licenceWebsite: '',
     studentEmail: '',
     userWebsite: '',
+    healthCareProfessionalEmail:'',
+    teritory:'',
+    degreeIdentifier:'',
+    degreeIdentifierType:''
   });
 
   const handleInputChange = (name: keyof verificationIdType, value: any) => {
-
-    setFormData((oldState)=>{
-      return { ...oldState, [name]: value }
+    setFormData((oldState) => {
+      return { ...oldState, [name]: value };
     });
   };
 
@@ -52,7 +59,8 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       );
     } else if (
       verificationOption === 'NPI Number' ||
-      verificationOption === 'License Number'
+      verificationOption === 'License Number' ||
+      verificationOption === 'HealthCare'
     ) {
       handleIdType();
     }
@@ -73,6 +81,16 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       }
     }
 
+    if (verificationOption === 'HealthCare') {
+      if (!optionData?.degreeIdentifier) {
+        errors.degreeIdentifier = 'Please enter a valid degreeIdentifier';
+      } 
+      
+      if (!optionData?.teritory) {
+        errors.teritory =
+          'Please enter a valid state/teritory!';
+      } 
+    }
     if (verificationOption === 'License Number') {
       if (!optionData?.licenseNumber) {
         errors.licenseNumber = 'Please enter a valid License number';
@@ -127,6 +145,18 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleInputChange('state', '');
       handleInputChange('studentEmail', '');
       handleInputChange('licenceWebsite', '');
+    } else if (option === 'HealthCare') {
+      handleInputChange('idType', '');
+      handleInputChange('isDoctoralCandidate', false);
+      handleInputChange('isPhd', false);
+      handleInputChange('healthCareProfessionalEmail', 'healthCareProfessionalEmail');
+      handleInputChange('state', '');
+      handleInputChange('studentEmail', '');
+      handleInputChange('licenceWebsite', '');
+      handleInputChange('userWebsite', '');
+      handleInputChange('degreeIdentifierType', 'CPSO');
+      handleInputChange('degreeIdentifier', '');
+      handleInputChange('teritory', '');
     }
     setVerificationOption(option);
   };
@@ -138,5 +168,6 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     handleVerificationOption,
     validationErrors,
     handleInputChange,
+    country
   };
 };
