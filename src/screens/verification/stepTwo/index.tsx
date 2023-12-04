@@ -10,6 +10,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { BlurView } from '@react-native-community/blur';
 
@@ -65,6 +67,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
     isSelfie,
     setIsSelfie,
   } = useVerificationViewModal(props);
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 
   return (
     <>
@@ -119,9 +122,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     your degree.
                   </Text>
                 </Text>
-                <FlatInput label="Enter website" 
-                onChangeText={handleWebsite}
-                />
+                <FlatInput label="Enter website" onChangeText={handleWebsite} />
               </>
             )}
             {verificationOption === 'HealthCare' && (
@@ -149,8 +150,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     request further verification if necessary.
                   </Text>
                 </Text>
-                <FlatInput label="Enter student email" 
-                onChangeText={handleWebsite}
+                <FlatInput
+                  label="Enter student email"
+                  onChangeText={handleWebsite}
                 />
               </>
             )}
@@ -266,6 +268,68 @@ const VerificationStepTwo = (props: AvatarProps) => {
               )}
             </View>
           )}
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={true}
+        onRequestClose={closePicModal}
+      >
+        <View style={modalStyles.modalContent}>
+          <Row
+            style={modalStyles.row}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Pressable onPress={closePicModal}>
+              <Image
+                style={modalStyles.arrow}
+                source={require('../../../assets/images/icons/arrow.png')}
+              />
+            </Pressable>
+            <Image
+              style={modalStyles.arrow}
+              source={require('../../../assets/images/icons/crossIcon.png')}
+            />
+          </Row>
+          <View style={verificationStyle.container}>
+            <View>
+              <Text style={verificationStyle.subHeader}>
+                Provide The Following Degree Verification (Step III)
+              </Text>
+              <Text style={verificationStyle.subText}>
+                Upload Proof of Degree from USA showing name, institution,
+                degree, date degree awarded
+              </Text>
+              <Text style={verificationStyle.subText}>
+                ( e.g., Diploma, Transcript, Certificate of Completion, Degree
+                Verification )
+              </Text>
+              <TouchableOpacity style={verificationStyle.uploadBtn}>
+                <Text style={verificationStyle.uploadBtnText}>Uplpoad</Text>
+              </TouchableOpacity>
+              <Text style={verificationStyle.subText}>
+                Enter website to show proof of degree (e.g., Professional
+                licensing website, Institution website showing name and year of
+                graduation, Work website showing name and title). We may request
+                additional proof of degree if needed.
+              </Text>
+            </View>
+            <KeyboardAvoidingView
+              behavior="position"
+              keyboardVerticalOffset={keyboardVerticalOffset}
+            >
+              <View style={verificationStyle.footerDiv}>
+                <FlatInput
+                  label="Enter student email"
+                  placeholder="Enter website"
+                />
+                <PrimaryButton onPress={toggleModal} title="Submit" />
+              </View>
+            </KeyboardAvoidingView>
+          </View>
         </View>
       </Modal>
     </>
