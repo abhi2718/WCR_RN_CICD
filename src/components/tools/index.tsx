@@ -124,12 +124,14 @@ export const Column: React.FC<rowColumnProps> = ({
   alignItems = 'stretch',
   children,
   style,
+  gap,
   flexWrap = 'nowrap',
 }) => {
   const styleProps = {
     justifyContent,
     alignItems,
     flexWrap,
+    gap,
     flexDirection: 'column',
   };
   return (

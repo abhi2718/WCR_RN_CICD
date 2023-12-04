@@ -145,3 +145,41 @@ export const headerDeckStyle = StyleSheet.create({
     zIndex: 10,
   },
 });
+
+export const ErrorScreenHeader = () => {
+  return (
+    <Row
+      style={pendingStyle.headerRow}
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Image
+        style={pendingStyle.backArrow}
+        resizeMode="contain"
+        source={require('../../assets/images/icons/arrow.png')}
+      />
+      <Logo width={40} height={40} />
+      <Image
+        style={pendingStyle.threeDots}
+        resizeMode="contain"
+        source={require('../../assets/images/icons/threeDots.png')}
+      />
+    </Row>
+  );
+};
+
+export const pendingStyle = StyleSheet.create({
+  headerRow: {
+    width: '100%',
+    paddingHorizontal: 16,
+    paddingBottom: 10,
+    borderBottomColor: colors.ui.chatBorder,
+    borderBottomWidth: 1,
+  },
+  backArrow: {
+    width: 30,
+  },
+  threeDots: {
+    height: 20,
+  },
+});
