@@ -16,7 +16,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   const [verificationOption, setVerificationOption] = useState('');
 
   const { user } = useSelector((state: any) => state.userState);
-  const country = user.address.country
+  const country = user.address.country;
   const dispatch = useDispatch();
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
@@ -28,10 +28,10 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     licenceWebsite: '',
     studentEmail: '',
     userWebsite: '',
-    healthCareProfessionalEmail:'',
-    teritory:'',
-    degreeIdentifier:'',
-    degreeIdentifierType:''
+    healthCareProfessionalEmail: '',
+    teritory: '',
+    degreeIdentifier: '',
+    degreeIdentifierType: '',
   });
 
   const handleInputChange = (name: keyof verificationIdType, value: any) => {
@@ -64,7 +64,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     ) {
       handleIdType();
     }
-    if (verificationOption === 'Student' || verificationOption === 'others') {
+    if (verificationOption === 'Student' || verificationOption === 'Others') {
       navigateToVerificationStepTwo();
     }
   };
@@ -84,12 +84,11 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     if (verificationOption === 'HealthCare') {
       if (!optionData?.degreeIdentifier) {
         errors.degreeIdentifier = 'Please enter a valid degreeIdentifier';
-      } 
-      
+      }
+
       if (!optionData?.teritory) {
-        errors.teritory =
-          'Please enter a valid state/teritory!';
-      } 
+        errors.teritory = 'Please enter a valid state/teritory!';
+      }
     }
     if (verificationOption === 'License Number') {
       if (!optionData?.licenseNumber) {
@@ -137,7 +136,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleInputChange('userWebsite', '');
       handleInputChange('licenceWebsite', '');
       handleInputChange('state', '');
-    } else if (option === 'others') {
+    } else if (option === 'Others') {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', true);
@@ -149,7 +148,10 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', false);
-      handleInputChange('healthCareProfessionalEmail', 'healthCareProfessionalEmail');
+      handleInputChange(
+        'healthCareProfessionalEmail',
+        'healthCareProfessionalEmail',
+      );
       handleInputChange('state', '');
       handleInputChange('studentEmail', '');
       handleInputChange('licenceWebsite', '');
@@ -168,6 +170,6 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     handleVerificationOption,
     validationErrors,
     handleInputChange,
-    country
+    country,
   };
 };

@@ -59,16 +59,24 @@ const VerificationStepTwo = (props: AvatarProps) => {
     clickPicture,
     selfie,
     loading,
+    validationErrorMessage,
     closePicModal,
-    openPicModal,
+    PhdOptionModal,
     toggleModal,
     visiblePicModal,
     sumbitVerificationForm,
     isSelfie,
+    uploadPhdOptionPhotos,
+    closePhdOptionModalModal,
+    openPhdOptionModal,
     setIsSelfie,
+    PhdOptionImage,
+    closePhdOptionPicUploadingModal,
+    openPhdOptionPicUploadingModal,
+    PhdOptionPicUploadingModal,
   } = useVerificationViewModal(props);
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
-
+  console.log(verificationOption)
   return (
     <>
       <ScreenContainer>
@@ -134,9 +142,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     your degree.
                   </Text>
                 </Text>
-                <FlatInput label="Enter website" 
-                onChangeText={handleWebsite}
-                />
+                <FlatInput label="Enter website" onChangeText={handleWebsite} />
               </>
             )}
 
@@ -244,9 +250,15 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   />
                   <PrimaryButton
                     style={modalStyles.button}
-                    title="Submit"
+                    title={
+                      verificationOption === 'Others' ? 'Continue' : 'Submit'
+                    }
                     isLoading={loading}
-                    onPress={() => sumbitVerificationForm()}
+                    onPress={
+                      verificationOption === 'Others'
+                        ? openPhdOptionModal
+                        : () => sumbitVerificationForm()
+                    }
                   />
                 </>
               ) : (
@@ -270,12 +282,11 @@ const VerificationStepTwo = (props: AvatarProps) => {
           )}
         </View>
       </Modal>
-
       <Modal
         animationType="slide"
         transparent={true}
-        visible={true}
-        onRequestClose={closePicModal}
+        visible={PhdOptionPicUploadingModal}
+        onRequestClose={closePhdOptionPicUploadingModal}
       >
         <View style={modalStyles.modalContent}>
           <Row
@@ -289,12 +300,36 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 source={require('../../../assets/images/icons/arrow.png')}
               />
             </Pressable>
-            <Image
-              style={modalStyles.arrow}
-              source={require('../../../assets/images/icons/crossIcon.png')}
-            />
+            <Logo width={50} height={35} />
+            <View />
           </Row>
+
+          <View style={modalStyles.content}>
+            <Text style={modalStyles.subText}>Photo captured</Text>
+            <Image
+              style={modalStyles.picture}
+              source={{ uri: PhdOptionImage?.path }}
+            />
+            <PrimaryButton
+              style={modalStyles.button}
+              onPress={() => sumbitVerificationForm()}
+              isLoading={loading}
+              title="Submit"
+            />
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={PhdOptionModal}
+        onRequestClose={closePhdOptionModalModal}
+      >
+        <View style={modalStyles.modalContent}>
+          <HeaderBar></HeaderBar>
           <View style={verificationStyle.container}>
+            <Text>{validationErrorMessage}</Text>
             <View>
               <Text style={verificationStyle.subHeader}>
                 Provide The Following Degree Verification (Step III)
@@ -307,7 +342,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 ( e.g., Diploma, Transcript, Certificate of Completion, Degree
                 Verification )
               </Text>
-              <TouchableOpacity style={verificationStyle.uploadBtn}>
+              <TouchableOpacity
+                style={verificationStyle.uploadBtn}
+                onPress={() => uploadPhdOptionPhotos()}
+              >
                 <Text style={verificationStyle.uploadBtnText}>Uplpoad</Text>
               </TouchableOpacity>
               <Text style={verificationStyle.subText}>
@@ -323,10 +361,13 @@ const VerificationStepTwo = (props: AvatarProps) => {
             >
               <View style={verificationStyle.footerDiv}>
                 <FlatInput
-                  label="Enter student email"
+                  label="Enter website"
                   placeholder="Enter website"
+                  onChangeText={handleWebsite}
                 />
-                <PrimaryButton onPress={toggleModal} title="Submit" />
+                <PrimaryButton onPress={()=>sumbitVerificationForm()} title="Submit" 
+                isLoading={loading}
+                />
               </View>
             </KeyboardAvoidingView>
           </View>

@@ -19,18 +19,25 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const { optionData, loggInUserId, verificationOption } =
     props.route?.params.data || 'No optionData received';
   const [visibleModal, setVisibleModal] = useState(false);
-  const toggleModal = () => setVisibleModal(!visibleModal);
   const [loading, setLoading] = useState(false);
   const [website, setWebsite] = useState('');
   const cloudinaryRepository = new CloudinaryRepository();
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+
   const [documentImage, setdocumentImage] = useState<ImageDataType | null>(
+    props.source?.uri || undefined,
+  );
+  const [PhdOptionImage, setPhdOptionImage] = useState<ImageDataType | null>(
     props.source?.uri || undefined,
   );
 
   const { user } = useSelector((state: any) => state.userState);
 
   const dispatch = useDispatch();
+   const [validationErrorMessage , setValidationErrorMessage] = useState('')
+
+  const toggleModal = () => setVisibleModal(!visibleModal);
+
   const clickPicture = async (source: string) => {
     if (source === 'camera') {
       const image: Image = await pickPhotoFromCammera(undefined, true);
@@ -47,7 +54,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
       openPicModal();
     } else if (source === 'library') {
-      const image: Image = await pickPhotoFromGallary(null, false);
+      const image: Image = await pickPhotoFromGallary(undefined, false);
       if (image) {
         const resultImage: ImageDataType = {
           path: image?.path,
@@ -61,6 +68,19 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
     toggleModal();
   };
+  const uploadPhdOptionPhotos = async () => {
+    const image: Image = await pickPhotoFromGallary(null, false);
+    if (image) {
+      const resultImage: ImageDataType = {
+        path: image?.path,
+        mime: image?.mime,
+        name: image?.path?.split('/').pop()!,
+      };
+      setPhdOptionImage(resultImage);
+      props.onChange?.(image);
+    }
+    openPhdOptionPicUploadingModal();
+  };
 
   const handleWebsite = (website: string) => {
     setWebsite(website);
@@ -69,6 +89,17 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [visiblePicModal, setVisiblePicModal] = useState(false);
   const closePicModal = () => setVisiblePicModal(false);
   const openPicModal = () => setVisiblePicModal(true);
+
+  const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
+  const closePhdOptionModalModal = () => setVisiblePhdOptionModal(false);
+  const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
+
+  const [PhdOptionPicUploadingModal, setPhdOptionPicUploadingModal] =
+    useState(false);
+  const closePhdOptionPicUploadingModal = () =>
+    setPhdOptionPicUploadingModal(false);
+  const openPhdOptionPicUploadingModal = () =>
+    setPhdOptionPicUploadingModal(true);
 
   // ----------------------------------------------------------------
   const [isSelfie, setIsSelfie] = useState(false);
@@ -96,30 +127,49 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const sumbitVerificationForm = async () => {
-    if (!documentImage?.path && !selfie?.path) {
-      return ShowFlashMessage(
-        'Warning',
-        'Pictures are not selected!',
-        FlashMessageType.DANGER,
-      );
-    }
-    const photos: imageObject[] = [
-      { photo: documentImage!, caption: 'userIdUpload' },
-      { photo: selfie!, caption: 'cameraImage' },
-    ];
-    const imageUrls: object[] = [];
-
-    for (let i = 0; i < photos.length; i++) {
-      const cloudURL = await uploadImageToCloudinary(photos[i].photo);
-      if (cloudURL) {
-        imageUrls.push({
-          url: cloudURL!,
-          section: photos[i].caption,
-        });
+    try{
+      if (!documentImage?.path && !selfie?.path) {
+        return ShowFlashMessage(
+          'Warning',
+          'Pictures are not selected!',
+          FlashMessageType.DANGER,
+        );
       }
+      if (verificationOption=== 'Others' && (!PhdOptionImage?.path && !website)) {
+        return setValidationErrorMessage('Message: website or id image either of two is required')
+        
+      }else{
+        setValidationErrorMessage('')
+      }
+  
+      const photos: imageObject[] = PhdOptionImage
+        ? [
+            { photo: documentImage!, caption: 'userIdUpload' },
+            { photo: selfie!, caption: 'cameraImage' },
+            { photo: PhdOptionImage, caption: '' },
+          ]
+        : [
+            { photo: documentImage!, caption: 'userIdUpload' },
+            { photo: selfie!, caption: 'cameraImage' },
+          ];
+  
+      const imageUrls: object[] = [];
+  
+      for (let i = 0; i < photos.length; i++) {
+        const cloudURL = await uploadImageToCloudinary(photos[i].photo);
+        if (cloudURL) {
+          imageUrls.push({
+            url: cloudURL!,
+            section: photos[i].caption,
+          });
+        }
+      }
+  
+      const verificationData = await updateImagesInDatabase(imageUrls);
+    }catch (err) {
+      console.log('---->error',err);
     }
-
-    const verificationData = await updateImagesInDatabase(imageUrls);
+   
   };
 
   const updateImagesInDatabase = async (photos: object[]) => {
@@ -140,10 +190,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
               licenceWebsite: optionData.licenceWebsite ? website : '',
               studentEmail: optionData.studentEmail ? website : '',
               userWebsite: optionData.userWebsite ? website : '',
-              healthCareProfessionalEmail: optionData.healthCareProfessionalEmail ? website : '',
-              degreeIdentifierType:optionData?.degreeIdentifierType, 
-              territory:optionData?.teritory, 
-              degreeIdentifier:optionData?.degreeIdentifier, 
+              healthCareProfessionalEmail:
+                optionData.healthCareProfessionalEmail ? website : '',
+              degreeIdentifierType: optionData?.degreeIdentifierType,
+              territory: optionData?.teritory,
+              degreeIdentifier: optionData?.degreeIdentifier,
               photo: photos,
             },
           },
@@ -212,5 +263,14 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     handleWebsite,
     setIsSelfie,
     sumbitVerificationForm,
+    closePhdOptionModalModal,
+    openPhdOptionModal,
+    PhdOptionModal,
+    closePhdOptionPicUploadingModal,
+    openPhdOptionPicUploadingModal,
+    PhdOptionPicUploadingModal,
+    uploadPhdOptionPhotos,
+    PhdOptionImage,
+    validationErrorMessage,
   };
 };
