@@ -1,4 +1,4 @@
-import {GestureResponderEvent} from 'react-native';
+import { GestureResponderEvent } from 'react-native';
 export type ButtonProps = {
   title: string;
   onPress?: (event: GestureResponderEvent) => void;
@@ -6,4 +6,5 @@ export type ButtonProps = {
   style?: any;
   btnColor?: any;
   iconSource?: any;
+  color?: any;
 };

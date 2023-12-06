@@ -1,11 +1,9 @@
 import React from 'react';
-import { Image, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Row, Logo, dimensions, Spacer } from '../tools';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Row, Logo } from '../tools';
 import { useNavigation } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
-import { fontSizes } from '../../infrastructure/theme/fonts';
-import { PrimaryButton } from '../button';
 
 interface HeaderBarProps {
   skip?: () => void;
@@ -90,7 +88,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
   return (
     <View>
       <Row justifyContent="space-between" alignItems="center">
-        <Row gap={25}>
+        <Row style={headerDeckStyle.row} gap={25}>
           <Pressable onPress={goToNotification}>
             <Text style={headerDeckStyle.count}>{count}</Text>
             <Image
@@ -107,7 +105,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           </Pressable>
         </Row>
         <Logo width={45} height={45} />
-        <Pressable>
+        <Pressable style={headerDeckStyle.row}>
           <Image
             style={headerDeckStyle.searchIcon}
             source={require('../../assets/images/Filter.png')}
@@ -120,28 +118,69 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
 
 export const headerDeckStyle = StyleSheet.create({
   notificationIcon: {
-    width: 20,
-    height: 35,
+    width: sizes[4],
+    height: sizes[6],
   },
   searchIcon: {
-    width: 30,
-    height: 30,
+    width: sizes[7],
+    height: sizes[7],
   },
   count: {
     position: 'absolute',
-    right: -8,
-    top: -4,
+    right: -sizes[1],
+    top: -sizes[0],
     backgroundColor: colors.ui.primary,
     color: colors.ui.white,
-    width: 23,
+    width: sizes[4],
     paddingTop: 1,
     textAlign: 'center',
-    height: 23,
+    height: sizes[4],
     borderRadius: 13.5,
     overflow: 'hidden',
-    fontSize: 12,
+    fontSize: sizes[2],
     borderColor: colors.ui.white,
-    borderWidth: 2,
-    zIndex: 10,
+    borderWidth: 1,
+    zIndex: sizes[2],
+  },
+  row: {
+    width: sizes[10],
+  },
+});
+
+export const ErrorScreenHeader = () => {
+  return (
+    <Row
+      style={errorScreenHeaderStyle.headerRow}
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Image
+        style={errorScreenHeaderStyle.backArrow}
+        resizeMode="contain"
+        source={require('../../assets/images/icons/arrow.png')}
+      />
+      <Logo width={40} height={40} />
+      <Image
+        style={errorScreenHeaderStyle.threeDots}
+        resizeMode="contain"
+        source={require('../../assets/images/icons/threeDots.png')}
+      />
+    </Row>
+  );
+};
+
+export const errorScreenHeaderStyle = StyleSheet.create({
+  headerRow: {
+    width: '100%',
+    paddingHorizontal: sizes[3],
+    paddingBottom: sizes[2],
+    borderBottomColor: colors.ui.chatBorder,
+    borderBottomWidth: 1,
+  },
+  backArrow: {
+    width: sizes[6],
+  },
+  threeDots: {
+    height: sizes[4],
   },
 });
