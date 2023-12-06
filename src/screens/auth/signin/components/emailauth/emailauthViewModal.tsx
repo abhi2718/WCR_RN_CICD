@@ -23,8 +23,8 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
       setLoading(true);
       const {data} = await otpInRepository.verifytOtp({email, code: otp});
       setLoading(false);
-      if (data?.message === 'Verified') {
-        checkIsNewUser(email);
+      if (data?.success) {
+       checkIsNewUser(email);
       } else {
         return ShowFlashMessage('Alert', 'OTP is incorrect', 'danger');
       }

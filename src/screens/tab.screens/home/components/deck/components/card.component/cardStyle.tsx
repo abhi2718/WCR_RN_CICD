@@ -24,7 +24,7 @@ export const cardStyles = StyleSheet.create({
   name: {
     fontSize: fontSizes.h6,
     color: colors.ui.white,
-    fontweight: fontWeights.bold,
+   fontWeight: fontWeights.bold,
   },
   gradient: {
     height: '100%',

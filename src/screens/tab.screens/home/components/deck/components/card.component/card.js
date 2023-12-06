@@ -27,7 +27,6 @@ export default function CardCompoent({ item, height, cardRef }) {
     userHeight,
     maritalStatus,
   } = useViewModal(item, cardRef);
-
   return (
     <View style={cardStyles.deckContainer}>
       <Card style={heightStyle}>
@@ -140,7 +139,7 @@ export default function CardCompoent({ item, height, cardRef }) {
 
             {item.photos.map(({ url, _id }, index) => {
               return (
-                <View>
+                <View key={index}>
                   <FastImage
                     key={_id}
                     style={{
