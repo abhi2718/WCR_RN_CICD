@@ -12,6 +12,8 @@ import {
 import CardCompoent from './components/card.component/card';
 import CardStack from './components/swiper';
 import { SearchModal } from './components/searchModal';
+import { RunOutOffProfile } from './components/runOutOffProfile';
+import { PausedProfile } from './components/pausedProfile';
 import { HeaderDeck } from '../../../../../components/header';
 
 export default function Deck() {
@@ -64,6 +66,8 @@ export default function Deck() {
           />
         ))}
       </CardStack>
+      {/* <RunOutOffProfile /> */}
+      {/* <PausedProfile /> */}
       <SearchModal
         showSearchModal={showSearchModal}
         toggleSearchModal={toggleSearchModal}

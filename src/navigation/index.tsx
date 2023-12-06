@@ -44,7 +44,10 @@ export enum ROUTES {
   NotificationSetting = '/notificationSetting',
   BlockAndUnBlock = '/blockAndUnBlock',
   ContactUs = '/contact-us',
-  Preferences = '/preferences'
+  Preferences = '/preferences',
+  VerificationPending = '/verificationPending',
+  VerificationDeclined = '/verificationDeclined',
+  TurnOnNotification = '/turnOnNotification',
 }
 export default function Navigator() {
   useCometChatInit();
