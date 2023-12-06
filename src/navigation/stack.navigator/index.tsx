@@ -34,30 +34,12 @@ import { AccountSettingScreen } from '../../screens/tab.screens/profile/componen
 import { BlockAndUnBlock } from '../../screens/tab.screens/profile/components/settings/components/block&Unblock';
 import { ContactUs } from '../../screens/tab.screens/profile/components/settings/components/contactUs';
 import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
-import VerificationPending from '../../screens/errorState/verificationPending';
 import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
-import VerificationDeclined from '../../screens/errorState/verificationDeclined';
-import TurnOnNotification from '../../screens/errorState/notifications';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        options={options}
-        name={ROUTES.TurnOnNotification}
-        component={TurnOnNotification}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.VerificationDeclined}
-        component={VerificationDeclined}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.VerificationPending}
-        component={VerificationPending}
-      />
       <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}

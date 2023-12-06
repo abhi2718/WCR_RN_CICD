@@ -24,7 +24,8 @@ export const cardStyles = StyleSheet.create({
   name: {
     fontSize: fontSizes.h6,
     color: colors.ui.white,
-   fontWeight: fontWeights.bold,
+    fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
   gradient: {
     height: '100%',
@@ -56,6 +57,7 @@ export const cardStyles = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.text,
+    fontFamily: fonts.body,
   },
   vitalSignsChips: {
     marginVertical: sizes[2],

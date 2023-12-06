@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
+import { sizes } from '../../../infrastructure/theme/sizes';
 
 export default function SolidDeckImage() {
   return (
@@ -25,7 +26,7 @@ export function VectorDeckImage() {
 
 const styles = StyleSheet.create({
   iconStyle: {
-    width: 20,
-    height:20
-  }
-})
+    width: sizes[7],
+    height: sizes[7],
+  },
+});

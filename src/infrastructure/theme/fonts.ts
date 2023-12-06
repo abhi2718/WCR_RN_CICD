@@ -1,5 +1,5 @@
 export const fonts = {
-  body: 'Urbanist',
+  body: 'Urbanist-Regular',
 };
 export const fontWeights: { [key: string]: any } = {
   regular: '400',

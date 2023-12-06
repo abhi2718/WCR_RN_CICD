@@ -33,7 +33,7 @@ export const Button = (props: ButtonProps) => {
 };
 
 export const PrimaryButton = (props: ButtonProps) => {
-  const { title, onPress, btnColor, isLoading, style } = props;
+  const { title, onPress, btnColor, isLoading, style, color } = props;
   const _isLoading = isLoading ?? false;
 
   let renderValue = null;
@@ -60,7 +60,14 @@ export const PrimaryButton = (props: ButtonProps) => {
         onPress={onPress}
       >
         <View>
-          <Text style={styles.bntText}>{title}</Text>
+          <Text
+            style={{
+              ...styles.bntText,
+              color: color ? color : colors.ui.white,
+            }}
+          >
+            {title}
+          </Text>
         </View>
       </TouchableOpacity>
     );
