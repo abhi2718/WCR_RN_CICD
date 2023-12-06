@@ -13,10 +13,11 @@ import { useDispatch, useSelector } from 'react-redux';
 export const useVerificationViewModal = (props: ScreenParams) => {
   const loggInUserId = props.route?.params?.data || 'No data received';
   const { navigation } = props;
-  const [verificationOption, setVerificationOption] = useState('');
 
   const { user } = useSelector((state: any) => state.userState);
+  const [verificationOption, setVerificationOption] = useState('');
   const country = user.address.country;
+  const id = user.verificationId.idNumber;
   const dispatch = useDispatch();
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
@@ -29,15 +30,21 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     studentEmail: '',
     userWebsite: '',
     healthCareProfessionalEmail: '',
-    teritory: '',
+    teritory:  '',
     degreeIdentifier: '',
     degreeIdentifierType: '',
   });
+
+  
+  useEffect(()=>{
+    setVerificationOptionState()
+  },[])
 
   const handleInputChange = (name: keyof verificationIdType, value: any) => {
     setFormData((oldState) => {
       return { ...oldState, [name]: value };
     });
+    
   };
 
   const [validationErrors, setValidationErrors] = useState<
@@ -49,6 +56,27 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       data: { optionData, loggInUserId, verificationOption },
     });
   };
+
+  const setVerificationOptionState = () => {
+if(user.verificationId.idType === "npi"){
+  setVerificationOption('NPI Number')
+  handleInputChange('npiNumber', user.verificationId.idNumber);
+} else if(user.verificationId.idType === "medicalLicense"){
+  setVerificationOption('License Number')
+  handleInputChange('state', user.verificationId.state);
+  handleInputChange('licenseNumber', user.verificationId.idNumber);
+} else if(user.verificationId.isPhd){
+  setVerificationOption('Others')
+}else if(user.verificationId.isDoctoralCandidate){
+  setVerificationOption('Student')
+  }else if(user.verificationId.territory){
+    setVerificationOption('HealthCare')
+    handleInputChange('teritory', user.verificationId.territory);
+    handleInputChange('degreeIdentifierType', user.verificationId.degreeIdentifierType);
+    handleInputChange('degreeIdentifier', user.verificationId.degreeIdentifier);
+  }
+
+}
 
   const handleVerificationOption = () => {
     if (!verificationOption) {
@@ -171,5 +199,6 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     validationErrors,
     handleInputChange,
     country,
+    optionData
   };
 };

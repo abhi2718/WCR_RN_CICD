@@ -53,7 +53,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
     clickSelfieImage,
     visibleModal,
     handleWebsite,
-    setVisibleModal,
+    website,
     documentImage,
     setdocumentImage,
     clickPicture,
@@ -76,7 +76,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
     PhdOptionPicUploadingModal,
   } = useVerificationViewModal(props);
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
-  console.log(verificationOption)
   return (
     <>
       <ScreenContainer>
@@ -130,7 +129,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     your degree.
                   </Text>
                 </Text>
-                <FlatInput label="Enter website" onChangeText={handleWebsite} />
+                <FlatInput label="Enter website" 
+                value={website}
+                onChangeText={handleWebsite} />
               </>
             )}
             {verificationOption === 'HealthCare' && (
@@ -142,7 +143,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     your degree.
                   </Text>
                 </Text>
-                <FlatInput label="Enter website" onChangeText={handleWebsite} />
+                <FlatInput label="Enter website"
+                value={website}
+                 onChangeText={handleWebsite} />
               </>
             )}
 
@@ -159,6 +162,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 <FlatInput
                   label="Enter student email"
                   onChangeText={handleWebsite}
+                  value={website}
                 />
               </>
             )}
@@ -363,6 +367,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 <FlatInput
                   label="Enter website"
                   placeholder="Enter website"
+                  value={website}
                   onChangeText={handleWebsite}
                 />
                 <PrimaryButton onPress={()=>sumbitVerificationForm()} title="Submit" 

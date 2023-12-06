@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   pickPhotoFromCammera,
   pickPhotoFromGallary,
@@ -18,9 +18,20 @@ import { addUser } from '../../../store/reducers/user.reducer';
 export const useVerificationViewModal = (props: AvatarProps) => {
   const { optionData, loggInUserId, verificationOption } =
     props.route?.params.data || 'No optionData received';
+  const { user } = useSelector((state: any) => state.userState);
+  const userWebsite =
+    user.verificationId.licenceWebsite ||
+    user.verificationId.studentEmail ||
+    user.verificationId.healthCareProfessionalEmail ||
+    user.verificationId.userWebsite
+      ? user.verificationId.licenceWebsite ||
+        user.verificationId.studentEmail ||
+        user.verificationId.healthCareProfessionalEmail ||
+        user.verificationId.userWebsite
+      : '';
   const [visibleModal, setVisibleModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [website, setWebsite] = useState('');
+  const [website, setWebsite] = useState(userWebsite ? userWebsite : '');
   const cloudinaryRepository = new CloudinaryRepository();
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
@@ -31,10 +42,42 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     props.source?.uri || undefined,
   );
 
-  const { user } = useSelector((state: any) => state.userState);
+  const alreadySetVerificationOption = () => {
+    let result;
+    if (user.verificationId.idType === 'npi') {
+      result = 'NPI Number';
+    } else if (user.verificationId.idType === 'medicalLicense') {
+      result = 'License Number';
+    } else if (user.verificationId.isPhd) {
+      result = 'Others';
+    } else if (user.verificationId.isDoctoralCandidate) {
+      result = 'Student';
+    } else if (user.verificationId.territory) {
+      result = 'HealthCare';
+    }
+    return result;
+  };
+
+  const [previousSetVerificationOption, setPreviousSetVerificationOption] =
+    useState(alreadySetVerificationOption());
+
+  useEffect(() => {
+    console.log(
+      'previousSetVerificationOption:',
+      previousSetVerificationOption,
+      'options',
+      verificationOption,
+    );
+    if (previousSetVerificationOption !== verificationOption) {
+      console.log('inside if');
+      setWebsite('');
+    }
+  }, [previousSetVerificationOption]);
+
+  
 
   const dispatch = useDispatch();
-   const [validationErrorMessage , setValidationErrorMessage] = useState('')
+  const [validationErrorMessage, setValidationErrorMessage] = useState('');
 
   const toggleModal = () => setVisibleModal(!visibleModal);
 
@@ -127,7 +170,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const sumbitVerificationForm = async () => {
-    try{
+    try {
       if (!documentImage?.path && !selfie?.path) {
         return ShowFlashMessage(
           'Warning',
@@ -135,13 +178,18 @@ export const useVerificationViewModal = (props: AvatarProps) => {
           FlashMessageType.DANGER,
         );
       }
-      if (verificationOption=== 'Others' && (!PhdOptionImage?.path && !website)) {
-        return setValidationErrorMessage('Message: website or id image either of two is required')
-        
-      }else{
-        setValidationErrorMessage('')
+      if (
+        verificationOption === 'Others' &&
+        !PhdOptionImage?.path &&
+        !website
+      ) {
+        return setValidationErrorMessage(
+          'Message: website or id image either of two is required',
+        );
+      } else {
+        setValidationErrorMessage('');
       }
-  
+
       const photos: imageObject[] = PhdOptionImage
         ? [
             { photo: documentImage!, caption: 'userIdUpload' },
@@ -152,9 +200,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
             { photo: documentImage!, caption: 'userIdUpload' },
             { photo: selfie!, caption: 'cameraImage' },
           ];
-  
       const imageUrls: object[] = [];
-  
       for (let i = 0; i < photos.length; i++) {
         const cloudURL = await uploadImageToCloudinary(photos[i].photo);
         if (cloudURL) {
@@ -164,12 +210,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
           });
         }
       }
-  
       const verificationData = await updateImagesInDatabase(imageUrls);
-    }catch (err) {
-      console.log('---->error',err);
+    } catch (err) {
+      console.log('---->error', err);
     }
-   
   };
 
   const updateImagesInDatabase = async (photos: object[]) => {
@@ -196,6 +240,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
               territory: optionData?.teritory,
               degreeIdentifier: optionData?.degreeIdentifier,
               photo: photos,
+              submitted: true,
             },
           },
         },
@@ -272,5 +317,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     uploadPhdOptionPhotos,
     PhdOptionImage,
     validationErrorMessage,
+    website,
   };
 };

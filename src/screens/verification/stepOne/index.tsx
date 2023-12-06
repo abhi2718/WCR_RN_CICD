@@ -21,6 +21,7 @@ const VerificationStepOne = (props: ScreenParams) => {
     validationErrors,
     changeVerificationOption,
     handleInputChange,
+    optionData,
     country,
   } = useVerificationViewModal(props);
   return (
@@ -46,6 +47,7 @@ const VerificationStepOne = (props: ScreenParams) => {
               <FlatInput
                 label="Individual NPI Number"
                 maxLength={10}
+                value={optionData.npiNumber}
                 error={validationErrors.npiNumber}
                 onChangeText={(text: string) =>
                   handleInputChange('npiNumber', text)
@@ -67,6 +69,7 @@ const VerificationStepOne = (props: ScreenParams) => {
               <View style={verificationStyle.textBox}>
                 <FlatInput
                   label="Degree Identifier Type"
+                  value={optionData.degreeIdentifierType}
                   onChangeText={(text: string) =>
                     handleInputChange('degreeIdentifierType', text)
                   }
@@ -78,6 +81,7 @@ const VerificationStepOne = (props: ScreenParams) => {
                 <FlatInput
                   label="Degree Identifier"
                   maxLength={10}
+                  value={optionData.degreeIdentifier}
                   onChangeText={(text: string) =>
                     handleInputChange('degreeIdentifier', text)
                   }
@@ -89,6 +93,7 @@ const VerificationStepOne = (props: ScreenParams) => {
                 <FlatInput
                   label="Province/Territory"
                   maxLength={30}
+                  value={optionData.teritory}
                   onChangeText={(text: string) =>
                     handleInputChange('teritory', text)
                   }
@@ -111,6 +116,7 @@ const VerificationStepOne = (props: ScreenParams) => {
                 <FlatInput
                   label="License Number"
                   maxLength={10}
+                  value={optionData.licenseNumber}
                   onChangeText={(text: string) =>
                     handleInputChange('licenseNumber', text)
                   }
@@ -122,6 +128,7 @@ const VerificationStepOne = (props: ScreenParams) => {
                 <FlatInput
                   label="State/Territory"
                   maxLength={40}
+                  value={optionData.state}
                   onChangeText={(text: string) =>
                     handleInputChange('state', text)
                   }
