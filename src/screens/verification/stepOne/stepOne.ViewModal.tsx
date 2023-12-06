@@ -164,6 +164,8 @@ if(user.verificationId.idType === "npi"){
       handleInputChange('userWebsite', '');
       handleInputChange('licenceWebsite', '');
       handleInputChange('state', '');
+      handleInputChange('licenseNumber', '');
+      handleInputChange('npiNumber', '');
     } else if (option === 'Others') {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
@@ -172,6 +174,8 @@ if(user.verificationId.idType === "npi"){
       handleInputChange('state', '');
       handleInputChange('studentEmail', '');
       handleInputChange('licenceWebsite', '');
+      handleInputChange('licenseNumber', '');
+      handleInputChange('npiNumber', '');
     } else if (option === 'HealthCare') {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
@@ -181,6 +185,8 @@ if(user.verificationId.idType === "npi"){
         'healthCareProfessionalEmail',
       );
       handleInputChange('state', '');
+      handleInputChange('licenseNumber', '');
+      handleInputChange('npiNumber', '');
       handleInputChange('studentEmail', '');
       handleInputChange('licenceWebsite', '');
       handleInputChange('userWebsite', '');

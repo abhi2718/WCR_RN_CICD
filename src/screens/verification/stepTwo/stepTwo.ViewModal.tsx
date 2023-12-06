@@ -62,19 +62,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     useState(alreadySetVerificationOption());
 
   useEffect(() => {
-    console.log(
-      'previousSetVerificationOption:',
-      previousSetVerificationOption,
-      'options',
-      verificationOption,
-    );
     if (previousSetVerificationOption !== verificationOption) {
-      console.log('inside if');
       setWebsite('');
     }
   }, [previousSetVerificationOption]);
-
-  
 
   const dispatch = useDispatch();
   const [validationErrorMessage, setValidationErrorMessage] = useState('');
