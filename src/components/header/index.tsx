@@ -88,7 +88,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
   return (
     <View>
       <Row justifyContent="space-between" alignItems="center">
-        <Row style={headerDeckStyle.row} gap={25}>
+        <Row alignItems="center" style={headerDeckStyle.row} gap={25}>
           <Pressable onPress={goToNotification}>
             <Text style={headerDeckStyle.count}>{count}</Text>
             <Image
@@ -122,8 +122,8 @@ export const headerDeckStyle = StyleSheet.create({
     height: sizes[6],
   },
   searchIcon: {
-    width: sizes[7],
-    height: sizes[7],
+    width: sizes[6],
+    height: sizes[6],
   },
   count: {
     position: 'absolute',

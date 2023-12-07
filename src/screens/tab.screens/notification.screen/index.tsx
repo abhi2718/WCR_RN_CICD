@@ -1,7 +1,14 @@
 import React, { useRef } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Animated,
+  Image,
+} from 'react-native';
 import { HeaderBar } from '../../../components/header';
-import { FullLoader } from '../../../components/tools';
+import { Column, FullLoader } from '../../../components/tools';
 import { SwipeableListItem } from './components/tiles';
 import { notificationStyle } from './notificationStyle';
 import { useViewModal } from './useViewModal';
@@ -30,11 +37,19 @@ export const NotificationScreen = () => {
         <HeaderBar />
       </View>
       {!notifications.notifications.length && (
-        <View>
-          <Text>No new notifications!</Text>
-          <Text>
-            Stay tuned for updates and check your settings in the meantime.
-          </Text>
+        <View style={notificationStyle.content}>
+          <Column gap={25} alignItems="center">
+            <Text style={notificationStyle.subHeading}>Notifications</Text>
+            <Image
+              style={notificationStyle.pendingIcon}
+              resizeMode="contain"
+              source={require('../../../assets/images/icons/notificationBellIcon.png')}
+            />
+            <Text style={notificationStyle.text}>
+              Yet to receive notifications. {`\n`} Please check back later for
+              any updates.
+            </Text>
+          </Column>
         </View>
       )}
       <FlatList
