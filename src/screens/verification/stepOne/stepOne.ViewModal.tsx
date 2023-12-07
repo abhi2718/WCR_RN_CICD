@@ -169,7 +169,7 @@ if(user.verificationId.idType === "npi"){
     } else if (option === 'Others') {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
-      handleInputChange('isPhd', true);
+      handleInputChange('isPhd',true);
       handleInputChange('userWebsite', 'userWebsite');
       handleInputChange('state', '');
       handleInputChange('studentEmail', '');

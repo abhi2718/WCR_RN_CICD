@@ -17,7 +17,7 @@ import { addUser } from '../../../store/reducers/user.reducer';
 
 export const useVerificationViewModal = (props: AvatarProps) => {
   const { optionData, loggInUserId, verificationOption } =
-    props.route?.params.data || 'No optionData received';
+    props.route?.params.data || 'No optionData received';  
   const { user } = useSelector((state: any) => state.userState);
   const userWebsite =
     user.verificationId.licenceWebsite ||
@@ -36,7 +36,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
   const [documentImage, setdocumentImage] = useState<ImageDataType | null>(
-    props.source?.uri || undefined,
+    props.source?.uri || undefined 
   );
   const [PhdOptionImage, setPhdOptionImage] = useState<ImageDataType | null>(
     props.source?.uri || undefined,
@@ -185,7 +185,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         ? [
             { photo: documentImage!, caption: 'userIdUpload' },
             { photo: selfie!, caption: 'cameraImage' },
-            { photo: PhdOptionImage, caption: '' },
+            { photo: PhdOptionImage, caption: 'userIdUpload' },
           ]
         : [
             { photo: documentImage!, caption: 'userIdUpload' },
