@@ -34,7 +34,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   };
 
   const navigateToKidsScreen = (id: string) => {
-    navigation.navigate(ROUTES.Hobbies, { data: id });
+    navigation.navigate(ROUTES.VerificationStepOne, { data: id });
   };
 
   const updateUserDetails = async () => {
