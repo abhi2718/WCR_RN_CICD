@@ -32,12 +32,22 @@ export const useGenderViewModal = (props: ScreenParams) => {
   };
 
   const navigateToGenderPronounScreen = (id: string) => {
-    navigation.navigate(ROUTES.Location, { data: id });
+    
+    navigation.navigate(ROUTES.VerificationStepOne, { data: id });
+    
   };
 
-  const updateUserDetails = async (id: string, update: string) => {
+  const updateUserDetails = async () => {
     try {
-      if (!update) {
+
+      const genderData = {
+        profile: {
+          gender: gender,
+          showGender: checkboxState,
+        },
+      };
+     
+      if (!gender) {
         return ShowFlashMessage(
           'Warning',
           'Please select gender!',
@@ -46,27 +56,22 @@ export const useGenderViewModal = (props: ScreenParams) => {
       }
       setLoading(true);
 
-      const genderData = {
-        profile: {
-          gender: update,
-          showGender: checkboxState,
-        },
-      };
-
-      const user = await updateUserDetailsRepository.updateUserDetails(id, {
+     
+      const userData = await updateUserDetailsRepository.updateUserDetails(user._id ,{
         update: genderData,
       });
       const data = token ? {
         user: {
-          ...user,
+          ...userData,
           token
         },
       }  :{
-        user: user,
+        user: userData,
       };
       dispatch(addUser(data));
       setLoading(false);
-      navigateToGenderPronounScreen(loggInUserId);
+      
+      navigateToGenderPronounScreen(user._id);
     } catch (err: any) {
       setLoading(false);
     }

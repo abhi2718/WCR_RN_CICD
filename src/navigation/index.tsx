@@ -46,7 +46,6 @@ export enum ROUTES {
   ContactUs = '/contact-us',
   Preferences = '/preferences',
   VerificationPending = '/verificationPending',
-  VerificationDeclined = '/verificationDeclined',
   TurnOnNotification = '/turnOnNotification',
 }
 export default function Navigator() {
