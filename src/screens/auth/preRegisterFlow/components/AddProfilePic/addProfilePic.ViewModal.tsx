@@ -1,5 +1,8 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { pickPhotoFromGallary } from '../../../../../utils/uploads';
+import { useLayoutEffect, useState } from 'react';
+import {
+  pickPhotoFromGallary,
+  pickPhotoFromUrl,
+} from '../../../../../utils/uploads';
 import { AvatarProps } from '.';
 import { CloudinaryRepository } from '../../../../../repository/cloudinary.repo';
 import {
@@ -159,31 +162,37 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     getSavedPics();
   }, []);
 
-  const setProfilePicFromModel = (imageValue: ModalImageSelectedType) => {
+  const setProfilePicFromModel = async (imageValue: ModalImageSelectedType) => {
+    const image: Image = await pickPhotoFromUrl(undefined, imageValue.path);
+    if (image?.cropRect) {
+      imageValue.path = image?.path;
+    }
     if (imageValue.type == sidePicConstant) {
-      exchangeSidePic(imageValue.index);
+      exchangeSidePic(imageValue.index, imageValue.path);
       setImageModal(!imageModal);
       return;
     }
 
     if (imageValue.type == bottomPicConstant) {
-      exchangeBottomSidePic(imageValue.index);
+      exchangeBottomSidePic(imageValue.index, imageValue.path);
       setImageModal(!imageModal);
       return;
     }
   };
 
-  const exchangeSidePic = (index: number) => {
+  const exchangeSidePic = (index: number, path: string) => {
     const updatedUris = [...sidePicUri!];
     const currentPic = updatedUris[index];
+    currentPic.path = path;
     updatedUris[index] = profilePicUri!;
     setProfilePicUri(currentPic);
     setSidePicUris(updatedUris);
   };
 
-  const exchangeBottomSidePic = (index: number) => {
+  const exchangeBottomSidePic = (index: number, path: string) => {
     const updatedUris = [...bottomUris!];
     const currentPic = updatedUris[index];
+    currentPic.path = path;
     updatedUris[index] = profilePicUri!;
     setProfilePicUri(currentPic);
     setBottomUris(updatedUris);
@@ -207,7 +216,11 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     null,
   );
 
-  const toggleImageModal = (imagePath: string, type: string, index: number) => {
+  const toggleImageModal = async (
+    imagePath: string,
+    type: string,
+    index: number,
+  ) => {
     const newResult: ModalImageSelectedType = {
       path: imagePath,
       type: type,

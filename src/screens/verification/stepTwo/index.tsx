@@ -13,7 +13,6 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { BlurView } from '@react-native-community/blur';
 
 import {
   Logo,
