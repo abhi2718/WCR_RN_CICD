@@ -8,11 +8,18 @@ import {
   TextInput,
   Pressable,
   ScrollView,
+  Image,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { Column, FullLoader, Row } from '../../../../../../../components/tools';
+import {
+  Column,
+  FullLoader,
+  Row,
+  ScreenContainer,
+} from '../../../../../../../components/tools';
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 import { useViewModal } from './useViewModal';
+import { searchStyle } from './searchStyle';
 
 export const SearchModal = (props: SearchModalProps) => {
   const {
@@ -26,64 +33,79 @@ export const SearchModal = (props: SearchModalProps) => {
 
   return (
     <Modal visible={showSearchModal}>
-      <SafeAreaView style={styles.container}>
-        {loading ? (
-          <FullLoader />
-        ) : (
-          <View style={styles.container}>
-            <Row>
-              <View style={styles.searchBox}>
-                <TextInput onChangeText={handleSearch} placeholder="Search" />
-              </View>
-              <View>
+      <SafeAreaView style={searchStyle.container}>
+        <View style={searchStyle.container}>
+          {loading ? (
+            <FullLoader />
+          ) : (
+            <View style={searchStyle.container}>
+              <Row style={searchStyle.header} alignItems="center" gap={15}>
+                <TextInput
+                  style={searchStyle.searchBox}
+                  onChangeText={handleSearch}
+                  placeholder="Search"
+                />
                 <Pressable onPress={handleClose}>
-                  <Text>X</Text>
+                  <Image
+                    resizeMode="contain"
+                    style={searchStyle.crossImg}
+                    source={require('../../../../../../../assets/images/icons/crossIcon.png')}
+                  />
                 </Pressable>
-              </View>
-            </Row>
-            <ScrollView style={styles.container}>
-              {users.map((user) => (
-                <Pressable
-                  onPress={() => fetchSelectedUser(user._id)}
-                  key={user._id}
-                >
-                  <Row>
-                    <FastImage
-                      style={styles.imageStyle}
-                      source={{
-                        uri: user.profilePicture.url,
-                      }}
+              </Row>
+
+              {users.length === 0 ? (
+                <View style={searchStyle.content}>
+                  <Column gap={25} alignItems="center">
+                    <Text style={searchStyle.subHeading}>No results found</Text>
+                    <Image
+                      style={searchStyle.pendingIcon}
+                      resizeMode="contain"
+                      source={require('../../../../../../../assets/images/icons/noSearchResultIcon.png')}
                     />
-                    <Column>
-                      <Text>{user.first}</Text>
-                      <Row>
-                        <Text>{user.designation.title}</Text>
-                        <Text>, {user.city}</Text>
+                    <Text style={searchStyle.text}>
+                      We could not find what you {`\n`} were searching for.
+                      Please try again.
+                    </Text>
+                  </Column>
+                </View>
+              ) : (
+                <ScrollView style={searchStyle.container}>
+                  <Text style={searchStyle.subHeadingInner}>
+                    Search Results
+                  </Text>
+                  {users.map((user) => (
+                    <Pressable
+                      onPress={() => fetchSelectedUser(user._id)}
+                      key={user._id}
+                    >
+                      <Row alignItems="center" style={searchStyle.row} gap={12}>
+                        <FastImage
+                          style={searchStyle.imageStyle}
+                          source={{
+                            uri: user.profilePicture.url,
+                          }}
+                        />
+                        <Column gap={5}>
+                          <Text style={searchStyle.firstName}>
+                            {user.first}
+                          </Text>
+                          <Row>
+                            <Text style={searchStyle.ctiy}>
+                              {user.designation.title}
+                            </Text>
+                            <Text style={searchStyle.ctiy}>, {user.city}</Text>
+                          </Row>
+                        </Column>
                       </Row>
-                    </Column>
-                  </Row>
-                </Pressable>
-              ))}
-            </ScrollView>
-          </View>
-        )}
+                    </Pressable>
+                  ))}
+                </ScrollView>
+              )}
+            </View>
+          )}
+        </View>
       </SafeAreaView>
     </Modal>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  imageStyle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-  searchBox: {
-    flex: 0.9,
-  },
-});
-
-
-    
