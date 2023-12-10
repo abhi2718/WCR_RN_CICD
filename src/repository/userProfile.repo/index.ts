@@ -24,7 +24,19 @@ export class UserProfileRepository {
     return await this.apiService.getGetApiResponse(url);
   }
   async contactUs(payload:any): Promise<any> {
-    const url = `${AppUrl.contactUs}`;
+    const url = `${AppUrl.contactUsEndPoint}`;
     return await this.apiService.getPostApiResponse(url,payload);
+  }
+  async getPreference(userId:string) : Promise<any> {
+    const url = `${AppUrl.preferenceEndPoint}/${userId}`;
+    return await this.apiService.getGetApiResponse(url);
+  }
+  async createPreference(payload:any) : Promise<any> {
+    const url = `${AppUrl.preferenceEndPoint}/`;
+    return await this.apiService.getPostApiResponse(url,payload);
+  }
+  async updatePreference(payload:any) : Promise<any> {
+    const url = `${AppUrl.preferenceEndPoint}/`;
+    return await this.apiService.getPutApiResponse(url,payload);
   }
 }

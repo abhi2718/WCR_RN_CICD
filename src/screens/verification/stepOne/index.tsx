@@ -15,8 +15,6 @@ const VerificationStepOne = () => {
   const navigation = useNavigation();
   const [value, setValue] = React.useState('');
 
-  console.log(`Verification`, value);
-
   return (
     <ScreenContainer>
       <HeaderBar />

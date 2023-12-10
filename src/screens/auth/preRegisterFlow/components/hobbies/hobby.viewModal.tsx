@@ -62,7 +62,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       navigation.navigate(ROUTES.Tab);
       // navigateToKidsScreen(loggInUserId);
     } catch (err: any) {
-      console.log(err);
       setLoading(false);
     }
   };

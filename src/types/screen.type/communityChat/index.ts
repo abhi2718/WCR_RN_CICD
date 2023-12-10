@@ -51,3 +51,15 @@ export type MemberProps = {
   member: CometChat.GroupMember;
   toggleSetShowMembers: () => void;
 };
+
+export type UserReactionProps = {
+  hanldePress: () => void,
+  item:any
+}
+export type UserListProps = {
+  user: {
+      name: string;
+      avatar: string;
+      userId: string;
+  }
+};

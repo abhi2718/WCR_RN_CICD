@@ -44,7 +44,7 @@ interface AvatarProps extends ImageProps {
   route: any;
 }
 
-const VerificationStepTwo = (props: AvatarProps) => {
+const VerificationStepTwo = (props: any) => {
   const [visibleModal, setVisibleModal] = React.useState(false);
   const toggleModal = () => setVisibleModal(!visibleModal);
 

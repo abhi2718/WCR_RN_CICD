@@ -36,14 +36,21 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
     data: CheckBoxDataType[],
   ) => {
     const stringData = data.map((item) => item.text);
-    if (stringData?.includes(preferNotToSay)) {
-      setEthnicityList(makeFalseDefaultValue(ethnicity));
-      setSelectedEthnicity([preferNotToSay]);
-      setEthnicityflag(preferNotToSay);
-      return;
+    if (stringData?.includes(preferNotToSay) && stringData.length ===2) {
+      setEthnicityList((oldState) => {
+        const temp = oldState.map((item) => {
+          if (item.text === preferNotToSay) {
+            return {
+              ...item,
+              isChecked: false,
+            }
+          }
+          return item;
+        });
+        return temp;
+      });
     }
     setEthnicityflag(ethnicityValue);
-    setSelectedEthnicity(stringData);
   };
   const handleListChange = (data: CheckBoxDataType[]) => {
     setEthnicityList(data);

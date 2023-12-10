@@ -7,7 +7,7 @@ import * as Progress from 'react-native-progress';
 import { styles } from './styles';
 
 export const ProfileScreen = () => {
-  const { user, goToPreview, goToSetting,goToPreferences } = useViewModal();
+  const { user, goToPreview, goToSetting,goToPreferences,goToEditProfile } = useViewModal();
   return (
     <View style={styles.container}>
       <View></View>
@@ -42,7 +42,7 @@ export const ProfileScreen = () => {
         </Row>
       </Pressable>
       <Spacer position={'top'} size={20} />
-      <Pressable>
+      <Pressable onPress={goToEditProfile}>
         <Row alignItems="center">
           <Image
             style={styles.iconStyle}

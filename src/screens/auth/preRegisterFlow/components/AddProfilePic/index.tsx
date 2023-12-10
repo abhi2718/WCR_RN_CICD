@@ -13,6 +13,7 @@ import {
   Logo,
   Row,
   ScreenContainer,
+  Spacer,
 } from '../../../../../components/tools';
 import { addPicture, modalStyles } from './AddProfilePicStyle';
 import { PrimaryButton } from '../../../../../components/button';
@@ -23,11 +24,12 @@ import { ProfilePicInfoModal } from '../../../../../components/profilePicInfoMod
 
 export interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
-  navigation: any;
-  route: any;
+  navigation?: any;
+  route?: any;
+  showHeader?: boolean;
 }
 
-const AddProfilePicScreen = (props: AvatarProps) => {
+const AddProfilePicScreen = (props: any) => {
   const {
     loading,
     closeModal,
@@ -49,6 +51,8 @@ const AddProfilePicScreen = (props: AvatarProps) => {
     sidePicConstant,
     uploadImage,
     bottomPicConstant,
+    showHeader,
+    setImageModal,
   } = useAddProfilePicViewModal(props);
 
   return (
@@ -60,7 +64,7 @@ const AddProfilePicScreen = (props: AvatarProps) => {
         ></ProfilePicInfoModal>
         <View style={addPicture.container}>
           <View>
-            <HeaderBar info={openModal}></HeaderBar>
+            {showHeader && <HeaderBar info={openModal}></HeaderBar>}
             <Text style={addPicture.subHeader}>Show off your best side </Text>
             <Text style={addPicture.text}>(Add at least 2 photos)</Text>
             <View>
@@ -72,7 +76,9 @@ const AddProfilePicScreen = (props: AvatarProps) => {
                         style={addPicture.profilePic}
                         {...props}
                         source={
-                          profilePicUri ? { uri: profilePicUri.path } : props.source
+                          profilePicUri
+                            ? { uri: profilePicUri.path }
+                            : props.source
                         }
                       />
                       <Text style={addPicture.profilePicText}>
@@ -104,7 +110,11 @@ const AddProfilePicScreen = (props: AvatarProps) => {
                         <View>
                           <TouchableOpacity
                             onPress={() =>
-                              toggleImageModal(sidePic.path, sidePicConstant, index)
+                              toggleImageModal(
+                                sidePic.path,
+                                sidePicConstant,
+                                index,
+                              )
                             }
                           >
                             <Image
@@ -113,12 +123,29 @@ const AddProfilePicScreen = (props: AvatarProps) => {
                               source={{ uri: sidePic?.path }}
                             />
                           </TouchableOpacity>
-                          <TouchableOpacity onPress={() => removePic(index)}>
-                            <Image
-                              style={addPicture.deletImg}
-                              source={require('../../../../../assets/images/icons/crossIcon.png')}
-                            />
-                          </TouchableOpacity>
+                          {!showHeader && sidePicUri.length === 1 ? (
+                            <>
+                              <TouchableOpacity
+                                onPress={() => removePic(index)}
+                              >
+                                <Image
+                                  style={addPicture.deletImg}
+                                  source={require('../../../../../assets/images/icons/crossIcon.png')}
+                                />
+                              </TouchableOpacity>
+                            </>
+                          ) : (
+                            <>
+                              <TouchableOpacity
+                                onPress={() => removePic(index)}
+                              >
+                                <Image
+                                  style={addPicture.deletImg}
+                                  source={require('../../../../../assets/images/icons/crossIcon.png')}
+                                />
+                              </TouchableOpacity>
+                            </>
+                          )}
                         </View>
                       ) : (
                         <TouchableOpacity onPress={() => sidePickPhoto(index)}>
@@ -177,11 +204,13 @@ const AddProfilePicScreen = (props: AvatarProps) => {
               </Row>
             </View>
           </View>
-          <PrimaryButton
+          {showHeader && (
+            <PrimaryButton
             onPress={() => uploadImage()}
             title="Next"
             isLoading={loading}
           />
+          )}
         </View>
       </ScreenContainer>
 
@@ -190,7 +219,7 @@ const AddProfilePicScreen = (props: AvatarProps) => {
           animationType="slide"
           transparent={true}
           visible={imageModal}
-          onRequestClose={() => toggleImageModal}
+          onRequestClose={() => setImageModal(false)}
         >
           <View style={modalStyles.modalContent}>
             <Row
@@ -198,7 +227,7 @@ const AddProfilePicScreen = (props: AvatarProps) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Pressable onPress={() => toggleImageModal}>
+              <Pressable onPress={() => setImageModal(false)}>
                 <Image
                   style={modalStyles.arrow}
                   source={require('../../../../../assets/images/icons/arrow.png')}
