@@ -45,6 +45,7 @@ export enum ROUTES {
   BlockAndUnBlock = '/blockAndUnBlock',
   ContactUs = '/contact-us',
   Preferences = '/preferences',
+  EditProfile = '/editProfile',
   VerificationPending = '/verificationPending',
   VerificationDeclined = '/verificationDeclined',
   TurnOnNotification = '/turnOnNotification',

@@ -4,6 +4,7 @@ import { Row, Logo } from '../tools';
 import { useNavigation } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
+import { ROUTES } from '../../navigation';
 
 interface HeaderBarProps {
   skip?: () => void;
@@ -85,6 +86,8 @@ interface HeaderDeckProps {
 
 export const HeaderDeck = (props: HeaderDeckProps) => {
   const { count, toggleSearchModal, goToNotification } = props;
+  const { navigate } = useNavigation();
+  const goToPrefrence = () => navigate(ROUTES.Preferences);
   return (
     <View>
       <Row justifyContent="space-between" alignItems="center">
@@ -105,7 +108,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           </Pressable>
         </Row>
         <Logo width={45} height={45} />
-        <Pressable style={headerDeckStyle.row}>
+        <Pressable onPress={goToPrefrence} style={headerDeckStyle.row}>
           <Image
             style={headerDeckStyle.searchIcon}
             source={require('../../assets/images/Filter.png')}

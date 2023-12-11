@@ -9,6 +9,7 @@ import {
   Text,
   Platform,
 } from 'react-native';
+import { dimensions } from '../../../../../../../components/tools';
 const {height, width} = Dimensions.get('window');
 class CardStack extends Component {
   static distance(x, y) {
@@ -436,7 +437,6 @@ class CardStack extends Component {
     });
     return (
       <View
-        
         style={[{position: 'relative'}, this.props.style]}>
         {renderNoMoreCards()}
         <Animated.View
@@ -538,7 +538,7 @@ CardStack.defaultProps = {
   loop: false,
   initialIndex: 0,
   renderNoMoreCards: () => {
-    return <Text></Text>;
+    return <Text>No More Card</Text>;
   },
   onSwipeStart: () => null,
   onSwipeEnd: () => null,

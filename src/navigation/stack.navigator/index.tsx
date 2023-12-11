@@ -34,12 +34,18 @@ import { AccountSettingScreen } from '../../screens/tab.screens/profile/componen
 import { BlockAndUnBlock } from '../../screens/tab.screens/profile/components/settings/components/block&Unblock';
 import { ContactUs } from '../../screens/tab.screens/profile/components/settings/components/contactUs';
 import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
+import { EditProfile } from '../../screens/tab.screens/profile/components/editProfile';
 import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
+       {/* <Stack.Screen
+        options={options}
+        name={ROUTES.AddEthnicity}
+        component={AddEthnicityScreen}
+      /> */}
       <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}
@@ -89,11 +95,11 @@ export const StackNavigator = () => {
         name={ROUTES.LookingFor}
         component={RelationShipScreen}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         options={options}
         name={ROUTES.AddEthnicity}
         component={AddEthnicityScreen}
-      />
+      /> */}
       <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
@@ -176,6 +182,11 @@ export const StackNavigator = () => {
         //options={optins}
         name={ROUTES.Preferences}
         component={PreferencesScreen}
+      />
+         <Stack.Screen
+        //options={optins}
+        name={ROUTES.EditProfile}
+        component={EditProfile}
       />
     </Stack.Navigator>
   );
