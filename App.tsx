@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { ThemeProvider } from 'styled-components/native';
 import CombinedProviders from './src/contexts';
@@ -13,7 +13,7 @@ import { theme } from './src/infrastructure/theme';
 export default function App() {
   return (
     <GestureHandlerRootView style={styles.containerStyle}>
-      <SafeAreaView style={styles.containerStyle}>
+      <View style={styles.containerStyle}>
         <Provider store={store}>
           <PaperProvider>
             <CombinedProviders>
@@ -24,7 +24,7 @@ export default function App() {
           </PaperProvider>
         </Provider>
         <FlashMessage position="top" />
-      </SafeAreaView>
+      </View>
     </GestureHandlerRootView>
   );
 }

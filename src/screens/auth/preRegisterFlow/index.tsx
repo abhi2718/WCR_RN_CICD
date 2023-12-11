@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { PrimaryButton } from '../../../components/button';
 import {
   ImageContainer,
@@ -15,6 +14,7 @@ import { useGenderViewModal } from './gender.ViewModal';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { colors } from '../../../infrastructure/theme/colors';
 import { HeaderBar } from '../../../components/header';
+import { CheckBox } from '../../../components/inputBox';
 const Gender = (props: ScreenParams) => {
   const {
     gender,
@@ -43,7 +43,10 @@ const Gender = (props: ScreenParams) => {
                   value={gender}
                 >
                   <Row style={genderStyle.rowView} alignItems="center">
-                    <RadioButton color={colors.ui.primary} value={option} />
+                    <RadioButton.Android
+                      color={colors.ui.primary}
+                      value={option}
+                    />
                     <Text style={genderStyle.btnText}>{option}</Text>
                   </Row>
                 </RadioButton.Group>
@@ -52,7 +55,7 @@ const Gender = (props: ScreenParams) => {
           </View>
           <View>
             <Row style={genderStyle.rowView} alignItems="center">
-              <BouncyCheckbox
+              <CheckBox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
                 fillColor={colors.ui.primary}

@@ -27,7 +27,7 @@ const VerificationStepOne = () => {
           value={value}
         >
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="NPI Number" />
+            <RadioButton.Android color={colors.ui.primary} value="NPI Number" />
             <Text style={verificationStyle.btnText}>
               NPI Number (Recommended)
             </Text>
@@ -40,7 +40,10 @@ const VerificationStepOne = () => {
           )}
 
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="License Number" />
+            <RadioButton.Android
+              color={colors.ui.primary}
+              value="License Number"
+            />
             <Text style={verificationStyle.btnText}>License Number</Text>
           </Row>
           {value === 'License Number' && (
@@ -55,12 +58,12 @@ const VerificationStepOne = () => {
             </>
           )}
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="Student" />
+            <RadioButton.Android color={colors.ui.primary} value="Student" />
             <Text style={verificationStyle.btnText}>Student</Text>
           </Row>
 
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="Other" />
+            <RadioButton.Android color={colors.ui.primary} value="Other" />
             <Text style={verificationStyle.btnText}>All Other Users</Text>
           </Row>
         </RadioButton.Group>
