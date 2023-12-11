@@ -26,7 +26,6 @@ const Habits = (props: ScreenParams) => {
     handleSmokingHabits,
     handlePets,
     loading,
-    loggInUserId,
     navigateToAboutScreen,
     updateUserDetails,
   } = useHabitViewModal(props);
@@ -36,7 +35,7 @@ const Habits = (props: ScreenParams) => {
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
           <HeaderBar
-            skip={() => navigateToAboutScreen(loggInUserId)}
+            skip={() => navigateToAboutScreen()}
           ></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>

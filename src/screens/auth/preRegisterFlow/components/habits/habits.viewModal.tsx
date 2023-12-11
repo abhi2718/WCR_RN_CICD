@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,9 +6,9 @@ import { addUser } from '../../../../../store/reducers/user.reducer';
 import { ROUTES } from '../../../../../navigation';
 
 export const useHabitViewModal = (props: ScreenParams) => {
-    const loggInUserId = props.route?.params?.data || 'No data received';
     const updateUserDetailsRepository = new UpdateUserDetailsRepository();
     const { user } = useSelector((state: any) => state.userState);
+    const token = useRef(user?.token ? user?.token : null).current;
     const dispatch = useDispatch();
     const {navigation} = props;
     const drinking =user.drinking;
@@ -46,8 +46,8 @@ export const useHabitViewModal = (props: ScreenParams) => {
       setSelectedPets(option === selectedPets ? null : option);
     };
 
-    const navigateToAboutScreen = (id: string) => {
-        navigation.navigate(ROUTES.About, { data: id });
+    const navigateToAboutScreen = () => {
+        navigation.navigate(ROUTES.About);
       };
     
     const updateUserDetails = async () => {
@@ -59,30 +59,37 @@ export const useHabitViewModal = (props: ScreenParams) => {
             pets: selectedPets
           };
 
-          if(!selectedDrinkingHabits && !selectedSmokingHabits && !selectedExercise && !selectedPets){
-            navigateToAboutScreen(loggInUserId);
+          if(user?.drinking === selectedDrinkingHabits && user?.smoking === selectedSmokingHabits && user?.excercise === selectedExercise && user?.pets === selectedPets){
+            navigateToAboutScreen();
             return 
           }
           setLoading(true);
-          const user = await updateUserDetailsRepository.updateUserDetails(
-            loggInUserId,
+          const userData = await updateUserDetailsRepository.updateUserDetails(
+            user._id,
             {
               update: selectedData,
             },
           );
-          const data = {
-            user: user,
+          const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
           };
            dispatch(addUser(data));
           setLoading(false);
     
-          navigateToAboutScreen(loggInUserId);
+          navigateToAboutScreen();
         } catch (err: any) {
           setLoading(false);
         }
       };
     
     return({
-        handleDrinking,selectedSmokingHabits, setSelectedSmokingHabits,selectedDrinkingHabits, setSelectedDrinkingHabits,selectedExercise, setSelectedExercise,selectedPets, setSelectedPets,handleeExercise,handleSmokingHabits,handlePets,updateUserDetails,loading,loggInUserId,navigateToAboutScreen
+        handleDrinking,selectedSmokingHabits, setSelectedSmokingHabits,selectedDrinkingHabits, setSelectedDrinkingHabits,selectedExercise, setSelectedExercise,selectedPets, setSelectedPets,handleeExercise,handleSmokingHabits,handlePets,updateUserDetails,loading,navigateToAboutScreen
     })
 }

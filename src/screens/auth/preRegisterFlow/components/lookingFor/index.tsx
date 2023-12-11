@@ -17,7 +17,6 @@ const RelationShipScreen = (props: ScreenParams) => {
     relationshipList,
     handleListChange,
     handleSeletedList,
-    loggInUserId,
     navigateToMaritalStatusScreen,
   } = useRelationshipViewModal(props);
 
@@ -26,7 +25,7 @@ const RelationShipScreen = (props: ScreenParams) => {
       <View style={LookingForStyle.container}>
         <View style={LookingForStyle.flex}>
           <HeaderBar
-            skip={() => navigateToMaritalStatusScreen(loggInUserId)}
+            skip={() => navigateToMaritalStatusScreen()}
           ></HeaderBar>
           <Text style={LookingForStyle.subHeader}>
             What are you looking for?

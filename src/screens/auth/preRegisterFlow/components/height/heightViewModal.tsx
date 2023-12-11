@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ROUTES } from '../../../../../navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,10 +11,10 @@ interface Measurement {
   heightInCm?: number;
 }
 export const useheightViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
   const { user } = useSelector((state: any) => state.userState);
+  const token = useRef(user?.token ? user?.token : null).current;
   const savedHeight: Measurement = user.height;
   const dispatch = useDispatch();
   const [heightFormat, setheightFormat] = useState('feet');
@@ -80,44 +80,49 @@ export const useheightViewModal = (props: ScreenParams) => {
     };
   }
 
-  const navigateToEthnicityScreen = (id: string) => {
-    navigation.navigate(ROUTES.AddEthnicity, { data: id });
+  const navigateToEthnicityScreen = () => {
+    navigation.navigate(ROUTES.AddEthnicity);
   };
 
   const updateUserDetails = async () => {
     try {
-     
       const heightData = {
         height: {
           feet: heightValue?.feet,
           inch: heightValue?.inch,
         },
       };
-      if(!heightData){
-        navigateToEthnicityScreen(loggInUserId);
-        return 
+      if (user.height &&  user.height.feet===heightValue?.feet && user.height.inch===heightValue?.inch) {
+        navigateToEthnicityScreen();
+        return;
       }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: heightData,
         },
       );
-      const data = {
-        user: user,
-      };
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
 
-      navigateToEthnicityScreen(loggInUserId);
+      navigateToEthnicityScreen();
     } catch (err: any) {
       setLoading(false);
     }
   };
   return {
     navigateToEthnicityScreen,
-    loggInUserId,
     currentHeight,
     heightFormat,
     handleFormatChange,

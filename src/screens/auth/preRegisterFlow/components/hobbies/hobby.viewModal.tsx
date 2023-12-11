@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
@@ -11,6 +11,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
+  const token = useRef(user?.token ? user?.token : null).current;
   let hobbies = user?.interests;
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>(
     hobbies ?? [],
@@ -33,7 +34,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   };
 
   const navigateToKidsScreen = () => {
-    console.log('inside hobby screen')
     navigation.navigate(ROUTES.VerificationStepOne);
   };
 
@@ -43,7 +43,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
         interests: selectedHobbies,
       };
 
-      if (selectedHobbies.length === 0) {
+      if (user?.interests === selectedHobbies) {
         navigateToKidsScreen();
         return;
       }
@@ -54,9 +54,16 @@ export const useHobbyViewModal = (props: ScreenParams) => {
           update: selectedInterests,
         },
       );
-      const data = {
-        user: userData,
-      };
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
        navigateToKidsScreen();

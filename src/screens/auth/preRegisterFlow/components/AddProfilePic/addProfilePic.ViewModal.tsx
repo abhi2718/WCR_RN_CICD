@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import {
   pickPhotoFromGallary,
   pickPhotoFromUrl,
@@ -27,7 +27,6 @@ export type ImageDataType = {
   name: string;
 };
 export const useAddProfilePicViewModal = (props: AvatarProps) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const sidePicConstant = 'sidePicConstant';
   const bottomPicConstant = 'bottomPicConstant';
   const cloudinaryRepository = new CloudinaryRepository();
@@ -39,6 +38,7 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     useState(false);
 
   const { user } = useSelector((state: any) => state.userState);
+  const token = useRef(user?.token ? user?.token : null).current;
 
   const dispatch = useDispatch();
   const closeModal = () => {
@@ -280,8 +280,8 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     photos: object[],
   ) => {
     try {
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: {
             profilePicture: profileImage,
@@ -289,12 +289,17 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
           },
         },
       );
-      const data = {
-        user: user,
+      const data = token ? {
+        user: {
+          ...userData,
+          token
+        },
+      }  :{
+        user: userData,
       };
       dispatch(addUser(data));
       setLoading(false);
-      navigateToHeightScreen(loggInUserId);
+      navigateToHeightScreen();
     } catch (err) {
     } finally {
       setLoading(false);
@@ -332,8 +337,8 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     }
   };
 
-  const navigateToHeightScreen = (id: string) => {
-    navigation.navigate(ROUTES.Height, { data: id });
+  const navigateToHeightScreen = () => {
+    navigation.navigate(ROUTES.Height);
   };
 
   return {
