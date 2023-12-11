@@ -10,8 +10,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
-import { BlurView } from '@react-native-community/blur';
 
 import {
   Logo,
@@ -37,6 +38,7 @@ import { ImageOrVideo } from 'react-native-image-crop-picker';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
+import { useVerificationViewModal } from './stepTwo.ViewModal';
 
 interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
@@ -45,43 +47,34 @@ interface AvatarProps extends ImageProps {
 }
 
 const VerificationStepTwo = (props: AvatarProps) => {
-  const [visibleModal, setVisibleModal] = React.useState(false);
-  const toggleModal = () => setVisibleModal(!visibleModal);
-
-  const [documentImage, setdocumentImage] = React.useState(
-    props.source?.uri || undefined,
-  );
-  const clickPicture = async (source) => {
-    if (source === 'camera') {
-      const image = await pickPhotoFromCammera(null, true);
-      setdocumentImage(image.path);
-      props.onChange?.(image);
-
-      openPicModal();
-    } else if (source === 'library') {
-      const image = await pickPhotoFromGallary(null, false);
-      setdocumentImage(image.path);
-      props.onChange?.(image);
-      openPicModal();
-    }
-    toggleModal();
-  };
-
-  const [visiblePicModal, setVisiblePicModal] = React.useState(false);
-  const closePicModal = () => setVisiblePicModal(false);
-  const openPicModal = () => setVisiblePicModal(true);
-
-  // ----------------------------------------------------------------
-  const [isSelfie, setisSelfie] = React.useState(false);
-
-  const [selfie, setSelfie] = React.useState(props.source?.uri || undefined);
-
-  const clickSelfieImage = async () => {
-    const image = await pickPhotoFromCammera(null, true);
-    setSelfie(image.path);
-    props.onChange?.(image);
-  };
-
+  const {
+    verificationOption,
+    clickSelfieImage,
+    visibleModal,
+    handleWebsite,
+    website,
+    documentImage,
+    setdocumentImage,
+    clickPicture,
+    selfie,
+    loading,
+    validationErrorMessage,
+    closePicModal,
+    PhdOptionModal,
+    toggleModal,
+    visiblePicModal,
+    sumbitVerificationForm,
+    isSelfie,
+    uploadPhdOptionPhotos,
+    closePhdOptionModalModal,
+    openPhdOptionModal,
+    setIsSelfie,
+    PhdOptionImage,
+    closePhdOptionPicUploadingModal,
+    openPhdOptionPicUploadingModal,
+    PhdOptionPicUploadingModal,
+  } = useVerificationViewModal(props);
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
   return (
     <>
       <ScreenContainer>
@@ -126,18 +119,60 @@ const VerificationStepTwo = (props: AvatarProps) => {
             </Row>
           </View>
           <View style={verificationStyle.footerDiv}>
-            <Text>
-              <Text style={verificationStyle.redDot}>Optional: </Text>
-              <Text style={verificationStyle.pointText}>
-                For quicker verification, please provide a website to verify
-                your degree.
+            {verificationOption === 'License Number' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For quicker verification, please provide a website to verify
+                    your degree.
+                  </Text>
+                </Text>
+                <FlatInput label="Enter website" 
+                value={website}
+                onChangeText={handleWebsite} />
+              </>
+            )}
+            {verificationOption === 'HealthCare' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For quicker verification, please provide a website to verify
+                    your degree.
+                  </Text>
+                </Text>
+                <FlatInput label="Enter website"
+                value={website}
+                 onChangeText={handleWebsite} />
+              </>
+            )}
+
+            {verificationOption === 'Student' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For faster verification, please provide your student email.
+                    We may send an email to confirm your student status and
+                    request further verification if necessary.
+                  </Text>
+                </Text>
+                <FlatInput
+                  label="Enter student email"
+                  onChangeText={handleWebsite}
+                  value={website}
+                />
+              </>
+            )}
+
+            {verificationOption === 'License Number' && (
+              <Text style={verificationStyle.footerText}>
+                We may request additional proof of degree if needed, depending
+                on the type of degree.
               </Text>
-            </Text>
-            <FlatInput label="Enter website" />
-            <Text style={verificationStyle.footerText}>
-              We may request additional proof of degree if needed, depending on
-              the type of degree.
-            </Text>
+            )}
+
             <PrimaryButton onPress={toggleModal} title="Camera" />
           </View>
         </View>
@@ -196,11 +231,11 @@ const VerificationStepTwo = (props: AvatarProps) => {
               <Text style={modalStyles.subText}>Photo captured</Text>
               <Image
                 style={modalStyles.picture}
-                source={{ uri: documentImage }}
+                source={{ uri: documentImage?.path }}
               />
               <PrimaryButton
                 style={modalStyles.button}
-                onPress={() => setisSelfie(true)}
+                onPress={() => setIsSelfie(true)}
                 title="Next"
               />
             </View>
@@ -212,8 +247,22 @@ const VerificationStepTwo = (props: AvatarProps) => {
 
               {selfie ? (
                 <>
-                  <Image style={modalStyles.picture} source={{ uri: selfie }} />
-                  <PrimaryButton style={modalStyles.button} title="Submit" />
+                  <Image
+                    style={modalStyles.picture}
+                    source={{ uri: selfie.path }}
+                  />
+                  <PrimaryButton
+                    style={modalStyles.button}
+                    title={
+                      verificationOption === 'Others' ? 'Continue' : 'Submit'
+                    }
+                    isLoading={loading}
+                    onPress={
+                      verificationOption === 'Others'
+                        ? openPhdOptionModal
+                        : () => sumbitVerificationForm()
+                    }
+                  />
                 </>
               ) : (
                 <>
@@ -234,6 +283,98 @@ const VerificationStepTwo = (props: AvatarProps) => {
               )}
             </View>
           )}
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={PhdOptionPicUploadingModal}
+        onRequestClose={closePhdOptionPicUploadingModal}
+      >
+        <View style={modalStyles.modalContent}>
+          <Row
+            style={modalStyles.row}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Pressable onPress={closePicModal}>
+              <Image
+                style={modalStyles.arrow}
+                source={require('../../../assets/images/icons/arrow.png')}
+              />
+            </Pressable>
+            <Logo width={50} height={35} />
+            <View />
+          </Row>
+
+          <View style={modalStyles.content}>
+            <Text style={modalStyles.subText}>Photo captured</Text>
+            <Image
+              style={modalStyles.picture}
+              source={{ uri: PhdOptionImage?.path }}
+            />
+            <PrimaryButton
+              style={modalStyles.button}
+              onPress={() => sumbitVerificationForm()}
+              isLoading={loading}
+              title="Submit"
+            />
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={PhdOptionModal}
+        onRequestClose={closePhdOptionModalModal}
+      >
+        <View style={modalStyles.modalContent}>
+          <HeaderBar></HeaderBar>
+          <View style={verificationStyle.container}>
+            <Text>{validationErrorMessage}</Text>
+            <View>
+              <Text style={verificationStyle.subHeader}>
+                Provide The Following Degree Verification (Step III)
+              </Text>
+              <Text style={verificationStyle.subText}>
+                Upload Proof of Degree from USA showing name, institution,
+                degree, date degree awarded
+              </Text>
+              <Text style={verificationStyle.subText}>
+                ( e.g., Diploma, Transcript, Certificate of Completion, Degree
+                Verification )
+              </Text>
+              <TouchableOpacity
+                style={verificationStyle.uploadBtn}
+                onPress={() => uploadPhdOptionPhotos()}
+              >
+                <Text style={verificationStyle.uploadBtnText}>Uplpoad</Text>
+              </TouchableOpacity>
+              <Text style={verificationStyle.subText}>
+                Enter website to show proof of degree (e.g., Professional
+                licensing website, Institution website showing name and year of
+                graduation, Work website showing name and title). We may request
+                additional proof of degree if needed.
+              </Text>
+            </View>
+            <KeyboardAvoidingView
+              behavior="position"
+              keyboardVerticalOffset={keyboardVerticalOffset}
+            >
+              <View style={verificationStyle.footerDiv}>
+                <FlatInput
+                  label="Enter website"
+                  placeholder="Enter website"
+                  value={website}
+                  onChangeText={handleWebsite}
+                />
+                <PrimaryButton onPress={()=>sumbitVerificationForm()} title="Submit" 
+                isLoading={loading}
+                />
+              </View>
+            </KeyboardAvoidingView>
+          </View>
         </View>
       </Modal>
     </>

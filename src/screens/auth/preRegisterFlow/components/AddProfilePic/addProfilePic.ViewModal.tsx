@@ -1,5 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { pickPhotoFromGallary } from '../../../../../utils/uploads';
+import {
+  pickPhotoFromGallary,
+  pickPhotoFromUrl,
+} from '../../../../../utils/uploads';
 import { AvatarProps } from '.';
 import { CloudinaryRepository } from '../../../../../repository/cloudinary.repo';
 import {
@@ -23,8 +26,9 @@ export type ImageDataType = {
   mime: string;
   name: string;
 };
-export const useAddProfilePicViewModal = (props: AvatarProps) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
+export const useAddProfilePicViewModal = (props: any) => {
+  const { user } = useSelector(({ userState }) => userState);
+  const loggInUserId = user._id;
   const sidePicConstant = 'sidePicConstant';
   const bottomPicConstant = 'bottomPicConstant';
   const cloudinaryRepository = new CloudinaryRepository();
@@ -34,9 +38,6 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [isPicUploadInfoModalVisible, setPicUploadInfoModalVisible] =
     useState(false);
-
-  const { user } = useSelector((state: any) => state.userState);
-
   const dispatch = useDispatch();
   const closeModal = () => {
     setPicUploadInfoModalVisible(false);
@@ -80,7 +81,6 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     };
     updatedUris[index] = resultImage;
     setSidePicUris(updatedUris);
-    // props.onChange?.(updatedUris);
   };
 
   const [bottomUris, setBottomUris] = useState<ImageDataType[] | null>(
@@ -99,6 +99,15 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     setBottomUris(updatedUris);
     // props.onChange?.(updatedUris);
   };
+  useEffect(() => {
+    if (props?.setAllPics) {
+      props?.setAllPics({
+        bottomUris:bottomUris?.filter((item)=>item),
+        sidePicUri:sidePicUri?.filter((item)=>item),
+        profilePicUri:profilePicUri
+      });
+    }
+  },[bottomUris,sidePicUri,profilePicUri])
   const fillSavedPhotos = (photos: any) => {
     if (!photos) {
       return [];
@@ -159,31 +168,37 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     getSavedPics();
   }, []);
 
-  const setProfilePicFromModel = (imageValue: ModalImageSelectedType) => {
+  const setProfilePicFromModel = async (imageValue: ModalImageSelectedType) => {
+    const image: Image = await pickPhotoFromUrl(undefined, imageValue.path);
+    if (image?.cropRect) {
+      imageValue.path = image?.path;
+    }
     if (imageValue.type == sidePicConstant) {
-      exchangeSidePic(imageValue.index);
+      exchangeSidePic(imageValue.index, imageValue.path);
       setImageModal(!imageModal);
       return;
     }
 
     if (imageValue.type == bottomPicConstant) {
-      exchangeBottomSidePic(imageValue.index);
+      exchangeBottomSidePic(imageValue.index, imageValue.path);
       setImageModal(!imageModal);
       return;
     }
   };
 
-  const exchangeSidePic = (index: number) => {
+  const exchangeSidePic = (index: number, path: string) => {
     const updatedUris = [...sidePicUri!];
     const currentPic = updatedUris[index];
+    currentPic.path = path;
     updatedUris[index] = profilePicUri!;
     setProfilePicUri(currentPic);
     setSidePicUris(updatedUris);
   };
 
-  const exchangeBottomSidePic = (index: number) => {
+  const exchangeBottomSidePic = (index: number, path: string) => {
     const updatedUris = [...bottomUris!];
     const currentPic = updatedUris[index];
+    currentPic.path = path;
     updatedUris[index] = profilePicUri!;
     setProfilePicUri(currentPic);
     setBottomUris(updatedUris);
@@ -200,14 +215,16 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     setBottomUris(updatedUris);
   };
 
-  // ---------Modal --------------------------------
   const [imageModal, setImageModal] = useState(false);
-
   const [selectedUri, setSelectedUri] = useState<ModalImageSelectedType | null>(
     null,
   );
 
-  const toggleImageModal = (imagePath: string, type: string, index: number) => {
+  const toggleImageModal = async (
+    imagePath: string,
+    type: string,
+    index: number,
+  ) => {
     const newResult: ModalImageSelectedType = {
       path: imagePath,
       type: type,
@@ -237,13 +254,13 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
       );
     }
     try {
-      const photos: object[] = [];
       setLoading(true);
       const profileCloudURL = await uploadImageToCloudinary(profilePicUri);
       const profileImage = {
         url: profileCloudURL,
         caption: 'User Profile',
       };
+      const photos: object[] = [];
       const allPhotos = [...sidePics!, ...bottomPics!];
       for (let i = 0; i < allPhotos.length; i++) {
         const cloudURL = await uploadImageToCloudinary(allPhotos[i]);
@@ -257,7 +274,6 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
         }
         photos.push({ url: cloudURL! });
       }
-
       await updateImagesInDatabase(profileImage, photos);
     } catch (error) {}
   };
@@ -281,7 +297,15 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
       };
       dispatch(addUser(data));
       setLoading(false);
-      navigateToHeightScreen(loggInUserId);
+      if (showHeader) {
+        navigateToHeightScreen(loggInUserId);
+      } else {
+        ShowFlashMessage(
+          'Success',
+          'successfully Updated your pics',
+          FlashMessageType.SUCCESS,
+        );
+      }
     } catch (err) {
     } finally {
       setLoading(false);
@@ -322,7 +346,7 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
   const navigateToHeightScreen = (id: string) => {
     navigation.navigate(ROUTES.Height, { data: id });
   };
-
+  let showHeader = props?.showHeader === false ? false : true;
   return {
     loading,
     closeModal,
@@ -346,5 +370,7 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     sidePicConstant,
     bottomPicConstant,
     uploadImage,
+    showHeader,
+    setImageModal,
   };
 };

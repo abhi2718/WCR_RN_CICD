@@ -7,55 +7,34 @@ export const genderArray = [
 ];
 export const genderPronounArray = [
   'He/Him',
-
   'She/Her',
-
   'They/Them',
-
   'Prefer not to say',
 ];
 
 export const maritalStatus = [
   'Never Married',
-
   'Divorced',
-
   'Annulled',
-
   'Separated',
-
   'Widowed',
-
   'Complicated',
-
   'Prefer not to say',
 ];
 
 export const religion = [
   'Buddhist',
-
   'Christian',
-
   'Catholic',
-
   'Hindu',
-
   'Jewish',
-
   'Muslim',
-
   'Sikh',
-
   'Shinto',
-
   'Taoism',
-
   'Spiritual',
-
   'Agnostic',
-
   'Prefer not to say',
-
   'Atheist',
 ];
 
@@ -90,62 +69,41 @@ export const hobbies = [
   'Video games',
 ];
 
-
 export const smoking = ['Never', 'Sometimes', 'Regularly', 'Prefer not to say'];
 
 export const exercise = [
   'Never',
-
   'Rarely',
-
   'Sometimes',
-
   'Frequently',
-
   'Prefer not to say',
 ];
 
 export const politics = [
   'Conservative',
-
   'Moderate',
-
   'Liberal',
-
   'Non-Political',
-
   'Prefer not to say',
 ];
 
 export const diet = [
   'No restrictions',
-
   'Gluten-Free',
-
   'Vegetarian',
-
   'Vegan',
-
   'Pescatarian',
-
   'Halal',
-
   'Kosher',
-
   'Prefer not to say',
-
   'Other',
 ];
 
 export const drinking = [
   'Never',
-
   'Rarely',
-
   'Sometimes',
-
   'Frequently',
-
   'Prefer not to say',
 ];
 
@@ -178,15 +136,10 @@ export const cannabis = [
 
 export const covidVaccineStatus = [
   'Fully vaccinated',
-
   'Partially vaccinated, plan to complete',
-
   'Partially vaccinated, unable to complete',
-
   'Unable to receive vaccine',
-
   'Decline to receive vaccine',
-
   'Prefer not to say',
 ];
 
@@ -209,37 +162,23 @@ export const country = [
 
 export const relationship = [
   'Long Term Relationship',
-
   'Marriage',
-
   'Friendship',
-
   'Casual',
-
   'Prefer not to say',
 ];
 
 export const ethnicity = [
   'American Indian or Alaska Native',
-
   'East Asian',
-
   'South Asian',
-
   'Southeast Asian',
-
   'Black or African American',
-
   'Middle Eastern',
-
   'Hispanic or Latino',
-
   'Native Hawaiian or Pacific Island',
-
   'White or Caucasian',
-
   'Other',
-
   'Prefer not to say',
 ];
 
@@ -338,7 +277,10 @@ export const userDegree = [
     label: 'Doctoral Student in Health-Related Field',
     value: 'Doctoral Student in Health-Related Field',
   },
-  { label: 'Healthcare Master’s Degree', value: 'Healthcare Master’s Degree' },
+  {
+    label: 'Healthcare Master’s Degree',
+    value: 'Healthcare Master’s Degree',
+  },
   {
     label: 'Healthcare Master’s Student',
     value: 'Healthcare Master’s Student',

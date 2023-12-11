@@ -10,50 +10,140 @@ import { ErrorText } from '../../auth/signin/signInStyle';
 import { PrimaryButton } from '../../../components/button';
 import { useNavigation } from '@react-navigation/native';
 import VerificationStepTwo from '../stepTwo';
+import { ScreenParams } from '../../../types/services.types/firebase.service';
+import { useVerificationViewModal } from './stepOne.ViewModal';
+import { cleanSingle } from 'react-native-image-crop-picker';
 
-const VerificationStepOne = () => {
-  const navigation = useNavigation();
-  const [value, setValue] = React.useState('');
-
-  console.log(`Verification`, value);
-
+const VerificationStepOne = (props: ScreenParams) => {
+  const {
+    verificationOption,
+    handleVerificationOption,
+    validationErrors,
+    changeVerificationOption,
+    handleInputChange,
+    optionData,
+    country,
+  } = useVerificationViewModal(props);
   return (
     <ScreenContainer>
       <HeaderBar />
       <Text style={verificationStyle.subHeader}>ID Verification (Step I)</Text>
       <View style={verificationStyle.container}>
         <RadioButton.Group
-          onValueChange={(newValue) => setValue(newValue)}
-          value={value}
+          onValueChange={(newValue) => changeVerificationOption(newValue)}
+          value={verificationOption}
         >
-          <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton.Android color={colors.ui.primary} value="NPI Number" />
-            <Text style={verificationStyle.btnText}>
-              NPI Number (Recommended)
-            </Text>
-          </Row>
-          {value === 'NPI Number' && (
-            <View style={verificationStyle.textBox}>
-              <FlatInput label="Individual NPI Number" />
-              <ErrorText>Enter valid NPI Number</ErrorText>
-            </View>
+          {country === 'USA' && (
+            <Row style={verificationStyle.rowView} alignItems="center">
+              <RadioButton.Android
+                color={colors.ui.primary}
+                value="NPI Number"
+              />
+              <Text style={verificationStyle.btnText}>
+                NPI Number (Recommended)
+              </Text>
+            </Row>
           )}
 
-          <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton.Android
-              color={colors.ui.primary}
-              value="License Number"
-            />
-            <Text style={verificationStyle.btnText}>License Number</Text>
-          </Row>
-          {value === 'License Number' && (
+          {verificationOption === 'NPI Number' && (
+            <View style={verificationStyle.textBox}>
+              <FlatInput
+                label="Individual NPI Number"
+                maxLength={10}
+                value={optionData.npiNumber}
+                error={validationErrors.npiNumber}
+                onChangeText={(text: string) =>
+                  handleInputChange('npiNumber', text)
+                }
+              />
+              <ErrorText>{validationErrors.npiNumber}</ErrorText>
+            </View>
+          )}
+          {country === 'Canada' && (
+            <Row style={verificationStyle.rowView} alignItems="center">
+              <RadioButton.Android
+                color={colors.ui.primary}
+                value="HealthCare"
+              />
+              <Text style={verificationStyle.btnText}>
+                Healthcare Professional
+              </Text>
+            </Row>
+          )}
+          {verificationOption === 'HealthCare' && (
             <>
               <View style={verificationStyle.textBox}>
-                <FlatInput label="License Number" />
+                <FlatInput
+                  label="Degree Identifier Type"
+                  value={optionData.degreeIdentifierType}
+                  onChangeText={(text: string) =>
+                    handleInputChange('degreeIdentifierType', text)
+                  }
+                  error={validationErrors.degreeIdentifierType}
+                />
+                <ErrorText>{validationErrors.degreeIdentifierType}</ErrorText>
               </View>
               <View style={verificationStyle.textBox}>
-                <FlatInput label="State/Territory" />
-                <ErrorText>(max 40 characters)</ErrorText>
+                <FlatInput
+                  label="Degree Identifier"
+                  maxLength={10}
+                  value={optionData.degreeIdentifier}
+                  onChangeText={(text: string) =>
+                    handleInputChange('degreeIdentifier', text)
+                  }
+                  error={validationErrors.degreeIdentifier}
+                />
+                <ErrorText>{validationErrors.degreeIdentifier}</ErrorText>
+              </View>
+              <View style={verificationStyle.textBox}>
+                <FlatInput
+                  label="Province/Territory"
+                  maxLength={30}
+                  value={optionData.teritory}
+                  onChangeText={(text: string) =>
+                    handleInputChange('teritory', text)
+                  }
+                  error={validationErrors.teritory}
+                />
+                <ErrorText>{validationErrors.teritory}</ErrorText>
+              </View>
+            </>
+          )}
+
+          {country === 'USA' && (
+            <Row style={verificationStyle.rowView} alignItems="center">
+              <RadioButton.Android
+                color={colors.ui.primary}
+                value="License Number"
+              />
+              <Text style={verificationStyle.btnText}>License Number</Text>
+            </Row>
+          )}
+          {verificationOption === 'License Number' && (
+            <>
+              <View style={verificationStyle.textBox}>
+                <FlatInput
+                  label="License Number"
+                  maxLength={10}
+                  value={optionData.licenseNumber}
+                  onChangeText={(text: string) =>
+                    handleInputChange('licenseNumber', text)
+                  }
+                  error={validationErrors.licenseNumber}
+                />
+                <ErrorText>{validationErrors.licenseNumber}</ErrorText>
+              </View>
+              <View style={verificationStyle.textBox}>
+                <FlatInput
+                  label="State/Territory"
+                  maxLength={40}
+                  value={optionData.state}
+                  onChangeText={(text: string) =>
+                    handleInputChange('state', text)
+                  }
+                  error={validationErrors.state}
+                />
+                <ErrorText>{validationErrors.state}</ErrorText>
               </View>
             </>
           )}
@@ -63,15 +153,12 @@ const VerificationStepOne = () => {
           </Row>
 
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton.Android color={colors.ui.primary} value="Other" />
+            <RadioButton.Android color={colors.ui.primary} value="Others" />
             <Text style={verificationStyle.btnText}>All Other Users</Text>
           </Row>
         </RadioButton.Group>
         <View style={verificationStyle.footerDiv}>
-          <PrimaryButton
-            onPress={() => navigation.navigate('/verificationStepTwo')}
-            title="Next"
-          />
+          <PrimaryButton onPress={handleVerificationOption} title="Next" />
         </View>
       </View>
     </ScreenContainer>

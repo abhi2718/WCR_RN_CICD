@@ -12,11 +12,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useEthnicityViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
+  const loggInUserId = user._id;
   const dispatch = useDispatch();
 
   const [selectedEthnicity, setSelectedEthnicity] = useState<string[]>([]);
@@ -25,7 +24,6 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
   const [ethnicityList, setEthnicityList] = useState<CheckBoxDataType[]>(
     transformArray(user?.ethnicity, ethnicity),
   );
-
 
   useEffect(() => {
     return () => {};
@@ -36,14 +34,23 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
     data: CheckBoxDataType[],
   ) => {
     const stringData = data.map((item) => item.text);
-    if (stringData?.includes(preferNotToSay)) {
-      setEthnicityList(makeFalseDefaultValue(ethnicity));
+    if (stringData?.includes(preferNotToSay) && stringData.length === 2) {
+      setEthnicityList((oldState) => {
+        const temp = oldState.map((item) => {
+          if (item.text === preferNotToSay) {
+            return {
+              ...item,
+              isChecked: false,
+            };
+          }
+          return item;
+        });
+        return temp;
+      });
       setSelectedEthnicity([preferNotToSay]);
-      setEthnicityflag(preferNotToSay);
-      return;
     }
-    setEthnicityflag(ethnicityValue);
     setSelectedEthnicity(stringData);
+    setEthnicityflag(ethnicityValue);
   };
   const handleListChange = (data: CheckBoxDataType[]) => {
     setEthnicityList(data);
@@ -55,14 +62,13 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      
       const selectedEthnicityData = {
         ethnicity: selectedEthnicity,
       };
-     
-      if(selectedEthnicity.length === 0){
+
+      if (selectedEthnicity.length === 0) {
         navigateToRelationshipScreen(loggInUserId);
-        return 
+        return;
       }
       setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
@@ -74,7 +80,7 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
       const data = {
         user: user,
       };
-       dispatch(addUser(data));
+      dispatch(addUser(data));
       setLoading(false);
 
       navigateToRelationshipScreen(loggInUserId);
@@ -92,6 +98,5 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
     ethnicityflag,
     loggInUserId,
     navigateToRelationshipScreen,
-  
   };
 };

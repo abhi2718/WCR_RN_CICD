@@ -128,7 +128,7 @@ const Profile = (props: ScreenParams) => {
                 mode="date"
                 open={isModalVisible}
                 maximumDate={calculateDateLessThan18YearsAgo(new Date())}
-                date={selectedDate}
+                date={selectedDate}          
                 onDateChange={handleDateChange}
                 onConfirm={(date) => {
                   toggleModal();

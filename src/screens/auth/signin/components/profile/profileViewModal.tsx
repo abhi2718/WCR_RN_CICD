@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import  { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useViewModal } from '../../signinViewModal';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { FirebaseService } from '../../../../../services/firebase.service';
@@ -30,7 +30,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     setModalVisible(!isModalVisible);
   };
   const {user} = useSelector((state: any) => state.userState);
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const handleConfirm = (date: Date) => {
     toggleModal();
     handleDateChange(date);
@@ -156,7 +156,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     credential?: FirebaseAuthTypes.AuthCredential,
     firebaseUid?: string,
   ) => {
-    console.log(credential,firebaseUid);
     const password = `$Sg{email}9%`;
     if (credential) {
       let data;
@@ -227,7 +226,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       if(dataMango.token)
       navigateToGenderScreen(dataMango.user._id);
     } catch (error) {
-      console.log(error)
     }
   }
   return {
