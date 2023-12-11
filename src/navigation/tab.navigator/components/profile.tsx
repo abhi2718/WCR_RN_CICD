@@ -1,22 +1,31 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import Image from 'react-native-fast-image';
+import { useSelector } from 'react-redux';
+import { sizes } from '../../../infrastructure/theme/sizes';
 
 export default function SolidProfileImageImage() {
+  const { user } = useSelector(({ userState }) => userState);
   return (
     <View>
       <Image
+        source={{
+          uri: user?.profilePicture?.url,
+        }}
         style={styles.iconStyle}
-        source={require('../../../assets/images/tabBarIcons/profileImage.png')}
       />
     </View>
   );
 }
 export function VectorProfileImageImage() {
+  const { user } = useSelector(({ userState }) => userState);
   return (
     <View>
       <Image
+        source={{
+          uri: user?.profilePicture?.url,
+        }}
         style={styles.iconStyle}
-        source={require('../../../assets/images/tabBarIcons/profileImage.png')}
       />
     </View>
   );
@@ -24,8 +33,8 @@ export function VectorProfileImageImage() {
 
 const styles = StyleSheet.create({
   iconStyle: {
-    width: 20,
-        height: 20,
-    borderRadius:10
-  }
-})
+    width: sizes[7],
+    height: sizes[7],
+    borderRadius: sizes[3],
+  },
+});

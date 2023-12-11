@@ -33,18 +33,26 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
     data: CheckBoxDataType[],
   ) => {
     const stringData = data.map((item) => item.text);
-    if (stringData?.includes(preferNotToSay)) {
-      setRelationshipList(makeFalseDefaultValue(relationship));
+    if (stringData?.includes(preferNotToSay) && stringData.length === 2) {
+      setRelationshipList((oldState) => {
+        const temp = oldState.map((item) => {
+          if (item.text === preferNotToSay) {
+            return {
+              ...item,
+              isChecked: false,
+            };
+          }
+          return item;
+        });
+        return temp;
+      });
       setSelectedRelationship([preferNotToSay]);
-      setpreferNotToSayflag(preferNotToSay);
-      return;
     }
     setpreferNotToSayflag(ethnicityValue);
     setSelectedRelationship(stringData);
   };
   const handleListChange = (data: CheckBoxDataType[]) => {
     setRelationshipList(data);
-    
   };
 
   const navigateToMaritalStatusScreen = (id: string) => {
@@ -53,13 +61,12 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      
       const selectedEthnicityData = {
         relationship: selectedRelationship,
       };
-      if(selectedRelationship.length === 0){
+      if (selectedRelationship.length === 0) {
         navigateToMaritalStatusScreen(loggInUserId);
-        return 
+        return;
       }
       setLoading(true);
       const user = await updateUserDetailsRepository.updateUserDetails(
@@ -71,7 +78,7 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
       const data = {
         user: user,
       };
-       dispatch(addUser(data));
+      dispatch(addUser(data));
       setLoading(false);
 
       navigateToMaritalStatusScreen(loggInUserId);
@@ -89,6 +96,5 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
     loading,
     navigateToMaritalStatusScreen,
     updateUserDetails,
-    
   };
 };

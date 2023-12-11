@@ -35,6 +35,7 @@ import { BlockAndUnBlock } from '../../screens/tab.screens/profile/components/se
 import { ContactUs } from '../../screens/tab.screens/profile/components/settings/components/contactUs';
 import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
 import { EditProfile } from '../../screens/tab.screens/profile/components/editProfile';
+import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
@@ -50,6 +51,7 @@ export const StackNavigator = () => {
         name={ROUTES.SPLASH}
         component={SplashScreen}
       />
+
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
@@ -157,22 +159,22 @@ export const StackNavigator = () => {
         component={PreviewScreen}
       />
       <Stack.Screen
-       // options={optins}
+        // options={optins}
         name={ROUTES.SettingScreen}
         component={SettingScreen}
       />
-       <Stack.Screen
-       // options={optins}
+      <Stack.Screen
+        // options={optins}
         name={ROUTES.AccountSetting}
         component={AccountSettingScreen}
       />
-       <Stack.Screen
-       // options={optins}
+      <Stack.Screen
+        // options={optins}
         name={ROUTES.BlockAndUnBlock}
         component={BlockAndUnBlock}
       />
-       <Stack.Screen
-       // options={optins}
+      <Stack.Screen
+        // options={optins}
         name={ROUTES.ContactUs}
         component={ContactUs}
       />

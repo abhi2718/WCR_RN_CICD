@@ -10,22 +10,23 @@ import { Swipeable } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
 import RenderHtml from 'react-native-render-html';
 import { NotificationType } from '../../../../types/screen.type/notification.type';
-import { styles } from './styles';
+import { notificationStyles } from './notificationStyles';
 import { Column, Row } from '../../../../components/tools';
 import { unixToDate } from '../../../../utils/common.functions';
+import { colors } from '../../../../infrastructure/theme/colors';
 
 interface SwipeableListItemProps {
   item: NotificationType;
   onDelete: (key: string) => void;
   markAsRead: (id: string) => Promise<void>;
-  htmlTextConvertPlainText: (data:string)=> string;
+  htmlTextConvertPlainText: (data: string) => string;
 }
 
 export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
   item,
   onDelete,
   markAsRead,
-  htmlTextConvertPlainText
+  htmlTextConvertPlainText,
 }) => {
   const swipeableRef = useRef<Swipeable>(null);
   const closeSwipeable = () => {};
@@ -40,14 +41,19 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
     return (
       <TouchableOpacity onPress={() => onDelete(item.key)}>
         <View
-          style={{ flex: 1, backgroundColor: 'red', justifyContent: 'center' }}
+          style={{
+            flex: 10,
+            backgroundColor: colors.ui.primary,
+            justifyContent: 'center',
+          }}
         >
           <Animated.Text
-            style={{
-              color: 'white',
-              paddingHorizontal: 10,
-              transform: [{ translateX: trans }],
-            }}
+            style={[
+              {
+                transform: [{ translateX: trans }],
+              },
+              notificationStyles.deletBtn,
+            ]}
           >
             Delete
           </Animated.Text>
@@ -63,18 +69,20 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
       renderRightActions={renderRightActions}
       onSwipeableWillOpen={closeSwipeable}
     >
-      <TouchableOpacity onPress={()=>markAsRead(item._id)}>
-        <View style={styles.container}>
-          <Row>
+      <TouchableOpacity onPress={() => markAsRead(item._id)}>
+        <View style={notificationStyles.container}>
+          <Row gap={16}>
             <FastImage
-              style={styles.profileImageStyle}
+              style={notificationStyles.profileImageStyle}
               source={{ uri: item.profile }}
             />
-            <Column justifyContent="space-between">
-              <View style={{backgroundColor:item.isRead?"#fff":"#fff"}}>
-                <Text>{htmlTextConvertPlainText(item.message) }</Text>
-              </View>
-              <Text>{unixToDate(item.createdAt)}</Text>
+            <Column style={{ flex: 1 }} gap={10} justifyContent="space-between">
+              <Text style={notificationStyles.notifyiMsg}>
+                {htmlTextConvertPlainText(item.message)}
+              </Text>
+              <Text style={notificationStyles.createdAt}>
+                {unixToDate(item.createdAt)}
+              </Text>
             </Column>
           </Row>
         </View>

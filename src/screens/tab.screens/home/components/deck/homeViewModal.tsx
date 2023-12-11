@@ -43,6 +43,7 @@ export const useViewModal = () => {
     fetchProfiles();
   }, []);
   const handleSetProfiles = (item) => setProfiles([item, ...profiles]);
+  const clearProfile = () => setProfiles([]);
   const goToNotification = () => navigate(ROUTES.Notification);
   const createPayLoafForUserAction = (index: number, action: string) => {
     const suggestedUser = profiles[index];
@@ -85,6 +86,8 @@ export const useViewModal = () => {
     handleCloseModal,
     handleSetProfiles,
     goToNotification,
-    count
+    count,
+    user,
+    clearProfile
   };
 };
