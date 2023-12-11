@@ -29,7 +29,7 @@ export const useGenderViewModal = (props: ScreenParams) => {
   };
 
   const navigateToGenderPronounScreen = () => {
-    navigation.navigate(ROUTES.GenderPronoun);
+    navigation.navigate(ROUTES.Hobbies);
   };
 
   const updateUserDetails = async () => {

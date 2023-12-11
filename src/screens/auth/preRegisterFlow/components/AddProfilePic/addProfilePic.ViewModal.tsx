@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   pickPhotoFromGallary,
   pickPhotoFromUrl,
@@ -26,7 +26,8 @@ export type ImageDataType = {
   mime: string;
   name: string;
 };
-export const useAddProfilePicViewModal = (props: AvatarProps) => {
+export const useAddProfilePicViewModal = (props: any) => {
+  const { user } = useSelector(({ userState }) => userState);
   const sidePicConstant = 'sidePicConstant';
   const bottomPicConstant = 'bottomPicConstant';
   const cloudinaryRepository = new CloudinaryRepository();
@@ -37,7 +38,7 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
   const [isPicUploadInfoModalVisible, setPicUploadInfoModalVisible] =
     useState(false);
 
-  const { user } = useSelector((state: any) => state.userState);
+ 
   const token = useRef(user?.token ? user?.token : null).current;
 
   const dispatch = useDispatch();
@@ -83,7 +84,6 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     };
     updatedUris[index] = resultImage;
     setSidePicUris(updatedUris);
-    // props.onChange?.(updatedUris);
   };
 
   const [bottomUris, setBottomUris] = useState<ImageDataType[] | null>(
@@ -102,6 +102,15 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     setBottomUris(updatedUris);
     // props.onChange?.(updatedUris);
   };
+  useEffect(() => {
+    if (props?.setAllPics) {
+      props?.setAllPics({
+        bottomUris:bottomUris?.filter((item)=>item),
+        sidePicUri:sidePicUri?.filter((item)=>item),
+        profilePicUri:profilePicUri
+      });
+    }
+  },[bottomUris,sidePicUri,profilePicUri])
   const fillSavedPhotos = (photos: any) => {
     if (!photos) {
       return [];
@@ -209,9 +218,7 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     setBottomUris(updatedUris);
   };
 
-  // ---------Modal --------------------------------
   const [imageModal, setImageModal] = useState(false);
-
   const [selectedUri, setSelectedUri] = useState<ModalImageSelectedType | null>(
     null,
   );
@@ -250,13 +257,13 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
       );
     }
     try {
-      const photos: object[] = [];
       setLoading(true);
       const profileCloudURL = await uploadImageToCloudinary(profilePicUri);
       const profileImage = {
         url: profileCloudURL,
         caption: 'User Profile',
       };
+      const photos: object[] = [];
       const allPhotos = [...sidePics!, ...bottomPics!];
       for (let i = 0; i < allPhotos.length; i++) {
         const cloudURL = await uploadImageToCloudinary(allPhotos[i]);
@@ -270,7 +277,6 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
         }
         photos.push({ url: cloudURL! });
       }
-
       await updateImagesInDatabase(profileImage, photos);
     } catch (error) {}
   };
@@ -300,6 +306,15 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
       dispatch(addUser(data));
       setLoading(false);
       navigateToHeightScreen();
+      if (showHeader) {
+        navigateToHeightScreen();
+      } else {
+        ShowFlashMessage(
+          'Success',
+          'successfully Updated your pics',
+          FlashMessageType.SUCCESS,
+        );
+      }
     } catch (err) {
     } finally {
       setLoading(false);
@@ -340,7 +355,7 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
   const navigateToHeightScreen = () => {
     navigation.navigate(ROUTES.Height);
   };
-
+  let showHeader = props?.showHeader === false ? false : true;
   return {
     loading,
     closeModal,
@@ -364,5 +379,7 @@ export const useAddProfilePicViewModal = (props: AvatarProps) => {
     sidePicConstant,
     bottomPicConstant,
     uploadImage,
+    showHeader,
+    setImageModal,
   };
 };

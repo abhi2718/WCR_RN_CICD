@@ -12,6 +12,7 @@ export enum ROUTES {
   SexualOrientation = '/sexualOrientation',
   SignUp = 'SignUp',
   EmailAuth = '/email-auth',
+  
   Tab = '/tabs',
   Onboarding = '/onboarding',
   CommunityChat = '/community-chat',
@@ -45,6 +46,7 @@ export enum ROUTES {
   BlockAndUnBlock = '/blockAndUnBlock',
   ContactUs = '/contact-us',
   Preferences = '/preferences',
+  EditProfile = '/editProfile',
   VerificationPending = '/verificationPending',
   TurnOnNotification = '/turnOnNotification',
 }

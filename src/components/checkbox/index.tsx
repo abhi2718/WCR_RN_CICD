@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
-import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 import React, { useEffect, useState } from 'react';
 import {
@@ -20,7 +19,7 @@ import { Row } from '../tools';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
 
-const CustomCheckbox = styled.View`
+export const CustomCheckbox = styled.View`
   width: 20px;
   height: 20px;
   border: 1px solid blue;

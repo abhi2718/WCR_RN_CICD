@@ -190,10 +190,8 @@ export const useLocationViewModal = (props: ScreenParams) => {
     handleCountry,
     stateOption,
     setStatesOption,
-
     locationForm,
     updateUserDetails,
-
     zipPlaceHolder,
     setPlaceholder,
     isFocus,

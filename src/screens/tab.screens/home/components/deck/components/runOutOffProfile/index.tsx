@@ -3,8 +3,13 @@ import { Image, Text, View } from 'react-native';
 import { runOutOffProfileStyle } from './runOutOffProfileStyle';
 import { PrimaryButton } from '../../../../../../../components/button';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../../../../../navigation';
 
 export const RunOutOffProfile = () => {
+  const { navigate } = useNavigation();
+  const goToPrefrence = () => navigate(ROUTES.Preferences);
+  const goToCommunityChat = () => navigate(ROUTES.CommunityChatTab);
   return (
     <View style={runOutOffProfileStyle.content}>
       <Text style={runOutOffProfileStyle.subHeading}>Discover</Text>
@@ -18,12 +23,13 @@ export const RunOutOffProfile = () => {
         (up to 5/day), based on your preferences and nearby users.
       </Text>
       <View style={runOutOffProfileStyle.primaryButton}>
-        <PrimaryButton title="Change Preference" />
+        <PrimaryButton onPress={goToPrefrence} title="Change Preference" />
         <PrimaryButton
           color={colors.ui.primary}
           style={runOutOffProfileStyle.secondaryButton}
           btnColor={colors.bg.secondary}
           title="Community"
+          onPress={goToCommunityChat}
         />
       </View>
     </View>
