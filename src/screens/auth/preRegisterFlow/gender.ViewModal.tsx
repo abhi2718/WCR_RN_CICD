@@ -1,4 +1,4 @@
-import {  useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../navigation';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
@@ -10,11 +10,10 @@ import {
 } from '../../../components/flashBar';
 
 export const useGenderViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const [loading, setLoading] = useState(false);
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-    const { user } = useSelector((state: any) => state.userState);
-    const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state.userState);
+  const dispatch = useDispatch();
   const { navigation } = props;
   const updatedGender = user?.profile?.gender ?? 'Male';
   const token = useRef(user?.token ? user?.token : null).current;
@@ -25,28 +24,28 @@ export const useGenderViewModal = (props: ScreenParams) => {
     setGender(value);
   };
 
-
-
   const handleCheckboxChange = () => {
     setCheckboxState(!checkboxState);
   };
 
-  const navigateToGenderPronounScreen = (id: string) => {
-    
-    navigation.navigate(ROUTES.VerificationStepOne, { data: id });
-    
+  const navigateToGenderPronounScreen = () => {
+    navigation.navigate(ROUTES.GenderPronoun);
   };
 
   const updateUserDetails = async () => {
     try {
-
       const genderData = {
         profile: {
           gender: gender,
           showGender: checkboxState,
         },
       };
-     
+
+      if (user.profile.gender && user.profile.gender === gender) {
+        navigateToGenderPronounScreen();
+        return
+      }
+
       if (!gender) {
         return ShowFlashMessage(
           'Warning',
@@ -56,22 +55,26 @@ export const useGenderViewModal = (props: ScreenParams) => {
       }
       setLoading(true);
 
-     
-      const userData = await updateUserDetailsRepository.updateUserDetails(user._id ,{
-        update: genderData,
-      });
-      const data = token ? {
-        user: {
-          ...userData,
-          token
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update: genderData,
         },
-      }  :{
-        user: userData,
-      };
+      );
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
-      
-      navigateToGenderPronounScreen(user._id);
+
+      navigateToGenderPronounScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -81,7 +84,6 @@ export const useGenderViewModal = (props: ScreenParams) => {
     loading,
     gender,
     setGender,
-    loggInUserId,
     handleGenderValue,
     updateUserDetails,
     handleCheckboxChange,

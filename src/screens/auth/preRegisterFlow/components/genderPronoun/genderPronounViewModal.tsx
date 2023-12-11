@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../../../navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,12 +9,11 @@ import {
 } from '../../../../../components/flashBar';
 
 export const useGenderPronounViewModal = (props: any) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
-
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state: any) => state.userState);
+  const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
 
   const { navigation } = props;
@@ -30,36 +29,47 @@ export const useGenderPronounViewModal = (props: any) => {
     setCheckboxState(!checkboxState);
   };
 
-  const navigateToSexualOrientationScreen = (id: string) => {
-    navigation.navigate(ROUTES.SexualOrientation, { data: id });
+  const navigateToSexualOrientationScreen = () => {
+    navigation.navigate(ROUTES.SexualOrientation);
   };
 
-  const updateUserDetails = async (id: string, update: string) => {
+  const updateUserDetails = async () => {
     try {
-      if (!update) {
+      if (!genderPronoun) {
         return ShowFlashMessage(
           'Warning',
           'Please select gender pronoun!',
           FlashMessageType.DANGER,
         );
       }
+
+      
+      if (user.profile.genderPronoun && user.profile.genderPronoun === genderPronoun) {
+        navigateToSexualOrientationScreen();
+        return
+      }
       setLoading(true);
       const genderPronounData = {
         profile: {
-          genderPronoun: update,
+          genderPronoun: genderPronoun,
           showGenderPronoun: checkboxState,
         },
       };
-      const user = await updateUserDetailsRepository.updateUserDetails(id, {
+      const userData = await updateUserDetailsRepository.updateUserDetails(user._id, {
         update: genderPronounData,
       });
-      const data = {
-        user: user,
+      const data = token ? {
+        user: {
+          ...userData,
+          token
+        },
+      }  :{
+        user: userData,
       };
       dispatch(addUser(data));
       setLoading(false);
 
-      navigateToSexualOrientationScreen(loggInUserId);
+      navigateToSexualOrientationScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -69,7 +79,6 @@ export const useGenderPronounViewModal = (props: any) => {
     loading,
     genderPronoun,
     setGenderPrPronoun,
-    loggInUserId,
     handleGenderPronounValue,
     updateUserDetails,
     checkboxState,

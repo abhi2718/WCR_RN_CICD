@@ -30,7 +30,6 @@ export const useViewModal = () => {
     _setCount(unReadCount);
   },[unReadCount])
   const fetchProfiles = async () => {
-    console.log("Hi Abhishek")
     setLoading(true);
     try {
       const data = await homeDeckRepository.getProfiles();

@@ -7,7 +7,6 @@ import { ROUTES } from '../../../../../navigation';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useHobbyViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
@@ -33,8 +32,9 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     }
   };
 
-  const navigateToKidsScreen = (id: string) => {
-    navigation.navigate(ROUTES.VerificationStepOne, { data: id });
+  const navigateToKidsScreen = () => {
+    console.log('inside hobby screen')
+    navigation.navigate(ROUTES.VerificationStepOne);
   };
 
   const updateUserDetails = async () => {
@@ -44,23 +44,22 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       };
 
       if (selectedHobbies.length === 0) {
-        navigateToKidsScreen(loggInUserId);
+        navigateToKidsScreen();
         return;
       }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: selectedInterests,
         },
       );
       const data = {
-        user: user,
+        user: userData,
       };
       dispatch(addUser(data));
       setLoading(false);
-      navigation.navigate(ROUTES.Tab);
-      // navigateToKidsScreen(loggInUserId);
+       navigateToKidsScreen();
     } catch (err: any) {
       console.log(err);
       setLoading(false);
@@ -72,7 +71,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     handleHobbies,
     updateUserDetails,
     loading,
-    loggInUserId,
     navigateToKidsScreen,
   };
 };
