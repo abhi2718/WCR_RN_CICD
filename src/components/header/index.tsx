@@ -21,7 +21,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
         <View style={headerStyle.arrowContainer}>
           <Image
             style={headerStyle.arrow}
-            source={require('../../assets/images/icons/arrow.png')}
+            source={require('../../assets/images/icons/back-arrow.png')}
           />
         </View>
       </Pressable>

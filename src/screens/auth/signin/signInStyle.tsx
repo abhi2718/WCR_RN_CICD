@@ -27,10 +27,11 @@ export const styles = StyleSheet.create({
   inputContainerr: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.ui.tertiary,
+    backgroundColor: colors.ui.inputBg,
     //paddingVertical:sizes[2],
     borderRadius: sizes[9],
     paddingHorizontal: sizes[3],
-    marginVertical: sizes[2],
+    marginTop: sizes[0],
+    marginBottom: sizes[4],
   },
 });

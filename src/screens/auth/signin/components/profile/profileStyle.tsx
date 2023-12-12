@@ -30,6 +30,7 @@ export const profileStyles = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
+    lineHeight: sizes[7],
   },
   text: {
     fontSize: fontSizes.text,

@@ -12,6 +12,7 @@ import { ButtonProps } from '../../types/components/button.type';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { fontWeights } from '../../infrastructure/theme/fonts';
+import { ImageContainer } from '../tools';
 
 export const Button = (props: ButtonProps) => {
   const { title, onPress, isLoading } = props;
@@ -87,6 +88,7 @@ export const RoundedButtonWithIconAndText = (props: ButtonProps) => {
     </TouchableOpacity>
   );
 };
+
 const roundStyles = StyleSheet.create({
   button: {
     borderRadius: sizes[15],
@@ -105,7 +107,7 @@ const roundStyles = StyleSheet.create({
   icon: {
     width: sizes[5],
     height: sizes[5],
-    marginRight: sizes[1],
+    marginRight: sizes[2],
     overflow: 'visible',
   },
   buttonText: {
