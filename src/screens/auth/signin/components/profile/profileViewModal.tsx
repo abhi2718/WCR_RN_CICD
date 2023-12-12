@@ -20,6 +20,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
   let firebaseUid = receivedData.firebaseUid;
   let fbId = receivedData?.fbId;
   const { navigation } = props;
+  const [loading, setLoading] = useState(false);
   const [isWelcomeModalVisible, setWelcomeModalVisible] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -136,7 +137,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       errors.dob = 'You must be at-least 18 yrs old';
     }
     if (Object.keys(errors).length) {
-      return setValidationErrors(errors);
+      return setValidationErrors(errors);  
     } else {
       setValidationErrors({});
      await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
@@ -156,43 +157,48 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     credential?: FirebaseAuthTypes.AuthCredential,
     firebaseUid?: string,
   ) => {
-    const password = `$Sg{email}9%`;
-    if (credential) {
-      let data;
-      if (!firebaseUid) {
-        data = await firebaseService.signInWithCredential(credential);
+    try{
+      const password = `$Sg{email}9%`;
+      if (credential) {
+        let data;
+        if (!firebaseUid) {
+          data = await firebaseService.signInWithCredential(credential);
+        }
+        return createUser({
+          email: email!,
+          firebaseUid: firebaseUid ? firebaseUid : data?.user?.uid,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          displayName: formData.displayName,
+          mobile: formData.mobile,
+          dob: formData.dob,
+        });
       }
-      return createUser({
-        email: email!,
-        firebaseUid: firebaseUid ? firebaseUid : data?.user?.uid,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        displayName: formData.displayName,
-        mobile: formData.mobile,
-        dob: formData.dob,
-      });
+  
+      if (!email) {
+        return ShowFlashMessage('Alert', 'Email is required', 'danger');
+      }
+  
+      const emailData = await firebaseService.signUpWithEmailPassword(
+        email,
+        password,
+      );
+  
+      if (emailData) {
+        createUser({
+          email: email!,
+          firebaseUid: emailData?.user?.uid,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          displayName: formData.displayName,
+          mobile: formData.mobile,
+          dob: formData.dob,
+        });
+      }
+    }catch(e) {
+      setLoading(false); 
     }
-
-    if (!email) {
-      return ShowFlashMessage('Alert', 'Email is required', 'danger');
-    }
-
-    const emailData = await firebaseService.signUpWithEmailPassword(
-      email,
-      password,
-    );
-
-    if (emailData) {
-      createUser({
-        email: email!,
-        firebaseUid: emailData?.user?.uid,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        displayName: formData.displayName,
-        mobile: formData.mobile,
-        dob: formData.dob,
-      });
-    }
+    
   };
 
   async function createUser({
@@ -206,6 +212,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     fbId,
   }: socialSignInSignUpPayload) {
     try {
+      setLoading(true);
       const dataMango = await socialSignInSignUp({
         firebaseUid,
         email,
@@ -223,6 +230,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
         }
       };
       dispatch(addUser(payload))
+      setLoading(false);
       if(dataMango.token)
       navigateToGenderScreen(dataMango.user._id);
     } catch (error) {
@@ -250,6 +258,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     email,
     handleConfirm,
     fbId,
+    loading,
     firebaseUid,
   };
 };

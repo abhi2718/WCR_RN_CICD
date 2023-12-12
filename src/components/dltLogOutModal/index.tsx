@@ -11,10 +11,7 @@ import {
 import { Row, Spacer, dimensions } from '../tools';
 import { AlertScreen } from '../alert';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
-import { clearAsynStorage } from '../../utils/asyncStorage';
-import { useDispatch } from 'react-redux';
 
-import { ROUTES } from '../../navigation';
 import { useLogOutViewModal } from '../../utils/logOut';
 
 export const DltLogOutModal = (props: DltLogOutType) => {
