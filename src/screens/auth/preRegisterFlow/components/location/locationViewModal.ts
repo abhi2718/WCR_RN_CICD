@@ -120,7 +120,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
   };
 
   const navigateToProfessionScreen = (id: string) => {
-    navigation.navigate(ROUTES.Profession, { data: id });
+    navigation.navigate(ROUTES.VerificationStepOne, { data: id });
   };
 
   const updateUserDetails = async (id: string) => {
@@ -171,10 +171,8 @@ export const useLocationViewModal = (props: ScreenParams) => {
     handleCountry,
     stateOption,
     setStatesOption,
-
     locationForm,
     updateUserDetails,
-
     zipPlaceHolder,
     setPlaceholder,
     isFocus,

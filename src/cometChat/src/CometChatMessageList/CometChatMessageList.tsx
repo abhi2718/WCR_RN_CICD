@@ -89,6 +89,10 @@ import { CometChatEmojiKeyboard } from '../shared/views/CometChatEmojiKeyboard';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { Row, Spacer } from '../../../components/tools';
 import FastImage from 'react-native-fast-image';
+import {
+  UserList,
+  UserReaction,
+} from '../../../screens/tab.screens/chat/community/components/userReaction';
 interface EmojiInfo {
   emoji: string;
   count: number;
@@ -98,8 +102,6 @@ interface EmojiInfo {
     userId: string;
   }[];
 }
-
-
 
 let templatesMap = new Map<string, CometChatMessageTemplate>();
 
@@ -360,7 +362,7 @@ export const CometChatMessageList = forwardRef<
     currentScrollPosition.current = event.nativeEvent.contentOffset.y;
     if (
       currentScrollPosition.current <
-      scrollPositionForNewMessageIndicator.current &&
+        scrollPositionForNewMessageIndicator.current &&
       unreadCount > 0
     ) {
       markUnreadMessageAsRead();
@@ -480,7 +482,7 @@ export const CometChatMessageList = forwardRef<
         // setMessagesList(tmpList);
         getNewMessages(tmpList);
       })
-      .catch((e) => { });
+      .catch((e) => {});
   };
 
   const getNewMessages = (updatedList) => {
@@ -512,7 +514,7 @@ export const CometChatMessageList = forwardRef<
           getNewMessages(tmpList);
         }
       })
-      .catch((e) => { });
+      .catch((e) => {});
   };
 
   const loadTemplates = () => {
@@ -629,7 +631,7 @@ export const CometChatMessageList = forwardRef<
       if (
         !scrollToBottomOnNewMessages &&
         Math.round(currentScrollPosition.current) >=
-        scrollPositionForNewMessageIndicator.current
+          scrollPositionForNewMessageIndicator.current
       ) {
         if (baseMessage['sender']['uid'] == loggedInUser.current?.['uid']) {
           scrollToBottom();
@@ -702,7 +704,7 @@ export const CometChatMessageList = forwardRef<
     }, 1500);
   };
 
-  const createActionMessage = () => { };
+  const createActionMessage = () => {};
 
   const updateMessageReceipt = (receipt) => {
     let index = messagesList.findIndex(
@@ -797,7 +799,7 @@ export const CometChatMessageList = forwardRef<
         onGroupMemberBanned: (message) => {
           newMessage(message);
         },
-        onGroupMemberUnbanned: (message) => { },
+        onGroupMemberUnbanned: (message) => {},
         onMemberAddedToGroup: (message) => {
           newMessage(message);
         },
@@ -924,7 +926,7 @@ export const CometChatMessageList = forwardRef<
         onConnected: () => {
           getUpdatedPreviousMessages();
         },
-        inConnecting: () => { },
+        inConnecting: () => {},
         onDisconnected: () => {
           if (!messagesList[0].id) {
             for (let i = 0; i < messagesList.length; i++) {
@@ -1004,7 +1006,7 @@ export const CometChatMessageList = forwardRef<
     if (
       showAvatar &&
       (item?.getSender()?.getUid() || item['sender']['uid']) !==
-      loggedInUser.current['uid'] &&
+        loggedInUser.current['uid'] &&
       item['category'] != MessageCategoryConstants.action
     ) {
       return (
@@ -1059,7 +1061,7 @@ export const CometChatMessageList = forwardRef<
           {senderName}
         </Text>
         {timeStampAlignment == 'bottom' ||
-          item['category'] == 'action' ? null : (
+        item['category'] == 'action' ? null : (
           <CometChatDate
             timeStamp={
               (item.getDeletedAt() ||
@@ -1137,7 +1139,7 @@ export const CometChatMessageList = forwardRef<
     if (
       alignment == 'standard' &&
       (item.getSender()?.getUid() || item['sender']['uid']) ==
-      loggedInUser.current['uid']
+        loggedInUser.current['uid']
     )
       return 'right';
     return 'left';
@@ -1248,7 +1250,7 @@ export const CometChatMessageList = forwardRef<
           : messageObject?.getAttachment()?.getMimeType(), // get Mime Type
     };
 
-    NativeModules.FileManager.shareMessage(shareObj, (callback) => { });
+    NativeModules.FileManager.shareMessage(shareObj, (callback) => {});
   };
 
   const getStyle = (item: CometChat.BaseMessage): BaseStyleInterface => {
@@ -1259,7 +1261,7 @@ export const CometChatMessageList = forwardRef<
 
     if (
       (item.getSender()?.getUid() || item['sender']['uid']) ==
-      loggedInUser.current?.['uid'] &&
+        loggedInUser.current?.['uid'] &&
       item.getCategory() == MessageCategoryConstants.message
     )
       _style.backgroundColor = theme?.palette.getPrimary();
@@ -1274,8 +1276,8 @@ export const CometChatMessageList = forwardRef<
   ) => {
     let options: any = template?.options
       ? template
-        .options(loggedInUser.current, item, group)
-        .filter((item) => item.id !== 'sendMessagePrivately')
+          .options(loggedInUser.current, item, group)
+          .filter((item) => item.id !== 'sendMessagePrivately')
       : [];
     if (!user && loggedInUser.current?.getUid() === item.getSender().getUid()) {
       options.push({
@@ -1392,12 +1394,13 @@ export const CometChatMessageList = forwardRef<
       return null;
     }
   };
-  const [openUserReactedwithEmojiModal, setOpenUserReactedwithEmojiModal] = useState(false);
-  const [selectedEmoji, setselectedEmoji] = useState(null)
+  const [openUserReactedwithEmojiModal, setOpenUserReactedwithEmojiModal] =
+    useState(false);
+  const [selectedEmoji, setselectedEmoji] = useState(null);
   const getBottomView = (item) => {
     function transformObject(inputObject) {
       const emojiArray = [];
-    
+
       for (const emoji in inputObject) {
         const users = Object.values(inputObject[emoji]);
         const usersIds = Object.keys(inputObject[emoji]);
@@ -1405,28 +1408,28 @@ export const CometChatMessageList = forwardRef<
           emojiArray.push({
             emoji,
             count: users.length,
-            users: users.map((user,index) => ({
+            users: users.map((user, index) => ({
               avatar: user.avatar,
               name: user.name,
-              userId:usersIds[index]
-            }))
+              userId: usersIds[index],
+            })),
           });
-        }else{
-            emojiArray.push({
+        } else {
+          emojiArray.push({
             emoji,
             count: users.length,
-            users: users.map((user,index) => ({
+            users: users.map((user, index) => ({
               avatar: user.avatar,
               name: user.name,
-              userId:usersIds[index]
-            }))
-          }); 
+              userId: usersIds[index],
+            })),
+          });
         }
       }
-    
+
       return { emojiArray };
     }
-    
+
     const payload = item?.data?.metadata;
     let emojiArray: EmojiInfo[] = [];
     if (payload) {
@@ -1447,48 +1450,33 @@ export const CometChatMessageList = forwardRef<
         <Row>
           {emojiArray.map((item, index) => {
             return (
-              <View key={index}>
-                { item.emoji.includes(":")?<View ></View>:
-                  <Pressable onPress={() => {
-                    setselectedEmoji(item)
-                    setOpenUserReactedwithEmojiModal(true)
-                  }}>
-                    <Spacer position={'right'} size={5}>
-                  <View>
-                    <Row>
-                    <Text>{item.emoji}</Text>
-                    <Text>{item.count}</Text>
-                   </Row>
-                  </View>
-                </Spacer>
-                  </Pressable>
-                }
-              </View>
+              <UserReaction
+                key={index}
+                item={item}
+                hanldePress={() => {
+                  setselectedEmoji(item);
+                  setOpenUserReactedwithEmojiModal(true);
+                }}
+              />
             );
           })}
         </Row>
         <Modal visible={openUserReactedwithEmojiModal}>
           <SafeAreaView style={{ flex: 1 }}>
-            <Pressable onPress={() => {
-               setOpenUserReactedwithEmojiModal(false)
-            }}>
+            <Pressable
+              onPress={() => {
+                setOpenUserReactedwithEmojiModal(false);
+              }}
+            >
               <Text>x</Text>
             </Pressable>
-            {
-              selectedEmoji && <View>
-                {
-                  selectedEmoji?.users?.map((user, index) => (<View  key={index}>
-                    <Row alignItems="center">
-                      <FastImage
-                        source={{ uri: user.avatar }}
-                        style={{width:40,height:40,borderRadius:20}}
-                      />
-                    <Text>{user.name}</Text>
-                  </Row>
-                  </View>))
-                }
+            {selectedEmoji && (
+              <View>
+                {selectedEmoji?.users?.map((user, index) => (
+                  <UserList key={index} user={user} />
+                ))}
               </View>
-         }
+            )}
           </SafeAreaView>
         </Modal>
       </View>
@@ -1598,10 +1586,8 @@ export const CometChatMessageList = forwardRef<
           msgId: _currentMessage?.current?.id,
           emoji,
         })
-          .then((response) => {
-          })
-          .catch((error) => {
-          });
+          .then((response) => {})
+          .catch((error) => {});
       }
       _bottomSheetRef?.current?.close();
     };

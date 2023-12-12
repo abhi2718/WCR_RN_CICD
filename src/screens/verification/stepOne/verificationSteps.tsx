@@ -39,6 +39,7 @@ export const verificationStyle = StyleSheet.create({
     paddingTop: 8,
     marginHorizontal: -16,
     paddingHorizontal: 16,
+    gap: 15,
   },
   subText: {
     fontSize: fontSizes.text,
@@ -75,6 +76,20 @@ export const verificationStyle = StyleSheet.create({
   imageIcon: {
     width: sizes[8],
     height: sizes[6],
+  },
+  uploadBtn: {
+    borderColor: colors.ui.primary,
+    paddingVertical: 15,
+    borderWidth: 2,
+    backgroundColor: colors.bg.secondary,
+    borderRadius: 28,
+    marginVertical: 20,
+  },
+  uploadBtnText: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.text,
+    textAlign: 'center',
+    color: colors.ui.primary,
   },
 });
 

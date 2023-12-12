@@ -18,5 +18,6 @@ export class AppUrl {
   public static comentChatFriendListUrl = `${this.COMETCHAT_BASE_URL}/conversations`;
   public static cloudinarySignatureEndPoint = `${this.BASE_URL}/auth/signature`;
   public static userEndPoints = `${this.BASE_URL}/user`;
-  public static contactUs = `${this.BASE_URL}/contact-us`;
+  public static contactUsEndPoint = `${this.BASE_URL}/contact-us`;
+  public static preferenceEndPoint = `${this.BASE_URL}/preference`;
 }

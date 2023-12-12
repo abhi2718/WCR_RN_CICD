@@ -30,6 +30,8 @@ export default function Deck() {
     handleSetProfiles,
     goToNotification,
     count,
+    user,
+    clearProfile
   } = useViewModal();
   if (isLoading) {
     return <FullLoader />;
@@ -50,24 +52,35 @@ export default function Deck() {
         />
       </View>
       <Spacer position="bottom" size={8} />
-      <CardStack
-        onSwipedLeft={handleDisLike}
-        onSwipedRight={handleLike}
-        horizontalThreshold={isAndroid ? 10 : 10}
-        verticalSwipe={false}
-        ref={cardRef}
-      >
-        {profiles.map((item, index) => (
-          <CardCompoent
-            height={isAndroid ? androidActualHeight - 64 : iOSActualHeight - 70}
-            key={index}
-            item={item}
-            cardRef={cardRef}
-          />
-        ))}
-      </CardStack>
-      {/* <RunOutOffProfile /> */}
-      {/* <PausedProfile /> */}
+      {!user?.isVisible ? (
+        <PausedProfile />
+      ) : user?.dailyClickActions < 6 && profiles?.length > 0 ? (
+        <>
+          <CardStack
+            onSwipedLeft={handleDisLike}
+            onSwipedRight={handleLike}
+            horizontalThreshold={isAndroid ? 10 : 10}
+            verticalSwipe={false}
+              ref={cardRef}
+              onSwipedAll={clearProfile}
+          >
+            {profiles.map((item, index) => (
+              <CardCompoent
+                height={
+                  isAndroid ? androidActualHeight - 64 : iOSActualHeight - 70
+                }
+                key={index}
+                item={item}
+                cardRef={cardRef}
+              />
+            ))}
+          </CardStack>
+        </>
+      ) : (
+        <>
+          <RunOutOffProfile />
+        </>
+      )}
       <SearchModal
         showSearchModal={showSearchModal}
         toggleSearchModal={toggleSearchModal}

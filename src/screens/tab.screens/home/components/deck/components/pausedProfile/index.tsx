@@ -3,8 +3,12 @@ import { Image, Text, View } from 'react-native';
 import { pausedProfileStyle } from './pausedProfileStyle';
 import { PrimaryButton } from '../../../../../../../components/button';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../../../../../navigation';
 
 export const PausedProfile = () => {
+  const { navigate } = useNavigation();
+  const goToProfileSetting = ()=> navigate(ROUTES.AccountSetting)
   return (
     <View style={pausedProfileStyle.content}>
       <Text style={pausedProfileStyle.subHeading}>Profile paused</Text>
@@ -17,7 +21,7 @@ export const PausedProfile = () => {
         You’ve paused your profile from being shown to new people.
       </Text>
       <View style={pausedProfileStyle.primaryButton}>
-        <PrimaryButton title="Unpause profile" />
+        <PrimaryButton onPress={goToProfileSetting} title="Unpause profile" />
       </View>
     </View>
   );

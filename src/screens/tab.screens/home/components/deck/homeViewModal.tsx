@@ -30,15 +30,12 @@ export const useViewModal = () => {
     _setCount(unReadCount);
   },[unReadCount])
   const fetchProfiles = async () => {
-    console.log("Hi Abhishek")
     setLoading(true);
     try {
       const data = await homeDeckRepository.getProfiles();
-      console.log(data.length)
       setProfiles(data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
@@ -46,6 +43,7 @@ export const useViewModal = () => {
     fetchProfiles();
   }, []);
   const handleSetProfiles = (item) => setProfiles([item, ...profiles]);
+  const clearProfile = () => setProfiles([]);
   const goToNotification = () => navigate(ROUTES.Notification);
   const createPayLoafForUserAction = (index: number, action: string) => {
     const suggestedUser = profiles[index];
@@ -88,6 +86,8 @@ export const useViewModal = () => {
     handleCloseModal,
     handleSetProfiles,
     goToNotification,
-    count
+    count,
+    user,
+    clearProfile
   };
 };

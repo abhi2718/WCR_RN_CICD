@@ -7,16 +7,15 @@ import * as Progress from 'react-native-progress';
 import { styles } from './styles';
 
 export const ProfileScreen = () => {
-  const { user, goToPreview, goToSetting,goToPreferences } = useViewModal();
+  const { user, goToPreview, goToSetting,goToPreferences,goToEditProfile } = useViewModal();
   return (
     <View style={styles.container}>
-      <View></View>
       <Spacer position="bottom" size={20}>
         <Column>
           <Row>
             <Image
               source={{
-                uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                uri: user?.profilePicture?.url
               }}
               style={{
                 width: 80,
@@ -42,7 +41,7 @@ export const ProfileScreen = () => {
         </Row>
       </Pressable>
       <Spacer position={'top'} size={20} />
-      <Pressable>
+      <Pressable onPress={goToEditProfile}>
         <Row alignItems="center">
           <Image
             style={styles.iconStyle}

@@ -10,10 +10,12 @@ export const useViewModal = () => {
     const goToPreview = () => navigation.navigate(ROUTES.Preview);
     const goToSetting = () => navigation.navigate(ROUTES.SettingScreen);
     const goToPreferences = () => navigation.navigate(ROUTES.Preferences);
+    const goToEditProfile = () => navigation.navigate(ROUTES.EditProfile);
     return {
         user,
         goToPreview,
         goToSetting,
-        goToPreferences
+        goToPreferences,
+        goToEditProfile
     }
 }
