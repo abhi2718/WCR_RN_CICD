@@ -28,7 +28,6 @@ const Kids = (props: ScreenParams) => {
     selectedDietarypreference,
     updateUserDetails,
     selectedFamilyPlans,
-    loggInUserId,
     navigateTohabitsScreen
   } = useKidsViewmodal(props);
 
@@ -36,7 +35,7 @@ const Kids = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar skip={()=>navigateTohabitsScreen(loggInUserId)}></HeaderBar>
+          <HeaderBar skip={()=>navigateTohabitsScreen()}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Do you have kids?</Text>

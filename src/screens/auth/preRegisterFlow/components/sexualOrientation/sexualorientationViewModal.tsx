@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../../../navigation';
 import { addUser } from '../../../../../store/reducers/user.reducer';
@@ -10,12 +10,13 @@ import {
 } from '../../../../../components/flashBar';
 
 export const useSexualOrientationViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
+
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
+  const token = useRef(user?.token ? user?.token : null).current;
 
   const { navigation } = props;
   const updatedOrientation = user?.profile?.sexualPreference ?? '';
@@ -32,36 +33,48 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
     setCheckboxState(!checkboxState);
   };
 
-  const navigateTolocationCreen = (id: string) => {
-    navigation.navigate(ROUTES.Location, { data: id });
+  const navigateTolocationCreen = () => {
+    navigation.navigate(ROUTES.Location);
   };
 
-  const updateUserDetails = async (id: string, update: string) => {
+  const updateUserDetails = async () => {
     try {
-      if (!update) {
+      if (!sexualOrientation) {
         return ShowFlashMessage(
           'Warning',
           'Please select Sexual Orientation!',
           FlashMessageType.DANGER,
         );
       }
+
+      if (user.profile.sexualPreference && user.profile.sexualPreference === sexualOrientation) {
+        navigateTolocationCreen();
+        return
+      }
       setLoading(true);
       const genderData = {
         profile: {
-          sexualPreference: update,
+          sexualPreference: sexualOrientation,
           showSexualPreference: checkboxState,
         },
       };
-      const user = await updateUserDetailsRepository.updateUserDetails(id, {
+      const userData = await updateUserDetailsRepository.updateUserDetails(user._id, {
         update: genderData,
       });
-      const data = {
-        user: user,
-      };
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
 
-      navigateTolocationCreen(loggInUserId);
+      navigateTolocationCreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -71,7 +84,6 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
     loading,
     sexualOrientation,
     setSexualOrientation,
-    loggInUserId,
     handleSexualOrientationValue,
     updateUserDetails,
     handleCheckboxChange,

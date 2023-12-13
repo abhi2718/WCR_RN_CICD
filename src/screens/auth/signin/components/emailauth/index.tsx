@@ -1,5 +1,11 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {
   ImageContainer,
   InputBox,
@@ -7,9 +13,12 @@ import {
 } from '../../../../../components/tools';
 import { styles } from './emailauthStyle';
 import { PrimaryButton } from '../../../../../components/button';
+import { OtpCodeInput } from '../../../../../components/otpInput';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { useEmailAuthViewModal } from './emailauthViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { isAndroid } from '../../../../../components/tools';
+import { HeaderBar } from '../../../../../components/header';
 
 export default function EmailAuthByOtpScreeen(props: ScreenParams) {
   let {
@@ -20,12 +29,19 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
     emailInput,
     setEmailInput,
     email,
+    loading
   } = useEmailAuthViewModal(props);
 
   return (
-    <ScreenContainer >
-      <ScrollView contentContainerStyle={styles.scrollDiv} keyboardShouldPersistTaps="always">
-        <View >
+    <ScreenContainer>
+      <View>
+        <HeaderBar />
+      </View>
+      <ScrollView
+        contentContainerStyle={styles.scrollDiv}
+        keyboardShouldPersistTaps="always"
+      >
+        <View>
           <ImageContainer
             height={sizes[10]}
             width={sizes[10]}
@@ -34,33 +50,50 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
           />
         </View>
         <View style={styles.viewBox}>
-          <Text>Enter the code we have shared to your email</Text>
+          <Text style={styles.otpText}>
+            Enter the code we have shared to your email
+          </Text>
           <View>
-            <InputBox
-              style={styles.inputBox}
-              placeholder={'Enter code'}
-              keyboardType="phone-pad"
-              value={otp}
-              onChangeText={(value: string) => setOtp(value)}
-            />
+            <OtpCodeInput />
           </View>
-        </View>
-        {!email && (
-          <View style={styles.viewBox}>
-            <Text>Enter the code email id</Text>
+          <KeyboardAvoidingView
+            enabled
+            behavior={isAndroid ? 'height' : 'padding'}
+          >
             <View>
               <InputBox
                 style={styles.inputBox}
-                placeholder={'Enter email'}
-                value={emailInput}
-                onChangeText={(value: string) => setEmailInput(value)}
+                placeholder={'Enter code'}
+                keyboardType="phone-pad"
+                value={otp}
+                onChangeText={(value: string) => setOtp(value)}
               />
             </View>
+          </KeyboardAvoidingView>
+        </View>
+        {!email && (
+          <View style={styles.viewBox}>
+            <Text style={styles.otpText}>Enter the code email id</Text>
+            <KeyboardAvoidingView
+              enabled
+              behavior={isAndroid ? 'height' : 'padding'}
+            >
+              <View>
+                <InputBox
+                  style={styles.inputBox}
+                  placeholder={'Enter email'}
+                  value={emailInput}
+                  onChangeText={(value: string) => setEmailInput(value)}
+                />
+              </View>
+            </KeyboardAvoidingView>
           </View>
         )}
-        <PrimaryButton title={'Continue'} onPress={verifyEmail} />
+        <PrimaryButton title={'Continue'} onPress={verifyEmail} 
+        isLoading={loading}
+        />
         <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
-          <Text>Resend code</Text>
+          <Text style={styles.otpText}>Resend code</Text>
         </TouchableOpacity>
       </ScrollView>
     </ScreenContainer>

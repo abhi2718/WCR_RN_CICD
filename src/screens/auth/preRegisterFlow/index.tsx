@@ -20,7 +20,6 @@ const Gender = (props: ScreenParams) => {
     gender,
     handleGenderValue,
     updateUserDetails,
-    loggInUserId,
     checkboxState,
     handleCheckboxChange,
     loading,
@@ -61,7 +60,7 @@ const Gender = (props: ScreenParams) => {
               <Text style={genderStyle.btnText}>Visible on profile</Text>
             </Row>
             <PrimaryButton
-              onPress={() => updateUserDetails(loggInUserId, gender)}
+              onPress={() => updateUserDetails()}
               title="Next"
               isLoading={loading}
             />

@@ -14,12 +14,10 @@ import { ScreenParams } from '../../../../../types/services.types/firebase.servi
 const Height = (props: ScreenParams) => {
   const {
     navigateToEthnicityScreen,
-    loggInUserId,
     heightFormat,
     handleFormatChange,
     loading,
     updateUserDetails,
-    getSelectedHeight,
     handleValueChange,
     currentHeight,
   } = useheightViewModal(props);
@@ -28,7 +26,7 @@ const Height = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={HeightStyle.container}>
         <View>
-          <HeaderBar skip={() => navigateToEthnicityScreen(loggInUserId)} />
+          <HeaderBar skip={() => navigateToEthnicityScreen()} />
           <View>
             <View>
               <Text style={HeightStyle.subHeader}>What's your height?</Text>

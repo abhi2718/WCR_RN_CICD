@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import { PrimaryButton } from '../../../../../components/button';
@@ -30,6 +31,7 @@ import { ErrorText } from '../../signInStyle';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { HeaderBar } from '../../../../../components/header';
+import { isAndroid } from '../../../../../components/tools';
 
 const Profile = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
@@ -45,6 +47,7 @@ const Profile = (props: ScreenParams) => {
     toggleModal,
     selectedDate,
     formateDOB,
+    loading,
     isModalVisible,
     validationErrors,
     toUpperFirstName,
@@ -66,95 +69,108 @@ const Profile = (props: ScreenParams) => {
             <Text style={profileStyles.subHeader}>
               Let's get started!{`\n`}Tell us a little about you.
             </Text>
-            <FlatInput
-              label="First Name"
-              value={formData.firstName}
-              onChangeText={(text: string) =>
-                handleInputChange('firstName', toUpperFirstName(text))
-              }
-              error={validationErrors.firstName}
-            />
-            {validationErrors.firstName && (
-              <ErrorText> {validationErrors.firstName}</ErrorText>
-            )}
-            <FlatInput
-              label="Last Name"
-              value={formData.lastName}
-              onChangeText={(text: string) =>
-                handleInputChange('lastName', toUpperFirstName(text))
-              }
-              error={validationErrors.lastName}
-            />
-            {validationErrors.lastName && (
-              <ErrorText> {validationErrors.lastName}</ErrorText>
-            )}
-            <FlatInput
-              label="Display Name"
-              value={formData.displayName}
-              onChangeText={(text: string) =>
-                handleInputChange('displayName', text)
-              }
-            />
-            <FlatInput
-              label="Mobile No"
-              value={formData.mobile}
-              onChangeText={(text: string) =>
-                handleInputChange('mobile', formatMobile(text))
-              }
-              error={validationErrors.mobile}
-            />
-            {validationErrors.mobile && (
-              <ErrorText> {validationErrors.mobile}</ErrorText>
-            )}
-            <FlatInput
-              editable={email ? false : true}
-              value={formData.email}
-              onChangeText={(text: string) => handleInputChange('email', text)}
-              label="Email"
-              theme={{ colors: { primary: 'red' } }}
-            />
-            <View style={profileStyles.datePickerContainer}>
-              <TouchableOpacity
-                style={profileStyles.openButton}
-                onPress={toggleModal}
-              >
-                <Image
-                  style={profileStyles.openButtonImg}
-                  source={require('../../../../../assets/images/icons/calender.png')}
-                />
-              </TouchableOpacity>
-              <DatePicker
-                modal
-                mode="date"
-                open={isModalVisible}
-                maximumDate={calculateDateLessThan18YearsAgo(new Date())}
-                date={selectedDate}          
-                onDateChange={handleDateChange}
-                onConfirm={(date) => {
-                  toggleModal();
-                  handleDateChange(date);
-                }}
-                onCancel={() => {
-                  toggleModal();
-                }}
+            <KeyboardAvoidingView
+              enabled
+              behavior={isAndroid ? 'height' : 'padding'}
+            >
+              <FlatInput
+                label="First Name"
+                value={formData.firstName}
+                onChangeText={(text: string) =>
+                  handleInputChange('firstName', toUpperFirstName(text))
+                }
+                error={validationErrors.firstName}
+              />
+              {validationErrors.firstName && (
+                <ErrorText> {validationErrors.firstName}</ErrorText>
+              )}
+              <FlatInput
+                label="Last Name"
+                value={formData.lastName}
+                onChangeText={(text: string) =>
+                  handleInputChange('lastName', toUpperFirstName(text))
+                }
+                error={validationErrors.lastName}
+              />
+              {validationErrors.lastName && (
+                <ErrorText> {validationErrors.lastName}</ErrorText>
+              )}
+              <FlatInput
+                label="Display Name"
+                value={formData.displayName}
+                onChangeText={(text: string) =>
+                  handleInputChange('displayName', text)
+                }
               />
               <FlatInput
-                editable={true}
-                label="MM/DD/YYYY"
-                value={formData.dob}
+                label="Mobile No"
+                value={formData.mobile}
                 onChangeText={(text: string) =>
-                  handleInputChange('dob', formateDOB(text))
+                  handleInputChange('mobile', formatMobile(text))
                 }
-                error={validationErrors.dob}
+                error={validationErrors.mobile}
               />
-              {validationErrors.dob && (
-                <ErrorText> {validationErrors.dob}</ErrorText>
+              {validationErrors.mobile && (
+                <ErrorText> {validationErrors.mobile}</ErrorText>
               )}
-            </View>
+              <FlatInput
+                editable={email ? false : true}
+                value={formData.email}
+                onChangeText={(text: string) =>
+                  handleInputChange('email', text)
+                }
+                label="Email"
+                theme={{ colors: { primary: 'red' } }}
+              />
+            </KeyboardAvoidingView>
+            <KeyboardAvoidingView
+              enabled
+              behavior={isAndroid ? 'height' : 'padding'}
+            >
+              <View style={profileStyles.datePickerContainer}>
+                <TouchableOpacity
+                  style={profileStyles.openButton}
+                  onPress={toggleModal}
+                >
+                  <Image
+                    style={profileStyles.openButtonImg}
+                    source={require('../../../../../assets/images/icons/calender.png')}
+                  />
+                </TouchableOpacity>
+                <DatePicker
+                  modal
+                  mode="date"
+                  open={isModalVisible}
+                  maximumDate={calculateDateLessThan18YearsAgo(new Date())}
+                  date={selectedDate}
+                  onDateChange={handleDateChange}
+                  onConfirm={(date) => {
+                    toggleModal();
+                    handleDateChange(date);
+                  }}
+                  onCancel={() => {
+                    toggleModal();
+                  }}
+                />
+                <FlatInput
+                  editable={true}
+                  label="MM/DD/YYYY"
+                  value={formData.dob}
+                  onChangeText={(text: string) =>
+                    handleInputChange('dob', formateDOB(text))
+                  }
+                  error={validationErrors.dob}
+                />
+                {validationErrors.dob && (
+                  <ErrorText> {validationErrors.dob}</ErrorText>
+                )}
+              </View>
+            </KeyboardAvoidingView>
           </View>
           <View>
             <Spacer position="top" size={25}>
               <PrimaryButton
+              isLoading={loading}
                 title="Submit"
                 onPress={() => handleSubmit(credential)}
               />

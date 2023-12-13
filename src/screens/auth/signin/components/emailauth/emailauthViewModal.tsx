@@ -16,7 +16,7 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
   const [emailInput, setEmailInput] = useState('');
   const [otp, setOtp] = useState('');
 
-  let {setLoading, checkIsNewUser,getOtpOnEmail} = useViewModal(props);
+  let {setLoading,loading,checkIsNewUser,getOtpOnEmail} = useViewModal(props);
 
   const verifyEmail = async () => {
     try {
@@ -50,6 +50,7 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
     email,
     setOtp,
     credential,
+    loading,
     fbId,
     firebaseUid,
   };

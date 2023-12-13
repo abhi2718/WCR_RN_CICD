@@ -28,8 +28,8 @@ export const WelcomeModalComponent = (props: ModalProps) => {
               source={require('../../assets/images/icons/userProfile.png')}
             />
             <Text style={styles.text}>
-              Use your real name that matches your degree only First Name shown
-              by default, or add a display name.
+              Use your real name that matches your degree (only First Name shown
+              by default), or add a display name.
             </Text>
           </Row>
           <Row style={styles.row}>
@@ -38,18 +38,8 @@ export const WelcomeModalComponent = (props: ModalProps) => {
               source={require('../../assets/images/icons/blockUser.png')}
             />
             <Text style={styles.text}>
-              Your profile picture shows your face clearly - no shades, masks,
-              or obstructions
-            </Text>
-          </Row>
-          <Row style={styles.row}>
-            <ImageContainer
-              style={styles.icon}
-              source={require('../../assets/images/icons/blackCheck.png')}
-            />
-            <Text style={styles.text}>
-              Use your real name that matches your degree only First Name shown
-              by default, or add a display name.
+              Once you verify, you can't change First Name, Last Name (not shown
+              on profile), Email, DOB, or Gender.
             </Text>
           </Row>
           <Text style={styles.footerText}>
@@ -72,11 +62,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ui.opacity,
   },
   modalView: {
-    margin: sizes[6],
+    margin: sizes[7],
     backgroundColor: 'white',
     borderRadius: sizes[4],
-    paddingTop: sizes[5],
-    paddingBottom: sizes[4],
+    paddingTop: sizes[7],
+    paddingBottom: sizes[9],
     paddingHorizontal: sizes[3],
     shadowColor: colors.ui.black,
 
@@ -89,14 +79,16 @@ const styles = StyleSheet.create({
     elevation: sizes[0],
   },
   heading: {
-    fontWeight: '600',
+    fontWeight: '700',
     fontSize: sizes[7],
-    color: colors.ui.text,
+    color: colors.ui.textHead,
   },
   subHeading: {
     paddingVertical: 16,
     color: colors.ui.secondary,
     fontSize: sizes[3],
+    lineHeight: sizes[4],
+    letterSpacing: 0.5,
   },
   row: {
     gap: sizes[1],
@@ -106,16 +98,19 @@ const styles = StyleSheet.create({
   text: {
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    fontWeight: '400',
+    lineHeight: sizes[4],
   },
   icon: {
     width: sizes[5],
     height: sizes[5],
+    marginHorizontal: sizes[1],
   },
   footerText: {
     textAlign: 'center',
     fontWeight: '600',
     fontSize: sizes[4],
     marginVertical: sizes[3],
-    color: colors.ui.black,
+    color: colors.ui.textHead,
   },
 });
