@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,11 +6,11 @@ import { addUser } from '../../../../../store/reducers/user.reducer';
 import { ROUTES } from '../../../../../navigation';
 
 export const useAboutViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
+  const token = useRef(user?.token ? user?.token : null).current;
   const maxLength = 1000;
   let bio = user?.bio;
   const [aboutText, setAboutText] = useState<string>(bio ?? '');
@@ -20,8 +20,8 @@ export const useAboutViewModal = (props: ScreenParams) => {
     setAboutText(text);
   };
 
-  const navigateTohabitsScreen = (id: string) => {
-    navigation.navigate(ROUTES.Hobbies, { data: id });
+  const navigateTohabitsScreen = () => {
+    navigation.navigate(ROUTES.Hobbies);
   };
 
   const updateUserDetails = async () => {
@@ -30,24 +30,31 @@ export const useAboutViewModal = (props: ScreenParams) => {
         bio: aboutText,
       };
 
-      if (!aboutText) {
-        navigateTohabitsScreen(loggInUserId);
-        return;
+      if(user?.bio && user?.bio === aboutText){
+        navigateTohabitsScreen();
+        return 
       }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: bioData,
         },
       );
-      const data = {
-        user: user,
-      };
+      const data = token
+      ? {
+          user: {
+            ...userData,
+            token,
+          },
+        }
+      : {
+          user: userData,
+        };
       dispatch(addUser(data));
       setLoading(false);
 
-      navigateTohabitsScreen(loggInUserId);
+      navigateTohabitsScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -59,7 +66,6 @@ export const useAboutViewModal = (props: ScreenParams) => {
     loading,
     updateUserDetails,
     maxLength,
-    loggInUserId,
-    navigateTohabitsScreen,
+    navigateTohabitsScreen
   };
 };

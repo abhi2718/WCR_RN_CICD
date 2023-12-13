@@ -9,13 +9,13 @@ import { ScreenParams } from '../../../../../types/services.types/firebase.servi
 import { useAboutViewModal } from './about.viewModal';
 
 const About = (props:ScreenParams) => {
-  const {handleText,aboutText,loggInUserId,navigateTohabitsScreen,updateUserDetails,loading,maxLength} = useAboutViewModal(props)
+  const {handleText,aboutText,navigateTohabitsScreen,updateUserDetails,loading,maxLength} = useAboutViewModal(props)
 
   return (
     <ScreenContainer>
       <View style={AboutStyle.container}>
         <View style={AboutStyle.scrollContainer}>
-          <HeaderBar skip={() => navigateTohabitsScreen(loggInUserId)}></HeaderBar>
+          <HeaderBar skip={() => navigateTohabitsScreen()}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={AboutStyle.subHeader}>
@@ -29,6 +29,8 @@ const About = (props:ScreenParams) => {
                 placeholder="Enter here..."
                 textAlignVertical="top"
                 value={aboutText}
+                returnKeyLabel="go"
+                onSubmitEditing={() => updateUserDetails()}
                 onChangeText={handleText}
               />
             </View>

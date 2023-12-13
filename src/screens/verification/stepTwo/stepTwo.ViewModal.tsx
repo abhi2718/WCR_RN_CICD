@@ -14,10 +14,11 @@ import {
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../store/reducers/user.reducer';
+import { ROUTES } from '../../../navigation';
 
 export const useVerificationViewModal = (props: AvatarProps) => {
   const { optionData, loggInUserId, verificationOption } =
-    props.route?.params.data || 'No optionData received';  
+    props.route?.params.data || 'No optionData received';
   const { user } = useSelector((state: any) => state.userState);
   const userWebsite =
     user.verificationId.licenceWebsite ||
@@ -29,6 +30,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         user.verificationId.healthCareProfessionalEmail ||
         user.verificationId.userWebsite
       : '';
+
+  const { navigation } = props;
   const [visibleModal, setVisibleModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [website, setWebsite] = useState(userWebsite ? userWebsite : '');
@@ -36,7 +39,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
   const [documentImage, setdocumentImage] = useState<ImageDataType | null>(
-    props.source?.uri || undefined 
+    props.source?.uri || undefined,
   );
   const [PhdOptionImage, setPhdOptionImage] = useState<ImageDataType | null>(
     props.source?.uri || undefined,
@@ -56,6 +59,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       result = 'HealthCare';
     }
     return result;
+  };
+
+  const navigateToVerificationState = () => {
+    navigation.navigate(ROUTES.VerificationPending);
   };
 
   const [previousSetVerificationOption, setPreviousSetVerificationOption] =
@@ -202,8 +209,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         }
       }
       const verificationData = await updateImagesInDatabase(imageUrls);
+      navigateToVerificationState()
     } catch (err) {
-      console.log('---->error', err);
     }
   };
 

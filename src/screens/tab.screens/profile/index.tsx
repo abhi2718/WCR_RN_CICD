@@ -5,9 +5,10 @@ import { Column, Row, Spacer } from '../../../components/tools';
 import { useViewModal } from './profileViewModal';
 import * as Progress from 'react-native-progress';
 import { styles } from './styles';
+import { AlertScreen } from '../../../components/alert';
 
 export const ProfileScreen = () => {
-  const { user, goToPreview, goToSetting,goToPreferences,goToEditProfile } = useViewModal();
+  const { user, goToPreview, goToSetting,goToPreferences,goToEditProfile,showLogOutModal, setLogOutModal,logOut } = useViewModal();
   return (
     <View style={styles.container}>
       <Spacer position="bottom" size={20}>
@@ -71,7 +72,7 @@ export const ProfileScreen = () => {
         </Row>
       </Pressable>
       <Spacer position={'top'} size={20} />
-      <Pressable>
+      <Pressable onPress={()=>setLogOutModal(true)}>
         <Row alignItems="center">
           <Image
             style={styles.iconStyle}
@@ -80,6 +81,13 @@ export const ProfileScreen = () => {
           <Text>Logout</Text>
         </Row>
       </Pressable>
+      <AlertScreen
+        showModal={showLogOutModal}
+        setShowModal={setLogOutModal}
+        title="Logout?"
+        description="Are you sure want to log out?"
+        onPress={logOut}
+      ></AlertScreen>
     </View>
   );
 };

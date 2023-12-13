@@ -22,7 +22,6 @@ const GenderProunoun = (props: any) => {
     genderPronoun,
     handleGenderPronounValue,
     updateUserDetails,
-    loggInUserId,
     checkboxState,
     setCheckboxState,
     handleCheckboxChange,
@@ -65,7 +64,7 @@ const GenderProunoun = (props: any) => {
               <Text style={genderPronounStyle.btnText}>Visible on profile</Text>
             </Row>
             <PrimaryButton
-              onPress={() => updateUserDetails(loggInUserId, genderPronoun)}
+              onPress={() => updateUserDetails()}
               title="Next"
               isLoading={loading}
             />

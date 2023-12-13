@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import {
   makeFalseDefaultValue,
@@ -12,7 +12,6 @@ import { ROUTES } from '../../../../../navigation';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useRelationshipViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
@@ -27,7 +26,7 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
   const [preferNotToSayflag, setpreferNotToSayflag] = useState<string>('');
 
   const dispatch = useDispatch();
-
+  const token = useRef(user?.token ? user?.token : null).current;
   const handleSeletedList = (
     ethnicityValue: string,
     data: CheckBoxDataType[],
@@ -55,8 +54,8 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
     setRelationshipList(data);
   };
 
-  const navigateToMaritalStatusScreen = (id: string) => {
-    navigation.navigate(ROUTES.MaritalStatus, { data: id });
+  const navigateToMaritalStatusScreen = () => {
+    navigation.navigate(ROUTES.MaritalStatus);
   };
 
   const updateUserDetails = async () => {
@@ -65,23 +64,30 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
         relationship: selectedRelationship,
       };
       if (selectedRelationship.length === 0) {
-        navigateToMaritalStatusScreen(loggInUserId);
+        navigateToMaritalStatusScreen();
         return;
       }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: selectedEthnicityData,
         },
       );
-      const data = {
-        user: user,
-      };
+      const data = token
+      ? {
+          user: {
+            ...userData,
+            token,
+          },
+        }
+      : {
+          user: userData,
+        };
       dispatch(addUser(data));
       setLoading(false);
 
-      navigateToMaritalStatusScreen(loggInUserId);
+      navigateToMaritalStatusScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -89,7 +95,6 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
 
   return {
     relationshipList,
-    loggInUserId,
     preferNotToSayflag,
     handleSeletedList,
     handleListChange,

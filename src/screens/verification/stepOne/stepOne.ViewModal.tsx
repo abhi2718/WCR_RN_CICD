@@ -30,21 +30,29 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     studentEmail: '',
     userWebsite: '',
     healthCareProfessionalEmail: '',
-    teritory:  '',
+    teritory: '',
     degreeIdentifier: '',
     degreeIdentifierType: '',
   });
 
-  
-  useEffect(()=>{
-    setVerificationOptionState()
-  },[])
+  useEffect(() => {
+    setVerificationOptionState();
+  }, []);
+
+  const navigateToVerificationState = () => {
+    navigation.navigate(ROUTES.VerificationPending);
+  };
+
+  useEffect(() => {
+    if (user.verificationId.submitted) {
+      navigateToVerificationState();
+    }
+  }, []);
 
   const handleInputChange = (name: keyof verificationIdType, value: any) => {
     setFormData((oldState) => {
       return { ...oldState, [name]: value };
     });
-    
   };
 
   const [validationErrors, setValidationErrors] = useState<
@@ -58,25 +66,30 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   };
 
   const setVerificationOptionState = () => {
-if(user.verificationId.idType === "npi"){
-  setVerificationOption('NPI Number')
-  handleInputChange('npiNumber', user.verificationId.idNumber);
-} else if(user.verificationId.idType === "medicalLicense"){
-  setVerificationOption('License Number')
-  handleInputChange('state', user.verificationId.state);
-  handleInputChange('licenseNumber', user.verificationId.idNumber);
-} else if(user.verificationId.isPhd){
-  setVerificationOption('Others')
-}else if(user.verificationId.isDoctoralCandidate){
-  setVerificationOption('Student')
-  }else if(user.verificationId.territory){
-    setVerificationOption('HealthCare')
-    handleInputChange('teritory', user.verificationId.territory);
-    handleInputChange('degreeIdentifierType', user.verificationId.degreeIdentifierType);
-    handleInputChange('degreeIdentifier', user.verificationId.degreeIdentifier);
-  }
-
-}
+    if (user.verificationId.idType === 'npi') {
+      setVerificationOption('NPI Number');
+      handleInputChange('npiNumber', user.verificationId.idNumber);
+    } else if (user.verificationId.idType === 'medicalLicense') {
+      setVerificationOption('License Number');
+      handleInputChange('state', user.verificationId.state);
+      handleInputChange('licenseNumber', user.verificationId.idNumber);
+    } else if (user.verificationId.isPhd) {
+      setVerificationOption('Others');
+    } else if (user.verificationId.isDoctoralCandidate) {
+      setVerificationOption('Student');
+    } else if (user.verificationId.territory) {
+      setVerificationOption('HealthCare');
+      handleInputChange('teritory', user.verificationId.territory);
+      handleInputChange(
+        'degreeIdentifierType',
+        user.verificationId.degreeIdentifierType,
+      );
+      handleInputChange(
+        'degreeIdentifier',
+        user.verificationId.degreeIdentifier,
+      );
+    }
+  };
 
   const handleVerificationOption = () => {
     if (!verificationOption) {
@@ -169,7 +182,7 @@ if(user.verificationId.idType === "npi"){
     } else if (option === 'Others') {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
-      handleInputChange('isPhd',true);
+      handleInputChange('isPhd', true);
       handleInputChange('userWebsite', 'userWebsite');
       handleInputChange('state', '');
       handleInputChange('studentEmail', '');
@@ -205,6 +218,6 @@ if(user.verificationId.idType === "npi"){
     validationErrors,
     handleInputChange,
     country,
-    optionData
+    optionData,
   };
 };
