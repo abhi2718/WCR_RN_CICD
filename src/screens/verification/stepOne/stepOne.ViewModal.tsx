@@ -11,7 +11,6 @@ import { ROUTES } from '../../../navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const useVerificationViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const { navigation } = props;
 
   const { user } = useSelector((state: any) => state.userState);
@@ -61,7 +60,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
 
   const navigateToVerificationStepTwo = () => {
     navigation.navigate(ROUTES.VerificationStepTwo, {
-      data: { optionData, loggInUserId, verificationOption },
+      data: { optionData, verificationOption },
     });
   };
 
