@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
-import { Column, Row, Spacer } from '../../../components/tools';
+import { Column, Row, ScreenContainer, ScreenWrapper, Spacer } from '../../../components/tools';
 import { useViewModal } from './profileViewModal';
 import * as Progress from 'react-native-progress';
 import { styles } from './styles';
 import { AlertScreen } from '../../../components/alert';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const ProfileScreen = ({}) => {
   const {
@@ -19,7 +20,8 @@ export const ProfileScreen = ({}) => {
     _logOut,
   } = useViewModal();
   return (
-    <View style={styles.container}>
+    <ScreenWrapper>
+       <View style={styles.container}>
       <Spacer position="bottom" size={20}>
         <Column>
           <Row>
@@ -98,5 +100,6 @@ export const ProfileScreen = ({}) => {
         onPress={_logOut}
       />
     </View>
+    </ScreenWrapper>
   );
 };

@@ -2,12 +2,12 @@ import React from 'react';
 import { View, SafeAreaView } from 'react-native';
 import Deck from './components/deck';
 import { styles } from './styles';
-import { ScreenContainer } from '../../../components/tools';
+import { ScreenWrapper } from '../../../components/tools';
 
 export default function HomeTab({ route }) {
   return (
-    <SafeAreaView style={styles.containerStyle}>
+    <ScreenWrapper>
       <Deck route={route} />
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 }
