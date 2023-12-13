@@ -29,6 +29,7 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
     emailInput,
     setEmailInput,
     email,
+    loading
   } = useEmailAuthViewModal(props);
 
   return (
@@ -88,7 +89,9 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
             </KeyboardAvoidingView>
           </View>
         )}
-        <PrimaryButton title={'Continue'} onPress={verifyEmail} />
+        <PrimaryButton title={'Continue'} onPress={verifyEmail} 
+        isLoading={loading}
+        />
         <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
           <Text style={styles.otpText}>Resend code</Text>
         </TouchableOpacity>

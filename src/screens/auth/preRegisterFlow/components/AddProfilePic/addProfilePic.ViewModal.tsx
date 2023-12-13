@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   pickPhotoFromGallary,
   pickPhotoFromUrl,
@@ -28,7 +28,6 @@ export type ImageDataType = {
 };
 export const useAddProfilePicViewModal = (props: any) => {
   const { user } = useSelector(({ userState }) => userState);
-  const loggInUserId = user._id;
   const sidePicConstant = 'sidePicConstant';
   const bottomPicConstant = 'bottomPicConstant';
   const cloudinaryRepository = new CloudinaryRepository();
@@ -38,6 +37,10 @@ export const useAddProfilePicViewModal = (props: any) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [isPicUploadInfoModalVisible, setPicUploadInfoModalVisible] =
     useState(false);
+
+ 
+  const token = useRef(user?.token ? user?.token : null).current;
+
   const dispatch = useDispatch();
   const closeModal = () => {
     setPicUploadInfoModalVisible(false);
@@ -283,8 +286,8 @@ export const useAddProfilePicViewModal = (props: any) => {
     photos: object[],
   ) => {
     try {
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: {
             profilePicture: profileImage,
@@ -292,13 +295,19 @@ export const useAddProfilePicViewModal = (props: any) => {
           },
         },
       );
-      const data = {
-        user: user,
+      const data = token ? {
+        user: {
+          ...userData,
+          token
+        },
+      }  :{
+        user: userData,
       };
       dispatch(addUser(data));
       setLoading(false);
+      navigateToHeightScreen();
       if (showHeader) {
-        navigateToHeightScreen(loggInUserId);
+        navigateToHeightScreen();
       } else {
         ShowFlashMessage(
           'Success',
@@ -343,8 +352,8 @@ export const useAddProfilePicViewModal = (props: any) => {
     }
   };
 
-  const navigateToHeightScreen = (id: string) => {
-    navigation.navigate(ROUTES.Height, { data: id });
+  const navigateToHeightScreen = () => {
+    navigation.navigate(ROUTES.Height);
   };
   let showHeader = props?.showHeader === false ? false : true;
   return {

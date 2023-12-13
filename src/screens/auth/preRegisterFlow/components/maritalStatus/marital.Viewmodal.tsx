@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import react, { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { ROUTES } from '../../../../../navigation';
@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useMaritalStatusViewModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
+ 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
+  const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
   const maritalStatus =user.maritalStatus;
   const politics =user.politics;
@@ -37,8 +38,8 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
     setSelectedPoliticalView(option === selectedPoliticalView ? null : option);
   };
 
-  const navigateToKidsScreen = (id: string) => {
-    navigation.navigate(ROUTES.Kids, { data: id });
+  const navigateToKidsScreen = () => {
+    navigation.navigate(ROUTES.Kids);
   };
 
   const updateUserDetails = async () => {
@@ -49,24 +50,31 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
         religion: selectedReligion,
       };
 
-      if(!selectedMaritalStatus && !selectedPoliticalView && !selectedReligion){
-        navigateToKidsScreen(loggInUserId);
+      if(user?.maritalStatus=== selectedMaritalStatus && user.politics ===selectedPoliticalView && user?.religion=== selectedReligion){
+        navigateToKidsScreen();
         return 
       }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: selectedData,
         },
       );
-      const data = {
-        user: user,
-      };
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
        dispatch(addUser(data));
       setLoading(false);
 
-      navigateToKidsScreen(loggInUserId);
+      navigateToKidsScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -82,6 +90,5 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
     handlePoliticalViewSelect,
     updateUserDetails,
     loading,
-    loggInUserId
   };
 };

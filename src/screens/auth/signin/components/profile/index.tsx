@@ -47,6 +47,7 @@ const Profile = (props: ScreenParams) => {
     toggleModal,
     selectedDate,
     formateDOB,
+    loading,
     isModalVisible,
     validationErrors,
     toUpperFirstName,
@@ -169,6 +170,7 @@ const Profile = (props: ScreenParams) => {
           <View>
             <Spacer position="top" size={25}>
               <PrimaryButton
+              isLoading={loading}
                 title="Submit"
                 onPress={() => handleSubmit(credential)}
               />

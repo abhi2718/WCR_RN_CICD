@@ -13,7 +13,6 @@ const About = (props: ScreenParams) => {
   const {
     handleText,
     aboutText,
-    loggInUserId,
     navigateTohabitsScreen,
     updateUserDetails,
     loading,
@@ -24,9 +23,7 @@ const About = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={AboutStyle.container}>
         <View style={AboutStyle.scrollContainer}>
-          <HeaderBar
-            skip={() => navigateTohabitsScreen(loggInUserId)}
-          ></HeaderBar>
+          <HeaderBar skip={() => navigateTohabitsScreen()}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={AboutStyle.subHeader}>
@@ -40,6 +37,8 @@ const About = (props: ScreenParams) => {
                 placeholder="Enter here"
                 textAlignVertical="top"
                 value={aboutText}
+                returnKeyLabel="go"
+                onSubmitEditing={() => updateUserDetails()}
                 onChangeText={handleText}
                 placeholderTextColor={colors.ui.placeholder}
               />
