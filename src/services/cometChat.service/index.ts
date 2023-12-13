@@ -1,20 +1,16 @@
 import { CometChatUIKit, UIKitSettings,ReactionsExtension } from '@cometchat/chat-uikit-react-native';
 import {useEffect, useState} from 'react';
-// import {
-//   CometChatUIKit,
-//   UIKitSettings,
-//   ReactionExtension
-// } from '../../cometChat/src';
+import { useSelector } from 'react-redux';
 import {config} from '../../utils/config';
 
 export const useCometChatInit = () => {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const { user } = useSelector(({ userState }) => userState);
   const uikitSettings: UIKitSettings = {
     appId: config.APP_ID,
     authKey: config.AUTH_KEY,
     region: config.REGION,
-   extensions:[new ReactionsExtension()]
-
+    extensions:[new ReactionsExtension()]
   };
   useEffect(() => {
     const inItCometChat = async () => {

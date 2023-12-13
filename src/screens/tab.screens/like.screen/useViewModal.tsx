@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import React, {
-  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -9,6 +8,7 @@ import React, {
 import { useSelector } from 'react-redux';
 import { FriendContext } from '../../../contexts/friends.context';
 import { LikeContext } from '../../../contexts/likes.context';
+import { NotificationCountContext } from '../../../contexts/notificationCount.context';
 import { ROUTES } from '../../../navigation';
 import { HomeDeckRepository } from '../../../repository/homeDeck.repo';
 import { LikeRepository } from '../../../repository/like.repo';
@@ -17,6 +17,8 @@ export const useViewModal = () => {
   const { loading, data, setData, fetchAll } = useContext(LikeContext);
   const { user } = useSelector(({ userState }) => userState);
   const { friends } = useContext(FriendContext);
+  const { count } = useContext(NotificationCountContext);
+  const isNoEvent = data?.allFavourite?.length + data?.liked?.length + data?.likesReceived?.length + data?.matchedUsersList?.length;
   const likeRepository = new LikeRepository();
   const navigation = useNavigation();
   const homeDeckRepository = new HomeDeckRepository();
@@ -91,6 +93,9 @@ export const useViewModal = () => {
       name: user.name,
     });
   };
+  const goToNotification = () => {
+    navigation.navigate(ROUTES.Notification)
+  }
   useEffect(() => {
     fetchAll(user._id);
   }, []);
@@ -104,5 +109,8 @@ export const useViewModal = () => {
     handleSetSeeAllState,
     seeAllState,
     startChat,
+    count,
+    goToNotification,
+    isNoEvent
   };
 };

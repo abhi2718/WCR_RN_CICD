@@ -16,7 +16,7 @@ import { RunOutOffProfile } from './components/runOutOffProfile';
 import { PausedProfile } from './components/pausedProfile';
 import { HeaderDeck } from '../../../../../components/header';
 
-export default function Deck() {
+export default function Deck({route}) {
   const {
     isLoading,
     handleLike,
@@ -32,7 +32,7 @@ export default function Deck() {
     count,
     user,
     clearProfile
-  } = useViewModal();
+  } = useViewModal(route);
   if (isLoading) {
     return <FullLoader />;
   }
