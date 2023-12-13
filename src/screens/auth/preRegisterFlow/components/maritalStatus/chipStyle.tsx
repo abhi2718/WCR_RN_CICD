@@ -42,7 +42,7 @@ export const ChipStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     width: 'auto',
     backgroundColor: 'transparent',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: sizes[12],
     borderColor: '#a5a4a6',
     padding: 0,

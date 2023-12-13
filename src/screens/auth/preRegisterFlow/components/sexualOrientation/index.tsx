@@ -47,7 +47,10 @@ const SexualOrientation = (props: ScreenParams) => {
                     style={SexualOrientationStyle.rowView}
                     alignItems="center"
                   >
-                    <RadioButton color={colors.ui.primary} value={option} />
+                    <RadioButton.Android
+                      color={colors.ui.primary}
+                      value={option}
+                    />
                     <Text style={SexualOrientationStyle.btnText}>{option}</Text>
                   </Row>
                 </RadioButton.Group>

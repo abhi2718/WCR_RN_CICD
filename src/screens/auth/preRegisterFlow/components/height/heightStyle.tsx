@@ -9,6 +9,9 @@ export const HeightStyle = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+  flex1: {
+    flex: 1,
+  },
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
@@ -16,9 +19,12 @@ export const HeightStyle = StyleSheet.create({
     marginTop: sizes[6],
     marginBottom: sizes[3],
   },
+  pickerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   picker: {
     backgroundColor: 'white',
-    height: 400,
   },
   switchDiv: {
     alignItems: 'flex-end',

@@ -1,13 +1,13 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import Deck from './components/deck';
-import { styles } from "./styles";
+import { styles } from './styles';
+import { ScreenContainer } from '../../../components/tools';
 
 export default function HomeTab({ route }) {
   return (
-    <View style={styles.containerStyle}>
+    <SafeAreaView style={styles.containerStyle}>
       <Deck route={route} />
-    </View>
+    </SafeAreaView>
   );
 }
-

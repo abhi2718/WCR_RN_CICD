@@ -87,7 +87,7 @@ const AddProfilePicScreen = (props: any) => {
                       <TouchableOpacity onPress={() => removeProfilePic()}>
                         <Image
                           style={addPicture.deletImg}
-                          source={require('../../../../../assets/images/icons/crossIcon.png')}
+                          source={require('../../../../../assets/images/icons/redCrossIcon.png')}
                         />
                       </TouchableOpacity>
                     </TouchableOpacity>
@@ -130,7 +130,7 @@ const AddProfilePicScreen = (props: any) => {
                               >
                                 <Image
                                   style={addPicture.deletImg}
-                                  source={require('../../../../../assets/images/icons/crossIcon.png')}
+                                  source={require('../../../../../assets/images/icons/redCrossIcon.png')}
                                 />
                               </TouchableOpacity>
                             </>
@@ -141,7 +141,7 @@ const AddProfilePicScreen = (props: any) => {
                               >
                                 <Image
                                   style={addPicture.deletImg}
-                                  source={require('../../../../../assets/images/icons/crossIcon.png')}
+                                  source={require('../../../../../assets/images/icons/redCrossIcon.png')}
                                 />
                               </TouchableOpacity>
                             </>
@@ -185,7 +185,7 @@ const AddProfilePicScreen = (props: any) => {
                         <TouchableOpacity onPress={() => removePicTwo(index)}>
                           <Image
                             style={addPicture.deletImg}
-                            source={require('../../../../../assets/images/icons/crossIcon.png')}
+                            source={require('../../../../../assets/images/icons/redCrossIcon.png')}
                           />
                         </TouchableOpacity>
                       </View>
@@ -206,10 +206,10 @@ const AddProfilePicScreen = (props: any) => {
           </View>
           {showHeader && (
             <PrimaryButton
-            onPress={() => uploadImage()}
-            title="Next"
-            isLoading={loading}
-          />
+              onPress={() => uploadImage()}
+              title="Next"
+              isLoading={loading}
+            />
           )}
         </View>
       </ScreenContainer>

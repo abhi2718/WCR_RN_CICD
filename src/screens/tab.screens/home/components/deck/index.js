@@ -16,7 +16,7 @@ import { RunOutOffProfile } from './components/runOutOffProfile';
 import { PausedProfile } from './components/pausedProfile';
 import { HeaderDeck } from '../../../../../components/header';
 
-export default function Deck({route}) {
+export default function Deck({ route }) {
   const {
     isLoading,
     handleLike,
@@ -31,7 +31,7 @@ export default function Deck({route}) {
     goToNotification,
     count,
     user,
-    clearProfile
+    clearProfile,
   } = useViewModal(route);
   if (isLoading) {
     return <FullLoader />;
@@ -61,8 +61,8 @@ export default function Deck({route}) {
             onSwipedRight={handleLike}
             horizontalThreshold={isAndroid ? 10 : 10}
             verticalSwipe={false}
-              ref={cardRef}
-              onSwipedAll={clearProfile}
+            ref={cardRef}
+            onSwipedAll={clearProfile}
           >
             {profiles.map((item, index) => (
               <CardCompoent
