@@ -316,9 +316,8 @@ export const useAddProfilePicViewModal = (props: any) => {
         );
       }
     } catch (err) {
-    } finally {
       setLoading(false);
-    }
+    } 
   };
 
   const uploadImageToCloudinary = async (
@@ -326,8 +325,6 @@ export const useAddProfilePicViewModal = (props: any) => {
   ): Promise<string | undefined> => {
     const verificationFolder = 'verificationProof';
     try {
-      setLoading(true);
-
       const responseData = await cloudinaryRepository.signature(
         verificationFolder,
       );
@@ -347,8 +344,6 @@ export const useAddProfilePicViewModal = (props: any) => {
         return undefined;
       }
     } catch (error) {
-    } finally {
-      setLoading(false);
     }
   };
 

@@ -44,8 +44,8 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       };
 
       if (user?.interests === selectedHobbies) {
-      //  navigateToKidsScreen();
-        navigation.navigate(ROUTES.Tab)
+        navigateToKidsScreen();
+        //navigation.navigate(ROUTES.Tab)
         return;
       }
       setLoading(true);
@@ -67,8 +67,8 @@ export const useHobbyViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-     //  navigateToKidsScreen();
-       navigation.navigate(ROUTES.Tab)
+      navigateToKidsScreen();
+      //navigation.navigate(ROUTES.Tab)
     } catch (err: any) {
       setLoading(false);
     }
