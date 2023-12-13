@@ -71,7 +71,7 @@ export const addPicture = StyleSheet.create({
     width: sizes[4],
     height: sizes[4],
     padding: sizes[0],
-    borderRadius: sizes[1],
+    borderRadius: sizes[2],
   },
   profilePicText: {
     position: 'absolute',

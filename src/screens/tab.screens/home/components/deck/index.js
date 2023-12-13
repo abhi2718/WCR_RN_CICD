@@ -31,7 +31,7 @@ export default function Deck() {
     goToNotification,
     count,
     user,
-    clearProfile
+    clearProfile,
   } = useViewModal();
   if (isLoading) {
     return <FullLoader />;
@@ -61,8 +61,8 @@ export default function Deck() {
             onSwipedRight={handleLike}
             horizontalThreshold={isAndroid ? 10 : 10}
             verticalSwipe={false}
-              ref={cardRef}
-              onSwipedAll={clearProfile}
+            ref={cardRef}
+            onSwipedAll={clearProfile}
           >
             {profiles.map((item, index) => (
               <CardCompoent

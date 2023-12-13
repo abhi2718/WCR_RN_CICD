@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { HeightStyle } from './heightStyle';
-import { HeaderBar } from '../../../../../components/header';
+import { HeaderBar, headerStyle } from '../../../../../components/header';
 import { Picker } from 'react-native-wheel-pick';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import SwitchSelector from 'react-native-switch-selector';
@@ -27,11 +27,11 @@ const Height = (props: ScreenParams) => {
   return (
     <ScreenContainer>
       <View style={HeightStyle.container}>
-        <View>
+        <View style={HeightStyle.flex1}>
           <HeaderBar skip={() => navigateToEthnicityScreen(loggInUserId)} />
-          <View>
-            <View>
-              <Text style={HeightStyle.subHeader}>What's your height?</Text>
+          <View style={HeightStyle.flex1}>
+            <Text style={HeightStyle.subHeader}>What's your height?</Text>
+            <View style={HeightStyle.pickerContainer}>
               <Picker
                 textSize={34}
                 isShowSelectBackground={false}

@@ -29,6 +29,12 @@ export default function CardCompoent({ item, height, cardRef }) {
   } = useViewModal(item, cardRef);
   return (
     <View style={cardStyles.deckContainer}>
+      <Pressable style={cardStyles.shareIconContainer} onPress={handleShare}>
+        <Image
+          style={cardStyles.shareIcon}
+          source={require('../../../../../../../assets/images/icons/Share.png')}
+        />
+      </Pressable>
       <Card style={heightStyle}>
         <View style={heightStyle}>
           <ScrollView bounces={false} style={heightStyle}>
