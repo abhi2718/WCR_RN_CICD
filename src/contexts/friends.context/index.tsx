@@ -12,7 +12,8 @@ export const FriendContext = createContext<FriendContextType>({
   friends: [],
   fetchPrivateFriends: async () => { },
   loading: false,
-  numberOfGroups:0
+  numberOfGroups: 0,
+  numberOfFriends:0
 });
 
 export const FriendContextProvider = (props:FriendContextProviderProps) => {
@@ -20,6 +21,7 @@ export const FriendContextProvider = (props:FriendContextProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [friends, setFriends] = useState <Conversation[]>([]);
   const [numberOfGroups, setNumberOfGroups] = useState(0);
+  const [numberOfFriends, setNumberOfFriends] = useState(0);
   const fetchPrivateFriends = async () => {
     try {
       setLoading(true);
@@ -28,6 +30,7 @@ export const FriendContextProvider = (props:FriendContextProviderProps) => {
       const _myFriends = data[0].data.map((friend:Conversation) => friend.conversationWith);
       setNumberOfGroups(data[1].data.length)
       setFriends(_myFriends);
+      setNumberOfFriends(_myFriends.length);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -38,7 +41,10 @@ export const FriendContextProvider = (props:FriendContextProviderProps) => {
     fetchPrivateFriends,
     loading,
     setLoading,
-    numberOfGroups
+    numberOfGroups,
+    numberOfFriends,
+    setNumberOfGroups,
+    setNumberOfFriends,
   };
 
   return (

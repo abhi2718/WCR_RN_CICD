@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
+import { ROUTES } from '../../../../../navigation';
 import { UserProfileRepository } from '../../../../../repository/userProfile.repo';
 import { handleInputChangeType } from '../../../../../types/screen.type/profile.type';
 import {
@@ -355,12 +356,11 @@ export const useViewModal = () => {
        await userProfileRepository.createPreference(payload);
         isPrefrenceCreated.current = true;
       }
-      ShowFlashMessage(
-        'Your prefrences has been updated succesfully !',
-        '',
-        'success',
-      );
+      navigation.navigate(ROUTES.DeckTab, {
+        loadProfile: true
+      })
       setSubmitLoading(false);
+      
     } catch (error) {
       setSubmitLoading(false);
     }

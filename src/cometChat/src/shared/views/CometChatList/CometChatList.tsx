@@ -35,6 +35,9 @@ import { ListItemStyleInterface } from '../CometChatListItem/ListItemStyle';
 import { AvatarStyleInterface } from '../CometChatAvatar/AvatarStyle';
 import { CometChatContextType } from '../../base/Types';
 import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { FriendContext } from '../../../../../contexts/friends.context';
+import { NoFriends } from '../../../../../screens/tab.screens/chat/private/compnents/nofriends';
+import { NoCommunityJoined } from '../../../../../screens/tab.screens/chat/community/components/noCommunityJoined';
 
 export interface CometChatListActionsInterface {
   updateList: (prop: any) => void;
@@ -605,6 +608,8 @@ export const CometChatList = React.forwardRef<
     } else {
       let currentLetter = '';
       const listWithHeaders = [];
+      let communityChatLength = 0;
+      let privateChatLength = 0;
       if (list.length) {
         list.forEach((listItem: any, index: number) => {
           const chr = listItem?.name && listItem.name[0].toUpperCase();
@@ -614,6 +619,12 @@ export const CometChatList = React.forwardRef<
               value: currentLetter,
               header: true,
             });
+          }
+          if (listItem.conversationType === 'user') {
+            privateChatLength = privateChatLength + 1;
+          }
+          if (listItem.conversationType === 'group') {
+            communityChatLength = communityChatLength + 1;
           }
           if (isUserWindow) {
             if (listItem.conversationType === 'user') {
@@ -625,6 +636,12 @@ export const CometChatList = React.forwardRef<
             }
           }
         });
+        if (isUserWindow && !privateChatLength) {
+          return <NoFriends />
+        }
+        if (!isUserWindow && !communityChatLength) {
+          return <NoCommunityJoined />
+        }
 
         messageContainer = (
           <View style={styles.listContainerStyle}>
@@ -641,6 +658,9 @@ export const CometChatList = React.forwardRef<
                             separators={separators}
                             item={item.value}
                           />
+                          {
+                            listWithHeaders.length - 1 === index && <View style={{height:200}}></View>
+                          }
                         </View>
                       );
                     }

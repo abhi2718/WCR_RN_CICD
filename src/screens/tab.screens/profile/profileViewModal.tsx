@@ -1,9 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
+
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../../navigation";
 import { useLogOutViewModal } from "../../../utils/logOut";
-
 
 export const useViewModal = () => {
     const {logOut} = useLogOutViewModal()
@@ -21,6 +21,7 @@ export const useViewModal = () => {
         goToPreferences,
         logOut,
         goToEditProfile,
-        showLogOutModal, setLogOutModal
+        showLogOutModal,
+        setLogOutModal
     }
 }
