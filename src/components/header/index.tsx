@@ -153,13 +153,9 @@ export const headerDeckStyle = StyleSheet.create({
 
 export const ErrorScreenHeader = () => {
   const [showModal, setShowModal] = useState(false);
- 
-
   const modalShow = () => {
-    console.log('show modal')
     setShowModal(true);
   };
-
   return (
     <>
       <Row

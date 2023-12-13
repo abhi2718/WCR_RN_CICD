@@ -14,13 +14,13 @@ import {
   ScreenParams,
 } from '../../../types/services.types/firebase.service';
 import { addUser } from '../../../store/reducers/user.reducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export const useViewModal = (props: ScreenParams) => {
+  const { navigation } = props;
   const signInRepository = new AuthRepository();
   const otpInRepository = new OtpRepository();
   const firebaseService = new FirebaseService();
-  const { navigation } = props;
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);

@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Pressable,
-  ScrollView,
   Image,
   Modal,
   SafeAreaView,

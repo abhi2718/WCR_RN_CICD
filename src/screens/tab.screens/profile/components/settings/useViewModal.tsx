@@ -1,11 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
+import { useLogOutViewModal } from '../../../../../utils/logOut';
 
 export const useViewModal = () => {
+  const { logOut } = useLogOutViewModal();
   const { user } = useSelector(({ userState }) => userState);
   const navigation = useNavigation();
+  const [showLogOutModal, setLogOutModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [link, setLink] = useState('');
   const handleToggleModal = () => setShowModal(oldValue => !oldValue);
@@ -77,13 +80,18 @@ export const useViewModal = () => {
       onPress: _contactUs,
     },
   ];
-
+  const _logOut = () => {
+   logOut();
+};
   return {
     user,
     goBack,
     lists,
     handleToggleModal,
     showModal,
-    link
+    link,
+    showLogOutModal,
+    setLogOutModal,
+    _logOut
   };
 };
