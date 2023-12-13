@@ -27,14 +27,16 @@ const MaritalStatus = (props: ScreenParams) => {
     updateUserDetails,
     loading,
     navigateToKidsScreen,
-    loggInUserId
+    loggInUserId,
   } = useMaritalStatusViewModal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar skip={()=>navigateToKidsScreen(loggInUserId)}></HeaderBar>
+          <HeaderBar
+            skip={() => navigateToKidsScreen(loggInUserId)}
+          ></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>
@@ -115,9 +117,11 @@ const MaritalStatus = (props: ScreenParams) => {
           </ScrollView>
         </View>
         <View>
-          <PrimaryButton title="Next"
-          isLoading={loading}
-          onPress={() => updateUserDetails()} />
+          <PrimaryButton
+            title="Next"
+            isLoading={loading}
+            onPress={() => updateUserDetails()}
+          />
         </View>
       </View>
     </ScreenContainer>

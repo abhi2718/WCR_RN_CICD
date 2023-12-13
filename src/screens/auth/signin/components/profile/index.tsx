@@ -84,7 +84,7 @@ const Profile = (props: ScreenParams) => {
                 <ErrorText> {validationErrors.firstName}</ErrorText>
               )}
               <FlatInput
-                label="Last Name"
+                label="Last Name (not visible on profile)"
                 value={formData.lastName}
                 onChangeText={(text: string) =>
                   handleInputChange('lastName', toUpperFirstName(text))
@@ -95,14 +95,14 @@ const Profile = (props: ScreenParams) => {
                 <ErrorText> {validationErrors.lastName}</ErrorText>
               )}
               <FlatInput
-                label="Display Name"
+                label="Display Name (if different from first name)"
                 value={formData.displayName}
                 onChangeText={(text: string) =>
                   handleInputChange('displayName', text)
                 }
               />
               <FlatInput
-                label="Mobile No"
+                label="Mobile Number"
                 value={formData.mobile}
                 onChangeText={(text: string) =>
                   handleInputChange('mobile', formatMobile(text))
@@ -118,7 +118,7 @@ const Profile = (props: ScreenParams) => {
                 onChangeText={(text: string) =>
                   handleInputChange('email', text)
                 }
-                label="Email"
+                label="Email Address"
                 theme={{ colors: { primary: 'red' } }}
               />
             </KeyboardAvoidingView>

@@ -41,7 +41,7 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-       {/* <Stack.Screen
+      {/* <Stack.Screen
         options={options}
         name={ROUTES.AddEthnicity}
         component={AddEthnicityScreen}
@@ -183,7 +183,7 @@ export const StackNavigator = () => {
         name={ROUTES.Preferences}
         component={PreferencesScreen}
       />
-         <Stack.Screen
+      <Stack.Screen
         //options={optins}
         name={ROUTES.EditProfile}
         component={EditProfile}
