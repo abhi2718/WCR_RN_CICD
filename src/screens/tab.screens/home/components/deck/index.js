@@ -33,6 +33,7 @@ export default function Deck({ route }) {
     user,
     clearProfile,
   } = useViewModal(route);
+  const isNewUser = false;
   if (isLoading) {
     return <FullLoader />;
   }
@@ -52,33 +53,42 @@ export default function Deck({ route }) {
         />
       </View>
       <Spacer position="bottom" size={8} />
-      {!user?.isVisible ? (
-        <PausedProfile />
-      ) : user?.dailyClickActions < 6 && profiles?.length > 0 ? (
+      {isNewUser ? (
         <>
-          <CardStack
-            onSwipedLeft={handleDisLike}
-            onSwipedRight={handleLike}
-            horizontalThreshold={isAndroid ? 10 : 10}
-            verticalSwipe={false}
-            ref={cardRef}
-            onSwipedAll={clearProfile}
-          >
-            {profiles.map((item, index) => (
-              <CardCompoent
-                height={
-                  isAndroid ? androidActualHeight - 64 : iOSActualHeight - 70
-                }
-                key={index}
-                item={item}
-                cardRef={cardRef}
-              />
-            ))}
-          </CardStack>
         </>
       ) : (
         <>
-          <RunOutOffProfile />
+          {!user?.isVisible ? (
+            <PausedProfile />
+          ) : user?.dailyClickActions < 6 && profiles?.length > 0 ? (
+            <>
+              <CardStack
+                onSwipedLeft={handleDisLike}
+                onSwipedRight={handleLike}
+                horizontalThreshold={isAndroid ? 10 : 10}
+                verticalSwipe={false}
+                ref={cardRef}
+                onSwipedAll={clearProfile}
+              >
+                {profiles.map((item, index) => (
+                  <CardCompoent
+                    height={
+                      isAndroid
+                        ? androidActualHeight - 64
+                        : iOSActualHeight - 70
+                    }
+                    key={index}
+                    item={item}
+                    cardRef={cardRef}
+                  />
+                ))}
+              </CardStack>
+            </>
+          ) : (
+            <>
+              <RunOutOffProfile />
+            </>
+          )}
         </>
       )}
       <SearchModal

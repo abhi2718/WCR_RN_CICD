@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { dimensions, Row, Spacer } from '../../../../../components/tools';
+import { dimensions, Row, ScreenWrapper, Spacer } from '../../../../../components/tools';
 import { useViewModal } from './previewViewModal';
 import { styles } from './styles';
 
@@ -9,7 +9,8 @@ export const PreviewScreen = () => {
   const { user, goBack } = useViewModal();
   const heightStyle = { height: 600, width: 300 };
   return (
-    <View style={styles.container}>
+    <ScreenWrapper>
+        <View style={styles.container}>
       <Row>
         <Pressable onPress={goBack}>
           <Text>X</Text>
@@ -74,5 +75,7 @@ export const PreviewScreen = () => {
         </View>
       </View>
     </View>
+    </ScreenWrapper>
+  
   );
 };

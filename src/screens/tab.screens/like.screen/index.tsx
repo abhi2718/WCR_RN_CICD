@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderDeck } from '../../../components/header';
-import { FullLoader, Row, Spacer } from '../../../components/tools';
+import { FullLoader, Row, ScreenWrapper, Spacer } from '../../../components/tools';
 import { ProfileView } from './components/profile';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
@@ -32,7 +32,8 @@ export const LikeScreen = () => {
     return <FullLoader />;
   }
   return (
-    <View>
+    <ScreenWrapper>
+       <View>
       <HeaderDeck count={count} goToNotification={goToNotification} />
       {isNoEvent > 0 ? (
         <>
@@ -215,5 +216,7 @@ export const LikeScreen = () => {
         </>
       )}
     </View>
+    </ScreenWrapper>
+   
   );
 };
