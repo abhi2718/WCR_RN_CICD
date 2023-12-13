@@ -42,8 +42,6 @@ export const HeaderBar = (props: HeaderBarProps) => {
       ) : (
         <View style={headerStyle.emptyView} />
       )}
-
-      {/* Profile pic info Modal */}
     </Row>
   );
 };
@@ -101,12 +99,14 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
               source={require('../../assets/images/notification.png')}
             />
           </Pressable>
-          <Pressable onPress={toggleSearchModal}>
-            <Image
-              style={headerDeckStyle.searchIcon}
-              source={require('../../assets/images/Magnifier.png')}
-            />
-          </Pressable>
+          {toggleSearchModal && (
+            <Pressable onPress={toggleSearchModal}>
+              <Image
+                style={headerDeckStyle.searchIcon}
+                source={require('../../assets/images/Magnifier.png')}
+              />
+            </Pressable>
+          )}
         </Row>
         <Logo width={45} height={45} />
         <Pressable onPress={goToPrefrence} style={headerDeckStyle.row}>
