@@ -211,7 +211,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       const verificationData = await updateImagesInDatabase(imageUrls);
       navigateToVerificationState()
     } catch (err) {
-      console.log('---->error', err);
     }
   };
 

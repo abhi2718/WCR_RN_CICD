@@ -42,11 +42,18 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-       {/* <Stack.Screen
+      <Stack.Screen
         options={options}
-        name={ROUTES.AddEthnicity}
-        component={AddEthnicityScreen}
-      /> */}
+        name={ROUTES.SPLASH}
+        component={SplashScreen}
+      />
+
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Onboarding}
+        component={Onboarding}
+      />
+
       <Stack.Screen
         options={options}
         name={ROUTES.SignIn}
@@ -63,19 +70,14 @@ export const StackNavigator = () => {
 
       <Stack.Screen
         options={options}
-        name={ROUTES.Onboarding}
-        component={Onboarding}
+        name={ROUTES.VerificationPending}
+        component={VerificationPending}
       />
 
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
         component={LocationScreen}
-      />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.VerificationPending}
-        component={VerificationPending}
       />
 
       <Stack.Screen
@@ -88,12 +90,6 @@ export const StackNavigator = () => {
         options={options}
         name={ROUTES.VerificationStepTwo}
         component={VerificationStepTwo}
-      />
-
-      <Stack.Screen
-        options={options}
-        name={ROUTES.SPLASH}
-        component={SplashScreen}
       />
 
       <Stack.Screen
@@ -206,7 +202,7 @@ export const StackNavigator = () => {
         name={ROUTES.Preferences}
         component={PreferencesScreen}
       />
-         <Stack.Screen
+      <Stack.Screen
         //options={optins}
         name={ROUTES.EditProfile}
         component={EditProfile}
