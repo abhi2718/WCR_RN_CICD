@@ -4,6 +4,6 @@ import { dimensions } from "../../../../components/tools";
 export const styles = StyleSheet.create({
     containerStyle: {
         flex: 1,
-        backgroundColor:"red"
+        backgroundColor:"#fff"
     }
 });

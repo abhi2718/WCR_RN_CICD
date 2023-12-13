@@ -4,10 +4,10 @@ import Deck from './components/deck';
 import { styles } from './styles';
 import { ScreenContainer } from '../../../components/tools';
 
-export default function HomeTab() {
+export default function HomeTab({ route }) {
   return (
     <SafeAreaView style={styles.containerStyle}>
-      <Deck />
+      <Deck route={route} />
     </SafeAreaView>
   );
 }

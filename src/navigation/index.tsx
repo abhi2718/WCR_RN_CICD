@@ -12,6 +12,7 @@ export enum ROUTES {
   SexualOrientation = '/sexualOrientation',
   SignUp = 'SignUp',
   EmailAuth = '/email-auth',
+  
   Tab = '/tabs',
   Onboarding = '/onboarding',
   CommunityChat = '/community-chat',
@@ -47,7 +48,6 @@ export enum ROUTES {
   Preferences = '/preferences',
   EditProfile = '/editProfile',
   VerificationPending = '/verificationPending',
-  VerificationDeclined = '/verificationDeclined',
   TurnOnNotification = '/turnOnNotification',
 }
 export default function Navigator() {

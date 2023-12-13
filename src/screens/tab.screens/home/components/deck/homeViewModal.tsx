@@ -9,7 +9,8 @@ import { ROUTES } from '../../../../../navigation';
 import { LikeContext } from '../../../../../contexts/likes.context';
 import {useViewModal as notificationuseViewModal } from "../../../notification.screen/useViewModal";
 import { NotificationCountContext } from '../../../../../contexts/notificationCount.context';
-export const useViewModal = () => {
+import { RouteType } from '../../../../../types/navigation.type';
+export const useViewModal = (route: RouteType) => {
   const [profiles, setProfiles] = useState([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -33,6 +34,7 @@ export const useViewModal = () => {
     setLoading(true);
     try {
       const data = await homeDeckRepository.getProfiles();
+      console.log(data);
       setProfiles(data);
       setLoading(false);
     } catch (error) {
@@ -41,8 +43,8 @@ export const useViewModal = () => {
   };
   useEffect(() => {
     fetchProfiles();
-  }, []);
-  const handleSetProfiles = (item) => setProfiles([item, ...profiles]);
+  }, [route?.params]);
+  const handleSetProfiles = (item:any) => setProfiles([item, ...profiles]);
   const clearProfile = () => setProfiles([]);
   const goToNotification = () => navigate(ROUTES.Notification);
   const createPayLoafForUserAction = (index: number, action: string) => {

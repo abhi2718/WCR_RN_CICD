@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
@@ -6,10 +6,10 @@ import { UpdateUserDetailsRepository } from '../../../../../repository/pregister
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useKidsViewmodal = (props:ScreenParams) => {
-    const loggInUserId = props.route?.params?.data || 'No data received';
     const updateUserDetailsRepository = new UpdateUserDetailsRepository();
     const {navigation} = props;
     const { user } = useSelector((state: any) => state.userState);
+    const token = useRef(user?.token ? user?.token : null).current;
     const dispatch = useDispatch();
     const kids =user?.kids;
     const familyPlan =user?.familyPlan;
@@ -49,8 +49,8 @@ export const useKidsViewmodal = (props:ScreenParams) => {
     );
   };
 
-  const navigateTohabitsScreen = (id: string) => {
-    navigation.navigate(ROUTES.Habits, { data: id });
+  const navigateTohabitsScreen = () => {
+    navigation.navigate(ROUTES.Habits);
   };
 
   const updateUserDetails = async () => {
@@ -62,24 +62,31 @@ export const useKidsViewmodal = (props:ScreenParams) => {
         diet: selectedDietarypreference
       };
 
-      if(!selectedKids && !selectedFamilyPlans && !selectedCovidVaccineStatus && !selectedDietarypreference){
-        navigateTohabitsScreen(loggInUserId);
+      if(user?.kids === selectedKids && user?.familyPlan === selectedFamilyPlans && user?.covidVaccineStatus === selectedCovidVaccineStatus && user?.diet === selectedDietarypreference){
+        navigateTohabitsScreen();
         return 
       }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: selectedData,
         },
       );
-      const data = {
-        user: user,
-      };
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
        dispatch(addUser(data));
       setLoading(false);
 
-      navigateTohabitsScreen(loggInUserId);
+      navigateTohabitsScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -87,7 +94,7 @@ export const useKidsViewmodal = (props:ScreenParams) => {
 
 
   return({
-    handleKidsSelect,handleFamilyPlansSelect,handleCovidVaccineStatusSelect,handleDietarypreferenceSelect,selectedKids,selectedCovidVaccineStatus,selectedDietarypreference,selectedFamilyPlans,loading,updateUserDetails,navigateTohabitsScreen,loggInUserId
+    handleKidsSelect,handleFamilyPlansSelect,handleCovidVaccineStatusSelect,handleDietarypreferenceSelect,selectedKids,selectedCovidVaccineStatus,selectedDietarypreference,selectedFamilyPlans,loading,updateUserDetails,navigateTohabitsScreen
   })
 
 }

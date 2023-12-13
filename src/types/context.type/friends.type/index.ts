@@ -8,5 +8,6 @@ export type FriendContextType = {
   friends: Conversation[];
   fetchPrivateFriends: () => Promise<void>;
   loading: boolean;
+  numberOfFriends: number;
   numberOfGroups:number
 };

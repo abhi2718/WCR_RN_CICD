@@ -1,6 +1,6 @@
 import { ROUTES } from './../../../../../navigation/index';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ScreenParams,
@@ -11,24 +11,22 @@ import { UpdateUserDetailsRepository } from '../../../../../repository/pregister
 import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useProfessionModal = (props: ScreenParams) => {
-  const loggInUserId = props.route?.params?.data || 'No data received';
   const [isFocus, setIsFocus] = useState(false);
   const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useSelector(({ userState }) => userState);
-  const {navigation} = props;
+  const token = useRef(user?.token ? user?.token : null).current;
+  const { navigation } = props;
   const dispatch = useDispatch();
+  const userDegree = user?.designation?.userDegree;
+  const primaryDegree = user?.designation?.primaryDegree;
+  const title = user?.designation?.title;
+  const institution = user?.institution;
   const [professionForm, setProfessionForm] = useState<professionTypes>({
-    userDegree: user?.designation?.userDegree
-      ? user?.designation?.userDegree
-      : '',
-    primaryDegree: user?.designation?.primaryDegree
-      ? user?.designation?.primaryDegree
-      : '',
-      institution: user?.institution
-      ? user?.institution
-      : '',
-    title: user?.designation?.title ? user?.designation?.title : '',
+    userDegree: userDegree ? user?.designation?.userDegree : '',
+    primaryDegree: primaryDegree ? primaryDegree : '',
+    institution: institution ? institution : '',
+    title: title ? title : '',
   });
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [validationErrors, setValidationErrors] = useState<
@@ -45,9 +43,9 @@ export const useProfessionModal = (props: ScreenParams) => {
     setProfessionForm({ ...professionForm, [name]: value });
   };
 
-   const navigateToPictureUploadingScreenScreen = (id: string) => {
-       navigation.navigate(ROUTES.ProfilePic, { data: id });
-     };
+  const navigateToPictureUploadingScreenScreen = () => {
+    navigation.navigate(ROUTES.ProfilePic);
+  };
 
   const handleSubmit = async () => {
     const errors: Partial<professionTypes> = {};
@@ -67,10 +65,10 @@ export const useProfessionModal = (props: ScreenParams) => {
     } else {
       setValidationErrors({});
     }
-    updateUserDetails(loggInUserId);
+    updateUserDetails();
   };
 
-  const updateUserDetails = async (id: string) => {
+  const updateUserDetails = async () => {
     try {
       const professionData = {
         designation: {
@@ -80,16 +78,37 @@ export const useProfessionModal = (props: ScreenParams) => {
         },
         institution: professionForm.institution,
       };
+
+      if (
+        user.designation &&
+        userDegree === professionForm.userDegree &&
+        primaryDegree === professionForm.primaryDegree &&
+        title === professionForm.title &&
+        institution === professionForm.institution
+      ) {
+        navigateToPictureUploadingScreenScreen();
+        return;
+      }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(id, {
-        update: professionData,
-      });
-      const data = {
-        user: user,
-      };
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update: professionData,
+        },
+      );
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
-      navigateToPictureUploadingScreenScreen(loggInUserId)
+      navigateToPictureUploadingScreenScreen();
     } catch (error) {}
   };
 

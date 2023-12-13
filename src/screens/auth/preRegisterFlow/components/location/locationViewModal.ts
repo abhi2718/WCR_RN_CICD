@@ -15,22 +15,26 @@ import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useLocationViewModal = (props: ScreenParams) => {
   const { navigation } = props;
-  const loggInUserId = props.route?.params?.data || 'No data received';
 
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
   const { user } = useSelector((state: any) => state.userState);
+  const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   const [stateOption, setStatesOption] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
 
+  const Country = user.address.country;
+  const City = user.address.city;
+  const Zipcode = user.address.zipcode;
+  const State = user.address.state;
   const [locationForm, setLocationForm] = useState<addressTypes>({
-    country: user.address.country ? user.address.country : 'USA',
-    state: user.address.state ? user.address.state : '',
-    city: user.address.city ? user.address.city : '',
-    zipcode: user.address.zipcode ? user.address.zipcode : '',
+    country: Country ? Country : 'USA',
+    state: State ? State : '',
+    city: City ? City : '',
+    zipcode: Zipcode ? Zipcode : '',
   });
 
   const [validationErrors, setValidationErrors] = useState<
@@ -83,7 +87,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
     } else {
       setValidationErrors({});
     }
-    await updateUserDetails(loggInUserId);
+    await updateUserDetails();
   };
 
   const handleZipPlaceHolder = (country: string) => {
@@ -119,11 +123,11 @@ export const useLocationViewModal = (props: ScreenParams) => {
     return updatedStates;
   };
 
-  const navigateToProfessionScreen = (id: string) => {
-    navigation.navigate(ROUTES.VerificationStepOne, { data: id });
+  const navigateToProfessionScreen = () => {
+    navigation.navigate(ROUTES.Profession);
   };
 
-  const updateUserDetails = async (id: string) => {
+  const updateUserDetails = async () => {
     try {
       const addressData = {
         address: {
@@ -134,6 +138,11 @@ export const useLocationViewModal = (props: ScreenParams) => {
           location: {},
         },
       };
+
+      if(user.address && Country === locationForm.country && State === locationForm.state && City === locationForm.city && Zipcode === locationForm.zipcode) {
+        navigateToProfessionScreen();
+        return
+      }
       setLoading(true);
       const validateZipcodeData = await validateZipcode();
 
@@ -151,16 +160,26 @@ export const useLocationViewModal = (props: ScreenParams) => {
         );
       }
 
-      const user = await updateUserDetailsRepository.updateUserDetails(id, {
-        update: addressData,
-      });
-      const data = {
-        user: user,
-      };
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update: addressData,
+        },
+      );
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
 
-      navigateToProfessionScreen(loggInUserId);
+      navigateToProfessionScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -176,7 +195,6 @@ export const useLocationViewModal = (props: ScreenParams) => {
     zipPlaceHolder,
     setPlaceholder,
     isFocus,
-    loggInUserId,
     setIsFocus,
     validationErrors,
     getStatesOptions,

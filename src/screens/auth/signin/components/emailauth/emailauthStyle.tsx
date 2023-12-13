@@ -17,4 +17,10 @@ export const styles = StyleSheet.create({
     marginTop: sizes[4],
     marginBottom: sizes[4],
   },
+  otpText: {
+    color: colors.ui.text,
+    textAlign: 'center',
+    fontWeight: '600',
+    lineHeight: sizes[4],
+  },
 });

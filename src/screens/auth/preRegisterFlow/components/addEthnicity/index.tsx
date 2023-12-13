@@ -16,7 +16,6 @@ const AddEthnicityScreen = (props: ScreenParams) => {
     handleSeletedList,
     updateUserDetails,
     ethnicityflag,
-    loggInUserId,
     navigateToRelationshipScreen,
   } = useEthnicityViewModal(props);
   return (
@@ -24,7 +23,7 @@ const AddEthnicityScreen = (props: ScreenParams) => {
       <View style={addEthnicityStyle.container}>
         <View style={{ flex: 1 }}>
           <HeaderBar
-            skip={() => navigateToRelationshipScreen(loggInUserId)}
+            skip={() => navigateToRelationshipScreen()}
           ></HeaderBar>
           <Text style={addEthnicityStyle.subHeader}>
             Tell us your ethnicity

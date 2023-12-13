@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Row, Logo } from '../tools';
 import { useNavigation } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
 import { ROUTES } from '../../navigation';
+import { DltLogOutModal } from '../dltLogOutModal';
 
 interface HeaderBarProps {
   skip?: () => void;
@@ -22,7 +23,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
         <View style={headerStyle.arrowContainer}>
           <Image
             style={headerStyle.arrow}
-            source={require('../../assets/images/icons/arrow.png')}
+            source={require('../../assets/images/icons/back-arrow.png')}
           />
         </View>
       </Pressable>
@@ -41,8 +42,6 @@ export const HeaderBar = (props: HeaderBarProps) => {
       ) : (
         <View style={headerStyle.emptyView} />
       )}
-
-      {/* Profile pic info Modal */}
     </Row>
   );
 };
@@ -100,12 +99,14 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
               source={require('../../assets/images/notification.png')}
             />
           </Pressable>
-          <Pressable onPress={toggleSearchModal}>
-            <Image
-              style={headerDeckStyle.searchIcon}
-              source={require('../../assets/images/Magnifier.png')}
-            />
-          </Pressable>
+          {toggleSearchModal && (
+            <Pressable onPress={toggleSearchModal}>
+              <Image
+                style={headerDeckStyle.searchIcon}
+                source={require('../../assets/images/Magnifier.png')}
+              />
+            </Pressable>
+          )}
         </Row>
         <Logo width={45} height={45} />
         <Pressable onPress={goToPrefrence} style={headerDeckStyle.row}>
@@ -151,24 +152,35 @@ export const headerDeckStyle = StyleSheet.create({
 });
 
 export const ErrorScreenHeader = () => {
+  const [showModal, setShowModal] = useState(false);
+ 
+
+  const modalShow = () => {
+    console.log('show modal')
+    setShowModal(true);
+  };
+
   return (
-    <Row
-      style={errorScreenHeaderStyle.headerRow}
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Image
-        style={errorScreenHeaderStyle.backArrow}
-        resizeMode="contain"
-        source={require('../../assets/images/icons/arrow.png')}
-      />
-      <Logo width={40} height={40} />
-      <Image
-        style={errorScreenHeaderStyle.threeDots}
-        resizeMode="contain"
-        source={require('../../assets/images/icons/threeDots.png')}
-      />
-    </Row>
+    <>
+      <Row
+        style={errorScreenHeaderStyle.headerRow}
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Logo width={40} height={40} />
+        <Pressable onPress={modalShow} >
+          <Image
+            style={errorScreenHeaderStyle.threeDots}
+            resizeMode="contain"
+            source={require('../../assets/images/icons/threeDots.png')}
+          />
+        </Pressable>
+      </Row>
+      <DltLogOutModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+      ></DltLogOutModal>
+    </>
   );
 };
 

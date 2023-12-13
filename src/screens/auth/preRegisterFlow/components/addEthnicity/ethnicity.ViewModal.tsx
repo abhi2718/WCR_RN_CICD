@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ethnicity, preferNotToSay } from '../../../../../utils/constanst';
 import { CheckBoxDataType } from '../../../../../types/components/checkbox.type';
@@ -15,7 +15,7 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
-  const loggInUserId = user._id;
+  const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
 
   const [selectedEthnicity, setSelectedEthnicity] = useState<string[]>([]);
@@ -56,8 +56,8 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
     setEthnicityList(data);
   };
 
-  const navigateToRelationshipScreen = (id: string) => {
-    navigation.navigate(ROUTES.LookingFor, { data: id });
+  const navigateToRelationshipScreen = () => {
+    navigation.navigate(ROUTES.LookingFor);
   };
 
   const updateUserDetails = async () => {
@@ -67,23 +67,30 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
       };
 
       if (selectedEthnicity.length === 0) {
-        navigateToRelationshipScreen(loggInUserId);
+        navigateToRelationshipScreen();
         return;
       }
       setLoading(true);
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: selectedEthnicityData,
         },
       );
-      const data = {
-        user: user,
-      };
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
 
-      navigateToRelationshipScreen(loggInUserId);
+      navigateToRelationshipScreen();
     } catch (err: any) {
       setLoading(false);
     }
@@ -96,7 +103,6 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
     handleListChange,
     updateUserDetails,
     ethnicityflag,
-    loggInUserId,
     navigateToRelationshipScreen,
   };
 };

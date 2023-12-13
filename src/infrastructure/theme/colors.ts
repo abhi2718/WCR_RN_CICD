@@ -4,6 +4,7 @@ export const colors = {
     secondary: '#656565',
     tertiary: '#DEDDDF',
     text: '#49454F',
+    textHead: '#253245',
     disabled: '#DEDEDE',
     error: '#D0421B',
     success: '#138000',
