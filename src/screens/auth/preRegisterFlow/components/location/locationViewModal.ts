@@ -139,7 +139,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
         },
       };
 
-      if(user.address && Country === locationForm.country && State === locationForm.state && City === locationForm.city && Zipcode === locationForm.zipcode) {
+      if(Country === locationForm.country && State === locationForm.state && City === locationForm.city && Zipcode === locationForm.zipcode) {
         navigateToProfessionScreen();
         return
       }

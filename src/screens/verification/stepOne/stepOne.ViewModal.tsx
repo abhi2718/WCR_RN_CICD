@@ -8,7 +8,7 @@ import {
   ShowFlashMessage,
 } from '../../../components/flashBar';
 import { ROUTES } from '../../../navigation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const useVerificationViewModal = (props: ScreenParams) => {
   const { navigation } = props;
@@ -17,7 +17,6 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   const [verificationOption, setVerificationOption] = useState('');
   const country = user.address.country;
   const id = user.verificationId.idNumber;
-  const dispatch = useDispatch();
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
     state: '',

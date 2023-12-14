@@ -33,7 +33,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     }
   };
 
-  const navigateToKidsScreen = () => {
+  const navigateToVerificationScreen = () => {
     navigation.navigate(ROUTES.VerificationStepOne);
   };
 
@@ -44,7 +44,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       };
 
       if (user?.interests === selectedHobbies) {
-      //  navigateToKidsScreen();
+       // navigateToVerificationScreen();
         navigation.navigate(ROUTES.Tab)
         return;
       }
@@ -67,7 +67,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-     //  navigateToKidsScreen();
+     // navigateToVerificationScreen();
        navigation.navigate(ROUTES.Tab)
     } catch (err: any) {
       setLoading(false);
@@ -79,6 +79,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     handleHobbies,
     updateUserDetails,
     loading,
-    navigateToKidsScreen,
+    navigateToVerificationScreen,
   };
 };
