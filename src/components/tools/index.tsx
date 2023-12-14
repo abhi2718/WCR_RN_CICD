@@ -30,7 +30,15 @@ export const ScreenContainer: React.FC<ScreenContainerProps> = ({
     </SafeAreaView>
   );
 };
-
+export const ScreenWrapper: React.FC<ScreenContainerProps> = ({
+  children,
+}) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      {children}
+    </SafeAreaView>
+  );
+};
 const InputContainer = styled.TextInput<InputProps>`
   padding: 15px;
   width: 100%;

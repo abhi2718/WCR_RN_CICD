@@ -33,7 +33,6 @@ export const useViewModal = () => {
           isVisible:status
         },
       };
-      console.log({isVisible:status})
       dispatch(addUser(data));
     } catch (error) {
     }

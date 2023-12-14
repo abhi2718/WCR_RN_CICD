@@ -10,6 +10,17 @@ import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 export const cardStyles = StyleSheet.create({
   deckContainer: {
     backgroundColor: '#fff',
+    position: 'relative',
+  },
+  shareIconContainer: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    zIndex: 9999,
+  },
+  shareIcon: {
+    width: 48,
+    height: 48,
   },
   imageStyle: {
     width: dimensions.width - sizes[3],

@@ -10,7 +10,7 @@ export const notificationStyle = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: 16,
+    paddingHorizontal: 16,
   },
   container: {
     flex: 1,

@@ -33,7 +33,7 @@ const MaritalStatus = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar skip={()=>navigateToKidsScreen()}></HeaderBar>
+          <HeaderBar skip={() => navigateToKidsScreen()}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>
@@ -114,9 +114,11 @@ const MaritalStatus = (props: ScreenParams) => {
           </ScrollView>
         </View>
         <View>
-          <PrimaryButton title="Next"
-          isLoading={loading}
-          onPress={() => updateUserDetails()} />
+          <PrimaryButton
+            title="Next"
+            isLoading={loading}
+            onPress={() => updateUserDetails()}
+          />
         </View>
       </View>
     </ScreenContainer>

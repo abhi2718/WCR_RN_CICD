@@ -18,6 +18,7 @@ import { makeFalseDefaultValue } from '../../utils/common.functions';
 import { Row } from '../tools';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
+import { fontWeights } from '../../infrastructure/theme/fonts';
 
 export const CustomCheckbox = styled.View`
   width: 20px;
@@ -47,20 +48,20 @@ export const MultipleCheckBoxList: React.FC<CheckBoxProps> = ({
     onChangeListValue(temp);
     let selected = temp.filter((product) => product.isChecked);
     onChangeValue(products[id].text, selected);
-    if (selected.find((item)=>item.text===preferNotToSay)) {
-      setProducts(oldState => {
+    if (selected.find((item) => item.text === preferNotToSay)) {
+      setProducts((oldState) => {
         const temp = oldState.map((item) => {
           if (item.text === preferNotToSay) {
             return {
               ...item,
               isChecked: false,
-            }
+            };
           }
           return item;
         });
         return temp;
-        })
-     }
+      });
+    }
   };
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: sizes[3],
     color: colors.ui.text,
-    fontWeight: 'bold',
+    fontWeight: fontWeights.semiBold,
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });

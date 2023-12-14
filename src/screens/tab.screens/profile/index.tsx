@@ -1,22 +1,33 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
-import { Column, Row, Spacer } from '../../../components/tools';
+import { Column, Row, ScreenContainer, ScreenWrapper, Spacer } from '../../../components/tools';
 import { useViewModal } from './profileViewModal';
 import * as Progress from 'react-native-progress';
 import { styles } from './styles';
 import { AlertScreen } from '../../../components/alert';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const ProfileScreen = () => {
-  const { user, goToPreview, goToSetting,goToPreferences,goToEditProfile,showLogOutModal, setLogOutModal,logOut } = useViewModal();
+export const ProfileScreen = ({}) => {
+  const {
+    user,
+    goToPreview,
+    goToSetting,
+    goToPreferences,
+    goToEditProfile,
+    showLogOutModal,
+    setLogOutModal,
+    _logOut,
+  } = useViewModal();
   return (
-    <View style={styles.container}>
+    <ScreenWrapper>
+       <View style={styles.container}>
       <Spacer position="bottom" size={20}>
         <Column>
           <Row>
             <Image
               source={{
-                uri: user?.profilePicture?.url
+                uri: user?.profilePicture?.url,
               }}
               style={{
                 width: 80,
@@ -72,7 +83,7 @@ export const ProfileScreen = () => {
         </Row>
       </Pressable>
       <Spacer position={'top'} size={20} />
-      <Pressable onPress={()=>setLogOutModal(true)}>
+      <Pressable onPress={_logOut}>
         <Row alignItems="center">
           <Image
             style={styles.iconStyle}
@@ -86,8 +97,9 @@ export const ProfileScreen = () => {
         setShowModal={setLogOutModal}
         title="Logout?"
         description="Are you sure want to log out?"
-        onPress={logOut}
-      ></AlertScreen>
+        onPress={_logOut}
+      />
     </View>
+    </ScreenWrapper>
   );
 };

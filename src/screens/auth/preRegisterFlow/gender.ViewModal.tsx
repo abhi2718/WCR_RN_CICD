@@ -19,17 +19,14 @@ export const useGenderViewModal = (props: ScreenParams) => {
   const token = useRef(user?.token ? user?.token : null).current;
   const [gender, setGender] = useState(updatedGender);
   const [checkboxState, setCheckboxState] = useState(true);
-
   const handleGenderValue = (value: string) => {
     setGender(value);
   };
-
   const handleCheckboxChange = () => {
     setCheckboxState(!checkboxState);
   };
-
   const navigateToGenderPronounScreen = () => {
-    navigation.navigate(ROUTES.Profession);
+    navigation.navigate(ROUTES.GenderPronoun);
   };
 
   const updateUserDetails = async () => {
@@ -54,7 +51,6 @@ export const useGenderViewModal = (props: ScreenParams) => {
         );
       }
       setLoading(true);
-
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         {
@@ -73,7 +69,6 @@ export const useGenderViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-
       navigateToGenderPronounScreen();
     } catch (err: any) {
       setLoading(false);

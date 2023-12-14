@@ -7,7 +7,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { inputBoxStyle } from './inputBoxStyle';
 import { sizes } from '../../infrastructure/theme/sizes';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { fontSizes } from '../../infrastructure/theme/fonts'
+import { fontSizes } from '../../infrastructure/theme/fonts';
 const ChildContainer = styled(TextInput)<InputProps>``;
 export const FlatInput: React.FC<InputProps> = (props) => {
   return (
@@ -38,12 +38,12 @@ export const CheckBox: React.FC<InputProps> = (props) => {
   return (
     <BouncyCheckbox
       {...props}
-      iconStyle={{ borderColor: 'gray', borderRadius: 0 }}
+      iconStyle={{ borderColor: 'red', borderRadius: 6 }}
       fillColor="#BB0000"
       unfillColor="#fff"
       innerIconStyle={{
-        borderRadius: 2,
-        borderColor: '#49454F',
+        borderRadius: 6,
+        borderColor: '#BB0000',
       }}
       textStyle={{
         fontWeight: '600',

@@ -35,6 +35,7 @@ export default function Deck({ route }) {
     clearProfile,
     updateIsNewUser,
   } = useViewModal(route);
+
   if (isLoading) {
     return <FullLoader />;
   }

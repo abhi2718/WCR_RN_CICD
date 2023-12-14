@@ -135,13 +135,13 @@ export const headerDeckStyle = StyleSheet.create({
     top: -sizes[0],
     backgroundColor: colors.ui.primary,
     color: colors.ui.white,
-    width: sizes[4],
-    paddingTop: 1,
+    width: 22,
+    height: 22,
+    paddingTop: 3,
     textAlign: 'center',
-    height: sizes[4],
-    borderRadius: 13.5,
+    borderRadius: 11,
     overflow: 'hidden',
-    fontSize: sizes[2],
+    fontSize: 10,
     borderColor: colors.ui.white,
     borderWidth: 1,
     zIndex: sizes[2],
@@ -153,13 +153,9 @@ export const headerDeckStyle = StyleSheet.create({
 
 export const ErrorScreenHeader = () => {
   const [showModal, setShowModal] = useState(false);
- 
-
   const modalShow = () => {
-    console.log('show modal')
     setShowModal(true);
   };
-
   return (
     <>
       <Row
