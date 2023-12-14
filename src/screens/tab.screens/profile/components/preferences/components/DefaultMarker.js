@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Platform, TouchableHighlight } from 'react-native';
+import { colors } from '../../../../../../infrastructure/theme/colors';
 
 class DefaultMarker extends React.Component {
   render() {
@@ -30,14 +31,14 @@ const styles = StyleSheet.create({
   markerStyle: {
     ...Platform.select({
       ios: {
-        height: 30,
-        width: 30,
-        borderRadius: 30,
+        height: 26,
+        width: 26,
+        borderRadius: 26,
         borderWidth: 1,
-        borderColor: '#DDDDDD',
+        borderColor: colors.ui.primary,
         backgroundColor: '#FFFFFF',
         shadowColor: '#000000',
-        backgroundColor:"red",
+        backgroundColor: colors.ui.primary,
         shadowOffset: {
           width: 0,
           height: 3,
@@ -46,10 +47,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
       },
       android: {
-        height: 12,
-        width: 12,
-        borderRadius: 12,
-        backgroundColor: '#0D8675',
+        height: 26,
+        width: 26,
+        borderRadius: 26,
+        backgroundColor: colors.ui.primary,
       },
       web: {
         height: 30,

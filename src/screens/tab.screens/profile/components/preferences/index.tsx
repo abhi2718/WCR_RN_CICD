@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, SafeAreaView } from 'react-native';
 import {
   Column,
   FullLoader,
@@ -12,6 +12,7 @@ import ModalSelector from 'react-native-modal-selector';
 import { ScrollView } from 'react-native-gesture-handler';
 import MultiSlider from './components/MultiSlider';
 import { ActivityIndicator } from 'react-native-paper';
+import { HeaderBar, HeaderDeck } from '../../../../../components/header';
 
 export const PreferencesScreen = () => {
   const {
@@ -36,28 +37,45 @@ export const PreferencesScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.padding16}>
+        <HeaderBar
+          button={submitLoading ? () => {} : createPrefrences}
+          isText={true}
+          text="Preference"
+          isLogo={false}
+          isLoading={submitLoading}
+        />
+      </View>
       <View>
-        <Pressable onPress={submitLoading ? () => {} : createPrefrences}>
+        {/* <Pressable onPress={submitLoading ? () => {} : createPrefrences}>
           <Row>
             <Text>Save</Text>
             {submitLoading && <ActivityIndicator />}
           </Row>
-        </Pressable>
-        <ScrollView>
+        </Pressable> */}
+        <Text style={styles.headerText}>Healthcare Professional</Text>
+        <ScrollView
+          style={[styles.padding16, styles.scrollSection]}
+          showsVerticalScrollIndicator={false}
+        >
           {optionsList.map((item, index) => {
             if (index === 2) {
               return (
-                <Spacer key={index} position="bottom" size={20}>
-                  <Row justifyContent="space-between">
+                <View style={styles.multiSelector}>
+                  <Row alignItems="center" justifyContent="space-between">
                     <Text>Distance preference</Text>
                     {distanceRange[0] === 600 ? (
-                      <Text>No Max</Text>
+                      <Text style={styles.silderSubText}>No Max</Text>
                     ) : (
                       <View>
                         {distanceRange[0] === 'No Max' ? (
-                          <Text>{distanceRange[0]}</Text>
+                          <Text style={styles.silderSubText}>
+                            {distanceRange[0]}
+                          </Text>
                         ) : (
-                          <Text>{distanceRange[0]} Miles</Text>
+                          <Text style={styles.silderSubText}>
+                            {distanceRange[0]} Miles
+                          </Text>
                         )}
                       </View>
                     )}
@@ -71,15 +89,15 @@ export const PreferencesScreen = () => {
                       onValuesChange={handleDistanceSliderChange}
                     />
                   </Column>
-                </Spacer>
+                </View>
               );
             }
             if (index === 3) {
               return (
-                <Spacer key={index} position="bottom" size={20}>
+                <View style={styles.multiSelector}>
                   <Row justifyContent="space-between">
                     <Text>Age preference</Text>
-                    <Text>
+                    <Text style={styles.silderSubText}>
                       {ageRange[0]} - {ageRange[1]}
                     </Text>
                   </Row>
@@ -92,15 +110,15 @@ export const PreferencesScreen = () => {
                       onValuesChange={handleAgeSliderChange}
                     />
                   </Column>
-                </Spacer>
+                </View>
               );
             }
             if (index === 4) {
               return (
-                <Spacer key={index} position="bottom" size={20}>
+                <View style={styles.multiSelector}>
                   <Row justifyContent="space-between">
                     <Text>Height preference</Text>
-                    <Text>
+                    <Text style={styles.silderSubText}>
                       {heightRange[0]} - {heightRange[1]}
                     </Text>
                   </Row>
@@ -113,13 +131,19 @@ export const PreferencesScreen = () => {
                       onValuesChange={handleHeightSliderChange}
                     />
                   </Column>
-                </Spacer>
+                </View>
               );
             }
             return (
-              <Spacer key={index} position="bottom" size={20}>
-                <Row justifyContent="space-between" alignItems="center">
-                  <Text>{item.title}</Text>
+              <Row
+                style={styles.itemRow}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text style={[styles.textColor, styles.optionName]}>
+                  {item.title}
+                </Text>
+                <SafeAreaView>
                   <ModalSelector
                     data={item.option!}
                     initValue={answer[item.initValue]}
@@ -130,9 +154,10 @@ export const PreferencesScreen = () => {
                     cancelStyle={styles.cancelButton}
                     selectedItemTextStyle={styles.selectedItem}
                     initValueTextStyle={styles.initValueTextStyle}
+                    selectStyle={{ borderWidth: 0 }}
                   />
-                </Row>
-              </Spacer>
+                </SafeAreaView>
+              </Row>
             );
           })}
         </ScrollView>
