@@ -6,6 +6,7 @@ import {
   Modal,
   SafeAreaView,
   FlatList,
+  Image,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderDeck } from '../../../components/header';
@@ -32,7 +33,7 @@ export const LikeScreen = () => {
     return <FullLoader />;
   }
   return (
-    <View>
+    <View style={styles.container}>
       <HeaderDeck count={count} goToNotification={goToNotification} />
       {isNoEvent > 0 ? (
         <>
@@ -208,11 +209,17 @@ export const LikeScreen = () => {
           </Modal>
         </>
       ) : (
-        <>
-          <View>
-            <Text>Show Empty State Here</Text>
-          </View>
-        </>
+        <View style={styles.content}>
+          <Text style={styles.subHeading}>Matches</Text>
+          <Image
+            style={styles.noMatchIcon}
+            resizeMode="contain"
+            source={require('../../../../src/assets/images/icons/noMatchIcon.png')}
+          />
+          <Text style={styles.text}>
+            You’re new here! No matches/likes yet.
+          </Text>
+        </View>
       )}
     </View>
   );

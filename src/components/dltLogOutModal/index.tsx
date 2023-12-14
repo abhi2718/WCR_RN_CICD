@@ -13,6 +13,9 @@ import { AlertScreen } from '../alert';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
 
 import { useLogOutViewModal } from '../../utils/logOut';
+import { colors } from '../../infrastructure/theme/colors';
+import { sizes } from '../../infrastructure/theme/sizes';
+import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
 
 export const DltLogOutModal = (props: DltLogOutType) => {
   const { showModal, setShowModal } = props;
@@ -33,7 +36,7 @@ export const DltLogOutModal = (props: DltLogOutType) => {
 
   const showDeleteAccountModal = () => {
     setDeleteModal(true);
-    logOut()
+    logOut();
   };
 
   const closeModal = () => {
@@ -50,20 +53,24 @@ export const DltLogOutModal = (props: DltLogOutType) => {
                 <View style={styles.sideContainer}></View>
               </Pressable>
               <View style={styles.mainContainer}>
-                <View style={{ height: 200 - 32 }}>
-                  <View>
+                <View style={styles.modalheight}>
+                  <View style={styles.btnContainer}>
                     <Row justifyContent="center">
-                      <Pressable onPress={logOutModalShow}>
-                        <Text>'Log Out'</Text>
+                      <Pressable
+                        onPress={showDeleteAccountModal}
+                        style={styles.delBtn}
+                      >
+                        <Text style={styles.btnText}>Account Delete</Text>
                       </Pressable>
                     </Row>
-                    <Spacer position="top" size={16}>
-                      <Row justifyContent="center">
-                        <Pressable onPress={showDeleteAccountModal}>
-                          <Text>'Delete Account'</Text>
-                        </Pressable>
-                      </Row>
-                    </Spacer>
+                    <Row justifyContent="center">
+                      <Pressable
+                        onPress={logOutModalShow}
+                        style={styles.logoutBtn}
+                      >
+                        <Text style={styles.btnText}>Logout</Text>
+                      </Pressable>
+                    </Row>
                   </View>
                 </View>
               </View>
@@ -100,10 +107,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.8)',
   },
   mainContainer: {
-    padding: 16,
-    height: 200,
+    height: sizes[4] * 5,
     width: dimensions.width - 80,
-    borderRadius: 16,
+    borderRadius: sizes[3],
     backgroundColor: '#fff',
   },
 
@@ -111,13 +117,51 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
 
+  btnContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    height: '100%',
+    alignItems: 'center',
+  },
+
   bottomContainer: {
-    height: dimensions.height - 200,
+    height: dimensions.height - 150,
     backgroundColor: 'rgba(0,0,0,0.8)',
   },
   sideContainer: {
-    height: 200,
-    width: 100,
+    height: 150,
+    width: sizes[4] * 5,
     backgroundColor: 'rgba(0,0,0,0.8)',
+  },
+
+  modalheight: {
+    height: 150,
+  },
+  delBtn: {
+    backgroundColor: colors.ui.white,
+    minHeight: sizes[10],
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopRightRadius: sizes[3],
+    borderTopLeftRadius: sizes[3],
+    height: 75,
+  },
+  logoutBtn: {
+    backgroundColor: colors.ui.white,
+    minHeight: sizes[10],
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomRightRadius: sizes[3],
+    borderBottomLeftRadius: sizes[3],
+    borderTopColor: '00000026',
+    borderTopWidth: 1,
+    height: 75,
+  },
+  btnText: {
+    fontSize: fontSizes.h6,
+    color: colors.ui.text,
+    fontweight: fontWeights.semiBold,
   },
 });
