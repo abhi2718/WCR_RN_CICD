@@ -44,7 +44,10 @@ const GenderProunoun = (props: any) => {
                   value={genderPronoun}
                 >
                   <Row style={genderPronounStyle.rowView} alignItems="center">
-                    <RadioButton color={colors.ui.primary} value={option} />
+                    <RadioButton.Android
+                      color={colors.ui.primary}
+                      value={option}
+                    />
                     <Text style={genderPronounStyle.btnText}>{option}</Text>
                   </Row>
                 </RadioButton.Group>

@@ -7,9 +7,17 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderBar } from '../../../../../components/header';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useAboutViewModal } from './about.viewModal';
+import { colors } from '../../../../../infrastructure/theme/colors';
 
-const About = (props:ScreenParams) => {
-  const {handleText,aboutText,navigateTohabitsScreen,updateUserDetails,loading,maxLength} = useAboutViewModal(props)
+const About = (props: ScreenParams) => {
+  const {
+    handleText,
+    aboutText,
+    navigateTohabitsScreen,
+    updateUserDetails,
+    loading,
+    maxLength,
+  } = useAboutViewModal(props);
 
   return (
     <ScreenContainer>
@@ -26,12 +34,13 @@ const About = (props:ScreenParams) => {
                 multiline={true}
                 maxLength={maxLength}
                 numberOfLines={10} // Set the number of lines to display
-                placeholder="Enter here..."
+                placeholder="Enter here"
                 textAlignVertical="top"
                 value={aboutText}
                 returnKeyLabel="go"
                 onSubmitEditing={() => updateUserDetails()}
                 onChangeText={handleText}
+                placeholderTextColor={colors.ui.placeholder}
               />
             </View>
           </ScrollView>

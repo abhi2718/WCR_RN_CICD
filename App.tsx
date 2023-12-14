@@ -1,6 +1,6 @@
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { LogBox, SafeAreaView, StyleSheet } from 'react-native';
+import { LogBox, View, StyleSheet } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { ThemeProvider } from 'styled-components/native';
 import CombinedProviders from './src/contexts';
@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { PaperProvider } from 'react-native-paper';
 import { store } from './src/store';
 import { theme } from './src/infrastructure/theme';
-LogBox.ignoreLogs(["new NativeEventEmitter"]);
+LogBox.ignoreLogs(['new NativeEventEmitter']);
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -17,7 +17,7 @@ LogBox.ignoreLogs([
 export default function App() {
   return (
     <GestureHandlerRootView style={styles.containerStyle}>
-      <SafeAreaView style={styles.containerStyle}>
+      <View style={styles.containerStyle}>
         <Provider store={store}>
           <PaperProvider>
             <CombinedProviders>
@@ -28,7 +28,7 @@ export default function App() {
           </PaperProvider>
         </Provider>
         <FlashMessage position="top" />
-      </SafeAreaView>
+      </View>
     </GestureHandlerRootView>
   );
 }
@@ -36,6 +36,6 @@ export default function App() {
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
+    backgroundColor: '#fff',
   },
 });
-

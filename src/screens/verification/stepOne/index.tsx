@@ -35,7 +35,10 @@ const VerificationStepOne = (props: ScreenParams) => {
         >
           {country === 'USA' && (
             <Row style={verificationStyle.rowView} alignItems="center">
-              <RadioButton color={colors.ui.primary} value="NPI Number" />
+              <RadioButton.Android
+                color={colors.ui.primary}
+                value="NPI Number"
+              />
               <Text style={verificationStyle.btnText}>
                 NPI Number (Recommended)
               </Text>
@@ -58,7 +61,10 @@ const VerificationStepOne = (props: ScreenParams) => {
           )}
           {country === 'Canada' && (
             <Row style={verificationStyle.rowView} alignItems="center">
-              <RadioButton color={colors.ui.primary} value="HealthCare" />
+              <RadioButton.Android
+                color={colors.ui.primary}
+                value="HealthCare"
+              />
               <Text style={verificationStyle.btnText}>
                 Healthcare Professional
               </Text>
@@ -106,7 +112,10 @@ const VerificationStepOne = (props: ScreenParams) => {
 
           {country === 'USA' && (
             <Row style={verificationStyle.rowView} alignItems="center">
-              <RadioButton color={colors.ui.primary} value="License Number" />
+              <RadioButton.Android
+                color={colors.ui.primary}
+                value="License Number"
+              />
               <Text style={verificationStyle.btnText}>License Number</Text>
             </Row>
           )}
@@ -139,12 +148,12 @@ const VerificationStepOne = (props: ScreenParams) => {
             </>
           )}
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="Student" />
+            <RadioButton.Android color={colors.ui.primary} value="Student" />
             <Text style={verificationStyle.btnText}>Student</Text>
           </Row>
 
           <Row style={verificationStyle.rowView} alignItems="center">
-            <RadioButton color={colors.ui.primary} value="Others" />
+            <RadioButton.Android color={colors.ui.primary} value="Others" />
             <Text style={verificationStyle.btnText}>All Other Users</Text>
           </Row>
         </RadioButton.Group>

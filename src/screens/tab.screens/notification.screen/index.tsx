@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Animated,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import { HeaderBar } from '../../../components/header';
 import { Column, FullLoader } from '../../../components/tools';
@@ -25,14 +26,16 @@ export const NotificationScreen = () => {
   } = useViewModal();
   if (notificationLoading) {
     return (
-      <View style={notificationStyle.padding}>
-        <HeaderBar />
+      <SafeAreaView style={notificationStyle.padding}>
+        <View style={notificationStyle.header}>
+          <HeaderBar />
+        </View>
         <FullLoader />
-      </View>
+      </SafeAreaView>
     );
   }
   return (
-    <View style={notificationStyle.container}>
+    <SafeAreaView style={notificationStyle.container}>
       <View style={notificationStyle.header}>
         <HeaderBar />
       </View>
@@ -69,6 +72,6 @@ export const NotificationScreen = () => {
         }}
         onEndReachedThreshold={0.1}
       />
-    </View>
+    </SafeAreaView>
   );
 };

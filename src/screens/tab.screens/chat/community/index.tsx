@@ -4,12 +4,13 @@ import {CometChatConversationsWithMessages} from '../../../../cometChat/src';
 import {useViewModal} from './useViewModal';
 import SwitchButton from './components/switchButton';
 import AllGroups from './components/allGroups';
-import {Column, Logo, Row} from '../../../../components/tools';
+import {Column, Logo, Row,ScreenWrapper} from '../../../../components/tools';
 import {styles} from './styles';
 export default function CommunityChat() {
   const {state, setState,count} = useViewModal();
   return (
-    <View style={styles.container}>
+    <ScreenWrapper>
+         <View style={styles.container}>
       <View style={styles.switchContainerStyle}>
         <Row
           alignItems="center"
@@ -34,5 +35,6 @@ export default function CommunityChat() {
         isUserWindow={false}
       /> : <AllGroups />}
     </View>
+    </ScreenWrapper>
   );
 }

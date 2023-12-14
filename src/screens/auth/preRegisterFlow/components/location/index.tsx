@@ -35,8 +35,6 @@ const LocationScreen = (props: ScreenParams) => {
             <HeaderBar></HeaderBar>
             <Text style={location.subHeader}>
               Let's find matches near you
-              {`\n`}
-              OR {`\n`}Tell us where you call home
             </Text>
             <View>
               <DropdownInput

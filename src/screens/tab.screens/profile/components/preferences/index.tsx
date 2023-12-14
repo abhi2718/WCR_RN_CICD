@@ -36,7 +36,7 @@ export const PreferencesScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.padding16}>
         <HeaderBar
           button={submitLoading ? () => {} : createPrefrences}
@@ -162,6 +162,6 @@ export const PreferencesScreen = () => {
           })}
         </ScrollView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

@@ -34,7 +34,6 @@ export const useViewModal = (route: RouteType) => {
     setLoading(true);
     try {
       const data = await homeDeckRepository.getProfiles();
-      console.log(data);
       setProfiles(data);
       setLoading(false);
     } catch (error) {

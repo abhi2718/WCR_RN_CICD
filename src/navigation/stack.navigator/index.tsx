@@ -198,7 +198,7 @@ export const StackNavigator = () => {
         component={ContactUs}
       />
       <Stack.Screen
-        //options={optins}
+        options={optins}
         name={ROUTES.Preferences}
         component={PreferencesScreen}
       />
