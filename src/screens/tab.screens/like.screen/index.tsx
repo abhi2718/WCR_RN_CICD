@@ -38,9 +38,11 @@ export const LikeScreen = () => {
     return <FullLoader />;
   }
   return (
-    <SafeAreaView>
-      <View>
-        <HeaderDeck count={count} goToNotification={goToNotification} />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.padHorizontal}>
+          <HeaderDeck count={count} goToNotification={goToNotification} />
+        </View>
         {isNoEvent > 0 ? (
           <>
             <ScrollView>

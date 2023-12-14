@@ -8,6 +8,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+
+  padHorizontal: {
+    paddingHorizontal: sizes[3],
+  },
+
   content: {
     flex: 1,
     width: '100%',
