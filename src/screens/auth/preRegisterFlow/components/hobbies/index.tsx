@@ -12,13 +12,13 @@ import { HeaderBar } from '../../../../../components/header';
 import { useHobbyViewModal } from './hobby.viewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 const Hobbies = (props: ScreenParams) => {
-  const { selectedHobbies, handleHobbies ,updateUserDetails,loading,navigateToKidsScreen} = useHobbyViewModal(props);
+  const { selectedHobbies, handleHobbies ,updateUserDetails,loading,navigateToVerificationScreen} = useHobbyViewModal(props);
 
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar skip={() => navigateToKidsScreen()}></HeaderBar>
+          <HeaderBar skip={() => navigateToVerificationScreen()}></HeaderBar>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>

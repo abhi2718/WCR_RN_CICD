@@ -538,7 +538,7 @@ CardStack.defaultProps = {
   loop: false,
   initialIndex: 0,
   renderNoMoreCards: () => {
-    return <Text>No More Card</Text>;
+    return <View/>;
   },
   onSwipeStart: () => null,
   onSwipeEnd: () => null,

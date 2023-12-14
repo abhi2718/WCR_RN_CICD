@@ -36,6 +36,7 @@ import {CometChatThreadedMessages} from '../CometChatThreadedMessages';
 import {infoIcon} from './resources';
 import {Style} from './style';
 import {CometChatUIEventHandler} from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const currentTime = new Date().getTime();
 const msgListenerId = 'messages_' + currentTime;
 const uiEventListener = 'uiEvent_' + new Date().getTime();
@@ -273,7 +274,8 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
   const {backgroundColor, height, width, border, borderRadius} = _messageStyles;
 
   return (
-    <View
+    <SafeAreaView style={{flex:1,backgroundColor:"#fff"}}>
+       <View
       style={[
         Style.container,
         showComponent == ComponentNames.Details ||
@@ -371,5 +373,6 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
         )}
       </View>
     </View>
+   </SafeAreaView>
   );
 };
