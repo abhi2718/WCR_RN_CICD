@@ -33,6 +33,7 @@ import { SettingScreen } from '../../screens/tab.screens/profile/components/sett
 import { AccountSettingScreen } from '../../screens/tab.screens/profile/components/settings/components/accountSettings';
 import { BlockAndUnBlock } from '../../screens/tab.screens/profile/components/settings/components/block&Unblock';
 import { ContactUs } from '../../screens/tab.screens/profile/components/settings/components/contactUs';
+import { ReportScreen } from '../../screens/tab.screens/profile/components/settings/components/report';
 import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
 import { EditProfile } from '../../screens/tab.screens/profile/components/editProfile';
 import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
@@ -206,6 +207,11 @@ export const StackNavigator = () => {
         //options={optins}
         name={ROUTES.EditProfile}
         component={EditProfile}
+      />
+    <Stack.Screen
+        //options={optins}
+        name={ROUTES.Report}
+        component={ReportScreen}
       />
     </Stack.Navigator>
   );

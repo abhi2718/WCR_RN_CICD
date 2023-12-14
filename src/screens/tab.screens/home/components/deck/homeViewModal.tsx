@@ -10,6 +10,7 @@ import { LikeContext } from '../../../../../contexts/likes.context';
 import {useViewModal as notificationuseViewModal } from "../../../notification.screen/useViewModal";
 import { NotificationCountContext } from '../../../../../contexts/notificationCount.context';
 import { RouteType } from '../../../../../types/navigation.type';
+import { useCometChatInit } from '../../../../../services/cometChat.service';
 export const useViewModal = (route: RouteType) => {
   const [profiles, setProfiles] = useState([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
@@ -24,6 +25,7 @@ export const useViewModal = (route: RouteType) => {
   const {_setCount,count} = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
   const { unReadCount } = notificationuseViewModal();
+  useCometChatInit();
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;

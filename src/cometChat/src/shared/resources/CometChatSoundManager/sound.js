@@ -1,7 +1,9 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
-const {RNSound} = NativeModules ;
-var IsAndroid = RNSound.IsAndroid;
-var IsWindows = RNSound.IsWindows;
+const { RNSound } = NativeModules;
+//RNSound?.IsAndroid
+//RNSound.IsWindows
+var IsAndroid = false;
+var IsWindows = false;
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 var eventEmitter = new NativeEventEmitter(RNSound);
 
@@ -47,9 +49,6 @@ class Sound {
         this._filename = filename.toLowerCase().replace(/\.[^.]+$/, '');
       }
     }
-
-    
-
     this._loaded = false;
     this._key = nextKey++;
     this._playing = false;

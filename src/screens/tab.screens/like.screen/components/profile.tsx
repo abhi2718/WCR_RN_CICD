@@ -5,7 +5,7 @@ import { ProfileModal } from '../../../../components/profile.component';
 import { Column, Spacer } from '../../../../components/tools';
 import { ProfileViewProps } from '../../../../types/screen.type/like.type';
 
-export const ProfileView = (props:ProfileViewProps) => {
+export const ProfileView = (props: ProfileViewProps) => {
   const {
     item,
     deleteFavourite,
@@ -16,7 +16,7 @@ export const ProfileView = (props:ProfileViewProps) => {
     isMatch,
     isFavourite,
     handleToggleOuterModal,
-    startChat
+    startChat,
   } = props;
   const handleRemove = () => {
     if (deleteFavourite) {
@@ -32,52 +32,140 @@ export const ProfileView = (props:ProfileViewProps) => {
       handleToggleOuterModal(false);
     }
     setShowModal((oldValue) => !oldValue);
-  }
-  const navigateToChat = (user) => {
+  };
+  const navigateToChat = () => {
     if (startChat) {
+      if (handleToggleOuterModal) {
+        handleToggleOuterModal(false);
+      }
       startChat({
-        senderId: user._id,
-        name:item.profile.name.first
-      })
+        senderId: item?._id,
+        name: item.profile.name.first,
+      });
     }
-  }
-  return (
-    <View>
-      <Pressable onPress={toggleModal}>
-        <Column>
-          <Spacer position="right" size={10}>
-            <FastImage
-              style={{ width: 180, height: 200 }}
-              source={{
-                uri: item.profilePicture.url,
-              }}
-              resizeMode={FastImage.resizeMode.stretch}
-            />
-          </Spacer>
+  };
+  if (isMatch) {
+    return (
+      <View style={{ width: 200, backgroundColor: '#fff' }}>
+        <Pressable onPress={toggleModal}>
           <Column>
-            <Text>{item.profile.name.first}</Text>
-            <Text>{item.designation.title}</Text>
-            {showDeleteIcon && (
-              <Pressable onPress={handleRemove}>
-                <Text>Remove</Text>
-              </Pressable>
-            )}
-            {
-              isMatch && <Pressable onPress={navigateToChat}>
-                <Text>Chat</Text>
-              </Pressable>
-            }
+            <Spacer position="right" size={10}>
+              <FastImage
+                style={{ width: 180, height: 100 }}
+                source={{
+                  uri: item?.profilePicture?.url,
+                }}
+                resizeMode={FastImage.resizeMode.stretch}
+              />
+            </Spacer>
+            <Column>
+              <Text>{item?.profile?.name?.first}</Text>
+              <Text>{item?.designation?.title}</Text>
+              {showDeleteIcon && (
+                <Pressable onPress={handleRemove}>
+                  <Text>Remove</Text>
+                </Pressable>
+              )}
+              {isMatch && (
+                <Pressable onPress={navigateToChat}>
+                  <Text>Chat</Text>
+                </Pressable>
+              )}
+            </Column>
           </Column>
-        </Column>
-      </Pressable>
-      <ProfileModal
-        showModal={showModal}
-        userId={item._id}
-        toggleModal={toggleModal}
-        showLike={isLiked ? false : true}
-        showDisLike={true}
-        showSave={isFavourite ? false : true}
-      />
-    </View>
-  );
+        </Pressable>
+        <ProfileModal
+          showModal={showModal}
+          userId={item?._id}
+          toggleModal={toggleModal}
+          showLike={false}
+          showDisLike={false}
+          showSave={false}
+        />
+      </View>
+    );
+  }
+  if (isLikesReceived) {
+    return (
+      <View style={{ width: 200, backgroundColor: '#fff' }}>
+        <Pressable onPress={toggleModal}>
+          <Column>
+            <Spacer position="right" size={10}>
+              <FastImage
+                style={{ width: 180, height: 100 }}
+                source={{
+                  uri: item?.userId?.profilePicture?.url,
+                }}
+                resizeMode={FastImage.resizeMode.stretch}
+              />
+            </Spacer>
+            <Column>
+              <Text>{item?.userId?.profile?.name?.first}</Text>
+              <Text>{item?.userId?.designation?.title}</Text>
+              {showDeleteIcon && (
+                <Pressable onPress={handleRemove}>
+                  <Text>Remove</Text>
+                </Pressable>
+              )}
+              {isMatch && (
+                <Pressable onPress={navigateToChat}>
+                  <Text>Chat</Text>
+                </Pressable>
+              )}
+            </Column>
+          </Column>
+        </Pressable>
+        <ProfileModal
+          showModal={showModal}
+          userId={item?.userId?._id}
+          toggleModal={toggleModal}
+          showLike={false}
+          showDisLike={false}
+          showSave={false}
+        />
+      </View>
+    );
+  }
+  if (isLiked || isFavourite) {
+    return (
+      <View style={{ width: 200, backgroundColor: '#fff' }}>
+        <Pressable onPress={toggleModal}>
+          <Column>
+            <Spacer position="right" size={10}>
+              <FastImage
+                style={{ width: 180, height: 100 }}
+                source={{
+                  uri: item?.profilePicture?.url,
+                }}
+                resizeMode={FastImage.resizeMode.stretch}
+              />
+            </Spacer>
+            <Column>
+              <Text>{item?.profile?.name?.first}</Text>
+              <Text>{item?.designation?.title}</Text>
+              {showDeleteIcon && (
+                <Pressable onPress={handleRemove}>
+                  <Text>Remove</Text>
+                </Pressable>
+              )}
+              {isMatch && (
+                <Pressable onPress={navigateToChat}>
+                  <Text>Chat</Text>
+                </Pressable>
+              )}
+            </Column>
+          </Column>
+        </Pressable>
+        <ProfileModal
+          showModal={showModal}
+          userId={item?._id}
+          toggleModal={toggleModal}
+          showLike={false}
+          showDisLike={false}
+          showSave={false}
+        />
+      </View>
+    );
+  }
+  return <View></View>;
 };

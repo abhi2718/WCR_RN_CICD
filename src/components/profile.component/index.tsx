@@ -12,7 +12,7 @@ import { profileProps } from '../../types/components/profile.type';
 import { FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 
-export const ProfileModal = (props:profileProps) => {
+export const ProfileModal = (props: profileProps) => {
   const {
     showModal,
     toggleModal,
@@ -26,6 +26,7 @@ export const ProfileModal = (props:profileProps) => {
     showLike,
     showDisLike,
     showSave,
+    showBlock,
   } = useViewModal(props);
   const heightStyle = { height: 600, width: 300 };
   return (
@@ -99,11 +100,13 @@ export const ProfileModal = (props:profileProps) => {
                         </Pressable>
                       )}
                     </Row>
-                    <Row>
-                      <Pressable onPress={handleBlockUser}>
-                        <Text>Block/Report</Text>
-                      </Pressable>
-                    </Row>
+                    {showBlock && (
+                      <Row>
+                        <Pressable onPress={handleBlockUser}>
+                          <Text>Block/Report</Text>
+                        </Pressable>
+                      </Row>
+                    )}
                     <Spacer position="bottom" size={60} />
                   </ScrollView>
                 )}
