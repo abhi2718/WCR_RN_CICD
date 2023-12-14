@@ -30,7 +30,7 @@ export const ChipStyle = StyleSheet.create({
     fontSize: fontSizes.title,
     fontWeight: '700',
     color: colors.ui.text,
-    marginTop: sizes[6],
+    marginTop: sizes[5],
     marginBottom: sizes[3],
   },
   chipRow: {
