@@ -18,6 +18,10 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
 
   let {setLoading,loading,checkIsNewUser,getOtpOnEmail} = useViewModal(props);
 
+  const handleInputChange = (text: string) => {
+    setOtp(text);
+  };
+
   const verifyEmail = async () => {
     try {
       setLoading(true);
@@ -53,5 +57,6 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
     loading,
     fbId,
     firebaseUid,
+    handleInputChange,
   };
 };

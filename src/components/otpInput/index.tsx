@@ -11,8 +11,10 @@ import {
 } from 'react-native-confirmation-code-field';
 
 const CELL_COUNT = 6;
-
-export const OtpCodeInput = () => {
+type otpTypes = {
+  onChangeOtp: (value: string) => void;
+};
+export const OtpCodeInput = ({ onChangeOtp }: otpTypes) => {
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -20,13 +22,17 @@ export const OtpCodeInput = () => {
     setValue,
   });
 
+  const handleInputChange = (text: string) => {
+    setValue(text);
+    onChangeOtp(text);
+  };
   return (
     <SafeAreaView style={styles.root}>
       <CodeField
         ref={ref}
         {...props}
         value={value}
-        onChangeText={setValue}
+        onChangeText={handleInputChange}
         cellCount={CELL_COUNT}
         rootStyle={styles.codeFieldRoot}
         keyboardType="number-pad"
