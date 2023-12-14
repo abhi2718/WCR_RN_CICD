@@ -47,7 +47,7 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
         );
       }
 
-      if (user.profile.sexualPreference && user.profile.sexualPreference === sexualOrientation) {
+      if (user.profile.sexualPreference === sexualOrientation) {
         navigateTolocationCreen();
         return
       }

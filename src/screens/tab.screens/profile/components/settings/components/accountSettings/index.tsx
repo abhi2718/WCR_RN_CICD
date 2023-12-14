@@ -37,8 +37,8 @@ export const AccountSettingScreen = () => {
         setShowModal={setShowModal}
         title="Delete Account?"
         description="Are you sure you want to 
-        delete your account permanently?"
-        onPress={()=>deleteUser}
+        delete your account ?"
+        onPress={deleteUser}
       />
     </View>
   );
