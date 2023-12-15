@@ -62,6 +62,8 @@ export const useProfessionModal = (props: ScreenParams) => {
       errors.title = 'Please Enter Your Job Title';
     }
 
+    console.log('professionForm-->',professionForm)
+
     if (Object.keys(errors).length) {
       return setValidationErrors(errors);
     } else {
@@ -115,7 +117,7 @@ export const useProfessionModal = (props: ScreenParams) => {
 
   const getPrimaryDegree = () => {
     const primaryDegreeOptions = primaryDegree[professionForm.userDegree];
-   // handleInputChange('primaryDegree','shaia')
+    handleInputChange('primaryDegree',user?.designation?.primaryDegree ? user?.designation?.primaryDegree : '');
     if (!primaryDegreeOptions || primaryDegreeOptions?.length === 0) {
       setPrimaryDegreeOption([]);
       return;
