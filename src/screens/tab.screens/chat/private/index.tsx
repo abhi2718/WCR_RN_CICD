@@ -1,3 +1,4 @@
+//import { CometChatConversationsWithMessages } from '@cometchat/chat-uikit-react-native';
 import React from 'react';
 import {View, Image, Text, SafeAreaView} from 'react-native';
 import {CometChatConversationsWithMessages, CometChatUsersWithMessages} from '../../../../cometChat/src';
@@ -14,7 +15,7 @@ export const PrivateChatScreen = () => {
        <View style={styles.containerStyle}>
       <HeaderDeck count={count} goToNotification={goToNotification} />
       <CometChatConversationsWithMessages
-        isUserWindow={true}
+       isUserWindow={true}
       />
     </View>
     </ScreenWrapper>
