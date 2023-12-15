@@ -6,22 +6,28 @@ import { HomeDeckRepository } from '../../repository/homeDeck.repo';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
 import { profileProps, UserProfile } from '../../types/components/profile.type';
 import { AppUrl } from '../../utils/appUrl';
-
-export const useViewModal = (props:profileProps) => {
+export const useViewModal = (props: profileProps) => {
   const userProfileRepository = useMemo(() => new UserProfileRepository(), []);
   const homeDeckRepository = new HomeDeckRepository();
   const { fetchAll } = useContext(LikeContext);
   const [loading, setLoading] = useState(false);
   const { user: me } = useSelector(({ userState }) => userState);
   const [user, setUser] = useState<null | UserProfile>(null);
-  const { showModal, toggleModal, userId, showLike, showDisLike, showSave } =
-    props;
+  const {
+    showModal,
+    toggleModal,
+    userId,
+    showLike,
+    showDisLike,
+    showSave,
+    showBlock,
+  } = props;
   const handleShare = () => {
     try {
       const shareOptions = {
-        message: `*White Coat Romance profile share*\n
-            Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you.\n `,
-        url: `${AppUrl.showProfileViewEndPoint}${user?._id}`,
+        message: `White Coat Romance profile share
+            Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you `,
+        url: 'https://staging.whitecoatromance.com/assets/images/e-wcr.png',
       };
       Share.open(shareOptions);
     } catch (error) {}
@@ -68,7 +74,7 @@ export const useViewModal = (props:profileProps) => {
       setLoading(true);
       const payLoad = createPayLoafForUserAction('Dislike');
       await homeDeckRepository.userReactin(payLoad);
-      setLoading(false)
+      setLoading(false);
       toggleModal();
       fetchAll(me._id);
     } catch (error) {
@@ -83,9 +89,9 @@ export const useViewModal = (props:profileProps) => {
       },
     };
     try {
-     setLoading(true)
+      setLoading(true);
       await homeDeckRepository.addFavourite(payLoad);
-      setLoading(false)
+      setLoading(false);
       toggleModal();
       fetchAll(me._id);
     } catch (error) {}
@@ -97,9 +103,9 @@ export const useViewModal = (props:profileProps) => {
           blockedIds: [user?._id.toString()],
         },
       };
-     setLoading(true)
+      setLoading(true);
       await homeDeckRepository.blockUser(payLoad);
-      setLoading(false)
+      setLoading(false);
       toggleModal();
     } catch (error) {}
   };
@@ -116,5 +122,6 @@ export const useViewModal = (props:profileProps) => {
     showLike,
     showDisLike,
     showSave,
+    showBlock,
   };
 };

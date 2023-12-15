@@ -7,11 +7,11 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest",
-    "prestart": "nvm use 18.17.1"
+    "test": "jest"
   },
   "dependencies": {
-    "@cometchat/chat-uikit-react-native": "^4.0.1",
+    "@cometchat/chat-sdk-react-native": "^4.0.4",
+    "@cometchat/chat-uikit-react-native": "^4.0.2",
     "@horizonlime/react-native-select-multiple": "^1.1.2",
     "@invertase/react-native-apple-authentication": "^2.2.2",
     "@react-native-async-storage/async-storage": "^1.19.3",

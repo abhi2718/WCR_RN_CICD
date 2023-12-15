@@ -14,10 +14,10 @@ export const styles = StyleSheet.create({
     borderRadius: 56 / 2,
   },
   singleRow: {
-    paddingVertical: 15,
+    paddingVertical: 8,
     paddingHorizontal: 10,
-    borderTopWidth: 1,
-    borderTopColor: colors.ui.chatBorder,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.ui.chatBorder,
   },
   colOne: {
     width: dimensions.width - 150,

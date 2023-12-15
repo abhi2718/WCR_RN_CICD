@@ -5,7 +5,7 @@ import { colors } from '../../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
   containerStyles: {
-    marginVertical: 15,
+    marginTop: 15,
     flexDirection: 'row',
     position: 'relative',
     height: 45,

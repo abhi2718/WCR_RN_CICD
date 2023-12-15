@@ -531,19 +531,19 @@ export const CometChatMessageList = forwardRef<
 
     if (message?.category === MessageCategoryConstants.message) {
       if (customSoundForMessages) {
-        CometChatSoundManager.play(
-          loggedInUser.current.getUid() == message['sender']['uid']
-            ? 'outgoingMessage'
-            : 'incomingMessage',
-          customSoundForMessages,
-        );
+        // CometChatSoundManager.play(
+        //   loggedInUser.current.getUid() == message['sender']['uid']
+        //     ? 'outgoingMessage'
+        //     : 'incomingMessage',
+        //   customSoundForMessages,
+        // );
       } else {
-        CometChatSoundManager.play(
-          // "incomingMessage"
-          loggedInUser.current.getUid() == message['sender']['uid']
-            ? 'outgoingMessage'
-            : 'incomingMessage',
-        );
+        // CometChatSoundManager.play(
+        //   //"incomingMessage"
+        //   loggedInUser.current.getUid() == message['sender']['uid']
+        //     ? 'outgoingMessage'
+        //     : 'incomingMessage',
+        // );
       }
     }
   };
@@ -758,6 +758,7 @@ export const CometChatMessageList = forwardRef<
       messageListenerId,
       new CometChat.MessageListener({
         onTextMessageReceived: (textMessage) => {
+          console.log(textMessage)
           newMessage(textMessage);
         },
         onMediaMessageReceived: (mediaMessage) => {

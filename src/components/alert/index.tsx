@@ -10,8 +10,11 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AlertScreenType } from '../../types/components/alert.type';
 import { Column, dimensions, Row, Spacer } from '../tools';
+import { colors } from '../../infrastructure/theme/colors';
+import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import { sizes } from '../../infrastructure/theme/sizes';
 
-export const AlertScreen = (props:AlertScreenType) => {
+export const AlertScreen = (props: AlertScreenType) => {
   const { showModal, setShowModal, title, description, onPress } = props;
   const handleCancel = () => {
     setShowModal(false);
@@ -27,22 +30,24 @@ export const AlertScreen = (props:AlertScreenType) => {
           <View style={{ height: 200 - 32, justifyContent: 'space-between' }}>
             <View>
               <Row justifyContent="center">
-                <Text>{title}</Text>
+                <Text style={styles.title}>{title}</Text>
               </Row>
               <Spacer position="top" size={16}>
                 <Row justifyContent="center">
-                  <Text>{description}</Text>
+                  <Text style={styles.description}>{description}</Text>
                 </Row>
               </Spacer>
+              <View style={styles.btnContainer}>
+                <Row justifyContent="space-between">
+                  <Pressable onPress={handleCancel} style={styles.secondBtn}>
+                    <Text style={styles.secondBtn.btnText}>Cancel</Text>
+                  </Pressable>
+                  <Pressable onPress={handlePress} style={styles.primeBtn}>
+                    <Text style={styles.primeBtn.btnText}>Yes</Text>
+                  </Pressable>
+                </Row>
+              </View>
             </View>
-            <Row justifyContent="space-between">
-              <Pressable onPress={handleCancel}>
-                <Text>Cancel</Text>
-              </Pressable>
-              <Pressable onPress={handlePress}>
-                <Text>Yes</Text>
-              </Pressable>
-            </Row>
           </View>
         </View>
       </SafeAreaView>
@@ -58,10 +63,57 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.8)',
   },
   mainContainer: {
-    padding: 16,
-    height: 200,
+    paddingTop: sizes[3],
+    height: 160,
     width: dimensions.width - 80,
-    borderRadius: 16,
-    backgroundColor: '#fff',
+    borderRadius: sizes[3],
+    backgroundColor: colors.ui.white,
+  },
+
+  btnContainer: {
+    marginTop: sizes[10] + 1,
+    borderTopColor: '#00000026',
+    borderTopWidth: 1,
+  },
+
+  title: {
+    color: colors.ui.black,
+    fontSize: sizes[3] + 1,
+  },
+
+  description: {
+    color: colors.ui.black,
+    fontSize: sizes[2] + 1,
+  },
+
+  primeBtn: {
+    backgroundColor: colors.ui.primary,
+    minHeight: sizes[10],
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomRightRadius: sizes[3],
+    height: sizes[10],
+
+    btnText: {
+      fontSize: 20,
+      color: colors.ui.white,
+      fontWeight: fontWeights.semiBold,
+    },
+  },
+  secondBtn: {
+    backgroundColor: colors.ui.white,
+    minHeight: sizes[10],
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomLeftRadius: sizes[3],
+    height: sizes[10],
+
+    btnText: {
+      fontSize: fontSizes.h6,
+      fontWeight: fontWeights.regular,
+      color: colors.ui.text,
+    },
   },
 });
