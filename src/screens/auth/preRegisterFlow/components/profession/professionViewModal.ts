@@ -9,38 +9,54 @@ import {
 import { primaryDegree } from '../../../../../utils/constanst';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { addUser } from '../../../../../store/reducers/user.reducer';
-
+type userDegreeOption = { label: string; value: string };
 export const useProfessionModal = (props: ScreenParams) => {
   const [isFocus, setIsFocus] = useState(false);
-  const [primaryDegreeOption, setPrimaryDegreeOption] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useSelector(({ userState }) => userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const { navigation } = props;
   const dispatch = useDispatch();
-  const savedUserDegree = user?.designation?.userDegree;
-  const savedPrimaryDegree = user?.designation?.primaryDegree;
-  const title = user?.designation?.title;
-  const institution = user?.institution;
   const [professionForm, setProfessionForm] = useState<professionTypes>({
-    userDegree: savedUserDegree ? savedUserDegree : '',
-    primaryDegree: user?.designation?.primaryDegree ? user?.designation?.primaryDegree : 'shaz',
-    institution: institution ? institution : '',
-    title: title ? title : '',
+    userDegree: user?.designation?.userDegree
+      ? user?.designation?.userDegree
+      : '',
+    primaryDegree: user?.designation?.primaryDegree
+      ? user?.designation?.primaryDegree
+      : '',
+    institution: user?.institution ? user?.institution : '',
+    title: user?.designation?.title ? user?.designation?.title : '',
   });
+
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [validationErrors, setValidationErrors] = useState<
     Partial<professionTypes>
   >({});
+  const generateList = (arr: string[]) =>
+    arr.map((item) => ({
+      label: item,
+      value: item,
+    }));
 
-  useEffect(() => {
-    if (professionForm.userDegree.length) {
-      getPrimaryDegree();
-    }
-  }, [professionForm?.userDegree]);
-
+  const [primaryDegreeOption, setPrimaryDegreeOption] = useState<
+    userDegreeOption[]
+  >(
+    professionForm?.userDegree?.length
+      ? generateList(primaryDegree[professionForm.userDegree])
+      : [],
+  );
+  const changePrimaryDegreeOption = (userDegree: string) => {
+    setPrimaryDegreeOption(generateList(primaryDegree[userDegree]));
+  };
   const handleInputChange = (name: keyof professionTypes, value: string) => {
     setProfessionForm((oldState) => {
+      if (name === 'userDegree') {
+        return {
+          ...oldState,
+          userDegree: value,
+          primaryDegree: 'Select Degree Type',
+        };
+      }
       return { ...oldState, [name]: value };
     });
   };
@@ -61,9 +77,9 @@ export const useProfessionModal = (props: ScreenParams) => {
     if (!professionForm?.title?.trim()?.length) {
       errors.title = 'Please Enter Your Job Title';
     }
-
-    console.log('professionForm-->',professionForm)
-
+    if (professionForm?.primaryDegree === 'Select Degree Type') {
+      errors.primaryDegree = 'Please Select A Degree type';
+    }
     if (Object.keys(errors).length) {
       return setValidationErrors(errors);
     } else {
@@ -82,12 +98,11 @@ export const useProfessionModal = (props: ScreenParams) => {
         },
         institution: professionForm.institution,
       };
-
       if (
-        savedUserDegree === professionForm.userDegree &&
-        savedPrimaryDegree === professionForm.primaryDegree &&
-        title === professionForm.title &&
-        institution === professionForm.institution
+        user?.designation?.userDegree === professionForm.userDegree &&
+        user?.designation?.primaryDegree === professionForm.primaryDegree &&
+        user?.designation?.title === professionForm.title &&
+        user?.institution === professionForm.institution
       ) {
         navigateToPictureUploadingScreenScreen();
         return;
@@ -115,19 +130,6 @@ export const useProfessionModal = (props: ScreenParams) => {
     } catch (error) {}
   };
 
-  const getPrimaryDegree = () => {
-    const primaryDegreeOptions = primaryDegree[professionForm.userDegree];
-    handleInputChange('primaryDegree',user?.designation?.primaryDegree ? user?.designation?.primaryDegree : '');
-    if (!primaryDegreeOptions || primaryDegreeOptions?.length === 0) {
-      setPrimaryDegreeOption([]);
-      return;
-    }
-    const updatedPrimaryDegree = primaryDegreeOptions?.map((state: string) => {
-      return { label: state, value: state };
-    });
-    setPrimaryDegreeOption(updatedPrimaryDegree);
-    return;
-  };
   return {
     loading,
     isFocus,
@@ -137,6 +139,6 @@ export const useProfessionModal = (props: ScreenParams) => {
     primaryDegreeOption,
     handleSubmit,
     handleInputChange,
-    getPrimaryDegree,
+    changePrimaryDegreeOption
   };
 };
