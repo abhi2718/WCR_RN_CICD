@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { LikeContext } from '../../../../../../../contexts/likes.context';
 import { HomeDeckRepository } from '../../../../../../../repository/homeDeck.repo';
 import { AppUrl } from '../../../../../../../utils/appUrl';
-
+//${AppUrl.showProfileViewEndPoint}${item._id}
 export const useViewModal = (item: any, cardRef: any) => {
   const homeDeckRepository = new HomeDeckRepository();
   const { user } = useSelector(({ userState }) => userState);
@@ -25,9 +25,9 @@ export const useViewModal = (item: any, cardRef: any) => {
   const handleShare = () => {
     try {
       const shareOptions = {
-        message: `*White Coat Romance profile share*\n
-        Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you.\n `,
-        url: `${AppUrl.showProfileViewEndPoint}${item._id}`,
+        message: `White Coat Romance profile share
+        Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you. `,
+        url: "https://staging.whitecoatromance.com/assets/images/e-wcr.png",
       };
       Share.open(shareOptions);
     } catch (error) {}
@@ -64,10 +64,9 @@ export const useViewModal = (item: any, cardRef: any) => {
       };
       if (cardRef) {
         cardRef?.current.swipeLeft();
-         await homeDeckRepository.blockUser(payLoad);
+        await homeDeckRepository.blockUser(payLoad);
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
   return {
     handleShare,

@@ -1,14 +1,13 @@
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 import { useLogOutViewModal } from '../../../../../utils/logOut';
 
 export const useViewModal = () => {
-  const { logOut } = useLogOutViewModal();
   const { user } = useSelector(({ userState }) => userState);
   const navigation = useNavigation();
-  const [showLogOutModal, setLogOutModal] = useState(false);
+  
   const [showModal, setShowModal] = useState(false);
   const [link, setLink] = useState('');
   const handleToggleModal = () => setShowModal(oldValue => !oldValue);
@@ -16,14 +15,10 @@ export const useViewModal = () => {
   const _accountSetting = () => {
       navigation.navigate(ROUTES.AccountSetting);
   };
-  const _notificationsSetting = () => {
-    navigation.navigate(ROUTES.NotificationSetting);
-  };
   const _blocknblock = () => {
     navigation.navigate(ROUTES.BlockAndUnBlock);
   };
   const _inviteOthers = () => {
-    console.log('_inviteOthers');
   };
   const _privacypolicy = () => {
     setLink("https://whitecoatromance.com/Privacy");
@@ -35,6 +30,9 @@ export const useViewModal = () => {
   };
   const _contactUs = () => {
     navigation.navigate(ROUTES.ContactUs);
+  };
+  const _report = () => {
+    navigation.navigate(ROUTES.Report);
   };
   const lists = [
     {
@@ -79,19 +77,14 @@ export const useViewModal = () => {
       title: 'Contact us',
       onPress: _contactUs,
     },
+    {
+      id: '7',
+      imagePath: require('../../../../../assets/images/settings/contactUS.jpg'),
+      title: 'Report',
+      onPress: _report,
+    },
   ];
-  const _logOut = () => {
-   logOut();
-};
   return {
-    user,
-    goBack,
-    lists,
-    handleToggleModal,
-    showModal,
-    link,
-    showLogOutModal,
-    setLogOutModal,
-    _logOut
+    lists, handleToggleModal, showModal, link
   };
 };

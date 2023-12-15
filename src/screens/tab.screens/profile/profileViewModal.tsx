@@ -7,6 +7,7 @@ import { useLogOutViewModal } from '../../../utils/logOut';
 export const useViewModal = () => {
   const { logOut } = useLogOutViewModal();
   const { user } = useSelector(({ userState }) => userState);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const [showLogOutModal, setLogOutModal] = useState(false);
   const goToPreview = () => navigation.navigate(ROUTES.Preview);
@@ -14,7 +15,12 @@ export const useViewModal = () => {
   const goToPreferences = () => navigation.navigate(ROUTES.Preferences);
   const goToEditProfile = () => navigation.navigate(ROUTES.EditProfile);
   const _logOut = () => {
-    logOut();
+    setLogOutModal(false);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      logOut();
+    },2000)
   };
   return {
     user,
@@ -25,5 +31,6 @@ export const useViewModal = () => {
     goToEditProfile,
     showLogOutModal,
     setLogOutModal,
+    loading
   };
 };

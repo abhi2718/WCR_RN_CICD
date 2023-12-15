@@ -4,6 +4,7 @@ import { CometChatConversationsWithMessages } from '../../../../cometChat/src';
 import { useViewModal } from './useViewModal';
 import SwitchButton from './components/switchButton';
 import AllGroups from './components/allGroups';
+//import { CometChatConversationsWithMessages } from '@cometchat/chat-uikit-react-native';
 import {
   Column,
   Logo,

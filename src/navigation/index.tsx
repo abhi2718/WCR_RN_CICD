@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './stack.navigator';
 import { useCometChatInit } from '../services/cometChat.service';
 
+
 export enum ROUTES {
   SPLASH = '/splash',
   SignIn = 'SignIn',
@@ -12,7 +13,6 @@ export enum ROUTES {
   SexualOrientation = '/sexualOrientation',
   SignUp = 'SignUp',
   EmailAuth = '/email-auth',
-  
   Tab = '/tabs',
   Onboarding = '/onboarding',
   CommunityChat = '/community-chat',
@@ -45,13 +45,13 @@ export enum ROUTES {
   NotificationSetting = '/notificationSetting',
   BlockAndUnBlock = '/blockAndUnBlock',
   ContactUs = '/contact-us',
+  Report = '/report',
   Preferences = '/preferences',
   EditProfile = '/editProfile',
   VerificationPending = '/verificationPending',
   TurnOnNotification = '/turnOnNotification',
 }
 export default function Navigator() {
-  useCometChatInit();
   return (
     <NavigationContainer>
       <StackNavigator />

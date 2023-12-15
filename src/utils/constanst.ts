@@ -531,3 +531,11 @@ export const cmValues = [
   `210`,
   `213`,
 ];
+export const report = [
+  'Fake account',
+  "Spam",
+  'Abusive or threatening behavior',
+  'Racism, discrimination, or insults',
+  'Contains illegal content or activity',
+  'Other'
+];

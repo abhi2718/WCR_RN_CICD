@@ -11,6 +11,7 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderDeck } from '../../../components/header';
 import {
+  dimensions,
   FullLoader,
   Row,
   ScreenWrapper,
@@ -38,14 +39,12 @@ export const LikeScreen = () => {
     return <FullLoader />;
   }
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.padHorizontal}>
-          <HeaderDeck count={count} goToNotification={goToNotification} />
-        </View>
+    <ScreenWrapper>
+      <View style={{ flex: 1 }}>
+        <HeaderDeck count={count} goToNotification={goToNotification} />
         {isNoEvent > 0 ? (
           <>
-            <ScrollView>
+            <ScrollView style={{ flex: 1 }}>
               <View style={styles.container}>
                 {data?.matchedUsersList?.length > 0 && (
                   <View style={{ height: 200 }}>
@@ -55,18 +54,21 @@ export const LikeScreen = () => {
                         <Text>See All</Text>
                       </Pressable>
                     </Row>
-                    <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
-                      <View>
-                        {data.matchedUsersList.map((item) => (
+                    <ScrollView
+                      style={{ maxHeight: 250, maxWidth: dimensions.width }}
+                      horizontal={true}
+                    >
+                      {data.matchedUsersList.map((item) => {
+                        return (
                           <ProfileView
                             key={item._id}
-                            item={item.actedOn}
+                            item={item}
                             showDeleteIcon={false}
                             isMatch={true}
                             startChat={startChat}
                           />
-                        ))}
-                      </View>
+                        );
+                      })}
                     </ScrollView>
                   </View>
                 )}
@@ -80,16 +82,16 @@ export const LikeScreen = () => {
                       </Pressable>
                     </Row>
                     <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
-                      <View style={{ height: 200 }}>
-                        {data.likesReceived.map((item) => (
+                      {data.likesReceived.map((item) => {
+                        return (
                           <ProfileView
                             key={item._id}
-                            item={item.actedOn}
+                            item={item}
                             showDeleteIcon={false}
                             isLikesReceived={true}
                           />
-                        ))}
-                      </View>
+                        );
+                      })}
                     </ScrollView>
                   </View>
                 )}
@@ -159,7 +161,7 @@ export const LikeScreen = () => {
                         renderItem={({ item }) => (
                           <ProfileView
                             key={item._id}
-                            item={item.actedOn}
+                            item={item}
                             showDeleteIcon={false}
                             isLikesReceived={true}
                             handleToggleOuterModal={toggleModal}
@@ -213,23 +215,39 @@ export const LikeScreen = () => {
                     }
                   </>
                 )}
+                {seeAllState.state === 3 && (
+                  <>
+                    {
+                      <FlatList
+                        data={data.matchedUsersList}
+                        renderItem={({ item }) => (
+                          <ProfileView
+                            key={item._id}
+                            item={item}
+                            showDeleteIcon={false}
+                            isFavourite={false}
+                            isMatch={true}
+                            startChat={startChat}
+                            handleToggleOuterModal={toggleModal}
+                          />
+                        )}
+                        numColumns={2}
+                        keyExtractor={(item) => item._id}
+                      />
+                    }
+                  </>
+                )}
               </SafeAreaView>
             </Modal>
           </>
         ) : (
-          <View style={styles.content}>
-            <Text style={styles.subHeading}>Matches</Text>
-            <Image
-              style={styles.noMatchIcon}
-              resizeMode="contain"
-              source={require('../../../../src/assets/images/icons/noMatchIcon.png')}
-            />
-            <Text style={styles.text}>
-              You’re new here! No matches/likes yet.
-            </Text>
-          </View>
+          <>
+            <View>
+              <Text>Show Empty State Here</Text>
+            </View>
+          </>
         )}
       </View>
-    </SafeAreaView>
+    </ScreenWrapper>
   );
 };

@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
 
     btnText: {
       fontSize: fontSizes.h6,
-      fontweight: fontWeights.regular,
+      fontWeight: fontWeights.regular,
       color: colors.ui.text,
     },
   },
