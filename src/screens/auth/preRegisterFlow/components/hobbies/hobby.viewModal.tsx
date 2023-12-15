@@ -42,13 +42,12 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       const selectedInterests = {
         interests: selectedHobbies,
       };
-
       if (user?.interests === selectedHobbies) {
-       // navigateToVerificationScreen();
-        navigation.navigate(ROUTES.Tab)
+        navigateToVerificationScreen();
+       // navigation.navigate(ROUTES.Tab)
         return;
       }
-      setLoading(true);
+      setLoading(true);     
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         {
@@ -67,8 +66,8 @@ export const useHobbyViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-     // navigateToVerificationScreen();
-       navigation.navigate(ROUTES.Tab)
+      navigateToVerificationScreen();
+      // navigation.navigate(ROUTES.Tab)
     } catch (err: any) {
       setLoading(false);
     }

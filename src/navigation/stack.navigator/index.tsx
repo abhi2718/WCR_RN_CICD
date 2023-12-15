@@ -43,12 +43,11 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}
         component={SplashScreen}
-      />
-
+      /> */}
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
@@ -66,27 +65,22 @@ export const StackNavigator = () => {
         name={ROUTES.Profile}
         component={Profile}
       />
-
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
-
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationPending}
         component={VerificationPending}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
         component={LocationScreen}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationStepOne}
         component={VerificationStepOne}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationStepTwo}
@@ -123,17 +117,11 @@ export const StackNavigator = () => {
         name={ROUTES.LookingFor}
         component={RelationShipScreen}
       />
-      {/* <Stack.Screen
-        options={options}
-        name={ROUTES.AddEthnicity}
-        component={AddEthnicityScreen}
-      /> */}
       <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Profession}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenContainer } from '../../../../../components/tools';
 import { Text, View, StyleSheet } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
@@ -9,7 +9,7 @@ import { ScreenParams } from '../../../../../types/services.types/firebase.servi
 import { useProfessionModal } from './professionViewModal';
 import { ErrorText } from '../../../signin/signInStyle';
 import { HeaderBar } from '../../../../../components/header';
-
+import { Dropdown } from 'react-native-element-dropdown';
 const Profession = (props: ScreenParams) => {
   const {
     loading,
@@ -18,8 +18,8 @@ const Profession = (props: ScreenParams) => {
     handleInputChange,
     professionForm,
     primaryDegreeOption,
-    getPrimaryDegree,
     validationErrors,
+    changePrimaryDegreeOption
   } = useProfessionModal(props);
   return (
     <ScreenContainer>
@@ -39,23 +39,26 @@ const Profession = (props: ScreenParams) => {
                 placeholder="Select degree category"
                 value={professionForm.userDegree}
                 onChange={(item: any) => {
+                  changePrimaryDegreeOption(item.value);
                   handleInputChange('userDegree', item.value);
                 }}
               />
               {validationErrors.userDegree && (
                 <ErrorText> {validationErrors.userDegree}</ErrorText>
               )}
-              <DropdownInput
+              <Dropdown
                 data={primaryDegreeOption}
-                onFocus={() => setIsFocus(true)}
+                onFocus={()=>{}}
                 maxHeight={200}
                 labelField="label"
                 valueField="value"
-                placeholder="Select degree type"
+                placeholder={professionForm.primaryDegree}
                 value={professionForm.primaryDegree}
+                placeholderStyle={{color:"black",fontSize:16,fontWeight:professionForm.primaryDegree=== "Select Degree Type"?"200":'400'}}
                 onChange={(item: any) => {
                   handleInputChange('primaryDegree', item.value);
                 }}
+                style={styles.dropdown}
               />
               {validationErrors.primaryDegree && (
                 <ErrorText> {validationErrors.primaryDegree}</ErrorText>
@@ -93,7 +96,7 @@ const Profession = (props: ScreenParams) => {
   );
 };
 
-export default Profession;
+export default Profession
 
 const styles = StyleSheet.create({
   label: {
@@ -104,4 +107,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     fontSize: 12,
   },
+  dropdown: {
+    height: 50,
+    //borderColor: 'gray',
+    //borderWidth: 0.5,
+    borderRadius: 8,
+    borderBottomWidth: 0.5,
+    borderBottomColor:'gray',
+    paddingHorizontal: 8,
+  }
 });

@@ -1,7 +1,11 @@
-import {CometChatUIKit, UIKitSettings,ReactionsExtension } from '@cometchat/chat-uikit-react-native';
-import {useEffect, useState} from 'react';
+import {
+  CometChatUIKit,
+  UIKitSettings,
+  ReactionsExtension,
+} from '@cometchat/chat-uikit-react-native';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {config} from '../../utils/config';
+import { config } from '../../utils/config';
 
 export const useCometChatInit = () => {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
@@ -10,7 +14,7 @@ export const useCometChatInit = () => {
     appId: config.APP_ID,
     authKey: config.AUTH_KEY,
     region: config.REGION,
-    extensions:[new ReactionsExtension()]
+    extensions: [new ReactionsExtension()],
   };
  
   useEffect(() => {
@@ -22,9 +26,7 @@ export const useCometChatInit = () => {
         //console.log(user?._id)
         await CometChatUIKit.login({ uid: uid });
         setIsInitialized(true);
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     };
     if (user?._id) {
       inItCometChat();
