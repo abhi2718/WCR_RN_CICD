@@ -7,8 +7,10 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import {
+  dimensions,
   InputBox,
   ScreenContainer,
+  Spacer,
 } from '../../../../../components/tools';
 import { styles } from './emailauthStyle';
 import { PrimaryButton } from '../../../../../components/button';
@@ -46,9 +48,7 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
             Enter the code we have shared to your email
           </Text>
           <View>
-            <OtpCodeInput
-              onChangeOtp={handleInputChange}
-            />
+            <OtpCodeInput onChangeOtp={handleInputChange} />
           </View>
         </View>
         {!email && (
@@ -69,11 +69,20 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
             </KeyboardAvoidingView>
           </View>
         )}
-        <PrimaryButton
-          title={'Continue'}
-          onPress={verifyEmail}
-          isLoading={loading}
-        />
+        <KeyboardAvoidingView
+          enabled
+          behavior={isAndroid ? 'height' : 'padding'}
+        >
+          <Spacer position="top" size={32}>
+            <View style={{ width: dimensions.width - 32 }}>
+              <PrimaryButton
+                title={'Continue'}
+                onPress={verifyEmail}
+                isLoading={loading}
+              />
+            </View>
+          </Spacer>
+        </KeyboardAvoidingView>
         <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
           <Text style={styles.otpText}>Resend code</Text>
         </TouchableOpacity>
