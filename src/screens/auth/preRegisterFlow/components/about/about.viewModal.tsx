@@ -30,7 +30,7 @@ export const useAboutViewModal = (props: ScreenParams) => {
         bio: aboutText,
       };
 
-      if(user?.bio && user?.bio === aboutText){
+      if(user?.bio === aboutText){
         navigateTohabitsScreen();
         return 
       }

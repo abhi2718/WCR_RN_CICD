@@ -44,7 +44,7 @@ export const useGenderPronounViewModal = (props: any) => {
       }
 
       
-      if (user.profile.genderPronoun && user.profile.genderPronoun === genderPronoun) {
+      if (user.profile.genderPronoun === genderPronoun) {
         navigateToSexualOrientationScreen();
         return
       }

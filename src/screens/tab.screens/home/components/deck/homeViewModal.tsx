@@ -3,25 +3,33 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { dimensions, isAndroid } from '../../../../../components/tools';
 import { HomeDeckRepository } from '../../../../../repository/homeDeck.repo';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../navigation';
 import { LikeContext } from '../../../../../contexts/likes.context';
-import {useViewModal as notificationuseViewModal } from "../../../notification.screen/useViewModal";
+import { useViewModal as notificationuseViewModal } from '../../../notification.screen/useViewModal';
 import { NotificationCountContext } from '../../../../../contexts/notificationCount.context';
 import { RouteType } from '../../../../../types/navigation.type';
+import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
+import { addUser } from '../../../../../store/reducers/user.reducer';
 export const useViewModal = (route: RouteType) => {
   const [profiles, setProfiles] = useState([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
+
   const [isLoading, setLoading] = useState(false);
   const homeDeckRepository = new HomeDeckRepository();
+  const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const tabBarHeight = useBottomTabBarHeight();
   const androidActualHeight = useRef(dimensions.height - tabBarHeight).current;
   const { top, bottom } = useSafeAreaInsets();
   const cardRef = useRef();
+  const infoScreenRef = useRef();
   const { user } = useSelector(({ userState }) => userState);
+  const dispatch = useDispatch();
+  const token = useRef(user?.token ? user?.token : null).current;
+  const [isNewUser, setIsNewUser] = useState(user.homeInfoModal);
   const { fetchAll } = useContext(LikeContext);
-  const {_setCount,count} = useContext(NotificationCountContext);
+  const { _setCount, count } = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
   const { unReadCount } = notificationuseViewModal();
   const iOSActualHeight = useRef(
@@ -29,7 +37,7 @@ export const useViewModal = (route: RouteType) => {
   ).current;
   useEffect(() => {
     _setCount(unReadCount);
-  },[unReadCount])
+  }, [unReadCount]);
   const fetchProfiles = async () => {
     setLoading(true);
     try {
@@ -43,8 +51,12 @@ export const useViewModal = (route: RouteType) => {
   useEffect(() => {
     fetchProfiles();
   }, [route?.params]);
-  const handleSetProfiles = (item:any) => setProfiles([item, ...profiles]);
+  const handleSetProfiles = (item: any) => setProfiles([item, ...profiles]);
   const clearProfile = () => setProfiles([]);
+  const updateIsNewUser = async () => {
+    setIsNewUser(true);
+    updateUserDetails();
+  };
   const goToNotification = () => navigate(ROUTES.Notification);
   const createPayLoafForUserAction = (index: number, action: string) => {
     const suggestedUser = profiles[index];
@@ -74,6 +86,33 @@ export const useViewModal = (route: RouteType) => {
   const handleCloseModal = () => {
     toggleSearchModal();
   };
+
+  const updateUserDetails = async () => {
+    try {
+      const update = {
+        homeInfoModal: true,
+      };
+
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update: update,
+        },
+      );
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
+      dispatch(addUser(data));
+    } catch (err: any) {}
+  };
+
   return {
     isLoading,
     profiles,
@@ -82,6 +121,8 @@ export const useViewModal = (route: RouteType) => {
     handleLike,
     handleDisLike,
     cardRef,
+    updateIsNewUser,
+    infoScreenRef,
     toggleSearchModal,
     showSearchModal,
     handleCloseModal,
@@ -89,6 +130,8 @@ export const useViewModal = (route: RouteType) => {
     goToNotification,
     count,
     user,
-    clearProfile
+    isNewUser,
+    setIsNewUser,
+    clearProfile,
   };
 };
