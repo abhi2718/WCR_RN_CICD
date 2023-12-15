@@ -95,12 +95,17 @@ export const modalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  arrowContainer: {
+    height: sizes[11],
+    width: sizes[11],
+    justifyContent: 'center',
+  },
   arrow: {
     height: sizes[4],
     width: sizes[2],
   },
   logo: {
-    marginLeft: -5,
+    marginLeft: -25,
     width: sizes[11],
     height: sizes[8],
     overflow: 'visible',

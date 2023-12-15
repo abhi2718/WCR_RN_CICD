@@ -1,5 +1,5 @@
-import {CometChat} from '@cometchat/chat-sdk-react-native';
-import {ReactNode} from 'react';
+import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { ReactNode } from 'react';
 
 export type GroupsListProps = {
   groups: [] | CometChat.Group[];
@@ -11,6 +11,7 @@ export type GroupProps = {
 };
 export type SearchGroupProps = {
   handleTextChange: (text: string) => void;
+  toggleSearchInput: () => void;
 };
 export type SwitchButtonProps = {
   stage: number;
@@ -42,7 +43,7 @@ export type membersTypes = {
 export type MediaMessageProps = {
   guid?: string;
   type?: string;
-  uid?:string
+  uid?: string;
 };
 export type CommunityMembersProps = {
   group?: CometChat.Group;
@@ -53,13 +54,13 @@ export type MemberProps = {
 };
 
 export type UserReactionProps = {
-  hanldePress: () => void,
-  item:any
-}
+  hanldePress: () => void;
+  item: any;
+};
 export type UserListProps = {
   user: {
-      name: string;
-      avatar: string;
-      userId: string;
-  }
+    name: string;
+    avatar: string;
+    userId: string;
+  };
 };
