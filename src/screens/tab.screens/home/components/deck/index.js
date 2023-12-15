@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View,Image } from 'react-native';
 import { styles } from './homeStyle';
 import { useViewModal } from './homeViewModal';
 import {
@@ -15,7 +15,6 @@ import { SearchModal } from './components/searchModal';
 import { RunOutOffProfile } from './components/runOutOffProfile';
 import { PausedProfile } from './components/pausedProfile';
 import { HeaderDeck } from '../../../../../components/header';
-
 export default function Deck({ route }) {
   const {
     isLoading,
@@ -30,10 +29,13 @@ export default function Deck({ route }) {
     handleSetProfiles,
     goToNotification,
     count,
+    isNewUser,
     user,
+    infoScreenRef,
     clearProfile,
+    updateIsNewUser,
   } = useViewModal(route);
-  const isNewUser = false;
+
   if (isLoading) {
     return <FullLoader />;
   }
@@ -53,8 +55,22 @@ export default function Deck({ route }) {
         />
       </View>
       <Spacer position="bottom" size={8} />
-      {isNewUser ? (
+      {!isNewUser ? (
         <>
+          <CardStack
+            // onSwipedLeft={handleDisLike}
+            // onSwipedRight={handleLike}
+            horizontalThreshold={isAndroid ? 10 : 10}
+            verticalSwipe={false}
+            ref={infoScreenRef}
+            onSwipedAll={updateIsNewUser}
+          >
+           <View>
+           <Image
+            source={require('../../../../../assets/images/infoScreen.png')}
+          />
+           </View>
+          </CardStack>
         </>
       ) : (
         <>

@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, TextInput, Image } from 'react-native';
+import { View, TextInput, Image, Pressable } from 'react-native';
 import { SearchGroupProps } from '../../../../../../../../types/screen.type/communityChat';
 import { styles } from './style';
 import { Row } from '../../../../../../../../components/tools';
 
 const SearchGroup = (props: SearchGroupProps) => {
-  const { handleTextChange } = props;
+  const { handleTextChange, toggleSearchInput } = props;
   return (
     <Row
       style={styles.searchBarContainer}
@@ -17,11 +17,18 @@ const SearchGroup = (props: SearchGroupProps) => {
         placeholder="Search"
         onChangeText={handleTextChange}
       />
-      <Image
-        style={styles.crossIcon}
-        resizeMode="contain"
-        source={require('../../../../../../../../assets/images/icons/crossIcon.png')}
-      />
+      <Pressable
+        onPress={() => {
+          handleTextChange('');
+          toggleSearchInput();
+        }}
+      >
+        <Image
+          style={styles.crossIcon}
+          resizeMode="contain"
+          source={require('../../../../../../../../assets/images/icons/crossIcon.png')}
+        />
+      </Pressable>
     </Row>
   );
 };

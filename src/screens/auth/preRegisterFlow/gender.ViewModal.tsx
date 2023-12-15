@@ -38,7 +38,7 @@ export const useGenderViewModal = (props: ScreenParams) => {
         },
       };
 
-      if (user.profile.gender && user.profile.gender === gender) {
+      if (user.profile.gender === gender) {
         navigateToGenderPronounScreen();
         return
       }

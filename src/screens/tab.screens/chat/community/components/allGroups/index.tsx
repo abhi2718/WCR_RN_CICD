@@ -7,14 +7,19 @@ import SearchGroup from './components/searchGroup';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 
-const AllGroups = () => {
+const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
   const { groups, handleTextChange, loading, handleJoinGroup } = useViewModal();
   if (loading) {
     return <FullLoader />;
   }
   return (
     <View style={styles.container}>
-      <SearchGroup handleTextChange={handleTextChange} />
+      {showToggleSearchInput && (
+        <SearchGroup
+          toggleSearchInput={toggleSearchInput}
+          handleTextChange={handleTextChange}
+        />
+      )}
       <GroupsList groups={groups} handleJoinGroup={handleJoinGroup} />
     </View>
   );

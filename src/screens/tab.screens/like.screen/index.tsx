@@ -6,6 +6,7 @@ import {
   Modal,
   SafeAreaView,
   FlatList,
+  Image,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderDeck } from '../../../components/header';
@@ -94,54 +95,54 @@ export const LikeScreen = () => {
                     </ScrollView>
                   </View>
                 )}
-               <Spacer position="top" size={10} />
-              {data?.liked?.length > 0 && (
-                <View>
-                  <Row justifyContent="space-between">
-                    <Text>Liked</Text>
-                    <Pressable onPress={() => handleSetSeeAllState(1)}>
-                      <Text>See All</Text>
-                    </Pressable>
-                  </Row>
-                  <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
-                    {data.liked.map((item) => {
-                      return (
-                        <ProfileView
-                          key={item._id}
-                          item={item.actedOn}
-                          deleteLiked={deleteLiked}
-                          showDeleteIcon={true}
-                          isLiked={true}
-                        />
-                      );
-                    })}
-                  </ScrollView>
-                </View>
-              )} 
                 <Spacer position="top" size={10} />
-              {data?.allFavourite?.length > 0 && (
-                <View>
-                  <Row justifyContent="space-between">
-                    <Text>Saved</Text>
-                    <Pressable onPress={() => handleSetSeeAllState(2)}>
-                      <Text>See All</Text>
-                    </Pressable>
-                  </Row>
-                  <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
-                    {data.allFavourite.map((item) => {
-                      return (
-                        <ProfileView
-                          key={item._id}
-                          item={item.favourite}
-                          deleteFavourite={deleteFavourite}
-                          showDeleteIcon={true}
-                          isFavourite={true}
-                        />
-                      );
-                    })}
-                  </ScrollView>
-                </View>
-              )} 
+                {data?.liked?.length > 0 && (
+                  <View>
+                    <Row justifyContent="space-between">
+                      <Text>Liked</Text>
+                      <Pressable onPress={() => handleSetSeeAllState(1)}>
+                        <Text>See All</Text>
+                      </Pressable>
+                    </Row>
+                    <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
+                      {data.liked.map((item) => {
+                        return (
+                          <ProfileView
+                            key={item._id}
+                            item={item.actedOn}
+                            deleteLiked={deleteLiked}
+                            showDeleteIcon={true}
+                            isLiked={true}
+                          />
+                        );
+                      })}
+                    </ScrollView>
+                  </View>
+                )}
+                <Spacer position="top" size={10} />
+                {data?.allFavourite?.length > 0 && (
+                  <View>
+                    <Row justifyContent="space-between">
+                      <Text>Saved</Text>
+                      <Pressable onPress={() => handleSetSeeAllState(2)}>
+                        <Text>See All</Text>
+                      </Pressable>
+                    </Row>
+                    <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
+                      {data.allFavourite.map((item) => {
+                        return (
+                          <ProfileView
+                            key={item._id}
+                            item={item.favourite}
+                            deleteFavourite={deleteFavourite}
+                            showDeleteIcon={true}
+                            isFavourite={true}
+                          />
+                        );
+                      })}
+                    </ScrollView>
+                  </View>
+                )}
               </View>
             </ScrollView>
             <Modal visible={modalVisible}>

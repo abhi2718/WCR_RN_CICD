@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   pickPhotoFromCammera,
   pickPhotoFromGallary,
@@ -17,9 +17,10 @@ import { addUser } from '../../../store/reducers/user.reducer';
 import { ROUTES } from '../../../navigation';
 
 export const useVerificationViewModal = (props: AvatarProps) => {
-  const { optionData, loggInUserId, verificationOption } =
+  const { optionData, verificationOption } =
     props.route?.params.data || 'No optionData received';
   const { user } = useSelector((state: any) => state.userState);
+  const token = useRef(user?.token ? user?.token : null).current;
   const userWebsite =
     user.verificationId.licenceWebsite ||
     user.verificationId.studentEmail ||
@@ -216,8 +217,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   const updateImagesInDatabase = async (photos: object[]) => {
     try {
-      const user = await updateUserDetailsRepository.updateUserDetails(
-        loggInUserId,
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
         {
           update: {
             verificationId: {
@@ -243,10 +244,17 @@ export const useVerificationViewModal = (props: AvatarProps) => {
           },
         },
       );
-      const formData = {
-        user: user,
-      };
-      dispatch(addUser(formData));
+      const data = token
+      ? {
+          user: {
+            ...userData,
+            token,
+          },
+        }
+      : {
+          user: userData,
+        };
+      dispatch(addUser(data));
       setLoading(false);
       //navigateToHeightScreen(loggInUserId);
       return user;

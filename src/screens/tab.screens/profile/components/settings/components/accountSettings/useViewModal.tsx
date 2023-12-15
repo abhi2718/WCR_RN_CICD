@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserProfileRepository } from '../../../../../../../repository/userProfile.repo';
 import { addUser } from '../../../../../../../store/reducers/user.reducer';
+import { ROUTES } from '../../../../../../../navigation';
 
 export const useViewModal = () => {
   const { user } = useSelector(({ userState }) => userState);
@@ -37,9 +38,10 @@ export const useViewModal = () => {
     }
   }
 
-  const deleteUser = async (status:boolean) => {
+  const deleteUser = async () => {
     try {
       await userProfileRepository.deleteUser();
+      navigation.navigate(ROUTES.SignIn)
     } catch (error) {
     }
   }

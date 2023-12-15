@@ -15,6 +15,10 @@ export class UserProfileRepository {
     const url = `${AppUrl.userEndPoints}/delete`;
     return await this.apiService.getPostApiResponse(url,{});
   }
+  async hardDeleteUser(): Promise<any> {
+    const url = `${AppUrl.userEndPoints}/hardDelete`;
+    return await this.apiService.getPostApiResponse(url,{});
+  }
   async blockByScope(payload:any): Promise<any> {
     const url = `${AppUrl.blockUserEndPoint}`;
     return await this.apiService.getPostApiResponse(url,payload);

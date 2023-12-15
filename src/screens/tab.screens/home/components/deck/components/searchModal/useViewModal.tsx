@@ -7,13 +7,18 @@ export const useViewModal = (props: SearchModalProps) => {
   const { showSearchModal, toggleSearchModal, handleSetProfiles } = props;
   const [loading, setLoading] = useState(false);
   const [users, setUser] = useState<any[]>([]);
+
+  const [isSearchActive, setSearchActive] = useState(false);
+
   const handleSearch = async (text: string) => {
+    if (!isSearchActive) setSearchActive(true);
     try {
       const data = await homeDeckRepository.searchUser(text);
       setUser(data);
     } catch (error) {}
   };
   const handleClose = () => {
+    setSearchActive(false);
     toggleSearchModal();
     setUser([]);
   };
@@ -35,5 +40,6 @@ export const useViewModal = (props: SearchModalProps) => {
     showSearchModal,
     fetchSelectedUser,
     loading,
+    isSearchActive,
   };
 };

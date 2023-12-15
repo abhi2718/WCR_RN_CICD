@@ -25,8 +25,8 @@ export const maritalStatus = [
 export const religion = [
   'Buddhist',
   'Christian',
-  'Catholic',
   'Hindu',
+  'Catholic',
   'Jewish',
   'Muslim',
   'Sikh',
@@ -34,8 +34,9 @@ export const religion = [
   'Taoism',
   'Spiritual',
   'Agnostic',
-  'Prefer not to say',
   'Atheist',
+  'Other',
+  'Prefer not to say',
 ];
 
 export const hobbies = [
@@ -50,6 +51,7 @@ export const hobbies = [
   'Foodie',
   'Gardening',
   'Hiking',
+  'Languages',
   'Listening to music',
   'Meditation',
   'Movies',
@@ -69,7 +71,13 @@ export const hobbies = [
   'Video games',
 ];
 
-export const smoking = ['Never', 'Sometimes', 'Regularly', 'Prefer not to say'];
+export const smoking = [
+  'Never',
+  'Rarely',
+  'Sometimes',
+  'Frequently',
+  'Prefer not to say',
+];
 
 export const exercise = [
   'Never',
@@ -89,14 +97,14 @@ export const politics = [
 
 export const diet = [
   'No restrictions',
-  'Gluten-Free',
+  'Gluten-free',
   'Vegetarian',
   'Vegan',
   'Pescatarian',
   'Halal',
   'Kosher',
-  'Prefer not to say',
   'Other',
+  'Prefer not to say',
 ];
 
 export const drinking = [
@@ -107,22 +115,22 @@ export const drinking = [
   'Prefer not to say',
 ];
 
-export const kids = ['None', 'Have kid(s)', 'Prefer not to say'];
+export const kids = ['None', 'Have kids', 'Prefer not to say'];
 
 export const familyPlan = [
-  'Open to kid(s)',
-  'Want kid(s)',
-  "Don't want kid(s)",
+  'Open to kids',
+  'Want kids',
+  "Don't want kids",
   'Undecided',
   'Prefer not to say',
 ];
 
 export const pets = [
   'None',
-  'Cat(s)',
-  'Dog(s)',
+  'Cats',
+  'Dogs',
   'Both',
-  'Other pet(s)',
+  'Other pets',
   'Prefer not to say',
 ];
 
@@ -135,11 +143,10 @@ export const cannabis = [
 ];
 
 export const covidVaccineStatus = [
-  'Fully vaccinated',
-  'Partially vaccinated, plan to complete',
-  'Partially vaccinated, unable to complete',
-  'Unable to receive vaccine',
-  'Decline to receive vaccine',
+  'Fully',
+  'Partially',
+  'Unable to receive',
+  'Decline',
   'Prefer not to say',
 ];
 
@@ -161,9 +168,9 @@ export const country = [
 ];
 
 export const relationship = [
-  'Long Term Relationship',
+  'Long-term relationship',
   'Marriage',
-  'Friendship',
+  'Long-term, open to short',
   'Casual',
   'Prefer not to say',
 ];
