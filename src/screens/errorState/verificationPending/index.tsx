@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, SafeAreaView, Text, View } from 'react-native';
 import { Column, Logo, Row, ScreenContainer } from '../../../components/tools';
 import { ErrorScreenHeader, HeaderDeck } from '../../../components/header';
 import { PrimaryButton } from '../../../components/button';
@@ -8,9 +8,10 @@ import { usePandingStateViewModal } from './pendingState.ViewModal';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 
 const VerificationPending = (props: ScreenParams) => {
-  const { state ,isFormSubmitted,navigateToGender} = usePandingStateViewModal(props);
+  const { state, isFormSubmitted, navigateToGender } =
+    usePandingStateViewModal(props);
   return (
-    <View style={pendingStyle.mainContainer}>
+    <SafeAreaView style={pendingStyle.mainContainer}>
       <ErrorScreenHeader />
       {state === 'Pending' && isFormSubmitted && (
         <View style={pendingStyle.content}>
@@ -39,8 +40,9 @@ const VerificationPending = (props: ScreenParams) => {
               as soon as we verify it.
             </Text>
             <View style={pendingStyle.primaryButton}>
-              <PrimaryButton title="Review Profile"
-              onPress={navigateToGender}
+              <PrimaryButton
+                title="Review Profile"
+                onPress={navigateToGender}
               />
             </View>
           </Column>
@@ -88,7 +90,7 @@ const VerificationPending = (props: ScreenParams) => {
           </Column>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

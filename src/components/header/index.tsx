@@ -116,22 +116,36 @@ interface HeaderDeckProps {
   count?: number;
   toggleSearchModal?: any;
   goToNotification?: any;
+  isPrefrence?: boolean;
+  isSearchIcon?: boolean;
+  toggleSearchInput?: any;
 }
 
 export const HeaderDeck = (props: HeaderDeckProps) => {
-  const { count, toggleSearchModal, goToNotification } = props;
+  const {
+    count = 0,
+    toggleSearchModal,
+    goToNotification,
+    isPrefrence = true,
+    isSearchIcon = false,
+    toggleSearchInput,
+  } = props;
   const { navigate } = useNavigation();
   const goToPrefrence = () => navigate(ROUTES.Preferences);
   return (
     <View>
       <Row justifyContent="space-between" alignItems="center">
-        <Row alignItems="center" style={headerDeckStyle.row} gap={25}>
+        <Row alignItems="center" style={headerDeckStyle.row} gap={30}>
           <Pressable onPress={goToNotification}>
-            <Text style={headerDeckStyle.count}>{count}</Text>
+            {count > 9 ? (
+              <Text style={headerDeckStyle.count}>9+</Text>
+            ) : (
+              <Text style={headerDeckStyle.count}>{count}</Text>
+            )}
             <Image
               style={headerDeckStyle.notificationIcon}
               resizeMode="contain"
-              source={require('../../assets/images/notification.png')}
+              source={require('../../assets/images/icons/notificationIcon.png')}
             />
           </Pressable>
           {toggleSearchModal && (
@@ -144,12 +158,25 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           )}
         </Row>
         <Logo width={45} height={45} />
-        <Pressable onPress={goToPrefrence} style={headerDeckStyle.row}>
-          <Image
-            style={headerDeckStyle.searchIcon}
-            source={require('../../assets/images/Filter.png')}
-          />
-        </Pressable>
+        {isPrefrence && (
+          <Pressable onPress={goToPrefrence} style={headerDeckStyle.row}>
+            <Image
+              style={headerDeckStyle.searchIcon}
+              source={require('../../assets/images/Filter.png')}
+            />
+          </Pressable>
+        )}
+        {isSearchIcon && (
+          <Pressable onPress={toggleSearchInput}>
+            <Image
+              style={headerDeckStyle.searchIcon}
+              source={require('../../assets/images/Magnifier.png')}
+            />
+          </Pressable>
+        )}
+        {!isPrefrence && !isSearchIcon && (
+          <View style={headerDeckStyle.searchIcon} />
+        )}
       </Row>
     </View>
   );
@@ -166,20 +193,21 @@ export const headerDeckStyle = StyleSheet.create({
   },
   count: {
     position: 'absolute',
-    right: -sizes[1],
-    top: -sizes[0],
+    right: -16,
+    top: -8,
     backgroundColor: colors.ui.primary,
     color: colors.ui.white,
-    width: 22,
-    height: 22,
-    paddingTop: 3,
+    width: 25,
+    height: 23,
+    paddingTop: 2,
     textAlign: 'center',
-    borderRadius: 11,
+    borderRadius: 12,
     overflow: 'hidden',
-    fontSize: 10,
+    fontSize: 12,
     borderColor: colors.ui.white,
-    borderWidth: 1,
+    borderWidth: 2,
     zIndex: sizes[2],
+    fontWeight: 'bold',
   },
   row: {
     width: sizes[10],
@@ -198,6 +226,7 @@ export const ErrorScreenHeader = () => {
         justifyContent="space-between"
         alignItems="center"
       >
+        <View style={errorScreenHeaderStyle.emptyView} />
         <Logo width={40} height={40} />
         <Pressable onPress={modalShow}>
           <Image
@@ -222,6 +251,9 @@ export const errorScreenHeaderStyle = StyleSheet.create({
     paddingBottom: sizes[2],
     borderBottomColor: colors.ui.chatBorder,
     borderBottomWidth: 1,
+  },
+  emptyView: {
+    width: 20,
   },
   backArrow: {
     width: sizes[6],

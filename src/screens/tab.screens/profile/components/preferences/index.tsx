@@ -61,7 +61,7 @@ export const PreferencesScreen = () => {
           {optionsList.map((item, index) => {
             if (index === 2) {
               return (
-                <View style={styles.multiSelector}>
+                <View key={index} style={styles.multiSelector}>
                   <Row alignItems="center" justifyContent="space-between">
                     <Text>Distance preference</Text>
                     {distanceRange[0] === 600 ? (
@@ -94,7 +94,7 @@ export const PreferencesScreen = () => {
             }
             if (index === 3) {
               return (
-                <View style={styles.multiSelector}>
+                <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
                     <Text>Age preference</Text>
                     <Text style={styles.silderSubText}>
@@ -115,7 +115,7 @@ export const PreferencesScreen = () => {
             }
             if (index === 4) {
               return (
-                <View style={styles.multiSelector}>
+                <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
                     <Text>Height preference</Text>
                     <Text style={styles.silderSubText}>
@@ -136,6 +136,7 @@ export const PreferencesScreen = () => {
             }
             return (
               <Row
+                key={index}
                 style={styles.itemRow}
                 justifyContent="space-between"
                 alignItems="center"
