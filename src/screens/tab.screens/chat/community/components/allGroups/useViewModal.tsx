@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {CometChat} from '@cometchat/chat-sdk-react-native';
+import { useEffect, useState } from 'react';
+import { CometChat } from '@cometchat/chat-sdk-react-native';
 
 export const useViewModal = () => {
   const [groups, setGroups] = useState<CometChat.Group[] | []>([]);
@@ -48,5 +48,6 @@ export const useViewModal = () => {
     handleTextChange,
     loading,
     handleJoinGroup,
+    groupListRequestBuilder,
   };
 };

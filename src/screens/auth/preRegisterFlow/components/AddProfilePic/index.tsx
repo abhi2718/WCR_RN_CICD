@@ -227,13 +227,16 @@ const AddProfilePicScreen = (props: any) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Pressable onPress={() => setImageModal(false)}>
+              <Pressable
+                style={modalStyles.arrowContainer}
+                onPress={() => setImageModal(false)}
+              >
                 <Image
                   style={modalStyles.arrow}
-                  source={require('../../../../../assets/images/icons/arrow.png')}
+                  source={require('../../../../../assets/images/icons/back-arrow.png')}
                 />
               </Pressable>
-              <Logo width={50} height={35} />
+              <Logo style={modalStyles.logo} width={50} height={35} />
               <View />
             </Row>
             <View style={modalStyles.content}>
