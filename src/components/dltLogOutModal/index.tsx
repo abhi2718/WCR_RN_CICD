@@ -11,7 +11,6 @@ import {
 import { Row, Spacer, dimensions } from '../tools';
 import { AlertScreen } from '../alert';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
-
 import { useLogOutViewModal } from '../../utils/logOut';
 
 export const DltLogOutModal = (props: DltLogOutType) => {
@@ -21,9 +20,10 @@ export const DltLogOutModal = (props: DltLogOutType) => {
   const userProfileRepository = new UserProfileRepository();
   const { logOut } = useLogOutViewModal();
 
-  const deleteUser = async (status: boolean) => {
+  const hardDeleteUser = async () => {
     try {
-      await userProfileRepository.deleteUser();
+      await userProfileRepository.hardDeleteUser();
+      logOut()
     } catch (error) {}
   };
 
@@ -33,7 +33,6 @@ export const DltLogOutModal = (props: DltLogOutType) => {
 
   const showDeleteAccountModal = () => {
     setDeleteModal(true);
-    logOut()
   };
 
   const closeModal = () => {
@@ -88,7 +87,7 @@ export const DltLogOutModal = (props: DltLogOutType) => {
         title="Delete Account?"
         description="Are you sure you want to 
          delete your account permanently?"
-        onPress={() => deleteUser}
+        onPress={() => hardDeleteUser()}
       ></AlertScreen>
     </>
   );
