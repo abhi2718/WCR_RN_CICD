@@ -33,7 +33,7 @@ export default function CommunityChat() {
         <SwitchButton stage={state} setStage={setState} />
       </View>
       {state === 0 ? <CometChatConversationsWithMessages
-        //isUserWindow={false}
+       // isUserWindow={false}
       /> : <AllGroups />}
     </View>
     </ScreenWrapper>
