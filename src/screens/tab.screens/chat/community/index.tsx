@@ -26,7 +26,7 @@ export default function CommunityChat() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.paddingH16}>
-        <HeaderDeck
+      <HeaderDeck
           isSearchIcon={state !== 0}
           isPrefrence={false}
           count={count}

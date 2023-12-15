@@ -13,7 +13,9 @@ export const PrivateChatScreen = () => {
   return (
     <ScreenWrapper>
        <View style={styles.containerStyle}>
-      <HeaderDeck count={count} goToNotification={goToNotification} />
+        <View style={{paddingLeft:16}}>
+        <HeaderDeck count={count} goToNotification={goToNotification} />
+     </View>
       <CometChatConversationsWithMessages
        isUserWindow={true}
       />
