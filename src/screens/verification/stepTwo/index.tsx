@@ -322,7 +322,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
           </View>
         </View>
       </Modal>
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -369,7 +368,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   value={website}
                   onChangeText={handleWebsite}
                 />
-                <PrimaryButton onPress={()=>sumbitVerificationForm()} title="Submit" 
+                <PrimaryButton onPress={() => {
+                  sumbitVerificationForm();
+                }} title="Submit" 
                 isLoading={loading}
                 />
               </View>

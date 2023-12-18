@@ -1,0 +1,1 @@
+{"version":3,"file":"Emoji.js","sourceRoot":"","sources":["../../../../src/shared/views/CometChatEmojiKeyboard/Emoji.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AACH,MAAM,cAAc;IAClB,IAAI,GAAG,EAAE,CAAC;IACV,QAAQ,GAAG,EAAE,CAAC;IACd,YAAY,EAAE,IAAI,EAAE,QAAQ,EAAE;QAC5B,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;IAC3B,CAAC;CACF;AAED,OAAO,EAAE,cAAc,EAAE,CAAC"}

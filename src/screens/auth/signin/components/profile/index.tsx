@@ -155,13 +155,13 @@ const Profile = (props: ScreenParams) => {
                 <FlatInput
                   editable={true}
                   label="MM/DD/YYYY"
-                  value={formData.dob}
                   onChangeText={(text: string) =>
                     handleInputChange('dob', formateDOB(text))
                   }
                   error={validationErrors.dob}
+                  value = {formData.dob}
                 />
-                {validationErrors.dob && (
+                 {validationErrors.dob && (
                   <ErrorText> {validationErrors.dob}</ErrorText>
                 )}
               </View>

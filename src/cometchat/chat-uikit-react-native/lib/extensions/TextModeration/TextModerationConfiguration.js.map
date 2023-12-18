@@ -1,0 +1,1 @@
+{"version":3,"file":"TextModerationConfiguration.js","sourceRoot":"","sources":["../../../src/extensions/TextModeration/TextModerationConfiguration.tsx"],"names":[],"mappings":"AAgBA,MAAM,OAAO,2BAA2B;IACtC,eAAe,CAA2B;IAE1C,YAAY,EACV,eAAe,GAAG,SAAS,GACU;QACnC,IAAI,CAAC,eAAe,GAAI,eAAe,CAAA;IACzC,CAAC;CACJ"}

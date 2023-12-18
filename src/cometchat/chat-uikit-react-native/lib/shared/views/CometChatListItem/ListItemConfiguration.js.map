@@ -1,0 +1,1 @@
+{"version":3,"file":"ListItemConfiguration.js","sourceRoot":"","sources":["../../../../src/shared/views/CometChatListItem/ListItemConfiguration.tsx"],"names":[],"mappings":"AAYA,MAAM,OAAO,qBAAqB;IAChC,YAAY,KAAqC;QAC/C,IAAI,KAAK;YACP,KAAK,MAAM,CAAC,GAAG,EAAE,KAAK,CAAC,IAAI,MAAM,CAAC,OAAO,CAAC,KAAK,CAAC,EAAE;gBAChD,IAAI,CAAC,GAAG,CAAC,GAAG,KAAK,CAAC;aACnB;IACL,CAAC;CACF"}

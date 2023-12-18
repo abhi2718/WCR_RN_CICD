@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { View, Image, Text, SafeAreaView } from 'react-native';
-import { CometChatConversationsWithMessages } from '../../../../cometChat/src';
 import { useViewModal } from './useViewModal';
 import SwitchButton from './components/switchButton';
 import AllGroups from './components/allGroups';
-//import { CometChatConversationsWithMessages } from '@cometchat/chat-uikit-react-native';
 import {
   Column,
   Logo,
@@ -14,6 +12,7 @@ import {
 } from '../../../../components/tools';
 import { styles } from './styles';
 import { HeaderDeck } from '../../../../components/header';
+//import { CometChatConversationsWithMessages } from '../../../../cometchat/chat-uikit-react-native/src';
 export default function CommunityChat() {
   const { state, setState, count } = useViewModal();
 
@@ -34,14 +33,14 @@ export default function CommunityChat() {
         />
         <SwitchButton stage={state} setStage={setState} />
       </View>
-      {state === 0 ? (
+      {/* {state === 0 ? (
         <CometChatConversationsWithMessages isUserWindow={false} />
       ) : (
         <AllGroups
           toggleSearchInput={toggleSearchInput}
           showToggleSearchInput={showToggleSearchInput}
         />
-      )}
+      )} */}
     </SafeAreaView>
   );
 }
