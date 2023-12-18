@@ -1,13 +1,6 @@
-
-//import { CometChatUIKit } from '@cometchat/chat-uikit-react-native';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { CometChatUIKit } from '../../cometchat/chat-uikit-react-native/src';
-//import { CometChatUIKit } from '../../cometchat/chat-uikit-react-native/src/shared/CometChatUiKit/CometChatUIKit';
-//import { CometChatUIKit, UIKitSettings } from '../../cometchat/chat-uikit-react-native/lib';
-//import { CometChatUIKit } from '../../cometchat/chat-uikit-react-native/lib/shared/CometChatUiKit/CometChatUIKit';
-//import { CometChatUIKit, ReactionsExtension, UIKitSettings } from '../../cometchat/chat-uikit-react-native/src';
-//import { CometChatUIKit, ReactionsExtension, UIKitSettings } from '../../cometchat/chat-uikit-react-native/src';
+import { CometChatUIKit, ReactionsExtension } from '../../cometchat/chat-uikit-react-native/src';
 import { config } from '../../utils/config';
 
 export const useCometChatInit = () => {
@@ -17,7 +10,7 @@ export const useCometChatInit = () => {
     appId: config.APP_ID,
     authKey: config.AUTH_KEY,
     region: config.REGION,
-    //extensions: [new ReactionsExtension()],
+    extensions: [new ReactionsExtension()],
   };
  
   useEffect(() => {
