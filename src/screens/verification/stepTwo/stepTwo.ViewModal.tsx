@@ -210,6 +210,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         }
       }
       const verificationData = await updateImagesInDatabase(imageUrls);
+      closePicModal()
+      closePhdOptionPicUploadingModal()
       navigateToVerificationState()
     } catch (err) {
     }
