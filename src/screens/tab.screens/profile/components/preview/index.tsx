@@ -37,7 +37,7 @@ export const PreviewScreen = () => {
                   source={{ uri: user.profilePicture.url }}
                 /> */}
                 <Text>
-                  {user?.fullName} 
+                  {user.profile.displayName ?? user.profile.name.first} 
                 </Text>
                 {
                   user?.genderPronoun &&    <Text>{user?.genderPronoun}</Text>

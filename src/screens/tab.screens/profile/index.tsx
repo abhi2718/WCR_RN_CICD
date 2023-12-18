@@ -43,7 +43,7 @@ export const ProfileScreen = ({}) => {
                 }}
               />
               <Column>
-                <Text>{user.fullName}</Text>
+                <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
                 {/* <Progress.Bar progress={0.3} width={200} />
               <Text>34% Profile Complete</Text> */}
               </Column>
