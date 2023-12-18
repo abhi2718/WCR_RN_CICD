@@ -47,6 +47,7 @@ import {
 } from '../../../screens/tab.screens/chat/community/components/mediaMessages';
 import { CommunityMembers } from '../../../screens/tab.screens/chat/community/components/communityMembers';
 import { ScrollView } from 'react-native-gesture-handler';
+import { sizes } from '../../../infrastructure/theme/sizes';
 
 export interface ModalDetailsInterface {
   title: string;
@@ -827,7 +828,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   if (group) {
     return (
       <View>
-        <View style={{ height: 200 }}>
+        <View style={{ height: 400, paddingHorizontal: 16 }}>
           <Header
             title={title}
             showCloseButton={showCloseButton}
@@ -845,21 +846,36 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
             }
           />
+          <Pressable onPress={handleLeaveGroup}>
+            <Text>Leave Group</Text>
+          </Pressable>
           {groupDetails && (
-            <Row>
+            <View style={styles.groupInfoContainer}>
               <Image
                 style={myStyles.imageStyle}
                 source={{ uri: groupDetails?.getIcon() }}
               />
+              <View style={styles.infoBtBox}>
+                <Pressable>
+                  <Image
+                    source={require('../../../assets/images/icons/infoIcon.png')}
+                    style={styles.infoIcon}
+                  />
+                </Pressable>
+              </View>
               <Column>
-                <Text>{groupDetails.getName()}</Text>
-                <Text>{groupDetails.getDescription()} </Text>
+                <Text style={styles.groupName}>{groupDetails.getName()}</Text>
+                <Text style={styles.participantCount}>
+                  "Dummy" Group.10 participants "Dummy"
+                </Text>
+                <View style={styles.descContainer}>
+                  <Text style={styles.groupDescription}>
+                    {groupDetails.getDescription()}{' '}
+                  </Text>
+                </View>
               </Column>
-            </Row>
+            </View>
           )}
-          <Pressable onPress={handleLeaveGroup}>
-            <Text>Leave Group</Text>
-          </Pressable>
         </View>
         <View
           style={{ height: dimensions.height - 200, backgroundColor: '#fff' }}
@@ -956,7 +972,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               />
               <Column>
                 <Text>{groupDetails.getName()}</Text>
-                <Text>{groupDetails.getDescription()} </Text>
+                <Text>{groupDetails.getDescription()}</Text>
               </Column>
             </Row>
           )}
@@ -974,9 +990,9 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
 
 const myStyles = StyleSheet.create({
   imageStyle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 160,
+    height: 160,
+    borderRadius: 100,
   },
   menuOptins: {
     height: 50,
