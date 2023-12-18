@@ -275,104 +275,104 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor:"#fff"}}>
-       <View
-      style={[
-        Style.container,
-        showComponent == ComponentNames.Details ||
-        showComponent == ComponentNames.Thread
-          ? {}
-          : {
-              paddingStart: 8,
-              paddingEnd: 8,
-            },
-        {backgroundColor, height, width, ...border, borderRadius},
-      ]}>
-      {showComponent == ComponentNames.Details && (
-        <View style={[Style.stackMe, {backgroundColor, borderRadius}]}>
-          <CometChatDetails
-            user={detailsData.current.user}
-            group={detailsData.current.group}
-            {..._detailsConfiguration}
-            onBack={
-              _detailsConfiguration.onBack ||
-              setShowComponent.bind(this, ComponentNames.Default)
-            }
-          />
-        </View>
-      )}
-      {showComponent == ComponentNames.Thread && (
-        <View style={[Style.stackMe, {backgroundColor, borderRadius}]}>
-          <CometChatThreadedMessages
-            BubbleView={(msg) =>
-              typeof threadedMessageInfo.current?.view === 'function' &&
-              threadedMessageInfo.current.view()
-            }
-            parentMessage={threadedMessageInfo.current.message}
-            onClose={() => setShowComponent(ComponentNames.Default)}
-            threadedMessagesStyle={{
-              closeIconTint: 'black',
-              titleStyle: {fontSize: 18},
-            }}
-            // threadedMessagesStyle={new ThreadedMessagesStyle({})}
-            {..._threadedConfiguration}
-          />
-        </View>
+      <View
+    style={[
+      Style.container,
+      showComponent == ComponentNames.Details ||
+      showComponent == ComponentNames.Thread
+        ? {}
+        : {
+            paddingStart: 8,
+            paddingEnd: 8,
+          },
+      {backgroundColor, height, width, ...border, borderRadius},
+    ]}>
+    {showComponent == ComponentNames.Details && (
+      <View style={[Style.stackMe, {backgroundColor, borderRadius}]}>
+        <CometChatDetails
+          user={detailsData.current.user}
+          group={detailsData.current.group}
+          {..._detailsConfiguration}
+          onBack={
+            _detailsConfiguration.onBack ||
+            setShowComponent.bind(this, ComponentNames.Default)
+          }
+        />
+      </View>
+    )}
+    {showComponent == ComponentNames.Thread && (
+      <View style={[Style.stackMe, {backgroundColor, borderRadius}]}>
+        <CometChatThreadedMessages
+          BubbleView={(msg) =>
+            typeof threadedMessageInfo.current?.view === 'function' &&
+            threadedMessageInfo.current.view()
+          }
+          parentMessage={threadedMessageInfo.current.message}
+          onClose={() => setShowComponent(ComponentNames.Default)}
+          threadedMessagesStyle={{
+            closeIconTint: 'black',
+            titleStyle: {fontSize: 18},
+          }}
+          // threadedMessagesStyle={new ThreadedMessagesStyle({})}
+          {..._threadedConfiguration}
+        />
+      </View>
+    )}
+    <View style={{flex: 1}}>
+      {hideMessageHeader ? null : MessageHeaderView ? (
+        <MessageHeaderView user={userObject} group={groupObject} />
+      ) : (
+        <CometChatMessageHeader
+          user={userObject}
+          group={groupObject}
+          AppBarOptions={({user, group}) => (
+            <DetailViewIcon user={user} group={group} />
+          )}
+          disableTyping={disableTyping}
+            onBack={() => {
+              if (handleBackBtn) {
+                handleBackBtn()
+              }
+              setShowComponent(ComponentNames.Default)
+          }}
+          {..._headerConfiguration}
+        />
       )}
       <View style={{flex: 1}}>
-        {hideMessageHeader ? null : MessageHeaderView ? (
-          <MessageHeaderView user={userObject} group={groupObject} />
+        {MessageListView ? (
+          <MessageListView user={userObject} group={groupObject} />
         ) : (
-          <CometChatMessageHeader
+          <CometChatMessageList
             user={userObject}
             group={groupObject}
-            AppBarOptions={({user, group}) => (
-              <DetailViewIcon user={user} group={group} />
-            )}
-            disableTyping={disableTyping}
-              onBack={() => {
-                if (handleBackBtn) {
-                  handleBackBtn()
-                }
-                setShowComponent(ComponentNames.Default)
+            emptyStateText={localize('NO_MESSAGES_FOUND')}
+            errorStateText={localize('SOMETHING_WRONG')}
+            dateSeperatorPattern={_listConfiguration.dateSeperatorPattern}
+            onThreadRepliesPress={(msg, view) => {
+              threadedMessageInfo.current = {message: msg, view};
+              setShowComponent(ComponentNames.Thread);
             }}
-            {..._headerConfiguration}
-          />
-        )}
-        <View style={{flex: 1}}>
-          {MessageListView ? (
-            <MessageListView user={userObject} group={groupObject} />
-          ) : (
-            <CometChatMessageList
-              user={userObject}
-              group={groupObject}
-              emptyStateText={localize('NO_MESSAGES_FOUND')}
-              errorStateText={localize('SOMETHING_WRONG')}
-              dateSeperatorPattern={_listConfiguration.dateSeperatorPattern}
-              onThreadRepliesPress={(msg, view) => {
-                threadedMessageInfo.current = {message: msg, view};
-                setShowComponent(ComponentNames.Thread);
-              }}
-              customSoundForMessages={customSoundForIncomingMessages}
-              {..._listConfiguration}
-            />
-          )}
-        </View>
-        {showLiveReaction ? <CometChatLiveReactions /> : null}
-        {hideMessageComposer ? null : MessageComposerView ? (
-          <MessageComposerView group={group} user={user} />
-        ) : (
-          <CometChatMessageComposer
-            ref={composerRef}
-            user={userObject}
-            group={groupObject}
-            disableSoundForMessages={disableSoundForMessages}
-            customSoundForMessage={customSoundForOutgoingMessages}
-            disableTypingEvents={disableTyping}
-            {..._composerConfiguration}
+            customSoundForMessages={customSoundForIncomingMessages}
+            {..._listConfiguration}
           />
         )}
       </View>
+      {showLiveReaction ? <CometChatLiveReactions /> : null}
+      {hideMessageComposer ? null : MessageComposerView ? (
+        <MessageComposerView group={group} user={user} />
+      ) : (
+        <CometChatMessageComposer
+          ref={composerRef}
+          user={userObject}
+          group={groupObject}
+          disableSoundForMessages={disableSoundForMessages}
+          customSoundForMessage={customSoundForOutgoingMessages}
+          disableTypingEvents={disableTyping}
+          {..._composerConfiguration}
+        />
+      )}
     </View>
-   </SafeAreaView>
+  </View>
+    </SafeAreaView>
   );
 };

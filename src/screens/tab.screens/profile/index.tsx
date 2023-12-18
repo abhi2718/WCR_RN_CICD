@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import Image from 'react-native-fast-image';
 import {
   Column,
@@ -26,6 +26,7 @@ export const ProfileScreen = ({}) => {
     showLogOutModal,
     setLogOutModal,
     _logOut,
+    loading,
   } = useViewModal();
   return (
     <ScreenWrapper>

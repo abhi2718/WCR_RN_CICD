@@ -58,8 +58,6 @@ export default function Deck({ route }) {
       {!isNewUser ? (
         <>
           <CardStack
-            // onSwipedLeft={handleDisLike}
-            // onSwipedRight={handleLike}
             horizontalThreshold={isAndroid ? 10 : 10}
             verticalSwipe={false}
             ref={infoScreenRef}

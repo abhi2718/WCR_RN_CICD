@@ -32,4 +32,5 @@ export type UserProfile = {
     showLike: boolean;
     showDisLike: boolean;
     showSave: boolean;
+    showBlock?:boolean
   }

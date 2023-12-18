@@ -55,17 +55,30 @@ export const SearchModal = (props: SearchModalProps) => {
               </Row>
 
               {users.length === 0 ? (
+                // <View style={searchStyle.content}>
+                //   <Column gap={25} alignItems="center">
+                //     <Text style={searchStyle.subHeading}>No results found</Text>
+                //     <Image
+                //       style={searchStyle.pendingIcon}
+                //       resizeMode="contain"
+                //       source={require('../../../../../../../assets/images/icons/noSearchResultIcon.png')}
+                //     />
+                //     <Text style={searchStyle.text}>
+                //       We could not find what you {`\n`} were searching for.
+                //       Please try again.
+                //     </Text>
+                //   </Column>
+                // </View>
                 <View style={searchStyle.content}>
                   <Column gap={25} alignItems="center">
-                    <Text style={searchStyle.subHeading}>No results found</Text>
                     <Image
                       style={searchStyle.pendingIcon}
                       resizeMode="contain"
-                      source={require('../../../../../../../assets/images/icons/noSearchResultIcon.png')}
+                      source={require('../../../../../../../assets/images/icons/searchBlank.png')}
                     />
                     <Text style={searchStyle.text}>
-                      We could not find what you {`\n`} were searching for.
-                      Please try again.
+                      Discover new users! Use keywords to {`\n`} find your
+                      match. Happy searching!
                     </Text>
                   </Column>
                 </View>

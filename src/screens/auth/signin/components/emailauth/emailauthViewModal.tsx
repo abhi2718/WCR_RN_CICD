@@ -3,6 +3,7 @@ import {OtpRepository} from '../../../../../repository/otp.repo';
 import {ShowFlashMessage} from '../../../../../components/flashBar';
 import {useViewModal} from '../../signinViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
+import { options } from '../../../../../utils/constanst';
 
 export const useEmailAuthViewModal = (props: ScreenParams) => {
   const {navigation} = props;
@@ -18,8 +19,15 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
 
   let {setLoading,loading,checkIsNewUser,getOtpOnEmail} = useViewModal(props);
 
+  const handleInputChange = (text: string) => {
+    setOtp(text);
+  };
+
   const verifyEmail = async () => {
     try {
+      if (!otp.length) {
+        return ShowFlashMessage('Alert', 'Please enter OTP', 'danger');
+      }
       setLoading(true);
       const {data} = await otpInRepository.verifytOtp({email, code: otp});
       setLoading(false);
@@ -53,5 +61,6 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
     loading,
     fbId,
     firebaseUid,
+    handleInputChange,
   };
 };

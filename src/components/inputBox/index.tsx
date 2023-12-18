@@ -20,10 +20,10 @@ export const FlatInput: React.FC<InputProps> = (props) => {
     />
   );
 };
-const DropdownChildContainer = styled(Dropdown)<InputProps>`
+const DropdownChildContainer = styled(Dropdown)<any>`
   margin-top: ${({ marginTop = sizes[1] }) => `${marginTop}px`};
 `;
-export const DropdownInput: React.FC<InputProps> = (props) => {
+export const DropdownInput: React.FC<any> = (props) => {
   return (
     <DropdownChildContainer
       {...props}
