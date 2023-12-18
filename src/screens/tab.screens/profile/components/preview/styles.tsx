@@ -17,8 +17,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   closeIcon: {
-    width: 20,
-    height: 20,
+    width: 16,
+    height: 16,
   },
   headerText: {
     fontSize: fontSizes.title,
