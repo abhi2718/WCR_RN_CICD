@@ -7,7 +7,7 @@ import { ProfileModalSheetProps } from '../../../../../../../types/screen.type/p
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../../navigation';
 import { ProfileModal } from '../../../../../../../components/profile.component';
-import { CometChat } from '../../../../../../../cometchat/chat-sdk-react-native/CometChat';
+
 
 export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
   const { visible, toggleVisiblity, image, name, navigateToPrivateChat,senderId, toggleModal,

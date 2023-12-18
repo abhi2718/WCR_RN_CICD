@@ -13,6 +13,7 @@ import {
   StyleProp,
   ViewStyle,
   ListRenderItem,
+  ActivityIndicator,
   //@ts-ignore
 } from 'react-native';
 import { CometChatContext } from '../../CometChatContext';
@@ -34,6 +35,8 @@ import { ListItemStyleInterface } from '../CometChatListItem/ListItemStyle';
 import { AvatarStyleInterface } from '../CometChatAvatar/AvatarStyle';
 import { CometChatContextType } from '../../base/Types';
 import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { NoFriends } from '../../../../../../screens/tab.screens/chat/private/compnents/nofriends';
+import { NoCommunityJoined } from '../../../../../../screens/tab.screens/chat/community/components/noCommunityJoined';
 
 export interface CometChatListActionsInterface {
   updateList: (prop: any) => void;
@@ -105,7 +108,8 @@ export interface CometChatListProps {
   bodyViewContainerStyle?: StyleProp<ViewStyle>;
   tailViewContainerStyle?: StyleProp<ViewStyle>;
   listStyle?: CometChatListStylesInterface;
-  hideSubmitIcon?: boolean
+  hideSubmitIcon?: boolean;
+  isUserWindow?: Boolean;
 }
 let lastCall;
 let lastReject: Function;
@@ -164,6 +168,7 @@ export const CometChatList = React.forwardRef<
     tailViewContainerStyle,
     listStyle,
     hideSubmitIcon,
+    isUserWindow
   } = props;
 
   // functions which can be access by parents
@@ -557,13 +562,14 @@ export const CometChatList = React.forwardRef<
       if (LoadingStateView) return <LoadingStateView />;
       messageContainer = (
         <View style={styles.msgContainerStyle}>
-          <Image
+          {/* <Image
             style={{
               tintColor:
                 listStyle?.loadingIconTint ?? theme.palette.getAccent600(),
             }}
             source={ICONS.SPINNER}
-          />
+          /> */}
+          <ActivityIndicator size={'large'} />
         </View>
       );
     } else if (
@@ -613,6 +619,8 @@ export const CometChatList = React.forwardRef<
     } else {
       let currentLetter = '';
       const listWithHeaders = [];
+      let communityChatLength = 0;
+      let privateChatLength = 0;
       if (list.length) {
         list.forEach((listItem: any) => {
           const chr = listItem?.name && listItem.name[0].toUpperCase();
@@ -623,9 +631,29 @@ export const CometChatList = React.forwardRef<
               header: true,
             });
           }
-          listWithHeaders.push({ value: listItem, header: false });
+          //listWithHeaders.push({ value: listItem, header: false });
+          if (isUserWindow) {
+            if (listItem.conversationType === 'user') {
+              listWithHeaders.push({ value: listItem, header: false });
+            }
+          } else {
+            if (listItem.conversationType === 'group') {
+              listWithHeaders.push({ value: listItem, header: false });
+            }
+          }
+          if (listItem.conversationType === 'user') {
+            privateChatLength = privateChatLength + 1;
+          }
+          if (listItem.conversationType === 'group') {
+            communityChatLength = communityChatLength + 1;
+          }
         });
-
+        if (isUserWindow && !privateChatLength) {
+          return <NoFriends />
+        }
+        if (!isUserWindow && !communityChatLength) {
+          return <NoCommunityJoined />
+        }
         messageContainer = (
           <View style={styles.listContainerStyle}>
             <FlatList

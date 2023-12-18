@@ -216,7 +216,8 @@ export interface ConversationInterface {
     /**
      * style object for confirm dialog
      */
-    confirmDialogStyle?: CometChatConfirmDialogStyleInterface
+    confirmDialogStyle?: CometChatConfirmDialogStyleInterface,
+    isUserWindow?: boolean;
 }
 
 /**
@@ -262,6 +263,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
         onError,
         onBack,
         conversationsStyle,
+        isUserWindow
     } = props;
 
     //context
@@ -602,6 +604,11 @@ export const CometChatConversations = (props: ConversationInterface) => {
                 customDateString={params.customPattern && params.customPattern()}
                 pattern={"dayDateTimeFormat"}
             />
+            {params.unreadCount > 0 && isUserWindow && (
+            <View>
+              <Text>Your Turn</Text>
+            </View>
+          )}
             <CometChatBadge
                 count={params.unreadCount}
                 style={_badgeStyle}
@@ -982,6 +989,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
 
         return <CometChatListItem
             id={conversation.conversationId}
+            isUserWindow={isUserWindow}
             avatarName={name}
             avatarURL={avatarIcon}
             hideSeparator={hideSeparator}
@@ -1012,10 +1020,11 @@ export const CometChatConversations = (props: ConversationInterface) => {
             <ConfirmDeletionDialog />
             <CometChatList
                 AppBarOptions={AppBarOption}
+                isUserWindow={isUserWindow}
                 onError={onError}
                 ref={conversationListRef}
                 requestBuilder={conversationsRequestBuilder || new CometChat.ConversationsRequestBuilder().setLimit(30)}
-                title={title}
+                title={''}
                 hideSearch={true}
                 hideSubmitIcon={hideSubmitIcon}
                 listItemKey={"conversationId"}

@@ -63,6 +63,7 @@ export class ApiService {
 
   async returnResponse(response: Response) {
     const body = await response.json();
+    console.log(body);
     switch (response.status) {
       case 200:
         return body;

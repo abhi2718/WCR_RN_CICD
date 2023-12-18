@@ -633,7 +633,10 @@ export const CometChatConversations = (props) => {
      */
     return (<View style={Style.container}>
             <ConfirmDeletionDialog />
-            <CometChatList AppBarOptions={AppBarOption} onError={onError} ref={conversationListRef} requestBuilder={conversationsRequestBuilder || new CometChat.ConversationsRequestBuilder().setLimit(30)} title={title} hideSearch={true} hideSubmitIcon={hideSubmitIcon} listItemKey={"conversationId"} LoadingStateView={LoadingStateView} ListItemView={ConversationItemView} EmptyStateView={EmptyStateView ? EmptyStateView : () => <EmptyView />} ErrorStateView={ErrorStateView ? ErrorStateView : () => <ErrorView />} onBack={onBack} backButtonIcon={backButtonIcon} showBackButton={showBackButton} onSelection={(items) => {
+        <CometChatList
+            AppBarOptions={AppBarOption}
+            onError={onError} ref={conversationListRef}
+            requestBuilder={conversationsRequestBuilder || new CometChat.ConversationsRequestBuilder().setLimit(30)} title={title} hideSearch={true} hideSubmitIcon={hideSubmitIcon} listItemKey={"conversationId"} LoadingStateView={LoadingStateView} ListItemView={ConversationItemView} EmptyStateView={EmptyStateView ? EmptyStateView : () => <EmptyView />} ErrorStateView={ErrorStateView ? ErrorStateView : () => <ErrorView />} onBack={onBack} backButtonIcon={backButtonIcon} showBackButton={showBackButton} onSelection={(items) => {
             onSelection && onSelection(items);
             setSelecting(false);
             setSelectedConversations([]);
