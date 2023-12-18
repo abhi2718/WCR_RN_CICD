@@ -4,6 +4,7 @@ import { CometChatConversationsWithMessages } from '../../../../cometChat/src';
 import { useViewModal } from './useViewModal';
 import SwitchButton from './components/switchButton';
 import AllGroups from './components/allGroups';
+//import { CometChatConversationsWithMessages } from '@cometchat/chat-uikit-react-native';
 import {
   Column,
   Logo,
@@ -25,7 +26,7 @@ export default function CommunityChat() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.paddingH16}>
-        <HeaderDeck
+      <HeaderDeck
           isSearchIcon={state !== 0}
           isPrefrence={false}
           count={count}

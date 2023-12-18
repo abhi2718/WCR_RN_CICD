@@ -35,7 +35,8 @@ import { ListItemStyleInterface } from '../CometChatListItem/ListItemStyle';
 import { AvatarStyleInterface } from '../CometChatAvatar/AvatarStyle';
 import { CometChatContextType } from '../../base/Types';
 import { CometChat } from '@cometchat/chat-sdk-react-native';
-import { FriendContext } from '../../../../../contexts/friends.context';
+import { SafeAreaView } from 'react-native-safe-area-context';
+// import { FriendContext } from '../../../../../contexts/friends.context';
 import { NoFriends } from '../../../../../screens/tab.screens/chat/private/compnents/nofriends';
 import { NoCommunityJoined } from '../../../../../screens/tab.screens/chat/community/components/noCommunityJoined';
 
@@ -642,6 +643,7 @@ export const CometChatList = React.forwardRef<
         if (!isUserWindow && !communityChatLength) {
           return <NoCommunityJoined />
         }
+       
 
         messageContainer = (
           <View style={styles.listContainerStyle}>

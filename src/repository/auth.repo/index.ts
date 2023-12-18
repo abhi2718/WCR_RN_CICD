@@ -16,6 +16,10 @@ export class AuthRepository {
     const url = `${AppUrl.authEndPoint}/apple-user/${fbId}`;
     return this.apiService.getGetApiResponse(url);
   }
+  async reportUser(payload:any) {
+    const url = `${AppUrl.reportEndPoint}`;
+    return this.apiService.getPostApiResponse(url,payload);
+  }
 }
 
 

@@ -6,14 +6,30 @@ import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
 import { ROUTES } from '../../navigation';
 import { DltLogOutModal } from '../dltLogOutModal';
+import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import { ActivityIndicator } from 'react-native-paper';
 
 interface HeaderBarProps {
   skip?: () => void;
   info?: () => void;
   goBack?: () => void;
+  isLogo?: boolean;
+  isText?: boolean;
+  text?: string;
+  button?: () => void;
+  isLoading?: boolean;
 }
 export const HeaderBar = (props: HeaderBarProps) => {
-  const { goBack, skip, info } = props;
+  const {
+    goBack,
+    skip,
+    info,
+    isLogo = true,
+    isText = false,
+    text,
+    button,
+    isLoading = false,
+  } = props;
 
   const navigation = useNavigation();
   const _goBack = goBack ? goBack : navigation.goBack;
@@ -27,7 +43,8 @@ export const HeaderBar = (props: HeaderBarProps) => {
           />
         </View>
       </Pressable>
-      <Logo width={50} height={35} />
+      {isLogo && <Logo width={50} height={35} />}
+      {isText && <Text style={headerStyle.text}>{text}</Text>}
       {props.skip ? (
         <Pressable onPress={skip}>
           <Text style={headerStyle.skipBtn}>Skip</Text>
@@ -38,6 +55,14 @@ export const HeaderBar = (props: HeaderBarProps) => {
             style={headerStyle.infoIcon}
             source={require('../../assets/images/icons/infoIcon.png')}
           />
+        </Pressable>
+      ) : props.button ? (
+        <Pressable onPress={button}>
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <Text style={headerStyle.actionButton}>Save</Text>
+          )}
         </Pressable>
       ) : (
         <View style={headerStyle.emptyView} />
@@ -74,6 +99,16 @@ export const headerStyle = StyleSheet.create({
     height: sizes[11],
     width: sizes[11],
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: fontSizes.h5,
+    color: colors.ui.text,
+    fontWeight: fontWeights.semiBold,
+  },
+  actionButton: {
+    fontSize: fontSizes.text,
+    color: '#007AFF',
+    fontWeight: fontWeights.regular,
   },
 });
 
@@ -132,12 +167,12 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           </Pressable>
         )}
         {isSearchIcon && (
-          <Pressable onPress={toggleSearchInput}>
-            <Image
-              style={headerDeckStyle.searchIcon}
-              source={require('../../assets/images/Magnifier.png')}
-            />
-          </Pressable>
+         <Pressable onPress={toggleSearchInput}>
+         <Image
+           style={headerDeckStyle.searchIcon}
+           source={require('../../assets/images/Magnifier.png')}
+         />
+       </Pressable>
         )}
         {!isPrefrence && !isSearchIcon && (
           <View style={headerDeckStyle.searchIcon} />

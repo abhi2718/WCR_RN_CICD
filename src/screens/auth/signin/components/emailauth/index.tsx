@@ -7,9 +7,10 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import {
-  ImageContainer,
+  dimensions,
   InputBox,
   ScreenContainer,
+  Spacer,
 } from '../../../../../components/tools';
 import { styles } from './emailauthStyle';
 import { PrimaryButton } from '../../../../../components/button';
@@ -29,7 +30,8 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
     emailInput,
     setEmailInput,
     email,
-    loading
+    loading,
+    handleInputChange,
   } = useEmailAuthViewModal(props);
 
   return (
@@ -41,35 +43,13 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
         contentContainerStyle={styles.scrollDiv}
         keyboardShouldPersistTaps="always"
       >
-        <View>
-          <ImageContainer
-            height={sizes[10]}
-            width={sizes[10]}
-            marginBottom={sizes[7]}
-            source={require('../../../../../assets/images/logo.png')}
-          />
-        </View>
         <View style={styles.viewBox}>
           <Text style={styles.otpText}>
             Enter the code we have shared to your email
           </Text>
           <View>
-            <OtpCodeInput />
+            <OtpCodeInput onChangeOtp={handleInputChange} />
           </View>
-          <KeyboardAvoidingView
-            enabled
-            behavior={isAndroid ? 'height' : 'padding'}
-          >
-            <View>
-              <InputBox
-                style={styles.inputBox}
-                placeholder={'Enter code'}
-                keyboardType="phone-pad"
-                value={otp}
-                onChangeText={(value: string) => setOtp(value)}
-              />
-            </View>
-          </KeyboardAvoidingView>
         </View>
         {!email && (
           <View style={styles.viewBox}>
@@ -89,9 +69,20 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
             </KeyboardAvoidingView>
           </View>
         )}
-        <PrimaryButton title={'Continue'} onPress={verifyEmail} 
-        isLoading={loading}
-        />
+        <KeyboardAvoidingView
+          enabled
+          behavior={isAndroid ? 'height' : 'padding'}
+        >
+          <Spacer position="top" size={32}>
+            <View style={{ width: dimensions.width - 32 }}>
+              <PrimaryButton
+                title={'Continue'}
+                onPress={verifyEmail}
+                isLoading={loading}
+              />
+            </View>
+          </Spacer>
+        </KeyboardAvoidingView>
         <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
           <Text style={styles.otpText}>Resend code</Text>
         </TouchableOpacity>

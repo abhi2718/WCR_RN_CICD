@@ -33,6 +33,7 @@ import { SettingScreen } from '../../screens/tab.screens/profile/components/sett
 import { AccountSettingScreen } from '../../screens/tab.screens/profile/components/settings/components/accountSettings';
 import { BlockAndUnBlock } from '../../screens/tab.screens/profile/components/settings/components/block&Unblock';
 import { ContactUs } from '../../screens/tab.screens/profile/components/settings/components/contactUs';
+import { ReportScreen } from '../../screens/tab.screens/profile/components/settings/components/report';
 import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
 import { EditProfile } from '../../screens/tab.screens/profile/components/editProfile';
 import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
@@ -42,12 +43,11 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}
         component={SplashScreen}
-      />
-
+      /> */}
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
@@ -65,27 +65,22 @@ export const StackNavigator = () => {
         name={ROUTES.Profile}
         component={Profile}
       />
-
       <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
-
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationPending}
         component={VerificationPending}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Location}
         component={LocationScreen}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationStepOne}
         component={VerificationStepOne}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationStepTwo}
@@ -122,17 +117,11 @@ export const StackNavigator = () => {
         name={ROUTES.LookingFor}
         component={RelationShipScreen}
       />
-      {/* <Stack.Screen
-        options={options}
-        name={ROUTES.AddEthnicity}
-        component={AddEthnicityScreen}
-      /> */}
       <Stack.Screen
         options={options}
         name={ROUTES.GenderPronoun}
         component={GenderProunoun}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Profession}
@@ -198,7 +187,7 @@ export const StackNavigator = () => {
         component={ContactUs}
       />
       <Stack.Screen
-        //options={optins}
+        options={optins}
         name={ROUTES.Preferences}
         component={PreferencesScreen}
       />
@@ -206,6 +195,11 @@ export const StackNavigator = () => {
         //options={optins}
         name={ROUTES.EditProfile}
         component={EditProfile}
+      />
+    <Stack.Screen
+        //options={optins}
+        name={ROUTES.Report}
+        component={ReportScreen}
       />
     </Stack.Navigator>
   );

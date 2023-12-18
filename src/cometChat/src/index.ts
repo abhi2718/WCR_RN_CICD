@@ -24,8 +24,6 @@ import {
   CometChatLiveReactions,
   messageStatus,
 
-
-
   //Resources
   CometChatLocalize,
   localize,
@@ -71,7 +69,6 @@ import {
   CometChatConfirmDialogStyleInterface,
   MessageReceipt,
 
-
   //Events
   CometChatUIEventHandler,
   CometChatConversationEvents,
@@ -86,17 +83,10 @@ import {
   MessageDataSource,
   DataSourceDecorator,
   ExtensionsDataSource,
-  //CometChatUIKit
-  CometChatUIKit,
-  CometChatUIKitHelper,
-  UIKitSettings,
-
   //Context
   CometChatContext,
   CometChatContextType,
   CometChatContextProvider,
-  //
-
   ActionItemInterface,
   ActionSheetStylesInterface,
   AvatarConfigurationInterface,
@@ -116,11 +106,14 @@ import {
   CometChatMediaRecorder,
   CometChatMediaRecorderInterface,
   MediaRecorderStyleInterface,
-  MediaRecorderStyle
-  //
-
+  MediaRecorderStyle,
 } from './shared';
 
+import {
+  CometChatUIKit,
+  CometChatUIKitHelper,
+  UIKitSettings,
+} from './shared/CometChatUiKit';
 import {
   CometChatUsers,
   CometChatUsersActionsInterface,
@@ -147,49 +140,47 @@ import {
   CometChatGroupsMembersInterface,
   GroupMemberConfigurationInterface,
   GroupMembersStyleInterface,
-  GroupScopeStyleInterface
+  GroupScopeStyleInterface,
 } from './CometChatGroupMembers';
 
 import {
   CometChatBannedMembers,
   BannedMembersConfigurationInterface,
-  CometChatBannedMembersInterface
+  CometChatBannedMembersInterface,
 } from './CometChatBannedMembers';
 
 import {
   CometChatContacts,
   CometChatContactsInterface,
   ContactsStyleInterface,
-  StartConversationConfigurationInterface
-} from './CometChatContacts'
+  StartConversationConfigurationInterface,
+} from './CometChatContacts';
 
 import {
   CometChatAddMembers,
   AddMembersConfigurationInterface,
-  CometChatAddMembersInterface
+  CometChatAddMembersInterface,
 } from './CometChatAddMembers';
 
 import {
   CometChatTransferOwnership,
   CometChatTransferOwnershipInterface,
   TransferOwnershipConfigurationInterface,
-} from "./CometChatTransferOwnership";
+} from './CometChatTransferOwnership';
 
 import {
   CreateGroupStyleInterface,
   CometChatCreateGroup,
   CometChatCreateGroupInterface,
   CreateGroupConfigurationInterface,
-} from "./CometChatCreateGroup"
+} from './CometChatCreateGroup';
 
 import {
   CometChatJoinProtectedGroup,
   CometChatJoinProtectedGroupInterface,
   JoinProtectedGroupConfigurationInterface,
-  JoinProtectedGroupStyleInterface
-}
-  from "./CometChatJoinProtectedGroup";
-
+  JoinProtectedGroupStyleInterface,
+} from './CometChatJoinProtectedGroup';
 
 import {
   CometChatDetails,
@@ -211,15 +202,15 @@ import {
   CometChatMessageInformation,
   CometChatMessageInformationInterface,
   MessageInformationConfigurationInterface,
-  MessageInformationStyleInterface
-} from './CometChatMessageInformation'
+  MessageInformationStyleInterface,
+} from './CometChatMessageInformation';
 
 import {
   CometChatMessageList,
   CometChatMessageListActionsInterface,
   CometChatMessageListProps,
   MessageListStyleInterface,
-  MessageListConfigurationInterface
+  MessageListConfigurationInterface,
 } from './CometChatMessageList';
 
 import {
@@ -229,38 +220,35 @@ import {
   MessageComposerStyleInterface,
 } from './CometChatMessageComposer';
 
-
-
 import {
   CometChatMessages,
   CometChatMessagesInterface,
   MessageStyleInterface,
   MessagesConfiguration,
-  MessagesConfigurationInterface
-} from "./CometChatMessages";
+  MessagesConfigurationInterface,
+} from './CometChatMessages';
 
 import {
   CometChatThreadedMessages,
   CometChatThreadedMessagesInterface,
   ThreadedMessagesConfigurationInterface,
   ThreadedMessagesStyleInterface,
-} from "./CometChatThreadedMessages";
+} from './CometChatThreadedMessages';
 
 import {
   CometChatUsersWithMessages,
   CometChatUsersWithMessagesInterface,
-} from "./CometChatUsersWithMessages";
+} from './CometChatUsersWithMessages';
 
 import {
   CometChatGroupsWithMessages,
   CometChatGroupsWithMessagesInterface,
-} from "./CometChatGroupsWithMessages";
+} from './CometChatGroupsWithMessages';
 
 import {
   CometChatConversationsWithMessages,
   CometChatConversationsWithMessagesInterface,
-} from "./CometChatConversationsWithMessages";
-
+} from './CometChatConversationsWithMessages';
 
 import {
   CometChatCallButtons,
@@ -275,7 +263,7 @@ import {
   CometChatOutgoingCall,
   CometChatCallBubble,
   CallingExtensionDecorator,
-} from "./calls";
+} from './calls';
 
 import {
   ExtensionConstants,
@@ -301,7 +289,9 @@ import {
   MessageTranslationConfigurationInterface,
   CometChatCreatePoll,
   CometChatCreatePollInterface,
-  PollsConfigurationInterface, PollsExtension, PollsStyleInterface,
+  PollsConfigurationInterface,
+  PollsExtension,
+  PollsStyleInterface,
   CometChatMessageReactions,
   ReactionsExtension,
   ReactionsConfigurationInterface,
@@ -315,10 +305,15 @@ import {
   CometChatStickerBubbleInterface,
   ThumbnailGenerationConfigurationInterface,
   ThumbnailGenerationExtension,
-} from "./extensions";
+} from './extensions';
 
-import { CometChatTabs, CometChatTabsInterface, TabItemStyleInterface, TabItem } from "./CometChatTabs";
-import { CometChatMessageListProps as CometChatMessageListInterface } from "./CometChatMessageList";
+import {
+  CometChatTabs,
+  CometChatTabsInterface,
+  TabItemStyleInterface,
+  TabItem,
+} from './CometChatTabs';
+import { CometChatMessageListProps as CometChatMessageListInterface } from './CometChatMessageList';
 export {
   CometChatUIEventHandler,
   CometChatContextProvider,
@@ -366,7 +361,8 @@ export {
   MessageTranslationConfigurationInterface,
   CometChatCreatePoll,
   CometChatCreatePollInterface,
-  PollsConfigurationInterface, PollsExtension,
+  PollsConfigurationInterface,
+  PollsExtension,
   CometChatMessageReactions,
   ReactionsExtension,
   SmartRepliesExtension,
@@ -374,7 +370,8 @@ export {
   SmartRepliesView,
   CometChatStickerBubble,
   StickerConfigurationInterface,
-  StickersExtension, CometChatStickerBubbleInterface,
+  StickersExtension,
+  CometChatStickerBubbleInterface,
   CometChatTheme,
   Palette,
   Typography,
@@ -546,20 +543,20 @@ export {
   CometChatMessageInformation,
   CometChatMessageInformationInterface,
   MessageInformationConfigurationInterface,
-  MessageInformationStyleInterface
+  MessageInformationStyleInterface,
 };
 
 // AI
-export {AIConversationStarterExtension} from './AI/AIConversationStarter/AIConversationStarter'
-export {AIConversationStarterDecorator} from './AI/AIConversationStarter/AIConversationStarterDecorator'
-export {AIConversationStarterStyle} from './AI/AIConversationStarter/AIConversationStarterStyle'
-export {AIConversationStarterConfiguration} from './AI/AIConversationStarter/configuration'
-export {AIEnabler} from './AI/AIEnabler'
-export {AIEnablerDecorator} from './AI/AIEnablerDecorator'
-export {AIExtensionDataSource} from './AI/AIExtensionDataSource'
-export {AISmartRepliesExtension} from './AI/AISmartReplies/AISmartReplies'
-export {AISmartRepliesExtensionDecorator} from './AI/AISmartReplies/AISmartRepliesDecorator'
-export {AISmartRepliesStyle} from './AI/AISmartReplies/AISmartRepliesStyle'
-export {AISmartRepliesConfiguration} from './AI/AISmartReplies/configuration'
-export {CardStyle,CardViewStyle} from './AI/CardViewStyle'
-export {AIEnablerConfiguration} from './AI/configuration'
+export { AIConversationStarterExtension } from './AI/AIConversationStarter/AIConversationStarter';
+export { AIConversationStarterDecorator } from './AI/AIConversationStarter/AIConversationStarterDecorator';
+export { AIConversationStarterStyle } from './AI/AIConversationStarter/AIConversationStarterStyle';
+export { AIConversationStarterConfiguration } from './AI/AIConversationStarter/configuration';
+export { AIEnabler } from './AI/AIEnabler';
+export { AIEnablerDecorator } from './AI/AIEnablerDecorator';
+export { AIExtensionDataSource } from './AI/AIExtensionDataSource';
+export { AISmartRepliesExtension } from './AI/AISmartReplies/AISmartReplies';
+export { AISmartRepliesExtensionDecorator } from './AI/AISmartReplies/AISmartRepliesDecorator';
+export { AISmartRepliesStyle } from './AI/AISmartReplies/AISmartRepliesStyle';
+export { AISmartRepliesConfiguration } from './AI/AISmartReplies/configuration';
+export { CardStyle, CardViewStyle } from './AI/CardViewStyle';
+export { AIEnablerConfiguration } from './AI/configuration';
