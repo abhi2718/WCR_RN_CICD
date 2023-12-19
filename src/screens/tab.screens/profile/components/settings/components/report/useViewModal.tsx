@@ -48,14 +48,12 @@ export const useViewModal = (props) => {
       setLoading(true);
       const data = await authRepository.reportUser(payload)
       setLoading(false);
-      console.log(data);
       ShowFlashMessage(
         'Your message has been sent succesfully !',
         '',
         'success',
       );
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };

@@ -85,7 +85,6 @@ export const useheightViewModal = (props: ScreenParams) => {
   };
 
   const updateUserDetails = async () => {
-    console.log('ok')
     try {
       const heightData = {
         height: {
@@ -118,7 +117,6 @@ export const useheightViewModal = (props: ScreenParams) => {
       setLoading(false);
       navigateToEthnicityScreen();
     } catch (err: any) {
-      console.log(err)
       setLoading(false);
     }
   };

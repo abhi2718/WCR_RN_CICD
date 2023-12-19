@@ -61,7 +61,6 @@ const Height = (props: ScreenParams) => {
           </View>
           <PrimaryButton
             onPress={() => {
-              console.log('ok');
               updateUserDetails()
             }}
             isLoading={loading}

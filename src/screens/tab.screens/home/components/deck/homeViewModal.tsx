@@ -29,16 +29,13 @@ export const useViewModal = (route: RouteType) => {
   const token = useRef(user?.token ? user?.token : null).current;
   const [isNewUser, setIsNewUser] = useState(user.homeInfoModal);
   const { fetchAll } = useContext(LikeContext);
-  const { _setCount, count } = useContext(NotificationCountContext);
+  const {count } = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
-  const { unReadCount } = notificationuseViewModal();
+  notificationuseViewModal();
   useCometChatInit();
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;
-  useEffect(() => {
-    _setCount(unReadCount);
-  }, [unReadCount]);
   const fetchProfiles = async () => {
     setLoading(true);
     try {
