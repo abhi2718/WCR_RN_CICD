@@ -1,14 +1,51 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
+import { sizes } from '../../../infrastructure/theme/sizes';
+import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import { colors } from '../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        padding:16
-    },
-    iconStyle: {
-        width: 20,
-        height: 20,
-        
-    }
-})
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 16,
+  },
+
+  profileImg: {
+    width: sizes[14] * 2,
+    height: sizes[14] * 2,
+    borderRadius: 100,
+  },
+  iconStyle: {
+    width: sizes[5],
+    height: sizes[5],
+  },
+  nameContainer: {
+    paddingVertical: sizes[4],
+  },
+  text: {
+    fontSize: sizes[3],
+    color: colors.ui.text,
+    fontWeight: fontWeights.regular,
+  },
+  logoutText: {
+    fontSize: sizes[3],
+    color: colors.ui.primary,
+    fontWeight: fontWeights.regular,
+  },
+  nameHead: {
+    fontSize: sizes[7],
+    color: colors.ui.text,
+    fontWeight: fontWeights.bold,
+    marginTop: sizes[1],
+  },
+  subHead: {
+    fontSize: sizes[3] + 2,
+    color: colors.ui.text,
+    fontWeight: fontWeights.medium,
+  },
+  address: {
+    fontSize: sizes[3],
+    color: 'rgba(64, 64, 64, 0.50)',
+    fontWeight: fontWeights.regular,
+  },
+});
