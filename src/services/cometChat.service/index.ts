@@ -18,10 +18,12 @@ export const useCometChatInit = () => {
     const inItCometChat = async () => {
      try {
        if (CometChatUIKit) {
-        await CometChatUIKit.init(uikitSettings);
+         await CometChatUIKit.init(uikitSettings);
         // let uid = '6499476d12c6b5d6b1093b2a';
-         const androidUser = isAndroid? '6569aa0292b03bce6ced8fd7':'6499476d12c6b5d6b1093b2a'
-        await CometChatUIKit.login({ uid: androidUser  });
+         //const androidUser = isAndroid? '6569aa0292b03bce6ced8fd7':'6499476d12c6b5d6b1093b2a'
+        const newUser = '637f1bf7124e95131a698c74';
+        console.log(user._id)
+        await CometChatUIKit.login({ uid: newUser});
         setIsInitialized(true);
         }
       } catch (error) {

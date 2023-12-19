@@ -137,7 +137,7 @@ export const CometChatConversationsWithMessages = (props) => {
         };
     }, []);
     return (<View style={{ flex: 1 }}>
-            <CometChatConversations {..._conversationsConfig} AppBarOption={_conversationsConfig.AppBarOption || NewConversation}/>
+            <CometChatConversations  {..._conversationsConfig} AppBarOption={_conversationsConfig.AppBarOption || NewConversation}/>
             {/* {
             showForwarding && <Toast message={localize("FORWARDING")} />
         } */}

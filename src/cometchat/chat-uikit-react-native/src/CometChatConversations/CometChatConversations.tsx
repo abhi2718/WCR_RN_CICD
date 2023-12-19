@@ -32,6 +32,8 @@ import { StatusIndicatorStyleInterface } from "../shared/views/CometChatStatusIn
 import { DateStyleInterface } from "../shared/views/CometChatDate/DateStyle";
 import { BadgeStyleInterface } from "../shared/views/CometChatBadge";
 import { InteractiveMessageUtils } from "../shared/utils/InteractiveMessageUtils";
+import { NoFriends } from "../../../../screens/tab.screens/chat/private/compnents/nofriends";
+import { NoCommunityJoined } from "../../../../screens/tab.screens/chat/community/components/noCommunityJoined";
 
 const conversationListenerId = "chatlist_" + new Date().getTime();
 const userListenerId = "chatlist_user_" + new Date().getTime();
@@ -334,16 +336,21 @@ export const CometChatConversations = (props: ConversationInterface) => {
     }
 
     const EmptyView = () => {
-        if (EmptyStateView)
-            return EmptyStateView();
-        else
-            return (
-                <View style={Style.listContainer}>
-                    <Text style={{ ..._style.emptyTextFont, color: _style.emptyTextColor }}>
-                        {emptyStateText || localize("NO_CHATS_FOUND")}
-                    </Text>
-                </View>
-            )
+        if (isUserWindow) {
+            return <NoFriends />;
+        } else {
+            return <NoCommunityJoined />;
+        }
+        // if (EmptyStateView)
+        //     return EmptyStateView();
+        // else
+        //     return (
+        //         <View style={Style.listContainer}>
+        //             <Text style={{ ..._style.emptyTextFont, color: _style.emptyTextColor }}>
+        //                 {emptyStateText || localize("NO_CHATS_FOUND")}
+        //             </Text>
+        //         </View>
+        //     )
     }
 
     const userEventHandler = (...args) => {

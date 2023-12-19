@@ -17,7 +17,7 @@ import {
   //@ts-ignore
 } from 'react-native';
 import { CometChatContext } from '../../CometChatContext';
-import { localize } from "../../resources/CometChatLocalize";
+import { localize } from '../../resources/CometChatLocalize';
 import {
   LOADING,
   NO_DATA_FOUND,
@@ -27,7 +27,7 @@ import {
 import { ICONS } from './resources';
 import styles from './styles';
 import { CometChatOptions } from '../../modals';
-import { CometChatListItem } from "../../views/CometChatListItem";
+import { CometChatListItem } from '../../views/CometChatListItem';
 import Header from './Header';
 import { ImageType } from '../../base';
 import { BorderStyleInterface, FontStyleInterface } from '../../base';
@@ -43,7 +43,7 @@ export interface CometChatListActionsInterface {
   addItemToList: (item: any, position?: number) => void;
   removeItemFromList: (itemId: string | number) => void;
   getListItem: (itemId: string | number) => void;
-  getSelectedItems: () => Array<any>,
+  getSelectedItems: () => Array<any>;
 }
 
 export interface CometChatListStylesInterface {
@@ -126,7 +126,6 @@ export const CometChatList = React.forwardRef<
   CometChatListActionsInterface,
   CometChatListProps
 >((props, ref) => {
-
   const connectionListenerId = 'connectionListener_' + new Date().getTime();
   const { theme } = useContext<CometChatContextType>(CometChatContext);
 
@@ -168,7 +167,7 @@ export const CometChatList = React.forwardRef<
     tailViewContainerStyle,
     listStyle,
     hideSubmitIcon,
-    isUserWindow
+    isUserWindow,
   } = props;
 
   // functions which can be access by parents
@@ -189,14 +188,14 @@ export const CometChatList = React.forwardRef<
         ? searchRequestBuilder.searchKeyword
         : ''
       : requestBuilder
+      ? requestBuilder.searchKeyword
         ? requestBuilder.searchKeyword
-          ? requestBuilder.searchKeyword
-          : ''
-        : searchRequestBuilder
-          ? searchRequestBuilder.searchKeyword
-            ? searchRequestBuilder.searchKeyword
-            : ''
-          : ''
+        : ''
+      : searchRequestBuilder
+      ? searchRequestBuilder.searchKeyword
+        ? searchRequestBuilder.searchKeyword
+        : ''
+      : ''
   );
   const [shouldSelect, setShouldSelect] = React.useState(
     selectionMode !== 'none' ? true : false
@@ -239,18 +238,18 @@ export const CometChatList = React.forwardRef<
 
   const getSelectedItems = () => {
     let markedItems = [];
-    Object.keys(selectedItems).forEach(item => {
+    Object.keys(selectedItems).forEach((item) => {
       return markedItems.push(getListItem(item));
-    })
+    });
     return markedItems;
-  }
+  };
 
   useEffect(() => {
     CometChat.addConnectionListener(
       connectionListenerId,
       new CometChat.ConnectionListener({
         onConnected: () => {
-          console.log("ConnectionListener => On Connected");
+          console.log('ConnectionListener => On Connected');
           listHandlerRef.current = requestBuilder.build();
           getList(listHandlerRef.current)
             .then((newlist: any) => {
@@ -266,16 +265,16 @@ export const CometChatList = React.forwardRef<
             });
         },
         inConnecting: () => {
-          console.log("ConnectionListener => In connecting");
+          console.log('ConnectionListener => In connecting');
         },
         onDisconnected: () => {
-          console.log("ConnectionListener => On Disconnected");
-        }
+          console.log('ConnectionListener => On Disconnected');
+        },
       })
     );
     return () => {
       CometChat.removeConnectionListener(connectionListenerId);
-    }
+    };
   });
 
   useEffect(() => {
@@ -320,7 +319,7 @@ export const CometChatList = React.forwardRef<
 
   /**
    * This will move item to first location if item doesn't exits then add it to first location.
-   * @param item 
+   * @param item
    */
   const updateAndMoveToFirst = (item: any) => {
     let newList = [...list];
@@ -331,7 +330,7 @@ export const CometChatList = React.forwardRef<
       newList.splice(itemKey, 1);
     }
     setList([item, ...newList]);
-  }
+  };
 
   const addItemToList = (item: any, position?: number) => {
     setList((prev: [any]) => {
@@ -423,7 +422,7 @@ export const CometChatList = React.forwardRef<
         setSelectedItems((prev: any) => {
           let newState = { ...prev };
           if (Object.keys(prev).includes(item.value[listItemKey])) {
-            delete newState[item.value[listItemKey]]
+            delete newState[item.value[listItemKey]];
             return newState;
           } else {
             newState[item.value[listItemKey]] = item.value;
@@ -495,13 +494,14 @@ export const CometChatList = React.forwardRef<
           Object.keys(selectedItems).includes(item.value[listItemKey])
             ? theme.palette.getBackgroundColor()
             : !disableUsersPresence && item.value.status === 'online'
+            ? listStyle?.onlineStatusColor
               ? listStyle?.onlineStatusColor
-                ? listStyle?.onlineStatusColor
-                : theme.palette.getSuccess()
-              : ''
+              : theme.palette.getSuccess()
+            : ''
         }
         statusIndicatorIcon={
-          Object.keys(selectedItems).includes(item.value[listItemKey]) && ICONS.CHECK
+          Object.keys(selectedItems).includes(item.value[listItemKey]) &&
+          ICONS.CHECK
         }
         SubtitleView={
           SubtitleView ? () => <SubtitleView {...item.value} /> : null
@@ -510,11 +510,11 @@ export const CometChatList = React.forwardRef<
         statusIndicatorStyle={
           selectedItems[item.value[listItemKey]] === true
             ? {
-              ...(statusIndicatorStyle as object),
-              borderRadius: 10,
-              height: 20,
-              width: 20,
-            }
+                ...(statusIndicatorStyle as object),
+                borderRadius: 10,
+                height: 20,
+                width: 20,
+              }
             : statusIndicatorStyle
         }
         avatarStyle={avatarStyle}
@@ -649,10 +649,10 @@ export const CometChatList = React.forwardRef<
           }
         });
         if (isUserWindow && !privateChatLength) {
-          return <NoFriends />
+          return <NoFriends />;
         }
         if (!isUserWindow && !communityChatLength) {
-          return <NoCommunityJoined />
+          return <NoCommunityJoined />;
         }
         messageContainer = (
           <View style={styles.listContainerStyle}>
@@ -662,12 +662,17 @@ export const CometChatList = React.forwardRef<
               renderItem={
                 ListItemView
                   ? ({ item, index, separators }) => (
-                    <ListItemView
-                      index={index}
-                      separators={separators}
-                      item={item.value}
-                    />
-                  )
+                      <View>
+                        <ListItemView
+                          index={index}
+                          separators={separators}
+                          item={item.value}
+                        />
+                        {listWithHeaders.length - 1 === index && (
+                          <View style={{ height: 200 }}></View>
+                        )}
+                      </View>
+                    )
                   : renderListItemView
               }
               keyExtractor={(item, index) =>
@@ -746,9 +751,9 @@ CometChatList.defaultProps = {
   emptyStateText: localize('NO_USERS_FOUND'), // Note: Need to add "No Data found" in localize
   errorStateText: localize('SOMETHING_WRONG'),
   hideError: false,
-  onItemPress: () => { },
-  onItemLongPress: () => { },
-  onSelection: () => { },
+  onItemPress: () => {},
+  onItemLongPress: () => {},
+  onSelection: () => {},
   selectionMode: 'none',
   listItemKey: 'uid',
   listStyle: {},

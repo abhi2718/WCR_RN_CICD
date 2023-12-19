@@ -46,6 +46,7 @@ export interface CometChatMessagesInterface {
     customSoundForOutgoingMessages?: string,
     messagesStyle?: MessageStyleInterface,
     AuxilaryAppBarOptions?: ({ user, group }: { user?: CometChat.User, group?: CometChat.Group }) => JSX.Element,
+    handleBackBtn?:()=>void
 }
 
 export const CometChatMessages = (props: CometChatMessagesInterface) => {
@@ -68,7 +69,8 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
         messagesStyle,
         threadedMessagesConfiguration,
         MessageListView,
-        hideDetails
+        hideDetails,
+        handleBackBtn
     } = props;
 
     const { theme } = useContext(CometChatContext);
@@ -277,7 +279,12 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
                             group={groupObject}
                             AppBarOptions={({ user, group }) => <DetailViewIcon user={user} group={group} />}
                             disableTyping={disableTyping}
-                            onBack={() => setShowComponent(ComponentNames.Default)}
+                            onBack={() => {
+                                if (handleBackBtn) {
+                                    handleBackBtn()
+                                  }
+                                setShowComponent(ComponentNames.Default)
+                            }}
                             {..._headerConfiguration}
                         />
             }
