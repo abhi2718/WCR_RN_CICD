@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { dimensions } from '../tools';
+import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
 
 export const modalStyle = StyleSheet.create({
   centeredView: {
@@ -19,7 +20,7 @@ export const modalStyle = StyleSheet.create({
     paddingBottom: sizes[4],
     paddingHorizontal: sizes[3],
     shadowColor: colors.ui.black,
-    height: dimensions.height - 300,
+    // height: dimensions.height - 300,
 
     shadowOffset: {
       width: 0,
@@ -30,12 +31,18 @@ export const modalStyle = StyleSheet.create({
     elevation: sizes[0],
   },
   heading: {
-    fontWeight: '600',
-    fontSize: sizes[7],
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.h5,
+    color: colors.ui.text,
+    marginBottom: sizes[4],
+    textTransform: 'uppercase',
+  },
+  subHeading: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.title,
     color: colors.ui.text,
     marginBottom: sizes[4],
   },
-
   row: {
     gap: sizes[1],
     width: '100%',
@@ -44,11 +51,12 @@ export const modalStyle = StyleSheet.create({
   text: {
     color: colors.ui.text,
     fontSize: sizes[3],
+    flex: 1,
   },
   icon: {
     width: sizes[5],
     height: sizes[5],
-    marginRight: sizes[1],
+    marginRight: sizes[2],
   },
   footerText: {
     textAlign: 'center',
