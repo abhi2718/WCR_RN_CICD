@@ -166,7 +166,9 @@ export default function CardCompoent({ item, height, cardRef }) {
               );
             })}
             <View style={cardStyles.inBtwnText}>
-              <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
+              {
+                item?.interests?.length > 0 && <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
+              }
               <Row>
               {item?.interests?.map((item,index) => (
                 <Text key={index} style={cardStyles.aboutText}>{item} </Text>
