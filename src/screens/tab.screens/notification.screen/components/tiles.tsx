@@ -47,7 +47,7 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
             justifyContent: 'center',
           }}
         >
-          <Animated.Text
+          {/* <Animated.Text
             style={[
               {
                 transform: [{ translateX: trans }],
@@ -56,7 +56,7 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
             ]}
           >
             Delete
-          </Animated.Text>
+          </Animated.Text> */}
         </View>
       </TouchableOpacity>
     );

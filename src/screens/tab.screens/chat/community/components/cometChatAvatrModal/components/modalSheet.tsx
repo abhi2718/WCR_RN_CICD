@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Modal, Text, SafeAreaView, Pressable, Image} from 'react-native';
+import {View, Modal, Text, SafeAreaView, Pressable, Image, StyleSheet} from 'react-native';
 import { Column, Row, Spacer } from '../../../../../../../components/tools';
 import { modalStyle } from '../styles';
 import { useViewMdal } from './useviewModal';
@@ -7,7 +7,9 @@ import { ProfileModalSheetProps } from '../../../../../../../types/screen.type/p
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../../navigation';
 import { ProfileModal } from '../../../../../../../components/profile.component';
-import { CometChat } from '../../../../../../../cometchat/chat-sdk-react-native/CometChat';
+import { CometChat } from '../../../../../../../cometChat/chat-sdk-react-native/CometChat';
+import { CometChatMessages } from '../../../../../../../cometChat/chat-uikit-react-native/src';
+
 
 export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
   const { visible, toggleVisiblity, image, name, navigateToPrivateChat,senderId, toggleModal,
@@ -62,13 +64,22 @@ export const PrivateChatWindowWrapper = ({ route }) => {
   const navigation = useNavigation();
   let user = new CometChat.User(senderId, name);
   return (
-    <View style={{flex: 1}}>
-      {/* <CometChatMessages
+    <SafeAreaView style={styles.container}>
+       <View style={styles.container}>
+      <CometChatMessages
         handleBackBtn={() => {
           navigation.navigate(ROUTES.PrivateChatTab);
         }}
         user={user}
-      /> */}
+      />
     </View>
+   </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor:'#fff'
+  }
+})

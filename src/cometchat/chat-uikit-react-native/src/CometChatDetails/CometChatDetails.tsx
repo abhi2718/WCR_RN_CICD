@@ -5,8 +5,8 @@ import {
   Image,
   FlatList,
   BackHandler,
-  Pressable,
   StyleSheet,
+  Pressable,
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import Header from './Header';
@@ -41,16 +41,11 @@ import { CometChatGroupsMembers } from '../CometChatGroupMembers';
 import { CometChatContextType } from '../shared/base/Types';
 import { CometChatUIEventHandler } from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
 import { CometChatTransferOwnershipInterface } from '../CometChatTransferOwnership/CometChatTransferOwnership';
-
-
-import { Column, dimensions, Row, Spacer } from '../../../../components/tools';
+import { Column, dimensions, Row } from '../../../../components/tools';
+import { CommunityMembers } from '../../../../screens/tab.screens/chat/community/components/communityMembers';
 import {
   MediaTab,
 } from '../../../../screens/tab.screens/chat/community/components/mediaMessages';
-import { CommunityMembers } from '../../../../screens/tab.screens/chat/community/components/communityMembers';
-import { ScrollView } from 'react-native-gesture-handler';
-import { sizes } from '../../../../infrastructure/theme/sizes';
-
 export interface ModalDetailsInterface {
   title: string;
   confirmButtonText: string;
@@ -852,181 +847,289 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...transferOwnershipConfiguration}
       />
     );
-  if (group) {
-    return (
-      <View>
-        <View style={{ height: 400, paddingHorizontal: 16 }}>
-          <Header
-            title={title}
-            showCloseButton={showCloseButton}
-            closeButtonIcon={closeButtonIcon}
-            onPress={() => {
-              onBack && onBack();
-            }}
-            titleStyle={{
-              color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
-              ...(detailsStyle?.titleFont
-                ? detailsStyle?.titleFont
-                : theme.typography.heading),
-            }}
-            closeIconTint={
-              detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
-            }
-          />
-          <Pressable onPress={handleLeaveGroup}>
-            <Text>Leave Group</Text>
-          </Pressable>
-          {groupDetails && (
-            <View style={styles.groupInfoContainer}>
-              <Image
-                style={myStyles.imageStyle}
-                source={{ uri: groupDetails?.getIcon() }}
-              />
-              <View style={styles.infoBtBox}>
-                <Pressable>
-                  <Image
-                    source={require('../../../assets/images/icons/infoIcon.png')}
-                    style={styles.infoIcon}
-                  />
-                </Pressable>
-              </View>
-              <Column>
-                <Text style={styles.groupName}>{groupDetails.getName()}</Text>
-                <Text style={styles.participantCount}>
-                  "Dummy" Group.10 participants "Dummy"
-                </Text>
-                <View style={styles.descContainer}>
-                  <Text style={styles.groupDescription}>
-                    {groupDetails.getDescription()}{' '}
-                  </Text>
-                </View>
-              </Column>
-            </View>
-          )}
-        </View>
-        <View
-          style={{ height: dimensions.height - 200, backgroundColor: '#fff' }}
-        >
-          <View style={myStyles.menuOptins}>
-            <CommunityMembers group={groupDetails} />
+    if (group) {
+      return (
+        <View>
+          <View style={{ height: 200 }}>
+            <Header
+              title={title}
+              showCloseButton={showCloseButton}
+              closeButtonIcon={closeButtonIcon}
+              onPress={() => {
+                onBack && onBack();
+              }}
+              titleStyle={{
+                color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+                ...(detailsStyle?.titleFont
+                  ? detailsStyle?.titleFont
+                  : theme.typography.heading),
+              }}
+              closeIconTint={
+                detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+              }
+            />
+            {groupDetails && (
+              <Row>
+                <Image
+                  style={myStyles.imageStyle}
+                  source={{ uri: groupDetails?.getIcon() }}
+                />
+                <Column>
+                  <Text>{groupDetails.getName()}</Text>
+                  <Text>{groupDetails.getDescription()} </Text>
+                </Column>
+              </Row>
+            )}
+            <Pressable onPress={handleLeaveGroup}>
+              <Text>Leave Group</Text>
+            </Pressable>
           </View>
-          <MediaTab guid={groupDetails?.getGuid()} />
+          <View
+            style={{ height: dimensions.height - 200, backgroundColor: '#fff' }}
+          >
+            <View style={myStyles.menuOptins}>
+              <CommunityMembers group={groupDetails} />
+            </View>
+            <MediaTab guid={groupDetails?.getGuid()} />
+          </View>
         </View>
-      </View>
-    );
-  }
-  if (user) {
+      );
+    }
+    if (user) {
+      return (
+        <View>
+          <View style={{ height: 600 }}>
+            <Header
+              title={title}
+              showCloseButton={showCloseButton}
+              closeButtonIcon={closeButtonIcon}
+              onPress={() => {
+                onBack && onBack();
+              }}
+              titleStyle={{
+                color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+                ...(detailsStyle?.titleFont
+                  ? detailsStyle?.titleFont
+                  : theme.typography.heading),
+              }}
+              closeIconTint={
+                detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+              }
+            />
+            {!user.getBlockedByMe() && (
+              <Pressable onPress={() => handleUserBlockUnblock()}>
+                <Text>Block</Text>
+              </Pressable>
+            )}
+            {user.getBlockedByMe() && (
+              <Pressable onPress={() => handleUserBlockUnblock(true)}>
+                <Text>Un Block</Text>
+              </Pressable>
+            )}
+            <MediaTab uid={user.getUid()} />
+          </View>
+          <View style={{ height: dimensions.height - 200 }}></View>
+        </View>
+      );
+    }
     return (
-      <View>
-        <View style={{ height: 600 }}>
-          <Header
-            title={title}
-            showCloseButton={showCloseButton}
-            closeButtonIcon={closeButtonIcon}
-            onPress={() => {
-              onBack && onBack();
-            }}
-            titleStyle={{
-              color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
-              ...(detailsStyle?.titleFont
-                ? detailsStyle?.titleFont
-                : theme.typography.heading),
-            }}
-            closeIconTint={
-              detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
-            }
-          />
-          {!user.getBlockedByMe() && (
-            <Pressable onPress={() => handleUserBlockUnblock()}>
-              <Text>Block</Text>
-            </Pressable>
-          )}
-          {user.getBlockedByMe() && (
-            <Pressable onPress={() => handleUserBlockUnblock(true)}>
-              <Text>Un Block</Text>
-            </Pressable>
-          )}
-          <MediaTab uid={user.getUid()} />
-        </View>
-        <View style={{ height: dimensions.height - 200 }}></View>
-      </View>
-    );
-  }
-  return (
-    <View
-      style={[
-        styles.container,
-        {
-          width: detailsStyle?.width ?? '100%',
-          height: detailsStyle?.height ?? '100%',
-          backgroundColor:
-            detailsStyle?.backgroundColor ?? theme.palette.getBackgroundColor(),
-          borderRadius: detailsStyle?.borderRadius ?? 0,
-        },
-        detailsStyle?.border ? detailsStyle?.border : {},
-      ]}
-    >
-      <Header
-        title={title}
-        showCloseButton={showCloseButton}
-        closeButtonIcon={closeButtonIcon}
-        onPress={() => {
-          onBack && onBack();
-        }}
-        titleStyle={{
-          color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
-          ...(detailsStyle?.titleFont
-            ? detailsStyle?.titleFont
-            : theme.typography.heading),
-        }}
-        closeIconTint={
-          detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
-        }
-      />
-      <CometChatConfirmDialog
-        isOpen={modalVisible}
-        title={modalDetails?.title}
-        confirmButtonText={modalDetails?.confirmButtonText}
-        cancelButtonText={modalDetails?.cancelButtonText}
-        messageText={modalDetails?.messageText}
-        onConfirm={modalDetails?.onConfirm}
-        onCancel={modalDetails?.onCancel}
-        style={modalDetails?.style}
-      />
-
-      {hideProfile ? null : CustomProfileView ? (
-        <CustomProfileView
-          {...(userDetails
-            ? { user: userDetails }
-            : group
+      <View style={{ padding: 16 }}>
+        <Header
+          title={title}
+          showCloseButton={showCloseButton}
+          closeButtonIcon={closeButtonIcon}
+          onPress={() => {
+            onBack && onBack();
+          }}
+          titleStyle={{
+            color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+            ...(detailsStyle?.titleFont
+              ? detailsStyle?.titleFont
+              : theme.typography.heading),
+          }}
+          closeIconTint={
+            detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+          }
+        />
+        <CometChatConfirmDialog
+          isOpen={modalVisible}
+          title={modalDetails?.title}
+          confirmButtonText={modalDetails?.confirmButtonText}
+          cancelButtonText={modalDetails?.cancelButtonText}
+          messageText={modalDetails?.messageText}
+          onConfirm={modalDetails?.onConfirm}
+          onCancel={modalDetails?.onCancel}
+          style={modalDetails?.style}
+        />
+        {hideProfile ? null : CustomProfileView ? (
+          <CustomProfileView
+            {...(userDetails
+              ? { user: userDetails }
+              : group
               ? { group: groupDetails }
               : {})}
-        />
-      ) : (
-        <>
-          {groupDetails && (
-            <Row>
-              <Image
-                style={myStyles.imageStyle}
-                source={{ uri: groupDetails?.getIcon() }}
-              />
-              <Column>
-                <Text>{groupDetails.getName()}</Text>
-                <Text>{groupDetails.getDescription()}</Text>
-              </Column>
-            </Row>
-          )}
-        </>
-      )}
-      <FlatList
-        keyExtractor={(_, i) => i.toString()}
-        data={detailsList}
-        renderItem={ListSection}
-      />
-    </View>
-  );
-};
+          />
+        ) : (
+          <>
+            {groupDetails && (
+              <Row>
+                <Image
+                  style={myStyles.imageStyle}
+                  source={{ uri: groupDetails?.getIcon() }}
+                />
+                <Column>
+                  <Text>{groupDetails.getName()}</Text>
+                  <Text>{groupDetails.getDescription()} </Text>
+                </Column>
+              </Row>
+            )}
+          </>
+        )}
+        <View style={myStyles.menuOptins}>
+          <CommunityMembers group={groupDetails} />
+        </View>
+        <View>
+          {/* <MediaMessage guid={groupDetails?.getGuid()} /> */}
+        </View>
+      </View>
+    );
+  // return (
+  //   <View
+  //     style={[
+  //       styles.container,
+  //       {
+  //         width: detailsStyle?.width ?? '100%',
+  //         height: detailsStyle?.height ?? '100%',
+  //         backgroundColor:
+  //           detailsStyle?.backgroundColor ?? theme.palette.getBackgroundColor(),
+  //         borderRadius: detailsStyle?.borderRadius ?? 0,
+  //       },
+  //       detailsStyle?.border ? detailsStyle?.border : {},
+  //     ]}
+  //   >
+  //     <Header
+  //       title={title}
+  //       showCloseButton={showCloseButton}
+  //       closeButtonIcon={closeButtonIcon}
+  //       onPress={() => {
+  //         onBack && onBack();
+  //       }}
+  //       titleStyle={{
+  //         color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+  //         ...(detailsStyle?.titleFont
+  //           ? detailsStyle?.titleFont
+  //           : theme.typography.heading),
+  //       }}
+  //       closeIconTint={
+  //         detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+  //       }
+  //     />
+  //     <CometChatConfirmDialog
+  //       isOpen={modalVisible}
+  //       title={modalDetails?.title}
+  //       confirmButtonText={modalDetails?.confirmButtonText}
+  //       cancelButtonText={modalDetails?.cancelButtonText}
+  //       messageText={modalDetails?.messageText}
+  //       onConfirm={modalDetails?.onConfirm}
+  //       onCancel={modalDetails?.onCancel}
+  //       style={modalDetails?.style}
+  //     />
 
+  //     {hideProfile ? null : CustomProfileView ? (
+  //       <CustomProfileView
+  //         {...(userDetails
+  //           ? { user: userDetails }
+  //           : group
+  //             ? { group: groupDetails }
+  //             : {})}
+  //       />
+  //     ) : (
+  //       <CometChatListItem
+  //         id={'profile'}
+  //         listItemStyle={
+  //           listItemStyle ? listItemStyle : { titleFont: { fontWeight: '600' } }
+  //         }
+  //         avatarName={userDetails?.getName() || groupDetails?.getName()}
+  //         avatarURL={{uri: userDetails?.getAvatar() || groupDetails?.getIcon()}}
+  //         headViewContainerStyle={{
+  //           paddingRight: 15,
+  //           paddingLeft: 0,
+  //         }}
+  //         statusIndicatorStyle={
+  //           groupDetails
+  //             ? {
+  //               end: 10,
+  //               height: 15,
+  //               width: 15,
+  //               backgroundColor:
+  //                 groupDetails.getType() === CometChat.GROUP_TYPE.PASSWORD
+  //                   ? protectedGroupIcon
+  //                     ? ''
+  //                     : detailsStyle?.protectedGroupIconBackground ??
+  //                     PASSWORD_GROUP_COLOR // Note need to add this to
+  //                   : groupDetails.getType() === CometChat.GROUP_TYPE.PRIVATE
+  //                     ? privateGroupIcon
+  //                       ? ''
+  //                       : detailsStyle?.privateGroupIconBackground ??
+  //                       PRIVATE_GROUP_COLOR
+  //                     : '',
+  //               borderRadius: 15,
+  //               ...(statusIndicatorStyle ? statusIndicatorStyle : {}),
+  //             }
+  //             : {
+  //               end: 10,
+  //               ...(statusIndicatorStyle ? statusIndicatorStyle : {}),
+  //             }
+  //         }
+  //         avatarStyle={
+  //           avatarStyle ? avatarStyle : { border: { borderWidth: 0 } }
+  //         }
+  //         statusIndicatorColor={
+  //           !disableUsersPresence &&
+  //             userDetails &&
+  //             userDetails.getStatus() === UserStatusConstants.online
+  //             ? detailsStyle?.onlineStatusColor ?? theme.palette.getSuccess()
+  //             : ''
+  //         }
+  //         statusIndicatorIcon={
+  //           groupDetails
+  //             ? groupDetails.getType() === CometChat.GROUP_TYPE.PASSWORD
+  //               ? protectedGroupIcon
+  //                 ? protectedGroupIcon
+  //                 : ICONS.PROTECTED
+  //               : groupDetails.getType() === CometChat.GROUP_TYPE.PRIVATE
+  //                 ? privateGroupIcon
+  //                   ? privateGroupIcon
+  //                   : ICONS.PRIVATE
+  //                 : null
+  //             : null
+  //         }
+  //         title={userDetails?.getName() || groupDetails?.getName()}
+  //         SubtitleView={
+  //           SubtitleView
+  //             ? () => (
+  //               <SubtitleView
+  //                 {...(userDetails
+  //                   ? { user: userDetails }
+  //                   : group
+  //                     ? { group: groupDetails }
+  //                     : {})}
+  //               />
+  //             )
+  //             : userDetails
+  //               ? SubtitleViewElem
+  //               : null
+  //         }
+  //       />
+  //     )}
+  //     <FlatList
+  //       keyExtractor={(_, i) => i.toString()}
+  //       data={detailsList}
+  //       renderItem={ListSection}
+  //     />
+  //   </View>
+  // );
+};
 const myStyles = StyleSheet.create({
   imageStyle: {
     width: 160,

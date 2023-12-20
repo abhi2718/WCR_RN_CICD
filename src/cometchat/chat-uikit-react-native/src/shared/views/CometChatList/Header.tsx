@@ -34,7 +34,7 @@ export default function Header({
 }: any) {
   return (
     <View style={styles.listBaseHeaderStyle}>
-      <View style={styles.upperContainer}>
+    {/* <View style={styles.upperContainer}>
         {(showBackButton || title?.length !== 0) && (
           <View style={styles.headerLeftContainer}>
             {showBackButton ? (
@@ -93,7 +93,7 @@ export default function Header({
             </TouchableOpacity>
           </View>
         )}
-      </View>
+      </View>  */}
       {!hideSearch && (
         <View
           style={[

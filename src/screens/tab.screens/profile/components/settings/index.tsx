@@ -13,7 +13,7 @@ import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 
 export const SettingScreen = () => {
-  const { lists, handleToggleModal, showModal, link } = useViewModal();
+  const { lists, handleToggleModal, showModal, link, handleShare } = useViewModal();
   return (
     <View style={styles.container}>
       {lists.map((item) => (

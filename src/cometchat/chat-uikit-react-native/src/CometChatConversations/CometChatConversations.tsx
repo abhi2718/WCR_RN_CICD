@@ -32,6 +32,8 @@ import { StatusIndicatorStyleInterface } from "../shared/views/CometChatStatusIn
 import { DateStyleInterface } from "../shared/views/CometChatDate/DateStyle";
 import { BadgeStyleInterface } from "../shared/views/CometChatBadge";
 import { InteractiveMessageUtils } from "../shared/utils/InteractiveMessageUtils";
+import { NoFriends } from "../../../../screens/tab.screens/chat/private/compnents/nofriends";
+import { NoCommunityJoined } from "../../../../screens/tab.screens/chat/community/components/noCommunityJoined";
 
 const conversationListenerId = "chatlist_" + new Date().getTime();
 const userListenerId = "chatlist_user_" + new Date().getTime();
@@ -216,7 +218,8 @@ export interface ConversationInterface {
     /**
      * style object for confirm dialog
      */
-    confirmDialogStyle?: CometChatConfirmDialogStyleInterface
+    confirmDialogStyle?: CometChatConfirmDialogStyleInterface,
+    isUserWindow?: boolean;
 }
 
 /**
@@ -262,6 +265,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
         onError,
         onBack,
         conversationsStyle,
+        isUserWindow
     } = props;
 
     //context
@@ -332,16 +336,21 @@ export const CometChatConversations = (props: ConversationInterface) => {
     }
 
     const EmptyView = () => {
-        if (EmptyStateView)
-            return EmptyStateView();
-        else
-            return (
-                <View style={Style.listContainer}>
-                    <Text style={{ ..._style.emptyTextFont, color: _style.emptyTextColor }}>
-                        {emptyStateText || localize("NO_CHATS_FOUND")}
-                    </Text>
-                </View>
-            )
+        if (isUserWindow) {
+            return <NoFriends />;
+        } else {
+            return <NoCommunityJoined />;
+        }
+        // if (EmptyStateView)
+        //     return EmptyStateView();
+        // else
+        //     return (
+        //         <View style={Style.listContainer}>
+        //             <Text style={{ ..._style.emptyTextFont, color: _style.emptyTextColor }}>
+        //                 {emptyStateText || localize("NO_CHATS_FOUND")}
+        //             </Text>
+        //         </View>
+        //     )
     }
 
     const userEventHandler = (...args) => {
@@ -602,6 +611,11 @@ export const CometChatConversations = (props: ConversationInterface) => {
                 customDateString={params.customPattern && params.customPattern()}
                 pattern={"dayDateTimeFormat"}
             />
+            {params.unreadCount > 0 && isUserWindow && (
+            <View>
+              <Text>Your Turn</Text>
+            </View>
+          )}
             <CometChatBadge
                 count={params.unreadCount}
                 style={_badgeStyle}
@@ -982,6 +996,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
 
         return <CometChatListItem
             id={conversation.conversationId}
+            isUserWindow={isUserWindow}
             avatarName={name}
             avatarURL={avatarIcon}
             hideSeparator={hideSeparator}
@@ -1012,10 +1027,11 @@ export const CometChatConversations = (props: ConversationInterface) => {
             <ConfirmDeletionDialog />
             <CometChatList
                 AppBarOptions={AppBarOption}
+                isUserWindow={isUserWindow}
                 onError={onError}
                 ref={conversationListRef}
                 requestBuilder={conversationsRequestBuilder || new CometChat.ConversationsRequestBuilder().setLimit(30)}
-                title={title}
+                title={''}
                 hideSearch={true}
                 hideSubmitIcon={hideSubmitIcon}
                 listItemKey={"conversationId"}

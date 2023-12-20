@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { NotificationCountContext } from '../../../contexts/notificationCount.context';
 import { NotificationRepository } from '../../../repository/notification.repo';
 import { NotificationType } from '../../../types/screen.type/notification.type';
 
@@ -13,9 +14,19 @@ export const useViewModal = () => {
     notifications: [],
     currentIndex: 0,
   });
+  const { _setCount, count } = useContext(NotificationCountContext);
   const [unReadCount, setUnReadCount] = useState(0);
   const [page, setPage] = useState(1);
-
+  const getNotifiactionCount = async () => {
+    try {
+      const { data } = await notificationRepository.getNotificationCount();
+      if (data && data > 0) {
+        _setCount(data);
+        setUnReadCount(data);
+      }
+    } catch (error) {
+    }
+  }
   const getNotifiaction = async (page: number, fethNext?: boolean) => {
     try {
       setNotificationLoading(true);
@@ -37,7 +48,6 @@ export const useViewModal = () => {
           notifications: data[0].data,
         });
       }
-      setUnReadCount(data[0].count[0].count);
       setNotificationLoading(false);
     } catch (error) {
       setNotificationLoading(false);
@@ -63,6 +73,9 @@ export const useViewModal = () => {
         notifications: updatedNotifications,
       }));
       const data = await notificationRepository.markAsRead(id, payload);
+      if (count && count > 0) {
+        _setCount(count - 1);
+      }
     } catch (error) {}
   };
   const scrollToIndex = (index) => {
@@ -84,6 +97,7 @@ export const useViewModal = () => {
   }
   useEffect(() => {
     getNotifiaction(page);
+    getNotifiactionCount();
   }, []);
   return {
     notificationLoading,
