@@ -3,12 +3,16 @@ export interface ModalProps {
     onClose: () => void;
   }
 export interface ProfilePicInfoModalProps {
-    isVisible: boolean;
-    onClose: () => void;
-  }
-
-  export type DltLogOutType = {
-    showModal:boolean,
-    setShowModal:(state:boolean)=>void,
-    
+  isVisible: boolean;
+  onClose: () => void;
 }
+
+export interface VerificationInfoProps {
+  isVisible: boolean;
+  onClose: () => void;
+}
+
+export type DltLogOutType = {
+  showModal: boolean;
+  setShowModal: (state: boolean) => void;
+};

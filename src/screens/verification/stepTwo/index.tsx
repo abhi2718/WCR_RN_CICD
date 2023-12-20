@@ -39,6 +39,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
 import { useVerificationViewModal } from './stepTwo.ViewModal';
+import { VerificationInfoModal } from '../../../components/verificationModal';
 
 interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
@@ -73,12 +74,19 @@ const VerificationStepTwo = (props: AvatarProps) => {
     closePhdOptionPicUploadingModal,
     openPhdOptionPicUploadingModal,
     PhdOptionPicUploadingModal,
+    openInfoModal,
+    isVerificationInfoModalVisible,
+    closeModal,
   } = useVerificationViewModal(props);
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
   return (
     <>
       <ScreenContainer>
-        <HeaderBar />
+        <VerificationInfoModal
+          isVisible={isVerificationInfoModalVisible}
+          onClose={closeModal}
+        ></VerificationInfoModal>
+        <HeaderBar info={openInfoModal} />
         <Text style={verificationStyle.subHeader}>
           Photo Verification (Step II)
         </Text>
@@ -128,9 +136,11 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     your degree.
                   </Text>
                 </Text>
-                <FlatInput label="Enter website" 
-                value={website}
-                onChangeText={handleWebsite} />
+                <FlatInput
+                  label="Enter website"
+                  value={website}
+                  onChangeText={handleWebsite}
+                />
               </>
             )}
             {verificationOption === 'HealthCare' && (
@@ -142,9 +152,11 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     your degree.
                   </Text>
                 </Text>
-                <FlatInput label="Enter website"
-                value={website}
-                 onChangeText={handleWebsite} />
+                <FlatInput
+                  label="Enter website"
+                  value={website}
+                  onChangeText={handleWebsite}
+                />
               </>
             )}
 
@@ -368,10 +380,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   value={website}
                   onChangeText={handleWebsite}
                 />
-                <PrimaryButton onPress={() => {
-                  sumbitVerificationForm();
-                }} title="Submit" 
-                isLoading={loading}
+                <PrimaryButton
+                  onPress={() => sumbitVerificationForm()}
+                  title="Submit"
+                  isLoading={loading}
                 />
               </View>
             </KeyboardAvoidingView>

@@ -196,7 +196,7 @@ export const StackNavigator = () => {
         name={ROUTES.EditProfile}
         component={EditProfile}
       />
-    <Stack.Screen
+      <Stack.Screen
         //options={optins}
         name={ROUTES.Report}
         component={ReportScreen}

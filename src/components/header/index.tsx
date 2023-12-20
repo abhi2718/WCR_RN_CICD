@@ -18,6 +18,8 @@ interface HeaderBarProps {
   text?: string;
   button?: () => void;
   isLoading?: boolean;
+  isVerificartionScreen?: boolean;
+  flagType?: string;
 }
 export const HeaderBar = (props: HeaderBarProps) => {
   const {
@@ -29,6 +31,8 @@ export const HeaderBar = (props: HeaderBarProps) => {
     text,
     button,
     isLoading = false,
+    isVerificartionScreen = false,
+    flagType,
   } = props;
 
   const navigation = useNavigation();
@@ -64,6 +68,18 @@ export const HeaderBar = (props: HeaderBarProps) => {
             <Text style={headerStyle.actionButton}>Save</Text>
           )}
         </Pressable>
+      ) : isVerificartionScreen ? (
+        flagType === 'USA' ? (
+          <Image
+            style={headerStyle.flagIcon}
+            source={require('../../assets/images/icons/USAFlag.png')}
+          />
+        ) : (
+          <Image
+            style={headerStyle.flagIcon}
+            source={require('../../assets/images/icons/CanadaFlag.png')}
+          />
+        )
       ) : (
         <View style={headerStyle.emptyView} />
       )}
@@ -75,6 +91,10 @@ export const headerStyle = StyleSheet.create({
   arrow: {
     height: sizes[4],
     width: sizes[2],
+  },
+  flagIcon: {
+    height: sizes[4],
+    width: sizes[6],
   },
   logo: {
     marginLeft: -5,
@@ -167,12 +187,12 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           </Pressable>
         )}
         {isSearchIcon && (
-         <Pressable onPress={toggleSearchInput}>
-         <Image
-           style={headerDeckStyle.searchIcon}
-           source={require('../../assets/images/Magnifier.png')}
-         />
-       </Pressable>
+          <Pressable onPress={toggleSearchInput}>
+            <Image
+              style={headerDeckStyle.searchIcon}
+              source={require('../../assets/images/Magnifier.png')}
+            />
+          </Pressable>
         )}
         {!isPrefrence && !isSearchIcon && (
           <View style={headerDeckStyle.searchIcon} />
