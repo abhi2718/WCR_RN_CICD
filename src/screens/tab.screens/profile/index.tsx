@@ -40,8 +40,12 @@ export const ProfileScreen = ({}) => {
                 }}
                 style={styles.profileImg}
               />
+             
+                <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
+                {/* <Progress.Bar progress={0.3} width={200} />
+              <Text>34% Profile Complete</Text> */}
               <Column gap={5}>
-                <Text style={styles.nameHead}>{user.profile.displayName ?? user.profile.name.first}</Text>
+              <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
                 <Text style={styles.subHead}></Text>
                 <Text style={styles.address}></Text>
               </Column>

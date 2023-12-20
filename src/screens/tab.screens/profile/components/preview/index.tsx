@@ -61,7 +61,7 @@ export const PreviewScreen = () => {
                       style={styles.gradient}
                     />
                     <Row alignItems="center" gap={15} style={styles.nameRow}>
-                      <Text style={styles.name}>{user.profile.displayName ?? user.profile.name.first} (He/Him), 27</Text>
+                      <Text style={styles.name}>{user.profile.displayName ?? user.profile.name.first}(He/Him), 27</Text>
                       <Image
                         style={styles.badge}
                         source={require('../../../../../assets/images/icons/badge.png')}
