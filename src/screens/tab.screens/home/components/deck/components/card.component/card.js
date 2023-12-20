@@ -7,6 +7,7 @@ import { Card } from '../swiper';
 import { useViewModal } from './useViewModal';
 import { calculateAge } from '../../../../../../../utils/common.functions';
 import LinearGradient from 'react-native-linear-gradient';
+import { BlockAndReportModal } from '../blockOrReportModal';
 export default function CardCompoent({ item, height, cardRef }) {
   const heightStyle = { height, ...cardStyles.imageStyle };
   const {
@@ -26,6 +27,10 @@ export default function CardCompoent({ item, height, cardRef }) {
     ethnicity,
     userHeight,
     maritalStatus,
+    bio,
+    showModal,
+    setShowModal,
+    handleReport,
   } = useViewModal(item, cardRef);
   return (
     <View style={cardStyles.deckContainer}>
@@ -49,7 +54,10 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Row alignItems="center" gap={15} style={cardStyles.nameRow}>
                   <Text style={cardStyles.name}>
-                    {first} ({genderPronoun}), {calculateAge(dob)}
+                    {first}{' '}
+                    {genderPronoun !== 'Prefer not to say' &&
+                      `(${genderPronoun})`}
+                    , {calculateAge(dob)}
                   </Text>
                   <Image
                     style={cardStyles.badge}
@@ -113,10 +121,6 @@ export default function CardCompoent({ item, height, cardRef }) {
 
                 {ethnicity.lenght > 0 && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    {/* <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/femailAvatar.png')}
-                      /> */}
                     <Text style={cardStyles.chipText}>{ethnicity}</Text>
                   </Row>
                 )}
@@ -133,17 +137,13 @@ export default function CardCompoent({ item, height, cardRef }) {
                 )}
                 {maritalStatus && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    {/* <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/femailAvatar.png')}
-                      /> */}
                     <Text style={cardStyles.chipText}>{maritalStatus}</Text>
                   </Row>
                 )}
               </Row>
             </View>
 
-            {item.photos.map(({ url, _id }, index) => {
+            {item?.photos?.map(({ url, _id }, index) => {
               return (
                 <View key={index}>
                   <FastImage
@@ -157,31 +157,33 @@ export default function CardCompoent({ item, height, cardRef }) {
                   />
                   {index === 0 && (
                     <View style={cardStyles.inBtwnText}>
-                      <Text style={cardStyles.headingText}>About</Text>
-                      <Text style={cardStyles.aboutText}>
-                        Lorem ipsum dolor sit amet consectetur. Enim inte sed
-                        blandit nulla pellentesque. Lacus aliquet nisi pell
-                        entesque ornare ac.
-                      </Text>
+                      {bio && (
+                        <View>
+                          <Text style={cardStyles.headingText}>About</Text>
+                          <Text style={cardStyles.aboutText}>{bio}</Text>
+                        </View>
+                      )}
                     </View>
                   )}
                 </View>
               );
             })}
             <View style={cardStyles.inBtwnText}>
-              <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
-              <Text style={cardStyles.aboutText}>
-                hiking, yoga, cooking, live music, trying new restaurants,
-                skydiving some day
-              </Text>
+              {
+                item?.interests?.length > 0 && <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
+              }
+              <Row>
+              {item?.interests?.map((item,index) => (
+                <Text key={index} style={cardStyles.aboutText}>{item} </Text>
+              ))}
+              </Row>
             </View>
-
             <Row style={cardStyles.footerIconRow} justifyContent="space-around">
               <Pressable onPress={_handleDisLike}>
                 <Image
                   style={cardStyles.footerIcon}
                   source={require('../../../../../../../assets/images/icons/disLike.png')}
-                />
+                />                                                       
               </Pressable>
               <Pressable onPress={addFavourite}>
                 <Image
@@ -203,12 +205,18 @@ export default function CardCompoent({ item, height, cardRef }) {
               </Text>
             </Pressable>
 
-            <Pressable onPress={handleBlockUser}>
+            <Pressable onPress={() => setShowModal(true)}>
               <Text style={cardStyles.blockReportText}>Block/Report</Text>
             </Pressable>
           </ScrollView>
         </View>
       </Card>
+      <BlockAndReportModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handleBlockUser={handleBlockUser}
+        handleReport={handleReport}
+      />
     </View>
   );
 }

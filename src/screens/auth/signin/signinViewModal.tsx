@@ -50,6 +50,11 @@ export const useViewModal = (props: ScreenParams) => {
       setLoading(false);
       return data;
     } catch (error) {
+      return ShowFlashMessage(
+        'Error',
+        `${error}`,
+        FlashMessageType.DANGER,
+      )
       setLoading(false);
     }
   };

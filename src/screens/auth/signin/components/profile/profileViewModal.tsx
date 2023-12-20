@@ -134,13 +134,17 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     if (formData.dob.trim().length == 0) {
       errors.dob = 'Please enter your date of birth';
     } else if (!isDate18YearsOrAbove(formData.dob)) {
+      ShowFlashMessage('Alert', 'You must be at-least 18 yrs old', 'danger');
       errors.dob = 'You must be at-least 18 yrs old';
+    }
+    if (!formData.dob.length) {
+     return ShowFlashMessage('Alert', 'Enter your DOB', 'danger');
     }
     if (Object.keys(errors).length) {
       return setValidationErrors(errors);  
     } else {
       setValidationErrors({});
-     await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
+      await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
     }
   };
 
@@ -198,7 +202,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     }catch(e) {
       setLoading(false); 
     }
-    
   };
 
   async function createUser({
@@ -213,6 +216,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
   }: socialSignInSignUpPayload) {
     try {
       setLoading(true);
+
       const dataMango = await socialSignInSignUp({
         firebaseUid,
         email,
@@ -234,6 +238,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       if(dataMango.token)
       navigateToGenderScreen(dataMango.user._id);
     } catch (error) {
+      setLoading(false);
     }
   }
   return {

@@ -7,7 +7,7 @@ import { report } from '../../../../../../../utils/constanst';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 
-export const ReportScreen = () => {
+export const ReportScreen = (props) => {
   const {
     user,
     goBack,
@@ -16,7 +16,7 @@ export const ReportScreen = () => {
     handleSubmit,
     loading,
     reasonOfReport
-  } = useViewModal();
+  } = useViewModal(props);
   return (
     <View style={styles.container}>
       <Spacer position='bottom' size={20}>

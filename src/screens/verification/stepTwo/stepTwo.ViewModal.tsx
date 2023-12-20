@@ -296,6 +296,20 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
   };
 
+  const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
+    useState(false);
+
+  const closeModal = () => {
+    setVerificvationInfoModalVisible(false);
+  };
+  const openModal = () => {
+    setVerificvationInfoModalVisible(true);
+  };
+
+  const openInfoModal = () => {
+    setVerificvationInfoModalVisible(true);
+  };
+
   return {
     loading,
     verificationOption,
@@ -326,5 +340,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     PhdOptionImage,
     validationErrorMessage,
     website,
+    isVerificationInfoModalVisible,
+    openInfoModal,
+    closeModal,
   };
 };
