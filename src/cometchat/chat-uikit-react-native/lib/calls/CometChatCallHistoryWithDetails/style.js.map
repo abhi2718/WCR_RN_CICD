@@ -1,1 +1,0 @@
-{"version":3,"file":"style.js","sourceRoot":"","sources":["../../../src/calls/CometChatCallHistoryWithDetails/style.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,UAAU,EAAE,MAAM,cAAc,CAAC;AAE1C,MAAM,CAAC,MAAM,KAAK,GAAG,UAAU,CAAC,MAAM,CAAC;IACnC,WAAW,EAAE;QACT,QAAQ,EAAE,UAAU;QACpB,MAAM,EAAE,CAAC;QACT,MAAM,EAAE,MAAM;QACd,KAAK,EAAE,MAAM;KAChB;CACJ,CAAC,CAAA"}

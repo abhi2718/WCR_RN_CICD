@@ -1,2 +1,0 @@
-import React from 'react';
-export default function Header({ backButtonIcon, showBackButton, onBack, title, AppBarOptions, shouldSelect, hideSubmitIcon, onSelectionHandler, hideSearch, searchBoxIcon, searchPlaceholderText, searchPlaceholderTextColor, searchHandler, searchInput, onSubmitEditing, selectionIcon, titleFontStyle, titleColor, backIconTint, searchBorderStyle, searchBorderRadius, searchTextFontStyle, searchTextColor, searchIconTint, searchBackground, selectionIconTint, }: any): React.JSX.Element;

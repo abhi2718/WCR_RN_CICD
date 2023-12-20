@@ -1,8 +1,9 @@
 import { isAndroid } from './../../components/tools/index';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { CometChatUIKit, ReactionsExtension } from '../../cometChat/chat-uikit-react-native/src';
+//import { CometChatUIKit, ReactionsExtension } from '../../cometChat/chat-uikit-react-native/src';
 import { config } from '../../utils/config';
+import { CometChatUIKit, ReactionsExtension } from '../../cometchat/src';
 
 export const useCometChatInit = () => {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);

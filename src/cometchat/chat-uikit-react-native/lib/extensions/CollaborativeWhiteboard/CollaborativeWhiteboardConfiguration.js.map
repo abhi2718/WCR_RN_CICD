@@ -1,1 +1,0 @@
-{"version":3,"file":"CollaborativeWhiteboardConfiguration.js","sourceRoot":"","sources":["../../../src/extensions/CollaborativeWhiteboard/CollaborativeWhiteboardConfiguration.tsx"],"names":[],"mappings":"AAiBG,MAAM,OAAO,oCAAoC;IAChD,wBAAwB,CAAoC;IAE5D,YAAY,EACV,wBAAwB,GAAG,SAAS,GACS;QAC3C,IAAI,CAAC,wBAAwB,GAAI,wBAAwB,CAAA;IAC3D,CAAC;CACJ"}

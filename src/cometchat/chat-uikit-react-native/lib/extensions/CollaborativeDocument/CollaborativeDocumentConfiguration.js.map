@@ -1,1 +1,0 @@
-{"version":3,"file":"CollaborativeDocumentConfiguration.js","sourceRoot":"","sources":["../../../src/extensions/CollaborativeDocument/CollaborativeDocumentConfiguration.tsx"],"names":[],"mappings":"AAiBG,MAAM,OAAO,kCAAkC;IAC9C,wBAAwB,CAAoC;IAE5D,YAAY,EACV,wBAAwB,GAAG,SAAS,GACO;QACzC,IAAI,CAAC,wBAAwB,GAAI,wBAAwB,CAAA;IAC3D,CAAC;CACJ"}

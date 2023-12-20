@@ -1,1 +1,0 @@
-export declare const Hooks: (props: any, stickerList: any, stickerSet: any, activeStickerSetName: any, setStickerList: any, setStickerSet: any, setActiveStickerList: any, setActiveStickerSetName: any, setDecoratorMessage: any, decoratorMessage: any) => void;

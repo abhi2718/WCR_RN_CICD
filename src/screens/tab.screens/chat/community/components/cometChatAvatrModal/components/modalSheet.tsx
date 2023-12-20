@@ -7,8 +7,9 @@ import { ProfileModalSheetProps } from '../../../../../../../types/screen.type/p
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../../navigation';
 import { ProfileModal } from '../../../../../../../components/profile.component';
-import { CometChat } from '../../../../../../../cometChat/chat-sdk-react-native/CometChat';
-import { CometChatMessages } from '../../../../../../../cometChat/chat-uikit-react-native/src';
+import { CometChat } from '../../../../../../../cometchat/sdk/CometChat';
+import { CometChatMessages } from '../../../../../../../cometchat/src';
+//import { CometChatMessages } from '../../../../../../../cometChat/chat-uikit-react-native/src';
 
 
 export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
