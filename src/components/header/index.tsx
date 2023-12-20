@@ -167,12 +167,12 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           </Pressable>
         )}
         {isSearchIcon && (
-         <Pressable onPress={toggleSearchInput}>
-         <Image
-           style={headerDeckStyle.searchIcon}
-           source={require('../../assets/images/Magnifier.png')}
-         />
-       </Pressable>
+          <Pressable onPress={toggleSearchInput}>
+            <Image
+              style={headerDeckStyle.searchIcon}
+              source={require('../../assets/images/Magnifier.png')}
+            />
+          </Pressable>
         )}
         {!isPrefrence && !isSearchIcon && (
           <View style={headerDeckStyle.searchIcon} />

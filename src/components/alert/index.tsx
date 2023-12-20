@@ -27,8 +27,8 @@ export const AlertScreen = (props: AlertScreenType) => {
     <Modal transparent={true} visible={showModal}>
       <SafeAreaView style={styles.container}>
         <View style={styles.mainContainer}>
-          <View style={{ height: 200 - 32, justifyContent: 'space-between' }}>
-            <View>
+          <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
               <Row justifyContent="center">
                 <Text style={styles.title}>{title}</Text>
               </Row>
@@ -37,16 +37,16 @@ export const AlertScreen = (props: AlertScreenType) => {
                   <Text style={styles.description}>{description}</Text>
                 </Row>
               </Spacer>
-              <View style={styles.btnContainer}>
-                <Row justifyContent="space-between">
-                  <Pressable onPress={handleCancel} style={styles.secondBtn}>
-                    <Text style={styles.secondBtn.btnText}>Cancel</Text>
-                  </Pressable>
-                  <Pressable onPress={handlePress} style={styles.primeBtn}>
-                    <Text style={styles.primeBtn.btnText}>Yes</Text>
-                  </Pressable>
-                </Row>
-              </View>
+            </View>
+            <View style={styles.btnContainer}>
+              <Row justifyContent="space-between">
+                <Pressable onPress={handleCancel} style={styles.secondBtn}>
+                  <Text style={styles.secondBtn.btnText}>Cancel</Text>
+                </Pressable>
+                <Pressable onPress={handlePress} style={styles.primeBtn}>
+                  <Text style={styles.primeBtn.btnText}>Yes</Text>
+                </Pressable>
+              </Row>
             </View>
           </View>
         </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    marginTop: sizes[10] + 1,
+    // marginTop: sizes[10] + 1,
     borderTopColor: '#00000026',
     borderTopWidth: 1,
   },

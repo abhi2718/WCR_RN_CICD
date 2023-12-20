@@ -79,4 +79,8 @@ export const searchStyle = StyleSheet.create({
     width: sizes[12] * 2,
     height: sizes[12] * 2 - 10,
   },
+  crossBox: {
+    width: sizes[8],
+    alignItems: 'center',
+  },
 });
