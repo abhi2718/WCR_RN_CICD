@@ -1,6 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
 import {
   dimensions,
@@ -10,11 +10,11 @@ import {
   Spacer,
 } from '../../../../../../components/tools';
 const type = ['image', 'video', 'audio', 'file'];
-import {useViewModal} from './useViewModal';
-import {MediaMessageProps} from '../../../../../../types/screen.type/communityChat';
+import { useViewModal } from './useViewModal';
+import { MediaMessageProps } from '../../../../../../types/screen.type/communityChat';
 import VedioPlayer from './components/video-player';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {styles} from './styles';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { styles } from './styles';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -49,17 +49,16 @@ const ViedoMessage = (props: MediaMessageProps) => {
         <FullLoader />
       ) : (
         <>
-          <ScrollView style={{backgroundColor:"#fff"}}>
-            {
-              ["https://vjs.zencdn.net/v/oceans.mp4"].map((imgUrl, index) => (
-                <Spacer key={index} position="bottom" size={10}>
-                  <View style={{height: 300, flex: 1}}>
-                    <View style={{height: 300, flex: 1}}>
-                      <VedioPlayer url="https://vjs.zencdn.net/v/oceans.mp4" />
-                    </View>
+          <ScrollView style={{ backgroundColor: '#fff' }}>
+            {['https://vjs.zencdn.net/v/oceans.mp4'].map((imgUrl, index) => (
+              <Spacer key={index} position="bottom" size={10}>
+                <View style={{ height: 300, flex: 1 }}>
+                  <View style={{ height: 300, flex: 1 }}>
+                    <VedioPlayer url="https://vjs.zencdn.net/v/oceans.mp4" />
                   </View>
-                </Spacer>
-              ))}
+                </View>
+              </Spacer>
+            ))}
           </ScrollView>
         </>
       )}
@@ -67,7 +66,7 @@ const ViedoMessage = (props: MediaMessageProps) => {
   );
 };
 const ImageMessage = (props: MediaMessageProps) => {
-  const {loading, images} = useViewModal(props);
+  const { loading, images } = useViewModal(props);
   return (
     <View style={styles.container}>
       {loading ? (
@@ -77,18 +76,18 @@ const ImageMessage = (props: MediaMessageProps) => {
           <ScrollView>
             {images &&
               images.map((imgUrl, index) => (
-                <Spacer key={index} position="bottom" size={10}>
+                <View style={styles.galleryContainer}>
                   <Row justifyContent="space-between">
                     <FastImage
-                      style={{width: (dimensions.width - 48) / 2, height: 140}}
-                      source={{uri: imgUrl}}
+                      style={styles.galleryImage}
+                      source={{ uri: imgUrl }}
                     />
                     <FastImage
-                      style={{width: (dimensions.width - 48) / 2, height: 140}}
-                      source={{uri: imgUrl}}
+                      style={styles.galleryImage}
+                      source={{ uri: imgUrl }}
                     />
                   </Row>
-                </Spacer>
+                </View>
               ))}
           </ScrollView>
         </>

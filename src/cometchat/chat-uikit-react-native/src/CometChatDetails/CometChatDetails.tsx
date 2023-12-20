@@ -1132,9 +1132,9 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
 };
 const myStyles = StyleSheet.create({
   imageStyle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 160,
+    height: 160,
+    borderRadius: 100,
   },
   menuOptins: {
     height: 50,
