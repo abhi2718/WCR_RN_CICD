@@ -525,7 +525,7 @@ PODS:
     - glog
   - react-native-blur (4.3.2):
     - React-Core
-  - react-native-cometchat-ui-kit (4.0.2):
+  - react-native-cometchat-ui-kit (4.1.0):
     - React-Core
   - react-native-date-picker (4.3.3):
     - React-Core
@@ -1040,7 +1040,7 @@ SPEC CHECKSUMS:
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
   react-native-blur: cfdad7b3c01d725ab62a8a729f42ea463998afa2
-  react-native-cometchat-ui-kit: 15f2d32db9f6fe6ddb4633fe6e3e4589989f5210
+  react-native-cometchat-ui-kit: 5e2b5b1e07a6aca0eee2af4971e08d6cf3c82a1a
   react-native-date-picker: 1d61c76315098a6ad4c643a356f005916c7d4875
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
   react-native-pager-view: e26d35e382d86950c936f8917e3beb9188115ccc

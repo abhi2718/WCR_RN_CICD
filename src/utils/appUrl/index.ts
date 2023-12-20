@@ -20,5 +20,6 @@ export class AppUrl {
   public static userEndPoints = `${this.BASE_URL}/user`;
   public static contactUsEndPoint = `${this.BASE_URL}/contact-us`;
   public static preferenceEndPoint = `${this.BASE_URL}/preference`;
-  public static reportEndPoint = `${this.BASE_URL}/report`
+  public static reportEndPoint = `${this.BASE_URL}/report`;
+  public static notificationCountEndPoint = `${this.notificationEndPoint}/user/notification/count`;
 }

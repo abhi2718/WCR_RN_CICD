@@ -10,7 +10,7 @@ type OptionType = {
   label: string;
   value: string;
 };
-export const useViewModal = () => {
+export const useViewModal = (props) => {
   const { user } = useSelector(({ userState }) => userState);
   const authRepository = useMemo(() => new AuthRepository(),[]);
   const dispatch = useDispatch();
@@ -29,6 +29,7 @@ export const useViewModal = () => {
   };
 
   const handleSubmit = async () => {
+    const {userId,name} = props?.route?.params;
     if (!messageRef?.current?.length || !subjectRef?.current?.length) {
       return ShowFlashMessage(
         'Subject and message both fields required !',
@@ -36,28 +37,22 @@ export const useViewModal = () => {
         'danger',
       );
     }
-    console.log({
-      message: messageRef?.current,
-      subject: subjectRef?.current
-    });
-    return;
+   
     const payload = {
-      reportedUserName:"",
-      reportedUser:"",
+      reportedUserName:name,
+      reportedUser:userId,
       reason: subjectRef?.current,
       message: messageRef?.current
     };
     try {
       setLoading(true);
-     const data = await authRepository.reportUser(payload)
-      // messageRef?.current = '';
-      // subjectRef?.current = '';
+      const data = await authRepository.reportUser(payload)
       setLoading(false);
-      // ShowFlashMessage(
-      //   'Your message has been sent succesfully !',
-      //   '',
-      //   'success',
-      // );
+      ShowFlashMessage(
+        'Your message has been sent succesfully !',
+        '',
+        'success',
+      );
     } catch (error) {
       setLoading(false);
     }

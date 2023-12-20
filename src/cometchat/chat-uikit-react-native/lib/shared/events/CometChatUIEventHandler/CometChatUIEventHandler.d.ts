@@ -1,0 +1,30 @@
+import { CallUIEventListener, ConversationUIEventListener, GroupUIEventListener, MessageUIEventListener, UserUIEventListener, UIEventListener } from "./Listener";
+export declare class CometChatUIEventHandler {
+    private static userHandlers?;
+    private static uiHandlers?;
+    private static messageHandlers?;
+    private static conversationHandlers?;
+    private static groupHandlers?;
+    private static callHandlers?;
+    private static panelHandlers?;
+    constructor();
+    static emitPanelEvent(name: string, param: object): void;
+    static emitCallEvent(name: string, param: object): void;
+    static addCallListener(name: string, callHandler: CallUIEventListener): void;
+    static removeCallListener(name: string): void;
+    static emitMessageEvent(name: string, param: object): void;
+    static addMessageListener(name: string, messageHandler: MessageUIEventListener): void;
+    static removeMessageListener(name: string): void;
+    static emitConversationEvent(name: string, param: object): void;
+    static addConversationListener(name: string, conversationHandler: ConversationUIEventListener): void;
+    static removeConversationListener(name: string): void;
+    static emitGroupEvent(name: string, param: object): void;
+    static addGroupListener(name: string, groupHandler: GroupUIEventListener): void;
+    static removeGroupListener(name: string): void;
+    static emitUserEvent(name: string, param: object): void;
+    static addUserListener(name: string, userHandler: UserUIEventListener): void;
+    static removeUserListener(name: string): void;
+    static emitUIEvent(name: string, param: object): void;
+    static addUIListener(name: string, uiHandlers: UIEventListener): void;
+    static removeUIListener(name: string): void;
+}

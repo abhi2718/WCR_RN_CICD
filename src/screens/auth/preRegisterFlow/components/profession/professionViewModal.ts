@@ -23,7 +23,7 @@ export const useProfessionModal = (props: ScreenParams) => {
       : '',
     primaryDegree: user?.designation?.primaryDegree
       ? user?.designation?.primaryDegree
-      : '',
+      : 'Select Degree Type',
     institution: user?.institution ? user?.institution : '',
     title: user?.designation?.title ? user?.designation?.title : '',
   });

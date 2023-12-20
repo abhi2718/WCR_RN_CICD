@@ -1,4 +1,5 @@
 import { CommonActions, useNavigation } from '@react-navigation/native';
+import Share from 'react-native-share';
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
@@ -12,6 +13,16 @@ export const useViewModal = () => {
   const [link, setLink] = useState('');
   const handleToggleModal = () => setShowModal(oldValue => !oldValue);
   const goBack = () => navigation.goBack();
+  const handleShare = () => {
+    try {
+      const shareOptions = {
+        message: `White Coat Romance profile share
+         The White Coat Romance dating app and thought it would be perfect for you. `,
+        url: "https://staging.whitecoatromance.com/assets/images/e-wcr.png",
+      };
+      Share.open(shareOptions);
+    } catch (error) {}
+  };
   const _accountSetting = () => {
       navigation.navigate(ROUTES.AccountSetting);
   };
@@ -57,7 +68,7 @@ export const useViewModal = () => {
       id: '3',
       imagePath: require('../../../../../assets/images/settings/inviteOthers.png'),
       title: 'Invite others',
-      onPress: _inviteOthers,
+      onPress: handleShare,
     },
     {
       id: '4',
@@ -77,14 +88,18 @@ export const useViewModal = () => {
       title: 'Contact us',
       onPress: _contactUs,
     },
-    {
-      id: '7',
-      imagePath: require('../../../../../assets/images/settings/contactUS.jpg'),
-      title: 'Report',
-      onPress: _report,
-    },
+    // {
+    //   id: '7',
+    //   imagePath: require('../../../../../assets/images/settings/contactUS.jpg'),
+    //   title: 'Report',
+    //   onPress: _report,
+    // },
   ];
   return {
-    lists, handleToggleModal, showModal, link
+    lists,
+    handleToggleModal,
+    showModal,
+    link,
+    handleShare
   };
 };

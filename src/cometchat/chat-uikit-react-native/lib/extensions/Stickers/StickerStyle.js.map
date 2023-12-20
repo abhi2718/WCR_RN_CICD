@@ -1,0 +1,1 @@
+{"version":3,"file":"StickerStyle.js","sourceRoot":"","sources":["../../../src/extensions/Stickers/StickerStyle.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAsB,MAAM,mBAAmB,CAAC;AAIlE,MAAM,OAAO,YAAa,SAAQ,SAAS;IACvC,YAAY,EACR,MAAM,GAAG,GAAG,EACZ,KAAK,GAAG,GAAG,GACM;QACjB,KAAK,CAAC;YACF,MAAM;YACN,KAAK;SACR,CAAC,CAAC;IACP,CAAC;CACJ"}

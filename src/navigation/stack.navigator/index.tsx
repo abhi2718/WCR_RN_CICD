@@ -5,7 +5,6 @@ import Profile from '../../screens/auth/signin/components/profile';
 import EmailAuthByOtpScreeen from '../../screens/auth/signin/components/emailauth';
 import { TabNavigator } from '../tab.navigator';
 import { ROUTES } from '../';
-import { MessageList } from '../../cometChat/src/CometChatConversationsWithMessages/CometChatConversationsWithMessages';
 import Onboarding from '../../screens/onBoarding';
 import { PrivateChatWindowWrapper } from '../../screens/tab.screens/chat/community/components/cometChatAvatrModal/components/modalSheet';
 const Stack = createNativeStackNavigator();
@@ -36,18 +35,19 @@ import { ContactUs } from '../../screens/tab.screens/profile/components/settings
 import { ReportScreen } from '../../screens/tab.screens/profile/components/settings/components/report';
 import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
 import { EditProfile } from '../../screens/tab.screens/profile/components/editProfile';
-import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
+//import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
 import VerificationPending from '../../screens/errorState/verificationPending';
+import { MessageList } from '../../screens/tab.screens/chat/components/chatList';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}
         component={SplashScreen}
-      /> */}
+      />
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
@@ -145,7 +145,6 @@ export const StackNavigator = () => {
         name={ROUTES.Hobbies}
         component={Hobbies}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.CommunityChatMessage}

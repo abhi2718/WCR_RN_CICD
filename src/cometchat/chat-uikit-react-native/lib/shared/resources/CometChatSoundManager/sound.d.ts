@@ -1,0 +1,56 @@
+export default Sound;
+declare class Sound {
+    static enable(enabled: any): void;
+    static enableInSilenceMode(enabled: any): void;
+    static setActive(value: any): void;
+    static setCategory(value: any, mixWithOthers?: boolean): void;
+    static setMode(value: any): void;
+    static setSpeakerPhone(value: any): void;
+    constructor(filename: any, basePath: any, onError: any, options: any);
+    _filename: any;
+    _loaded: boolean;
+    _key: number;
+    _playing: boolean;
+    _duration: number;
+    _numberOfChannels: number;
+    _volume: number;
+    _pan: number;
+    _numberOfLoops: number;
+    _speed: number;
+    _pitch: number;
+    registerOnPlay(): void;
+    onPlaySubscription: import("react-native").EmitterSubscription;
+    isLoaded(): boolean;
+    play(onEnd: any): this;
+    pause(callback: any): this;
+    stop(callback: any): this;
+    reset(): this;
+    release(): this;
+    getFilename(): any;
+    getDuration(): number;
+    getNumberOfChannels(): number;
+    getVolume(): number;
+    getSpeed(): number;
+    getPitch(): number;
+    setVolume(value: any): this;
+    setPan(value: any): this;
+    getSystemVolume(callback: any): this;
+    setSystemVolume(value: any): this;
+    getPan(): number;
+    getNumberOfLoops(): number;
+    setNumberOfLoops(value: any): this;
+    setSpeed(value: any): this;
+    setPitch(value: any): this;
+    getCurrentTime(callback: any): void;
+    setCurrentTime(value: any): this;
+    setSpeakerphoneOn(value: any): void;
+    isPlaying(): boolean;
+    checkOtherAudioPlaying(): Promise<any>;
+    setCategory(value: any): void;
+}
+declare namespace Sound {
+    let MAIN_BUNDLE: any;
+    let DOCUMENT: any;
+    let LIBRARY: any;
+    let CACHES: any;
+}

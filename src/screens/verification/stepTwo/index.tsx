@@ -334,7 +334,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
           </View>
         </View>
       </Modal>
-
       <Modal
         animationType="slide"
         transparent={true}

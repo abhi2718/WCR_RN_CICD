@@ -1,7 +1,6 @@
-//import { CometChatConversationsWithMessages } from '@cometchat/chat-uikit-react-native';
 import React from 'react';
 import {View, Image, Text, SafeAreaView} from 'react-native';
-import {CometChatConversationsWithMessages, CometChatUsersWithMessages} from '../../../../cometChat/src';
+import { CometChatConversationsWithMessages } from '../../../../cometChat/chat-uikit-react-native/src';
 import { HeaderDeck } from '../../../../components/header';
 import { ScreenContainer, ScreenWrapper } from '../../../../components/tools';
 import {styles} from './styles';
