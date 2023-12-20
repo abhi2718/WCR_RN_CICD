@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { sizes } from '../../../infrastructure/theme/sizes';
-import { fontWeights } from '../../../infrastructure/theme/fonts';
-import { colors } from '../../../infrastructure/theme/colors';
-import { dimensions } from '../../../components/tools';
+import { sizes } from '../../../../infrastructure/theme/sizes';
+import { fontWeights } from '../../../../infrastructure/theme/fonts';
+import { colors } from '../../../../infrastructure/theme/colors';
+import { dimensions } from '../../../../components/tools';
 
 export const styles = StyleSheet.create({
   container: { flex: 1, paddingLeft: 15, backgroundColor: '#fff' },
