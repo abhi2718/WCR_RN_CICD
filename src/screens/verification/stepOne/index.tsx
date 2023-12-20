@@ -26,7 +26,7 @@ const VerificationStepOne = (props: ScreenParams) => {
   } = useVerificationViewModal(props);
   return (
     <ScreenContainer>
-      <HeaderBar />
+      <HeaderBar isVerificartionScreen={true} flagType={country} />
       <Text style={verificationStyle.subHeader}>ID Verification (Step I)</Text>
       <View style={verificationStyle.container}>
         <RadioButton.Group

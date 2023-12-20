@@ -49,7 +49,10 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Row alignItems="center" gap={15} style={cardStyles.nameRow}>
                   <Text style={cardStyles.name}>
-                    {first} ({genderPronoun}), {calculateAge(dob)}
+                    {first}{' '}
+                    {genderPronoun !== 'Prefer not to say' &&
+                      `(${genderPronoun})`}
+                    , {calculateAge(dob)}
                   </Text>
                   <Image
                     style={cardStyles.badge}

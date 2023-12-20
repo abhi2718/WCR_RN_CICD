@@ -13,6 +13,8 @@ import * as Progress from 'react-native-progress';
 import { styles } from './styles';
 import { AlertScreen } from '../../../components/alert';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { sizes } from '../../../infrastructure/theme/sizes';
+import { colors } from '../../../infrastructure/theme/colors';
 
 export const ProfileScreen = ({}) => {
   const {
@@ -30,80 +32,73 @@ export const ProfileScreen = ({}) => {
     <ScreenWrapper>
       <View style={styles.container}>
         <Spacer position="bottom" size={20}>
-          <Column>
-            <Row>
+          <Column style={styles.nameContainer}>
+            <Row gap={20}>
               <Image
                 source={{
                   uri: user?.profilePicture?.url,
                 }}
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: 40,
-                }}
+                style={styles.profileImg}
               />
-              <Column>
+             
                 <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
                 {/* <Progress.Bar progress={0.3} width={200} />
               <Text>34% Profile Complete</Text> */}
+              <Column gap={5}>
+              <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
+                <Text style={styles.subHead}></Text>
+                <Text style={styles.address}></Text>
               </Column>
             </Row>
           </Column>
         </Spacer>
         <Pressable onPress={goToPreview}>
-          <Row alignItems="center">
+          <Row gap={sizes[2]}>
             <Image
               style={styles.iconStyle}
               source={require('../../../assets/images/Pewview.png')}
             />
-            <Text>Preview</Text>
+            <Text style={styles.text}>Preview</Text>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={20} />
+        <Spacer position={'top'} size={40} />
         <Pressable onPress={goToEditProfile}>
-          <Row alignItems="center">
+          <Row gap={sizes[2]}>
             <Image
               style={styles.iconStyle}
               source={require('../../../assets/images/EditProfile.png')}
             />
-            <Text>Edit profile</Text>
+            <Text style={styles.text}>Edit profile</Text>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={20} />
+        <Spacer position={'top'} size={40} />
         <Pressable onPress={goToPreferences}>
-          <Row alignItems="center">
+          <Row gap={sizes[2]}>
             <Image
               style={styles.iconStyle}
               source={require('../../../assets/images/Preferences.png')}
             />
-            <Text>Preferences</Text>
+            <Text style={styles.text}>Preferences</Text>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={20} />
+        <Spacer position={'top'} size={40} />
         <Pressable onPress={goToSetting}>
-          <Row alignItems="center">
+          <Row gap={sizes[2]}>
             <Image
               style={styles.iconStyle}
               source={require('../../../assets/images/Setting.png')}
             />
-            <Text>Setting</Text>
+            <Text style={styles.text}>Settings</Text>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={20} />
-        <Pressable onPress={loading ? () => {} : () => setLogOutModal(true)}>
-          <Row alignItems="center">
+        <Spacer position={'top'} size={40} />
+        <Pressable onPress={_logOut}>
+          <Row gap={sizes[2]}>
             <Image
               style={styles.iconStyle}
               source={require('../../../assets/images/logout.png')}
             />
-            {loading ? (
-              <Row>
-                <Text>Logout</Text>
-                <ActivityIndicator color="blue" animating={loading} />
-              </Row>
-            ) : (
-              <Text>Logout</Text>
-            )}
+            <Text style={styles.logoutText}>Logout</Text>
           </Row>
         </Pressable>
         <AlertScreen

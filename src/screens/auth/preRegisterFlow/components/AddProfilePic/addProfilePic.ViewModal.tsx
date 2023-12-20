@@ -38,7 +38,6 @@ export const useAddProfilePicViewModal = (props: any) => {
   const [isPicUploadInfoModalVisible, setPicUploadInfoModalVisible] =
     useState(false);
 
- 
   const token = useRef(user?.token ? user?.token : null).current;
 
   const dispatch = useDispatch();
@@ -105,12 +104,12 @@ export const useAddProfilePicViewModal = (props: any) => {
   useEffect(() => {
     if (props?.setAllPics) {
       props?.setAllPics({
-        bottomUris:bottomUris?.filter((item)=>item),
-        sidePicUri:sidePicUri?.filter((item)=>item),
-        profilePicUri:profilePicUri
+        bottomUris: bottomUris?.filter((item) => item),
+        sidePicUri: sidePicUri?.filter((item) => item),
+        profilePicUri: profilePicUri,
       });
     }
-  },[bottomUris,sidePicUri,profilePicUri])
+  }, [bottomUris, sidePicUri, profilePicUri]);
   const fillSavedPhotos = (photos: any) => {
     if (!photos) {
       return [];
@@ -295,14 +294,16 @@ export const useAddProfilePicViewModal = (props: any) => {
           },
         },
       );
-      const data = token ? {
-        user: {
-          ...userData,
-          token
-        },
-      }  :{
-        user: userData,
-      };
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
       navigateToHeightScreen();
@@ -317,7 +318,7 @@ export const useAddProfilePicViewModal = (props: any) => {
       }
     } catch (err) {
       setLoading(false);
-    } 
+    }
   };
 
   const uploadImageToCloudinary = async (
@@ -343,8 +344,7 @@ export const useAddProfilePicViewModal = (props: any) => {
       } else {
         return undefined;
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const navigateToHeightScreen = () => {
