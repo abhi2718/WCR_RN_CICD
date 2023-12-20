@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,35 +11,59 @@ import { WebView } from 'react-native-webview';
 import { dimensions, Row, Spacer } from '../../../../../components/tools';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
+import { HeaderBar } from '../../../../../components/header';
 
 export const SettingScreen = () => {
   const { lists, handleToggleModal, showModal, link } = useViewModal();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const onLoadEnd = () => {
+    setIsLoading(false);
+  };
+
   return (
-    <View style={styles.container}>
-      {lists.map((item) => (
-        <Pressable key={item.id} onPress={item.onPress}>
-          <Spacer position="bottom" size={20}>
-            <Row alignItems="center" justifyContent="space-between">
-              <Row alignItems="center">
-                <Image style={styles.iconStyle} source={item.imagePath} />
-                <Spacer position="left" size={20}>
-                  <Text>{item.title}</Text>
-                </Spacer>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <HeaderBar isLogo={false} isText={true} text="Settings" />
+        <Spacer position="top" size={15} />
+        {lists.map((item) => (
+          <Pressable key={item.id} onPress={item.onPress}>
+            <Spacer position="bottom" size={20}>
+              <Row alignItems="center" justifyContent="space-between">
+                <Row alignItems="center">
+                  <Image
+                    resizeMode="contain"
+                    style={styles.iconStyle}
+                    source={item.imagePath}
+                  />
+                  <Spacer position="left" size={15}>
+                    <Text style={styles.text}>{item.title}</Text>
+                  </Spacer>
+                </Row>
+                <Image
+                  style={styles.arrowStyle}
+                  resizeMode="contain"
+                  source={require('../../../../../assets/images/settings/Next.png')}
+                />
               </Row>
-              <Image
-                source={require('../../../../../assets/images/settings/Next.png')}
-              />
-            </Row>
-          </Spacer>
-        </Pressable>
-      ))}
+            </Spacer>
+          </Pressable>
+        ))}
+      </View>
       <Modal visible={showModal}>
         <SafeAreaView>
           <View style={{ height: dimensions.height, width: dimensions.width }}>
             <Row>
-              <Pressable onPress={handleToggleModal}>
-                <Text>X</Text>
-              </Pressable>
+              <Spacer position="left" size={15}>
+                <Pressable onPress={handleToggleModal}>
+                  <Image
+                    style={styles.arrowStyle}
+                    resizeMode="contain"
+                    source={require('../../../../../assets/images/icons/crossIcon.png')}
+                  />
+                </Pressable>
+              </Spacer>
             </Row>
             <WebView
               source={{ uri: link }}
@@ -47,10 +71,11 @@ export const SettingScreen = () => {
                 height: dimensions.height - 100,
                 width: dimensions.width,
               }}
+              onLoadEnd={onLoadEnd}
             />
           </View>
         </SafeAreaView>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };

@@ -50,6 +50,11 @@ export const StackNavigator = () => {
       /> */}
       <Stack.Screen
         options={options}
+        name={ROUTES.Tab}
+        component={TabNavigator}
+      />
+      <Stack.Screen
+        options={options}
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
@@ -101,11 +106,6 @@ export const StackNavigator = () => {
 
       <Stack.Screen options={options} name={ROUTES.Height} component={Height} />
 
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Tab}
-        component={TabNavigator}
-      />
       <Stack.Screen options={options} name={ROUTES.About} component={About} />
       <Stack.Screen
         options={options}
@@ -167,22 +167,22 @@ export const StackNavigator = () => {
         component={PreviewScreen}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.SettingScreen}
         component={SettingScreen}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.AccountSetting}
         component={AccountSettingScreen}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.BlockAndUnBlock}
         component={BlockAndUnBlock}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.ContactUs}
         component={ContactUs}
       />
@@ -196,8 +196,8 @@ export const StackNavigator = () => {
         name={ROUTES.EditProfile}
         component={EditProfile}
       />
-    <Stack.Screen
-        //options={optins}
+      <Stack.Screen
+        options={optins}
         name={ROUTES.Report}
         component={ReportScreen}
       />
