@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -15,12 +15,6 @@ import { HeaderBar } from '../../../../../components/header';
 
 export const SettingScreen = () => {
   const { lists, handleToggleModal, showModal, link } = useViewModal();
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const onLoadEnd = () => {
-    setIsLoading(false);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -71,7 +65,6 @@ export const SettingScreen = () => {
                 height: dimensions.height - 100,
                 width: dimensions.width,
               }}
-              onLoadEnd={onLoadEnd}
             />
           </View>
         </SafeAreaView>
