@@ -1,14 +1,17 @@
-import { useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useContext, useState } from 'react';
 import Share from 'react-native-share';
 import { useSelector } from 'react-redux';
 import { LikeContext } from '../../../../../../../contexts/likes.context';
+import { ROUTES } from '../../../../../../../navigation';
 import { HomeDeckRepository } from '../../../../../../../repository/homeDeck.repo';
 import { AppUrl } from '../../../../../../../utils/appUrl';
-//${AppUrl.showProfileViewEndPoint}${item._id}
 export const useViewModal = (item: any, cardRef: any) => {
   const homeDeckRepository = new HomeDeckRepository();
   const { user } = useSelector(({ userState }) => userState);
   const { fetchAll } = useContext(LikeContext);
+  const [showModal, setShowModal] = useState(false);
+  const navigation = useNavigation();
   const {
     profilePicture,
     first,
@@ -21,6 +24,7 @@ export const useViewModal = (item: any, cardRef: any) => {
     ethnicity,
     height: userHeight,
     maritalStatus,
+    bio,
   } = item;
   const handleShare = () => {
     try {
@@ -56,6 +60,7 @@ export const useViewModal = (item: any, cardRef: any) => {
     } catch (error) {}
   };
   const handleBlockUser = async () => {
+    setShowModal(false);
     try {
       const payLoad = {
         document: {
@@ -68,6 +73,10 @@ export const useViewModal = (item: any, cardRef: any) => {
       }
     } catch (error) {}
   };
+  const handleReport = () => {
+    setShowModal(false);
+    navigation.navigate(ROUTES.Report,{userId:item._id,name:first});
+  }
   return {
     handleShare,
     profilePicture,
@@ -85,5 +94,9 @@ export const useViewModal = (item: any, cardRef: any) => {
     ethnicity,
     userHeight,
     maritalStatus,
+    bio,
+    showModal,
+    setShowModal,
+    handleReport
   };
 };

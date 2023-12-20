@@ -23,3 +23,8 @@ Finding community details screen with view Memebres , Media -->comentChat/src/Co
 // Friend List Item --> CometChatConversationsWithMessages -->CometChatConversations ---> CometChatListItem
 
 CometChatMessageInput ---> CometChatMessageInput
+
+
+want to see block group or user or group info
+//--------------------
+Go to CometChatDetails ----> find Leave Group

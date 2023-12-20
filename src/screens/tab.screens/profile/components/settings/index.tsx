@@ -14,8 +14,8 @@ import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 
 export const SettingScreen = () => {
-  const { lists, handleToggleModal, showModal, link } = useViewModal();
-
+  const { lists, handleToggleModal, showModal, link, handleShare } =
+    useViewModal();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>

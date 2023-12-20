@@ -92,7 +92,7 @@ export const useheightViewModal = (props: ScreenParams) => {
           inch: heightValue?.inch,
         },
       };
-      if (user.height.feet===heightValue?.feet && user.height.inch===heightValue?.inch) {
+      if (user?.height?.feet===heightValue?.feet && user?.height?.inch===heightValue?.inch) {
         navigateToEthnicityScreen();
         return;
       }
@@ -112,10 +112,9 @@ export const useheightViewModal = (props: ScreenParams) => {
           }
         : {
             user: userData,
-          };
+        };
       dispatch(addUser(data));
       setLoading(false);
-
       navigateToEthnicityScreen();
     } catch (err: any) {
       setLoading(false);

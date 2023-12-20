@@ -9,7 +9,7 @@ import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../../../components/header';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 
-export const ReportScreen = () => {
+export const ReportScreen = (props) => {
   const {
     user,
     goBack,
@@ -18,7 +18,7 @@ export const ReportScreen = () => {
     handleSubmit,
     loading,
     reasonOfReport,
-  } = useViewModal();
+  } = useViewModal(props);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
