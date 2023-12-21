@@ -7,6 +7,7 @@ export default function SolidCommunityImage() {
     <View>
       <Image
         style={styles.iconStyle}
+        resizeMode="contain"
         source={require('../../../assets/images/tabBarIcons/community-solid.png')}
       />
     </View>
