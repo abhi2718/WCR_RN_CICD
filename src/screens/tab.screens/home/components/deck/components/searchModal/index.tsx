@@ -45,7 +45,7 @@ export const SearchModal = (props: SearchModalProps) => {
                   onChangeText={handleSearch}
                   placeholder="Search"
                 />
-                <Pressable onPress={handleClose}>
+                <Pressable onPress={handleClose} style={searchStyle.crossBox}>
                   <Image
                     resizeMode="contain"
                     style={searchStyle.crossImg}
