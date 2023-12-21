@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScreenContainer } from '../../../../../components/tools';
+import { ScreenContainer, dimensions } from '../../../../../components/tools';
 import { Text, View, StyleSheet } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { profession } from './professionStyle';
@@ -19,7 +19,7 @@ const Profession = (props: ScreenParams) => {
     professionForm,
     primaryDegreeOption,
     validationErrors,
-    changePrimaryDegreeOption
+    changePrimaryDegreeOption,
   } = useProfessionModal(props);
   return (
     <ScreenContainer>
@@ -48,13 +48,20 @@ const Profession = (props: ScreenParams) => {
               )}
               <Dropdown
                 data={primaryDegreeOption}
-                onFocus={()=>{}}
+                onFocus={() => {}}
                 maxHeight={200}
                 labelField="label"
                 valueField="value"
                 placeholder={professionForm.primaryDegree}
                 value={professionForm.primaryDegree}
-                placeholderStyle={{color:"black",fontSize:16,fontWeight:professionForm.primaryDegree=== "Select Degree Type"?"200":'400'}}
+                placeholderStyle={{
+                  color: 'black',
+                  fontSize: 16,
+                  fontWeight:
+                    professionForm.primaryDegree === 'Select Degree Type'
+                      ? '300'
+                      : '400',
+                }}
                 onChange={(item: any) => {
                   handleInputChange('primaryDegree', item.value);
                 }}
@@ -96,7 +103,7 @@ const Profession = (props: ScreenParams) => {
   );
 };
 
-export default Profession
+export default Profession;
 
 const styles = StyleSheet.create({
   label: {
@@ -113,7 +120,9 @@ const styles = StyleSheet.create({
     //borderWidth: 0.5,
     borderRadius: 8,
     borderBottomWidth: 0.5,
-    borderBottomColor:'gray',
-    paddingHorizontal: 8,
-  }
+    borderBottomColor: 'gray',
+    paddingRight: 6,
+    paddingLeft: 16,
+    width: dimensions.width - 26,
+  },
 });

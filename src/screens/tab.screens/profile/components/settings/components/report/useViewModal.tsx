@@ -39,10 +39,12 @@ export const useViewModal = (props) => {
     }
    
     const payload = {
-      reportedUserName:name,
-      reportedUser:userId,
-      reason: subjectRef?.current,
-      message: messageRef?.current
+      document: {
+        reportedUserName: name,
+        reportedUser: userId,
+        reason: subjectRef?.current,
+        message: messageRef?.current
+      }
     };
     try {
       setLoading(true);

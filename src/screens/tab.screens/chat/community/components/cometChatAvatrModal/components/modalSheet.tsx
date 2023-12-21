@@ -9,8 +9,6 @@ import { ROUTES } from '../../../../../../../navigation';
 import { ProfileModal } from '../../../../../../../components/profile.component';
 import { CometChat } from '../../../../../../../cometchat/sdk/CometChat';
 import { CometChatMessages } from '../../../../../../../cometchat/src';
-//import { CometChatMessages } from '../../../../../../../cometChat/chat-uikit-react-native/src';
-
 
 export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
   const { visible, toggleVisiblity, image, name, navigateToPrivateChat,senderId, toggleModal,

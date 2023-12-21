@@ -59,7 +59,7 @@ export const useheightViewModal = (props: ScreenParams) => {
 
       return { feet, inch };
     } else {
-      console.error(
+      console.error( 
         "Invalid measurement format. Please use the format like '4'1\"'",
       );
       return null;
@@ -71,7 +71,7 @@ export const useheightViewModal = (props: ScreenParams) => {
     const inches = cm / 2.54;
 
     // 1 foot is 12 inches
-    const feet = Math.floor(inches / 12);
+    const feet = Math.floor(inches / 12); 
     const remainingInches = Math.floor(inches % 12);
 
     return {

@@ -5,6 +5,7 @@ import { dimensions } from '../../../../../../components/tools';
 export const styles = StyleSheet.create({
   container: {
     height: 500,
+    backgroundColor:'#fff'
   },
 
   galleryContainer: {
