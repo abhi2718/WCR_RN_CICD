@@ -10,6 +10,7 @@ import { ProfileModal } from '../../../../../../../components/profile.component'
 
 export const Member = (props: MemberProps) => {
   const { member, toggleSetShowMembers } = props;
+  console.log(member);
   const [showModal, setModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const toggleModal = () => {

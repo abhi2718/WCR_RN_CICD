@@ -41,11 +41,14 @@ import { CometChatGroupsMembers } from '../CometChatGroupMembers';
 import { CometChatContextType } from '../shared/base/Types';
 import { CometChatUIEventHandler } from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
 import { CometChatTransferOwnershipInterface } from '../CometChatTransferOwnership/CometChatTransferOwnership';
-import { Column, dimensions, Row } from '../../../components/tools';
+import { Column, dimensions, Row, Spacer } from '../../../components/tools';
 import { CommunityMembers } from '../../../screens/tab.screens/chat/community/components/communityMembers';
 import {
   MediaTab,
 } from '../../../screens/tab.screens/chat/community/components/mediaMessages';
+import { sizes } from '../../../infrastructure/theme/sizes';
+import { fontWeights } from '../../../infrastructure/theme/fonts';
+import { colors } from '../../../infrastructure/theme/colors';
 export interface ModalDetailsInterface {
   title: string;
   confirmButtonText: string;
@@ -850,7 +853,8 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
     if (group) {
       return (
         <View>
-          <View style={{ height: 200 }}>
+          <View style={{ height: 400,padding:16, }}>
+            <Row justifyContent='space-between' alignItems='center'>
             <Header
               title={title}
               showCloseButton={showCloseButton}
@@ -868,28 +872,45 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
                 detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
               }
             />
+             <Pressable onPress={handleLeaveGroup}>
+              <Text>Leave Group</Text>
+            </Pressable>
+           </Row>
             {groupDetails && (
               <Row>
+                <View style={styles.groupInfoContainer}>
                 <Image
                   style={myStyles.imageStyle}
                   source={{ uri: groupDetails?.getIcon() }}
-                />
+                  />
+                    <View style={styles.infoBtBox}>
+                <Pressable>
+                  <Image
+                    source={require('../../../assets/images/icons/infoIcon.png')}
+                    style={styles.infoIcon}
+                  />
+                </Pressable>
+              </View>
                 <Column>
-                  <Text>{groupDetails.getName()}</Text>
-                  <Text>{groupDetails.getDescription()} </Text>
+                  <Text style={styles.groupName}>{groupDetails.getName()}</Text>
+                  <View style={styles.descContainer}>
+                  <Text style={styles.groupDescription}>
+                    {groupDetails.getDescription()}{' '}
+                  </Text>
+                </View>
                 </Column>
+                </View>
               </Row>
             )}
-            <Pressable onPress={handleLeaveGroup}>
-              <Text>Leave Group</Text>
-            </Pressable>
-          </View>
-          <View
-            style={{ height: dimensions.height - 200, backgroundColor: '#fff' }}
-          >
+            <Spacer position='top' size={10}>
             <View style={myStyles.menuOptins}>
               <CommunityMembers group={groupDetails} />
             </View>
+           </Spacer>
+          </View>
+          <View
+            style={{ height: dimensions.height - 400, backgroundColor: '#fff' }}
+          >
             <MediaTab guid={groupDetails?.getGuid()} />
           </View>
         </View>

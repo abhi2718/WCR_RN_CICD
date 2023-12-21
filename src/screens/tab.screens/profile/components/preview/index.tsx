@@ -21,8 +21,6 @@ import LinearGradient from 'react-native-linear-gradient';
 export const PreviewScreen = () => {
   const { user, goBack } = useViewModal();
   const heightStyle = { height: 700, width: 300 };
-
-  console.log('User:', user);
   return (
     <ScreenWrapper>
       <View style={styles.container}>

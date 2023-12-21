@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
 import {
@@ -50,7 +50,7 @@ const ViedoMessage = (props: MediaMessageProps) => {
       ) : (
         <>
           <ScrollView style={{ backgroundColor: '#fff' }}>
-            {['https://vjs.zencdn.net/v/oceans.mp4'].map((imgUrl, index) => (
+            {/* {['https://vjs.zencdn.net/v/oceans.mp4'].map((imgUrl, index) => (
               <Spacer key={index} position="bottom" size={10}>
                 <View style={{ height: 300, flex: 1 }}>
                   <View style={{ height: 300, flex: 1 }}>
@@ -58,7 +58,7 @@ const ViedoMessage = (props: MediaMessageProps) => {
                   </View>
                 </View>
               </Spacer>
-            ))}
+            ))} */}
           </ScrollView>
         </>
       )}
@@ -73,23 +73,25 @@ const ImageMessage = (props: MediaMessageProps) => {
         <FullLoader />
       ) : (
         <>
-          <ScrollView>
-            {images &&
-              images.map((imgUrl, index) => (
-                <View style={styles.galleryContainer}>
-                  <Row justifyContent="space-between">
-                    <FastImage
-                      style={styles.galleryImage}
-                      source={{ uri: imgUrl }}
-                    />
-                    <FastImage
-                      style={styles.galleryImage}
-                      source={{ uri: imgUrl }}
-                    />
-                  </Row>
-                </View>
-              ))}
-          </ScrollView>
+          <FlatList
+            data={images}
+            columnWrapperStyle={{ justifyContent: 'space-around' }}
+            renderItem={({ item, index }) => {
+              if (index === images.length - 1) {
+                return <View style={{ height: 400 }}></View>;
+              }
+              return (
+                <Spacer position="bottom" size={16}>
+                  <FastImage
+                    style={styles.galleryImage}
+                    source={{ uri: item }}
+                  />
+                </Spacer>
+              );
+            }}
+            numColumns={2}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </>
       )}
     </View>
