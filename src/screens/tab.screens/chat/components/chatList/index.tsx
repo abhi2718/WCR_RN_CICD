@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import CometChat from '../../../../../cometchat/sdk/CometChat';
 import { CometChatMessages } from '../../../../../cometchat/src';
-//import { CometChatMessages } from '../../../../../cometChat/chat-uikit-react-native/src';
 import { MessageContext } from '../../../../../contexts/cometChatMessage.context';
 
 export const MessageList = () => {

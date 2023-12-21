@@ -22,6 +22,7 @@ import {
   sexualOrientationArray,
   smoking,
   userDegree,
+  covidVaccineStatus
 } from '../../../../../utils/constanst';
 
 export const useViewModal = () => {
@@ -49,6 +50,7 @@ export const useViewModal = () => {
     familyPlan: 'Select',
     pets: 'Select',
     sexualPreference: 'Select',
+    covidVaccineStatus:'Select'
   });
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
@@ -85,7 +87,8 @@ export const useViewModal = () => {
   const kidsList = generateList(kids, 'kids');
   const familyPlanList = generateList(familyPlan, 'familyPlan');
   const petsList = generateList(pets, 'pets');
-  const sexualOrientationArrayList = generateList(sexualOrientationArray,'sexualPreference')
+  const sexualOrientationArrayList = generateList(sexualOrientationArray, 'sexualPreference');
+  const covidVaccineStatusList = generateList(covidVaccineStatus,'covidVaccineStatus')
   const [distanceRange, setDistanceRange] = useState<any[]>([0]);
   const [ageRange, setAgeRange] = useState([18, 60]);
   const [heightRange, setHeightRange] = useState([3, 7]);
@@ -100,6 +103,7 @@ export const useViewModal = () => {
       option: _primaryDegree,
       initValue: 'degreeType',
     },
+    {},
     {},
     {},
     {
@@ -172,6 +176,11 @@ export const useViewModal = () => {
       option: petsList,
       initValue: 'pets',
     },
+    {
+      title: 'Covid Vaccine Status',
+      option: covidVaccineStatusList,
+      initValue: 'covidVaccineStatus',
+    }
   ];
   const getPrefrences = async () => {
     try {
@@ -270,6 +279,7 @@ export const useViewModal = () => {
         relationship: [answer.relationshipLevel],
         maritalStatus: answer.maritalStatus,
         distance: distanceRange[0] > 600 ? 'No Max' : distanceRange[0],
+        covidVaccineStatus:answer.covidVaccineStatus
       };
       let updates: any = {
         height: {
