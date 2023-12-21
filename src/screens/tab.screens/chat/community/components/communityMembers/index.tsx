@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import { Column, Row } from '../../../../../../components/tools';
+import { Column, Row, Spacer } from '../../../../../../components/tools';
 import { Member } from './components';
 import { styles } from './styles';
 import { useViewMdal } from './useViewModal';
@@ -44,12 +44,28 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
       {showMembers && (
         <Modal visible={showMembers}>
           <SafeAreaView>
-            <Pressable onPress={toggleSetShowMembers}>
-              <Row>
-                <Text>x</Text>
+            <View style={styles.headerContainer}>
+              <Row justifyContent="space-between" alignItems="center">
+                <Row>
+                  <Text style={styles.groupHeading}>Group Members</Text>
+                </Row>
+                <Pressable onPress={toggleSetShowMembers}>
+                  <Row>
+                    <Image
+                      source={require('../../../../../../assets/images/icons/crossIcon.png')}
+                      style={styles.iconCross}
+                    />
+                  </Row>
+                </Pressable>
               </Row>
-            </Pressable>
-            <ScrollView>
+            </View>
+            <ScrollView style={styles.memberContainer}>
+              <Spacer position="bottom" size={10}>
+                <Row justifyContent="space-between">
+                  <Text style={styles.nameHeading}>Name</Text>
+                  <Text style={styles.nameHeading}>Scope</Text>
+                </Row>
+              </Spacer>
               {members.map((member, index) => (
                 <Member
                   toggleSetShowMembers={toggleSetShowMembers}

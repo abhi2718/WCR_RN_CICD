@@ -1,20 +1,20 @@
 import React from 'react';
-import {View, FlatList, Text, Image, Pressable} from 'react-native';
+import { View, FlatList, Text, Image, Pressable } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {Column, Row, Spacer} from '../../../../../../../../components/tools';
+import { Column, Row, Spacer } from '../../../../../../../../components/tools';
 import {
   GroupProps,
   GroupsListProps,
 } from '../../../../../../../../types/screen.type/communityChat';
-import {styles} from './styles';
+import { styles } from './styles';
 
 const GroupsList = (props: GroupsListProps) => {
-  const {groups, handleJoinGroup} = props;
+  const { groups, handleJoinGroup } = props;
   return (
     <View style={styles.container}>
       <FlatList
         data={groups}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <Group group={item} handleJoinGroup={handleJoinGroup} />
         )}
         keyExtractor={(item) => item.getGuid()}
@@ -24,7 +24,7 @@ const GroupsList = (props: GroupsListProps) => {
 };
 
 const Group = (props: GroupProps) => {
-  const {group, handleJoinGroup} = props;
+  const { group, handleJoinGroup } = props;
   return (
     <View style={styles.singleRow}>
       <Row justifyContent="space-between">
