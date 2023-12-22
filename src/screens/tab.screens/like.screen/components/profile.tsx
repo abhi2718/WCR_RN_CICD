@@ -40,7 +40,7 @@ export const ProfileView = (props: ProfileViewProps) => {
       }
       startChat({
         senderId: item?._id,
-        name: item.profile.name.first,
+        name: item.profile.displayName ??  item.profile.name.first,
       });
     }
   };
@@ -59,7 +59,7 @@ export const ProfileView = (props: ProfileViewProps) => {
               />
             </Spacer>
             <Column>
-              <Text>{item?.profile?.name?.first}</Text>
+              <Text>{item?.profile?.displayName ??  item?.profile?.name?.first}</Text>
               <Text>{item?.designation?.title}</Text>
               {showDeleteIcon && (
                 <Pressable onPress={handleRemove}>
@@ -100,7 +100,7 @@ export const ProfileView = (props: ProfileViewProps) => {
               />
             </Spacer>
             <Column>
-              <Text>{item?.userId?.profile?.name?.first}</Text>
+              <Text>{item?.profile?.displayName ?? item?.profile?.name?.first}</Text>
               <Text>{item?.userId?.designation?.title}</Text>
               {showDeleteIcon && (
                 <Pressable onPress={handleRemove}>
@@ -141,7 +141,7 @@ export const ProfileView = (props: ProfileViewProps) => {
               />
             </Spacer>
             <Column>
-              <Text>{item?.profile?.name?.first}</Text>
+              <Text>{item?.profile?.displayName ?? item?.profile?.name?.first}</Text>
               <Text>{item?.designation?.title}</Text>
               {showDeleteIcon && (
                 <Pressable onPress={handleRemove}>

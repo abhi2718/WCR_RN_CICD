@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import {
-  DropdownInput,
-} from '../../../../../../../components/inputBox';
-import { FullLoader, Row } from '../../../../../../../components/tools';
+import { View, Text, SafeAreaView } from 'react-native';
+import { DropdownInput } from '../../../../../../../components/inputBox';
+import { FullLoader, Row, Spacer } from '../../../../../../../components/tools';
 import { Chip } from './components';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
+import { HeaderBar } from '../../../../../../../components/header';
 
 export const BlockAndUnBlock = () => {
   const {
@@ -24,62 +23,76 @@ export const BlockAndUnBlock = () => {
     handleselectedUserDegreeType,
     handledeSelectedUserDegreeType,
     _selectedUserDegreeType,
-    loading
+    loading,
   } = useViewModal();
   if (loading) {
-    return <FullLoader />
+    return <FullLoader />;
   }
   return (
-    <View style={styles.container}>
-      <Text>Block by Country</Text>
-      <DropdownInput
-        data={country}
-        onFocus={() => {}}
-        labelField="label"
-        valueField="value"
-        placeholder="Select Country"
-        onChange={handleSelectCountry}
-      />
-      <Row>
-        {selectedCountry.map((item, index) => (
-          <Chip
-            key={index}
-            item={item}
-            onPress={() => handleDeSelectCountry(item)}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
+        <Spacer style={styles.rowOne} position="top" size={20}>
+          <Text style={styles.text}>Block by Country</Text>
+          <DropdownInput
+            data={country}
+            onFocus={() => {}}
+            labelField="label"
+            valueField="value"
+            placeholder="Country"
+            onChange={handleSelectCountry}
           />
-        ))}
-      </Row>
-      <Text>Block by Degree Category/ Type</Text>
-      <DropdownInput
-        data={_userDegree}
-        onFocus={() => {}}
-        labelField="label"
-        valueField="value"
-        placeholder="Select Degree Category"
-        onChange={handleSelectUserDegree}
-      />
-      <DropdownInput
-        data={selectedUserDegreeType}
-        onFocus={() => { }}
-        labelField="label"
-        valueField="value"
-        placeholder="Select Degree Type"
-        onChange={handleselectedUserDegreeType}
-      />
-      {selecteduserDegree.map((item, index) => (
-        <Chip
-          key={index}
-          item={item}
-          onPress={() => handleDeSelectUserDegree(item)}
-        />
-      ))}
-      {_selectedUserDegreeType.map((item, index) => (
-        <Chip
-          key={index}
-          item={item}
-          onPress={() => handledeSelectedUserDegreeType(item)}
-        />
-      ))}
-    </View>
+          <Row alignItems="center" gap={10}>
+            {selectedCountry.map((item, index) => (
+              <Chip
+                key={index}
+                item={item}
+                onPress={() => handleDeSelectCountry(item)}
+              />
+            ))}
+          </Row>
+        </Spacer>
+        <Spacer style={styles.rowOne} position="top" size={20}>
+          <Text style={styles.text}>Block by Degree Category/ Type</Text>
+          <DropdownInput
+            data={_userDegree}
+            onFocus={() => {}}
+            labelField="label"
+            valueField="value"
+            placeholder="Select Degree Category"
+            onChange={handleSelectUserDegree}
+          />
+          <Spacer style={styles.rowOne} position="bottom" size={10}>
+            <DropdownInput
+              data={selectedUserDegreeType}
+              onFocus={() => {}}
+              labelField="label"
+              valueField="value"
+              placeholder="Select Degree Type"
+              onChange={handleselectedUserDegreeType}
+            />
+          </Spacer>
+
+          <Row style={styles.rowWrap} alignItems="center">
+            {selecteduserDegree.map((item, index) => (
+              <Chip
+                key={index}
+                item={item}
+                onPress={() => handleDeSelectUserDegree(item)}
+              />
+            ))}
+            <Row style={styles.rowWrap} alignItems="center">
+              {_selectedUserDegreeType.map((item, index) => (
+                <Chip
+                  key={index}
+                  item={item}
+                  onPress={() => handledeSelectedUserDegreeType(item)}
+                />
+              ))}
+            </Row>
+          </Row>
+        </Spacer>
+      </View>
+    </SafeAreaView>
   );
 };

@@ -40,8 +40,12 @@ export const ProfileScreen = ({}) => {
                 }}
                 style={styles.profileImg}
               />
+             
+                <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
+                {/* <Progress.Bar progress={0.3} width={200} />
+              <Text>34% Profile Complete</Text> */}
               <Column gap={5}>
-                <Text style={styles.nameHead}>{user.fullName}</Text>
+              <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
                 <Text style={styles.subHead}></Text>
                 <Text style={styles.address}></Text>
               </Column>
@@ -49,42 +53,74 @@ export const ProfileScreen = ({}) => {
           </Column>
         </Spacer>
         <Pressable onPress={goToPreview}>
-          <Row gap={sizes[2]}>
-            <Image
-              style={styles.iconStyle}
-              source={require('../../../assets/images/Pewview.png')}
-            />
-            <Text style={styles.text}>Preview</Text>
+          <Row justifyContent="space-between">
+            <Row gap={sizes[2]}>
+              <Image
+                style={styles.iconStyle}
+                source={require('../../../assets/images/Pewview.png')}
+              />
+              <Text style={styles.text}>Preview</Text>
+            </Row>
+            <Row alignItems="center">
+              <Image
+                source={require('../../../assets/images/icons/buttonRightArrow.png')}
+                style={styles.iconArrowStyle}
+              />
+            </Row>
           </Row>
         </Pressable>
         <Spacer position={'top'} size={40} />
         <Pressable onPress={goToEditProfile}>
-          <Row gap={sizes[2]}>
-            <Image
-              style={styles.iconStyle}
-              source={require('../../../assets/images/EditProfile.png')}
-            />
-            <Text style={styles.text}>Edit profile</Text>
+          <Row justifyContent="space-between">
+            <Row gap={sizes[2]}>
+              <Image
+                style={styles.iconStyle}
+                source={require('../../../assets/images/EditProfile.png')}
+              />
+              <Text style={styles.text}>Edit profile</Text>
+            </Row>
+            <Row alignItems="center">
+              <Image
+                source={require('../../../assets/images/icons/buttonRightArrow.png')}
+                style={styles.iconArrowStyle}
+              />
+            </Row>
           </Row>
         </Pressable>
         <Spacer position={'top'} size={40} />
         <Pressable onPress={goToPreferences}>
-          <Row gap={sizes[2]}>
-            <Image
-              style={styles.iconStyle}
-              source={require('../../../assets/images/Preferences.png')}
-            />
-            <Text style={styles.text}>Preferences</Text>
+          <Row justifyContent="space-between">
+            <Row gap={sizes[2]}>
+              <Image
+                style={styles.iconStyle}
+                source={require('../../../assets/images/Preferences.png')}
+              />
+              <Text style={styles.text}>Preferences</Text>
+            </Row>
+            <Row alignItems="center">
+              <Image
+                source={require('../../../assets/images/icons/buttonRightArrow.png')}
+                style={styles.iconArrowStyle}
+              />
+            </Row>
           </Row>
         </Pressable>
         <Spacer position={'top'} size={40} />
         <Pressable onPress={goToSetting}>
-          <Row gap={sizes[2]}>
-            <Image
-              style={styles.iconStyle}
-              source={require('../../../assets/images/Setting.png')}
-            />
-            <Text style={styles.text}>Settings</Text>
+          <Row justifyContent="space-between">
+            <Row gap={sizes[2]}>
+              <Image
+                style={styles.iconStyle}
+                source={require('../../../assets/images/Setting.png')}
+              />
+              <Text style={styles.text}>Settings</Text>
+            </Row>
+            <Row alignItems="center">
+              <Image
+                source={require('../../../assets/images/icons/buttonRightArrow.png')}
+                style={styles.iconArrowStyle}
+              />
+            </Row>
           </Row>
         </Pressable>
         <Spacer position={'top'} size={40} />

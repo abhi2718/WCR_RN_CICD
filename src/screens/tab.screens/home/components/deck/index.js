@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { styles } from './homeStyle';
 import { useViewModal } from './homeViewModal';
 import {
@@ -63,11 +63,11 @@ export default function Deck({ route }) {
             ref={infoScreenRef}
             onSwipedAll={updateIsNewUser}
           >
-           <View>
-           <Image
-            source={require('../../../../../assets/images/infoScreen.png')}
-          />
-           </View>
+            <View>
+              <Image
+                source={require('../../../../../assets/images/infoScreen.png')}
+              />
+            </View>
           </CardStack>
         </>
       ) : (

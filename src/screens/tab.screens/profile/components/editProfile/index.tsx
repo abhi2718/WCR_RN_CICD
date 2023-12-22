@@ -50,18 +50,16 @@ export const EditProfile = () => {
     hobbiesList,
     statesList,
     setUserProfile,
-    submitLoading
+    submitLoading,
   } = useViewModal();
 
   return (
     <View style={styles.picWrapper}>
-      <Pressable onPress={submitLoading?()=>{}:editProfile}>
+      <Pressable onPress={submitLoading ? () => {} : editProfile}>
         <Row>
           <Text>Save</Text>
-          {
-            submitLoading && <ActivityIndicator />
-          }
-       </Row>
+          {submitLoading && <ActivityIndicator />}
+        </Row>
       </Pressable>
       <ScrollView>
         <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />

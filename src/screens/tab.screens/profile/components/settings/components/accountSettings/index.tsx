@@ -1,10 +1,19 @@
 import React from 'react';
-import { View, Text, Pressable, ScrollView, Image } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  ScrollView,
+  Image,
+  SafeAreaView,
+} from 'react-native';
 import { Switch } from 'react-native-paper';
 import { AlertScreen } from '../../../../../../../components/alert';
 import { Row, Spacer } from '../../../../../../../components/tools';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
+import { HeaderBar } from '../../../../../../../components/header';
+import { colors } from '../../../../../../../infrastructure/theme/colors';
 
 export const AccountSettingScreen = () => {
   const {
@@ -15,31 +24,52 @@ export const AccountSettingScreen = () => {
     isSwitchOn,
     showModal,
     setShowModal,
-    deleteUser
+    deleteUser,
   } = useViewModal();
   return (
-    <View style={styles.container}>
-      <Row justifyContent="space-between" alignItems="center">
-        {user.isVisible && <Text>Pause my account</Text>}
-        {!user.isVisible && <Text>Unpause my account</Text>}
-        <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-      </Row>
-      <Spacer position="top" size={10}>
-        <Row justifyContent="space-between" alignItems="center">
-          <Text>Delete my account</Text>
-          <Pressable onPress={()=>setShowModal(true)}>
-          <Text>Delete</Text>
-          </Pressable>
-        </Row>
-      </Spacer>
-      <AlertScreen
-        showModal={showModal}
-        setShowModal={setShowModal}
-        title="Delete Account?"
-        description="Are you sure you want to 
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <HeaderBar isLogo={false} isText={true} text="Account settings" />
+        <Spacer position="top" size={20}>
+          <Row
+            style={styles.row}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            {user.isVisible && (
+              <Text style={styles.text}>Pause my account</Text>
+            )}
+            {!user.isVisible && (
+              <Text style={styles.text}>Unpause my account</Text>
+            )}
+            <Switch
+              trackColor={{ true: colors.ui.primary, false: 'grey' }}
+              value={isSwitchOn}
+              onValueChange={onToggleSwitch}
+            />
+          </Row>
+        </Spacer>
+        <Spacer position="top" size={30}>
+          <Row
+            style={styles.row}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Text style={styles.text}>Delete my account</Text>
+            <Pressable onPress={() => setShowModal(true)}>
+              <Text style={styles.deletBtn}>Delete</Text>
+            </Pressable>
+          </Row>
+        </Spacer>
+        <AlertScreen
+          showModal={showModal}
+          setShowModal={setShowModal}
+          title="Delete Account?"
+          description="Are you sure you want to 
         delete your account ?"
-        onPress={deleteUser}
-      />
-    </View>
+          onPress={deleteUser}
+        />
+      </View>
+    </SafeAreaView>
   );
 };

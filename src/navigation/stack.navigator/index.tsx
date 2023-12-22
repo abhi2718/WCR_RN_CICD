@@ -166,22 +166,22 @@ export const StackNavigator = () => {
         component={PreviewScreen}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.SettingScreen}
         component={SettingScreen}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.AccountSetting}
         component={AccountSettingScreen}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.BlockAndUnBlock}
         component={BlockAndUnBlock}
       />
       <Stack.Screen
-        // options={optins}
+        options={optins}
         name={ROUTES.ContactUs}
         component={ContactUs}
       />
@@ -196,7 +196,7 @@ export const StackNavigator = () => {
         component={EditProfile}
       />
       <Stack.Screen
-        //options={optins}
+        options={optins}
         name={ROUTES.Report}
         component={ReportScreen}
       />

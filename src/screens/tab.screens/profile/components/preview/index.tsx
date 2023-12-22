@@ -21,8 +21,6 @@ import LinearGradient from 'react-native-linear-gradient';
 export const PreviewScreen = () => {
   const { user, goBack } = useViewModal();
   const heightStyle = { height: 700, width: 300 };
-
-  console.log('User:', user);
   return (
     <ScreenWrapper>
       <View style={styles.container}>
@@ -61,7 +59,7 @@ export const PreviewScreen = () => {
                       style={styles.gradient}
                     />
                     <Row alignItems="center" gap={15} style={styles.nameRow}>
-                      <Text style={styles.name}>User Name (He/Him), 27</Text>
+                      <Text style={styles.name}>{user.profile.displayName ?? user.profile.name.first}(He/Him), 27</Text>
                       <Image
                         style={styles.badge}
                         source={require('../../../../../assets/images/icons/badge.png')}

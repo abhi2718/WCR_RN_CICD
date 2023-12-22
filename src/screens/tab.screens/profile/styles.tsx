@@ -19,6 +19,10 @@ export const styles = StyleSheet.create({
     width: sizes[5],
     height: sizes[5],
   },
+  iconArrowStyle: {
+    width: sizes[2],
+    height: sizes[2],
+  },
   nameContainer: {
     paddingVertical: sizes[4],
   },

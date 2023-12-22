@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, Pressable, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  Modal,
+  Pressable,
+  SafeAreaView,
+  Image,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Column, Row, Spacer } from '../../../../../../../components/tools';
 import { styles } from './styles';
@@ -10,6 +17,7 @@ import { ProfileModal } from '../../../../../../../components/profile.component'
 
 export const Member = (props: MemberProps) => {
   const { member, toggleSetShowMembers } = props;
+  console.log(member);
   const [showModal, setModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const toggleModal = () => {
@@ -28,28 +36,10 @@ export const Member = (props: MemberProps) => {
   };
   return (
     <View>
-      <Spacer position="bottom" size={10}>
+      <Spacer position="bottom" size={20}>
         <Pressable onPress={toggleModal}>
-          <Row alignItems="center">
-            <FastImage
-              style={styles.imageStyle}
-              source={{
-                uri: member.getAvatar(),
-              }}
-            />
-            <Spacer position="left" size={10}>
-              <Text>{member.getName()}</Text>
-            </Spacer>
-          </Row>
-        </Pressable>
-      </Spacer>
-      <Modal visible={showModal}>
-        <SafeAreaView>
-          <Pressable onPress={toggleModal}>
-            <Text>x</Text>
-          </Pressable>
-          <Spacer position="bottom" size={10}>
-            <Column alignItems="center">
+          <Row justifyContent="space-between">
+            <Row alignItems="center">
               <FastImage
                 style={styles.imageStyle}
                 source={{
@@ -57,18 +47,50 @@ export const Member = (props: MemberProps) => {
                 }}
               />
               <Spacer position="left" size={10}>
-                <Text>{member.getName()}</Text>
+                <Text style={styles.memberNameText}>{member.getName()}</Text>
               </Spacer>
-              <Pressable onPress={() => togglePrfileModal()}>
-                <Spacer position="top" size={80}>
-                  <Text>View Profile</Text>
-                </Spacer>
-              </Pressable>
-              <Pressable onPress={navigateToChatWindow}>
-                <Spacer position="top" size={10}>
-                  <Text>Message</Text>
-                </Spacer>
-              </Pressable>
+            </Row>
+            <Row alignItems="center">
+              <Text style={styles.scopeMemberText}>member</Text>
+            </Row>
+          </Row>
+        </Pressable>
+      </Spacer>
+      <Modal visible={showModal}>
+        <SafeAreaView>
+          <Pressable onPress={toggleModal}>
+            <Image
+              source={require('../../../../../../../assets/images/icons/back-arrow.png')}
+              style={styles.arrowStyle}
+            />
+          </Pressable>
+          <Spacer position="bottom" size={10}>
+            <Column alignItems="center">
+              <FastImage
+                style={styles.profileAvatar}
+                source={{
+                  uri: member.getAvatar(),
+                }}
+              />
+              <Spacer position="top" size={10}>
+                <Text style={styles.memberName}>{member.getName()}</Text>
+              </Spacer>
+              <Spacer position="top" size={20}>
+                <Row justifyContent="space-between" gap={20}>
+                  <Pressable
+                    onPress={() => togglePrfileModal()}
+                    style={styles.viewProfileBtn}
+                  >
+                    <Text style={styles.viewBtnText}>View Profile</Text>
+                  </Pressable>
+                  <Pressable
+                    onPress={navigateToChatWindow}
+                    style={styles.messageBtn}
+                  >
+                    <Text style={styles.msgBtnText}>Message</Text>
+                  </Pressable>
+                </Row>
+              </Spacer>
               <ProfileModal
                 showModal={showProfileModal}
                 toggleModal={togglePrfileModal}
