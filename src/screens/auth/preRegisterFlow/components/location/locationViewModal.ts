@@ -55,6 +55,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
 
   useEffect(() => {
     getStatesOptions();
+    handleZipPlaceHolder(user.address.country)
   }, []);
   useEffect(() => {
     setStatesOption(statesOption[locationForm.country]);
@@ -112,7 +113,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
     return await updateUserDetailsRepository.validateZipcode({ user: USER });
   };
 
-  const getStatesOptions = () => {
+  const getStatesOptions = () => {      
     const states = statesOption[locationForm.country];
     if (states === null || states?.length === 0) {
       return [];

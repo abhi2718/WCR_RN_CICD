@@ -1,12 +1,12 @@
-import {useState} from 'react';
-import {OtpRepository} from '../../../../../repository/otp.repo';
-import {ShowFlashMessage} from '../../../../../components/flashBar';
-import {useViewModal} from '../../signinViewModal';
+import { useState } from 'react';
+import { OtpRepository } from '../../../../../repository/otp.repo';
+import { ShowFlashMessage } from '../../../../../components/flashBar';
+import { useViewModal } from '../../signinViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { options } from '../../../../../utils/constanst';
 
 export const useEmailAuthViewModal = (props: ScreenParams) => {
-  const {navigation} = props;
+  const { navigation } = props;
   const receivedData = props.route?.params?.data || 'No data received';
   let fbId = receivedData?.fbId;
 
@@ -15,24 +15,32 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
   let credential = receivedData.credential;
   const otpInRepository = new OtpRepository();
   const [emailInput, setEmailInput] = useState('');
-  const [otp, setOtp] = useState('');
+  const [otpValue, setOtpValue] = useState('');
 
-  let {setLoading,loading,checkIsNewUser,getOtpOnEmail} = useViewModal(props);
+  let { setLoading, loading, checkIsNewUser, getOtpOnEmail } =
+    useViewModal(props);
 
   const handleInputChange = (text: string) => {
-    setOtp(text);
+    setOtpValue(text);
+  };
+
+  const resetOtp = () => {
+    setOtpValue('');
   };
 
   const verifyEmail = async () => {
     try {
-      if (!otp.length) {
+      if (!otpValue.length) {
         return ShowFlashMessage('Alert', 'Please enter OTP', 'danger');
       }
       setLoading(true);
-      const {data} = await otpInRepository.verifytOtp({email, code: otp});
+      const { data } = await otpInRepository.verifytOtp({
+        email,
+        code: otpValue,
+      });
       setLoading(false);
       if (data?.success) {
-       checkIsNewUser(email);
+        checkIsNewUser(email);
       } else {
         return ShowFlashMessage('Alert', 'OTP is incorrect', 'danger');
       }
@@ -45,7 +53,8 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
   const resendOtp = async () => {
     try {
       setLoading(true);
-      const data = await getOtpOnEmail(email)
+      resetOtp();
+      const data = await getOtpOnEmail(email);
     } catch (error) {}
   };
 
@@ -54,12 +63,13 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
     setEmailInput,
     resendOtp,
     verifyEmail,
-    otp,
+    otpValue,
     email,
-    setOtp,
+    setOtpValue,
     credential,
     loading,
     fbId,
+    resetOtp,
     firebaseUid,
     handleInputChange,
   };
