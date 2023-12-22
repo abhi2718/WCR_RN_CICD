@@ -301,8 +301,8 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
             borderBottomColor: 'rgba(35, 35, 35, 0.20)',
             borderStyle: listItemStyle?.border?.borderStyle ?? 'solid',
             height: listItemStyle?.height ?? 72,
-            paddingLeft: 12,
-            paddingRight: 12,
+            paddingLeft: 16,
+            paddingRight: 16,
           },
         ]}
       >

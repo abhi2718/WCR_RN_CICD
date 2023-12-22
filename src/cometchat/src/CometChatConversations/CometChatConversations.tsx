@@ -677,12 +677,15 @@ export const CometChatConversations = (props: ConversationInterface) => {
           customDateString={params.customPattern && params.customPattern()}
           pattern={'dayDateTimeFormat'}
         />
-        {params.unreadCount > 0 && isUserWindow && (
-          <View>
-            <Text>Your Turn</Text>
+        {params.unreadCount > 0 && isUserWindow ? (
+          <View style={Style.yourTurnBadge}>
+            <Text style={{ color: 'white', textTransform: 'uppercase' }}>
+              Your Turn
+            </Text>
           </View>
+        ) : (
+          <CometChatBadge count={params.unreadCount} style={_badgeStyle} />
         )}
-        <CometChatBadge count={params.unreadCount} style={_badgeStyle} />
       </View>
     );
   };
