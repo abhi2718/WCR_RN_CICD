@@ -17,7 +17,6 @@ import { ProfileModal } from '../../../../../../../components/profile.component'
 
 export const Member = (props: MemberProps) => {
   const { member, toggleSetShowMembers } = props;
-  console.log(member);
   const [showModal, setModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const toggleModal = () => {
@@ -51,19 +50,21 @@ export const Member = (props: MemberProps) => {
               </Spacer>
             </Row>
             <Row alignItems="center">
-              <Text style={styles.scopeMemberText}>member</Text>
+              <Text style={styles.scopeMemberText}>{member.getScope()}</Text>
             </Row>
           </Row>
         </Pressable>
       </Spacer>
       <Modal visible={showModal}>
         <SafeAreaView>
+          <Spacer position='left' size={16}>
           <Pressable onPress={toggleModal}>
             <Image
               source={require('../../../../../../../assets/images/icons/back-arrow.png')}
               style={styles.arrowStyle}
             />
           </Pressable>
+         </Spacer>
           <Spacer position="bottom" size={10}>
             <Column alignItems="center">
               <FastImage

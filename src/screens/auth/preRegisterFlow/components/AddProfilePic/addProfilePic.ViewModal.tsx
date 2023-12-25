@@ -48,6 +48,10 @@ export const useAddProfilePicViewModal = (props: any) => {
     setPicUploadInfoModalVisible(true);
   };
 
+  useEffect(()=>{
+    openModal()
+  },[])
+
   const [profilePicUri, setProfilePicUri] = useState<ImageDataType | null>(
     props.source?.uri || undefined,
   );

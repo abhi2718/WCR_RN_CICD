@@ -33,23 +33,22 @@ export const ProfileScreen = ({}) => {
       <View style={styles.container}>
         <Spacer position="bottom" size={20}>
           <Column style={styles.nameContainer}>
-            <Row gap={20}>
+            <Row gap={20} alignItems="center">
               <Image
                 source={{
                   uri: user?.profilePicture?.url,
                 }}
                 style={styles.profileImg}
               />
-             
-                <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
-                {/* <Progress.Bar progress={0.3} width={200} />
-              <Text>34% Profile Complete</Text> */}
               <Column gap={5}>
                 <Text>
-                  {user.profile?.displayName ?? user.profile.name?.first}
+                  {user.profile.displayName ?? user.profile.name?.first}
                 </Text>
-                <Text style={styles.subHead}></Text>
-                <Text style={styles.address}></Text>
+
+                <Text style={styles.address}>
+                  {user?.address?.city} {user?.address?.state}
+                </Text>
+                <Text style={styles.address}>{user?.address?.country} </Text>
               </Column>
             </Row>
           </Column>
@@ -126,13 +125,14 @@ export const ProfileScreen = ({}) => {
           </Row>
         </Pressable>
         <Spacer position={'top'} size={40} />
-        <Pressable onPress={_logOut}>
+        <Pressable onPress={() => setLogOutModal(true)}>
           <Row gap={sizes[2]}>
             <Image
               style={styles.iconStyle}
               source={require('../../../assets/images/logout.png')}
             />
             <Text style={styles.logoutText}>Logout</Text>
+            {loading && <ActivityIndicator color="red" />}
           </Row>
         </Pressable>
         <AlertScreen

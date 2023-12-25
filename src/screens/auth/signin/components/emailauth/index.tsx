@@ -23,8 +23,9 @@ import { HeaderBar } from '../../../../../components/header';
 
 export default function EmailAuthByOtpScreeen(props: ScreenParams) {
   let {
-    otp,
-    setOtp,
+    otpValue,
+    setOtpValue,
+    resetOtp,
     verifyEmail,
     resendOtp,
     emailInput,
@@ -33,7 +34,6 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
     loading,
     handleInputChange,
   } = useEmailAuthViewModal(props);
-
   return (
     <ScreenContainer>
       <View>
@@ -48,7 +48,11 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
             Enter the code we have shared to your email
           </Text>
           <View>
-            <OtpCodeInput onChangeOtp={handleInputChange} />
+            <OtpCodeInput
+              onChangeOtp={handleInputChange}
+              otpValue={otpValue}
+              setOtpValue={setOtpValue}
+            />
           </View>
         </View>
         {!email && (

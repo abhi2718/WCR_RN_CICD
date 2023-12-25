@@ -18,6 +18,7 @@ export function VectorCommunityImage() {
     <View>
       <Image
         style={styles.iconStyle}
+        resizeMode="contain"
         source={require('../../../assets/images/tabBarIcons/community-vector.png')}
       />
     </View>
