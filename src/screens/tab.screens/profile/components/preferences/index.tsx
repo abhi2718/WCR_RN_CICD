@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable, SafeAreaView } from 'react-native';
+import { View, Text, Pressable, SafeAreaView, Image } from 'react-native';
 import {
   Column,
   FullLoader,
@@ -53,17 +53,20 @@ export const PreferencesScreen = () => {
             {submitLoading && <ActivityIndicator />}
           </Row>
         </Pressable> */}
-        <Text style={styles.headerText}>Healthcare Professional</Text>
+
+        {/* <Text style={styles.headerText}>Healthcare Professional</Text> */}
         <ScrollView
           style={[styles.padding16, styles.scrollSection]}
           showsVerticalScrollIndicator={false}
         >
           {optionsList.map((item, index) => {
-            if (index === 2) {
+            if (index === 1) {
               return (
                 <View key={index} style={styles.multiSelector}>
                   <Row alignItems="center" justifyContent="space-between">
-                    <Text>Distance preference</Text>
+                    <Text style={[styles.textColor, styles.optionName]}>
+                      Distance preference
+                    </Text>
                     {distanceRange[0] === 600 ? (
                       <Text style={styles.silderSubText}>No Max</Text>
                     ) : (
@@ -92,11 +95,13 @@ export const PreferencesScreen = () => {
                 </View>
               );
             }
-            if (index === 3) {
+            if (index === 2) {
               return (
                 <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
-                    <Text>Age preference</Text>
+                    <Text style={[styles.textColor, styles.optionName]}>
+                      Age preference
+                    </Text>
                     <Text style={styles.silderSubText}>
                       {ageRange[0]} - {ageRange[1]}
                     </Text>
@@ -113,11 +118,13 @@ export const PreferencesScreen = () => {
                 </View>
               );
             }
-            if (index === 4) {
+            if (index === 3) {
               return (
                 <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
-                    <Text>Height preference</Text>
+                    <Text style={[styles.textColor, styles.optionName]}>
+                      Height preference
+                    </Text>
                     <Text style={styles.silderSubText}>
                       {heightRange[0]} - {heightRange[1]}
                     </Text>
@@ -135,30 +142,42 @@ export const PreferencesScreen = () => {
               );
             }
             return (
-              <Row
+              <Column
                 key={index}
                 style={styles.itemRow}
                 justifyContent="space-between"
-                alignItems="center"
+                alignItems="flex-start"
               >
                 <Text style={[styles.textColor, styles.optionName]}>
                   {item.title}
                 </Text>
+
                 <SafeAreaView>
-                  <ModalSelector
-                    data={item.option!}
-                    initValue={answer[item.initValue]}
-                    onChange={handleInputChange}
-                    style={styles.modalSelector}
-                    optionContainerStyle={styles.optionContainer}
-                    optionTextStyle={styles.optionText}
-                    cancelStyle={styles.cancelButton}
-                    selectedItemTextStyle={styles.selectedItem}
-                    initValueTextStyle={styles.initValueTextStyle}
-                    selectStyle={{ borderWidth: 0 }}
-                  />
+                  <Row
+                    style={{ width: '100%' }}
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ModalSelector
+                      data={item.option!}
+                      initValue={answer[item.initValue]}
+                      onChange={handleInputChange}
+                      style={styles.modalSelector}
+                      optionContainerStyle={styles.optionContainer}
+                      optionTextStyle={styles.optionText}
+                      cancelStyle={styles.cancelButton}
+                      selectedItemTextStyle={styles.selectedItem}
+                      initValueTextStyle={styles.initValueTextStyle}
+                      selectStyle={{ borderWidth: 0 }}
+                    />
+                    <Image
+                      resizeMode="contain"
+                      style={styles.selectArrow}
+                      source={require('../../../../../assets/images/settings/Next.png')}
+                    />
+                  </Row>
                 </SafeAreaView>
-              </Row>
+              </Column>
             );
           })}
         </ScrollView>

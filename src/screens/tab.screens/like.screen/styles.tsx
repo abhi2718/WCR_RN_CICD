@@ -2,13 +2,19 @@ import { View, Text, StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import { dimensions } from '../../../components/tools';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    width: dimensions.width,
+    padding: 8,
   },
-
+  headerViewStyle: {
+    height: 40,
+    justifyContent: 'center',
+  },
   padHorizontal: {
     paddingHorizontal: sizes[3],
   },
