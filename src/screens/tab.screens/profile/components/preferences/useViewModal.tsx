@@ -87,9 +87,9 @@ export const useViewModal = () => {
   const kidsList = generateList(kids, 'kids');
   const familyPlanList = generateList(familyPlan, 'familyPlan');
   const petsList = generateList(pets, 'pets');
-  const sexualOrientationArrayList = generateList(sexualOrientationArray, 'sexualPreference');
+  //const sexualOrientationArrayList = generateList(sexualOrientationArray, 'sexualPreference');
   const covidVaccineStatusList = generateList(covidVaccineStatus,'covidVaccineStatus')
-  const [distanceRange, setDistanceRange] = useState<any[]>([0]);
+  const [distanceRange, setDistanceRange] = useState<any[]>(['No Max']);
   const [ageRange, setAgeRange] = useState([18, 60]);
   const [heightRange, setHeightRange] = useState([3, 7]);
   const optionsList = [
@@ -103,9 +103,9 @@ export const useViewModal = () => {
       option: _primaryDegree,
       initValue: 'degreeType',
     },
-    {},
-    {},
-    {},
+    {}, // distance prefrence
+    {}, // age prefrence
+    {}, // height prefrence
     {
       title: 'Gender of Interests',
       option: genderList,
@@ -219,7 +219,7 @@ export const useViewModal = () => {
                 };
               }
             }
-            if (Array.isArray(value)) {
+            if (Array.isArray(value) && value.length) {
               if (key === 'relationship') {
                 newState = {
                   ...newState,
@@ -235,8 +235,13 @@ export const useViewModal = () => {
           }
           return newState;
         });
-        if (data?.distance) {
-          setDistanceRange([data?.distance]);
+        if (data?.distance) { 
+          const isNumber = Number(data?.distance);
+          if (isNumber) {
+             setDistanceRange([isNumber]);
+          } else {
+            setDistanceRange([data?.distance]);
+          }
         }
         if (data?.age) {
           setAgeRange([data.age.min, data.age.max]);
@@ -366,17 +371,16 @@ export const useViewModal = () => {
        await userProfileRepository.createPreference(payload);
         isPrefrenceCreated.current = true;
       }
+      setSubmitLoading(false);
       navigation.navigate(ROUTES.DeckTab, {
         loadProfile: true
       })
-      setSubmitLoading(false);
-      
     } catch (error) {
       setSubmitLoading(false);
     }
   };
   const handleDistanceSliderChange = (values: any) => {
-    if (values[0] > 600) {
+    if (values[0] > 510) {
       setDistanceRange(['No Max']);
       return;
     }

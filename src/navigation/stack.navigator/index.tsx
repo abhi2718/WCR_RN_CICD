@@ -35,7 +35,6 @@ import { ContactUs } from '../../screens/tab.screens/profile/components/settings
 import { ReportScreen } from '../../screens/tab.screens/profile/components/settings/components/report';
 import { PreferencesScreen } from '../../screens/tab.screens/profile/components/preferences';
 import { EditProfile } from '../../screens/tab.screens/profile/components/editProfile';
-//import { DeclineIcon } from '@cometchat/chat-uikit-react-native/src/calls/CometChatOutgoingCall/resources';
 import VerificationPending from '../../screens/errorState/verificationPending';
 import { MessageList } from '../../screens/tab.screens/chat/components/chatList';
 
