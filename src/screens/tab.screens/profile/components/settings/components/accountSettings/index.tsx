@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   SafeAreaView,
+  ActivityIndicator
 } from 'react-native';
 import { Switch } from 'react-native-paper';
 import { AlertScreen } from '../../../../../../../components/alert';
@@ -25,6 +26,7 @@ export const AccountSettingScreen = () => {
     showModal,
     setShowModal,
     deleteUser,
+    loading
   } = useViewModal();
   return (
     <SafeAreaView style={styles.container}>
@@ -56,17 +58,20 @@ export const AccountSettingScreen = () => {
             alignItems="center"
           >
             <Text style={styles.text}>Delete my account</Text>
-            <Pressable onPress={() => setShowModal(true)}>
+            <Pressable onPress={loading?()=>{}:() => setShowModal(true)}>
               <Text style={styles.deletBtn}>Delete</Text>
+              {
+              loading && <ActivityIndicator color='red' />
+            }
             </Pressable>
+           
           </Row>
         </Spacer>
         <AlertScreen
           showModal={showModal}
           setShowModal={setShowModal}
           title="Delete Account?"
-          description="Are you sure you want to 
-        delete your account ?"
+          description="Are you sure you want to delete your account ?"
           onPress={deleteUser}
         />
       </View>
