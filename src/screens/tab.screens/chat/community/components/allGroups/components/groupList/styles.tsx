@@ -18,6 +18,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: colors.ui.chatBorder,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   colOne: {
     width: dimensions.width - 150,

@@ -196,10 +196,10 @@ export const CometChatList = React.forwardRef<
       ? searchRequestBuilder.searchKeyword
         ? searchRequestBuilder.searchKeyword
         : ''
-      : ''
+      : '',
   );
   const [shouldSelect, setShouldSelect] = React.useState(
-    selectionMode !== 'none' ? true : false
+    selectionMode !== 'none' ? true : false,
   );
   const [selectedItems, setSelectedItems] = useState({});
   const listHandlerRef = React.useRef(null);
@@ -271,7 +271,7 @@ export const CometChatList = React.forwardRef<
         onDisconnected: () => {
           console.log('ConnectionListener => On Disconnected');
         },
-      })
+      }),
     );
     return () => {
       CometChat.removeConnectionListener(connectionListenerId);
@@ -309,7 +309,7 @@ export const CometChatList = React.forwardRef<
   const updateList = (item: any) => {
     let newList = [...list];
     let itemKey = newList.findIndex(
-      (u) => u[listItemKey] === item[listItemKey]
+      (u) => u[listItemKey] === item[listItemKey],
     );
     if (itemKey > -1) {
       newList.splice(itemKey, 1, item);
@@ -325,7 +325,7 @@ export const CometChatList = React.forwardRef<
   const updateAndMoveToFirst = (item: any) => {
     let newList = [...list];
     let itemKey = newList.findIndex(
-      (u) => u[listItemKey] === item[listItemKey]
+      (u) => u[listItemKey] === item[listItemKey],
     );
     if (itemKey > -1) {
       newList.splice(itemKey, 1);
@@ -696,7 +696,6 @@ export const CometChatList = React.forwardRef<
   return (
     <View
       style={[
-        styles.containerStyle,
         {
           height: listStyle.height ?? '100%',
           width: listStyle.width ?? '100%',
