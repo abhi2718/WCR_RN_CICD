@@ -13,7 +13,6 @@ import {
 import { styles } from './styles';
 import { HeaderDeck } from '../../../../components/header';
 import { CometChatConversationsWithMessages } from '../../../../cometchat/src';
-//import { CometChatConversationsWithMessages } from '../../../../cometChat/chat-uikit-react-native/src';
 export default function CommunityChat() {
   const { state, setState, count } = useViewModal();
   const [showToggleSearchInput, settoggleSearchInput] = useState(false);
