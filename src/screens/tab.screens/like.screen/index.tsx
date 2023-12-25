@@ -50,10 +50,15 @@ export const LikeScreen = () => {
               <View style={styles.container}>
                 {data?.matchedUsersList?.length > 0 && (
                   <View style={{ height: 200 }}>
-                    <Row justifyContent="space-between">
-                      <Text>Match</Text>
+                    <Row
+                      justifyContent="space-between"
+                      style={{ paddingBottom: 10, paddingTop: 0 }}
+                    >
+                      <Text style={styles.matchHeading}>Match</Text>
                       <Pressable onPress={() => handleSetSeeAllState(3)}>
-                        <Text>See All</Text>
+                        <Spacer position="right" size={12}>
+                          <Text style={styles.seeAll}>See All</Text>
+                        </Spacer>
                       </Pressable>
                     </Row>
                     <ScrollView
@@ -77,13 +82,18 @@ export const LikeScreen = () => {
                 <Spacer position="top" size={10} />
                 {data?.likesReceived?.length > 0 && (
                   <View>
-                    <Row justifyContent="space-between">
-                      <Text>Likes Received</Text>
+                    <Row
+                      justifyContent="space-between"
+                      style={{ paddingBottom: 10, paddingTop: 0 }}
+                    >
+                      <Text style={styles.matchHeading}>Likes Received</Text>
                       <Pressable onPress={() => handleSetSeeAllState(0)}>
-                        <Text>See All</Text>
+                        <Spacer position="right" size={12}>
+                          <Text style={styles.seeAll}>See All</Text>
+                        </Spacer>
                       </Pressable>
                     </Row>
-                    <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
+                    <ScrollView style={{ paddingBottom: 20 }} horizontal={true}>
                       {data.likesReceived.map((item) => {
                         return (
                           <ProfileView
@@ -100,13 +110,18 @@ export const LikeScreen = () => {
                 <Spacer position="top" size={10} />
                 {data?.liked?.length > 0 && (
                   <View>
-                    <Row justifyContent="space-between">
-                      <Text>Liked</Text>
+                    <Row
+                      justifyContent="space-between"
+                      style={{ paddingBottom: 10, paddingTop: 0 }}
+                    >
+                      <Text style={styles.matchHeading}>Liked</Text>
                       <Pressable onPress={() => handleSetSeeAllState(1)}>
-                        <Text>See All</Text>
+                        <Spacer position="right" size={12}>
+                          <Text style={styles.seeAll}>See All</Text>
+                        </Spacer>
                       </Pressable>
                     </Row>
-                    <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
+                    <ScrollView horizontal={true} style={{ paddingBottom: 20 }}>
                       {data.liked.map((item) => {
                         return (
                           <ProfileView
@@ -124,13 +139,18 @@ export const LikeScreen = () => {
                 <Spacer position="top" size={10} />
                 {data?.allFavourite?.length > 0 && (
                   <View>
-                    <Row justifyContent="space-between">
-                      <Text>Saved</Text>
+                    <Row
+                      justifyContent="space-between"
+                      style={{ paddingBottom: 10, paddingTop: 0 }}
+                    >
+                      <Text style={styles.matchHeading}>Saved</Text>
                       <Pressable onPress={() => handleSetSeeAllState(2)}>
-                        <Text>See All</Text>
+                        <Spacer position="right" size={12}>
+                          <Text style={styles.seeAll}>See All</Text>
+                        </Spacer>
                       </Pressable>
                     </Row>
-                    <ScrollView style={{ maxHeight: 250 }} horizontal={true}>
+                    <ScrollView style={{ paddingBottom: 20 }} horizontal={true}>
                       {data.allFavourite.map((item) => {
                         return (
                           <ProfileView
@@ -149,11 +169,26 @@ export const LikeScreen = () => {
             </ScrollView>
             <Modal visible={modalVisible}>
               <SafeAreaView style={styles.container}>
-                <Row justifyContent="space-between">
+                <Row
+                  alignItems="center"
+                  gap={100}
+                  style={{ paddingTop: 2, paddingBottom: 16 }}
+                >
                   <Pressable onPress={() => toggleModal()}>
-                    <Text>X</Text>
+                    <Image
+                      style={{ width: 21, height: 21 }}
+                      source={require('../../../assets/images/icons/back-arrow.png')}
+                    />
                   </Pressable>
-                  <Text>{seeAllState.title}</Text>
+                  <Text
+                    style={{
+                      fontSize: 21,
+                      fontWeight: '600',
+                      color: '#404040',
+                    }}
+                  >
+                    {seeAllState.title}
+                  </Text>
                 </Row>
                 {seeAllState.state === 0 && (
                   <>

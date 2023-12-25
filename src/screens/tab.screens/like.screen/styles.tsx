@@ -43,4 +43,22 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: fontSizes.button,
   },
+  matchHeading: {
+    color: '#616161',
+    leadingTrim: 'both',
+    textEdge: 'cap',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    lineHeight: 26,
+  },
+  seeAll: {
+    color: '#B00',
+    leadingTrim: 'both',
+    textEdge: 'cap',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 26,
+  },
 });

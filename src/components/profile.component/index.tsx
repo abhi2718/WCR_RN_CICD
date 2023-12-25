@@ -6,11 +6,20 @@ import {
   SafeAreaView,
   ScrollView,
   Pressable,
+  Image,
+  StyleSheet,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
 import { FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
+import LinearGradient from 'react-native-linear-gradient';
+import { colors } from '../../infrastructure/theme/colors';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -28,7 +37,7 @@ export const ProfileModal = (props: profileProps) => {
     showSave,
     showBlock,
   } = useViewModal(props);
-  const heightStyle = { height: 600, width: 300 };
+
   return (
     <Modal visible={showModal}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -38,9 +47,13 @@ export const ProfileModal = (props: profileProps) => {
           </View>
         ) : (
           <View>
-            <Row>
+            <Spacer position="top" size={10} />
+            <Row style={{ paddingTop: 0, paddingBottom: 10 }}>
               <Pressable onPress={toggleModal}>
-                <Text>Close</Text>
+                <Image
+                  style={{ width: 21, height: 21 }}
+                  source={require('../../assets/images/icons/back-arrow.png')}
+                />
               </Pressable>
             </Row>
             <View style={{ backgroundColor: '#fff' }}>
@@ -48,36 +61,54 @@ export const ProfileModal = (props: profileProps) => {
                 {user && (
                   <ScrollView bounces={false}>
                     <View>
-                      <FastImage
-                        style={{ ...heightStyle, borderRadius: 0 }}
-                        source={{ uri: user.profilePicture.url }}
-                      />
-                      <Text>
-                        {user.first} ({user.genderPronoun})
-                      </Text>
-                      <Row>
-                        <Text>{user.designation.userDegree}</Text>
+                      <Row style={styles.relative}>
+                        <FastImage
+                          style={styles.profileImage}
+                          source={{ uri: user.profilePicture.url }}
+                        >
+                          <LinearGradient
+                            colors={[
+                              'rgba(0, 0, 0, 0.00)',
+                              ' rgba(0, 0, 0, 0.9)',
+                            ]}
+                            style={styles.gradient}
+                          />
+                          <Text style={styles.userNameText}>
+                            {user.first} ({user.genderPronoun})
+                          </Text>
+                        </FastImage>
                       </Row>
-                      <Row>
-                        <Text>{user.designation.title}</Text>
-                      </Row>
-                      <Row>
-                        <Text>{user.designation.title}</Text>
-                      </Row>
-                      <Row>
-                        <Text>{user.state}</Text>
-                      </Row>
-                      <View>
-                        <Text>Vital Signs</Text>
+                      <View style={styles.userInfo}>
+                        <Text style={styles.aboutText}>
+                          {user.designation.userDegree}
+                        </Text>
+                        <Text style={styles.aboutText}>
+                          {user.designation.title}
+                        </Text>
+                        <Text style={styles.aboutText}>
+                          {user.designation.title}
+                        </Text>
+                        <Text style={styles.aboutText}>{user.state}</Text>
+                      </View>
+
+                      <View style={styles.userInfo}>
+                        <Text style={styles.gallery}>Vital Signs</Text>
                       </View>
                     </View>
                     {user?.photos.map(({ url, _id }) => {
                       return (
-                        <FastImage
-                          key={_id}
-                          style={{ ...heightStyle, borderRadius: 0 }}
-                          source={{ uri: url }}
-                        />
+                        <View style={{ padding: 10 }}>
+                          <FastImage
+                            key={_id}
+                            source={{ uri: url }}
+                            style={{
+                              width: 200,
+                              height: 200,
+                              borderRadius: 30,
+                            }}
+                            resizeMode={FastImage.resizeMode.cover}
+                          />
+                        </View>
                       );
                     })}
                     <Pressable onPress={handleShare}>
@@ -118,3 +149,41 @@ export const ProfileModal = (props: profileProps) => {
     </Modal>
   );
 };
+
+export const styles = StyleSheet.create({
+  profileImage: {
+    width: '100%',
+    height: 600,
+  },
+  relative: {
+    position: 'relative',
+  },
+  userNameText: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    fontSize: fontSizes.h6,
+    color: colors.ui.white,
+    fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
+  },
+  gradient: {
+    height: '100%',
+    width: '100%',
+  },
+  aboutText: {
+    color: colors.ui.text,
+    fontWeight: fontWeights.medium,
+    fontSize: fontSizes.text,
+  },
+  userInfo: {
+    padding: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 14,
+  },
+  gallery: {
+    fontSize: 22,
+    fontWeight: '600',
+  },
+});
