@@ -62,11 +62,13 @@ export const HeaderBar = (props: HeaderBarProps) => {
         </Pressable>
       ) : props.button ? (
         <Pressable onPress={button}>
-          {isLoading ? (
-            <ActivityIndicator />
-          ) : (
-            <Text style={headerStyle.actionButton}>Save</Text>
-          )}
+          <View style={headerStyle.actionButtonView}>
+            {isLoading ? (
+              <ActivityIndicator />
+            ) : (
+              <Text style={headerStyle.actionButton}>Save</Text>
+            )}
+          </View>
         </Pressable>
       ) : isVerificartionScreen ? (
         flagType === 'USA' ? (
@@ -124,6 +126,9 @@ export const headerStyle = StyleSheet.create({
     fontSize: fontSizes.h5,
     color: colors.ui.text,
     fontWeight: fontWeights.semiBold,
+  },
+  actionButtonView: {
+    width: sizes[10],
   },
   actionButton: {
     fontSize: fontSizes.text,

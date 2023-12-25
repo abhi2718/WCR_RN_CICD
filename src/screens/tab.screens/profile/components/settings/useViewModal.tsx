@@ -67,7 +67,7 @@ export const useViewModal = () => {
     {
       id: '3',
       imagePath: require('../../../../../assets/images/settings/inviteOthers.png'),
-      title: 'Invite others',
+      title: 'Invite a friend',
       onPress: handleShare,
     },
     {

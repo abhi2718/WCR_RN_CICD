@@ -45,7 +45,9 @@ export const ProfileScreen = ({}) => {
                 {/* <Progress.Bar progress={0.3} width={200} />
               <Text>34% Profile Complete</Text> */}
               <Column gap={5}>
-              <Text>{user.profile.displayName ?? user.profile.name.first}</Text>
+                <Text>
+                  {user.profile?.displayName ?? user.profile.name?.first}
+                </Text>
                 <Text style={styles.subHead}></Text>
                 <Text style={styles.address}></Text>
               </Column>

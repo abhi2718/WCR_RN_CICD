@@ -94,6 +94,15 @@ export const useViewModal = () => {
   const [heightRange, setHeightRange] = useState([3, 7]);
   const optionsList = [
     {
+      title: 'Gender of interest',
+      option: genderList,
+      initValue: 'gender',
+    },
+
+    {},
+    {},
+    {},
+    {
       title: 'Degree category',
       option: _userDegree,
       initValue: 'degreeCategory',
@@ -102,14 +111,6 @@ export const useViewModal = () => {
       title: 'Degree Type',
       option: _primaryDegree,
       initValue: 'degreeType',
-    },
-    {},
-    {},
-    {},
-    {
-      title: 'Gender',
-      option: genderList,
-      initValue: 'gender',
     },
     {
       title: 'Ethnicity',
