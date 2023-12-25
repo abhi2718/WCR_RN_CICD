@@ -10,9 +10,9 @@ import {
   FlatList,
   //@ts-ignore
 } from 'react-native';
-import { CometChatAvatar } from "../../views/CometChatAvatar";
+import { CometChatAvatar } from '../../views/CometChatAvatar';
 import { CometChatStatusIndicator } from '../../views/CometChatStatusIndicator';
-import { CometChatContext } from "../../CometChatContext";
+import { CometChatContext } from '../../CometChatContext';
 import SwipeRow from '../../helper/SwipeRow';
 import { ListItemStyle } from './ListItemStyle';
 import { Style } from './style';
@@ -46,6 +46,7 @@ export interface CometChatListItemInterface {
   headViewContainerStyle?: StyleProp<ViewStyle>;
   tailViewContainerStyle?: StyleProp<ViewStyle>;
   bodyViewContainerStyle?: StyleProp<ViewStyle>;
+  unreadCount: any;
 }
 export const CometChatListItem = (props: CometChatListItemInterface) => {
   //state for translateX
@@ -71,6 +72,7 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
     bodyViewContainerStyle,
     onPress,
     onLongPress,
+    unreadCount,
   } = props;
 
   const defaultlistItemStyleProps = new ListItemStyle({
@@ -238,32 +240,41 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
     );
   };
 
-  let ListComponent = ((onPress && typeof onPress == 'function') || (onLongPress && typeof onLongPress == 'function')) ? TouchableOpacity : View;
-  let listComponentProps = ((onPress && typeof onPress == 'function') || (onLongPress && typeof onLongPress == 'function')) ? {
-    activeOpacity: 1,
-    onPress: clickHandler,
-    onLongPress: longPressHandler
-  } : {};
+  let ListComponent =
+    (onPress && typeof onPress == 'function') ||
+    (onLongPress && typeof onLongPress == 'function')
+      ? TouchableOpacity
+      : View;
+  let listComponentProps =
+    (onPress && typeof onPress == 'function') ||
+    (onLongPress && typeof onLongPress == 'function')
+      ? {
+          activeOpacity: 1,
+          onPress: clickHandler,
+          onLongPress: longPressHandler,
+        }
+      : {};
 
   let WrapperComponent = swipeRowOptions.length ? SwipeRow : React.Fragment;
-  let wrapperComponentProps = swipeRowOptions.length ? {
-    key: id,
-    onRowDidOpen: rowOpened,
-    onRowDidClose: rowClosed,
-    disableRightSwipe: true,
-    disableLeftSwipe: !swipeRowOptions.length,
-    rightOpenValue: 0 - translate
-  } : {};
+  let wrapperComponentProps = swipeRowOptions.length
+    ? {
+        key: id,
+        onRowDidOpen: rowOpened,
+        onRowDidClose: rowClosed,
+        disableRightSwipe: true,
+        disableLeftSwipe: !swipeRowOptions.length,
+        rightOpenValue: 0 - translate,
+      }
+    : {};
 
   return (
-    <WrapperComponent
-      {...wrapperComponentProps}
-    >
+    <WrapperComponent {...wrapperComponentProps}>
       <View
         style={[
           Style.optionStyle,
           {
             height: listItemStyle.height ?? 50,
+            marginBottom: 20,
           },
         ]}
       >
@@ -283,12 +294,15 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
         style={[
           Style.container,
           {
-            backgroundColor: listItemStyle.backgroundColor,
+            backgroundColor:
+              unreadCount > 0 ? 'rgba(249, 235, 235, 1)' : 'white',
             borderRadius: listItemStyle?.borderRadius ?? 0,
-            borderWidth: listItemStyle?.border?.borderWidth ?? 0,
-            borderColor: listItemStyle?.border?.borderColor ?? 'black',
+            borderBottomWidth: 0.5,
+            borderBottomColor: 'rgba(35, 35, 35, 0.20)',
             borderStyle: listItemStyle?.border?.borderStyle ?? 'solid',
             height: listItemStyle?.height ?? 72,
+            paddingLeft: 16,
+            paddingRight: 16,
           },
         ]}
       >
@@ -296,7 +310,10 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
         <View
           style={[
             Style.rightContainerStyle,
-            { borderBottomWidth: hideSeparator ? 0 : 1, borderBottomColor: separatorColor || undefined },
+            {
+              borderBottomWidth: hideSeparator ? 0 : 1,
+              borderBottomColor: separatorColor || undefined,
+            },
           ]}
         >
           <View style={[Style.middleViewStyle, bodyViewContainerStyle ?? {}]}>
