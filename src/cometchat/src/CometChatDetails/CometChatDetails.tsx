@@ -43,12 +43,11 @@ import { CometChatUIEventHandler } from '../shared/events/CometChatUIEventHandle
 import { CometChatTransferOwnershipInterface } from '../CometChatTransferOwnership/CometChatTransferOwnership';
 import { Column, dimensions, Row, Spacer } from '../../../components/tools';
 import { CommunityMembers } from '../../../screens/tab.screens/chat/community/components/communityMembers';
-import {
-  MediaTab,
-} from '../../../screens/tab.screens/chat/community/components/mediaMessages';
+import { MediaTab } from '../../../screens/tab.screens/chat/community/components/mediaMessages';
 import { sizes } from '../../../infrastructure/theme/sizes';
-import { fontWeights } from '../../../infrastructure/theme/fonts';
 import { colors } from '../../../infrastructure/theme/colors';
+import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import { GroupInfoModal } from '../../../components/groupInfoModal';
 export interface ModalDetailsInterface {
   title: string;
   confirmButtonText: string;
@@ -380,7 +379,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [detailsList, setDetailsList] = useState(
-    (data && data({ user, group })) ?? []
+    (data && data({ user, group })) ?? [],
   );
   const [loggedInUser, setLoggedInUser] = useState<CometChat.User>();
   const [currentScreen, setCurrentScreen] = useState(null);
@@ -414,7 +413,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
           groupDetails.getGuid(),
           CometChat.MESSAGE_TYPE.TEXT,
           CometChat.RECEIVER_TYPE.GROUP,
-          CometChat.CATEGORY_ACTION as CometChat.MessageCategory
+          CometChat.CATEGORY_ACTION as CometChat.MessageCategory,
         );
         actionMessage.setMessage(`${loggedInUser.getName()} has left`);
         CometChatUIEventHandler.emitGroupEvent(CometChatUIEvents.ccGroupLeft, {
@@ -426,7 +425,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       },
       (error: CometChat.CometChatException) => {
         onError && onError(error);
-      }
+      },
     );
   };
 
@@ -467,13 +466,13 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
           CometChatGroupsEvents.ccGroupDeleted,
           {
             group: groupDetails,
-          }
+          },
         );
         onBack && onBack();
       },
       (error: CometChat.CometChatException) => {
         onError && onError(error);
-      }
+      },
     );
   };
 
@@ -494,9 +493,9 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   };
 
   const updateUserBlockStatus = (list: Object, blocked: boolean) => {
-    let updatedUser = userDetails
+    let updatedUser = userDetails;
     if (list[userDetails.getUid()]['success'] == true) {
-      updatedUser.setBlockedByMe(blocked)
+      updatedUser.setBlockedByMe(blocked);
     }
     setUserDetails(updatedUser);
     getDefaultTemplate(loggedInUser, updatedUser);
@@ -512,12 +511,12 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
             CometChatUIEvents.ccUserUnBlocked,
             {
               user: userDetails,
-            }
+            },
           );
         },
         (error: CometChat.CometChatException) => {
           onError && onError(error);
-        }
+        },
       );
       return;
     }
@@ -530,7 +529,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       },
       (error: CometChat.CometChatException) => {
         onError && onError(error);
-      }
+      },
     );
   };
   const handleOnClickFncDeclaration = (item?: any) => {
@@ -552,7 +551,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       case UserStatusConstants.unblocked:
         return () => handleUserBlockUnblock();
       default:
-        return () => { };
+        return () => {};
     }
   };
 
@@ -704,11 +703,11 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       return () => {
         BackHandler.removeEventListener(
           'hardwareBackPress',
-          handleBackButtonClick
+          handleBackButtonClick,
         );
       };
     }
-    return () => { }
+    return () => {};
   }, [currentScreen]);
 
   const getDefaultTemplate = (loggedUser, user?: any) => {
@@ -734,9 +733,9 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       },
       (error: CometChat.CometChatException) => {
         onError && onError(error);
-      }
+      },
     );
-  }
+  };
 
   useEffect(() => {
     getTemplates();
@@ -744,7 +743,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
 
   const handleUserStatus = (user) => {
     setUserDetails((prev) => {
-      prev.setStatus(user.getStatus())
+      prev.setStatus(user.getStatus());
       return prev;
     });
   };
@@ -790,7 +789,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
     usersAdded,
     userAddedIn,
   }) => {
-    setCurrentScreen(null)
+    setCurrentScreen(null);
     handleGroupListener(userAddedIn);
   };
   const handleOwnershipChanged = ({ group, newOwner, message }) => {
@@ -850,13 +849,13 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...transferOwnershipConfiguration}
       />
     );
-    if (group) {
-      return (
-        <View>
-          <View style={{ height: 400,padding:16, }}>
-            <Row justifyContent='space-between' alignItems='center'>
+  if (group) {
+    return (
+      <View>
+        <View style={{ height: 400, paddingHorizontal: 16 }}>
+          <Row justifyContent="space-between" alignItems="center">
             <Header
-              title={title}
+              title="Group info"
               showCloseButton={showCloseButton}
               closeButtonIcon={closeButtonIcon}
               onPress={() => {
@@ -872,148 +871,154 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
                 detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
               }
             />
-             <Pressable onPress={handleLeaveGroup}>
-              <Text>Leave Group</Text>
+            <Pressable onPress={handleLeaveGroup}>
+              <Text style={myStyles.leaveBtn}>Leave</Text>
             </Pressable>
-           </Row>
-            {groupDetails && (
+          </Row>
+          {groupDetails && (
+            <>
+              <GroupInfoModal
+                isVisible={false}
+                // onClose={closeModal}
+              ></GroupInfoModal>
               <Row>
                 <View style={styles.groupInfoContainer}>
-                <Image
-                  style={myStyles.imageStyle}
-                  source={{ uri: groupDetails?.getIcon() }}
-                  />
-                    <View style={styles.infoBtBox}>
-                <Pressable>
                   <Image
-                    source={require('../../../assets/images/icons/infoIcon.png')}
-                    style={styles.infoIcon}
+                    style={myStyles.imageStyle}
+                    source={{ uri: groupDetails?.getIcon() }}
                   />
-                </Pressable>
-              </View>
-                <Column>
-                  <Text style={styles.groupName}>{groupDetails.getName()}</Text>
-                  <View style={styles.descContainer}>
-                  <Text style={styles.groupDescription}>
-                    {groupDetails.getDescription()}{' '}
-                  </Text>
-                </View>
-                </Column>
+                  <View style={styles.infoBtBox}>
+                    <Pressable>
+                      <Image
+                        source={require('../../../assets/images/icons/infoIcon.png')}
+                        style={styles.infoIcon}
+                      />
+                    </Pressable>
+                  </View>
+                  <Column>
+                    <Text style={styles.groupName}>
+                      {groupDetails.getName()}
+                    </Text>
+                    <View style={styles.descContainer}>
+                      <Text style={styles.groupDescription}>
+                        {groupDetails.getDescription()}{' '}
+                      </Text>
+                    </View>
+                  </Column>
                 </View>
               </Row>
-            )}
-            <Spacer position='top' size={10}>
+            </>
+          )}
+          <Spacer position="top" size={10}>
             <View style={myStyles.menuOptins}>
               <CommunityMembers group={groupDetails} />
             </View>
-           </Spacer>
-          </View>
-          <View
-            style={{ height: dimensions.height - 400, backgroundColor: '#fff' }}
-          >
-            <MediaTab guid={groupDetails?.getGuid()} />
-          </View>
+          </Spacer>
         </View>
-      );
-    }
-    if (user) {
-      return (
-        <View>
-          <View style={{ height: 600 }}>
-            <Header
-              title={title}
-              showCloseButton={showCloseButton}
-              closeButtonIcon={closeButtonIcon}
-              onPress={() => {
-                onBack && onBack();
-              }}
-              titleStyle={{
-                color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
-                ...(detailsStyle?.titleFont
-                  ? detailsStyle?.titleFont
-                  : theme.typography.heading),
-              }}
-              closeIconTint={
-                detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
-              }
-            />
-            {!user.getBlockedByMe() && (
-              <Pressable onPress={() => handleUserBlockUnblock()}>
-                <Text>Block</Text>
-              </Pressable>
-            )}
-            {user.getBlockedByMe() && (
-              <Pressable onPress={() => handleUserBlockUnblock(true)}>
-                <Text>Un Block</Text>
-              </Pressable>
-            )}
-            <MediaTab uid={user.getUid()} />
-          </View>
-          <View style={{ height: dimensions.height - 200 }}></View>
-        </View>
-      );
-    }
-    return (
-      <View style={{ padding: 16 }}>
-        <Header
-          title={title}
-          showCloseButton={showCloseButton}
-          closeButtonIcon={closeButtonIcon}
-          onPress={() => {
-            onBack && onBack();
-          }}
-          titleStyle={{
-            color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
-            ...(detailsStyle?.titleFont
-              ? detailsStyle?.titleFont
-              : theme.typography.heading),
-          }}
-          closeIconTint={
-            detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
-          }
-        />
-        <CometChatConfirmDialog
-          isOpen={modalVisible}
-          title={modalDetails?.title}
-          confirmButtonText={modalDetails?.confirmButtonText}
-          cancelButtonText={modalDetails?.cancelButtonText}
-          messageText={modalDetails?.messageText}
-          onConfirm={modalDetails?.onConfirm}
-          onCancel={modalDetails?.onCancel}
-          style={modalDetails?.style}
-        />
-        {hideProfile ? null : CustomProfileView ? (
-          <CustomProfileView
-            {...(userDetails
-              ? { user: userDetails }
-              : group
-              ? { group: groupDetails }
-              : {})}
-          />
-        ) : (
-          <>
-            {groupDetails && (
-              <Row>
-                <Image
-                  style={myStyles.imageStyle}
-                  source={{ uri: groupDetails?.getIcon() }}
-                />
-                <Column>
-                  <Text>{groupDetails.getName()}</Text>
-                  <Text>{groupDetails.getDescription()} </Text>
-                </Column>
-              </Row>
-            )}
-          </>
-        )}
-        <View style={myStyles.menuOptins}>
-          <CommunityMembers group={groupDetails} />
-        </View>
-        <View>
-          {/* <MediaMessage guid={groupDetails?.getGuid()} /> */}
+        <View
+          style={{ height: dimensions.height - 400, backgroundColor: '#fff' }}
+        >
+          <MediaTab guid={groupDetails?.getGuid()} />
         </View>
       </View>
     );
+  }
+  if (user) {
+    return (
+      <View>
+        <View style={{ height: 600 }}>
+          <Header
+            title={title}
+            showCloseButton={showCloseButton}
+            closeButtonIcon={closeButtonIcon}
+            onPress={() => {
+              onBack && onBack();
+            }}
+            titleStyle={{
+              color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+              ...(detailsStyle?.titleFont
+                ? detailsStyle?.titleFont
+                : theme.typography.heading),
+            }}
+            closeIconTint={
+              detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+            }
+          />
+          {!user.getBlockedByMe() && (
+            <Pressable onPress={() => handleUserBlockUnblock()}>
+              <Text>Block</Text>
+            </Pressable>
+          )}
+          {user.getBlockedByMe() && (
+            <Pressable onPress={() => handleUserBlockUnblock(true)}>
+              <Text>Un Block</Text>
+            </Pressable>
+          )}
+          <MediaTab uid={user.getUid()} />
+        </View>
+        <View style={{ height: dimensions.height - 200 }}></View>
+      </View>
+    );
+  }
+  return (
+    <View style={{ padding: 16 }}>
+      <Header
+        title={title}
+        showCloseButton={showCloseButton}
+        closeButtonIcon={closeButtonIcon}
+        onPress={() => {
+          onBack && onBack();
+        }}
+        titleStyle={{
+          color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
+          ...(detailsStyle?.titleFont
+            ? detailsStyle?.titleFont
+            : theme.typography.heading),
+        }}
+        closeIconTint={
+          detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+        }
+      />
+      <CometChatConfirmDialog
+        isOpen={modalVisible}
+        title={modalDetails?.title}
+        confirmButtonText={modalDetails?.confirmButtonText}
+        cancelButtonText={modalDetails?.cancelButtonText}
+        messageText={modalDetails?.messageText}
+        onConfirm={modalDetails?.onConfirm}
+        onCancel={modalDetails?.onCancel}
+        style={modalDetails?.style}
+      />
+      {hideProfile ? null : CustomProfileView ? (
+        <CustomProfileView
+          {...(userDetails
+            ? { user: userDetails }
+            : group
+            ? { group: groupDetails }
+            : {})}
+        />
+      ) : (
+        <>
+          {groupDetails && (
+            <Row>
+              <Image
+                style={myStyles.imageStyle}
+                source={{ uri: groupDetails?.getIcon() }}
+              />
+              <Column>
+                <Text>{groupDetails.getName()}</Text>
+                <Text>{groupDetails.getDescription()} </Text>
+              </Column>
+            </Row>
+          )}
+        </>
+      )}
+      <View style={myStyles.menuOptins}>
+        <CommunityMembers group={groupDetails} />
+      </View>
+      <View>{/* <MediaMessage guid={groupDetails?.getGuid()} /> */}</View>
+    </View>
+  );
   // return (
   //   <View
   //     style={[
@@ -1159,5 +1164,9 @@ const myStyles = StyleSheet.create({
   },
   menuOptins: {
     height: 50,
+  },
+  leaveBtn: {
+    color: colors.ui.primary,
+    fontSize: fontSizes.text,
   },
 });
