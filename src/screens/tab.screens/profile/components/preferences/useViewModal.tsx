@@ -107,7 +107,7 @@ export const useViewModal = () => {
     {},
     {},
     {
-      title: 'Gender',
+      title: 'Gender of Interests',
       option: genderList,
       initValue: 'gender',
     },
@@ -156,11 +156,11 @@ export const useViewModal = () => {
       option: smokingList,
       initValue: 'smoking',
     },
-    {
-      title: 'Sexual Orientation',
-      option: sexualOrientationArrayList,
-      initValue: 'sexualPreference',
-    },
+    // {
+    //   title: 'Sexual Orientation',
+    //   option: sexualOrientationArrayList,
+    //   initValue: 'sexualPreference',
+    // },
     {
       title: 'Kids',
       option: kidsList,
@@ -261,7 +261,7 @@ export const useViewModal = () => {
       setSubmitLoading(true);
       const preferences: any = {
         gender: answer.gender,
-        sexualPreference: answer.sexualPreference,
+      //  sexualPreference: answer.sexualPreference,
         healthcareProfessionals: {
           userDegree: answer.degreeCategory,
           primaryDegree: answer.degreeType,

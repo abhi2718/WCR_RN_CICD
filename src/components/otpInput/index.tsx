@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { colors } from '../../infrastructure/theme/colors';
@@ -13,25 +13,30 @@ import {
 const CELL_COUNT = 6;
 type otpTypes = {
   onChangeOtp: (value: string) => void;
+  otpValue: string;
+  setOtpValue: any;
 };
-export const OtpCodeInput = ({ onChangeOtp }: otpTypes) => {
-  const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
+export const OtpCodeInput = ({
+  onChangeOtp,
+  otpValue,
+  setOtpValue,
+}: otpTypes) => {
+  const ref = useBlurOnFulfill({ value: otpValue, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value,
-    setValue,
+    value: otpValue,
+    setValue: setOtpValue,
   });
-
   const handleInputChange = (text: string) => {
-    setValue(text);
+    setOtpValue(text);
     onChangeOtp(text);
   };
+ 
   return (
     <SafeAreaView style={styles.root}>
       <CodeField
         ref={ref}
         {...props}
-        value={value}
+        value={otpValue}
         onChangeText={handleInputChange}
         cellCount={CELL_COUNT}
         rootStyle={styles.codeFieldRoot}
