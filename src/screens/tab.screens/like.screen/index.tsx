@@ -40,10 +40,10 @@ export const LikeScreen = () => {
   }
   return (
     <ScreenWrapper>
-      <View style={{ flex: 1 }}>
-        <View style={{paddingLeft:16}}>
-        <HeaderDeck count={count} goToNotification={goToNotification} />
-      </View>
+      <View style={styles.container}>
+        <View style={styles.headerViewStyle}>
+          <HeaderDeck count={count} goToNotification={goToNotification} />
+        </View>
         {isNoEvent > 0 ? (
           <>
             <ScrollView style={{ flex: 1 }}>
@@ -245,16 +245,16 @@ export const LikeScreen = () => {
         ) : (
           <>
             <View style={styles.content}>
-            <Text style={styles.subHeading}>Matches</Text>
-            <Image
-              style={styles.noMatchIcon}
-              resizeMode="contain"
-              source={require('../../../../src/assets/images/icons/noMatchIcon.png')}
-            />
-            <Text style={styles.text}>
-              You’re new here! No matches/likes yet.
-            </Text>
-          </View>
+              <Text style={styles.subHeading}>Matches</Text>
+              <Image
+                style={styles.noMatchIcon}
+                resizeMode="contain"
+                source={require('../../../../src/assets/images/icons/noMatchIcon.png')}
+              />
+              <Text style={styles.text}>
+                You’re new here! No matches/likes yet.
+              </Text>
+            </View>
           </>
         )}
       </View>

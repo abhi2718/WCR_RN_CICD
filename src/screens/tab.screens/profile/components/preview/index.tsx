@@ -32,7 +32,7 @@ export const PreviewScreen = () => {
             <Image
               style={styles.closeIcon}
               resizeMode="contain"
-              source={require('../../../../../assets/images/icons/crossIcon.png')}
+              source={require('../../../../../assets/images/icons/back-arrow.png')}
             />
           </Pressable>
           <Text style={styles.headerText}>Preview</Text>
@@ -49,7 +49,7 @@ export const PreviewScreen = () => {
                 <View>
                   <FastImage
                     source={{
-                      uri: user.profilePicture.url,
+                      uri: user.profilePicture?.url,
                     }}
                     style={styles.profilePic}
                   >
@@ -76,7 +76,7 @@ export const PreviewScreen = () => {
                       source={require('../../../../../assets/images/icons/degree.png')}
                     />
                     <Text style={styles.userInfoText}>
-                      {user.designation.userDegree}
+                      {user.designation?.userDegree}
                     </Text>
                   </Row>
                   <Row style={styles.userInfoRow} gap={15}>
@@ -85,7 +85,7 @@ export const PreviewScreen = () => {
                       source={require('../../../../../assets/images/icons/degTitle.png')}
                     />
                     <Text style={styles.userInfoText}>
-                      {user.designation.title}
+                      {user.designation?.title}
                     </Text>
                   </Row>
                   <Row style={styles.userInfoRow} gap={15}>
@@ -94,7 +94,7 @@ export const PreviewScreen = () => {
                       source={require('../../../../../assets/images/icons/location.png')}
                     />
                     <Text style={styles.userInfoText}>
-                      {user.address.state}
+                      {user.address?.state}
                     </Text>
                   </Row>
                 </View>
@@ -184,11 +184,20 @@ export const PreviewScreen = () => {
                   <View style={styles.inBtwnText}>
                     <Text style={styles.headingText}>Interests/Hobbies</Text>
                     <Row style={{ flexWrap: 'wrap' }}>
-                      {user?.interests?.map((hobby: string, index: number) => (
-                        <Text key={index} style={styles.aboutText}>
-                          {hobby},
-                        </Text>
-                      ))}
+                      {user?.interests?.map((hobby: string, index: number) => {
+                        if (user?.interests?.length - 1 === index) {
+                          return (
+                            <Text key={index} style={styles.aboutText}>
+                              {hobby}
+                            </Text>
+                          );
+                        }
+                        return (
+                          <Text key={index} style={styles.aboutText}>
+                            {hobby},
+                          </Text>
+                        );
+                      })}
                     </Row>
                   </View>
                 )}

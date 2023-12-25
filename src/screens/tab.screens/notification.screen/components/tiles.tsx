@@ -70,7 +70,12 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
       onSwipeableWillOpen={closeSwipeable}
     >
       <TouchableOpacity onPress={() => markAsRead(item._id)}>
-        <View style={notificationStyles.container}>
+        <View
+          style={[
+            notificationStyles.container,
+            { backgroundColor: item.isRead ? '#fff' : colors.bg.secondary },
+          ]}
+        >
           <Row gap={16}>
             <FastImage
               style={notificationStyles.profileImageStyle}

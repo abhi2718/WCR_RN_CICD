@@ -42,7 +42,7 @@ export const ProfileScreen = ({}) => {
               />
               <Column gap={5}>
                 <Text>
-                  {user.profile.displayName ?? user.profile.name.first}
+                  {user.profile.displayName ?? user.profile.name?.first}
                 </Text>
 
                 <Text style={styles.address}>
