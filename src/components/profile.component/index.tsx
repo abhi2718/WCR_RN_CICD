@@ -48,7 +48,7 @@ export const ProfileModal = (props: profileProps) => {
         ) : (
           <View>
             <Spacer position="top" size={10} />
-            <Row style={{ paddingTop: 0, paddingBottom: 10 }}>
+            <Row style={{ paddingTop: 0, paddingBottom: 10, paddingLeft: 10 }}>
               <Pressable onPress={toggleModal}>
                 <Image
                   style={{ width: 21, height: 21 }}

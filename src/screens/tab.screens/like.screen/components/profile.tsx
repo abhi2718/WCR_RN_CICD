@@ -59,20 +59,22 @@ export const ProfileView = (props: ProfileViewProps) => {
               />
             </Spacer>
             <Column>
-              <Text>
-                {item?.profile?.displayName ?? item?.profile?.name?.first}
-              </Text>
-              <Text>{item?.designation?.title}</Text>
-              {showDeleteIcon && (
-                <Pressable onPress={handleRemove}>
-                  <Text>Remove</Text>
-                </Pressable>
-              )}
-              {isMatch && (
-                <Pressable onPress={navigateToChat}>
-                  <Text>Chat</Text>
-                </Pressable>
-              )}
+              <Spacer position="bottom" size={10}>
+                <Text>
+                  {item?.profile?.displayName ?? item?.profile?.name?.first}
+                </Text>
+                <Text>{item?.designation?.title}</Text>
+                {showDeleteIcon && (
+                  <Pressable onPress={handleRemove}>
+                    <Text>Remove</Text>
+                  </Pressable>
+                )}
+                {isMatch && (
+                  <Pressable onPress={navigateToChat}>
+                    <Text>Chat</Text>
+                  </Pressable>
+                )}
+              </Spacer>
             </Column>
           </Column>
         </Pressable>
@@ -145,15 +147,19 @@ export const ProfileView = (props: ProfileViewProps) => {
               />
             </Spacer>
             <Column justifyContent="center" alignItems="center">
-              <Text style={styles.textName}>
-                {item?.profile?.displayName ?? item?.profile?.name?.first}
-              </Text>
-              <Text style={styles.textDegree}>{item?.designation?.title}</Text>
-              {isMatch && (
-                <Pressable onPress={navigateToChat}>
-                  <Text>Chat</Text>
-                </Pressable>
-              )}
+              <Spacer position="bottom" size={10}>
+                <Text style={styles.textName}>
+                  {item?.profile?.displayName ?? item?.profile?.name?.first}
+                </Text>
+                <Text style={styles.textDegree}>
+                  {item?.designation?.title}
+                </Text>
+                {isMatch && (
+                  <Pressable onPress={navigateToChat}>
+                    <Text>Chat</Text>
+                  </Pressable>
+                )}
+              </Spacer>
             </Column>
             {showDeleteIcon && (
               <Pressable onPress={handleRemove} style={styles.removeIcon}>
@@ -192,7 +198,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
   },
   avatar: {
-    width: 200,
+    width: 185,
     height: 152,
     borderRadius: 30,
   },

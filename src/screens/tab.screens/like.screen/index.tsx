@@ -171,7 +171,6 @@ export const LikeScreen = () => {
               <SafeAreaView style={styles.container}>
                 <Row
                   alignItems="center"
-                  gap={100}
                   style={{ paddingTop: 2, paddingBottom: 16 }}
                 >
                   <Pressable onPress={() => toggleModal()}>
@@ -185,6 +184,9 @@ export const LikeScreen = () => {
                       fontSize: 21,
                       fontWeight: '600',
                       color: '#404040',
+                      textAlign: 'center',
+                      flex: 1,
+                      paddingRight: 21,
                     }}
                   >
                     {seeAllState.title}
