@@ -78,16 +78,12 @@ export default function SignInScreen(props: ScreenParams) {
               placeholderTextColor="rgba(35, 35, 35, 0.4)"
             />
           </View>
+          <PrimaryButton
+            title="Continue"
+            onPress={getOtpToVerifyEmail}
+            isLoading={loading}
+          />
         </KeyboardAvoidingView>
-        <KeyboardAvoidingView
-          enabled
-          behavior={isAndroid ? 'height' : 'padding'}
-        ></KeyboardAvoidingView>
-        <PrimaryButton
-          title="Continue"
-          onPress={getOtpToVerifyEmail}
-          isLoading={loading}
-        />
       </ScrollView>
     </ScreenContainer>
   );

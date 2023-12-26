@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     borderRadius: 35,
     backgroundColor: colors.ui.bgMud,
     width: dimensions.width - 32,
+    marginBottom: 16,
   },
   animatedContainerStyles: {
     position: 'absolute',

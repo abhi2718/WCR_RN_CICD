@@ -5,6 +5,7 @@ import {
   fontWeights,
   fonts,
 } from '../../../../../infrastructure/theme/fonts';
+import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 export const styles = StyleSheet.create({
   container: {
@@ -40,6 +41,7 @@ export const styles = StyleSheet.create({
   silderSubText: {
     marginRight: 8,
     color: colors.ui.text,
+    fontSize: 16,
   },
   optionContainer: {
     borderRadius: 4,
@@ -55,9 +57,11 @@ export const styles = StyleSheet.create({
   selectedItem: {
     marginTop: 10,
     fontSize: 16,
+    color: colors.ui.text,
   },
   initValueTextStyle: {
-    color: 'black',
+    color: '#B3B3B3',
+    marginLeft: -8,
   },
   textColor: {
     color: colors.ui.text,
@@ -71,5 +75,9 @@ export const styles = StyleSheet.create({
   optionName: {
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.text,
+  },
+  selectArrow: {
+    width: sizes[2],
+    height: sizes[2],
   },
 });

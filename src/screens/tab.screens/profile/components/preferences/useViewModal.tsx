@@ -22,7 +22,7 @@ import {
   sexualOrientationArray,
   smoking,
   userDegree,
-  covidVaccineStatus
+  covidVaccineStatus,
 } from '../../../../../utils/constanst';
 
 export const useViewModal = () => {
@@ -50,7 +50,7 @@ export const useViewModal = () => {
     familyPlan: 'Select',
     pets: 'Select',
     sexualPreference: 'Select',
-    covidVaccineStatus:'Select'
+    covidVaccineStatus: 'Select',
   });
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
@@ -87,12 +87,19 @@ export const useViewModal = () => {
   const kidsList = generateList(kids, 'kids');
   const familyPlanList = generateList(familyPlan, 'familyPlan');
   const petsList = generateList(pets, 'pets');
-  const sexualOrientationArrayList = generateList(sexualOrientationArray, 'sexualPreference');
   const covidVaccineStatusList = generateList(covidVaccineStatus,'covidVaccineStatus')
-  const [distanceRange, setDistanceRange] = useState<any[]>([0]);
+  const [distanceRange, setDistanceRange] = useState<any[]>(['No Max']);
   const [ageRange, setAgeRange] = useState([18, 60]);
   const [heightRange, setHeightRange] = useState([3, 7]);
   const optionsList = [
+    {
+      title: 'Gender of interest',
+      option: genderList,
+      initValue: 'gender',
+    },
+    {}, // distance prefrence
+    {}, // age prefrence
+    {}, // height prefrence
     {
       title: 'Degree category',
       option: _userDegree,
@@ -103,11 +110,8 @@ export const useViewModal = () => {
       option: _primaryDegree,
       initValue: 'degreeType',
     },
-    {},
-    {},
-    {},
     {
-      title: 'Gender',
+      title: 'Gender of Interests',
       option: genderList,
       initValue: 'gender',
     },
@@ -156,11 +160,11 @@ export const useViewModal = () => {
       option: smokingList,
       initValue: 'smoking',
     },
-    {
-      title: 'Sexual Orientation',
-      option: sexualOrientationArrayList,
-      initValue: 'sexualPreference',
-    },
+    // {
+    //   title: 'Sexual Orientation',
+    //   option: sexualOrientationArrayList,
+    //   initValue: 'sexualPreference',
+    // },
     {
       title: 'Kids',
       option: kidsList,
@@ -180,7 +184,7 @@ export const useViewModal = () => {
       title: 'Covid Vaccine Status',
       option: covidVaccineStatusList,
       initValue: 'covidVaccineStatus',
-    }
+    },
   ];
   const getPrefrences = async () => {
     try {
@@ -219,13 +223,13 @@ export const useViewModal = () => {
                 };
               }
             }
-            if (Array.isArray(value)) {
-              if (key === 'relationship') {
+            if (Array.isArray(value) && value.length) {
+              if (key === 'relationship' && value[0]) {
                 newState = {
                   ...newState,
                   relationshipLevel: value[0],
                 };
-              } else {
+              } else if(value[0]) {
                 newState = {
                   ...newState,
                   [key]: value[0],
@@ -235,8 +239,13 @@ export const useViewModal = () => {
           }
           return newState;
         });
-        if (data?.distance) {
-          setDistanceRange([data?.distance]);
+        if (data?.distance) { 
+          const isNumber = Number(data?.distance);
+          if (isNumber) {
+             setDistanceRange([isNumber]);
+          } else {
+            setDistanceRange([data?.distance]);
+          }
         }
         if (data?.age) {
           setAgeRange([data.age.min, data.age.max]);
@@ -261,7 +270,7 @@ export const useViewModal = () => {
       setSubmitLoading(true);
       const preferences: any = {
         gender: answer.gender,
-        sexualPreference: answer.sexualPreference,
+        //  sexualPreference: answer.sexualPreference,
         healthcareProfessionals: {
           userDegree: answer.degreeCategory,
           primaryDegree: answer.degreeType,
@@ -279,18 +288,18 @@ export const useViewModal = () => {
         relationship: [answer.relationshipLevel],
         maritalStatus: answer.maritalStatus,
         distance: distanceRange[0] > 600 ? 'No Max' : distanceRange[0],
-        covidVaccineStatus:answer.covidVaccineStatus
+        covidVaccineStatus: answer.covidVaccineStatus,
       };
       let updates: any = {
         height: {
           minFeet: Number(`${heightRange[0]}`.split('.')[0]),
           minInch: `${heightRange[0]}`.includes('.')
-          ? Number(`${heightRange[0]}`.split('.')[1])
-          : 0,
+            ? Number(`${heightRange[0]}`.split('.')[1])
+            : 0,
           maxFeet: Number(`${heightRange[1]}`.split('.')[0]),
           maxInch: `${heightRange[1]}`.includes('.')
-          ? Number(`${heightRange[1]}`.split('.')[1])
-          : 0,
+            ? Number(`${heightRange[1]}`.split('.')[1])
+            : 0,
         },
         age: {
           min: ageRange[0],
@@ -363,20 +372,19 @@ export const useViewModal = () => {
       if (isPrefrenceCreated.current) {
         await userProfileRepository.updatePreference(payload);
       } else {
-       await userProfileRepository.createPreference(payload);
+        await userProfileRepository.createPreference(payload);
         isPrefrenceCreated.current = true;
       }
+      setSubmitLoading(false);
       navigation.navigate(ROUTES.DeckTab, {
         loadProfile: true
       })
-      setSubmitLoading(false);
-      
     } catch (error) {
       setSubmitLoading(false);
     }
   };
   const handleDistanceSliderChange = (values: any) => {
-    if (values[0] > 600) {
+    if (values[0] > 510) {
       setDistanceRange(['No Max']);
       return;
     }
@@ -414,6 +422,6 @@ export const useViewModal = () => {
     handleAgeSliderChange,
     handleHeightSliderChange,
     heightRange,
-    submitLoading
+    submitLoading,
   };
 };

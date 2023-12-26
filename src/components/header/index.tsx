@@ -62,11 +62,13 @@ export const HeaderBar = (props: HeaderBarProps) => {
         </Pressable>
       ) : props.button ? (
         <Pressable onPress={button}>
-          {isLoading ? (
-            <ActivityIndicator />
-          ) : (
-            <Text style={headerStyle.actionButton}>Save</Text>
-          )}
+          <View style={headerStyle.actionButtonView}>
+            {isLoading ? (
+              <ActivityIndicator />
+            ) : (
+              <Text style={headerStyle.actionButton}>Save</Text>
+            )}
+          </View>
         </Pressable>
       ) : isVerificartionScreen ? (
         flagType === 'USA' ? (
@@ -125,6 +127,9 @@ export const headerStyle = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.semiBold,
   },
+  actionButtonView: {
+    width: sizes[10],
+  },
   actionButton: {
     fontSize: fontSizes.text,
     color: '#007AFF',
@@ -152,11 +157,12 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
   } = props;
   const { navigate } = useNavigation();
   const goToPrefrence = () => navigate(ROUTES.Preferences);
+  const _goToNotification = () => navigate(ROUTES.Notification);
   return (
     <View>
       <Row justifyContent="space-between" alignItems="center">
         <Row alignItems="center" style={headerDeckStyle.row} gap={30}>
-          <Pressable onPress={goToNotification}>
+          <Pressable onPress={goToNotification?goToNotification:_goToNotification}>
             {count > 9 ? (
               <Text style={headerDeckStyle.count}>9+</Text>
             ) : (

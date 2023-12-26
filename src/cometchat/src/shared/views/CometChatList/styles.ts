@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '400',
     marginLeft: 8,
-    alignSelf:"center"
+    alignSelf: 'center',
   },
   searchButtonStyle: {
     width: 16,
