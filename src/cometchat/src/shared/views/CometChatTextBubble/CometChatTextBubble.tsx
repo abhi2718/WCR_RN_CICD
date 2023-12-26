@@ -23,7 +23,6 @@ const Link = ({ text, url, style }) => {
             }
           })
           .catch((err) => {
-            console.log({ url });
             console.log('Error:', err);
           });
       }}

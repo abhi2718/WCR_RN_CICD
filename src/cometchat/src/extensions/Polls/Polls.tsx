@@ -207,7 +207,6 @@ export const CometChatCreatePoll = (props: CometChatCreatePollInterface) => {
       receiverType: user ? 'user' : group ? 'group' : '',
     })
       .then((response) => {
-        console.log('poll created', response);
         onClose && onClose()
         // Details about the created poll
       })
