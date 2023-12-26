@@ -1220,14 +1220,12 @@ export const CometChatMessageComposer = React.forwardRef(
         "type": "audio/mp4",
         "uri": recordedFile
       }
-      console.log("fileObj", fileObj);
       sendMediaMessage(
         chatWithId.current,
         fileObj,
         MessageTypeConstants.audio,
         chatWith.current
       );
-      console.log("Send Audio");
     }
 
     return (

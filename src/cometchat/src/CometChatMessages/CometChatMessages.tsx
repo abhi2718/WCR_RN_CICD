@@ -172,12 +172,10 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
             connectionListenerId,
             new CometChat.ConnectionListener({
                 onConnected: () => {
-                    console.log("ConnectionListener => On Connected", user, group);
                     if(user?.uid){
                     CometChat.getUser(user?.uid)
                         .then(user => {
                             setUserObject(user);
-                            console.log("onConnected getUser", { user });
                         })
                         .catch(e => {
                             console.log("ERROR")
@@ -186,7 +184,6 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
                         CometChat.getGroup(group?.guid)
                         .then(group => {
                             setGroupObject(group);
-                            console.log("onConnected getGroup", { group });
                         })
                         .catch(e => {
                             console.log("ERROR")
@@ -194,10 +191,10 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
                     }
                 },
                 inConnecting: () => {
-                    console.log("ConnectionListener => In connecting");
+                    
                 },
                 onDisconnected: () => {
-                    console.log("ConnectionListener => On Disconnected");
+                    
                 }
             })
         );

@@ -151,7 +151,6 @@ export const CometChatGroupsWithMessages = (props: CometChatGroupsWithMessagesIn
                 }, 200);
             },
             ccGroupMemberJoined: ({joinedGroup}) => {
-                console.log("joined", joinedGroup);
                 joinedGroup['hasJoined'] = true;
                 joinedGroup['scope'] = "participant";
                 selectedGroup.current = joinedGroup;

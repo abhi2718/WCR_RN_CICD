@@ -81,7 +81,6 @@ export const CometChatBannedMembers = (
           }
         );
         listRef.current.removeItemFromList(uid);
-        console.log('Group member unbanned successfully', response);
       },
       (error) => {
         console.log('Group member unbanning failed with error', error);

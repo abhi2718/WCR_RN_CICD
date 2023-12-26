@@ -111,7 +111,7 @@ export const PreferencesScreen = () => {
                     <MultiSlider
                       values={ageRange}
                       min={18}
-                      max={60}
+                      max={100}
                       step={1}
                       onValuesChange={handleAgeSliderChange}
                     />
