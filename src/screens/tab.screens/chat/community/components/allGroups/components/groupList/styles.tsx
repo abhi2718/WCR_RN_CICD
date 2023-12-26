@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../../../../../infrastructure/theme/colors';
 import { dimensions } from '../../../../../../../../components/tools';
+import { theme } from '../../../../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,9 +10,9 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   imageStyle: {
-    width: 56,
-    height: 56,
-    borderRadius: 56 / 2,
+    width: 42,
+    height: 42,
+    borderRadius: 42 / 2,
   },
   singleRow: {
     paddingVertical: 8,
@@ -25,8 +26,9 @@ export const styles = StyleSheet.create({
     width: dimensions.width - 150,
   },
   groupName: {
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: theme.fontSizes.text,
+    fontWeight: theme.fontWeights.bold,
+    color: theme.colors.ui.text,
     textTransform: 'capitalize',
   },
   groupMembers: {

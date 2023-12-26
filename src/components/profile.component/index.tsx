@@ -14,12 +14,7 @@ import { profileProps } from '../../types/components/profile.type';
 import { FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
-import { colors } from '../../infrastructure/theme/colors';
-import {
-  fontSizes,
-  fontWeights,
-  fonts,
-} from '../../infrastructure/theme/fonts';
+import { theme } from '../../infrastructure/theme';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -48,15 +43,15 @@ export const ProfileModal = (props: profileProps) => {
         ) : (
           <View>
             <Spacer position="top" size={10} />
-            <Row style={{ paddingTop: 0, paddingBottom: 10, paddingLeft: 10 }}>
+            <Row style={styles.backHeaderPadding}>
               <Pressable onPress={toggleModal}>
                 <Image
-                  style={{ width: 21, height: 21 }}
+                  style={styles.backArrowSize}
                   source={require('../../assets/images/icons/back-arrow.png')}
                 />
               </Pressable>
             </Row>
-            <View style={{ backgroundColor: '#fff' }}>
+            <View style={styles.sectionWhite}>
               <View>
                 {user && (
                   <ScrollView bounces={false}>
@@ -79,33 +74,44 @@ export const ProfileModal = (props: profileProps) => {
                         </FastImage>
                       </Row>
                       <View style={styles.userInfo}>
-                        <Text style={styles.aboutText}>
-                          {user.designation.userDegree}
-                        </Text>
-                        <Text style={styles.aboutText}>
-                          {user.designation.title}
-                        </Text>
-                        <Text style={styles.aboutText}>
-                          {user.designation.title}
-                        </Text>
-                        <Text style={styles.aboutText}>{user.state}</Text>
+                        <Row alignItems="center">
+                          <Image
+                            style={styles.imageIcon}
+                            source={require('../../assets/images/icons/degree.png')}
+                          />
+                          <Text style={styles.aboutText}>
+                            {user.designation.userDegree}
+                          </Text>
+                        </Row>
+                        <Row alignItems="center">
+                          <Image
+                            style={styles.imageIcon}
+                            source={require('../../assets/images/icons/degTitle.png')}
+                          />
+                          <Text style={styles.aboutText}>
+                            {user.designation.title}
+                          </Text>
+                        </Row>
+                        <Row alignItems="center">
+                          <Image
+                            style={styles.imageIcon}
+                            source={require('../../assets/images/icons/location.png')}
+                          />
+                          <Text style={styles.aboutText}>{user.state}</Text>
+                        </Row>
                       </View>
 
                       <View style={styles.userInfo}>
-                        <Text style={styles.gallery}>Vital Signs</Text>
+                        <Text style={styles.vitalSigns}>Vital Signs</Text>
                       </View>
                     </View>
                     {user?.photos.map(({ url, _id }) => {
                       return (
-                        <View style={{ padding: 10 }}>
+                        <View style={styles.padding10}>
                           <FastImage
                             key={_id}
                             source={{ uri: url }}
-                            style={{
-                              width: 200,
-                              height: 200,
-                              borderRadius: 30,
-                            }}
+                            style={styles.galleryImage}
                             resizeMode={FastImage.resizeMode.cover}
                           />
                         </View>
@@ -160,21 +166,22 @@ export const styles = StyleSheet.create({
   },
   userNameText: {
     position: 'absolute',
-    bottom: 10,
-    left: 10,
-    fontSize: fontSizes.h6,
-    color: colors.ui.white,
-    fontWeight: fontWeights.bold,
-    fontFamily: fonts.body,
+    bottom: theme.units.sizes[20],
+    left: theme.units.sizes[12],
+    fontSize: theme.fontSizes.h6,
+    color: theme.colors.ui.white,
+    fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fontFamily.body,
   },
   gradient: {
     height: '100%',
     width: '100%',
   },
   aboutText: {
-    color: colors.ui.text,
-    fontWeight: fontWeights.medium,
-    fontSize: fontSizes.text,
+    color: theme.colors.ui.text,
+    fontWeight: theme.fontWeights.medium,
+    fontSize: theme.fontSizes.text,
+    paddingLeft: 6,
   },
   userInfo: {
     padding: 16,
@@ -184,6 +191,36 @@ export const styles = StyleSheet.create({
   },
   gallery: {
     fontSize: 22,
-    fontWeight: '600',
+    fontWeight: theme.fontWeights.semiBold,
+  },
+  galleryImage: {
+    width: theme.units.sizes[200],
+    height: theme.units.sizes[200],
+    borderRadius: theme.units.sizes[32],
+  },
+  backHeaderPadding: {
+    paddingTop: theme.units.sizes[0],
+    paddingBottom: theme.units.sizes[10],
+    paddingLeft: theme.units.sizes[10],
+  },
+  backArrowSize: {
+    width: theme.units.sizes[21],
+    height: theme.units.sizes[21],
+  },
+  sectionWhite: {
+    backgroundColor: theme.colors.ui.white,
+  },
+  padding10: {
+    padding: theme.units.sizes[10],
+  },
+  vitalSigns: {
+    fontSize: theme.fontSizes.text,
+    fontWeight: theme.fontWeights.bold,
+    color: theme.colors.ui.text,
+  },
+  imageIcon: {
+    width: theme.units.sizes[19],
+    height: theme.units.sizes[19],
+    resizeMode: 'contain',
   },
 });

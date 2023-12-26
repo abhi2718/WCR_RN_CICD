@@ -3,6 +3,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { dimensions } from '../../../components/tools';
+import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -44,21 +45,38 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.button,
   },
   matchHeading: {
-    color: '#616161',
-    leadingTrim: 'both',
-    textEdge: 'cap',
-    fontSize: 16,
-    fontStyle: 'normal',
-    fontWeight: '600',
+    color: theme.colors.ui.textHead,
+    fontSize: theme.fontSizes.text,
+    fontWeight: theme.fontWeights.semiBold,
     lineHeight: 26,
   },
   seeAll: {
-    color: '#B00',
-    leadingTrim: 'both',
-    textEdge: 'cap',
-    fontSize: 16,
-    fontStyle: 'normal',
-    fontWeight: '500',
+    color: theme.colors.ui.primary,
+    fontSize: theme.fontSizes.text,
+    fontWeight: theme.fontWeights.medium,
     lineHeight: 26,
+  },
+  headerPadding: {
+    paddingBottom: theme.units.sizes[10],
+    paddingTop: theme.units.sizes[0],
+  },
+  backArrowPadding: {
+    paddingBottom: theme.units.sizes[16],
+    paddingTop: theme.units.sizes[2],
+  },
+  paddingBottom20: {
+    paddingBottom: theme.units.sizes[20],
+  },
+  headerText: {
+    fontSize: theme.fontSizes.title,
+    fontWeight: theme.fontWeights.semiBold,
+    color: theme.colors.ui.textHead,
+    textAlign: 'center',
+    flex: 1,
+    paddingRight: 21,
+  },
+  backArrowSize: {
+    width: theme.units.sizes[21],
+    height: theme.units.sizes[21],
   },
 });

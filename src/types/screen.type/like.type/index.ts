@@ -9,6 +9,7 @@ export type ProfileViewProps = {
   isFavourite?: boolean;
   handleToggleOuterModal?: (state?: boolean) => void;
   startChat?: (user: any) => void;
+  path?: string;
 };
 export interface Conversation {
   conversationId: string;
