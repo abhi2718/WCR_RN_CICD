@@ -10,7 +10,7 @@ type OptionType = {
   label: string;
   value: string;
 };
-export const useViewModal = (props) => {
+export const useViewModal = (props:any) => {
   const { user } = useSelector(({ userState }) => userState);
   const authRepository = useMemo(() => new AuthRepository(),[]);
   const dispatch = useDispatch();
@@ -27,7 +27,10 @@ export const useViewModal = (props) => {
   const handleMessage = (text: string) => {
     messageRef.current = text;
   };
-
+  const clearAllField = () => {
+    subjectRef.current = '';
+    messageRef.current = '';
+  }
   const handleSubmit = async () => {
     const {userId,name} = props?.route?.params;
     if (!messageRef?.current?.length || !subjectRef?.current?.length) {
@@ -37,7 +40,6 @@ export const useViewModal = (props) => {
         'danger',
       );
     }
-   
     const payload = {
       document: {
         reportedUserName: name,
@@ -50,11 +52,13 @@ export const useViewModal = (props) => {
       setLoading(true);
       const data = await authRepository.reportUser(payload)
       setLoading(false);
+      clearAllField();
       ShowFlashMessage(
-        'Your message has been sent succesfully !',
+        'Reported succesfully !',
         '',
         'success',
       );
+      navigation.goBack();
     } catch (error) {
       setLoading(false);
     }
