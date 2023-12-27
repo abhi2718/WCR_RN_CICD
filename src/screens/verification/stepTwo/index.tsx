@@ -12,6 +12,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from 'react-native';
 
 import {
@@ -81,7 +82,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
   } = useVerificationViewModal(props);
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
   return (
-    <>
+    <ScrollView style={{ flex: 1 }}>
       <ScreenContainer>
         <VerificationInstructionModal
           isVisible={isVerificationInfoModalVisible}
@@ -89,61 +90,63 @@ const VerificationStepTwo = (props: AvatarProps) => {
         ></VerificationInstructionModal>
         <HeaderBar info={openInfoModal} />
 
-        <Text style={verificationStyle.subHeader}>
-          Photo Verification (Step II)
-        </Text>
-        {verificationOption === 'Student' ? (
-          <Text style={verificationStyle.subText}>
-            Take a photo of your Student photo ID.
-          </Text>
-        ) : (
-          <Text style={verificationStyle.subText}>
-            Take a photo of ONE of the following that clearly displays your name
-            on it.
-          </Text>
-        )}
-
         <View style={verificationStyle.container}>
-          {verificationOption === 'Student' ? null : (
-            //<Text>'Shaz'</Text>
-            <View>
-              <Row style={verificationStyle.pointsRow} alignItems="center">
-                <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                <Text style={verificationStyle.pointText}>White Coat</Text>
-              </Row>
+          <View style={{ flex: 1 }}>
+            <Text style={verificationStyle.subHeader}>
+              Photo Verification (Step II)
+            </Text>
+            {verificationOption === 'Student' ? (
+              <Text style={verificationStyle.subText}>
+                Take a photo of your Student photo ID.
+              </Text>
+            ) : (
+              <Text style={verificationStyle.subText}>
+                Take a photo of ONE of the following that clearly displays your
+                name on it.
+              </Text>
+            )}
 
-              <Row style={verificationStyle.pointsRow} alignItems="center">
-                <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                <Text style={verificationStyle.pointText}>Scrubs</Text>
-              </Row>
-              <Row style={verificationStyle.pointsRow} alignItems="center">
-                <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                <Text style={verificationStyle.pointText}>Jacket</Text>
-              </Row>
-              <Row style={verificationStyle.pointsRow} alignItems="center">
-                <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                <Text style={verificationStyle.pointText}>Work ID badge</Text>
-              </Row>
-              <Row style={verificationStyle.pointsRow} alignItems="center">
-                <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                <Text style={verificationStyle.pointText}>
-                  Business/license card
-                </Text>
-              </Row>
-              <Row style={verificationStyle.pointsRow} alignItems="center">
-                <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                <Text style={verificationStyle.pointText}>
-                  Desk/door nameplate
-                </Text>
-              </Row>
-            </View>
-          )}
+            {verificationOption === 'Student' ? null : (
+              //<Text>'Shaz'</Text>
+              <View>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>White Coat</Text>
+                </Row>
+
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>Scrubs</Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>Jacket</Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>Work ID badge</Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>
+                    Business/license card
+                  </Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>
+                    Desk/door nameplate
+                  </Text>
+                </Row>
+              </View>
+            )}
+          </View>
 
           <View style={verificationStyle.footerDiv}>
             {verificationOption === 'License Number' && (
               <>
                 <Text>
-                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
                     For quicker verification, please provide a website to verify
                     your degree.
@@ -164,7 +167,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
             {verificationOption === 'HealthCare' && (
               <>
                 <Text>
-                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
                     For quicker verification, please provide a website to verify
                     your degree.
@@ -186,7 +189,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
             {verificationOption === 'Student' && (
               <>
                 <Text>
-                  <Text style={verificationStyle.redDot}>Optional: </Text>
+                  <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
                     For faster verification, please provide your student email.
                     We may send an email to confirm your student status and
@@ -422,7 +425,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
           </View>
         </View>
       </Modal>
-    </>
+    </ScrollView>
   );
 };
 
