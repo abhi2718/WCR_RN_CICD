@@ -44,7 +44,7 @@ export const ProfileModal = (props: profileProps) => {
           <View>
             <Spacer position="top" size={10} />
             <Row style={styles.backHeaderPadding}>
-              <Pressable onPress={toggleModal}>
+              <Pressable onPress={()=>toggleModal()}>
                 <Image
                   style={styles.backArrowSize}
                   source={require('../../assets/images/icons/back-arrow.png')}
@@ -100,16 +100,14 @@ export const ProfileModal = (props: profileProps) => {
                           <Text style={styles.aboutText}>{user.state}</Text>
                         </Row>
                       </View>
-
                       <View style={styles.userInfo}>
                         <Text style={styles.vitalSigns}>Vital Signs</Text>
                       </View>
                     </View>
                     {user?.photos.map(({ url, _id }) => {
                       return (
-                        <View style={styles.padding10}>
+                        <View key={_id} style={styles.padding10}>
                           <FastImage
-                            key={_id}
                             source={{ uri: url }}
                             style={styles.galleryImage}
                             resizeMode={FastImage.resizeMode.cover}
