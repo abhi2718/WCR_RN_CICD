@@ -40,7 +40,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
 import { useVerificationViewModal } from './stepTwo.ViewModal';
-import { VerificationInfoModal } from '../../../components/verificationModal';
+import { VerificationInfoModal, VerificationInstructionModal } from '../../../components/verificationModal';
 
 interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
@@ -83,10 +83,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
   return (
     <>
       <ScreenContainer>
-        <VerificationInfoModal
+        <VerificationInstructionModal
           isVisible={isVerificationInfoModalVisible}
           onClose={closeModal}
-        ></VerificationInfoModal>
+        ></VerificationInstructionModal>
         <HeaderBar info={openInfoModal} />
 
         <Text style={verificationStyle.subHeader}>

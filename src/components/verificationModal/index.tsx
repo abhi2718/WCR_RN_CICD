@@ -58,3 +58,22 @@ export const VerificationInfoModal = (props: VerificationInfoProps) => {
     </Modal>
   );
 };
+
+
+export const VerificationInstructionModal = (props: VerificationInfoProps) => {
+  const { isVisible, onClose } = props;
+
+  return (
+    <Modal animationType="slide" transparent={true} visible={isVisible}>
+      <View style={modalStyle.centeredView}>
+        <View style={modalStyle.modalView}>
+          <View>
+            <Row>
+              <PrimaryButton onPress={() => onClose()} title="Continue" />
+            </Row>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
