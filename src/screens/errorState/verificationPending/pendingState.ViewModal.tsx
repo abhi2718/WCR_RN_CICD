@@ -12,5 +12,8 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
   const navigateToGender = () => {
     navigation.navigate(ROUTES.Gender);
   };
+  if(user?.verification?.status==='Verified'){
+    navigation.navigate(ROUTES.Tab);
+  }
   return {state,isFormSubmitted,navigateToGender};
 };

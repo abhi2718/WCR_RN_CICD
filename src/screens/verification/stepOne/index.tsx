@@ -13,6 +13,7 @@ import VerificationStepTwo from '../stepTwo';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { useVerificationViewModal } from './stepOne.ViewModal';
 import { cleanSingle } from 'react-native-image-crop-picker';
+import { VerificationInfoModal } from '../../../components/verificationModal';
 
 const VerificationStepOne = (props: ScreenParams) => {
   const {
@@ -23,9 +24,15 @@ const VerificationStepOne = (props: ScreenParams) => {
     handleInputChange,
     optionData,
     country,
+    isVerificationInfoModalVisible,
+    closeModal,
   } = useVerificationViewModal(props);
   return (
     <ScreenContainer>
+       <VerificationInfoModal
+          isVisible={isVerificationInfoModalVisible}
+          onClose={closeModal}
+        ></VerificationInfoModal>
       <HeaderBar isVerificartionScreen={true} flagType={country} />
       <Text style={verificationStyle.subHeader}>ID Verification (Step I)</Text>
       <View style={verificationStyle.container}>
