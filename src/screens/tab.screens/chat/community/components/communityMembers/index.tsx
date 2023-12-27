@@ -44,7 +44,7 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
       {showMembers && (
         <Modal visible={showMembers}>
           <SafeAreaView>
-            <View style={styles.headerContainer}>
+            <View style={[styles.headerContainer, styles.box]}>
               <Row justifyContent="space-between" alignItems="center">
                 <Row>
                   <Text style={styles.groupHeading}>Group Members</Text>
@@ -60,7 +60,7 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
               </Row>
             </View>
             <ScrollView style={styles.memberContainer}>
-              <Spacer position="bottom" size={10}>
+              <Spacer position="top" size={20}>
                 <Row justifyContent="space-between">
                   <Text style={styles.nameHeading}>Name</Text>
                   <Text style={styles.nameHeading}>Scope</Text>

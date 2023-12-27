@@ -35,7 +35,7 @@ export const Member = (props: MemberProps) => {
   };
   return (
     <View>
-      <Spacer position="bottom" size={20}>
+      <Spacer position="top" size={10}>
         <Pressable onPress={toggleModal}>
           <Row justifyContent="space-between">
             <Row alignItems="center">
@@ -57,14 +57,20 @@ export const Member = (props: MemberProps) => {
       </Spacer>
       <Modal visible={showModal}>
         <SafeAreaView>
-          <Spacer position='left' size={16}>
-          <Pressable onPress={toggleModal}>
-            <Image
-              source={require('../../../../../../../assets/images/icons/back-arrow.png')}
-              style={styles.arrowStyle}
-            />
-          </Pressable>
-         </Spacer>
+          <Row style={styles.profileHeader}>
+            <Pressable onPress={toggleModal}>
+              <Image
+                source={require('../../../../../../../assets/images/icons/back-arrow.png')}
+                style={styles.arrowStyle}
+              />
+            </Pressable>
+            <View style={styles.logoHeadContainer}>
+              <Image
+                source={require('../../../../../../../assets/images/logo.png')}
+                style={styles.logoStyle}
+              />
+            </View>
+          </Row>
           <Spacer position="bottom" size={10}>
             <Column alignItems="center">
               <FastImage
