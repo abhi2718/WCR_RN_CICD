@@ -48,6 +48,7 @@ export const SexualOrientationStyle = StyleSheet.create({
     marginLeft: sizes[3],
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
+    color: colors.ui.text,
   },
   rowView: {
     marginBottom: sizes[1],

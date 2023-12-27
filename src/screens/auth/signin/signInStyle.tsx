@@ -20,8 +20,8 @@ export const styles = StyleSheet.create({
     paddingVertical: sizes[3],
   },
   emailIconStyle: {
-    height: sizes[5],
-    width: sizes[5],
+    height: sizes[3] + 1.5,
+    width: sizes[4],
     marginRight: sizes[2],
   },
   inputContainerr: {

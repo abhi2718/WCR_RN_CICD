@@ -50,7 +50,7 @@ export const cardStyles = StyleSheet.create({
     marginTop: sizes[2],
   },
   userInfoRow: {
-    marginTop: sizes[1] / 2,
+    marginTop: sizes[2],
   },
   userInfoIcon: {
     height: sizes[5],
@@ -60,7 +60,6 @@ export const cardStyles = StyleSheet.create({
   },
   userInfoText: {
     color: colors.ui.text,
-    fontWeight: fontWeights.medium,
     fontSize: fontSizes.text,
   },
   headingText: {

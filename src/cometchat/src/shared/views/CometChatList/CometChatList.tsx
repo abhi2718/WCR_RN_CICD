@@ -250,7 +250,6 @@ export const CometChatList = React.forwardRef<
       connectionListenerId,
       new CometChat.ConnectionListener({
         onConnected: () => {
-          console.log('ConnectionListener => On Connected');
           listHandlerRef.current = requestBuilder.build();
           getList(listHandlerRef.current)
             .then((newlist: any) => {
@@ -266,10 +265,8 @@ export const CometChatList = React.forwardRef<
             });
         },
         inConnecting: () => {
-          console.log('ConnectionListener => In connecting');
         },
         onDisconnected: () => {
-          console.log('ConnectionListener => On Disconnected');
         },
       }),
     );
