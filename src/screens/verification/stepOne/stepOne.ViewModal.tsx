@@ -41,11 +41,11 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     navigation.navigate(ROUTES.VerificationPending);
   };
 
-  useEffect(() => {
-    if (user.verificationId.submitted) {
-      navigateToVerificationState();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user.verificationId.submitted) {
+  //     navigateToVerificationState();
+  //   }
+  // }, []);
 
   const handleInputChange = (name: keyof verificationIdType, value: any) => {
     setFormData((oldState) => {
