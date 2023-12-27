@@ -16,6 +16,7 @@ import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeaderBar } from '../../../../../components/header';
+import { CheckBox } from '../../../../../components/inputBox';
 
 const SexualOrientation = (props: ScreenParams) => {
   const {
@@ -59,7 +60,7 @@ const SexualOrientation = (props: ScreenParams) => {
           </View>
           <View>
             <Row style={SexualOrientationStyle.rowView} alignItems="center">
-              <BouncyCheckbox
+              <CheckBox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
                 fillColor={colors.ui.primary}

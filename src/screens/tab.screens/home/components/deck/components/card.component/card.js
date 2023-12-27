@@ -165,13 +165,15 @@ export default function CardCompoent({ item, height, cardRef }) {
               );
             })}
             <View style={cardStyles.inBtwnText}>
-              {
-                item?.interests?.length > 0 && <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
-              }
+              {item?.interests?.length > 0 && (
+                <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
+              )}
               <Row>
-              {item?.interests?.map((item,index) => (
-                <Text key={index} style={cardStyles.aboutText}>{item} </Text>
-              ))}
+                {item?.interests?.map((item, index) => (
+                  <Text key={index} style={cardStyles.aboutText}>
+                    {item}{' '}
+                  </Text>
+                ))}
               </Row>
             </View>
             <Row style={cardStyles.footerIconRow} justifyContent="space-around">
@@ -179,7 +181,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 <Image
                   style={cardStyles.footerIcon}
                   source={require('../../../../../../../assets/images/icons/disLike.png')}
-                />                                                       
+                />
               </Pressable>
               <Pressable onPress={addFavourite}>
                 <Image
