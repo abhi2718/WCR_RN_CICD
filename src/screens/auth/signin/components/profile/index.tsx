@@ -144,6 +144,7 @@ const Profile = (props: ScreenParams) => {
                   maximumDate={calculateDateLessThan18YearsAgo(new Date())}
                   date={selectedDate}
                   onDateChange={handleDateChange}
+                  locale="US"
                   onConfirm={(date) => {
                     toggleModal();
                     handleDateChange(date);
