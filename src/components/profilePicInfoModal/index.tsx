@@ -20,8 +20,26 @@ export const ProfilePicInfoModal = (props: ProfilePicInfoModalProps) => {
                 source={require('../../assets/images/icons/blackCheck.png')}
               />
               <Text style={modalStyle.text}>
-                Your profile picture shows your face {`\n`} clearly - no shades,
-                masks, or obstructions
+                Required: We need that fabulous face front and center - no
+                shades, masks, or obstructions.
+              </Text>
+            </Row>
+            <Row style={modalStyle.row}>
+              <Image
+                style={modalStyle.icon}
+                source={require('../../assets/images/icons/blackCheck.png')}
+              />
+              <Text style={modalStyle.text}>
+                Opt for soft, natural light for that genuine, flattering glow.
+              </Text>
+            </Row>
+            <Row style={modalStyle.row}>
+              <Image
+                style={modalStyle.icon}
+                source={require('../../assets/images/icons/blackCheck.png')}
+              />
+              <Text style={modalStyle.text}>
+                Your best invite? A real, friendly smile!
               </Text>
             </Row>
           </View>

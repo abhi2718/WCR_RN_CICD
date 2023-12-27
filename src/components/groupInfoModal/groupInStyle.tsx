@@ -13,14 +13,14 @@ export const modalStyle = StyleSheet.create({
   },
   modalView: {
     justifyContent: 'space-between',
-    margin: sizes[5],
-    backgroundColor: 'white',
+    backgroundColor: colors.bg.primary,
     borderRadius: sizes[4],
-    paddingTop: sizes[5],
     paddingBottom: sizes[4],
     paddingHorizontal: sizes[3],
     shadowColor: colors.ui.black,
-    // height: dimensions.height - 300,
+    height: dimensions.height,
+    width: dimensions.width,
+    paddingTop: 50,
 
     shadowOffset: {
       width: 0,
@@ -30,39 +30,50 @@ export const modalStyle = StyleSheet.create({
     shadowRadius: sizes[0],
     elevation: sizes[0],
   },
-  heading: {
-    fontWeight: fontWeights.bold,
-    fontSize: fontSizes.h5,
-    color: colors.ui.text,
-    marginBottom: sizes[4],
-    textTransform: 'uppercase',
+  logo: {
+    width: 55,
   },
-  subHeading: {
-    fontWeight: fontWeights.bold,
-    fontSize: fontSizes.title,
-    color: colors.ui.text,
-    marginBottom: sizes[4],
+  closeIcon: {
+    width: 20,
   },
-  row: {
-    gap: sizes[1],
-    width: '100%',
-    marginVertical: sizes[1],
-  },
-  text: {
-    color: colors.ui.text,
-    fontSize: sizes[3],
+  flex: {
     flex: 1,
   },
-  icon: {
-    width: sizes[5],
-    height: sizes[5],
-    marginRight: sizes[2],
+  header: {
+    color: colors.ui.textHead,
+    fontSize: fontSizes.h6,
+    fontWeight: fontWeights.bold,
+  },
+  subHeader: {
+    color: colors.ui.text,
+    fontSize: fontSizes.button,
+    fontWeight: fontWeights.regular,
+  },
+  contentHeader: {
+    color: colors.ui.textHead,
+    fontSize: fontSizes.text,
+    fontWeight: fontWeights.semiBold,
+  },
+  contentText: {
+    color: colors.ui.text,
+    fontSize: fontSizes.text,
+    fontWeight: fontWeights.regular,
+    marginBottom: 12,
+  },
+  footerView: {
+    paddingVertical: 20,
+    alignItems: 'center',
   },
   footerText: {
+    color: colors.ui.textHead,
+    fontSize: fontSizes.text,
+    fontWeight: fontWeights.semiBold,
     textAlign: 'center',
-    fontWeight: '600',
-    fontSize: sizes[4],
-    marginVertical: sizes[3],
-    color: colors.ui.black,
+  },
+  footerRedText: {
+    color: colors.ui.primary,
+    fontSize: fontSizes.h6 + 2,
+    fontWeight: fontWeights.bold,
+    textAlign: 'center',
   },
 });

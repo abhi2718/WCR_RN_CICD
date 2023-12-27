@@ -830,6 +830,10 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...addMembersConfiguration}
       />
     );
+  const [isGroupInfoModalVisible, setisGroupInfoModalVisible] = useState(false);
+  const closeModal = () => {
+    setisGroupInfoModalVisible(false);
+  };
 
   if (currentScreen === ComponentIds.BANNED_MEMBERS)
     return (
@@ -878,8 +882,8 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
           {groupDetails && (
             <>
               <GroupInfoModal
-                isVisible={false}
-                // onClose={closeModal}
+                isVisible={isGroupInfoModalVisible}
+                onClose={closeModal}
               ></GroupInfoModal>
               <Row>
                 <View style={styles.groupInfoContainer}>
@@ -888,7 +892,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
                     source={{ uri: groupDetails?.getIcon() }}
                   />
                   <View style={styles.infoBtBox}>
-                    <Pressable>
+                    <Pressable onPress={() => setisGroupInfoModalVisible(true)}>
                       <Image
                         source={require('../../../assets/images/icons/infoIcon.png')}
                         style={styles.infoIcon}

@@ -8,35 +8,34 @@ import { useLogOutViewModal } from '../../../../../utils/logOut';
 export const useViewModal = () => {
   const { user } = useSelector(({ userState }) => userState);
   const navigation = useNavigation();
-  
+
   const [showModal, setShowModal] = useState(false);
   const [link, setLink] = useState('');
-  const handleToggleModal = () => setShowModal(oldValue => !oldValue);
+  const handleToggleModal = () => setShowModal((oldValue) => !oldValue);
   const goBack = () => navigation.goBack();
   const handleShare = () => {
     try {
       const shareOptions = {
         message: `White Coat Romance profile share
          The White Coat Romance dating app and thought it would be perfect for you. `,
-        url: "https://staging.whitecoatromance.com/assets/images/e-wcr.png",
+        url: 'https://staging.whitecoatromance.com/assets/images/e-wcr.png',
       };
       Share.open(shareOptions);
     } catch (error) {}
   };
   const _accountSetting = () => {
-      navigation.navigate(ROUTES.AccountSetting);
+    navigation.navigate(ROUTES.AccountSetting);
   };
   const _blocknblock = () => {
     navigation.navigate(ROUTES.BlockAndUnBlock);
   };
-  const _inviteOthers = () => {
-  };
+  const _inviteOthers = () => {};
   const _privacypolicy = () => {
-    setLink("https://whitecoatromance.com/Privacy");
+    setLink('https://whitecoatromance.com/Privacy');
     setShowModal(true);
-  }
+  };
   const _termsConditions = () => {
-    setLink("https://whitecoatromance.com/Terms");
+    setLink('https://whitecoatromance.com/Terms');
     setShowModal(true);
   };
   const _contactUs = () => {
@@ -67,7 +66,7 @@ export const useViewModal = () => {
     {
       id: '3',
       imagePath: require('../../../../../assets/images/settings/inviteOthers.png'),
-      title: 'Invite a friend',
+      title: 'Invite friend',
       onPress: handleShare,
     },
     {
@@ -100,6 +99,6 @@ export const useViewModal = () => {
     handleToggleModal,
     showModal,
     link,
-    handleShare
+    handleShare,
   };
 };
