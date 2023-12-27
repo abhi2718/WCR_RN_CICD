@@ -118,7 +118,7 @@ const UserNameText = ({ name }: any) => {
 
   return (
     <View>
-      <Text style={{ color }}>{name}</Text>
+      <Text style={[Style.groupName, { color }]}>{name}</Text>
     </View>
   );
 };
