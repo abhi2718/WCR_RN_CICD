@@ -4,23 +4,6 @@ import { fontWeights } from '../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
-  box: {
-    ...Platform.select({
-      ios: {
-        shadowColor: '#808080',
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-      },
-      android: {
-        elevation: 1.25,
-        backgroundColor: '#0000',
-      },
-    }),
-  },
   container: {
     flex: 1,
   },
@@ -64,6 +47,19 @@ export const styles = StyleSheet.create({
 
   headerContainer: {
     padding: sizes[3],
-    backgroundColor: '#0000',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#808080',
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+      },
+      android: {
+        elevation: 1.25,
+      },
+    }),
   },
 });

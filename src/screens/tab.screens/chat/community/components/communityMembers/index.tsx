@@ -44,18 +44,16 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
       {showMembers && (
         <Modal visible={showMembers}>
           <SafeAreaView>
-            <View style={[styles.headerContainer, styles.box]}>
+            <View style={styles.headerContainer}>
               <Row justifyContent="space-between" alignItems="center">
-                <Row>
+                <Column>
                   <Text style={styles.groupHeading}>Group Members</Text>
-                </Row>
+                </Column>
                 <Pressable onPress={toggleSetShowMembers}>
-                  <Row>
-                    <Image
-                      source={require('../../../../../../assets/images/icons/crossIcon.png')}
-                      style={styles.iconCross}
-                    />
-                  </Row>
+                  <Image
+                    source={require('../../../../../../assets/images/icons/crossIcon.png')}
+                    style={styles.iconCross}
+                  />
                 </Pressable>
               </Row>
             </View>
