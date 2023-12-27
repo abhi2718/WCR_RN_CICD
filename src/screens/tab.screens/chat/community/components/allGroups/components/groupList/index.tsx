@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, Text, Image, Pressable } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Column, Row, Spacer } from '../../../../../../../../components/tools';
@@ -7,6 +7,7 @@ import {
   GroupsListProps,
 } from '../../../../../../../../types/screen.type/communityChat';
 import { styles } from './styles';
+import { GroupInfoModal } from '../../../../../../../../components/groupInfoModal';
 
 const GroupsList = (props: GroupsListProps) => {
   const { groups, handleJoinGroup } = props;
@@ -25,6 +26,10 @@ const GroupsList = (props: GroupsListProps) => {
 
 const Group = (props: GroupProps) => {
   const { group, handleJoinGroup } = props;
+  const [isGroupInfoModalVisible, setisGroupInfoModalVisible] = useState(false);
+  const closeModal = () => {
+    setisGroupInfoModalVisible(false);
+  };
   return (
     <View style={styles.singleRow}>
       <Row justifyContent="space-between">
@@ -50,9 +55,17 @@ const Group = (props: GroupProps) => {
           )}
           {!group.getHasJoined() && (
             <>
-              <Pressable onPress={() => handleJoinGroup(group.getGuid())}>
+              {/* <Pressable onPress={() => handleJoinGroup(group.getGuid())}>
+                <Text style={styles.joinBtn}>Join</Text>
+              </Pressable> */}
+              <Pressable onPress={() => setisGroupInfoModalVisible(true)}>
                 <Text style={styles.joinBtn}>Join</Text>
               </Pressable>
+              <GroupInfoModal
+                isVisible={isGroupInfoModalVisible}
+                onClose={closeModal}
+                joinGroup={() => handleJoinGroup(group.getGuid())}
+              />
             </>
           )}
         </Column>

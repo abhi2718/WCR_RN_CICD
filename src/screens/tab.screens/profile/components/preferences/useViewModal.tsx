@@ -89,7 +89,7 @@ export const useViewModal = () => {
   const petsList = generateList(pets, 'pets');
   const covidVaccineStatusList = generateList(covidVaccineStatus,'covidVaccineStatus')
   const [distanceRange, setDistanceRange] = useState<any[]>(['No Max']);
-  const [ageRange, setAgeRange] = useState([18, 60]);
+  const [ageRange, setAgeRange] = useState([18, 100]);
   const [heightRange, setHeightRange] = useState([3, 7]);
   const optionsList = [
     {
@@ -109,11 +109,6 @@ export const useViewModal = () => {
       title: 'Degree Type',
       option: _primaryDegree,
       initValue: 'degreeType',
-    },
-    {
-      title: 'Gender of Interests',
-      option: genderList,
-      initValue: 'gender',
     },
     {
       title: 'Ethnicity',

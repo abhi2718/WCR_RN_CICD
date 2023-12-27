@@ -78,12 +78,13 @@ const styles = StyleSheet.create({
 
   title: {
     color: colors.ui.black,
-    fontSize: sizes[3] + 1,
+    fontSize: fontSizes.title,
+    fontWeight: fontWeights.semiBold,
   },
 
   description: {
-    color: colors.ui.black,
-    fontSize: sizes[2] + 1,
+    color: colors.ui.text,
+    fontSize: fontSizes.text,
   },
 
   primeBtn: {

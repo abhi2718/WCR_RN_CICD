@@ -16,7 +16,6 @@ export class ChatConfigurator {
     let oldSource: DataSource = this.dataSource;
     let newSource: DataSource = fun(oldSource);
     if (!this.names.find(nm => nm == newSource.getId())) {
-      console.log("added", newSource.getId() );
       this.dataSource = newSource;
       this.names.push(this.dataSource.getId());
     }

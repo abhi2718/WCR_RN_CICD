@@ -118,7 +118,7 @@ const UserNameText = ({ name }: any) => {
 
   return (
     <View>
-      <Text style={{ color }}>{name}</Text>
+      <Text style={[Style.groupName, { color }]}>{name}</Text>
     </View>
   );
 };
@@ -439,7 +439,6 @@ export const CometChatMessageList = forwardRef<
     // TODO: this condition is applied because somewhere from whiteboard extention group scope is set to undefined.
     if (group != undefined && group['scope'] == undefined) {
       let fetchedGroup = await CometChat.getGroup(group['guid']).catch((e) => {
-        console.log('Error: fetching group', e);
         onError && onError(e);
       });
       group['scope'] = fetchedGroup['scope'];

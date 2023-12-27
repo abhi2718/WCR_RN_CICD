@@ -54,6 +54,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: sizes[1],
     position: 'relative',
+    marginTop: 20,
   },
   infoIcon: {
     height: sizes[4],

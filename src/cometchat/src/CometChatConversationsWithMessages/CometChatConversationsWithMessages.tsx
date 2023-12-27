@@ -204,7 +204,6 @@ export const CometChatConversationsWithMessages = (
           setShowComponent(ComponentNames.ConversationList);
       },
       ccGroupLeft: ({ leftGroup }) => {
-        console.log({ leftGroup });
         if (
           selectedConversation.current?.getConversationId() ==
             leftGroup['conversationId'] ||
