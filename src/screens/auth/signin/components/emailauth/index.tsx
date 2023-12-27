@@ -43,53 +43,64 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
         contentContainerStyle={styles.scrollDiv}
         keyboardShouldPersistTaps="always"
       >
-        <View style={styles.viewBox}>
-          <Text style={styles.otpText}>
-            Enter the code we have shared to your email
-          </Text>
-          <View>
-            <OtpCodeInput
-              onChangeOtp={handleInputChange}
-              otpValue={otpValue}
-              setOtpValue={setOtpValue}
-            />
-          </View>
-        </View>
-        {!email && (
-          <View style={styles.viewBox}>
-            <Text style={styles.otpText}>Enter the code email id</Text>
-            <KeyboardAvoidingView
-              enabled
-              behavior={isAndroid ? 'height' : 'padding'}
-            >
-              <View>
-                <InputBox
-                  style={styles.inputBox}
-                  placeholder={'Enter email'}
-                  value={emailInput}
-                  onChangeText={(value: string) => setEmailInput(value)}
-                />
-              </View>
-            </KeyboardAvoidingView>
-          </View>
-        )}
         <KeyboardAvoidingView
           enabled
           behavior={isAndroid ? 'height' : 'padding'}
+          style={styles.scrollDiv}
         >
-          <Spacer position="top" size={32}>
-            <View style={{ width: dimensions.width - 32 }}>
-              <PrimaryButton
-                title={'Continue'}
-                onPress={verifyEmail}
-                isLoading={loading}
+          <View style={styles.viewBox}>
+            <Text style={styles.otpText}>
+              Enter the code we have shared to your email
+            </Text>
+            <View>
+              <OtpCodeInput
+                onChangeOtp={handleInputChange}
+                otpValue={otpValue}
+                setOtpValue={setOtpValue}
               />
             </View>
-          </Spacer>
+          </View>
+          {!email && (
+            <View style={styles.viewBox}>
+              <Text style={styles.otpText}>Enter your email </Text>
+              <KeyboardAvoidingView
+                enabled
+                behavior={isAndroid ? 'height' : 'padding'}
+              >
+                <View>
+                  <InputBox
+                    style={styles.inputBox}
+                    placeholder={'Enter email'}
+                    value={emailInput}
+                    onChangeText={(value: string) => setEmailInput(value)}
+                  />
+                </View>
+              </KeyboardAvoidingView>
+            </View>
+          )}
+          <KeyboardAvoidingView
+            enabled
+            behavior={isAndroid ? 'height' : 'padding'}
+          >
+            <Spacer position="top" size={32}>
+              <View style={{ width: dimensions.width - 32 }}>
+                <PrimaryButton
+                  title={'Continue'}
+                  onPress={verifyEmail}
+                  isLoading={loading}
+                />
+              </View>
+            </Spacer>
+          </KeyboardAvoidingView>
+          <KeyboardAvoidingView
+            enabled
+            behavior={isAndroid ? 'height' : 'padding'}
+          >
+            <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
+              <Text style={styles.otpText}>Resend code</Text>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
         </KeyboardAvoidingView>
-        <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
-          <Text style={styles.otpText}>Resend code</Text>
-        </TouchableOpacity>
       </ScrollView>
     </ScreenContainer>
   );

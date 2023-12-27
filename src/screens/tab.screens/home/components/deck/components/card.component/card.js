@@ -76,7 +76,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                   {designation.userDegree}
                 </Text>
               </Row>
-
               <Row style={cardStyles.userInfoRow} gap={15}>
                 <Image
                   style={cardStyles.userInfoIcon}
@@ -84,7 +83,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Text style={cardStyles.userInfoText}>{designation.title}</Text>
               </Row>
-
               <Row style={cardStyles.userInfoRow} gap={15}>
                 <Image
                   style={cardStyles.userInfoIcon}
@@ -118,7 +116,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                     <Text style={cardStyles.chipText}>{drinking}</Text>
                   </Row>
                 )}
-
                 {ethnicity.lenght > 0 && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Text style={cardStyles.chipText}>{ethnicity}</Text>
@@ -142,7 +139,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                 )}
               </Row>
             </View>
-
             {item?.photos?.map(({ url, _id }, index) => {
               return (
                 <View key={index}>

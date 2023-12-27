@@ -167,9 +167,13 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           >
             {count > 9 ? (
               <Text style={headerDeckStyle.count}>9+</Text>
-            ) : count > 0 ? (
-              <Text style={headerDeckStyle.count}>{count}</Text>
-            ) : null}
+            ) : (
+              <View>
+                {count > 0 && (
+                  <Text style={headerDeckStyle.count}>{count}</Text>
+                )}
+              </View>
+            )}
             <Image
               style={headerDeckStyle.notificationIcon}
               resizeMode="contain"

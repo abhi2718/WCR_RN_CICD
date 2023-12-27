@@ -36,7 +36,6 @@ export class CometChatUIKit {
         CometChatUIKit.uiKitSettings = {
             ...uiKitSettings
         };
-        console.log(uiKitSettings?.overrideAdminHost, uiKitSettings.overrideClientHost)
         var appSetting = new CometChat.AppSettingsBuilder()
             .subscribePresenceForAllUsers()
             .autoEstablishSocketConnection(uiKitSettings.autoEstablishSocketConnection)
@@ -52,7 +51,7 @@ export class CometChatUIKit {
                 CometChat.setSource("uikit-v4", Platform.OS, "react-native")
                 ListenerInitializer.attachListeners();
             }, error => {
-                // console.log("Initialization failed with error:", error);
+                console.log("Initialization failed with error:", error);
             }
         );
     }
@@ -258,14 +257,12 @@ export class CometChatUIKit {
 
             CometChat.sendInteractiveMessage(message)
                 .then((message: CometChat.BaseMessage) => {
-                    console.log("message sent successfully", message.getSentAt())
                     if (!disableLocalEvents) {
                         CometChatUIKitHelper.onMessageSent(message, messageStatus.success);
                     }
                     resolve(message);
                 })
                 .catch((error: CometChat.CometChatException) => {
-                    console.log("error while sending message", { error })
                     message.setMetadata({ error });
                     // if (!disableLocalEvents) {
                     //     CometChatUIKitHelper.onMessageSent(message, messageStatus.error);
@@ -285,11 +282,8 @@ export class CometChatUIKit {
             if (!disableLocalEvents) {
                 CometChatUIKitHelper.onMessageSent(message, messageStatus.inprogress);
             }
-            console.log("message", JSON.stringify(message));
-
             CometChat.sendInteractiveMessage(message)
                 .then((message: CometChat.BaseMessage) => {
-                    console.log("message sent successfully", message.getSentAt())
                     if (!disableLocalEvents) {
                         CometChatUIKitHelper.onMessageSent(message, messageStatus.success);
                     }
@@ -319,7 +313,6 @@ export class CometChatUIKit {
 
             CometChat.sendInteractiveMessage(message)
                 .then((message: CometChat.BaseMessage) => {
-                    console.log("message sent successfully", message.getSentAt())
                     if (!disableLocalEvents) {
                         CometChatUIKitHelper.onMessageSent(message, messageStatus.success);
                     }

@@ -125,7 +125,6 @@ export const CometChatAudioBubble = ({
     React.useEffect(() => {
         return () => {
             SoundPlayer.pause((s) => {
-                console.log(s);
             });
         }
     }, []);

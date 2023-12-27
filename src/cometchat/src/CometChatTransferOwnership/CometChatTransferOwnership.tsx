@@ -80,10 +80,7 @@ export const CometChatTransferOwnership = (
     let UID: string = member.uid;
     CometChat.transferGroupOwnership(GUID, UID).then(
       (ownershipTransferred: string) => {
-        console.log(
-          'Successfully transferred ownership of the group.',
-          ownershipTransferred
-        );
+       
         group['scope'] = GroupMemberScope.admin;
         group['owner'] = UID;
         onTransferOwnership && onTransferOwnership(group, member);

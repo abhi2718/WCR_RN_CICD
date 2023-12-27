@@ -13,6 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import MultiSlider from './components/MultiSlider';
 import { ActivityIndicator } from 'react-native-paper';
 import { HeaderBar, HeaderDeck } from '../../../../../components/header';
+import { formatNumber } from '../../../../../utils/common.functions';
 
 export const PreferencesScreen = () => {
   const {
@@ -87,7 +88,7 @@ export const PreferencesScreen = () => {
                     <MultiSlider
                       values={distanceRange}
                       min={100}
-                      max={600}
+                      max={700}
                       step={100}
                       onValuesChange={handleDistanceSliderChange}
                     />
@@ -110,7 +111,7 @@ export const PreferencesScreen = () => {
                     <MultiSlider
                       values={ageRange}
                       min={18}
-                      max={60}
+                      max={100}
                       step={1}
                       onValuesChange={handleAgeSliderChange}
                     />
@@ -126,7 +127,7 @@ export const PreferencesScreen = () => {
                       Height preference
                     </Text>
                     <Text style={styles.silderSubText}>
-                      {heightRange[0]} - {heightRange[1]}
+                      {formatNumber(heightRange[0])} - {formatNumber(heightRange[1])}
                     </Text>
                   </Row>
                   <Column justifyContent="center" alignItems="center">

@@ -68,3 +68,11 @@ export function calculateAge(dob: string) {
   );
   return age;
 }
+export function formatNumber(inputNumber:number) {
+  const numberString = inputNumber.toString();
+  const [wholePart, decimalPart] = numberString.split('.');
+  if (!decimalPart) {
+    return wholePart;
+  }
+  return `${wholePart}'${decimalPart}`;
+};
