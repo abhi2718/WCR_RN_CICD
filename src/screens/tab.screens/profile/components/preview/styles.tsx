@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   userInfoRow: {
-    marginTop: sizes[1] / 2,
+    marginTop: sizes[2],
   },
   userInfoIcon: {
     height: sizes[5],
@@ -78,7 +78,6 @@ export const styles = StyleSheet.create({
   },
   userInfoText: {
     color: colors.ui.text,
-    fontWeight: fontWeights.medium,
     fontSize: fontSizes.text,
   },
   headingText: {

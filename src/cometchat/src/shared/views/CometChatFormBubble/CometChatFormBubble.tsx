@@ -96,7 +96,6 @@ export const CometChatFormBubble = memo((props: CometChatFormBubbleInterface) =>
                 setLoggedInUser(u);
             })
             .catch(e => {
-                console.log("Error while getting loggedInUser");
                 setLoggedInUser(null);
             });
         setInteractedElements(message.getInteractions() || []);
@@ -221,7 +220,6 @@ export const CometChatFormBubble = memo((props: CometChatFormBubbleInterface) =>
 
     const _renderButton = (data: ButtonElement, isSubmitElement?: boolean) => {
         function onClick() {
-            console.log("ElemId", data.getElementId(), interactedElements)
             _handleButtonClick(data.getAction(), data.getElementId(), isSubmitElement);
         }
 

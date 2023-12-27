@@ -44,7 +44,6 @@ export const ProfileScreen = ({}) => {
                 <Text>
                   {user.profile.displayName ?? user.profile.name?.first}
                 </Text>
-
                 <Text style={styles.address}>
                   {user?.address?.city} {user?.address?.state}
                 </Text>

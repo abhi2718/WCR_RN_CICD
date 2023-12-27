@@ -129,7 +129,6 @@ export class CollaborativeDocumentExtensionDecorator extends DataSourceDecorator
             receiverType: receiverType,
           }
         ).then(response => {
-           console.log("extension sent ",response )
         }).catch((error) => {
             console.log("error", error);
             CometChatUIEventHandler.emitMessageEvent(MessageEvents.ccMessageError, error);

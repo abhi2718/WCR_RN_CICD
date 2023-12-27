@@ -162,11 +162,17 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
     <View>
       <Row justifyContent="space-between" alignItems="center">
         <Row alignItems="center" style={headerDeckStyle.row} gap={30}>
-          <Pressable onPress={goToNotification?goToNotification:_goToNotification}>
+          <Pressable
+            onPress={goToNotification ? goToNotification : _goToNotification}
+          >
             {count > 9 ? (
               <Text style={headerDeckStyle.count}>9+</Text>
             ) : (
-              <Text style={headerDeckStyle.count}>{count}</Text>
+              <View>
+                {count > 0 && (
+                  <Text style={headerDeckStyle.count}>{count}</Text>
+                )}
+              </View>
             )}
             <Image
               style={headerDeckStyle.notificationIcon}

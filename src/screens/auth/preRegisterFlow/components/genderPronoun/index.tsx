@@ -16,6 +16,7 @@ import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { goBack } from '../../../../../utils/common.functions';
 import { HeaderBar } from '../../../../../components/header';
+import { CheckBox } from '../../../../../components/inputBox';
 
 const GenderProunoun = (props: any) => {
   const {
@@ -57,7 +58,7 @@ const GenderProunoun = (props: any) => {
 
           <View>
             <Row style={genderPronounStyle.rowView} alignItems="center">
-              <BouncyCheckbox
+              <CheckBox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
                 fillColor={colors.ui.primary}
