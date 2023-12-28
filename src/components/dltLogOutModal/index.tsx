@@ -161,6 +161,6 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: fontSizes.h6,
     color: colors.ui.text,
-    fontweight: fontWeights.semiBold,
+    fontWeight: fontWeights.semiBold,
   },
 });
