@@ -190,7 +190,7 @@ export const StackNavigator = () => {
         component={PreferencesScreen}
       />
       <Stack.Screen
-        //options={optins}
+        options={optins}
         name={ROUTES.EditProfile}
         component={EditProfile}
       />

@@ -100,27 +100,59 @@ export default function CardCompoent({ item, height, cardRef }) {
               >
                 {gender && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    <Image
-                      style={cardStyles.chipIcon}
-                      source={require('../../../../../../../assets/images/icons/femailAvatar.png')}
-                    />
+                    {gender === 'Female' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/femailAvatar.png')}
+                      />
+                    )}
+                    {gender === 'Male' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/maleAvatar.png')}
+                      />
+                    )}
+                    {gender === 'Transman' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/transmanAvatar.png')}
+                      />
+                    )}
+                    {gender === 'Transwomen' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/transwomenAvator.png')}
+                      />
+                    )}
                     <Text style={cardStyles.chipText}>{gender}</Text>
                   </Row>
                 )}
-                {drinking && (
+                {item.showSexualPreference && item.sexualPreference && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    <Image
-                      style={cardStyles.chipIcon}
-                      source={require('../../../../../../../assets/images/icons/drinks.png')}
-                    />
-                    <Text style={cardStyles.chipText}>{drinking}</Text>
+                    {item.sexualPreference === 'Straight' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/straight.png')}
+                      />
+                    )}
+                    {item.sexualPreference === 'Lesbian' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/lesbian.png')}
+                      />
+                    )}
+                    {item.sexualPreference === 'Gay' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/gay.png')}
+                      />
+                    )}
+                    <Text style={cardStyles.chipText}>
+                      {item.sexualPreference}
+                    </Text>
                   </Row>
                 )}
-                {ethnicity.lenght > 0 && (
-                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    <Text style={cardStyles.chipText}>{ethnicity}</Text>
-                  </Row>
-                )}
+
                 {userHeight && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
@@ -132,9 +164,86 @@ export default function CardCompoent({ item, height, cardRef }) {
                     </Text>
                   </Row>
                 )}
+
+                {ethnicity.length >= 0 &&
+                  ethnicity.map((ethnicity) => (
+                    <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                      {/* <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/USAFlag.png')}
+                      /> */}
+                      <Text style={cardStyles.chipText}>{ethnicity}</Text>
+                    </Row>
+                  ))}
+
                 {maritalStatus && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/icons/heartVitialSign.png')}
+                    />
                     <Text style={cardStyles.chipText}>{maritalStatus}</Text>
+                  </Row>
+                )}
+
+                {item.religion && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    {item.religion === 'Christian' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/Christian.png')}
+                      />
+                    )}
+                    {item.religion === 'Muslim' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/Muslim.png')}
+                      />
+                    )}
+                    {item.religion === 'Hindu' && (
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/hindu.png')}
+                      />
+                    )}
+                    <Text style={cardStyles.chipText}>{item.religion}</Text>
+                  </Row>
+                )}
+                {item.politics && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Text style={cardStyles.chipText}>{item.politics}</Text>
+                  </Row>
+                )}
+                {item.kids &&
+                  (item.kids === ' Prefer not to say' ? null : (
+                    <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/kids.png')}
+                      />
+                      <Text style={cardStyles.chipText}>{item.kids}</Text>
+                    </Row>
+                  ))}
+
+                {item.covidVaccineStatus && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/icons/vaccinated.png')}
+                    />
+                    <Text style={cardStyles.chipText}>
+                      {item.covidVaccineStatus}
+                    </Text>
+                  </Row>
+                )}
+
+                {drinking && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/icons/drinks.png')}
+                    />
+                    <Text style={cardStyles.chipText}>{drinking}</Text>
                   </Row>
                 )}
               </Row>

@@ -29,8 +29,10 @@ export const SearchModal = (props: SearchModalProps) => {
     showSearchModal,
     fetchSelectedUser,
     loading,
+    isSearchActive,
   } = useViewModal(props);
 
+  console.log(users.length);
   return (
     <Modal visible={showSearchModal}>
       <SafeAreaView style={searchStyle.container}>
@@ -54,21 +56,22 @@ export const SearchModal = (props: SearchModalProps) => {
                 </Pressable>
               </Row>
 
-              {users.length === 0 ? (
-                // <View style={searchStyle.content}>
-                //   <Column gap={25} alignItems="center">
-                //     <Text style={searchStyle.subHeading}>No results found</Text>
-                //     <Image
-                //       style={searchStyle.pendingIcon}
-                //       resizeMode="contain"
-                //       source={require('../../../../../../../assets/images/icons/noSearchResultIcon.png')}
-                //     />
-                //     <Text style={searchStyle.text}>
-                //       We could not find what you {`\n`} were searching for.
-                //       Please try again.
-                //     </Text>
-                //   </Column>
-                // </View>
+              {isSearchActive ? (
+                <View style={searchStyle.content}>
+                  <Column gap={25} alignItems="center">
+                    <Text style={searchStyle.subHeading}>No results found</Text>
+                    <Image
+                      style={searchStyle.pendingIcon}
+                      resizeMode="contain"
+                      source={require('../../../../../../../assets/images/icons/noSearchResultIcon.png')}
+                    />
+                    <Text style={searchStyle.text}>
+                      We could not find what you {`\n`} were searching for.
+                      Please try again.
+                    </Text>
+                  </Column>
+                </View>
+              ) : users.length === 0 ? (
                 <View style={searchStyle.content}>
                   <Column gap={25} alignItems="center">
                     <Image

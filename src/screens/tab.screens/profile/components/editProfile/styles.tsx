@@ -1,19 +1,64 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../../../../infrastructure/theme/colors';
+import {
+  fontSizes,
+  fontWeights,
+} from '../../../../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
-  picWrapper: {
+  editInfoContainer: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingVertical: 16,
+  },
+  ph16: {
+    paddingHorizontal: 16,
+  },
+  headingText: {
+    backgroundColor: colors.bg.secondary,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    fontWeight: fontWeights.semiBold,
+    fontSize: fontSizes.text,
   },
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 16,
   },
-  iconStyle: {
-    width: 20,
-    height: 20,
+  aboutInput: {
+    padding: 16,
+    color: '#B3B3B3',
+    fontSize: fontSizes.text,
+    paddingBottom: 30,
+  },
+  charCount: {
+    position: 'absolute',
+    bottom: 0,
+    right: 16,
+    color: colors.ui.primary,
+    fontSize: fontSizes.text,
+  },
+  fieldName: {
+    color: colors.ui.textHead,
+    fontWeight: fontWeights.semiBold,
+    fontSize: fontSizes.text,
+  },
+  fieldValue: {
+    color: '#B3B3B3',
+    fontWeight: fontWeights.regular,
+    fontSize: fontSizes.text,
+    width: '100%',
+  },
+  fieldValueContainer: {
+    paddingVertical: 5,
+    borderBottomColor: '#B3B3B3',
+    borderBottomWidth: 0.4,
+  },
+  nextArrow: {
+    width: 15,
+    height: 15,
+    position: 'absolute',
+    right: 0,
+    bottom: 8,
   },
   label: {
     fontSize: 16,
@@ -21,26 +66,33 @@ export const styles = StyleSheet.create({
     color: 'black',
   },
   modalSelector: {
-    borderWidth: 1,
-    borderColor: 'red',
-    borderRadius: 4,
+    borderWidth: 0,
+    width: '100%',
   },
   optionContainer: {
     borderRadius: 4,
   },
   optionText: {
     fontSize: 18,
-    color: 'blue',
+    color: colors.ui.text,
+    width: '100%',
   },
   cancelButton: {
     borderRadius: 4,
     backgroundColor: '#eee',
   },
+
+  initValueTextStyle: {
+    color: '#B3B3B3',
+    marginLeft: -8,
+    textAlign: 'left',
+  },
   selectedItem: {
     marginTop: 10,
     fontSize: 16,
+    color: colors.ui.text,
   },
-  initValueTextStyle: {
-    color: 'black',
+  selectRow: {
+    width: '100%',
   },
 });
