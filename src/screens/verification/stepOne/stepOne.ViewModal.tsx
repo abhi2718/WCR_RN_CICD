@@ -109,7 +109,10 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   };
 
   useEffect(() => {
-    openModal();
+    if(!user.verificationId.submitted){
+      openModal();
+    }
+    
   },[])
 
   const handleIdType = () => {
