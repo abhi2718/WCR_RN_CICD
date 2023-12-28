@@ -62,7 +62,7 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
             </Row>
 
             <ScrollView style={styles.memberContainer}>
-              <Spacer position="bottom" size={10}>
+              <Spacer position="top" size={20}>
                 <Row justifyContent="space-between">
                   <Text style={styles.nameHeading}>Name</Text>
                   <Text style={styles.nameHeading}>Scope</Text>

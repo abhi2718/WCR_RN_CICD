@@ -343,5 +343,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     isVerificationInfoModalVisible,
     openInfoModal,
     closeModal,
+    openModal
   };
 };

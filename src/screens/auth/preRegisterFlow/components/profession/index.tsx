@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScreenContainer, dimensions } from '../../../../../components/tools';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable, Keyboard } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { profession } from './professionStyle';
 import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
@@ -22,7 +22,8 @@ const Profession = (props: ScreenParams) => {
     changePrimaryDegreeOption,
   } = useProfessionModal(props);
   return (
-    <ScreenContainer>
+   <Pressable style={{flex:1}} onPress={Keyboard.dismiss}>
+     <ScreenContainer>
       <View style={profession.container}>
         <View style={profession.innerView}>
           <View style={{ flex: 1 }}>
@@ -100,6 +101,7 @@ const Profession = (props: ScreenParams) => {
         </View>
       </View>
     </ScreenContainer>
+   </Pressable>
   );
 };
 

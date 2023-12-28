@@ -6,7 +6,6 @@ import { colors } from '../../../../../../infrastructure/theme/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: sizes[3],
   },
   memberContainer: {
     paddingHorizontal: sizes[3],
@@ -21,8 +20,8 @@ export const styles = StyleSheet.create({
     width: sizes[2],
   },
   iconCross: {
-    height: sizes[4] - 2,
-    width: sizes[4] - 2,
+    height: sizes[3],
+    width: sizes[3],
   },
   memberText: {
     fontSize: sizes[3],
@@ -35,7 +34,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
   },
   nameHeading: {
-    fontSize: sizes[3],
+    fontSize: sizes[3] + 1,
     fontWeight: fontWeights.bold,
     color: colors.ui.primary,
   },

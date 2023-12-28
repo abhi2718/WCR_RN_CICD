@@ -63,7 +63,7 @@ export const useViewModal = () => {
         if (id === item._id) {
           return {
             ...item,
-            isRead: !true,
+            isRead: true,
           };
         }
         return item;
@@ -72,7 +72,7 @@ export const useViewModal = () => {
         ...oldState,
         notifications: updatedNotifications,
       }));
-      const data = await notificationRepository.markAsRead(id, payload);
+     await notificationRepository.markAsRead(id, payload);
       if (count && count > 0) {
         _setCount(count - 1);
       }

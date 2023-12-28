@@ -108,6 +108,13 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     }
   };
 
+  useEffect(() => {
+    if(!user.verificationId.submitted){
+      openModal();
+    }
+    
+  },[])
+
   const handleIdType = () => {
     const errors: Partial<verificationIdType> = {};
 
@@ -147,6 +154,16 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     }
 
     navigateToVerificationStepTwo();
+  };
+
+  const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
+    useState(false);
+
+  const closeModal = () => {
+    setVerificvationInfoModalVisible(false);
+  };
+  const openModal = () => {
+    setVerificvationInfoModalVisible(true);
   };
 
   const changeVerificationOption = (option: string) => {
@@ -217,5 +234,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     handleInputChange,
     country,
     optionData,
+    isVerificationInfoModalVisible,
+    closeModal,
   };
 };

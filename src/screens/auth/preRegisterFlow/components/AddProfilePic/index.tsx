@@ -58,15 +58,23 @@ const AddProfilePicScreen = (props: any) => {
   return (
     <>
       <ScreenContainer>
-        <ProfilePicInfoModal
-          isVisible={isPicUploadInfoModalVisible}
-          onClose={closeModal}
-        ></ProfilePicInfoModal>
+        {showHeader && (
+          <ProfilePicInfoModal
+            isVisible={isPicUploadInfoModalVisible}
+            onClose={closeModal}
+          ></ProfilePicInfoModal>
+        )}
         <View style={addPicture.container}>
           <View>
-            {showHeader && <HeaderBar info={openModal}></HeaderBar>}
-            <Text style={addPicture.subHeader}>Show off your best side </Text>
-            <Text style={addPicture.text}>(Add at least 2 photos)</Text>
+            {showHeader && (
+              <>
+                <HeaderBar info={openModal}></HeaderBar>
+                <Text style={addPicture.subHeader}>
+                  Show off your best side{' '}
+                </Text>
+                <Text style={addPicture.text}>(Add at least 2 photos)</Text>
+              </>
+            )}
             <View>
               <Row justifyContent="space-between" style={addPicture.row}>
                 {profilePicUri ? (

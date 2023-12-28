@@ -1,6 +1,8 @@
 import React from 'react';
 import {
+  Image,
   Pressable,
+  SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -17,6 +19,8 @@ import AddProfilePicScreen from '../../../../auth/preRegisterFlow/components/Add
 import MultiSlider from '../preferences/components/MultiSlider';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
+import { HeaderBar } from '../../../../../components/header';
+import { colors } from '../../../../../infrastructure/theme/colors';
 
 export const EditProfile = () => {
   const {
@@ -54,97 +58,128 @@ export const EditProfile = () => {
   } = useViewModal();
 
   return (
-    <View style={styles.picWrapper}>
-      <Pressable onPress={submitLoading ? () => {} : editProfile}>
-        <Row>
-          <Text>Save</Text>
-          {submitLoading && <ActivityIndicator />}
-        </Row>
-      </Pressable>
+    <SafeAreaView style={styles.editInfoContainer}>
+      <View style={styles.ph16}>
+        <HeaderBar
+          isLogo={false}
+          isText={true}
+          text="Edit info"
+          button={submitLoading ? () => {} : editProfile}
+        />
+      </View>
       <ScrollView>
+        <Text style={styles.headingText}>Media</Text>
+        {/* <Spacer position="bottom" size={-30} /> */}
         <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
+          <Text style={styles.headingText}>About Me</Text>
           <Column>
-            <Text>About Me</Text>
             <TextInput
               placeholder="About Me"
               value={userProfile.aboutMe}
               onChangeText={(text: string) =>
                 _handleInputChange(text, 'aboutMe')
               }
+              textAlignVertical="top"
+              style={styles.aboutInput}
+              multiline={true}
+              maxLength={150}
+              numberOfLines={10}
+              returnKeyLabel="go"
+              placeholderTextColor={colors.ui.placeholder}
             />
+            <Text style={styles.charCount}>360</Text>
           </Column>
-          <Column>
-            <Text>Personal info</Text>
-            <Row justifyContent="space-between">
-              <Text>First Name</Text>
-              <Text>{user?.profile?.name?.first}</Text>
-            </Row>
+          <Spacer position="bottom" size={20} />
+          <Text style={styles.headingText}>Personal info</Text>
+          <Spacer position="bottom" size={10} />
+          <Column style={styles.ph16}>
+            <Text style={styles.fieldName}>First Name</Text>
+            <View style={styles.fieldValueContainer}>
+              <Text style={styles.fieldValue}>
+                {user?.profile?.name?.first}
+              </Text>
+            </View>
             <Spacer position="top" size={10}>
-              <Row justifyContent="space-between">
-                <Text>Last Name</Text>
-                <Text>{user?.profile?.name?.last}</Text>
-              </Row>
-              <Spacer position="top" size={10}>
-                <Row justifyContent="space-between">
-                  <Text>Email Address</Text>
-                  <Text>{user?.profile?.email}</Text>
-                </Row>
-              </Spacer>
+              <Text style={styles.fieldName}>Last Name</Text>
+              <View style={styles.fieldValueContainer}>
+                <Text style={styles.fieldValue}>
+                  {user?.profile?.name?.last}
+                </Text>
+              </View>
             </Spacer>
-          </Column>
-          <Spacer position="top" size={10}>
-            <Column>
-              <Spacer position="bottom" size={10}>
-                <Row>
-                  <Text>Display Name</Text>
-                </Row>
-              </Spacer>
-              <Row>
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>Email Address</Text>
+              <View style={styles.fieldValueContainer}>
+                <Text style={styles.fieldValue}>{user?.profile?.email}</Text>
+              </View>
+            </Spacer>
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>Display Name</Text>
+              <View style={styles.fieldValueContainer}>
                 <TextInput
                   placeholder="Display Name"
                   value={userProfile.displayName}
                   onChangeText={(text: string) =>
                     _handleInputChange(text, 'displayName')
                   }
+                  style={styles.fieldValue}
                 />
-              </Row>
-            </Column>
-          </Spacer>
-          <Spacer position="top" size={10}>
-            <Column>
-              <Spacer position="bottom" size={10}>
-                <Text>Phone No</Text>
+                <Image
+                  resizeMode="contain"
+                  style={styles.nextArrow}
+                  source={require('../../../../../assets/images/settings/Next.png')}
+                />
+              </View>
+            </Spacer>
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>Phone No</Text>
+              <View style={styles.fieldValueContainer}>
                 <TextInput
                   placeholder="Phone No"
                   value={userProfile.phone}
                   onChangeText={(text: string) =>
                     _handleInputChange(formatMobile(text), 'phone')
                   }
+                  style={styles.fieldValue}
                 />
-              </Spacer>
-            </Column>
-          </Spacer>
-          <Spacer position="top" size={10}>
-            <Row justifyContent="space-between">
-              <Text>DOB</Text>
-              <Text>{userProfile.dob}</Text>
-            </Row>
-          </Spacer>
-          <Spacer position="top" size={10}>
-            <Row justifyContent="space-between">
-              <Text>Gender</Text>
-              <Text>{userProfile.gender}</Text>
-            </Row>
-          </Spacer>
-          <Column>
-            <View>
-              <Row justifyContent="space-between">
-                <Text>Interests/Hobbies</Text>
+                <Image
+                  resizeMode="contain"
+                  style={styles.nextArrow}
+                  source={require('../../../../../assets/images/settings/Next.png')}
+                />
+              </View>
+            </Spacer>
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>DOB</Text>
+              <View style={styles.fieldValueContainer}>
+                <Text style={styles.fieldValue}>{userProfile.dob}</Text>
+              </View>
+            </Spacer>
+          </Column>
+          <Spacer position="bottom" size={20} />
+          <Text style={styles.headingText}>Personal info</Text>
+
+          <Column style={styles.ph16}>
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>Gender</Text>
+              <View style={styles.fieldValueContainer}>
+                <Text style={styles.fieldValue}>{userProfile.gender}</Text>
+              </View>
+            </Spacer>
+
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>Interests/Hobbies</Text>
+              <View style={styles.fieldValueContainer}>
                 <TouchableOpacity onPress={() => openModal('hobby')}>
-                  <Text>Select</Text>
+                  <Text style={styles.fieldValue}>Select</Text>
                 </TouchableOpacity>
-              </Row>
+                <Image
+                  resizeMode="contain"
+                  style={styles.nextArrow}
+                  source={require('../../../../../assets/images/settings/Next.png')}
+                />
+              </View>
               <MultiSelectModal
                 isVisible={openHobbyModal}
                 data={hobbies}
@@ -155,17 +190,22 @@ export const EditProfile = () => {
                 }
               />
               <Text>{hobbiesList.join(', ')}</Text>
-            </View>
-          </Column>
-          <Column>
-            <Text>Location Details</Text>
-            <Row justifyContent="space-between">
-              <Text>Country</Text>
-              <Text>{user?.address?.country}</Text>
-            </Row>
-            <Spacer position="bottom" size={20}>
-              <Row justifyContent="space-between" alignItems="center">
-                <Text>State/Territy</Text>
+            </Spacer>
+
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>Country</Text>
+              <View style={styles.fieldValueContainer}>
+                <Text style={styles.fieldValue}>{user?.address?.country}</Text>
+              </View>
+            </Spacer>
+
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>State/Territy</Text>
+              <Row
+                style={[styles.selectRow, styles.fieldValueContainer]}
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <ModalSelector
                   data={statesList}
                   initValue={userProfile.state}
@@ -180,9 +220,18 @@ export const EditProfile = () => {
                   cancelStyle={styles.cancelButton}
                   selectedItemTextStyle={styles.selectedItem}
                   initValueTextStyle={styles.initValueTextStyle}
+                  selectStyle={{ borderWidth: 0 }}
+                />
+                <Image
+                  resizeMode="contain"
+                  style={styles.nextArrow}
+                  source={require('../../../../../assets/images/settings/Next.png')}
                 />
               </Row>
             </Spacer>
+          </Column>
+
+          <Column>
             <Spacer position="bottom" size={10}>
               <Text>City</Text>
               <TextInput
@@ -352,6 +401,6 @@ export const EditProfile = () => {
           })}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };

@@ -87,11 +87,15 @@ export const useViewModal = () => {
   const kidsList = generateList(kids, 'kids');
   const familyPlanList = generateList(familyPlan, 'familyPlan');
   const petsList = generateList(pets, 'pets');
-  const covidVaccineStatusList = generateList(covidVaccineStatus,'covidVaccineStatus')
+  const covidVaccineStatusList = generateList(
+    covidVaccineStatus,
+    'covidVaccineStatus',
+  );
   const [distanceRange, setDistanceRange] = useState<any[]>(['No Max']);
   const [ageRange, setAgeRange] = useState([18, 100]);
   const [heightRange, setHeightRange] = useState([3, 7]);
   const optionsList = [
+    {},
     {
       title: 'Gender of interest',
       option: genderList,
@@ -100,6 +104,7 @@ export const useViewModal = () => {
     {}, // distance prefrence
     {}, // age prefrence
     {}, // height prefrence
+    {},
     {
       title: 'Degree category',
       option: _userDegree,
@@ -110,6 +115,7 @@ export const useViewModal = () => {
       option: _primaryDegree,
       initValue: 'degreeType',
     },
+    {},
     {
       title: 'Ethnicity',
       option: ethnicityList,
@@ -224,7 +230,7 @@ export const useViewModal = () => {
                   ...newState,
                   relationshipLevel: value[0],
                 };
-              } else if(value[0]) {
+              } else if (value[0]) {
                 newState = {
                   ...newState,
                   [key]: value[0],
@@ -234,10 +240,10 @@ export const useViewModal = () => {
           }
           return newState;
         });
-        if (data?.distance) { 
+        if (data?.distance) {
           const isNumber = Number(data?.distance);
           if (isNumber) {
-             setDistanceRange([isNumber]);
+            setDistanceRange([isNumber]);
           } else {
             setDistanceRange([data?.distance]);
           }

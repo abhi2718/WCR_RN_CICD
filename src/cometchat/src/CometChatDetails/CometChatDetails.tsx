@@ -48,6 +48,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { GroupInfoModal } from '../../../components/groupInfoModal';
+import { AlertScreen } from '../../../components/alert';
 import FastImage from 'react-native-fast-image';
 import { ROUTES } from '../../../navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -857,6 +858,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...transferOwnershipConfiguration}
       />
     );
+  const [showModal, setShowModal] = useState(false);
   if (group) {
     return (
       <View>
@@ -880,7 +882,18 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
                 detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
               }
             />
-            <Pressable onPress={handleLeaveGroup} style={myStyles.leaveGroup}>
+            <AlertScreen
+              showModal={showModal}
+              setShowModal={setShowModal}
+              title="Leave group?"
+              description="Are you sure you want to 
+              leave the group permanently?"
+              onPress={handleLeaveGroup}
+            />
+            <Pressable
+              onPress={() => setShowModal(true)}
+              style={myStyles.leaveGroup}
+            >
               <Text style={myStyles.leaveBtn}>Leave</Text>
             </Pressable>
           </Row>
