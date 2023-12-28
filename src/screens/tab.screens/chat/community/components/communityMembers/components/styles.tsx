@@ -66,4 +66,19 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: fontWeights.bold,
   },
+
+  profileHeader: {
+    padding: sizes[3],
+    marginBottom: sizes[3],
+  },
+
+  logoStyle: {
+    height: sizes[6] - 2,
+    width: sizes[8],
+  },
+
+  logoHeadContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
 });

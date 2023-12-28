@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
 import { fontWeights } from '../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../infrastructure/theme/colors';
@@ -6,7 +6,6 @@ import { colors } from '../../../../../../infrastructure/theme/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: sizes[3],
   },
   memberContainer: {
     paddingHorizontal: sizes[3],
@@ -21,8 +20,8 @@ export const styles = StyleSheet.create({
     width: sizes[2],
   },
   iconCross: {
-    height: sizes[4] - 2,
-    width: sizes[4] - 2,
+    height: sizes[3],
+    width: sizes[3],
   },
   memberText: {
     fontSize: sizes[3],
@@ -35,7 +34,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
   },
   nameHeading: {
-    fontSize: sizes[3],
+    fontSize: sizes[3] + 1,
     fontWeight: fontWeights.bold,
     color: colors.ui.primary,
   },
@@ -48,11 +47,19 @@ export const styles = StyleSheet.create({
 
   headerContainer: {
     padding: sizes[3],
-    backgroundColor: '#fff',
-    shadowColor: 'red',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#808080',
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+      },
+      android: {
+        elevation: 1.25,
+      },
+    }),
   },
 });
