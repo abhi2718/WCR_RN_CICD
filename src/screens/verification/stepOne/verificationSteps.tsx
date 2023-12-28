@@ -41,6 +41,7 @@ export const verificationStyle = StyleSheet.create({
     paddingHorizontal: 16,
     gap: 15,
     flex: 1,
+    justifyContent:"flex-end"
   },
   subText: {
     fontSize: fontSizes.text,

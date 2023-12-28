@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ImageProps,
   Modal,
@@ -13,6 +13,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Keyboard,
 } from 'react-native';
 
 import {
@@ -42,6 +43,7 @@ import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
 import { useVerificationViewModal } from './stepTwo.ViewModal';
 import { VerificationInfoModal, VerificationInstructionModal } from '../../../components/verificationModal';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface AvatarProps extends ImageProps {
   onChange?: (image: ImageOrVideo) => void;
@@ -79,18 +81,26 @@ const VerificationStepTwo = (props: AvatarProps) => {
     openInfoModal,
     isVerificationInfoModalVisible,
     closeModal,
+    openModal,
   } = useVerificationViewModal(props);
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
+  const { top, bottom } = useSafeAreaInsets();
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
       <ScreenContainer>
         <VerificationInstructionModal
           isVisible={isVerificationInfoModalVisible}
           onClose={closeModal}
         ></VerificationInstructionModal>
-        <HeaderBar info={openInfoModal} />
-
-        <View style={verificationStyle.container}>
+        <HeaderBar isVerificartionScreen={false} info={openModal}/>
+        <KeyboardAvoidingView
+          enabled
+          behavior={isAndroid ? 'height' : 'padding'}
+          keyboardVerticalOffset={100}
+          style={{
+            ...verificationStyle.container,
+            height: dimensions.height - (top + bottom + 110),
+          }}
+        >
           <View style={{ flex: 1 }}>
             <Text style={verificationStyle.subHeader}>
               Photo Verification (Step II)
@@ -105,9 +115,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 name on it.
               </Text>
             )}
-
             {verificationOption === 'Student' ? null : (
-              //<Text>'Shaz'</Text>
               <View>
                 <Row style={verificationStyle.pointsRow} alignItems="center">
                   <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
@@ -142,7 +150,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
             )}
           </View>
 
-          <View style={verificationStyle.footerDiv}>
+          <View style={{ ...verificationStyle.footerDiv }}>
             {verificationOption === 'License Number' && (
               <>
                 <Text>
@@ -185,7 +193,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 </KeyboardAvoidingView>
               </>
             )}
-
             {verificationOption === 'Student' && (
               <>
                 <Text>
@@ -208,7 +215,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 </KeyboardAvoidingView>
               </>
             )}
-
             {verificationOption === 'License Number' && (
               <Text style={verificationStyle.footerText}>
                 We may request additional proof of degree if needed, depending
@@ -222,210 +228,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
               <PrimaryButton onPress={toggleModal} title="Camera" />
             </KeyboardAvoidingView>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </ScreenContainer>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={visibleModal}
-        onRequestClose={toggleModal}
-      >
-        <View style={firstModalStyle.centeredView}>
-          <View style={firstModalStyle.modalView}>
-            <TouchableOpacity onPress={() => clickPicture('camera')}>
-              <Text style={firstModalStyle.text}>Take a photo</Text>
-            </TouchableOpacity>
-            <View style={firstModalStyle.borderView} />
-            <TouchableOpacity onPress={() => clickPicture('library')}>
-              <Text style={firstModalStyle.text}> Choose from library</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View
-            style={[firstModalStyle.modalView, firstModalStyle.modalViewTwo]}
-          >
-            <TouchableOpacity onPress={toggleModal}>
-              <Text style={firstModalStyle.backBtnText}>Back</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={visiblePicModal}
-        onRequestClose={closePicModal}
-      >
-        <View style={modalStyles.modalContent}>
-          <Row
-            style={modalStyles.row}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Pressable onPress={closePicModal}>
-              <Image
-                style={modalStyles.arrow}
-                source={require('../../../assets/images/icons/arrow.png')}
-              />
-            </Pressable>
-            <Logo width={50} height={35} />
-            <View />
-          </Row>
-          {!isSelfie ? (
-            <View style={modalStyles.content}>
-              <Text style={modalStyles.subText}>Photo captured</Text>
-              <Image
-                style={modalStyles.picture}
-                source={{ uri: documentImage?.path }}
-              />
-              <PrimaryButton
-                style={modalStyles.button}
-                onPress={() => setIsSelfie(true)}
-                title="Next"
-              />
-            </View>
-          ) : (
-            <View style={modalStyles.content}>
-              <Text style={modalStyles.subText}>
-                Take a selfie wearing or holding the SAME item.
-              </Text>
-
-              {selfie ? (
-                <>
-                  <Image
-                    style={modalStyles.picture}
-                    source={{ uri: selfie.path }}
-                  />
-                  <PrimaryButton
-                    style={modalStyles.button}
-                    title={
-                      verificationOption === 'Others' ? 'Continue' : 'Submit'
-                    }
-                    isLoading={loading}
-                    onPress={
-                      verificationOption === 'Others'
-                        ? openPhdOptionModal
-                        : () => sumbitVerificationForm()
-                    }
-                  />
-                </>
-              ) : (
-                <>
-                  <View style={verificationStyle.imageViewProfile}>
-                    <TouchableOpacity onPress={clickSelfieImage}>
-                      <Image
-                        style={verificationStyle.imageIcon}
-                        source={require('../../../assets/images/icons/addImg.png')}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                  <PrimaryButton
-                    onPress={clickSelfieImage}
-                    style={modalStyles.button}
-                    title="Click Selfie"
-                  />
-                </>
-              )}
-            </View>
-          )}
-        </View>
-      </Modal>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={PhdOptionPicUploadingModal}
-        onRequestClose={closePhdOptionPicUploadingModal}
-      >
-        <View style={modalStyles.modalContent}>
-          <Row
-            style={modalStyles.row}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Pressable onPress={closePicModal}>
-              <Image
-                style={modalStyles.arrow}
-                source={require('../../../assets/images/icons/arrow.png')}
-              />
-            </Pressable>
-            <Logo width={50} height={35} />
-            <View />
-          </Row>
-
-          <View style={modalStyles.content}>
-            <Text style={modalStyles.subText}>Photo captured</Text>
-            <Image
-              style={modalStyles.picture}
-              source={{ uri: PhdOptionImage?.path }}
-            />
-            <PrimaryButton
-              style={modalStyles.button}
-              onPress={() => sumbitVerificationForm()}
-              isLoading={loading}
-              title="Submit"
-            />
-          </View>
-        </View>
-      </Modal>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={PhdOptionModal}
-        onRequestClose={closePhdOptionModalModal}
-      >
-        <View style={modalStyles.modalContent}>
-          <HeaderBar></HeaderBar>
-          <View style={verificationStyle.container}>
-            <Text>{validationErrorMessage}</Text>
-            <View>
-              <Text style={verificationStyle.subHeader}>
-                Provide The Following Degree Verification (Step III)
-              </Text>
-              <Text style={verificationStyle.subText}>
-                Upload Proof of Degree from USA showing name, institution,
-                degree, date degree awarded
-              </Text>
-              <Text style={verificationStyle.subText}>
-                ( e.g., Diploma, Transcript, Certificate of Completion, Degree
-                Verification )
-              </Text>
-              <TouchableOpacity
-                style={verificationStyle.uploadBtn}
-                onPress={() => uploadPhdOptionPhotos()}
-              >
-                <Text style={verificationStyle.uploadBtnText}>Uplpoad</Text>
-              </TouchableOpacity>
-              <Text style={verificationStyle.subText}>
-                Enter website to show proof of degree (e.g., Professional
-                licensing website, Institution website showing name and year of
-                graduation, Work website showing name and title). We may request
-                additional proof of degree if needed.
-              </Text>
-            </View>
-            <KeyboardAvoidingView
-              behavior="position"
-              keyboardVerticalOffset={keyboardVerticalOffset}
-            >
-              <View style={verificationStyle.footerDiv}>
-                <FlatInput
-                  label="Enter website"
-                  placeholder="Enter website"
-                  value={website}
-                  onChangeText={handleWebsite}
-                />
-                <PrimaryButton
-                  onPress={() => sumbitVerificationForm()}
-                  title="Submit"
-                  isLoading={loading}
-                />
-              </View>
-            </KeyboardAvoidingView>
-          </View>
-        </View>
-      </Modal>
-    </ScrollView>
+    </Pressable>
   );
 };
 
