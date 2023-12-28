@@ -40,6 +40,8 @@ export const verificationStyle = StyleSheet.create({
     marginHorizontal: -16,
     paddingHorizontal: 16,
     gap: 15,
+    flex: 1,
+    justifyContent:"flex-end"
   },
   subText: {
     fontSize: fontSizes.text,
@@ -47,6 +49,10 @@ export const verificationStyle = StyleSheet.create({
     color: colors.ui.text,
   },
   redDot: {
+    color: colors.ui.primary,
+    fontSize: 8,
+  },
+  optionalText: {
     color: colors.ui.primary,
     fontSize: fontSizes.text,
   },
