@@ -82,150 +82,19 @@ const VerificationStepTwo = (props: AvatarProps) => {
   } = useVerificationViewModal(props);
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <ScreenContainer>
-        <VerificationInfoModal
-          isVisible={isVerificationInfoModalVisible}
-          onClose={closeModal}
-        ></VerificationInfoModal>
-        <HeaderBar info={openInfoModal} />
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView style={{ flex: 1,backgroundColor:"#fff" }}>
+      <View style={{ flex: 1, backgroundColor: "#fff" }}>
+        
+          <View style={{ flex: 1, backgroundColor: "blue" }}>
 
-        <View style={verificationStyle.container}>
-          <View style={{ flex: 1 }}>
-            <Text style={verificationStyle.subHeader}>
-              Photo Verification (Step II)
-            </Text>
-            {verificationOption === 'Student' ? (
-              <Text style={verificationStyle.subText}>
-                Take a photo of your Student photo ID.
-              </Text>
-            ) : (
-              <Text style={verificationStyle.subText}>
-                Take a photo of ONE of the following that clearly displays your
-                name on it.
-              </Text>
-            )}
-
-            {verificationOption === 'Student' ? null : (
-              //<Text>'Shaz'</Text>
-              <View>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>White Coat</Text>
-                </Row>
-
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>Scrubs</Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>Jacket</Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>Work ID badge</Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>
-                    Business/license card
-                  </Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>
-                    Desk/door nameplate
-                  </Text>
-                </Row>
-              </View>
-            )}
           </View>
-
-          <View style={verificationStyle.footerDiv}>
-            {verificationOption === 'License Number' && (
-              <>
-                <Text>
-                  <Text style={verificationStyle.optionalText}>Optional: </Text>
-                  <Text style={verificationStyle.pointText}>
-                    For quicker verification, please provide a website to verify
-                    your degree.
-                  </Text>
-                </Text>
-                <KeyboardAvoidingView
-                  enabled
-                  behavior={isAndroid ? 'height' : 'padding'}
-                >
-                  <FlatInput
-                    label="Enter website"
-                    value={website}
-                    onChangeText={handleWebsite}
-                  />
-                </KeyboardAvoidingView>
-              </>
-            )}
-            {verificationOption === 'HealthCare' && (
-              <>
-                <Text>
-                  <Text style={verificationStyle.optionalText}>Optional: </Text>
-                  <Text style={verificationStyle.pointText}>
-                    For quicker verification, please provide a website to verify
-                    your degree.
-                  </Text>
-                </Text>
-                <KeyboardAvoidingView
-                  enabled
-                  behavior={isAndroid ? 'height' : 'padding'}
-                >
-                  <FlatInput
-                    label="Enter website"
-                    value={website}
-                    onChangeText={handleWebsite}
-                  />
-                </KeyboardAvoidingView>
-              </>
-            )}
-
-            {verificationOption === 'Student' && (
-              <>
-                <Text>
-                  <Text style={verificationStyle.optionalText}>Optional: </Text>
-                  <Text style={verificationStyle.pointText}>
-                    For faster verification, please provide your student email.
-                    We may send an email to confirm your student status and
-                    request further verification if necessary.
-                  </Text>
-                </Text>
-                <KeyboardAvoidingView
-                  enabled
-                  behavior={isAndroid ? 'height' : 'padding'}
-                >
-                  <FlatInput
-                    label="Enter student email"
-                    onChangeText={handleWebsite}
-                    value={website}
-                  />
-                </KeyboardAvoidingView>
-              </>
-            )}
-
-            {verificationOption === 'License Number' && (
-              <Text style={verificationStyle.footerText}>
-                We may request additional proof of degree if needed, depending
-                on the type of degree.
-              </Text>
-            )}
-            <KeyboardAvoidingView
-              enabled
-              behavior={isAndroid ? 'height' : 'padding'}
-            >
-              <PrimaryButton onPress={toggleModal} title="Camera" />
-            </KeyboardAvoidingView>
-          </View>
-        </View>
-      </ScreenContainer>
-
-      <Modal
+      
+    
+      </View>
+    </SafeAreaView>
+    <Modal
         animationType="slide"
         transparent={true}
         visible={visibleModal}
@@ -251,7 +120,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
           </View>
         </View>
       </Modal>
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -425,6 +293,148 @@ const VerificationStepTwo = (props: AvatarProps) => {
           </View>
         </View>
       </Modal>
+  </View>
+    </ScrollView>
+    )
+  return (
+    <ScrollView style={{ flex: 1,backgroundColor:"#fff" }}>
+      <ScreenContainer>
+        <VerificationInfoModal
+          isVisible={isVerificationInfoModalVisible}
+          onClose={closeModal}
+        ></VerificationInfoModal>
+       
+        <View style={{...verificationStyle.container,height:dimensions.height- 250}}>
+          <View style={{ flex: 1 }}>
+            <Text style={verificationStyle.subHeader}>
+              Photo Verification (Step II)
+            </Text>
+            {verificationOption === 'Student' ? (
+              <Text style={verificationStyle.subText}>
+                Take a photo of your Student photo ID.
+              </Text>
+            ) : (
+              <Text style={verificationStyle.subText}>
+                Take a photo of ONE of the following that clearly displays your
+                name on it.
+              </Text>
+            )}
+            {verificationOption === 'Student' ? null : (
+              <View>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>White Coat</Text>
+                </Row>
+
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>Scrubs</Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>Jacket</Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>Work ID badge</Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>
+                    Business/license card
+                  </Text>
+                </Row>
+                <Row style={verificationStyle.pointsRow} alignItems="center">
+                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
+                  <Text style={verificationStyle.pointText}>
+                    Desk/door nameplate
+                  </Text>
+                </Row>
+              </View>
+            )}
+          </View>
+
+          <View style={{...verificationStyle.footerDiv,backgroundColor:"red"}}>
+            {verificationOption === 'License Number' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.optionalText}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For quicker verification, please provide a website to verify
+                    your degree.
+                  </Text>
+                </Text>
+                <KeyboardAvoidingView
+                  enabled
+                  behavior={isAndroid ? 'height' : 'padding'}
+                >
+                  <FlatInput
+                    label="Enter website"
+                    value={website}
+                    onChangeText={handleWebsite}
+                  />
+                </KeyboardAvoidingView>
+              </>
+            )}
+            {verificationOption === 'HealthCare' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.optionalText}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For quicker verification, please provide a website to verify
+                    your degree.
+                  </Text>
+                </Text>
+                <KeyboardAvoidingView
+                  enabled
+                  behavior={isAndroid ? 'height' : 'padding'}
+                >
+                  <FlatInput
+                    label="Enter website"
+                    value={website}
+                    onChangeText={handleWebsite}
+                  />
+                </KeyboardAvoidingView>
+              </>
+            )}
+            {verificationOption === 'Student' && (
+              <>
+                <Text>
+                  <Text style={verificationStyle.optionalText}>Optional: </Text>
+                  <Text style={verificationStyle.pointText}>
+                    For faster verification, please provide your student email.
+                    We may send an email to confirm your student status and
+                    request further verification if necessary.
+                  </Text>
+                </Text>
+                <KeyboardAvoidingView
+                  enabled
+                  behavior={isAndroid ? 'height' : 'padding'}
+                >
+                  <FlatInput
+                    label="Enter student email"
+                    onChangeText={handleWebsite}
+                    value={website}
+                  />
+                </KeyboardAvoidingView>
+              </>
+            )}
+            {verificationOption === 'License Number' && (
+              <Text style={verificationStyle.footerText}>
+                We may request additional proof of degree if needed, depending
+                on the type of degree.
+              </Text>
+            )}
+            <KeyboardAvoidingView
+              enabled
+              behavior={isAndroid ? 'height' : 'padding'}
+            >
+              <PrimaryButton onPress={toggleModal} title="Camera" />
+            </KeyboardAvoidingView>
+          </View>
+        </View>
+      </ScreenContainer>
+      
     </ScrollView>
   );
 };
