@@ -48,6 +48,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { GroupInfoModal } from '../../../components/groupInfoModal';
+import { AlertScreen } from '../../../components/alert';
 import FastImage from 'react-native-fast-image';
 import { ROUTES } from '../../../navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -823,7 +824,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...groupMembersConfiguration}
       />
     );
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   if (currentScreen === ComponentIds.ADD_MEMBERS)
     return (
       <CometChatAddMembers
@@ -856,6 +857,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...transferOwnershipConfiguration}
       />
     );
+  const [showModal, setShowModal] = useState(false);
   if (group) {
     return (
       <View>
@@ -878,7 +880,15 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
                 detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
               }
             />
-            <Pressable onPress={handleLeaveGroup}>
+            <AlertScreen
+              showModal={showModal}
+              setShowModal={setShowModal}
+              title="Leave group?"
+              description="Are you sure you want to 
+              leave the group permanently?"
+              onPress={handleLeaveGroup}
+            />
+            <Pressable onPress={() => setShowModal(true)}>
               <Text style={myStyles.leaveBtn}>Leave</Text>
             </Pressable>
           </Row>
@@ -932,7 +942,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   }
   if (user) {
     return (
-      <View style={{backgroundColor:'#fff'}}>
+      <View style={{ backgroundColor: '#fff' }}>
         <View style={{ height: 180 }}>
           <Header
             title={title}
@@ -969,14 +979,18 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
             </Pressable>
           )}
         </View>
-        <Pressable onPress={() => {
-          
-          navigation.navigate(ROUTES.Report,{userId:user.getUid(),name:user.getName()});
-        }}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate(ROUTES.Report, {
+              userId: user.getUid(),
+              name: user.getName(),
+            });
+          }}
+        >
           <Text>Report</Text>
         </Pressable>
         <View style={{ height: dimensions.height - 180 }}>
-        <MediaTab uid={user.getUid()} />
+          <MediaTab uid={user.getUid()} />
         </View>
       </View>
     );

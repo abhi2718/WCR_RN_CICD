@@ -44,7 +44,7 @@ export const ProfileModal = (props: profileProps) => {
           <View>
             <Spacer position="top" size={10} />
             <Row style={styles.backHeaderPadding}>
-              <Pressable onPress={()=>toggleModal()}>
+              <Pressable onPress={() => toggleModal()}>
                 <Image
                   style={styles.backArrowSize}
                   source={require('../../assets/images/icons/back-arrow.png')}
@@ -164,7 +164,7 @@ export const styles = StyleSheet.create({
   },
   userNameText: {
     position: 'absolute',
-    bottom: theme.units.sizes[20],
+    bottom: theme.units?.sizes[20],
     left: theme.units.sizes[12],
     fontSize: theme.fontSizes.h6,
     color: theme.colors.ui.white,

@@ -6,6 +6,7 @@ import {
   fonts,
 } from '../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
+import { dimensions } from '../../../../../components/tools';
 
 export const styles = StyleSheet.create({
   container: {
@@ -15,11 +16,24 @@ export const styles = StyleSheet.create({
   padding16: {
     paddingHorizontal: 16,
   },
-  headerText: {
+  heading: {
+    height: 40,
     backgroundColor: colors.bg.secondary,
     paddingHorizontal: 16,
-    paddingVertical: 10,
-    color: colors.ui.text,
+    paddingVertical: 0,
+    color: colors.ui.textHead,
+    marginHorizontal: -16,
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.text,
+    marginVertical: 10,
+  },
+  headerText: {
+    color: colors.ui.textHead,
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.text,
+  },
+  questionMarkIcon: {
+    width: 25,
   },
   itemRow: {
     marginVertical: 5,
@@ -37,6 +51,7 @@ export const styles = StyleSheet.create({
   },
   modalSelector: {
     borderWidth: 0,
+    width: '100%',
   },
   silderSubText: {
     marginRight: 8,
@@ -49,6 +64,7 @@ export const styles = StyleSheet.create({
   optionText: {
     fontSize: 18,
     color: colors.ui.text,
+    width: '100%',
   },
   cancelButton: {
     borderRadius: 4,
@@ -62,6 +78,7 @@ export const styles = StyleSheet.create({
   initValueTextStyle: {
     color: '#B3B3B3',
     marginLeft: -8,
+    textAlign: 'left',
   },
   textColor: {
     color: colors.ui.text,
@@ -76,7 +93,12 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.text,
   },
+  selectRow: {
+    width: '100%',
+  },
   selectArrow: {
+    position: 'absolute',
+    right: 0,
     width: sizes[2],
     height: sizes[2],
   },

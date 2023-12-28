@@ -83,8 +83,10 @@ const styles = StyleSheet.create({
   },
 
   description: {
+    paddingHorizontal: 16,
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    textAlign: 'center',
   },
 
   primeBtn: {

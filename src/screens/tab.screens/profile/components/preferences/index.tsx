@@ -42,7 +42,7 @@ export const PreferencesScreen = () => {
         <HeaderBar
           button={submitLoading ? () => {} : createPrefrences}
           isText={true}
-          text="Preference"
+          text="Dating Preference"
           isLogo={false}
           isLoading={submitLoading}
         />
@@ -61,7 +61,25 @@ export const PreferencesScreen = () => {
           showsVerticalScrollIndicator={false}
         >
           {optionsList.map((item, index) => {
-            if (index === 1) {
+            if (index === 0) {
+              return (
+                <Row
+                  style={styles.heading}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Text style={styles.headerText}>
+                    Tap here for more information
+                  </Text>
+                  <Image
+                    style={styles.questionMarkIcon}
+                    resizeMode="contain"
+                    source={require('../../../../../assets/images/icons/questionMark.png')}
+                  />
+                </Row>
+              );
+            }
+            if (index === 2) {
               return (
                 <View key={index} style={styles.multiSelector}>
                   <Row alignItems="center" justifyContent="space-between">
@@ -96,7 +114,7 @@ export const PreferencesScreen = () => {
                 </View>
               );
             }
-            if (index === 2) {
+            if (index === 3) {
               return (
                 <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
@@ -119,7 +137,7 @@ export const PreferencesScreen = () => {
                 </View>
               );
             }
-            if (index === 3) {
+            if (index === 4) {
               return (
                 <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
@@ -127,7 +145,8 @@ export const PreferencesScreen = () => {
                       Height preference
                     </Text>
                     <Text style={styles.silderSubText}>
-                      {formatNumber(heightRange[0])} - {formatNumber(heightRange[1])}
+                      {formatNumber(heightRange[0])} -{' '}
+                      {formatNumber(heightRange[1])}
                     </Text>
                   </Row>
                   <Column justifyContent="center" alignItems="center">
@@ -140,6 +159,28 @@ export const PreferencesScreen = () => {
                     />
                   </Column>
                 </View>
+              );
+            }
+            if (index === 5) {
+              return (
+                <Row
+                  style={styles.heading}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Text style={styles.headerText}>Healthcare Professional</Text>
+                </Row>
+              );
+            }
+            if (index === 8) {
+              return (
+                <Row
+                  style={styles.heading}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Text style={styles.headerText}>Basic Info</Text>
+                </Row>
               );
             }
             return (
@@ -155,7 +196,7 @@ export const PreferencesScreen = () => {
 
                 <SafeAreaView>
                   <Row
-                    style={{ width: '100%' }}
+                    style={styles.selectRow}
                     justifyContent="space-between"
                     alignItems="center"
                   >

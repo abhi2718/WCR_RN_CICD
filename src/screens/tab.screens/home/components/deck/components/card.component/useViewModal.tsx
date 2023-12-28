@@ -31,7 +31,7 @@ export const useViewModal = (item: any, cardRef: any) => {
       const shareOptions = {
         message: `White Coat Romance profile share
         Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you. `,
-        url: "https://staging.whitecoatromance.com/assets/images/e-wcr.png",
+        url: 'https://staging.whitecoatromance.com/assets/images/e-wcr.png',
       };
       Share.open(shareOptions);
     } catch (error) {}
@@ -75,8 +75,8 @@ export const useViewModal = (item: any, cardRef: any) => {
   };
   const handleReport = () => {
     setShowModal(false);
-    navigation.navigate(ROUTES.Report,{userId:item._id,name:first});
-  }
+    navigation.navigate(ROUTES.Report, { userId: item._id, name: first });
+  };
   return {
     handleShare,
     profilePicture,
@@ -97,6 +97,6 @@ export const useViewModal = (item: any, cardRef: any) => {
     bio,
     showModal,
     setShowModal,
-    handleReport
+    handleReport,
   };
 };

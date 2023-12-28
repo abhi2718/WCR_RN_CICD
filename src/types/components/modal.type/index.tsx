@@ -4,7 +4,7 @@ export interface ModalProps {
 }
 export interface ProfilePicInfoModalProps {
   isVisible: boolean;
-  joinGroup: () => void;
+  joinGroup?: () => void;
   onClose: () => void;
 }
 
