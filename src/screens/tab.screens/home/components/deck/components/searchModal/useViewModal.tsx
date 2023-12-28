@@ -16,6 +16,8 @@ export const useViewModal = (props: SearchModalProps) => {
       if (text.length > 2) {
         const data = await homeDeckRepository.searchUser(text);
         setUser(data);
+      } else {
+        setUser([]);
       }
     } catch (error) {}
   };

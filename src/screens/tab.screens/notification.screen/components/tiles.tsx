@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Animated,
   useWindowDimensions,
+  StyleSheet,
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
@@ -30,6 +31,12 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
 }) => {
   const swipeableRef = useRef<Swipeable>(null);
   const closeSwipeable = () => {};
+  const handleReadNotification = () => {
+    if (item.isRead) {
+      return;
+    }
+    markAsRead(item._id);
+  };
   const renderRightActions = (
     progress: Animated.AnimatedInterpolation,
     dragX: Animated.AnimatedInterpolation,
@@ -40,13 +47,7 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
     });
     return (
       <TouchableOpacity onPress={() => onDelete(item.key)}>
-        <View
-          style={{
-            flex: 10,
-            backgroundColor: colors.ui.primary,
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.container}>
           {/* <Animated.Text
             style={[
               {
@@ -69,7 +70,7 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
       renderRightActions={renderRightActions}
       onSwipeableWillOpen={closeSwipeable}
     >
-      <TouchableOpacity onPress={() => markAsRead(item._id)}>
+      <TouchableOpacity onPress={handleReadNotification}>
         <View
           style={[
             notificationStyles.container,
@@ -95,3 +96,11 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
     </Swipeable>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 10,
+    backgroundColor: colors.ui.primary,
+    justifyContent: 'center',
+  },
+});
