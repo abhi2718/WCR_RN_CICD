@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import { FullLoader, Row, Spacer } from '../tools';
+import { Column, FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
 import { theme } from '../../infrastructure/theme';
@@ -44,7 +44,7 @@ export const ProfileModal = (props: profileProps) => {
           <View>
             <Spacer position="top" size={10} />
             <Row style={styles.backHeaderPadding}>
-              <Pressable onPress={()=>toggleModal()}>
+              <Pressable onPress={() => toggleModal()}>
                 <Image
                   style={styles.backArrowSize}
                   source={require('../../assets/images/icons/back-arrow.png')}
@@ -104,17 +104,22 @@ export const ProfileModal = (props: profileProps) => {
                         <Text style={styles.vitalSigns}>Vital Signs</Text>
                       </View>
                     </View>
-                    {user?.photos.map(({ url, _id }) => {
-                      return (
-                        <View key={_id} style={styles.padding10}>
-                          <FastImage
-                            source={{ uri: url }}
-                            style={styles.galleryImage}
-                            resizeMode={FastImage.resizeMode.cover}
-                          />
-                        </View>
-                      );
-                    })}
+                    <Row style={styles.userGallery}>
+                      <ScrollView horizontal={true}>
+                        {user?.photos.map(({ url, _id }) => {
+                          return (
+                            <Column key={_id} style={styles.padding10}>
+                              <FastImage
+                                source={{ uri: url }}
+                                style={styles.galleryImage}
+                                resizeMode={FastImage.resizeMode.cover}
+                              />
+                            </Column>
+                          );
+                        })}
+                      </ScrollView>
+                    </Row>
+
                     <Pressable onPress={handleShare}>
                       <Text>Share</Text>
                     </Pressable>
@@ -192,8 +197,8 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.semiBold,
   },
   galleryImage: {
-    width: theme.units.sizes[200],
-    height: theme.units.sizes[200],
+    width: theme.units.sizes[180],
+    height: theme.units.sizes[180],
     borderRadius: theme.units.sizes[32],
   },
   backHeaderPadding: {
@@ -211,6 +216,10 @@ export const styles = StyleSheet.create({
   padding10: {
     padding: theme.units.sizes[10],
   },
+  imageView: {
+    padding: theme.units.sizes[10],
+    flexBasis: '50%',
+  },
   vitalSigns: {
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.bold,
@@ -220,5 +229,9 @@ export const styles = StyleSheet.create({
     width: theme.units.sizes[19],
     height: theme.units.sizes[19],
     resizeMode: 'contain',
+  },
+  userGallery: {
+    paddingTop: 5,
+    paddingBottom: 24,
   },
 });

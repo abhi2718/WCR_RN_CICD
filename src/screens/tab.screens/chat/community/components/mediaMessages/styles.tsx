@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
-import { dimensions } from '../../../../../../components/tools';
+import { theme } from '../../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {
     height: 500,
-    backgroundColor:'#fff'
+    backgroundColor: theme.colors.ui.white,
   },
 
   galleryContainer: {
@@ -14,7 +14,16 @@ export const styles = StyleSheet.create({
   },
 
   galleryImage: {
-    width: (dimensions.width - 48) / 2,
-    height: 140,
+    width: '31.33%',
+    height: 120,
+  },
+
+  galleryWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingVertical: 14,
+    paddingHorizontal: 12,
   },
 });

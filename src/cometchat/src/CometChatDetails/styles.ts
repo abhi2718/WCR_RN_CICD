@@ -62,6 +62,6 @@ export const styles = StyleSheet.create({
   },
   infoBtBox: {
     position: 'absolute',
-    right: 0,
+    right: 20,
   },
 });

@@ -65,11 +65,13 @@ export const CometChatMessageBubble = memo(
             {HeaderView && <HeaderView />}
             {ReplyView && <ReplyView />}
             <View
-              style={{
-                ...border,
-                borderRadius,
-                backgroundColor,
-              }}
+              style={[
+                {
+                  ...border,
+                  borderRadius,
+                  backgroundColor,
+                },
+              ]}
             >
               {ContentView && <ContentView />}
               {BottomView && <BottomView />}

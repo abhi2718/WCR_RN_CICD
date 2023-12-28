@@ -1,8 +1,16 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import React from 'react';
 import { ICONS } from './resources';
 import { colors } from '../../../infrastructure/theme/colors';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import { theme } from '../../../infrastructure/theme';
 
 const Header = (props) => {
   const {
@@ -14,7 +22,7 @@ const Header = (props) => {
     closeIconTint,
   } = props;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.shadows]}>
       {showCloseButton && (
         <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
           <Image
@@ -45,6 +53,21 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.h5,
     fontWeight: fontWeights.semiBold,
     color: colors.ui.text,
+  },
+  shadows: {
+    padding: theme.units.sizes[3],
+    backgroundColor: '#fff',
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 12,
+      },
+    }),
   },
 });
 export default Header;

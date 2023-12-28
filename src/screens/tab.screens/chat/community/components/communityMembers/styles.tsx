@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
 import { fontWeights } from '../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../infrastructure/theme/colors';
@@ -45,14 +45,28 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: '#302B2B',
   },
-
+  square: {
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    borderRadius: 4,
+    height: 150,
+    shadowColor: 'black',
+    width: 150,
+  },
   headerContainer: {
     padding: sizes[3],
     backgroundColor: '#fff',
-    shadowColor: 'red',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
+    marginBottom: 10,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 12,
+      },
+    }),
   },
 });
