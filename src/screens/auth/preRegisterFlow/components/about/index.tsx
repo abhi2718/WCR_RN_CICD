@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Image, Text, TextInput, View } from 'react-native';
+import {
+  Image,
+  Keyboard,
+  Pressable,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { AboutStyle } from './aboutStyle';
 import { PrimaryButton } from '../../../../../components/button';
@@ -21,38 +29,50 @@ const About = (props: ScreenParams) => {
 
   return (
     <ScreenContainer>
-      <View style={AboutStyle.container}>
-        <View style={AboutStyle.scrollContainer}>
-          <HeaderBar skip={() => navigateTohabitsScreen()}></HeaderBar>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View>
-              <Text style={AboutStyle.subHeader}>
-                Tell us a bit about yourself
-              </Text>
-              <TextInput
-                style={AboutStyle.input}
-                multiline={true}
-                maxLength={maxLength}
-                numberOfLines={10} // Set the number of lines to display
-                placeholder="Enter here"
-                textAlignVertical="top"
-                value={aboutText}
-                returnKeyLabel="go"
-                onSubmitEditing={() => updateUserDetails()}
-                onChangeText={handleText}
-                placeholderTextColor={colors.ui.placeholder}
-              />
-            </View>
-          </ScrollView>
+      <Pressable
+        style={AboutStyle.container}
+        onPress={Keyboard.dismiss}
+      >
+        <View style={AboutStyle.container}>
+          <View style={AboutStyle.scrollContainer}>
+            <HeaderBar skip={() => navigateTohabitsScreen()}></HeaderBar>
+            <ScrollView
+              keyboardShouldPersistTaps="always"
+              showsVerticalScrollIndicator={false}
+            >
+              <View>
+                <Text style={AboutStyle.subHeader}>
+                  Tell us a bit about yourself
+                </Text>
+                <TextInput
+                  style={AboutStyle.input}
+                  multiline={true}
+                  maxLength={maxLength}
+                  numberOfLines={10}
+                  placeholder="Enter here"
+                  textAlignVertical="top"
+                  value={aboutText}
+                  returnKeyType="done"
+                  blurOnSubmit={true}
+                  onSubmitEditing={() => {
+                    console.log('okay');
+                    //updateUserDetails()
+                  }}
+                  onChangeText={handleText}
+                  placeholderTextColor={colors.ui.placeholder}
+                />
+              </View>
+            </ScrollView>
+          </View>
+          <View>
+            <PrimaryButton
+              title="Next"
+              isLoading={loading}
+              onPress={() => updateUserDetails()}
+            />
+          </View>
         </View>
-        <View>
-          <PrimaryButton
-            title="Next"
-            isLoading={loading}
-            onPress={() => updateUserDetails()}
-          />
-        </View>
-      </View>
+      </Pressable>
     </ScreenContainer>
   );
 };

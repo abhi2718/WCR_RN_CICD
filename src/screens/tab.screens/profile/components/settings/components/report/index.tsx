@@ -9,7 +9,7 @@ import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../../../components/header';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 
-export const ReportScreen = (props) => {
+export const ReportScreen = (props:any) => {
   const {
     user,
     goBack,
@@ -27,7 +27,6 @@ export const ReportScreen = (props) => {
           <Spacer position="top" size={20}>
             <Text style={styles.text}>Subject</Text>
           </Spacer>
-
           <DropdownInput
             data={reasonOfReport}
             onFocus={() => {}}

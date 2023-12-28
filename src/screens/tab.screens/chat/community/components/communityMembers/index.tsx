@@ -46,21 +46,19 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
           <SafeAreaView>
             <View style={styles.headerContainer}>
               <Row justifyContent="space-between" alignItems="center">
-                <Row>
+                <Column>
                   <Text style={styles.groupHeading}>Group Members</Text>
-                </Row>
+                </Column>
                 <Pressable onPress={toggleSetShowMembers}>
-                  <Row>
-                    <Image
-                      source={require('../../../../../../assets/images/icons/crossIcon.png')}
-                      style={styles.iconCross}
-                    />
-                  </Row>
+                  <Image
+                    source={require('../../../../../../assets/images/icons/crossIcon.png')}
+                    style={styles.iconCross}
+                  />
                 </Pressable>
               </Row>
             </View>
             <ScrollView style={styles.memberContainer}>
-              <Spacer position="bottom" size={10}>
+              <Spacer position="top" size={20}>
                 <Row justifyContent="space-between">
                   <Text style={styles.nameHeading}>Name</Text>
                   <Text style={styles.nameHeading}>Scope</Text>

@@ -16,7 +16,7 @@ import {
   fontWeights,
 } from '../../../../../../../infrastructure/theme/fonts';
 
-export const BlockAndReportModal = (props) => {
+export const BlockAndReportModal = (props:any) => {
   const { showModal, setShowModal, handleBlockUser, handleReport } = props;
   return (
     <>

@@ -49,6 +49,9 @@ import { colors } from '../../../infrastructure/theme/colors';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { GroupInfoModal } from '../../../components/groupInfoModal';
 import { AlertScreen } from '../../../components/alert';
+import FastImage from 'react-native-fast-image';
+import { ROUTES } from '../../../navigation';
+import { useNavigation } from '@react-navigation/native';
 export interface ModalDetailsInterface {
   title: string;
   confirmButtonText: string;
@@ -821,7 +824,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         {...groupMembersConfiguration}
       />
     );
-
+  const navigation = useNavigation();
   if (currentScreen === ComponentIds.ADD_MEMBERS)
     return (
       <CometChatAddMembers
@@ -877,7 +880,6 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
                 detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
               }
             />
-
             <AlertScreen
               showModal={showModal}
               setShowModal={setShowModal}
@@ -940,8 +942,8 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   }
   if (user) {
     return (
-      <View>
-        <View style={{ height: 600 }}>
+      <View style={{ backgroundColor: '#fff' }}>
+        <View style={{ height: 180 }}>
           <Header
             title={title}
             showCloseButton={showCloseButton}
@@ -959,6 +961,13 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
             }
           />
+          <Column justifyContent="center" alignItems="center">
+            <FastImage
+              source={{ uri: user.getAvatar() }}
+              style={{ width: 100, height: 100, borderRadius: 50 }}
+            />
+            <Text>{user.getName()}</Text>
+          </Column>
           {!user.getBlockedByMe() && (
             <Pressable onPress={() => handleUserBlockUnblock()}>
               <Text>Block</Text>
@@ -966,12 +975,23 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
           )}
           {user.getBlockedByMe() && (
             <Pressable onPress={() => handleUserBlockUnblock(true)}>
-              <Text>Un Block</Text>
+              <Text>UnBlock</Text>
             </Pressable>
           )}
+        </View>
+        <Pressable
+          onPress={() => {
+            navigation.navigate(ROUTES.Report, {
+              userId: user.getUid(),
+              name: user.getName(),
+            });
+          }}
+        >
+          <Text>Report</Text>
+        </Pressable>
+        <View style={{ height: dimensions.height - 180 }}>
           <MediaTab uid={user.getUid()} />
         </View>
-        <View style={{ height: dimensions.height - 200 }}></View>
       </View>
     );
   }
