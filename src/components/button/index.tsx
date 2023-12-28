@@ -135,11 +135,11 @@ const styles = StyleSheet.create({
     borderRadius: sizes[6],
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 2,
-    shadowColor: 'rgba(250, 86, 114, 0.8)', // iOS box shadow color
-    shadowOffset: { width: sizes[0], height: sizes[4] }, // iOS box shadow offset
+    elevation: sizes[0],
+    shadowColor: 'rgba(250, 86, 114, 0.15)', // iOS box shadow color
+    shadowOffset: { width: 2, height: 8 }, // iOS box shadow offset
     shadowOpacity: 1, // iOS box shadow opacity
-    shadowRadius: sizes[4], // iOS box shadow radius
+    shadowRadius: 18, // iOS box shadow radius
     width: '100%',
     zIndex: 9999,
   },
