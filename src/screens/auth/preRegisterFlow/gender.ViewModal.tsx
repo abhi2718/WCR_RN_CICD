@@ -26,7 +26,7 @@ export const useGenderViewModal = (props: ScreenParams) => {
     setCheckboxState(!checkboxState);
   };
   const navigateToGenderPronounScreen = () => {
-    navigation.navigate(ROUTES.VerificationStepOne);
+    navigation.navigate(ROUTES.GenderPronoun);
   };
 
   const updateUserDetails = async () => {

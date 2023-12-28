@@ -42,11 +42,11 @@ const options = { headerShown: false };
 export const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
         options={options}
         name={ROUTES.SPLASH}
         component={SplashScreen}
-      /> */}
+      />
       <Stack.Screen
         options={options}
         name={ROUTES.Onboarding}
