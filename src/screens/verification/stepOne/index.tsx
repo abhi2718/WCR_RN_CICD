@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View,Keyboard } from 'react-native';
 import { Row, ScreenContainer } from '../../../components/tools';
 import { HeaderBar } from '../../../components/header';
 import { RadioButton } from 'react-native-paper';
@@ -13,6 +13,7 @@ import VerificationStepTwo from '../stepTwo';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { useVerificationViewModal } from './stepOne.ViewModal';
 import { cleanSingle } from 'react-native-image-crop-picker';
+import { VerificationInfoModal } from '../../../components/verificationModal';
 
 const VerificationStepOne = (props: ScreenParams) => {
   const {
@@ -23,11 +24,20 @@ const VerificationStepOne = (props: ScreenParams) => {
     handleInputChange,
     optionData,
     country,
+    isVerificationInfoModalVisible,
+    closeModal,
   } = useVerificationViewModal(props);
   return (
     <ScreenContainer>
+       <VerificationInfoModal
+          isVisible={isVerificationInfoModalVisible}
+          onClose={closeModal}
+        ></VerificationInfoModal>
       <HeaderBar isVerificartionScreen={true} flagType={country} />
       <Text style={verificationStyle.subHeader}>ID Verification (Step I)</Text>
+      <Pressable style={{flex:1}} onPress={() => {
+        Keyboard.dismiss()
+      }}>
       <View style={verificationStyle.container}>
         <RadioButton.Group
           onValueChange={(newValue) => changeVerificationOption(newValue)}
@@ -44,7 +54,6 @@ const VerificationStepOne = (props: ScreenParams) => {
               </Text>
             </Row>
           )}
-
           {verificationOption === 'NPI Number' && (
             <View style={verificationStyle.textBox}>
               <FlatInput
@@ -161,6 +170,7 @@ const VerificationStepOne = (props: ScreenParams) => {
           <PrimaryButton onPress={handleVerificationOption} title="Next" />
         </View>
       </View>
+      </Pressable>
     </ScreenContainer>
   );
 };
