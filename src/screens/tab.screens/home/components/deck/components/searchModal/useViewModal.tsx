@@ -13,12 +13,8 @@ export const useViewModal = (props: SearchModalProps) => {
   const handleSearch = async (text: string) => {
     if (!isSearchActive) setSearchActive(true);
     try {
-      if (text.length > 2) {
-        const data = await homeDeckRepository.searchUser(text);
-        setUser(data);
-      } else {
-        setUser([]);
-      }
+      const data = await homeDeckRepository.searchUser(text);
+      setUser(data);
     } catch (error) {}
   };
   const handleClose = () => {
