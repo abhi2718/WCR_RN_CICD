@@ -1,12 +1,8 @@
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import React, { useContext } from 'react';
-import {
-  CometChatContext,
-} from '../../shared/CometChatContext';
-import {
-  CometChatTextBubble,
-  TextBubbleStyle, } from "../../shared/views";
-import { FontStyleInterface } from "../../shared/base";
+import { CometChatContext } from '../../shared/CometChatContext';
+import { CometChatTextBubble, TextBubbleStyle } from '../../shared/views';
+import { FontStyleInterface } from '../../shared/base';
 import { FormatTextForLinks } from '../../shared/views/CometChatTextBubble';
 
 interface textStyle extends FontStyleInterface {

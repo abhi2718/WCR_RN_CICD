@@ -93,16 +93,17 @@ import { ROUTES } from '../../../navigation';
 
 const getColorByFirstLetter = (letter: any) => {
   const colors = [
-    'red',
-    'green',
-    'blue',
-    'yellow',
-    'orange',
-    'purple',
-    'pink',
-    'cyan',
-    'brown',
-    'gray',
+    '#AF3A94',
+    '#E10810',
+    '#FF5B0B',
+    '#720404',
+    '#097C3F',
+    '#07B151',
+    '#2FBBB3',
+    '#1766D0',
+    '#2357BC',
+    '#594AEA',
+    '#733B97',
   ];
 
   const uppercaseLetter = letter.toUpperCase();
@@ -1420,7 +1421,7 @@ export const CometChatMessageList = forwardRef<
     (item: CometChat.BaseMessage): BaseStyleInterface => {
       let _style = new BaseStyle({
         ..._messageBubbleStyle,
-        backgroundColor: theme?.palette.getAccent50(),
+        backgroundColor: '#F7F7F7',
       });
 
       if (item.getCategory() == MessageCategoryConstants.interactive) {
@@ -1437,7 +1438,7 @@ export const CometChatMessageList = forwardRef<
           loggedInUser.current?.['uid'] &&
         item.getCategory() == MessageCategoryConstants.message
       )
-        _style.backgroundColor = theme?.palette.getPrimary();
+        _style.backgroundColor = '#e62323';
 
       return _style;
     },

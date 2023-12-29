@@ -52,6 +52,7 @@ import { AlertScreen } from '../../../components/alert';
 import FastImage from 'react-native-fast-image';
 import { ROUTES } from '../../../navigation';
 import { useNavigation } from '@react-navigation/native';
+import { theme } from '../../../infrastructure/theme';
 export interface ModalDetailsInterface {
   title: string;
   confirmButtonText: string;
@@ -861,7 +862,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   if (group) {
     return (
       <View>
-        <View style={{ height: 400, paddingHorizontal: 16 }}>
+        <View style={{ height: 400 }}>
           <Row justifyContent="space-between" alignItems="center">
             <Header
               title="Group info"
@@ -871,6 +872,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
                 onBack && onBack();
               }}
               titleStyle={{
+                padding: 10,
                 color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
                 ...(detailsStyle?.titleFont
                   ? detailsStyle?.titleFont
@@ -888,7 +890,10 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               leave the group permanently?"
               onPress={handleLeaveGroup}
             />
-            <Pressable onPress={() => setShowModal(true)}>
+            <Pressable
+              onPress={() => setShowModal(true)}
+              style={myStyles.leaveGroup}
+            >
               <Text style={myStyles.leaveBtn}>Leave</Text>
             </Pressable>
           </Row>
@@ -943,7 +948,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   if (user) {
     return (
       <View style={{ backgroundColor: '#fff' }}>
-        <View style={{ height: 180 }}>
+        <View style={{ height: 270 }}>
           <Header
             title={title}
             showCloseButton={showCloseButton}
@@ -961,35 +966,56 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
             }
           />
-          <Column justifyContent="center" alignItems="center">
+          <Column
+            justifyContent="center"
+            alignItems="center"
+            style={{ marginTop: 20 }}
+          >
             <FastImage
               source={{ uri: user.getAvatar() }}
-              style={{ width: 100, height: 100, borderRadius: 50 }}
+              style={myStyles.userAvatar}
             />
-            <Text>{user.getName()}</Text>
+            <Text style={myStyles.userName}>{user.getName()}</Text>
           </Column>
-          {!user.getBlockedByMe() && (
-            <Pressable onPress={() => handleUserBlockUnblock()}>
-              <Text>Block</Text>
-            </Pressable>
-          )}
-          {user.getBlockedByMe() && (
-            <Pressable onPress={() => handleUserBlockUnblock(true)}>
-              <Text>UnBlock</Text>
-            </Pressable>
-          )}
         </View>
-        <Pressable
-          onPress={() => {
-            navigation.navigate(ROUTES.Report, {
-              userId: user.getUid(),
-              name: user.getName(),
-            });
+        <Row style={myStyles.viewReportBlock} gap={16}>
+          <Column style={myStyles.widthFlex}>
+            <Pressable
+              onPress={() => {
+                navigation.navigate(ROUTES.Report, {
+                  userId: user.getUid(),
+                  name: user.getName(),
+                });
+              }}
+              style={myStyles.buttonBlock}
+            >
+              <Text style={myStyles.textRed}>Report</Text>
+            </Pressable>
+          </Column>
+          <Column style={myStyles.widthFlex}>
+            {!user.getBlockedByMe() && (
+              <Pressable
+                onPress={() => handleUserBlockUnblock()}
+                style={myStyles.buttonReport}
+              >
+                <Text style={myStyles.textWhite}>Block</Text>
+              </Pressable>
+            )}
+            {user.getBlockedByMe() && (
+              <Pressable
+                onPress={() => handleUserBlockUnblock(true)}
+                style={myStyles.buttonReport}
+              >
+                <Text style={myStyles.textWhite}>UnBlock</Text>
+              </Pressable>
+            )}
+          </Column>
+        </Row>
+        <View
+          style={{
+            height: dimensions.height - 270,
           }}
         >
-          <Text>Report</Text>
-        </Pressable>
-        <View style={{ height: dimensions.height - 180 }}>
           <MediaTab uid={user.getUid()} />
         </View>
       </View>
@@ -1203,5 +1229,61 @@ const myStyles = StyleSheet.create({
   leaveBtn: {
     color: colors.ui.primary,
     fontSize: fontSizes.text,
+  },
+  viewReportBlock: {
+    padding: 20,
+  },
+  buttonBlock: {
+    fontSize: theme.fontSizes.text,
+    fontWeight: theme.fontWeights.bold,
+    padding: 10,
+    paddingLeft: 16,
+    paddingRight: 16,
+    backgroundColor: theme.colors.bg.secondary,
+    borderColor: theme.colors.ui.primary,
+    borderWidth: 1,
+    borderRadius: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonReport: {
+    fontSize: 16,
+    fontWeight: theme.fontWeights.bold,
+    padding: 10,
+    paddingLeft: 16,
+    paddingRight: 16,
+    borderColor: theme.colors.ui.primary,
+    borderWidth: 1,
+    borderRadius: 30,
+    backgroundColor: theme.colors.ui.primary,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textRed: {
+    color: theme.colors.ui.primary,
+  },
+  textWhite: {
+    color: theme.colors.ui.white,
+  },
+  widthFlex: {
+    flex: 1,
+  },
+  userName: {
+    fontSize: theme.fontSizes.title,
+    fontWeight: theme.fontWeights.bold,
+    marginVertical: 12,
+    color: theme.colors.ui.secondary,
+  },
+  userAvatar: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+  },
+  leaveGroup: {
+    position: 'absolute',
+    right: 10,
+    zIndex: 111,
   },
 });

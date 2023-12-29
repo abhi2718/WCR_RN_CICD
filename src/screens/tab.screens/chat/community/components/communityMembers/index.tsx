@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -19,6 +19,7 @@ import { ROUTES } from '../../../../../../navigation';
 
 export const CommunityMembers = (props: CommunityMembersProps) => {
   const { members, showMembers, toggleSetShowMembers } = useViewMdal(props);
+
   return (
     <View style={styles.container}>
       {!showMembers && (
@@ -44,19 +45,22 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
       {showMembers && (
         <Modal visible={showMembers}>
           <SafeAreaView>
-            <View style={styles.headerContainer}>
-              <Row justifyContent="space-between" alignItems="center">
-                <Column>
-                  <Text style={styles.groupHeading}>Group Members</Text>
-                </Column>
-                <Pressable onPress={toggleSetShowMembers}>
-                  <Image
-                    source={require('../../../../../../assets/images/icons/crossIcon.png')}
-                    style={styles.iconCross}
-                  />
-                </Pressable>
-              </Row>
-            </View>
+            <Row
+              justifyContent="space-between"
+              alignItems="center"
+              style={styles.headerContainer}
+            >
+              <Column>
+                <Text style={styles.groupHeading}>Group Members</Text>
+              </Column>
+              <Pressable onPress={toggleSetShowMembers}>
+                <Image
+                  source={require('../../../../../../assets/images/icons/crossIcon.png')}
+                  style={styles.iconCross}
+                />
+              </Pressable>
+            </Row>
+
             <ScrollView style={styles.memberContainer}>
               <Spacer position="top" size={20}>
                 <Row justifyContent="space-between">
