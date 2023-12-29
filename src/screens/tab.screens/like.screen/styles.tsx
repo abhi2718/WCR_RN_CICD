@@ -79,4 +79,37 @@ export const styles = StyleSheet.create({
     width: theme.units.sizes[21],
     height: theme.units.sizes[21],
   },
+  noDataList: {
+    minHeight: 170,
+    padding: 16,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noDataListText: {
+    textAlign: 'center',
+    fontSize: theme.fontSizes.button,
+    fontWeight: theme.fontWeights.medium,
+    color: theme.colors.ui.secondary,
+  },
+  paddingMatches: {
+    maxWidth: 210,
+  },
+  paddingReceiveLiked: {
+    maxWidth: 300,
+  },
+  paddingLiked: {
+    maxWidth: 190,
+  },
+  paddingSaved: {
+    maxWidth: 300,
+  },
+  likedTextBlur: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 });
