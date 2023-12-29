@@ -3,6 +3,7 @@ import { View, FlatList } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
 import {
+  Column,
   dimensions,
   FullLoader,
   ImageContainer,
@@ -15,6 +16,8 @@ import { MediaMessageProps } from '../../../../../../types/screen.type/community
 import VedioPlayer from './components/video-player';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { styles } from './styles';
+import { theme } from '../../../../../../infrastructure/theme';
+import { Text } from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -35,7 +38,12 @@ export const MediaTab = (props: MediaMessageProps) => {
     );
   };
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarIndicatorStyle: { backgroundColor: theme.colors.ui.primary },
+        tabBarStyle: { backgroundColor: theme.colors.bg.secondary },
+      }}
+    >
       <Tab.Screen name="Image" component={GetImageMessage} />
       <Tab.Screen name="Video" component={GetVideoMessage} />
     </Tab.Navigator>
@@ -75,21 +83,21 @@ const ImageMessage = (props: MediaMessageProps) => {
         <>
           <FlatList
             data={images}
-            columnWrapperStyle={{ justifyContent: 'space-around' }}
+            columnWrapperStyle={styles.galleryWrapper}
             renderItem={({ item, index }) => {
               if (index === images.length - 1) {
                 return <View style={{ height: 400 }}></View>;
               }
+
               return (
-                <Spacer position="bottom" size={16}>
-                  <FastImage
-                    style={styles.galleryImage}
-                    source={{ uri: item }}
-                  />
-                </Spacer>
+                <FastImage
+                  style={styles.galleryImage}
+                  source={{ uri: item }}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
               );
             }}
-            numColumns={2}
+            numColumns={3}
             keyExtractor={(item, index) => index.toString()}
           />
         </>

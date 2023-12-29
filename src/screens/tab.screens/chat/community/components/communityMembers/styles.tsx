@@ -44,21 +44,27 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: '#302B2B',
   },
-
+  square: {
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    borderRadius: 4,
+    height: 150,
+    shadowColor: 'black',
+    width: 150,
+  },
   headerContainer: {
     padding: sizes[3],
+    backgroundColor: '#fff',
+    marginBottom: 10,
     ...Platform.select({
       ios: {
-        shadowColor: '#808080',
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
+        shadowColor: 'black',
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
       },
       android: {
-        elevation: 1.25,
+        elevation: 12,
       },
     }),
   },
