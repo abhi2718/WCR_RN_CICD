@@ -28,3 +28,7 @@ CometChatMessageInput ---> CometChatMessageInput
 want to see block group or user or group info
 //--------------------
 Go to CometChatDetails ----> find Leave Group
+
+
+Finding Bubble color 
+Go to CometChatMessageList and find getStyle

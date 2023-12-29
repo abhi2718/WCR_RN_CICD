@@ -26,7 +26,6 @@ export const CometChatCardBubble = (props: CometChatCardBubbleInterface) => {
   const [loggedInUser, setLoggedInUser] = React.useState<CometChat.User>(null);
 
   const [interactedElements, setInteractedElements] = React.useState<CometChat.Interaction[]>([]);
-
   const _style = new CardBubbleStyle({
     backgroundColor: theme.palette.getBackgroundColor(),
     borderRadius: 5,
@@ -66,7 +65,6 @@ export const CometChatCardBubble = (props: CometChatCardBubbleInterface) => {
         setLoggedInUser(u);
       })
       .catch(e => {
-        console.log("Error while getting loggedInUser");
         setLoggedInUser(null);
       });
     setInteractedElements(message.getInteractions() || []);

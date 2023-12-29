@@ -1417,6 +1417,7 @@ export const CometChatMessageList = forwardRef<
     });
   };
 
+ // styles of message bubble 
   const getStyle = useCallback(
     (item: CometChat.BaseMessage): BaseStyleInterface => {
       let _style = new BaseStyle({
@@ -1438,7 +1439,7 @@ export const CometChatMessageList = forwardRef<
           loggedInUser.current?.['uid'] &&
         item.getCategory() == MessageCategoryConstants.message
       )
-        _style.backgroundColor = '#e62323';
+        _style.backgroundColor = '#f9ebeb';
 
       return _style;
     },
@@ -1685,7 +1686,7 @@ export const CometChatMessageList = forwardRef<
         <View style={{ marginBottom: 10 }}>
           <CometChatDate
             timeStamp={getSentAtTimestamp(item)}
-            pattern={'dayDateFormat'}
+            pattern={'dayDateTimeFormat'}
             style={_dateSeperatorStyle}
             customDateString={
               dateSeperatorPattern

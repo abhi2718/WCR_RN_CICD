@@ -31,8 +31,6 @@ export const SearchModal = (props: SearchModalProps) => {
     loading,
     isSearchActive,
   } = useViewModal(props);
-
-  console.log(users.length);
   return (
     <Modal visible={showSearchModal}>
       <SafeAreaView style={searchStyle.container}>
