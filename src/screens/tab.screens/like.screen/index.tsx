@@ -20,6 +20,8 @@ import {
 import { ProfileView } from './components/profile';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
+import { BlurView } from '@react-native-community/blur';
+
 export const LikeScreen = () => {
   const {
     loading,
@@ -48,7 +50,7 @@ export const LikeScreen = () => {
           <>
             <ScrollView style={{ flex: 1 }}>
               <View style={styles.container}>
-                {data?.matchedUsersList?.length > 0 && (
+                {data?.matchedUsersList?.length > 0 ? (
                   <View>
                     <Row
                       justifyContent="space-between"
@@ -79,9 +81,20 @@ export const LikeScreen = () => {
                       })}
                     </ScrollView>
                   </View>
+                ) : (
+                  <View>
+                    <Text style={styles.matchHeading}>Match</Text>
+                    <View style={styles.noDataList}>
+                      <Text
+                        style={[styles.noDataListText, styles.paddingMatches]}
+                      >
+                        No matches so far; begin swiping to find new connections
+                      </Text>
+                    </View>
+                  </View>
                 )}
                 <Spacer position="top" size={10} />
-                {data?.likesReceived?.length > 0 && (
+                {data?.likesReceived?.length > 0 ? (
                   <View>
                     <Row
                       justifyContent="space-between"
@@ -105,14 +118,30 @@ export const LikeScreen = () => {
                             item={item}
                             showDeleteIcon={false}
                             isLikesReceived={true}
+                            path="scrollView"
                           />
                         );
                       })}
                     </ScrollView>
                   </View>
+                ) : (
+                  <View>
+                    <Text style={styles.matchHeading}>Likes Received</Text>
+                    <View style={styles.noDataList}>
+                      <Text
+                        style={[
+                          styles.noDataListText,
+                          styles.paddingReceiveLiked,
+                        ]}
+                      >
+                        Someone Liked you, Unlock the Premium feature to
+                        discover who's interested in you.
+                      </Text>
+                    </View>
+                  </View>
                 )}
                 <Spacer position="top" size={10} />
-                {data?.liked?.length > 0 && (
+                {data?.liked?.length > 0 ? (
                   <View>
                     <Row
                       justifyContent="space-between"
@@ -137,14 +166,32 @@ export const LikeScreen = () => {
                             deleteLiked={deleteLiked}
                             showDeleteIcon={true}
                             isLiked={true}
+                            path="scrollView"
                           />
                         );
                       })}
                     </ScrollView>
                   </View>
+                ) : (
+                  <View>
+                    <Text style={styles.matchHeading}>Liked</Text>
+                    <View style={styles.noDataList}>
+                      <Text
+                        style={[styles.noDataListText, styles.paddingLiked]}
+                      >
+                        Start swiping and giving likes to view profiles here.
+                      </Text>
+                      <BlurView
+                        style={styles.likedTextBlur}
+                        blurType="light"
+                        blurAmount={2}
+                        reducedTransparencyFallbackColor="white"
+                      />
+                    </View>
+                  </View>
                 )}
                 <Spacer position="top" size={10} />
-                {data?.allFavourite?.length > 0 && (
+                {data?.allFavourite?.length > 0 ? (
                   <View>
                     <Row
                       justifyContent="space-between"
@@ -169,10 +216,22 @@ export const LikeScreen = () => {
                             deleteFavourite={deleteFavourite}
                             showDeleteIcon={true}
                             isFavourite={true}
+                            path="scrollView"
                           />
                         );
                       })}
                     </ScrollView>
+                  </View>
+                ) : (
+                  <View>
+                    <Text style={styles.matchHeading}>Saved</Text>
+                    <View style={styles.noDataList}>
+                      <Text
+                        style={[styles.noDataListText, styles.paddingSaved]}
+                      >
+                        Start saving profiles to like them later.
+                      </Text>
+                    </View>
                   </View>
                 )}
               </View>

@@ -170,7 +170,7 @@ export const styles = StyleSheet.create({
   userNameText: {
     position: 'absolute',
     bottom: theme.units?.sizes[20],
-    left: theme.units.sizes[12],
+    left: theme.units.sizes[16],
     fontSize: theme.fontSizes.h6,
     color: theme.colors.ui.white,
     fontWeight: theme.fontWeights.bold,
