@@ -33,7 +33,7 @@ export default function CardCompoent({ item, height, cardRef }) {
     handleReport,
   } = useViewModal(item, cardRef);
   return (
-    <View style={cardStyles.deckContainer}>
+    <View style={[cardStyles.deckContainer, cardStyles.shadows]}>
       <Pressable style={cardStyles.shareIconContainer} onPress={handleShare}>
         <Image
           style={cardStyles.shareIcon}
@@ -66,8 +66,8 @@ export default function CardCompoent({ item, height, cardRef }) {
                 </Row>
               </FastImage>
             </View>
-            <View style={cardStyles.userInfo}>
-              <Row style={cardStyles.userInfoRow} gap={15}>
+            <View style={[cardStyles.userInfo, cardStyles.ph16]}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/degree.png')}
@@ -76,14 +76,14 @@ export default function CardCompoent({ item, height, cardRef }) {
                   {designation.userDegree}
                 </Text>
               </Row>
-              <Row style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/degTitle.png')}
                 />
                 <Text style={cardStyles.userInfoText}>{designation.title}</Text>
               </Row>
-              <Row style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/location.png')}
@@ -91,11 +91,12 @@ export default function CardCompoent({ item, height, cardRef }) {
                 <Text style={cardStyles.userInfoText}>{state}</Text>
               </Row>
             </View>
-            <View style={cardStyles.vitalSigns}>
+            <View style={[cardStyles.vitalSigns, cardStyles.ph16]}>
               <Text style={cardStyles.headingText}>Vital Signs</Text>
+              <Spacer position="top" size={5} />
               <Row
                 style={cardStyles.vitalSignsChips}
-                gap={15}
+                gap={12}
                 alignItems="center"
               >
                 {gender && (
@@ -273,7 +274,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 </View>
               );
             })}
-            <View style={cardStyles.inBtwnText}>
+            <View style={[cardStyles.inBtwnText, cardStyles.ph16]}>
               {item?.interests?.length > 0 && (
                 <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
               )}
@@ -285,7 +286,10 @@ export default function CardCompoent({ item, height, cardRef }) {
                 ))}
               </Row>
             </View>
-            <Row style={cardStyles.footerIconRow} justifyContent="space-around">
+            <Row
+              style={[cardStyles.footerIconRow, cardStyles.ph16]}
+              justifyContent="space-around"
+            >
               <Pressable onPress={_handleDisLike}>
                 <Image
                   style={cardStyles.footerIcon}

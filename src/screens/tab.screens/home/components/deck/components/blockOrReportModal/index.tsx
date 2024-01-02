@@ -1,135 +1,107 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Modal,
-  Text,
-  SafeAreaView,
-  Pressable,
-  Image,
-} from 'react-native';
-import { Row, dimensions } from '../../../../../../../components/tools';
-import { sizes } from '../../../../../../../infrastructure/theme/sizes';
+import { View, StyleSheet, Modal, Text, Pressable } from 'react-native';
+import { dimensions } from '../../../../../../../components/tools';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
 } from '../../../../../../../infrastructure/theme/fonts';
 
-export const BlockAndReportModal = (props:any) => {
+export const BlockAndReportModal = (props: any) => {
   const { showModal, setShowModal, handleBlockUser, handleReport } = props;
   return (
     <>
-      <Modal visible={showModal}>
-        <SafeAreaView style={styles.container}>
-          <View style={styles.mainContainer}>
-            <View style={{ flex: 1 }}>
-              <View style={{ flex: 1 }}>
-                <Row
-                  justifyContent="space-between"
-                  alignItems="center"
-                  style={styles.rowOne}
-                >
-                  <Text style={styles.title}>
-                    Do you want to Block or Report
-                  </Text>
-                  <Pressable onPress={() => setShowModal(false)}>
-                    <Image
-                      style={styles.closeIcon}
-                      source={require('../../../../../../../assets/images/icons/crossIcon.png')}
-                    />
-                  </Pressable>
-                </Row>
-              </View>
-              <View style={styles.btnContainer}>
-                <Row justifyContent="space-between">
-                  <Pressable onPress={handleBlockUser} style={styles.secondBtn}>
-                    <Text style={styles.btnText}>Block</Text>
-                  </Pressable>
-                  <Pressable onPress={handleReport} style={styles.primeBtn}>
-                    <Text style={styles.reportText}>Report</Text>
-                  </Pressable>
-                </Row>
-              </View>
-            </View>
+      <Modal
+        visible={showModal}
+        animationType="slide"
+        presentationStyle="pageSheet" // For bottom sheet-style
+        transparent={true} // Allow background visibility
+        style={styles.modalContainer}
+      >
+        <View style={styles.modalContent}>
+          <View style={styles.buttonContainer}>
+            <Pressable onPress={handleBlockUser}>
+              <Text style={styles.textOne}>Block</Text>
+            </Pressable>
+            <Pressable onPress={handleReport}>
+              <View style={styles.hrLine} />
+            </Pressable>
+            <Text style={styles.textTwo}>Report</Text>
           </View>
-        </SafeAreaView>
+          <View style={styles.backContainer}>
+            <Pressable onPress={() => setShowModal(false)}>
+              <Text style={styles.textBack}>Cancle</Text>
+            </Pressable>
+          </View>
+        </View>
       </Modal>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  modalContainer: {
+    backgroundColor: 'rgba(0, 0, 0)', // Adjust opacity as needed
+  },
+  modalContent: {
+    padding: 20,
+    borderRadius: 10,
+    position: 'absolute',
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    left: 0,
+    margin: 10,
+    width: dimensions.width - 20,
   },
-  mainContainer: {
-    paddingTop: sizes[3],
-    height: 100,
-    width: dimensions.width - 35,
-    borderRadius: sizes[3],
-    backgroundColor: colors.ui.white,
+  modalText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
   },
-  rowOne: {
+  buttonContainer: {
+    alignItems: 'center',
+    marginVertical: 10,
+    backgroundColor: 'rgba(245, 245, 245, 0.85)',
+    width: '100%',
+    borderRadius: 13,
+    gap: 20,
     paddingHorizontal: 16,
-    gap: 25,
+    paddingVertical: 18,
+    marginBottom: 8,
   },
-
-  btnContainer: {
-    borderTopColor: '#00000026',
-    borderTopWidth: 1,
+  hrLine: {
+    borderBottomColor: 'gray',
+    borderBottomWidth: 0.5,
+    width: dimensions.width - 63,
   },
-
-  title: {
-    color: colors.ui.black,
+  backContainer: {
+    backgroundColor: colors.ui.white,
+    width: '100%',
+    alignItems: 'center',
+    borderRadius: 13,
+    paddingHorizontal: 16,
+    paddingVertical: 18,
+    marginBottom: 8,
+  },
+  textBack: {
+    color: '#007AFF',
+    fontWeight: fontWeights.bold,
     fontSize: fontSizes.title,
-    fontWeight: fontWeights.semiBold,
   },
-
-  description: {
-    color: colors.ui.text,
+  textOne: {
+    color: colors.ui.primary,
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.title,
+  },
+  textTwo: {
+    color: colors.ui.textHead,
+    fontWeight: fontWeights.medium,
     fontSize: fontSizes.text,
   },
 
-  primeBtn: {
-    backgroundColor: colors.ui.primary,
-    minHeight: sizes[10],
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomRightRadius: sizes[3],
-    height: sizes[10],
-
-    btnText: {
-      fontSize: 20,
-      color: colors.ui.white,
-      fontWeight: fontWeights.semiBold,
-    },
-  },
-  secondBtn: {
-    backgroundColor: colors.ui.white,
-    minHeight: sizes[10],
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomLeftRadius: sizes[3],
-    height: sizes[10],
-  },
-  btnText: {
-    fontSize: fontSizes.h6,
-    fontWeight: fontWeights.regular,
-    color: colors.ui.text,
-  },
-  reportText: {
-    fontSize: fontSizes.h6,
-    fontWeight: fontWeights.regular,
-    color: colors.ui.white,
-  },
-  closeIcon: {
-    width: 20,
-    height: 20,
+  backButton: {
+    alignSelf: 'flex-end',
+    margin: 10,
   },
 });
