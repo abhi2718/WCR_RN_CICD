@@ -107,7 +107,7 @@ export const CometChatDate = (props: CometChatDateInterface) => {
     if (dt < 10) {
       dt = '0' + dt;
     }
-    return dt + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    return   (date.getMonth() + 1) + '/' + dt +  '/' + date.getFullYear();
   };
 
   const getTimeFormat = () => {

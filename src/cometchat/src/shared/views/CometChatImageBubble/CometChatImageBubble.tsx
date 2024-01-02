@@ -99,12 +99,12 @@ export const CometChatImageBubble = (props: CometChatImageBubbleInterface) => {
     return (
         <View onTouchEnd={openImage}>
             <Image
-                resizeMode={resizeMode || (Platform.OS == "android" ? "cover" : "contain")}
+                resizeMode={resizeMode || (Platform.OS == "android" ? "cover" : "cover")}
                 loadingIndicatorSource={placeHolderImage}
                 source={thumbnailUrl ?? imageUrl} style={{
-                    height, width,
+                    height,
+                    width,
                     aspectRatio,
-                    backgroundColor,
                     borderRadius,
                     ...border
                 }}
