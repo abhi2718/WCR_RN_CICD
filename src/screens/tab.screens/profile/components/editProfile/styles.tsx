@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   fieldValueContainer: {
-    paddingVertical: 5,
+    paddingTop: 10,
     borderBottomColor: '#B3B3B3',
     borderBottomWidth: 0.4,
   },
@@ -86,6 +86,7 @@ export const styles = StyleSheet.create({
     color: '#B3B3B3',
     marginLeft: -8,
     textAlign: 'left',
+    height: 20,
   },
   selectedItem: {
     marginTop: 10,
@@ -94,5 +95,6 @@ export const styles = StyleSheet.create({
   },
   selectRow: {
     width: '100%',
+    marginTop: -10,
   },
 });

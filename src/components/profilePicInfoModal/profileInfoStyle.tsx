@@ -66,3 +66,42 @@ export const modalStyle = StyleSheet.create({
     color: colors.ui.black,
   },
 });
+export const insModalStyle = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.ui.opacity,
+  },
+  modalView: {
+    backgroundColor: 'white',
+    shadowColor: colors.ui.black,
+    width: dimensions.width,
+    paddingTop: 50,
+    flex: 1,
+    padding: 16,
+  },
+  icon: {
+    width: sizes[4],
+    height: sizes[4],
+    marginTop: -15,
+  },
+  headerText: {
+    color: colors.ui.textHead,
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.h5,
+    marginBottom: 20,
+  },
+  rowOneImg: {
+    marginTop: 10,
+    // borderWidth: 2,
+    // borderColor: 'red',
+    width: '100%',
+    height: 300,
+  },
+  text: {
+    fontSize: fontSizes.text,
+    fontWeight: fontWeights.reqular,
+    fontcolor: colors.ui.text,
+  },
+});

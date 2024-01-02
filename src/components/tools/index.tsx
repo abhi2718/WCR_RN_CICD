@@ -176,9 +176,10 @@ type spacerProos = {
   size: number;
   children?: ReactNode;
   style?: object;
+  key?: number;
 };
 export const Spacer = (props: spacerProos) => {
-  const { position, size, children, style } = props;
+  const { position, size, children, style, key } = props;
   const computedStyle = getVariant(position, size);
   return <SpacerView style={[computedStyle, style]}>{children}</SpacerView>;
 };
