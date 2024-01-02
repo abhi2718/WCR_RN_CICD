@@ -42,7 +42,11 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
 import { useVerificationViewModal } from './stepTwo.ViewModal';
-import { VerificationInfoModal, VerificationInstructionModal } from '../../../components/verificationModal';
+import {
+  VerificationInfoModal,
+  IdverifyModal,
+  IdverifyStudentModal,
+} from '../../../components/verificationModal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface AvatarProps extends ImageProps {
@@ -87,11 +91,11 @@ const VerificationStepTwo = (props: AvatarProps) => {
   return (
     <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
       <ScreenContainer>
-        <VerificationInstructionModal
+        <IdverifyModal
           isVisible={isVerificationInfoModalVisible}
           onClose={closeModal}
-        ></VerificationInstructionModal>
-        <HeaderBar isVerificartionScreen={false} info={openModal}/>
+        ></IdverifyModal>
+        <HeaderBar isVerificartionScreen={false} info={openModal} />
         <KeyboardAvoidingView
           enabled
           behavior={isAndroid ? 'height' : 'padding'}

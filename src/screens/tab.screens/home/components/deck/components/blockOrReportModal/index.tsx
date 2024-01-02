@@ -23,10 +23,10 @@ export const BlockAndReportModal = (props: any) => {
             <Pressable onPress={handleBlockUser}>
               <Text style={styles.textOne}>Block</Text>
             </Pressable>
+            <View style={styles.hrLine} />
             <Pressable onPress={handleReport}>
-              <View style={styles.hrLine} />
+              <Text style={styles.textTwo}>Report</Text>
             </Pressable>
-            <Text style={styles.textTwo}>Report</Text>
           </View>
           <View style={styles.backContainer}>
             <Pressable onPress={() => setShowModal(false)}>
