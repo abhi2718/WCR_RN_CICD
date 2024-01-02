@@ -49,7 +49,6 @@ const VerificationPending = (props: ScreenParams) => {
         </View>
       )}
 
-      {/* // declined state */}
       {state === 'Rejected' && (
         <View style={pendingStyle.contentDeclined}>
           <Column gap={25} alignItems="center">

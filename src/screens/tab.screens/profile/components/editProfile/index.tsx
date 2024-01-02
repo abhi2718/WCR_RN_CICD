@@ -157,8 +157,6 @@ export const EditProfile = () => {
               </View>
             </Spacer>
           </Column>
-          <Spacer position="bottom" size={20} />
-          <Text style={styles.headingText}>Personal info</Text>
 
           <Column style={styles.ph16}>
             <Spacer position="top" size={10}>
@@ -166,30 +164,6 @@ export const EditProfile = () => {
               <View style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>{userProfile.gender}</Text>
               </View>
-            </Spacer>
-
-            <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Interests/Hobbies</Text>
-              <View style={styles.fieldValueContainer}>
-                <TouchableOpacity onPress={() => openModal('hobby')}>
-                  <Text style={styles.fieldValue}>Select</Text>
-                </TouchableOpacity>
-                <Image
-                  resizeMode="contain"
-                  style={styles.nextArrow}
-                  source={require('../../../../../assets/images/settings/Next.png')}
-                />
-              </View>
-              <MultiSelectModal
-                isVisible={openHobbyModal}
-                data={hobbies}
-                selectedItems={hobbiesList}
-                onClose={() => closeModal('hobby')}
-                onItemSelected={(selected) =>
-                  handleItemSelected(selected, 'hobby')
-                }
-              />
-              <Text>{hobbiesList.join(', ')}</Text>
             </Spacer>
 
             <Spacer position="top" size={10}>
@@ -229,46 +203,49 @@ export const EditProfile = () => {
                 />
               </Row>
             </Spacer>
-          </Column>
-
-          <Column>
-            <Spacer position="bottom" size={10}>
-              <Text>City</Text>
-              <TextInput
-                placeholder="City"
-                value={userProfile.city}
-                onChangeText={(text: string) =>
-                  _handleInputChange(text, 'city')
-                }
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>City</Text>
+              <View style={styles.fieldValueContainer}>
+                <TextInput
+                  placeholder="City"
+                  value={userProfile.city}
+                  onChangeText={(text: string) =>
+                    _handleInputChange(text, 'city')
+                  }
+                  style={styles.fieldValue}
+                />
+              </View>
+            </Spacer>
+            <Spacer position="top" size={10}>
+              <Text style={styles.fieldName}>Zipcode</Text>
+              <View style={styles.fieldValueContainer}>
+                <TextInput
+                  placeholder={
+                    user.address.country === 'USA' ? 'EX: 55555' : 'Ex: M4G3B2'
+                  }
+                  value={userProfile.zipcode}
+                  maxLength={user.address.country === 'USA' ? 5 : 6}
+                  onChangeText={(text: string) =>
+                    _handleInputChange(text, 'zipcode')
+                  }
+                  style={styles.fieldValue}
+                />
+              </View>
+            </Spacer>
+            <Spacer position="top" size={10}>
+              <CustomCheckBox
+                onPress={() => {
+                  setUserProfile((oldstate) => {
+                    return {
+                      ...oldstate,
+                      showGender: !userProfile.showGender,
+                    };
+                  });
+                }}
+                isChecked={userProfile.showGender}
+                label="Show Gender on profile"
               />
             </Spacer>
-            <Spacer position="bottom" size={10}>
-              <Text>Zipcode</Text>
-              <TextInput
-                placeholder={
-                  user.address.country === 'USA' ? 'EX: 55555' : 'Ex: M4G3B2'
-                }
-                value={userProfile.zipcode}
-                maxLength={user.address.country === 'USA' ? 5 : 6}
-                onChangeText={(text: string) =>
-                  _handleInputChange(text, 'zipcode')
-                }
-              />
-            </Spacer>
-          </Column>
-          <Column>
-            <CustomCheckBox
-              onPress={() => {
-                setUserProfile((oldstate) => {
-                  return {
-                    ...oldstate,
-                    showGender: !userProfile.showGender,
-                  };
-                });
-              }}
-              isChecked={userProfile.showGender}
-              label="Show Gender on profile"
-            />
             <CustomCheckBox
               onPress={() => {
                 setUserProfile((oldstate) => {
@@ -282,123 +259,189 @@ export const EditProfile = () => {
               label="Show Sexual orientation on profile"
             />
           </Column>
-          {optionsList.map((item, index) => {
-            if (index === 2) {
-              return (
-                <Column key={index}>
-                  <Spacer position="bottom" size={10}>
-                    <Text>Job Title</Text>
-                    <TextInput
-                      placeholder="Job Title"
-                      value={userProfile.jobTitle}
-                      onChangeText={(text: string) =>
-                        _handleInputChange(text, 'jobTitle')
+
+          <Column style={styles.ph16}>
+            {optionsList.map((item, index) => {
+              <>
+                <Spacer position="top" size={10}>
+                  <Text style={styles.fieldName}>Interests/Hobbies</Text>
+                  <View style={styles.fieldValueContainer}>
+                    <TouchableOpacity onPress={() => openModal('hobby')}>
+                      <Text style={styles.fieldValue}>Select</Text>
+                    </TouchableOpacity>
+                    <Image
+                      resizeMode="contain"
+                      style={styles.nextArrow}
+                      source={require('../../../../../assets/images/settings/Next.png')}
+                    />
+                  </View>
+                  <MultiSelectModal
+                    isVisible={openHobbyModal}
+                    data={hobbies}
+                    selectedItems={hobbiesList}
+                    onClose={() => closeModal('hobby')}
+                    onItemSelected={(selected) =>
+                      handleItemSelected(selected, 'hobby')
+                    }
+                  />
+                  <Text>{hobbiesList.join(', ')}</Text>
+                </Spacer>
+                ;
+              </>;
+
+              if (index === 2) {
+                return (
+                  <Spacer key={index} position="top" size={10}>
+                    <Text style={styles.fieldName}>Job Title</Text>
+                    <View style={styles.fieldValueContainer}>
+                      <TextInput
+                        placeholder="Job Title"
+                        value={userProfile.jobTitle}
+                        onChangeText={(text: string) =>
+                          _handleInputChange(text, 'jobTitle')
+                        }
+                        style={styles.fieldValue}
+                      />
+                    </View>
+                  </Spacer>
+                );
+              }
+              if (index === 3) {
+                return (
+                  <Spacer key={index} position="top" size={10}>
+                    <Text style={styles.fieldName}>
+                      Institution/School/Practice Name
+                    </Text>
+                    <View style={styles.fieldValueContainer}>
+                      <TextInput
+                        placeholder="Institution/School/Practice Name"
+                        value={userProfile.institution}
+                        onChangeText={(text: string) =>
+                          _handleInputChange(text, 'institution')
+                        }
+                        style={styles.fieldValue}
+                      />
+                    </View>
+                  </Spacer>
+                );
+              }
+              if (index === 4) {
+                return (
+                  <Spacer key={index} position="top" size={20}>
+                    <Row justifyContent="space-between">
+                      <Text style={styles.fieldName}>Height</Text>
+                      <Text style={styles.fieldName}>{heightRange[0]}</Text>
+                    </Row>
+                    <Column justifyContent="center" alignItems="center">
+                      <MultiSlider
+                        values={heightRange}
+                        min={4}
+                        max={7}
+                        step={0.1}
+                        onValuesChange={handleHeightSliderChange}
+                      />
+                    </Column>
+                  </Spacer>
+                );
+              }
+              if (item.title === 'Ethnicity') {
+                return (
+                  <Spacer key={index} position="top" size={10}>
+                    <Spacer key={index} position="top" size={10}>
+                      <Text style={styles.fieldName}>{item.title}</Text>
+                      <TouchableOpacity onPress={() => openModal('ethnicity')}>
+                        <Row
+                          style={[styles.selectRow, styles.fieldValueContainer]}
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Text style={styles.fieldValue}>Select</Text>
+                          <Image
+                            resizeMode="contain"
+                            style={styles.nextArrow}
+                            source={require('../../../../../assets/images/settings/Next.png')}
+                          />
+                        </Row>
+                      </TouchableOpacity>
+                    </Spacer>
+                    <MultiSelectModal
+                      isVisible={ethnicityModalVisible}
+                      data={ethnicity}
+                      selectedItems={selectedEthnicityItems}
+                      onClose={() => closeModal('ethnicity')}
+                      onItemSelected={(selected) =>
+                        handleItemSelected(selected, 'ethnicity')
                       }
                     />
+                    <Text>{selectedEthnicityItems.join(', ')}</Text>
                   </Spacer>
-                </Column>
-              );
-            }
-            if (index === 3) {
-              return (
-                <Column key={index}>
-                  <Spacer position="bottom" size={10}>
-                    <Text>Institution/School/Practice Name</Text>
-                    <TextInput
-                      placeholder="Institution/School/Practice Name"
-                      value={userProfile.institution}
-                      onChangeText={(text: string) =>
-                        _handleInputChange(text, 'institution')
+                );
+              }
+              if (item.title === 'Relationship level') {
+                return (
+                  <Spacer key={index} position="top" size={10}>
+                    <Spacer position="top" size={10}>
+                      <Text style={styles.fieldName}>{item.title}</Text>
+                      <TouchableOpacity
+                        onPress={() => openModal('relationshipLevel')}
+                      >
+                        <Row
+                          style={[styles.selectRow, styles.fieldValueContainer]}
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Text style={styles.fieldValue}>Select</Text>
+                          <Image
+                            resizeMode="contain"
+                            style={styles.nextArrow}
+                            source={require('../../../../../assets/images/settings/Next.png')}
+                          />
+                        </Row>
+                      </TouchableOpacity>
+                    </Spacer>
+                    <MultiSelectModal
+                      isVisible={relationshipLevelModalVisible}
+                      data={relationship}
+                      selectedItems={selectedrelationshipLevelItems}
+                      onClose={() => closeModal('relationshipLevel')}
+                      onItemSelected={(selected) =>
+                        handleItemSelected(selected, 'relationshipLevel')
                       }
                     />
+                    <Text>{selectedrelationshipLevelItems.join(', ')}</Text>
                   </Spacer>
-                </Column>
-              );
-            }
-            if (index === 4) {
+                );
+              }
               return (
-                <Spacer key={index} position="bottom" size={20}>
-                  <Row justifyContent="space-between">
-                    <Text>Height</Text>
-                    <Text>{heightRange[0]}</Text>
+                <Spacer key={index} position="top" size={10}>
+                  <Text style={styles.fieldName}>{item.title}</Text>
+                  <Row
+                    style={[styles.selectRow, styles.fieldValueContainer]}
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <ModalSelector
+                      data={item.option!}
+                      initValue={answer[item.initValue]}
+                      onChange={handleInputChange}
+                      style={styles.modalSelector}
+                      optionContainerStyle={styles.optionContainer}
+                      optionTextStyle={styles.optionText}
+                      cancelStyle={styles.cancelButton}
+                      selectedItemTextStyle={styles.selectedItem}
+                      initValueTextStyle={styles.initValueTextStyle}
+                      selectStyle={{ borderWidth: 0 }}
+                    />
+                    <Image
+                      resizeMode="contain"
+                      style={styles.nextArrow}
+                      source={require('../../../../../assets/images/settings/Next.png')}
+                    />
                   </Row>
-                  <Column justifyContent="center" alignItems="center">
-                    <MultiSlider
-                      values={heightRange}
-                      min={4}
-                      max={7}
-                      step={0.1}
-                      onValuesChange={handleHeightSliderChange}
-                    />
-                  </Column>
                 </Spacer>
               );
-            }
-            if (item.title === 'Ethnicity') {
-              return (
-                <View key={index}>
-                  <Row justifyContent="space-between">
-                    <Text>{item.title}</Text>
-                    <TouchableOpacity onPress={() => openModal('ethnicity')}>
-                      <Text>Select</Text>
-                    </TouchableOpacity>
-                  </Row>
-                  <MultiSelectModal
-                    isVisible={ethnicityModalVisible}
-                    data={ethnicity}
-                    selectedItems={selectedEthnicityItems}
-                    onClose={() => closeModal('ethnicity')}
-                    onItemSelected={(selected) =>
-                      handleItemSelected(selected, 'ethnicity')
-                    }
-                  />
-                  <Text>{selectedEthnicityItems.join(', ')}</Text>
-                </View>
-              );
-            }
-            if (item.title === 'Relationship level') {
-              return (
-                <View key={index}>
-                  <Row justifyContent="space-between">
-                    <Text>{item.title}</Text>
-                    <TouchableOpacity
-                      onPress={() => openModal('relationshipLevel')}
-                    >
-                      <Text>Select</Text>
-                    </TouchableOpacity>
-                  </Row>
-                  <MultiSelectModal
-                    isVisible={relationshipLevelModalVisible}
-                    data={relationship}
-                    selectedItems={selectedrelationshipLevelItems}
-                    onClose={() => closeModal('relationshipLevel')}
-                    onItemSelected={(selected) =>
-                      handleItemSelected(selected, 'relationshipLevel')
-                    }
-                  />
-                  <Text>{selectedrelationshipLevelItems.join(', ')}</Text>
-                </View>
-              );
-            }
-            return (
-              <Spacer key={index} position="bottom" size={20}>
-                <Row justifyContent="space-between" alignItems="center">
-                  <Text>{item.title}</Text>
-                  <ModalSelector
-                    data={item.option!}
-                    initValue={answer[item.initValue]}
-                    onChange={handleInputChange}
-                    style={styles.modalSelector}
-                    optionContainerStyle={styles.optionContainer}
-                    optionTextStyle={styles.optionText}
-                    cancelStyle={styles.cancelButton}
-                    selectedItemTextStyle={styles.selectedItem}
-                    initValueTextStyle={styles.initValueTextStyle}
-                  />
-                </Row>
-              </Spacer>
-            );
-          })}
+            })}
+          </Column>
         </View>
       </ScrollView>
     </SafeAreaView>

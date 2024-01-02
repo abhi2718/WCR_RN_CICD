@@ -26,15 +26,22 @@ export const DltLogOutModal = (props: DltLogOutType) => {
   const hardDeleteUser = async () => {
     try {
       await userProfileRepository.hardDeleteUser();
-      logOut();
+      handleLogOut();
     } catch (error) {}
+  };
+  const handleLogOut = () => {
+    setTimeout(() => {
+      logOut();
+    }, 500);
   };
 
   const logOutModalShow = () => {
+    setShowModal(false);
     setLogOutModal(true);
   };
 
   const showDeleteAccountModal = () => {
+    setShowModal(false);
     setDeleteModal(true);
   };
 
@@ -75,7 +82,6 @@ export const DltLogOutModal = (props: DltLogOutType) => {
               </View>
             </Row>
           </View>
-
           <Pressable onPress={closeModal}>
             <View style={styles.bottomContainer}></View>
           </Pressable>
@@ -86,7 +92,7 @@ export const DltLogOutModal = (props: DltLogOutType) => {
         setShowModal={setLogOutModal}
         title="Logout?"
         description="Are you sure want to log out?"
-        onPress={logOut}
+        onPress={handleLogOut}
       ></AlertScreen>
       <AlertScreen
         showModal={showDeleteModal}
