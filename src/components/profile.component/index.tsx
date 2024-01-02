@@ -11,10 +11,18 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import { Column, FullLoader, Row, Spacer } from '../tools';
+import { Column, FullLoader, Row, Spacer, dimensions } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
 import { theme } from '../../infrastructure/theme';
+import { colors } from '../../infrastructure/theme/colors';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
+import { sizes } from '../../infrastructure/theme/sizes';
+import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -100,53 +108,287 @@ export const ProfileModal = (props: profileProps) => {
                           <Text style={styles.aboutText}>{user.state}</Text>
                         </Row>
                       </View>
-                      <View style={styles.userInfo}>
+                      {/* <View style={styles.userInfo}>
                         <Text style={styles.vitalSigns}>Vital Signs</Text>
-                      </View>
-                    </View>
-                    <Row style={styles.userGallery}>
-                      <ScrollView horizontal={true}>
-                        {user?.photos.map(({ url, _id }) => {
-                          return (
-                            <Column key={_id} style={styles.padding10}>
-                              <FastImage
-                                source={{ uri: url }}
-                                style={styles.galleryImage}
-                                resizeMode={FastImage.resizeMode.cover}
-                              />
-                            </Column>
-                          );
-                        })}
-                      </ScrollView>
-                    </Row>
+                      </View> */}
 
-                    <Pressable onPress={handleShare}>
-                      <Text>Share</Text>
-                    </Pressable>
-                    <Row justifyContent="space-between">
-                      {showLike && (
-                        <Pressable onPress={handleLike}>
-                          <Text>Like</Text>
-                        </Pressable>
-                      )}
-                      {showSave && (
-                        <Pressable onPress={addFavourite}>
-                          <Text>Save</Text>
-                        </Pressable>
-                      )}
-                      {showDisLike && (
-                        <Pressable onPress={handleDisLike}>
-                          <Text>DisLike</Text>
-                        </Pressable>
-                      )}
-                    </Row>
-                    {showBlock && (
-                      <Row>
-                        <Pressable onPress={handleBlockUser}>
-                          <Text>Block/Report</Text>
-                        </Pressable>
+                      <View style={styles.vitalSigns}>
+                        {(user?.gender?.length > 0 ||
+                          user?.drinking?.length > 0 ||
+                          user?.ethnicity?.length > 0 ||
+                          user?.maritalStatus) && (
+                          <Text style={styles.headingText}>Vital Signs</Text>
+                        )}
+                        <Row
+                          style={styles.vitalSignsChips}
+                          gap={15}
+                          alignItems="center"
+                        >
+                          {user.gender && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              {user.gender === 'Female' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/femailAvatar.png')}
+                                />
+                              )}
+                              {user.gender === 'Male' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/maleAvatar.png')}
+                                />
+                              )}
+                              {user.gender === 'Transman' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/transmanAvatar.png')}
+                                />
+                              )}
+                              {user.gender === 'Transwomen' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/transwomenAvator.png')}
+                                />
+                              )}
+                              <Text style={styles.chipText}>
+                                {' '}
+                                {user?.gender}
+                              </Text>
+                            </Row>
+                          )}
+
+                          {user.showSexualPreference &&
+                            user.sexualPreference && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                {user.sexualPreference === 'Straight' && (
+                                  <Image
+                                    style={styles.chipIcon}
+                                    source={require('../../assets/images/icons/straight.png')}
+                                  />
+                                )}
+                                {user.sexualPreference === 'Lesbian' && (
+                                  <Image
+                                    style={styles.chipIcon}
+                                    source={require('../../assets/images/icons/lesbian.png')}
+                                  />
+                                )}
+                                {user.sexualPreference === 'Gay' && (
+                                  <Image
+                                    style={styles.chipIcon}
+                                    source={require('../../assets/images/icons/gay.png')}
+                                  />
+                                )}
+                                <Text style={styles.chipText}>
+                                  {user.sexualPreference}
+                                </Text>
+                              </Row>
+                            )}
+
+                          {user.userHeight && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/icons/heightScale.png')}
+                              />
+                              <Text style={styles.chipText}>
+                                {user.userHeight.feet}"{user.userHeight.inch}'
+                              </Text>
+                            </Row>
+                          )}
+
+                          {user.ethnicity.length >= 0 &&
+                            user.ethnicity.map((ethnicity: String) => (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                {/* <Image
+                        style={styles.chipIcon}
+                        source={require('../../assets/images/icons/USAFlag.png')}
+                      /> */}
+                                <Text style={styles.chipText}>{ethnicity}</Text>
+                              </Row>
+                            ))}
+
+                          {user.maritalStatus && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/icons/heartVitialSign.png')}
+                              />
+                              <Text style={styles.chipText}>
+                                {user.maritalStatus}
+                              </Text>
+                            </Row>
+                          )}
+
+                          {user.religion && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              {user.religion === 'Christian' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/Christian.png')}
+                                />
+                              )}
+                              {user.religion === 'Muslim' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/Muslim.png')}
+                                />
+                              )}
+                              {user.religion === 'Hindu' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/hindu.png')}
+                                />
+                              )}
+                              <Text style={styles.chipText}>
+                                {user.religion}
+                              </Text>
+                            </Row>
+                          )}
+                          {user.politics && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Text style={styles.chipText}>
+                                {user.politics}
+                              </Text>
+                            </Row>
+                          )}
+                          {user.kids &&
+                            (user.kids === ' Prefer not to say' ? null : (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/kids.png')}
+                                />
+                                <Text style={styles.chipText}>{user.kids}</Text>
+                              </Row>
+                            ))}
+
+                          {user.covidVaccineStatus && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/icons/vaccinated.png')}
+                              />
+                              <Text style={styles.chipText}>
+                                {user.covidVaccineStatus}
+                              </Text>
+                            </Row>
+                          )}
+
+                          {user.drinking && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/icons/drinks.png')}
+                              />
+                              <Text style={styles.chipText}>
+                                {user.drinking}
+                              </Text>
+                            </Row>
+                          )}
+                        </Row>
+                      </View>
+
+                      {/* End Vital */}
+                    </View>
+                    <View style={styles.marginY}>
+                      {user?.photos.map(({ url, _id }, index) => {
+                        return (
+                          <View key={_id} style={styles.marginBottom}>
+                            <FastImage
+                              source={{ uri: url }}
+                              style={styles.pictures}
+                              resizeMode={FastImage.resizeMode.cover}
+                            />
+                            {index === 0 && user?.bio?.length > 0 && (
+                              <View style={styles.inBtwnText}>
+                                <Text style={styles.headingText}>About</Text>
+                                <Text style={styles.aboutText}>{user.bio}</Text>
+                              </View>
+                            )}
+                          </View>
+                        );
+                      })}
+                    </View>
+                    <View style={styles.shareWrapper}>
+                      <Row justifyContent="space-between">
+                        {showDisLike && (
+                          <Pressable onPress={handleDisLike}>
+                            <Image
+                              style={styles.shareIcon}
+                              source={require('../../assets/images/icons/disLike.png')}
+                            />
+                          </Pressable>
+                        )}
+                        {showLike && (
+                          <Pressable onPress={handleLike}>
+                            <Image
+                              style={cardStyles.shareIcon}
+                              source={require('../../assets/images/icons/like.png')}
+                            />
+                          </Pressable>
+                        )}
+                        {showSave && (
+                          <Pressable onPress={addFavourite}>
+                            <Image
+                              style={styles.shareIcon}
+                              source={require('../../assets/images/icons/save.png')}
+                            />
+                          </Pressable>
+                        )}
                       </Row>
-                    )}
+                      <Pressable onPress={handleShare}>
+                        <Text style={styles.blockReportText}>
+                          Share with a Friend
+                        </Text>
+                      </Pressable>
+                      {showBlock && (
+                        <Pressable onPress={handleBlockUser}>
+                          <Text style={styles.blockReportText}>
+                            Block/Report
+                          </Text>
+                        </Pressable>
+                      )}
+                    </View>
                     <Spacer position="bottom" size={60} />
                   </ScrollView>
                 )}
@@ -196,10 +438,9 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: theme.fontWeights.semiBold,
   },
-  galleryImage: {
-    width: theme.units.sizes[180],
-    height: theme.units.sizes[180],
-    borderRadius: theme.units.sizes[32],
+  pictures: {
+    width: dimensions.width,
+    height: dimensions.height - 150,
   },
   backHeaderPadding: {
     paddingTop: theme.units.sizes[0],
@@ -213,17 +454,15 @@ export const styles = StyleSheet.create({
   sectionWhite: {
     backgroundColor: theme.colors.ui.white,
   },
-  padding10: {
-    padding: theme.units.sizes[10],
+  marginY: {
+    marginVertical: 16,
+  },
+  marginBottom: {
+    marginBottom: 16,
   },
   imageView: {
     padding: theme.units.sizes[10],
     flexBasis: '50%',
-  },
-  vitalSigns: {
-    fontSize: theme.fontSizes.text,
-    fontWeight: theme.fontWeights.bold,
-    color: theme.colors.ui.text,
   },
   imageIcon: {
     width: theme.units.sizes[19],
@@ -233,5 +472,57 @@ export const styles = StyleSheet.create({
   userGallery: {
     paddingTop: 5,
     paddingBottom: 24,
+  },
+
+  vitalSigns: {
+    paddingHorizontal: 16,
+  },
+  vitalSignsChips: {
+    marginVertical: sizes[2],
+    flexWrap: 'wrap',
+  },
+  chip: {
+    backgroundColor: colors.ui.deckChipBgColor,
+    paddingVertical: sizes[1],
+    paddingHorizontal: sizes[2],
+    borderRadius: sizes[4],
+  },
+  chipIcon: {
+    height: sizes[5],
+    width: sizes[5],
+    overflow: 'visible',
+    resizeMode: 'contain',
+  },
+  chipText: {
+    color: colors.ui.text,
+    fontSize: fontSizes.button,
+  },
+  headingText: {
+    marginTop: sizes[2],
+    color: colors.ui.text,
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.text,
+    fontFamily: fonts.body,
+  },
+  inBtwnText: {
+    marginVertical: sizes[1],
+    paddingHorizontal: 16,
+  },
+  shareWrapper: {
+    minHeight: 180,
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+  },
+  shareIcon: {
+    height: sizes[12],
+    width: sizes[12],
+    overflow: 'visible',
+    resizeMode: 'contain',
+  },
+  blockReportText: {
+    textAlign: 'center',
+    marginVertical: sizes[2],
+    fontWeight: fontWeights.semiBold,
+    fontSize: fontSizes.title,
   },
 });

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Pressable, Text, View, StyleSheet, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ProfileModal } from '../../../../components/profile.component';
-import { Column, Row, Spacer } from '../../../../components/tools';
+import { Column, Row, Spacer, dimensions } from '../../../../components/tools';
 import { ProfileViewProps } from '../../../../types/screen.type/like.type';
 import { theme } from '../../../../infrastructure/theme';
 import LinearGradient from 'react-native-linear-gradient';
@@ -58,7 +58,7 @@ export const ProfileView = (props: ProfileViewProps) => {
                   style={
                     path === 'scrollView'
                       ? styles.matchAvatar
-                      : styles.avatarModalWidth
+                      : styles.avatarWidth
                   }
                   source={{
                     uri: item?.profilePicture?.url,
@@ -71,7 +71,7 @@ export const ProfileView = (props: ProfileViewProps) => {
                       style={styles.gradient}
                     >
                       <View style={[styles.userTextView, { width: '100%' }]}>
-                        <Row justifyContent="space-between" alignItems="start">
+                        <Row justifyContent="space-between" alignItems="center">
                           <Column>
                             <Text style={styles.userNameText}>
                               {item?.profile?.displayName ??
@@ -94,11 +94,11 @@ export const ProfileView = (props: ProfileViewProps) => {
                           <Spacer position="right" size={20}>
                             {isMatch && (
                               <Pressable onPress={navigateToChat}>
-                                <Text
-                                  style={[styles.chatButton, styles.textBlack]}
-                                >
-                                  Chat
-                                </Text>
+                                <Image
+                                  style={{ width: 32 }}
+                                  source={require('../../../../assets/images/icons/matchChat.png')}
+                                  resizeMode="contain"
+                                />
                               </Pressable>
                             )}
                           </Spacer>
@@ -164,11 +164,7 @@ export const ProfileView = (props: ProfileViewProps) => {
           <Column>
             <Spacer position="right" size={10}>
               <FastImage
-                style={
-                  path === 'scrollView'
-                    ? styles.avatarScrollWidth
-                    : styles.avatarModalWidth
-                }
+                style={styles.avatarWidth}
                 source={{
                   uri: item?.userId?.profilePicture?.url,
                 }}
@@ -218,11 +214,7 @@ export const ProfileView = (props: ProfileViewProps) => {
           <Column>
             <Spacer position="right" size={10}>
               <FastImage
-                style={
-                  path === 'scrollView'
-                    ? styles.avatarScrollWidth
-                    : styles.avatarModalWidth
-                }
+                style={styles.avatarWidth}
                 source={{
                   uri: item?.profilePicture?.url,
                 }}
@@ -273,6 +265,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     maxWidth: 200,
     backgroundColor: theme.colors.ui.white,
+    paddingHorizontal: 8,
   },
   relative: {
     position: 'relative',
@@ -285,13 +278,8 @@ export const styles = StyleSheet.create({
     height: theme.units.sizes[24],
     borderRadius: theme.units.sizes[100],
   },
-  avatarScrollWidth: {
-    width: theme.units.sizes[185],
-    height: theme.units.sizes[165],
-    borderRadius: theme.units.sizes[30],
-  },
-  avatarModalWidth: {
-    width: '100%',
+  avatarWidth: {
+    width: (dimensions.width - 40) / 2,
     height: theme.units.sizes[165],
     borderRadius: theme.units.sizes[30],
   },

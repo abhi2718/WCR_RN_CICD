@@ -140,6 +140,7 @@ export const LikeScreen = () => {
                     </View>
                   </View>
                 )}
+
                 <Spacer position="top" size={10} />
                 {data?.liked?.length > 0 ? (
                   <View>
