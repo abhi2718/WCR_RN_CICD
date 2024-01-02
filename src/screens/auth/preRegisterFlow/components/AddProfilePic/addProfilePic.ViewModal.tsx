@@ -295,6 +295,7 @@ export const useAddProfilePicViewModal = (props: any) => {
           update: {
             profilePicture: profileImage,
             photos: photos,
+            steps:6
           },
         },
       );

@@ -1,6 +1,8 @@
 import moment from 'moment';
 import { CheckBoxDataType } from '../types/components/checkbox.type';
 import { preferNotToSay } from './constanst';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../navigation';
 
 export const calculateDateLessThan18YearsAgo = (inputDate: Date): Date => {
   const eighteenYearsAgo = new Date(inputDate);
@@ -75,4 +77,79 @@ export function formatNumber(inputNumber:number) {
     return wholePart;
   }
   return `${wholePart}'${decimalPart}`;
+};
+
+const navigation = useNavigation();
+
+export const navigateToScreen = (user: any) => {
+  if (user.verification.status === 'Verified') {
+    navigation.navigate(ROUTES.Tab);
+  } else {
+    if (user.verificationId.submitted) {
+      navigation.navigate(ROUTES.VerificationPending);
+    } else {
+      switch (user.steps) {
+        case 1:
+          user.steps = 1;
+          navigation.navigate(ROUTES.Gender);
+          break;
+        case 2:
+          user.steps = 2;
+          navigation.navigate(ROUTES.GenderPronoun);
+          break;
+        case 3:
+          user.steps = 3;
+          navigation.navigate(ROUTES.SexualOrientation);
+          break;
+        case 4:
+          user.steps = 4;
+          navigation.navigate(ROUTES.Location);
+          break;
+        case 5:
+          user.steps = 5;
+          navigation.navigate(ROUTES.Profession);
+
+          break;
+        case 6:
+          user.steps = 6;
+          navigation.navigate(ROUTES.ProfilePic);
+
+          break;
+        case 7:
+          user.steps = 7;
+          navigation.navigate(ROUTES.Height);
+          break;
+        case 8:
+          user.steps = 8;
+          navigation.navigate(ROUTES.AddEthnicity);
+          break;
+        case 9:
+          user.steps = 9;
+          navigation.navigate(ROUTES.LookingFor);
+          break;
+        case 10:
+          user.steps = 10;
+          navigation.navigate(ROUTES.MaritalStatus);
+          break;
+        case 11:
+          user.steps = 11;
+          navigation.navigate(ROUTES.Kids);
+          break;
+        case 12:
+          user.steps = 12;
+          navigation.navigate(ROUTES.Habits);
+          break;
+        case 13:
+          user.steps = 13;
+          navigation.navigate(ROUTES.About);
+
+        case 14:
+          user.steps = 14;
+          navigation.navigate(ROUTES.Hobbies);
+          break;
+        default:
+          navigation.navigate(ROUTES.Gender);
+      }
+    }
+  }
 };

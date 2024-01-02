@@ -48,6 +48,7 @@ export const useMaritalStatusViewModal = (props: ScreenParams) => {
         maritalStatus: selectedMaritalStatus,
         politics: selectedPoliticalView,
         religion: selectedReligion,
+        steps:10
       };
 
       if(user?.maritalStatus=== selectedMaritalStatus && user.politics ===selectedPoliticalView && user?.religion=== selectedReligion){

@@ -56,7 +56,8 @@ export const useHabitViewModal = (props: ScreenParams) => {
             drinking: selectedDrinkingHabits,
             smoking: selectedSmokingHabits,
             excercise: selectedExercise,
-            pets: selectedPets
+            pets: selectedPets,
+            steps:12
           };
 
           if(user?.drinking === selectedDrinkingHabits && user?.smoking === selectedSmokingHabits && user?.excercise === selectedExercise && user?.pets === selectedPets){
