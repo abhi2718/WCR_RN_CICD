@@ -58,7 +58,7 @@ export const ProfileView = (props: ProfileViewProps) => {
                   style={
                     path === 'scrollView'
                       ? styles.matchAvatar
-                      : styles.avatarWidth
+                      : styles.avatarModalWidth
                   }
                   source={{
                     uri: item?.profilePicture?.url,
@@ -164,7 +164,11 @@ export const ProfileView = (props: ProfileViewProps) => {
           <Column>
             <Spacer position="right" size={10}>
               <FastImage
-                style={styles.avatarWidth}
+                style={
+                  path === 'modalView'
+                    ? styles.avatarModalWidth
+                    : styles.avatarWidth
+                }
                 source={{
                   uri: item?.userId?.profilePicture?.url,
                 }}
@@ -214,7 +218,11 @@ export const ProfileView = (props: ProfileViewProps) => {
           <Column>
             <Spacer position="right" size={10}>
               <FastImage
-                style={styles.avatarWidth}
+                style={
+                  path === 'modalView'
+                    ? styles.avatarModalWidth
+                    : styles.avatarWidth
+                }
                 source={{
                   uri: item?.profilePicture?.url,
                 }}
@@ -265,7 +273,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     maxWidth: 200,
     backgroundColor: theme.colors.ui.white,
-    paddingHorizontal: 8,
   },
   relative: {
     position: 'relative',
@@ -279,7 +286,12 @@ export const styles = StyleSheet.create({
     borderRadius: theme.units.sizes[100],
   },
   avatarWidth: {
-    width: (dimensions.width - 40) / 2,
+    width: (dimensions.width - 32) / 2,
+    height: theme.units.sizes[165],
+    borderRadius: theme.units.sizes[30],
+  },
+  avatarModalWidth: {
+    width: (dimensions.width - 48) / 2,
     height: theme.units.sizes[165],
     borderRadius: theme.units.sizes[30],
   },
