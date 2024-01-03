@@ -15,6 +15,7 @@ import { SearchModal } from './components/searchModal';
 import { RunOutOffProfile } from './components/runOutOffProfile';
 import { PausedProfile } from './components/pausedProfile';
 import { HeaderDeck } from '../../../../../components/header';
+import { MatchScreen } from './components/matchScreen';
 export default function Deck({ route }) {
   const {
     isLoading,
@@ -34,10 +35,20 @@ export default function Deck({ route }) {
     infoScreenRef,
     clearProfile,
     updateIsNewUser,
+    isMatch,
+    handleHideOfIsMatchScreen,
+    startChat
   } = useViewModal(route);
 
   if (isLoading) {
     return <FullLoader />;
+  }
+  if (isMatch?.status) {
+    return <MatchScreen
+      isMatch={isMatch}
+      startChat={startChat}
+      handleHideOfIsMatchScreen={handleHideOfIsMatchScreen}
+    />;
   }
   return (
     <View

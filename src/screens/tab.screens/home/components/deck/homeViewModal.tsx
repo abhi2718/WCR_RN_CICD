@@ -29,10 +29,14 @@ export const useViewModal = (route: RouteType) => {
   const token = useRef(user?.token ? user?.token : null).current;
   const [isNewUser, setIsNewUser] = useState(user.homeInfoModal);
   const { fetchAll } = useContext(LikeContext);
-  const {count } = useContext(NotificationCountContext);
+  const { count } = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
   notificationuseViewModal();
   useCometChatInit();
+  const [isMatch, setIsMatch] = useState({
+    status: !false,
+    matchUser: null,
+  });
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;
@@ -70,7 +74,13 @@ export const useViewModal = (route: RouteType) => {
   const handleLike = async (index: number) => {
     try {
       const payLoad = createPayLoafForUserAction(index, 'Like');
-      await homeDeckRepository.userReactin(payLoad);
+      const { data } = await homeDeckRepository.userReactin(payLoad);
+      if (data?.isMatch) {
+        setIsMatch({
+          status: true,
+          matchUser: profiles[index],
+        });
+      }
       fetchAll(user._id);
     } catch (error) {}
   };
@@ -110,7 +120,21 @@ export const useViewModal = (route: RouteType) => {
       dispatch(addUser(data));
     } catch (err: any) {}
   };
-
+  const handleHideOfIsMatchScreen = () => {
+    setIsMatch({
+      status: false,
+      matchUser: null,
+    });
+  };
+  const navigation = useNavigation();
+  const startChat = () => {
+    if (isMatch?.matchUser) {
+      navigation.navigate(ROUTES.CommunityPrivateChat, {
+        senderId: isMatch?.matchUser?._id,
+        name: isMatch?.matchUser?.profile?.name?.first,
+      });
+    }
+  };
   return {
     isLoading,
     profiles,
@@ -131,5 +155,8 @@ export const useViewModal = (route: RouteType) => {
     isNewUser,
     setIsNewUser,
     clearProfile,
+    isMatch,
+    handleHideOfIsMatchScreen,
+    startChat,
   };
 };
