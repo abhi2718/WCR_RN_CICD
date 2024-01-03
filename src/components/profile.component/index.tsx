@@ -338,7 +338,15 @@ export const ProfileModal = (props: profileProps) => {
                               source={{ uri: url }}
                               style={styles.pictures}
                               resizeMode={FastImage.resizeMode.cover}
-                            />
+                            >
+                              <LinearGradient
+                                colors={[
+                                  'rgba(0, 0, 0, 0.00)',
+                                  ' rgba(0, 0, 0, 0.9)',
+                                ]}
+                                style={styles.gradient}
+                              />
+                            </FastImage>
                             {index === 0 && user?.bio?.length > 0 && (
                               <View style={styles.inBtwnText}>
                                 <Text style={styles.headingText}>About</Text>

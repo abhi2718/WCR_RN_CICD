@@ -106,6 +106,12 @@ export const ProfileView = (props: ProfileViewProps) => {
                       </View>
                     </LinearGradient>
                   )}
+                  {path === 'modalView' && (
+                    <LinearGradient
+                      colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
+                      style={styles.gradient}
+                    />
+                  )}
                 </FastImage>
               </Spacer>
             </Spacer>
@@ -173,7 +179,12 @@ export const ProfileView = (props: ProfileViewProps) => {
                   uri: item?.userId?.profilePicture?.url,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-              />
+              >
+                <LinearGradient
+                  colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
+                  style={styles.gradient}
+                />
+              </FastImage>
             </Spacer>
             <Column>
               <Spacer position="bottom" size={10}>
@@ -227,7 +238,12 @@ export const ProfileView = (props: ProfileViewProps) => {
                   uri: item?.profilePicture?.url,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-              />
+              >
+                <LinearGradient
+                  colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
+                  style={styles.gradient}
+                />
+              </FastImage>
             </Spacer>
             <Column justifyContent="center" alignItems="center">
               <Spacer position="bottom" size={10}>
