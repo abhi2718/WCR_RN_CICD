@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { dimensions } from '../../../../../../../components/tools';
 import {
   fontSizes,
@@ -7,10 +7,23 @@ import {
 } from '../../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
+import { theme } from '../../../../../../../infrastructure/theme';
 export const cardStyles = StyleSheet.create({
   deckContainer: {
     backgroundColor: '#fff',
     position: 'relative',
+  },
+  ph16: {
+    paddingHorizontal: 16,
+  },
+  shadows: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 32,
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+    shadowRadius: 9,
+    shadowOffset: { width: 0, height: 0 },
   },
   shareIconContainer: {
     position: 'absolute',
@@ -47,7 +60,7 @@ export const cardStyles = StyleSheet.create({
     width: sizes[5],
   },
   userInfo: {
-    marginTop: sizes[2],
+    marginVertical: sizes[1],
   },
   userInfoRow: {
     marginTop: sizes[2],
