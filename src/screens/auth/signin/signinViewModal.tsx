@@ -15,7 +15,7 @@ import {
 } from '../../../types/services.types/firebase.service';
 import { addUser } from '../../../store/reducers/user.reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { navigateToScreen } from '../../../utils/common.functions';
+import { useNavigateToScreen } from '../../../utils/common.functions';
 
 export const useViewModal = (props: ScreenParams) => {
   const { navigation } = props;
@@ -27,6 +27,7 @@ export const useViewModal = (props: ScreenParams) => {
   const [fbdata, setFbData] = useState(null);
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
+  const {navigateToScreen} = useNavigateToScreen()
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
