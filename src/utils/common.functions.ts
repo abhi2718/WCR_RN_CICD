@@ -93,61 +93,61 @@ export const useNavigateToScreen = () => {
         switch (user.steps) {
           case 1:
             user.steps = 1;
-            navigation.navigate(ROUTES.Gender);
+            navigation.navigate(ROUTES.GenderPronoun);
             break;
           case 2:
             user.steps = 2;
-            navigation.navigate(ROUTES.GenderPronoun);
+            navigation.navigate(ROUTES.SexualOrientation);
             break;
           case 3:
             user.steps = 3;
-            navigation.navigate(ROUTES.SexualOrientation);
+            navigation.navigate(ROUTES.Location);
             break;
           case 4:
             user.steps = 4;
-            navigation.navigate(ROUTES.Location);
+            navigation.navigate(ROUTES.Profession);
             break;
           case 5:
             user.steps = 5;
-            navigation.navigate(ROUTES.Profession);
+            navigation.navigate(ROUTES.ProfilePic);
   
             break;
           case 6:
             user.steps = 6;
-            navigation.navigate(ROUTES.ProfilePic);
+            navigation.navigate(ROUTES.Height);
   
             break;
           case 7:
             user.steps = 7;
-            navigation.navigate(ROUTES.Height);
+            navigation.navigate(ROUTES.AddEthnicity);
             break;
           case 8:
             user.steps = 8;
-            navigation.navigate(ROUTES.AddEthnicity);
+            navigation.navigate(ROUTES.LookingFor);
             break;
           case 9:
             user.steps = 9;
-            navigation.navigate(ROUTES.LookingFor);
+            navigation.navigate(ROUTES.MaritalStatus);
             break;
           case 10:
             user.steps = 10;
-            navigation.navigate(ROUTES.MaritalStatus);
+            navigation.navigate(ROUTES.Kids);
             break;
           case 11:
             user.steps = 11;
-            navigation.navigate(ROUTES.Kids);
+            navigation.navigate(ROUTES.Habits);
             break;
           case 12:
             user.steps = 12;
-            navigation.navigate(ROUTES.Habits);
+            navigation.navigate(ROUTES.About);
             break;
           case 13:
             user.steps = 13;
-            navigation.navigate(ROUTES.About);
+            navigation.navigate(ROUTES.Hobbies);
   
           case 14:
             user.steps = 14;
-            navigation.navigate(ROUTES.Hobbies);
+            navigation.navigate(ROUTES.VerificationStepOne);
             break;
           default:
             navigation.navigate(ROUTES.Gender);
