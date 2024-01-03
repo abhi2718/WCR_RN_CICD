@@ -69,7 +69,6 @@ export const EditProfile = () => {
       </View>
       <ScrollView>
         <Text style={styles.headingText}>Media</Text>
-        {/* <Spacer position="bottom" size={-30} /> */}
         <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
           <Text style={styles.headingText}>About Me</Text>
@@ -260,35 +259,8 @@ export const EditProfile = () => {
             />
           </Column>
 
-          <Column style={styles.ph16}>
+         <Column style={styles.ph16}>
             {optionsList.map((item, index) => {
-              <>
-                <Spacer position="top" size={10}>
-                  <Text style={styles.fieldName}>Interests/Hobbies</Text>
-                  <View style={styles.fieldValueContainer}>
-                    <TouchableOpacity onPress={() => openModal('hobby')}>
-                      <Text style={styles.fieldValue}>Select</Text>
-                    </TouchableOpacity>
-                    <Image
-                      resizeMode="contain"
-                      style={styles.nextArrow}
-                      source={require('../../../../../assets/images/settings/Next.png')}
-                    />
-                  </View>
-                  <MultiSelectModal
-                    isVisible={openHobbyModal}
-                    data={hobbies}
-                    selectedItems={hobbiesList}
-                    onClose={() => closeModal('hobby')}
-                    onItemSelected={(selected) =>
-                      handleItemSelected(selected, 'hobby')
-                    }
-                  />
-                  <Text>{hobbiesList.join(', ')}</Text>
-                </Spacer>
-                ;
-              </>;
-
               if (index === 2) {
                 return (
                   <Spacer key={index} position="top" size={10}>
@@ -412,6 +384,7 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
+              
               return (
                 <Spacer key={index} position="top" size={10}>
                   <Text style={styles.fieldName}>{item.title}</Text>
@@ -441,7 +414,7 @@ export const EditProfile = () => {
                 </Spacer>
               );
             })}
-          </Column>
+          </Column> 
         </View>
       </ScrollView>
     </SafeAreaView>
