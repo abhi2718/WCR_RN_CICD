@@ -153,7 +153,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
               </View>
             )}
           </View>
-
           <View style={{ ...verificationStyle.footerDiv }}>
             {verificationOption === 'License Number' && (
               <>

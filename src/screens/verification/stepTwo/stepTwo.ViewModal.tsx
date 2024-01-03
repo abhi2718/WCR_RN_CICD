@@ -142,8 +142,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     setPhdOptionPicUploadingModal(false);
   const openPhdOptionPicUploadingModal = () =>
     setPhdOptionPicUploadingModal(true);
-
-  // ----------------------------------------------------------------
   const [isSelfie, setIsSelfie] = useState(false);
 
   const [selfie, setSelfie] = useState<ImageDataType | null>(

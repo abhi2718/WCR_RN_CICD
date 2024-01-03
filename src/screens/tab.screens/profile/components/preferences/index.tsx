@@ -64,6 +64,7 @@ export const PreferencesScreen = () => {
             if (index === 0) {
               return (
                 <Row
+                  key={index}
                   style={styles.heading}
                   justifyContent="space-between"
                   alignItems="center"
@@ -164,6 +165,7 @@ export const PreferencesScreen = () => {
             if (index === 5) {
               return (
                 <Row
+                  key={index}
                   style={styles.heading}
                   justifyContent="space-between"
                   alignItems="center"
@@ -175,6 +177,7 @@ export const PreferencesScreen = () => {
             if (index === 8) {
               return (
                 <Row
+                  key={index}
                   style={styles.heading}
                   justifyContent="space-between"
                   alignItems="center"

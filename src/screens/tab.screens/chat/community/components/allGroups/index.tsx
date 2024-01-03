@@ -9,22 +9,21 @@ import { useViewModal } from './useViewModal';
 import { WelocmeGroupModal } from '../../../../../../components/modal/welocmeGroupModal';
 
 const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
-  const { groups, handleTextChange, loading, handleJoinGroup } = useViewModal();
-  const [isModalVisible, setisModalVisible] = useState(false);
-  useEffect(() => {
-    setisModalVisible(true);
-  }, []);
-
-  const closeModal = () => {
-    setisModalVisible(false);
-  };
+  const {
+    groups,
+    handleTextChange,
+    loading,
+    handleJoinGroup,
+    closeModal,
+    isModalVisible,
+  } = useViewModal();
 
   if (loading) {
     return <FullLoader />;
   }
   return (
     <>
-      <WelocmeGroupModal isVisible={isModalVisible} onClose={closeModal} />
+      <WelocmeGroupModal isVisible={!isModalVisible} onClose={closeModal} />
       <View style={styles.container}>
         {showToggleSearchInput && (
           <SearchGroup

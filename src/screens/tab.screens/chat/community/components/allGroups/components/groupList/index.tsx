@@ -55,9 +55,6 @@ const Group = (props: GroupProps) => {
           )}
           {!group.getHasJoined() && (
             <>
-              {/* <Pressable onPress={() => handleJoinGroup(group.getGuid())}>
-                <Text style={styles.joinBtn}>Join</Text>
-              </Pressable> */}
               <Pressable onPress={() => setisGroupInfoModalVisible(true)}>
                 <Text style={styles.joinBtn}>Join</Text>
               </Pressable>
