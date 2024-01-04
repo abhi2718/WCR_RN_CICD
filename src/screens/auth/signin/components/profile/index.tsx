@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
+  Pressable,
+  Keyboard,
 } from 'react-native';
 
 import { PrimaryButton } from '../../../../../components/button';
@@ -57,7 +59,8 @@ const Profile = (props: ScreenParams) => {
   } = useProfileUseViewModal(props);
 
   return (
-    <ScreenContainer>
+    <Pressable style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+      <ScreenContainer>
       <WelcomeModalComponent
         isVisible={isWelcomeModalVisible}
         onClose={closeModal}
@@ -178,6 +181,7 @@ const Profile = (props: ScreenParams) => {
         </View>
       </View>
     </ScreenContainer>
+    </Pressable>
   );
 };
 
