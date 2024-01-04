@@ -54,9 +54,7 @@ const About = (props: ScreenParams) => {
                   value={aboutText}
                   returnKeyType="done"
                   blurOnSubmit={true}
-                  onSubmitEditing={() => {
-                    updateUserDetails()
-                  }}
+                  onSubmitEditing={() => {}}
                   onChangeText={handleText}
                   placeholderTextColor={colors.ui.placeholder}
                 />
