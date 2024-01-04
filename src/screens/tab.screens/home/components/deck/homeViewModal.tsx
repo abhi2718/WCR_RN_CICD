@@ -34,7 +34,7 @@ export const useViewModal = (route: RouteType) => {
   notificationuseViewModal();
   useCometChatInit();
   const [isMatch, setIsMatch] = useState({
-    status: false,
+    status: !false,
     matchUser: null,
   });
   const iOSActualHeight = useRef(
