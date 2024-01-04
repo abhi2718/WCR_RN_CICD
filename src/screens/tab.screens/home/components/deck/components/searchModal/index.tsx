@@ -54,7 +54,7 @@ export const SearchModal = (props: SearchModalProps) => {
                 </Pressable>
               </Row>
 
-              {isSearchActive ? (
+              {isSearchActive && users.length === 0 ? (
                 <View style={searchStyle.content}>
                   <Column gap={25} alignItems="center">
                     <Text style={searchStyle.subHeading}>No results found</Text>

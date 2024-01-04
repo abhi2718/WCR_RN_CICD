@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { HomeDeckRepository } from '../../../../../../../repository/homeDeck.repo';
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 
@@ -7,15 +7,26 @@ export const useViewModal = (props: SearchModalProps) => {
   const { showSearchModal, toggleSearchModal, handleSetProfiles } = props;
   const [loading, setLoading] = useState(false);
   const [users, setUser] = useState<any[]>([]);
-
   const [isSearchActive, setSearchActive] = useState(false);
-
+  const textRef = useRef('');
   const handleSearch = async (text: string) => {
-    if (!isSearchActive) setSearchActive(true);
-    try {
-      const data = await homeDeckRepository.searchUser(text);
-      setUser(data);
-    } catch (error) {}
+    textRef.current = text;
+    if (text.length) {
+      try {
+        const data = await homeDeckRepository.searchUser(text);
+        setUser(() => {
+          return textRef.current.length? data: []
+        });
+        if (!data.length) {
+          setSearchActive(true);
+        }
+      } catch (error) {
+
+      }
+    } else {
+      setSearchActive(false);
+      setUser([]);
+    }
   };
   const handleClose = () => {
     setSearchActive(false);

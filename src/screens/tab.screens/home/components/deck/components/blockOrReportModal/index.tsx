@@ -14,7 +14,7 @@ export const BlockAndReportModal = (props: any) => {
       <Modal
         visible={showModal}
         animationType="slide"
-        presentationStyle="pageSheet" // For bottom sheet-style
+        //presentationStyle="pageSheet" // For bottom sheet-style
         transparent={true} // Allow background visibility
         style={styles.modalContainer}
       >
@@ -41,7 +41,7 @@ export const BlockAndReportModal = (props: any) => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: 'rgba(0, 0, 0)', // Adjust opacity as needed
+    backgroundColor: 'rgba(0, 0, 0,0.1)', // Adjust opacity as needed
   },
   modalContent: {
     padding: 20,
