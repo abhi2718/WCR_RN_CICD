@@ -14,7 +14,8 @@ import {
   ScreenParams,
 } from '../../../types/services.types/firebase.service';
 import { addUser } from '../../../store/reducers/user.reducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigateToScreen } from '../../../utils/common.functions';
 
 export const useViewModal = (props: ScreenParams) => {
   const { navigation } = props;
@@ -24,7 +25,9 @@ export const useViewModal = (props: ScreenParams) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
+  const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
+  const {navigateToScreen} = useNavigateToScreen()
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
@@ -50,11 +53,7 @@ export const useViewModal = (props: ScreenParams) => {
       setLoading(false);
       return data;
     } catch (error) {
-      return ShowFlashMessage(
-        'Error',
-        `${error}`,
-        FlashMessageType.DANGER,
-      )
+      return ShowFlashMessage('Error', `${error}`, FlashMessageType.DANGER);
       setLoading(false);
     }
   };
@@ -90,7 +89,8 @@ export const useViewModal = (props: ScreenParams) => {
           if (data?.token) {
             const payload = { user: { ...data.user, token: data?.token } };
             dispatch(addUser(payload));
-            navigateToGenderScreen(data.user._id);
+            navigateToScreen(data.user);
+            // navigateToGenderScreen(data.user._id);
           } else {
             return ShowFlashMessage(
               'warn',
@@ -114,15 +114,19 @@ export const useViewModal = (props: ScreenParams) => {
       const payload = {
         user: {
           ...data.user,
-          token: data?.token
-        }
+          token: data?.token,
+        },
       };
       dispatch(addUser(payload));
-      navigateToGenderScreen(data.user._id);
+      navigateToScreen(data.user);
+      // navigateToGenderScreen(data.user._id);
     } else {
       navigateToProfile({ email: _email });
     }
   };
+
+ 
+
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
       return ShowFlashMessage(
@@ -165,7 +169,8 @@ export const useViewModal = (props: ScreenParams) => {
           if (data?.token) {
             const payload = { user: { ...data.user, token: data?.token } };
             dispatch(addUser(payload));
-            navigateToGenderScreen(data.user._id);
+            navigateToScreen(data.user);
+            // navigateToGenderScreen(data.user._id);
           }
         }
       }
@@ -184,7 +189,8 @@ export const useViewModal = (props: ScreenParams) => {
   const handleNavigationAfterFbLogin = async (data: any) => {
     if (data?.token) {
       dispatch(addUser(data));
-      navigateToGenderScreen(data.user._id);
+      navigateToScreen(data.user);
+      // navigateToGenderScreen(data.user._id);
       // login path if user had created account with other provider
     }
     if (data?.profile && data?.user) {
@@ -219,7 +225,8 @@ export const useViewModal = (props: ScreenParams) => {
         }
         const res = await socialSignInSignUp({ email });
         if (res.token) {
-          navigateToGenderScreen(res.user._id);
+          navigateToScreen(data.user);
+          // navigateToGenderScreen(res.user._id);
         }
       }
     }

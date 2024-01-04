@@ -4,10 +4,12 @@ import { useDispatch } from 'react-redux';
 import { ROUTES } from '../../navigation';
 import { addUser } from '../../store/reducers/user.reducer';
 import { getDataFromAsynStorage } from '../../utils/asyncStorage';
+import {useNavigateToScreen } from '../../utils/common.functions';
 
 export const useViewModal = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const {navigateToScreen} = useNavigateToScreen()
   const checkIsUserLoggedIn = async () => {
     const { data: user } = await getDataFromAsynStorage('profile');
     const { data: token } = await getDataFromAsynStorage('token');
@@ -19,7 +21,9 @@ export const useViewModal = () => {
         },
       };
       dispatch(addUser(data));
-      return navigation.navigate(ROUTES.Tab);;
+    
+      return navigateToScreen(data.user)
+      // navigation.navigate(ROUTES.Tab);;
     }
     navigation.navigate(ROUTES.Onboarding);
   };

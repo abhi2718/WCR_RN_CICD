@@ -64,6 +64,7 @@ export const useEthnicityViewModal = (props: ScreenParams) => {
     try {
       const selectedEthnicityData = {
         ethnicity: selectedEthnicity,
+        steps:8
       };
 
       if (selectedEthnicity.length === 0) {
