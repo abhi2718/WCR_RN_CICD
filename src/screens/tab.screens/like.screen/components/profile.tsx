@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Pressable, Text, View, StyleSheet, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ProfileModal } from '../../../../components/profile.component';
-import { Column, Row, Spacer } from '../../../../components/tools';
+import { Column, Row, Spacer, dimensions } from '../../../../components/tools';
 import { ProfileViewProps } from '../../../../types/screen.type/like.type';
 import { theme } from '../../../../infrastructure/theme';
 import LinearGradient from 'react-native-linear-gradient';
@@ -71,7 +71,7 @@ export const ProfileView = (props: ProfileViewProps) => {
                       style={styles.gradient}
                     >
                       <View style={[styles.userTextView, { width: '100%' }]}>
-                        <Row justifyContent="space-between" alignItems="start">
+                        <Row justifyContent="space-between" alignItems="center">
                           <Column>
                             <Text style={styles.userNameText}>
                               {item?.profile?.displayName ??
@@ -94,17 +94,23 @@ export const ProfileView = (props: ProfileViewProps) => {
                           <Spacer position="right" size={20}>
                             {isMatch && (
                               <Pressable onPress={navigateToChat}>
-                                <Text
-                                  style={[styles.chatButton, styles.textBlack]}
-                                >
-                                  Chat
-                                </Text>
+                                <Image
+                                  style={{ width: 32 }}
+                                  source={require('../../../../assets/images/icons/matchChat.png')}
+                                  resizeMode="contain"
+                                />
                               </Pressable>
                             )}
                           </Spacer>
                         </Row>
                       </View>
                     </LinearGradient>
+                  )}
+                  {path === 'modalView' && (
+                    <LinearGradient
+                      colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
+                      style={styles.gradient}
+                    />
                   )}
                 </FastImage>
               </Spacer>
@@ -165,15 +171,20 @@ export const ProfileView = (props: ProfileViewProps) => {
             <Spacer position="right" size={10}>
               <FastImage
                 style={
-                  path === 'scrollView'
-                    ? styles.avatarScrollWidth
-                    : styles.avatarModalWidth
+                  path === 'modalView'
+                    ? styles.avatarModalWidth
+                    : styles.avatarWidth
                 }
                 source={{
                   uri: item?.userId?.profilePicture?.url,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-              />
+              >
+                <LinearGradient
+                  colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
+                  style={styles.gradient}
+                />
+              </FastImage>
             </Spacer>
             <Column>
               <Spacer position="bottom" size={10}>
@@ -219,15 +230,20 @@ export const ProfileView = (props: ProfileViewProps) => {
             <Spacer position="right" size={10}>
               <FastImage
                 style={
-                  path === 'scrollView'
-                    ? styles.avatarScrollWidth
-                    : styles.avatarModalWidth
+                  path === 'modalView'
+                    ? styles.avatarModalWidth
+                    : styles.avatarWidth
                 }
                 source={{
                   uri: item?.profilePicture?.url,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-              />
+              >
+                <LinearGradient
+                  colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
+                  style={styles.gradient}
+                />
+              </FastImage>
             </Spacer>
             <Column justifyContent="center" alignItems="center">
               <Spacer position="bottom" size={10}>
@@ -285,18 +301,18 @@ export const styles = StyleSheet.create({
     height: theme.units.sizes[24],
     borderRadius: theme.units.sizes[100],
   },
-  avatarScrollWidth: {
-    width: theme.units.sizes[185],
+  avatarWidth: {
+    width: (dimensions.width - 38) / 2,
     height: theme.units.sizes[165],
     borderRadius: theme.units.sizes[30],
   },
   avatarModalWidth: {
-    width: '100%',
+    width: (dimensions.width - 48) / 2,
     height: theme.units.sizes[165],
     borderRadius: theme.units.sizes[30],
   },
   matchAvatar: {
-    width: theme.units.sizes[185],
+    width: (dimensions.width - 38) / 2,
     height: theme.units.sizes[300],
     borderRadius: theme.units.sizes[30],
   },
