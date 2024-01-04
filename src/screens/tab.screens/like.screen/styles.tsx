@@ -97,8 +97,8 @@ export const styles = StyleSheet.create({
   },
 
   paddingMatches: {
-    width: dimensions.width - 60,
-    maxWidth: 210,
+    width: dimensions.width - 20,
+    maxWidth: 250,
   },
   paddingReceiveLiked: {
     width: dimensions.width - 60,

@@ -76,9 +76,7 @@ export const ProfileModal = (props: profileProps) => {
                             ]}
                             style={styles.gradient}
                           />
-                          <Text style={styles.userNameText}>
-                            {user.first} ({user.genderPronoun})
-                          </Text>
+                          <Text style={styles.userNameText}>{user.first}</Text>
                         </FastImage>
                       </Row>
                       <View style={styles.userInfo}>
