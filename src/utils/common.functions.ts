@@ -83,7 +83,7 @@ export function formatNumber(inputNumber:number) {
 export const useNavigateToScreen = () => {
   const navigation = useNavigation();
 
-  const navigateToScreen = (user: any) => {
+  const navigateToScreen = (user:any) => {
     if (user.verification.status === 'Verified') {
       navigation.navigate(ROUTES.Tab);
     } else {
