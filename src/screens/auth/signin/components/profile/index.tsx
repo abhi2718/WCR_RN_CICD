@@ -69,6 +69,7 @@ const Profile = (props: ScreenParams) => {
             <Text style={profileStyles.subHeader}>
               Let's get started!{`\n`}Tell us a little about you.
             </Text>
+            <ScrollView  style={{ flex: 1 }}>
             <KeyboardAvoidingView
               enabled
               behavior={isAndroid ? 'height' : 'padding'}
@@ -122,11 +123,6 @@ const Profile = (props: ScreenParams) => {
                 label="Email Address"
                 theme={{ colors: { primary: 'red' } }}
               />
-            </KeyboardAvoidingView>
-            <KeyboardAvoidingView
-              enabled
-              behavior={isAndroid ? 'height' : 'padding'}
-            >
               <View style={profileStyles.datePickerContainer}>
                 <TouchableOpacity
                   style={profileStyles.openButton}
@@ -167,6 +163,8 @@ const Profile = (props: ScreenParams) => {
                 )}
               </View>
             </KeyboardAvoidingView>
+            </ScrollView>
+           
           </View>
           <View>
             <Spacer position="top" size={25}>
