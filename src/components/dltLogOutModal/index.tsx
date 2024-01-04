@@ -26,15 +26,22 @@ export const DltLogOutModal = (props: DltLogOutType) => {
   const hardDeleteUser = async () => {
     try {
       await userProfileRepository.hardDeleteUser();
-      logOut();
+      handleLogOut();
     } catch (error) {}
+  };
+  const handleLogOut = () => {
+    setTimeout(() => {
+      logOut();
+    }, 500);
   };
 
   const logOutModalShow = () => {
+    setShowModal(false);
     setLogOutModal(true);
   };
 
   const showDeleteAccountModal = () => {
+    setShowModal(false);
     setDeleteModal(true);
   };
 
@@ -75,7 +82,6 @@ export const DltLogOutModal = (props: DltLogOutType) => {
               </View>
             </Row>
           </View>
-
           <Pressable onPress={closeModal}>
             <View style={styles.bottomContainer}></View>
           </Pressable>
@@ -86,7 +92,7 @@ export const DltLogOutModal = (props: DltLogOutType) => {
         setShowModal={setLogOutModal}
         title="Logout?"
         description="Are you sure want to log out?"
-        onPress={logOut}
+        onPress={handleLogOut}
       ></AlertScreen>
       <AlertScreen
         showModal={showDeleteModal}
@@ -103,17 +109,19 @@ export const DltLogOutModal = (props: DltLogOutType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: 'rgba(0,0,0,0.7)',
   },
   mainContainer: {
     height: sizes[4] * 5,
-    width: dimensions.width - 80,
+    width: dimensions.width - 130,
     borderRadius: sizes[3],
     backgroundColor: '#fff',
   },
 
   mainContainerWrapper: {
     alignItems: 'flex-end',
+    marginTop: 10,
+    marginRight: 3,
   },
 
   btnContainer: {
@@ -125,16 +133,16 @@ const styles = StyleSheet.create({
 
   bottomContainer: {
     height: dimensions.height - 150,
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: '#0000',
   },
   sideContainer: {
     height: 150,
     width: sizes[4] * 5,
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: '#0000',
   },
 
   modalheight: {
-    height: 150,
+    height: 115,
   },
   delBtn: {
     backgroundColor: colors.ui.white,
@@ -144,7 +152,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopRightRadius: sizes[3],
     borderTopLeftRadius: sizes[3],
-    height: 75,
+    height: 57,
   },
   logoutBtn: {
     backgroundColor: colors.ui.white,
@@ -155,12 +163,12 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: sizes[3],
     borderBottomLeftRadius: sizes[3],
     borderTopColor: '00000026',
-    borderTopWidth: 1,
-    height: 75,
+    borderTopWidth: 0.5,
+    height: 57,
   },
   btnText: {
     fontSize: fontSizes.h6,
     color: colors.ui.text,
-    fontWeight: fontWeights.semiBold,
+    fontWeight: fontWeights.medium,
   },
 });
