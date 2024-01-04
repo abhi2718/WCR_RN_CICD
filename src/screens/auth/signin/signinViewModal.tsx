@@ -61,7 +61,6 @@ export const useViewModal = (props: ScreenParams) => {
     try {
       setLoading(true);
       const data = await otpInRepository.getOtp(email);
-      console.log('--->', data);
       setLoading(false);
       return data;
     } catch (error) {
