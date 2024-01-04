@@ -97,6 +97,7 @@ export const useProfessionModal = (props: ScreenParams) => {
           title: professionForm.title,
         },
         institution: professionForm.institution,
+        steps:5
       };
       if (
         user?.designation?.userDegree === professionForm.userDegree &&

@@ -36,6 +36,7 @@ export const useGenderViewModal = (props: ScreenParams) => {
           gender: gender,
           showGender: checkboxState,
         },
+        steps:1
       };
 
       if (user.profile.gender === gender) {

@@ -138,6 +138,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
           zipcode: locationForm.zipcode,
           location: {},
         },
+        steps:4
       };
 
       if(Country === locationForm.country && State === locationForm.state && City === locationForm.city && Zipcode === locationForm.zipcode) {

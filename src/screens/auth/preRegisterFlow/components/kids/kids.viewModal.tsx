@@ -59,7 +59,8 @@ export const useKidsViewmodal = (props:ScreenParams) => {
         kids: selectedKids,
         familyPlan: selectedFamilyPlans,
         covidVaccineStatus: selectedCovidVaccineStatus,
-        diet: selectedDietarypreference
+        diet: selectedDietarypreference,
+        steps:11
       };
 
       if(user?.kids === selectedKids && user?.familyPlan === selectedFamilyPlans && user?.covidVaccineStatus === selectedCovidVaccineStatus && user?.diet === selectedDietarypreference){

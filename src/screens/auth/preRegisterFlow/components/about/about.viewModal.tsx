@@ -28,6 +28,7 @@ export const useAboutViewModal = (props: ScreenParams) => {
     try {
       const bioData = {
         bio: aboutText,
+        steps:13
       };
 
       if(user?.bio === aboutText){

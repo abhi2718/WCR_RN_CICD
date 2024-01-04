@@ -54,6 +54,7 @@ export const useGenderPronounViewModal = (props: any) => {
           genderPronoun: genderPronoun,
           showGenderPronoun: checkboxState,
         },
+        steps:2
       };
       const userData = await updateUserDetailsRepository.updateUserDetails(user._id, {
         update: genderPronounData,

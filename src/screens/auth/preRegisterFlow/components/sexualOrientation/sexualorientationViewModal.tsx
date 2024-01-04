@@ -57,6 +57,7 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
           sexualPreference: sexualOrientation,
           showSexualPreference: checkboxState,
         },
+        steps:3
       };
       const userData = await updateUserDetailsRepository.updateUserDetails(user._id, {
         update: genderData,
