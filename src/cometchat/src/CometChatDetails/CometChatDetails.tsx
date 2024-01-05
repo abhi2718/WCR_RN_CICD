@@ -448,8 +448,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       //   style: {},
       // });
       leaveGroup(true);
-    }
-    else {
+    } else {
       leaveGroup();
       // setModalDetails({
       //   title: 'Please Confirm',
@@ -897,7 +896,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
               onPress={() => setShowModal(true)}
               style={myStyles.leaveGroup}
             >
-              <Text style={myStyles.leaveBtn}>Leave</Text>
+              <Text style={myStyles.leaveBtn}>Exit Group</Text>
             </Pressable>
           </Row>
           {groupDetails && (

@@ -18,11 +18,7 @@ import { fontSizes } from '../../../infrastructure/theme/fonts';
 export const WelocmeGroupModal = (props: ModalProps) => {
   const { isVisible, onClose } = props;
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={isVisible}
-    >
+    <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Row justifyContent="space-between" alignItems="center">
@@ -59,7 +55,12 @@ export const WelocmeGroupModal = (props: ModalProps) => {
               and create meaningful connections!
             </Text>
           </Row>
-          <Text style={styles.footerText}>Join interest groups now!</Text>
+          <View style={styles.centerContent}>
+            <Text style={styles.footerText}>Let's get started.</Text>
+            <Text style={styles.footerText}>
+              Join our many interest groups!
+            </Text>
+          </View>
           <Row>
             <PrimaryButton onPress={() => onClose(true)} title="Continue" />
           </Row>
@@ -129,7 +130,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     fontSize: sizes[4],
-    marginVertical: sizes[3],
     color: colors.ui.textHead,
+  },
+  centerContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginVertical: 16,
   },
 });
