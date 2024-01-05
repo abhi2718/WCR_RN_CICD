@@ -435,7 +435,6 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   };
 
   const handleLeaveGroup = () => {
-    console.log("leave group -->")
     if (groupDetails?.['owner'] === loggedInUser.getUid()) {
       // setModalDetails({
       //   title: 'Transfer Ownership',

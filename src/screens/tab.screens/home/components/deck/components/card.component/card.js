@@ -306,11 +306,11 @@ export default function CardCompoent({ item, height, cardRef }) {
               </Pressable>
             </Row>
 
-            <Pressable onPress={handleShare}>
+            {/* <Pressable onPress={handleShare}>
               <Text style={cardStyles.blockReportText}>
                 Share with a Friend
               </Text>
-            </Pressable>
+            </Pressable> */}
 
             <Pressable onPress={() => setShowModal(true)}>
               <Text style={cardStyles.blockReportText}>Block/Report</Text>
