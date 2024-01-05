@@ -435,33 +435,37 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   };
 
   const handleLeaveGroup = () => {
-    if (groupDetails?.['owner'] === loggedInUser.getUid())
-      setModalDetails({
-        title: 'Transfer Ownership',
-        cancelButtonText: localize('CANCEL'),
-        confirmButtonText: localize('CONFIRM'),
-        messageText: localize('TRANSFER_CONFIRM'),
-        onCancel: () => {
-          setModalVisible(false);
-        },
-        onConfirm: () => leaveGroup(true),
-        style: {},
-      });
-    else {
-      setModalDetails({
-        title: 'Please Confirm',
-        cancelButtonText: leaveGroupCancelButtonText ?? localize('CANCEL'),
-        confirmButtonText: leaveGroupButtonText ?? localize('CONFIRM'),
-        messageText:
-          leaveGroupConfirmDialogMessage ?? localize('LEAVE_CONFIRM'),
-        onCancel: () => {
-          setModalVisible(false);
-        },
-        onConfirm: () => leaveGroup(),
-        style: leaveGroupDialogStyle ?? {},
-      });
+    console.log("leave group -->")
+    if (groupDetails?.['owner'] === loggedInUser.getUid()) {
+      // setModalDetails({
+      //   title: 'Transfer Ownership',
+      //   cancelButtonText: localize('CANCEL'),
+      //   confirmButtonText: localize('CONFIRM'),
+      //   messageText: localize('TRANSFER_CONFIRM'),
+      //   onCancel: () => {
+      //     setModalVisible(false);
+      //   },
+      //   onConfirm: () => leaveGroup(true),
+      //   style: {},
+      // });
+      leaveGroup(true);
     }
-    setModalVisible(true);
+    else {
+      leaveGroup();
+      // setModalDetails({
+      //   title: 'Please Confirm',
+      //   cancelButtonText: leaveGroupCancelButtonText ?? localize('CANCEL'),
+      //   confirmButtonText: leaveGroupButtonText ?? localize('CONFIRM'),
+      //   messageText:
+      //     leaveGroupConfirmDialogMessage ?? localize('LEAVE_CONFIRM'),
+      //   onCancel: () => {
+      //     setModalVisible(false);
+      //   },
+      //   onConfirm: () => leaveGroup(),
+      //   style: leaveGroupDialogStyle ?? {},
+      // });
+    }
+    //setModalVisible(true);
   };
 
   const deleteGroup = () => {

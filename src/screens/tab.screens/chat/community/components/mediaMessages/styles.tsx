@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
 import { theme } from '../../../../../../infrastructure/theme';
+import { dimensions } from '../../../../../../components/tools';
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
   },
 
   galleryImage: {
-    width: '31.33%',
+    width: (dimensions.width - 32) / 3,
     height: 120,
   },
 

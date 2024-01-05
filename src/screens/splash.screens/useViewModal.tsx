@@ -21,9 +21,7 @@ export const useViewModal = () => {
         },
       };
       dispatch(addUser(data));
-    
       return navigateToScreen(data.user)
-      // navigation.navigate(ROUTES.Tab);;
     }
     navigation.navigate(ROUTES.Onboarding);
   };

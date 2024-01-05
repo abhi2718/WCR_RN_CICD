@@ -54,7 +54,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Row alignItems="center" gap={15} style={cardStyles.nameRow}>
                   <Text style={cardStyles.name}>
-                    {first}{' '}
+                    {first}
                     {genderPronoun !== 'Prefer not to say' &&
                       `(${genderPronoun})`}
                     , {calculateAge(dob)}
@@ -167,12 +167,8 @@ export default function CardCompoent({ item, height, cardRef }) {
                 )}
 
                 {ethnicity.length >= 0 &&
-                  ethnicity.map((ethnicity) => (
-                    <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                      {/* <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/USAFlag.png')}
-                      /> */}
+                  ethnicity.map((ethnicity,index) => (
+                    <Row key={index} gap={10} alignItems="center" style={cardStyles.chip}>
                       <Text style={cardStyles.chipText}>{ethnicity}</Text>
                     </Row>
                   ))}
