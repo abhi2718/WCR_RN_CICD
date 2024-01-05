@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
+  Pressable,
+  Keyboard,
 } from 'react-native';
 
 import { PrimaryButton } from '../../../../../components/button';
@@ -57,7 +59,8 @@ const Profile = (props: ScreenParams) => {
   } = useProfileUseViewModal(props);
 
   return (
-    <ScreenContainer>
+    <Pressable style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+      <ScreenContainer>
       <WelcomeModalComponent
         isVisible={isWelcomeModalVisible}
         onClose={closeModal}
@@ -69,6 +72,7 @@ const Profile = (props: ScreenParams) => {
             <Text style={profileStyles.subHeader}>
               Let's get started!{`\n`}Tell us a little about you.
             </Text>
+            <ScrollView  style={{ flex: 1 }}>
             <KeyboardAvoidingView
               enabled
               behavior={isAndroid ? 'height' : 'padding'}
@@ -122,11 +126,6 @@ const Profile = (props: ScreenParams) => {
                 label="Email Address"
                 theme={{ colors: { primary: 'red' } }}
               />
-            </KeyboardAvoidingView>
-            <KeyboardAvoidingView
-              enabled
-              behavior={isAndroid ? 'height' : 'padding'}
-            >
               <View style={profileStyles.datePickerContainer}>
                 <TouchableOpacity
                   style={profileStyles.openButton}
@@ -167,6 +166,8 @@ const Profile = (props: ScreenParams) => {
                 )}
               </View>
             </KeyboardAvoidingView>
+            </ScrollView>
+           
           </View>
           <View>
             <Spacer position="top" size={25}>
@@ -180,6 +181,7 @@ const Profile = (props: ScreenParams) => {
         </View>
       </View>
     </ScreenContainer>
+    </Pressable>
   );
 };
 

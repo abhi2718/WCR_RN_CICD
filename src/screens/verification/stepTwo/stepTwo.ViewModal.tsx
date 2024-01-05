@@ -208,11 +208,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         }
       }
       const verificationData = await updateImagesInDatabase(imageUrls);
-      closePicModal()
-      closePhdOptionPicUploadingModal()
-      navigateToVerificationState()
-    } catch (err) {
-    }
+      closePicModal();
+      closePhdOptionPicUploadingModal();
+      navigateToVerificationState();
+    } catch (err) {}
   };
 
   const updateImagesInDatabase = async (photos: object[]) => {
@@ -245,15 +244,15 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         },
       );
       const data = token
-      ? {
-          user: {
-            ...userData,
-            token,
-          },
-        }
-      : {
-          user: userData,
-        };
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
       //navigateToHeightScreen(loggInUserId);
@@ -300,12 +299,27 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const closeModal = () => {
     setVerificvationInfoModalVisible(false);
   };
-  const openModal = () => {
-    setVerificvationInfoModalVisible(true);
+
+  const [isStudentInfoModalVisible, setStudentInfoModalVisible] =
+    useState(false);
+
+  const closeStudentInfoModal = () => {
+    setStudentInfoModalVisible(false);
+  };
+  const openStudentInfoModal = () => {
+    setStudentInfoModalVisible(true);
   };
 
   const openInfoModal = () => {
-    setVerificvationInfoModalVisible(true);
+    setStudentInfoModalVisible(true);
+  };
+
+  const openModal = () => {
+    if (verificationOption === 'Student') {
+      setStudentInfoModalVisible(true);
+    } else {
+      setVerificvationInfoModalVisible(true);
+    }
   };
 
   return {
@@ -341,6 +355,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     isVerificationInfoModalVisible,
     openInfoModal,
     closeModal,
-    openModal
+    openModal,
+    closeStudentInfoModal,
+    openStudentInfoModal,
+    isStudentInfoModalVisible,
   };
 };
