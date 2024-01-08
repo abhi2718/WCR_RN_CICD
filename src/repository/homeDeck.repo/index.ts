@@ -20,8 +20,9 @@ export class HomeDeckRepository {
     const url = `${AppUrl.blockUserEndPoint}`;
     return this.apiService.getPostApiResponse(url, payload);
   }
-  async searchUser(search:string) {
-    const url = `${AppUrl.searchUserEndPoint}${search}`;
+  async searchUser(query:any) {
+    const url = `${AppUrl.searchUserEndPoint}${query.searchValue}`;
+    console.log(url)
     return this.apiService.getGetApiResponse(url);
   }
   async getUser(userId:string) {

@@ -29,13 +29,14 @@ export const useViewModal = () => {
   }
   const getNotifiaction = async (page: number, fethNext?: boolean) => {
     try {
-      setNotificationLoading(true);
+      setNotificationLoading(true); 
       const { data } = await notificationRepository.getNotification({
         page,
-        pageSize: 40,
+        pageSize: 200,
       });
       if (fethNext) {
         const updatedNotificatins = [
+          ...notifications.notifications,
           ...data[0].data,
         ];
         setNotifications({
@@ -82,10 +83,11 @@ export const useViewModal = () => {
     flatListRef.current.scrollToIndex({ animated: true, index });
   };
   const handleEndReached = () => {
-    if (!notificationLoading) {
-      setPage((oldPage) => oldPage + 1);
-      getNotifiaction(page + 1, true);
-    }
+    // if (!notificationLoading) {
+    //   setPage((oldPage) => oldPage + 1);
+    //   getNotifiaction(page + 1, true);
+    // }
+    getNotifiaction(1)
   };
   const htmlTextConvertPlainText = (data : string)=>{
     const item =  data.replace(/<\/?[^>]+>/ig, '');
