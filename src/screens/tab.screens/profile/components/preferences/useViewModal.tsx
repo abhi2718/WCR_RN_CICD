@@ -37,7 +37,7 @@ export const useViewModal = () => {
   const [answer, setAnswer] = useState({
     degreeCategory: 'No Preference',
     degreeType: 'No Preference',
-    gender: 'No Preference',
+    gender: 'Everyone',
     ethnicity: 'No Preference',
     maritalStatus: 'No Preference',
     relationshipLevel: 'No Preference',
@@ -59,7 +59,11 @@ export const useViewModal = () => {
     });
   };
   const generateListWithNoPreference = (list:string[]) => {
-    return [...list.filter((item) => item !== preferNotToSay), 'No Preference'];
+    const isContainPreferNotToSay = list.find((item)=>item === preferNotToSay)
+    if(isContainPreferNotToSay){
+      return [...list.filter((item) => item !== preferNotToSay), 'No Preference'];
+    }
+    return list
   }
   const generateList = (list: any[], type: string) => {
     return generateListWithNoPreference(list)?.map((item: any, index) => ({

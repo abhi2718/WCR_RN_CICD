@@ -1,9 +1,10 @@
 export const genderArray = [
-  'Male',
-  'Female',
-  'Transman',
-  'Transwoman',
-  'Non-binary',
+  'Man',
+  'Woman',
+  'Trans-man',
+  'Trans-woman',
+  'Non-Binary',
+  'Everyone',
 ];
 export const genderPronounArray = [
   'He/Him',
@@ -160,6 +161,7 @@ export const sexualOrientationArray = [
   'Questioning',
   'Asexual',
   'Demisexual',
+  'Non-Binary'
 ];
 
 export const country = [
