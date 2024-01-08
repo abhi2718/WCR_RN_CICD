@@ -22,7 +22,7 @@ export const useCometChatInit = () => {
         // let uid = '6499476d12c6b5d6b1093b2a';
         const androidUser = isAndroid? '6569aa0292b03bce6ced8fd7':'6499476d12c6b5d6b1093b2a'
         const newUser = '637f1bf7124e95131a698c74';
-        await CometChatUIKit.login({ uid:androidUser});
+        await CometChatUIKit.login({ uid:user._id});
         setIsInitialized(true);
         }
       } catch (error) {

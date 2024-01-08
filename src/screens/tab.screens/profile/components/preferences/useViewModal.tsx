@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { ROUTES } from '../../../../../navigation';
 import { UserProfileRepository } from '../../../../../repository/userProfile.repo';
@@ -23,6 +23,7 @@ import {
   smoking,
   userDegree,
   covidVaccineStatus,
+  preferNotToSay,
 } from '../../../../../utils/constanst';
 
 export const useViewModal = () => {
@@ -34,31 +35,34 @@ export const useViewModal = () => {
   const goBack = () => navigation.goBack();
   const isPrefrenceCreated = useRef(false);
   const [answer, setAnswer] = useState({
-    degreeCategory: 'Select',
-    degreeType: 'Select',
-    gender: 'Select',
-    ethnicity: 'Select',
-    maritalStatus: 'Select',
-    relationshipLevel: 'Select',
-    religion: 'Select',
-    politics: 'Select',
-    exercise: 'Select',
-    diet: 'Select',
-    drinking: 'Select',
-    smoking: 'Select',
-    kids: 'Select',
-    familyPlan: 'Select',
-    pets: 'Select',
-    sexualPreference: 'Select',
-    covidVaccineStatus: 'Select',
+    degreeCategory: 'No Preference',
+    degreeType: 'No Preference',
+    gender: 'No Preference',
+    ethnicity: 'No Preference',
+    maritalStatus: 'No Preference',
+    relationshipLevel: 'No Preference',
+    religion: 'No Preference',
+    politics: 'No Preference',
+    exercise: 'No Preference',
+    diet: 'No Preference',
+    drinking: 'No Preference',
+    smoking: 'No Preference',
+    kids: 'No Preference',
+    familyPlan: 'No Preference',
+    pets: 'No Preference',
+    sexualPreference: 'No Preference',
+    covidVaccineStatus: 'No Preference',
   });
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
       return { ...oldState, [option.type]: option.value };
     });
   };
+  const generateListWithNoPreference = (list:string[]) => {
+    return [...list.filter((item) => item !== preferNotToSay), 'No Preference'];
+  }
   const generateList = (list: any[], type: string) => {
-    return list?.map((item: any, index) => ({
+    return generateListWithNoPreference(list)?.map((item: any, index) => ({
       value: item,
       label: item,
       key: index,
@@ -75,7 +79,11 @@ export const useViewModal = () => {
     generateList([], 'degreeType'),
   );
   const genderList = generateList(genderArray, 'gender');
-  const ethnicityList = generateList(ethnicity, 'ethnicity');
+  
+  const ethnicityList = generateList(
+    ethnicity,
+    'ethnicity',
+  );
   const maritalStatusList = generateList(maritalStatus, 'maritalStatus');
   const relationshipLevelList = generateList(relationship, 'relationshipLevel');
   const religionList = generateList(religion, 'religion');
@@ -312,7 +320,7 @@ export const useViewModal = () => {
         const typeOfKey = typeof value;
         if (key === 'healthcareProfessionals') {
           if (
-            !preferences.healthcareProfessionals.userDegree.includes('Select')
+            !preferences.healthcareProfessionals.userDegree.includes('No Preference')
           ) {
             updates = {
               ...updates,
@@ -323,7 +331,7 @@ export const useViewModal = () => {
           }
           if (
             !preferences.healthcareProfessionals.primaryDegree.includes(
-              'Select',
+              'No Preference',
             )
           ) {
             updates = {
@@ -336,10 +344,10 @@ export const useViewModal = () => {
           }
           if (
             !preferences.healthcareProfessionals.userDegree.includes(
-              'Select',
+              'No Preference',
             ) &&
             !preferences.healthcareProfessionals.primaryDegree.includes(
-              'Select',
+              'No Preference',
             )
           ) {
             updates = {
@@ -352,7 +360,7 @@ export const useViewModal = () => {
             };
           }
         }
-        if (typeOfKey === 'string' && !value?.includes('Select')) {
+        if (typeOfKey === 'string' && !value?.includes('No Preference')) {
           updates = {
             ...updates,
             [key]: value,
@@ -362,7 +370,7 @@ export const useViewModal = () => {
             ...updates,
             [key]: value,
           };
-        } else if (Array.isArray(value) && !value.includes('Select')) {
+        } else if (Array.isArray(value) && !value.includes('No Preference')) {
           updates = {
             ...updates,
             [key]: value,
@@ -378,9 +386,10 @@ export const useViewModal = () => {
       }
       setSubmitLoading(false);
       navigation.navigate(ROUTES.DeckTab, {
-        loadProfile: true
-      })
+        loadProfile: true,
+      });
     } catch (error) {
+      console.log(error)
       setSubmitLoading(false);
     }
   };
@@ -404,7 +413,7 @@ export const useViewModal = () => {
     getPrefrences();
   }, []);
   useEffect(() => {
-    if (!answer.degreeCategory.includes('Select')) {
+    if (!answer.degreeCategory.includes('No Preference')) {
       setPrimaryDegree(
         generateList(primaryDegree[answer.degreeCategory], 'degreeType'),
       );

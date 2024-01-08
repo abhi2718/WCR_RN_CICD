@@ -23,6 +23,7 @@ import {
 } from '../../infrastructure/theme/fonts';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
+import { calculateAge } from '../../utils/common.functions';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -40,7 +41,7 @@ export const ProfileModal = (props: profileProps) => {
     showSave,
     showBlock,
   } = useViewModal(props);
-
+  console.log(user);
   return (
     <Modal visible={showModal}>
       <SafeAreaView style={{ flex: 1 }}>
@@ -76,7 +77,12 @@ export const ProfileModal = (props: profileProps) => {
                             ]}
                             style={styles.gradient}
                           />
-                          <Text style={styles.userNameText}>{user.first}</Text>
+                          <Text style={styles.userNameText}>
+                            {user.first}{' '}
+                            {user?.genderPronoun !== 'Prefer not to say' &&
+                              `(${user?.genderPronoun})`}
+                            , {calculateAge(user?.dob)}
+                          </Text>
                         </FastImage>
                       </Row>
                       <View style={styles.userInfo}>
