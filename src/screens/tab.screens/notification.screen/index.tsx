@@ -3,13 +3,14 @@ import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
-  Animated,
   Image,
   SafeAreaView,
+  RefreshControl,
+  StyleSheet,
 } from 'react-native';
 import { HeaderBar } from '../../../components/header';
-import { Column, FullLoader } from '../../../components/tools';
+import { Column, FullLoader, Spacer } from '../../../components/tools';
+import { theme } from '../../../infrastructure/theme';
 import { SwipeableListItem } from './components/tiles';
 import { notificationStyle } from './notificationStyle';
 import { useViewModal } from './useViewModal';
@@ -39,7 +40,7 @@ export const NotificationScreen = () => {
       <View style={notificationStyle.header}>
         <HeaderBar />
       </View>
-      {!notifications.notifications.length && (
+      {notifications.notifications.length === 0 && (
         <View style={notificationStyle.content}>
           <Column gap={25} alignItems="center">
             <Text style={notificationStyle.subHeading}>Notifications</Text>
@@ -55,23 +56,39 @@ export const NotificationScreen = () => {
           </Column>
         </View>
       )}
-      <FlatList
-        data={notifications.notifications}
-        ref={flatListRef}
-        renderItem={({ item }) => (
-          <SwipeableListItem
-            style={notificationStyle.notifications}
-            item={item}
-            onDelete={onDeleteItem}
-            markAsRead={markAsRead}
-            htmlTextConvertPlainText={htmlTextConvertPlainText}
-          />
-        )}
-        onEndReached={() => {
-          handleEndReached();
-        }}
-        onEndReachedThreshold={0.1}
-      />
+      {notifications.notifications.length > 0 && (
+        <FlatList
+          data={notifications.notifications}
+          renderItem={({ item, index }) => {
+            if (index === notifications.notifications.length - 1) {
+              return (<Spacer position='bottom' size={100}>
+                <View>
+                  <Spacer position='top' size={40}>
+                  <Text style={styles.notificationEndText}>👋 That’s it for now! </Text>
+                  </Spacer>
+                </View>
+              </Spacer>)
+            }
+            return(
+              <SwipeableListItem
+                item={item}
+                onDelete={onDeleteItem}
+                markAsRead={markAsRead}
+                htmlTextConvertPlainText={htmlTextConvertPlainText}
+              />
+            )
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  notificationEndText: {
+    textAlign: 'center',
+    fontSize: theme.fontSizes.h6,
+    fontWeight: theme.fontWeights.semiBold,
+    color:theme.colors.ui.text
+  }
+})
