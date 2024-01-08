@@ -55,6 +55,7 @@ export const EditProfile = () => {
     statesList,
     setUserProfile,
     submitLoading,
+    letterCount,
   } = useViewModal();
 
   return (
@@ -63,6 +64,7 @@ export const EditProfile = () => {
         <HeaderBar
           isLogo={false}
           isText={true}
+          isLoading={submitLoading}
           text="Edit info"
           button={submitLoading ? () => {} : editProfile}
         />
@@ -88,7 +90,8 @@ export const EditProfile = () => {
               returnKeyLabel="go"
               placeholderTextColor={colors.ui.placeholder}
             />
-            <Text style={styles.charCount}>360</Text>
+
+            <Text style={styles.charCount}>{letterCount}</Text>
           </Column>
           <Spacer position="bottom" size={20} />
           <Text style={styles.headingText}>Personal info</Text>
@@ -156,7 +159,23 @@ export const EditProfile = () => {
                 <Text style={styles.fieldValue}>{userProfile.dob}</Text>
               </View>
             </Spacer>
+            <Spacer position="top" size={20}>
+              <Row justifyContent="space-between">
+                <Text style={styles.fieldName}>Height</Text>
+                <Text style={styles.fieldName}>{heightRange[0]}</Text>
+              </Row>
+              <Column justifyContent="center" alignItems="center">
+                <MultiSlider
+                  values={heightRange}
+                  min={4}
+                  max={7}
+                  step={0.1}
+                  onValuesChange={handleHeightSliderChange}
+                />
+              </Column>
+            </Spacer>
           </Column>
+          <Text style={styles.headingText}>Identity/Orientation</Text>
 
           <Column style={styles.ph16}>
             <Spacer position="top" size={10}>
@@ -355,7 +374,23 @@ export const EditProfile = () => {
                           justifyContent="space-between"
                           alignItems="center"
                         >
-                          <Text style={styles.fieldValue}>Select</Text>
+                          <View>
+                            <Spacer position="top" size={5} />
+                            {selectedEthnicityItems.length === 0 ? (
+                              <Text style={styles.fieldValue}>Select</Text>
+                            ) : selectedEthnicityItems.length > 2 ? (
+                              <Text style={styles.fieldValue}>
+                                {selectedEthnicityItems[0]}
+                                {' , '}
+                                {selectedEthnicityItems[1]}...
+                              </Text>
+                            ) : (
+                              <Text style={styles.fieldValue}>
+                                {selectedEthnicityItems.join(', ')}
+                              </Text>
+                            )}
+                            <Spacer position="top" size={5} />
+                          </View>
                           <Image
                             resizeMode="contain"
                             style={styles.nextArrow}
@@ -373,7 +408,6 @@ export const EditProfile = () => {
                         handleItemSelected(selected, 'ethnicity')
                       }
                     />
-                    <Text>{selectedEthnicityItems.join(', ')}</Text>
                   </Spacer>
                 );
               }
@@ -390,7 +424,23 @@ export const EditProfile = () => {
                           justifyContent="space-between"
                           alignItems="center"
                         >
-                          <Text style={styles.fieldValue}>Select</Text>
+                          <View>
+                            <Spacer position="top" size={5} />
+                            {selectedrelationshipLevelItems.length === 0 ? (
+                              <Text style={styles.fieldValue}>Select</Text>
+                            ) : selectedrelationshipLevelItems.length > 2 ? (
+                              <Text style={styles.fieldValue}>
+                                {selectedrelationshipLevelItems[0]}
+                                {' , '}
+                                {selectedrelationshipLevelItems[1]}...
+                              </Text>
+                            ) : (
+                              <Text style={styles.fieldValue}>
+                                {selectedrelationshipLevelItems.join(', ')}
+                              </Text>
+                            )}
+                            <Spacer position="top" size={5} />
+                          </View>
                           <Image
                             resizeMode="contain"
                             style={styles.nextArrow}
@@ -408,7 +458,6 @@ export const EditProfile = () => {
                         handleItemSelected(selected, 'relationshipLevel')
                       }
                     />
-                    <Text>{selectedrelationshipLevelItems.join(', ')}</Text>
                   </Spacer>
                 );
               }
