@@ -41,6 +41,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     try {
       const selectedInterests = {
         interests: selectedHobbies,
+        steps:14
       };
       if (user?.interests === selectedHobbies) {
         navigateToVerificationScreen();

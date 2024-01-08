@@ -140,6 +140,7 @@ export const LikeScreen = () => {
                     </View>
                   </View>
                 )}
+
                 <Spacer position="top" size={10} />
                 {data?.liked?.length > 0 ? (
                   <View>
@@ -237,7 +238,9 @@ export const LikeScreen = () => {
               </View>
             </ScrollView>
             <Modal visible={modalVisible}>
-              <SafeAreaView style={styles.container}>
+              <SafeAreaView
+                style={[styles.container, { paddingLeft: 16, paddingRight: 4 }]}
+              >
                 <Row alignItems="center" style={styles.backArrowPadding}>
                   <Pressable onPress={() => toggleModal()}>
                     <Image
@@ -259,6 +262,7 @@ export const LikeScreen = () => {
                             showDeleteIcon={false}
                             isLikesReceived={true}
                             handleToggleOuterModal={toggleModal}
+                            path="modalView"
                           />
                         )}
                         numColumns={2}
@@ -280,6 +284,7 @@ export const LikeScreen = () => {
                             showDeleteIcon={true}
                             isLiked={true}
                             handleToggleOuterModal={toggleModal}
+                            path="modalView"
                           />
                         )}
                         numColumns={2}
@@ -301,6 +306,7 @@ export const LikeScreen = () => {
                             showDeleteIcon={true}
                             isFavourite={true}
                             handleToggleOuterModal={toggleModal}
+                            path="modalView"
                           />
                         )}
                         numColumns={2}

@@ -13,27 +13,33 @@ export const BlockAndReportModal = (props: any) => {
     <>
       <Modal
         visible={showModal}
-        animationType="slide"
+        animationType="fade"
         //presentationStyle="pageSheet" // For bottom sheet-style
         transparent={true} // Allow background visibility
         style={styles.modalContainer}
       >
-        <View style={styles.modalContent}>
+        <Pressable
+          onPress={() => setShowModal(false)}
+          style={styles.modalContent}
+        >
           <View style={styles.buttonContainer}>
-            <Pressable onPress={handleBlockUser}>
+            <Pressable style={styles.btnContainer} onPress={handleBlockUser}>
               <Text style={styles.textOne}>Block</Text>
             </Pressable>
             <View style={styles.hrLine} />
-            <Pressable onPress={handleReport}>
+            <Pressable style={styles.btnContainer} onPress={handleReport}>
               <Text style={styles.textTwo}>Report</Text>
             </Pressable>
           </View>
-          <View style={styles.backContainer}>
-            <Pressable onPress={() => setShowModal(false)}>
-              <Text style={styles.textBack}>Cancle</Text>
-            </Pressable>
-          </View>
-        </View>
+          <Pressable
+            style={styles.backContainer}
+            onPress={() => setShowModal(false)}
+          >
+            <View>
+              <Text style={styles.textBack}>Cancel</Text>
+            </View>
+          </Pressable>
+        </Pressable>
       </Modal>
     </>
   );
@@ -44,15 +50,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0,0.1)', // Adjust opacity as needed
   },
   modalContent: {
+    height: dimensions.height,
     padding: 20,
     borderRadius: 10,
     position: 'absolute',
     bottom: 0,
-    justifyContent: 'center',
     alignItems: 'center',
     left: 0,
-    margin: 10,
-    width: dimensions.width - 20,
+    backgroundColor: 'rgba(0, 0, 0,0.4)',
+    width: dimensions.width,
+    justifyContent: 'flex-end',
   },
   modalText: {
     fontSize: 18,
@@ -83,6 +90,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 18,
     marginBottom: 8,
+  },
+  btnContainer: {
+    width: '100%',
+    alignItems: 'center',
+    borderRadius: 13,
   },
   textBack: {
     color: '#007AFF',

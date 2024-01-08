@@ -86,6 +86,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
     isVerificationInfoModalVisible,
     closeModal,
     openModal,
+    closeStudentInfoModal,
+    openStudentInfoModal,
+    isStudentInfoModalVisible
   } = useVerificationViewModal(props);
   const { top, bottom } = useSafeAreaInsets();
   return (
@@ -95,6 +98,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
           isVisible={isVerificationInfoModalVisible}
           onClose={closeModal}
         ></IdverifyModal>
+        <IdverifyStudentModal
+        isVisible={isStudentInfoModalVisible}
+        onClose={closeStudentInfoModal}
+        ></IdverifyStudentModal>
         <HeaderBar isVerificartionScreen={false} info={openModal} />
         <KeyboardAvoidingView
           enabled
@@ -153,7 +160,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
               </View>
             )}
           </View>
-
           <View style={{ ...verificationStyle.footerDiv }}>
             {verificationOption === 'License Number' && (
               <>

@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     width: dimensions.width,
     padding: 8,
   },
+
   headerViewStyle: {
     height: 40,
     justifyContent: 'center',
@@ -92,17 +93,23 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.button,
     fontWeight: theme.fontWeights.medium,
     color: theme.colors.ui.secondary,
+    maxWidth: dimensions.width,
   },
+
   paddingMatches: {
-    maxWidth: 210,
+    width: dimensions.width - 20,
+    maxWidth: 250,
   },
   paddingReceiveLiked: {
+    width: dimensions.width - 60,
     maxWidth: 300,
   },
   paddingLiked: {
+    width: dimensions.width - 60,
     maxWidth: 190,
   },
   paddingSaved: {
+    width: dimensions.width - 60,
     maxWidth: 300,
   },
   likedTextBlur: {

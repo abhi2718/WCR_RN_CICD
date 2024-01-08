@@ -62,6 +62,7 @@ export const useRelationshipViewModal = (props: ScreenParams) => {
     try {
       const selectedEthnicityData = {
         relationship: selectedRelationship,
+        steps:9
       };
       if (selectedRelationship.length === 0) {
         navigateToMaritalStatusScreen();

@@ -102,6 +102,6 @@ export const insModalStyle = StyleSheet.create({
   text: {
     fontSize: fontSizes.text,
     fontWeight: fontWeights.reqular,
-    fontcolor: colors.ui.text,
+    color: colors.ui.text,
   },
 });

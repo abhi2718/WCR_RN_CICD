@@ -22,13 +22,12 @@ export const WelocmeGroupModal = (props: ModalProps) => {
       animationType="slide"
       transparent={true}
       visible={isVisible}
-      onRequestClose={() => onClose()}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Row justifyContent="space-between" alignItems="center">
             <Text style={styles.heading}>WELCOME</Text>
-            <Pressable onPress={() => onClose()}>
+            <Pressable onPress={() => onClose(false)}>
               <Image
                 style={styles.crossicon}
                 source={require('../../../assets/images/icons/crossIcon.png')}
@@ -62,7 +61,7 @@ export const WelocmeGroupModal = (props: ModalProps) => {
           </Row>
           <Text style={styles.footerText}>Join interest groups now!</Text>
           <Row>
-            <PrimaryButton onPress={() => onClose()} title="Continue" />
+            <PrimaryButton onPress={() => onClose(true)} title="Continue" />
           </Row>
         </View>
       </View>

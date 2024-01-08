@@ -91,6 +91,7 @@ export const useheightViewModal = (props: ScreenParams) => {
           feet: heightValue?.feet,
           inch: heightValue?.inch,
         },
+        steps:7
       };
       if (user?.height?.feet===heightValue?.feet && user?.height?.inch===heightValue?.inch) {
         navigateToEthnicityScreen();

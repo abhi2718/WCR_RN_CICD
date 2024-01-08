@@ -23,7 +23,10 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
   return (
     <View style={styles.container}>
       {!showMembers && (
-        <Pressable onPress={toggleSetShowMembers}>
+        <Pressable
+          onPress={toggleSetShowMembers}
+          style={{ paddingHorizontal: 16 }}
+        >
           <Row justifyContent="space-between">
             <Row alignItems="center" gap={4}>
               <Image
