@@ -7,6 +7,7 @@ import {
   ViewStyle,
   NativeSyntheticEvent,
   TextInputSelectionChangeEventData,
+  Text,
 } from 'react-native';
 import React, { RefObject, useContext } from 'react';
 import { styles } from './styles';

@@ -32,3 +32,7 @@ Go to CometChatDetails ----> find Leave Group
 
 Finding Bubble color 
 Go to CometChatMessageList and find getStyle
+
+
+Finding mention list 
+go to the ---> CometChatMessageComposer ->renderMentionList

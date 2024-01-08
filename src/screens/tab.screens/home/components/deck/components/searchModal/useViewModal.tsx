@@ -11,22 +11,27 @@ export const useViewModal = (props: SearchModalProps) => {
   const textRef = useRef('');
   const handleSearch = async (text: string) => {
     textRef.current = text;
-    if (text.length) {
-      try {
-        const data = await homeDeckRepository.searchUser(text);
-        setUser(() => {
-          return textRef.current.length? data: []
-        });
-        if (!data.length) {
-          setSearchActive(true);
+      if (text.length) {
+        try {
+          const query = {
+            searchValue: text,
+          };
+          const data = await homeDeckRepository.searchUser(query);
+          setUser(() => {
+            return textRef.current.length
+              ? data.filter((user) => user.first.includes(text))
+              : [];
+          });
+          if (!data.length) {
+            setSearchActive(true);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-
+      } else {
+        setSearchActive(false);
+        setUser([]);
       }
-    } else {
-      setSearchActive(false);
-      setUser([]);
-    }
   };
   const handleClose = () => {
     setSearchActive(false);
