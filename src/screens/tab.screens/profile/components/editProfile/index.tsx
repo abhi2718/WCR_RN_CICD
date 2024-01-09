@@ -173,7 +173,7 @@ export const EditProfile = () => {
             </Spacer>
 
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>State/Territy</Text>
+              <Text style={styles.fieldName}>State/Territory</Text>
               <Row
                 style={[styles.selectRow, styles.fieldValueContainer]}
                 justifyContent="space-between"
@@ -259,7 +259,7 @@ export const EditProfile = () => {
             />
           </Column>
 
-         <Column style={styles.ph16}>
+          <Column style={styles.ph16}>
             {optionsList.map((item, index) => {
               if (index === 2) {
                 return (
@@ -384,7 +384,7 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-              
+
               return (
                 <Spacer key={index} position="top" size={10}>
                   <Text style={styles.fieldName}>{item.title}</Text>
@@ -414,7 +414,7 @@ export const EditProfile = () => {
                 </Spacer>
               );
             })}
-          </Column> 
+          </Column>
         </View>
       </ScrollView>
     </SafeAreaView>

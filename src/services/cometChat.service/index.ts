@@ -17,6 +17,7 @@ export const useCometChatInit = () => {
   useEffect(() => {
     const inItCometChat = async () => {
       try {
+        console.log(user._id)
         if (CometChatUIKit) {
           await CometChatUIKit.init(uikitSettings);
           await CometChatUIKit.login({ uid: user._id });

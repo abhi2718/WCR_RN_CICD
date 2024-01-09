@@ -3,7 +3,7 @@ import { ScreenContainer, dimensions } from '../../../../../components/tools';
 import { Text, View, StyleSheet, Pressable, Keyboard } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { profession } from './professionStyle';
-import { DropdownInput, FlatInput } from '../../../../../components/inputBox';
+import { DropdownInput, FlatInput, SearchableDropdownInput } from '../../../../../components/inputBox';
 import { userDegree } from '../../../../../utils/constanst';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useProfessionModal } from './professionViewModal';
@@ -32,7 +32,7 @@ const Profession = (props: ScreenParams) => {
               Tell us about your profession
             </Text>
             <View>
-              <DropdownInput
+              <SearchableDropdownInput
                 data={userDegree}
                 onFocus={() => setIsFocus(true)}
                 labelField="label"
@@ -47,7 +47,7 @@ const Profession = (props: ScreenParams) => {
               {validationErrors.userDegree && (
                 <ErrorText> {validationErrors.userDegree}</ErrorText>
               )}
-              <Dropdown
+              <SearchableDropdownInput
                 data={primaryDegreeOption}
                 onFocus={() => {}}
                 maxHeight={200}
