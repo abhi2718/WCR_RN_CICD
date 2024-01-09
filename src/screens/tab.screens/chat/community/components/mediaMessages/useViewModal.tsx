@@ -68,6 +68,7 @@ export const useViewModal = (props: MediaMessageProps) => {
       setVideo(videoCollections);
       setLoading(false);
     } catch (error) {
+      console.log(error);
     }
   };
   useEffect(() => {

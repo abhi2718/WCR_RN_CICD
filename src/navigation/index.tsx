@@ -50,6 +50,7 @@ export enum ROUTES {
   EditProfile = '/editProfile',
   VerificationPending = '/verificationPending',
   TurnOnNotification = '/turnOnNotification',
+  PrivateChatMediaScreen = '/privateChatMediaScreen'
 }
 export default function Navigator() {
   return (

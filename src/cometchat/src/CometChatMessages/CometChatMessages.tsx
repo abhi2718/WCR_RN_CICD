@@ -4,12 +4,6 @@ import { CometChat } from '@cometchat/chat-sdk-react-native';
 import { MessageStyle, MessageStyleInterface } from './MessageStyle';
 import { CometChatMessageList } from '../CometChatMessageList';
 import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-  } from 'react-native-popup-menu';
-import {
   CometChatMessageComposer,
   MessageComposerConfiguration,
   MessageComposerConfigurationInterface,
@@ -42,6 +36,7 @@ import { CometChatThreadedMessages } from '../CometChatThreadedMessages';
 import { infoIcon } from './resources';
 import { Style } from './style';
 import { CometChatUIEventHandler } from '../shared/events/CometChatUIEventHandler/CometChatUIEventHandler';
+import { AppBarDropDown } from '../../../screens/tab.screens/chat/private/compnents/appBarDropDown';
 
 const currentTime = new Date().getTime();
 const msgListenerId = 'messages_' + currentTime;
@@ -297,8 +292,6 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
     >
       {showComponent == ComponentNames.Details && (
         <View style={[Style.stackMe, { backgroundColor, borderRadius }]}>
-          {/* showComponent == ComponentNames.Details &&
-             <View style={{flex: 1}}> */}
           <CometChatDetails
             user={detailsData.current.user}
             group={detailsData.current.group}
@@ -344,25 +337,19 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
                     </View>
                   );
                 } else if (user) {
-                    console.log(user)
-                    return (<View style={{
-                        width:100,
-                        backgroundColor: "red",
-                        flexDirection: "row",
-                        justifyContent:"flex-end"
-                    }}>
-                        
-                        <Menu>
-      <MenuTrigger text='. ' />
-      <MenuOptions>
-        <MenuOption onSelect={() => alert(`Save`)} text='Save' />
-        <MenuOption onSelect={() => alert(`Delete`)} >
-          <Text style={{color: 'red'}}>Delete</Text>
-        </MenuOption>
-        <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled' />
-      </MenuOptions>
-    </Menu>
-                    </View>)
+                  return (
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        marginRight:20
+                      }}
+                    >
+                      <AppBarDropDown
+                        user={user}
+                      />
+                    </View>
+                  );
                 }
               }}
               disableTyping={disableTyping}
