@@ -13,20 +13,16 @@ export const useCometChatInit = () => {
     region: config.REGION,
     extensions: [new ReactionsExtension()],
   };
- 
+
   useEffect(() => {
     const inItCometChat = async () => {
-     try {
-       if (CometChatUIKit) {
-         await CometChatUIKit.init(uikitSettings);
-        // let uid = '6499476d12c6b5d6b1093b2a';
-        const androidUser = isAndroid? '6569aa0292b03bce6ced8fd7':'6499476d12c6b5d6b1093b2a'
-        const newUser = '637f1bf7124e95131a698c74';
-        await CometChatUIKit.login({ uid:user._id});
-        setIsInitialized(true);
+      try {
+        if (CometChatUIKit) {
+          await CometChatUIKit.init(uikitSettings);
+          await CometChatUIKit.login({ uid: user._id });
+          setIsInitialized(true);
         }
-      } catch (error) {
-      }
+      } catch (error) {}
     };
     if (user?._id) {
       inItCometChat();

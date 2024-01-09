@@ -281,7 +281,6 @@ export const ProfileView = (props: ProfileViewProps) => {
       </View>
     );
   }
-  return <View></View>;
 };
 
 export const styles = StyleSheet.create({

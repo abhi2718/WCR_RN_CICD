@@ -174,9 +174,9 @@ export const useAddProfilePicViewModal = (props: any) => {
     getSavedPics();
   }, []);
 
-  const setProfilePicFromModel = async (imageValue: ModalImageSelectedType) => {
-    const image: Image = await pickPhotoFromUrl(undefined, imageValue.path);
-    if (image?.cropRect) {
+const setProfilePicFromModel = async (imageValue: ModalImageSelectedType) => {
+    const image: Image = await pickPhotoFromUrl(undefined, imageValue.path); 
+    if(image?.cropRect) {
       imageValue.path = image?.path;
     }
     if (imageValue.type == sidePicConstant) {
@@ -184,7 +184,6 @@ export const useAddProfilePicViewModal = (props: any) => {
       setImageModal(!imageModal);
       return;
     }
-
     if (imageValue.type == bottomPicConstant) {
       exchangeBottomSidePic(imageValue.index, imageValue.path);
       setImageModal(!imageModal);

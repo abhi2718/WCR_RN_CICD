@@ -410,7 +410,6 @@ export const CometChatFormBubble = memo((props: CometChatFormBubbleInterface) =>
             }
         )
             .catch((error) => {
-                console.log("error while markAsInteracted", error);
             });
     }
 
