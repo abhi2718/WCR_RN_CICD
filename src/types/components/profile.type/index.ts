@@ -9,6 +9,7 @@ export type UserProfile = {
   dob: string;
   ethnicity: string[];
   first: string;
+  displayName: string;
   gender: string;
   genderPronoun: string;
   interests: string[];
