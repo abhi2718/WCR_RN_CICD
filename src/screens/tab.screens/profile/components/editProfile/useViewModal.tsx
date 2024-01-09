@@ -28,6 +28,7 @@ import {
   smoking,
   statesOption,
   userDegree,
+  covidVaccineStatus,
 } from '../../../../../utils/constanst';
 import { ImageDataType } from '../../../../auth/preRegisterFlow/components/AddProfilePic/addProfilePic.ViewModal';
 
@@ -59,6 +60,7 @@ export const useViewModal = () => {
     kids: 'Select',
     familyPlan: 'Select',
     pets: 'Select',
+    covidVaccineStatus: 'Select',
     genderPronoun: user?.profile?.genderPronoun
       ? user?.profile?.genderPronoun
       : 'Select',
@@ -117,6 +119,7 @@ export const useViewModal = () => {
   const dietList = generateList(diet, 'diet');
   const drinkingList = generateList(drinking, 'drinking');
   const smokingList = generateList(smoking, 'smoking');
+  const covidList = generateList(covidVaccineStatus, 'covidVaccineStatus');
   const kidsList = generateList(kids, 'kids');
   const familyPlanList = generateList(familyPlan, 'familyPlan');
   const petsList = generateList(pets, 'pets');
@@ -238,7 +241,7 @@ export const useViewModal = () => {
       initValue: 'politics',
     },
     {
-      title: 'excercise',
+      title: 'Excercise',
       option: excerciseList,
       initValue: 'excercise',
     },
@@ -251,6 +254,11 @@ export const useViewModal = () => {
       title: 'Drinking',
       option: drinkingList,
       initValue: 'drinking',
+    },
+    {
+      title: 'Covid',
+      option: covidList,
+      initValue: 'covidVaccineStatus',
     },
     {
       title: 'Smoking',
@@ -404,6 +412,7 @@ export const useViewModal = () => {
         politics: answer.politics,
         drinking: answer.drinking,
         smoking: answer.smoking,
+        covidVaccineStatus: answer.covidVaccineStatus,
         kids: answer.kids,
         familyPlan: answer.familyPlan,
         pets: answer.pets,

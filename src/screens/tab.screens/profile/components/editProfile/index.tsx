@@ -173,7 +173,7 @@ export const EditProfile = () => {
             </Spacer>
 
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>State/Territy</Text>
+              <Text style={styles.fieldName}>State/Territory</Text>
               <Row
                 style={[styles.selectRow, styles.fieldValueContainer]}
                 justifyContent="space-between"
