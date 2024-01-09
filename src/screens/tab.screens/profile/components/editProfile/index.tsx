@@ -349,6 +349,39 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
+              if (item.title === 'Hobby') {
+                return (
+                  <Spacer key={index} position="top" size={10}>
+                    <Spacer key={index} position="top" size={10}>
+                      <Text style={styles.fieldName}>{item.title}</Text>
+                      <TouchableOpacity onPress={() => openModal('hobby')}>
+                        <Row
+                          style={[styles.selectRow, styles.fieldValueContainer]}
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Text style={styles.fieldValue}>Select</Text>
+                          <Image
+                            resizeMode="contain"
+                            style={styles.nextArrow}
+                            source={require('../../../../../assets/images/settings/Next.png')}
+                          />
+                        </Row>
+                      </TouchableOpacity>
+                    </Spacer>
+                    <MultiSelectModal
+                      isVisible={openHobbyModal}
+                      data={ethnicity}
+                      selectedItems={hobbiesList}
+                      onClose={() => closeModal('hobby')}
+                      onItemSelected={(selected) =>
+                        handleItemSelected(selected, 'hobby')
+                      }
+                    />
+                    <Text>{hobbiesList.join(', ')}</Text>
+                  </Spacer>
+                );
+              }
               if (item.title === 'Relationship level') {
                 return (
                   <Spacer key={index} position="top" size={10}>

@@ -29,6 +29,7 @@ import {
   statesOption,
   userDegree,
   covidVaccineStatus,
+  hobbies,
 } from '../../../../../utils/constanst';
 import { ImageDataType } from '../../../../auth/preRegisterFlow/components/AddProfilePic/addProfilePic.ViewModal';
 
@@ -61,6 +62,7 @@ export const useViewModal = () => {
     familyPlan: 'Select',
     pets: 'Select',
     covidVaccineStatus: 'Select',
+    interests: 'Select',
     genderPronoun: user?.profile?.genderPronoun
       ? user?.profile?.genderPronoun
       : 'Select',
@@ -111,6 +113,7 @@ export const useViewModal = () => {
     'state',
   );
   const ethnicityList = generateList(ethnicity, 'ethnicity');
+  const hobbyList = generateList(hobbies, 'interests');
   const maritalStatusList = generateList(maritalStatus, 'maritalStatus');
   const relationshipLevelList = generateList(relationship, 'relationshipLevel');
   const religionList = generateList(religion, 'religion');
@@ -209,6 +212,11 @@ export const useViewModal = () => {
       title: 'Ethnicity',
       option: ethnicityList,
       initValue: 'ethnicity',
+    },
+    {
+      title: 'Hobby',
+      option: hobbyList,
+      initValue: 'interests',
     },
     {
       title: 'Marital status',
@@ -408,6 +416,7 @@ export const useViewModal = () => {
           primaryDegree: answer.degreeType,
         },
         ethnicity: [answer.ethnicity],
+        interests: [answer.interests],
         religion: answer.religion,
         politics: answer.politics,
         drinking: answer.drinking,
