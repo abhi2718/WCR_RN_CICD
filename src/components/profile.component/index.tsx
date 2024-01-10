@@ -77,7 +77,7 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.gradient}
                           />
                           <Text style={styles.userNameText}>
-                            {user.first}{' '}
+                            {user.displayName ?? user.first}{' '}
                             {user?.genderPronoun !== 'Prefer not to say' &&
                               `(${user?.genderPronoun})`}
                             , {calculateAge(user?.dob)}

@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    paddingVertical: 14,
-    paddingHorizontal: 12,
+    marginHorizontal: 8,
+    marginVertical: 4,
   },
 });

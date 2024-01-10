@@ -59,7 +59,7 @@ export const PreviewScreen = () => {
                     />
                     <Row alignItems="center" gap={15} style={styles.nameRow}>
                       <Text style={styles.name}>
-                        {user.profile.displayName ?? user.profile.name.first}
+                        {user.profile.displayName ?? user.profile.name.first}{' '}
                         (He/Him), 27
                       </Text>
                       <Image
@@ -182,8 +182,13 @@ export const PreviewScreen = () => {
                     )}
 
                     {user.ethnicity.length >= 0 &&
-                      user.ethnicity.map((ethnicity: String,index:number) => (
-                        <Row key={index} gap={10} alignItems="center" style={styles.chip}>
+                      user.ethnicity.map((ethnicity: String, index: number) => (
+                        <Row
+                          key={index}
+                          gap={10}
+                          alignItems="center"
+                          style={styles.chip}
+                        >
                           {/* <Image
                         style={styles.chipIcon}
                         source={require('../../../../../assets/images/icons/USAFlag.png')}
