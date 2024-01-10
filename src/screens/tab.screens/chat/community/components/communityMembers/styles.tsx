@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         shadowColor: 'black',
-        shadowOffset: { width: 10, height: 10 },
+        shadowOffset: { width: 10, height: 4 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
       },

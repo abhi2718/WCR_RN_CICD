@@ -10,12 +10,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     width: dimensions.width,
-    padding: 8,
+    paddingHorizontal: 8,
   },
 
   headerViewStyle: {
-    height: 40,
+    // height: 40,
     justifyContent: 'center',
+    paddingHorizontal: 8,
   },
   padHorizontal: {
     paddingHorizontal: sizes[3],

@@ -128,12 +128,13 @@ export const headerStyle = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
   },
   actionButtonView: {
-    width: sizes[10],
+    width: 50,
   },
   actionButton: {
     fontSize: fontSizes.text,
     color: '#007AFF',
     fontWeight: fontWeights.regular,
+    textAlign: 'right',
   },
 });
 

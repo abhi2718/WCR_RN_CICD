@@ -207,12 +207,34 @@ export const EditProfile = () => {
                     _handleInputChange('', 'zipcode');
                   }}
                   style={styles.modalSelector}
+                  cancelText="Close"
                   optionContainerStyle={styles.optionContainer}
                   optionTextStyle={styles.optionText}
                   cancelStyle={styles.cancelButton}
                   selectedItemTextStyle={styles.selectedItem}
                   initValueTextStyle={styles.initValueTextStyle}
-                  selectStyle={{ borderWidth: 0 }}
+                  selectStyle={{
+                    borderWidth: 0,
+                    borderColor: 'transparent',
+                  }}
+                  overlayStyle={{
+                    flex: 1,
+                    marginTop: 50,
+                    paddingBottom: 40,
+                    justifyContent: 'space-between',
+                    backgroundColor: '#fff',
+                    paddingHorizontal: 0,
+                  }}
+                  cancelTextStyle={{
+                    color: '#fff',
+                    fontWeight: 'bold',
+                  }}
+                  optionStyle={{
+                    borderBottomWidth: 0,
+                    borderColor: 'transparent',
+                    margin: 0,
+                    gap: 0,
+                  }}
                 />
                 <Image
                   resizeMode="contain"
@@ -278,7 +300,7 @@ export const EditProfile = () => {
             />
           </Column>
 
-         <Column style={styles.ph16}>
+          <Column style={styles.ph16}>
             {optionsList.map((item, index) => {
               if (index === 2) {
                 return (
@@ -433,7 +455,7 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-              
+
               return (
                 <Spacer key={index} position="top" size={10}>
                   <Text style={styles.fieldName}>{item.title}</Text>
@@ -447,12 +469,34 @@ export const EditProfile = () => {
                       initValue={answer[item.initValue]}
                       onChange={handleInputChange}
                       style={styles.modalSelector}
+                      cancelText="Close"
                       optionContainerStyle={styles.optionContainer}
                       optionTextStyle={styles.optionText}
                       cancelStyle={styles.cancelButton}
                       selectedItemTextStyle={styles.selectedItem}
                       initValueTextStyle={styles.initValueTextStyle}
-                      selectStyle={{ borderWidth: 0 }}
+                      selectStyle={{
+                        borderWidth: 0,
+                        borderColor: 'transparent',
+                      }}
+                      overlayStyle={{
+                        flex: 1,
+                        marginTop: 50,
+                        paddingBottom: 40,
+                        justifyContent: 'space-between',
+                        backgroundColor: '#fff',
+                        paddingHorizontal: 0,
+                      }}
+                      cancelTextStyle={{
+                        color: '#fff',
+                        fontWeight: 'bold',
+                      }}
+                      optionStyle={{
+                        borderBottomWidth: 0,
+                        borderColor: 'transparent',
+                        margin: 0,
+                        gap: 0,
+                      }}
                     />
                     <Image
                       resizeMode="contain"
@@ -463,7 +507,7 @@ export const EditProfile = () => {
                 </Spacer>
               );
             })}
-          </Column> 
+          </Column>
         </View>
       </ScrollView>
     </SafeAreaView>

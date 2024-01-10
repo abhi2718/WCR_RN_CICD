@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     marginVertical: 10,
-    backgroundColor: 'rgba(245, 245, 245, 0.85)',
+    backgroundColor: 'rgba(245, 245, 245, 1)',
     width: '100%',
     borderRadius: 13,
     gap: 20,

@@ -66,25 +66,25 @@ export const useViewModal = () => {
     {
       id: '3',
       imagePath: require('../../../../../assets/images/settings/inviteOthers.png'),
-      title: 'Invite friends',
+      title: 'Invite Friends',
       onPress: handleShare,
     },
     {
       id: '4',
       imagePath: require('../../../../../assets/images/settings/privacy.png'),
-      title: 'Privacy policy',
+      title: 'Privacy Policy',
       onPress: _privacypolicy,
     },
     {
       id: '5',
       imagePath: require('../../../../../assets/images/settings/terms&Condation.png'),
-      title: 'Terms & conditions',
+      title: 'Terms & Conditions',
       onPress: _termsConditions,
     },
     {
       id: '6',
       imagePath: require('../../../../../assets/images/settings/contactUS.jpg'),
-      title: 'Contact us',
+      title: 'Contact Us',
       onPress: _contactUs,
     },
     // {
