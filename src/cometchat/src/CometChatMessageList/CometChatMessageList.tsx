@@ -1417,7 +1417,7 @@ export const CometChatMessageList = forwardRef<
     });
   };
 
- // styles of message bubble 
+  // styles of message bubble
   const getStyle = useCallback(
     (item: CometChat.BaseMessage): BaseStyleInterface => {
       let _style = new BaseStyle({

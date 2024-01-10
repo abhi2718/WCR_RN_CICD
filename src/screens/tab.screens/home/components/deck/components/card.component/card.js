@@ -32,6 +32,7 @@ export default function CardCompoent({ item, height, cardRef }) {
     setShowModal,
     handleReport,
   } = useViewModal(item, cardRef);
+
   return (
     <View style={[cardStyles.deckContainer, cardStyles.shadows]}>
       <Pressable style={cardStyles.shareIconContainer} onPress={handleShare}>

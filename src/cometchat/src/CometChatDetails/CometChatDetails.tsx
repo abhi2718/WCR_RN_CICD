@@ -7,6 +7,7 @@ import {
   BackHandler,
   StyleSheet,
   Pressable,
+  ScrollView,
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import Header from './Header';
@@ -448,8 +449,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
       //   style: {},
       // });
       leaveGroup(true);
-    }
-    else {
+    } else {
       leaveGroup();
       // setModalDetails({
       //   title: 'Please Confirm',
@@ -865,92 +865,88 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
   if (group) {
     return (
       <View>
-        <View style={{ height: 400 }}>
-          <Row justifyContent="space-between" alignItems="center">
-            <Header
-              title="Group info"
-              showCloseButton={showCloseButton}
-              closeButtonIcon={closeButtonIcon}
-              onPress={() => {
-                onBack && onBack();
-              }}
-              titleStyle={{
-                padding: 10,
-                color: detailsStyle?.titleColor ?? theme.palette.getAccent(),
-                ...(detailsStyle?.titleFont
-                  ? detailsStyle?.titleFont
-                  : theme.typography.heading),
-              }}
-              closeIconTint={
-                detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
-              }
-            />
-            <AlertScreen
-              showModal={showModal}
-              setShowModal={setShowModal}
-              title="Leave group?"
-              description="Are you sure you want to 
+        <Row justifyContent="space-between" alignItems="center">
+          <Header
+            title="Group info"
+            showCloseButton={showCloseButton}
+            closeButtonIcon={closeButtonIcon}
+            onPress={() => {
+              onBack && onBack();
+            }}
+            titleStyle={{
+              padding: 10,
+            }}
+            closeIconTint={
+              detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
+            }
+          />
+          <AlertScreen
+            showModal={showModal}
+            setShowModal={setShowModal}
+            title="Leave group?"
+            description="Are you sure you want to 
               leave the group permanently?"
-              onPress={handleLeaveGroup}
-            />
-            <Pressable
-              onPress={() => setShowModal(true)}
-              style={myStyles.leaveGroup}
-            >
-              <Text style={myStyles.leaveBtn}>Leave</Text>
-            </Pressable>
-          </Row>
-          {groupDetails && (
-            <>
-              <GroupInfoModal
-                isVisible={isGroupInfoModalVisible}
-                onClose={closeModal}
-              ></GroupInfoModal>
-              <Row>
-                <View style={styles.groupInfoContainer}>
-                  <Image
-                    style={myStyles.imageStyle}
-                    source={{ uri: groupDetails?.getIcon() }}
-                  />
-                  <View style={styles.infoBtBox}>
-                    <Pressable onPress={() => setisGroupInfoModalVisible(true)}>
-                      <Image
-                        source={require('../../../assets/images/icons/infoIcon.png')}
-                        style={styles.infoIcon}
-                      />
-                    </Pressable>
-                  </View>
-                  <Column>
-                    <Text style={styles.groupName}>
-                      {groupDetails.getName()}
-                    </Text>
-                    <View style={styles.descContainer}>
-                      <Text style={styles.groupDescription}>
-                        {groupDetails.getDescription()}{' '}
-                      </Text>
+            onPress={handleLeaveGroup}
+          />
+          <Pressable
+            onPress={() => setShowModal(true)}
+            style={myStyles.leaveGroup}
+          >
+            <Text style={myStyles.leaveBtn}>Exit Group</Text>
+          </Pressable>
+        </Row>
+        <ScrollView>
+          <View>
+            {groupDetails && (
+              <>
+                <GroupInfoModal
+                  isVisible={isGroupInfoModalVisible}
+                  onClose={closeModal}
+                ></GroupInfoModal>
+                <Row>
+                  <View style={styles.groupInfoContainer}>
+                    <Image
+                      style={myStyles.imageStyle}
+                      source={{ uri: groupDetails?.getIcon() }}
+                    />
+                    <View style={styles.infoBtBox}>
+                      <Pressable
+                        onPress={() => setisGroupInfoModalVisible(true)}
+                      >
+                        <Image
+                          source={require('../../../assets/images/icons/infoIcon.png')}
+                          style={styles.infoIcon}
+                        />
+                      </Pressable>
                     </View>
-                  </Column>
-                </View>
-              </Row>
-            </>
-          )}
-          <Spacer position="top" size={10}>
-            <View style={myStyles.menuOptins}>
-              <CommunityMembers group={groupDetails} />
-            </View>
-          </Spacer>
-        </View>
-        <View
-          style={{ height: dimensions.height - 400, backgroundColor: '#fff' }}
-        >
-          <MediaTab guid={groupDetails?.getGuid()} />
-        </View>
+                    <Column>
+                      <Text style={styles.groupName}>
+                        {groupDetails.getName()}
+                      </Text>
+                      <View style={styles.descContainer}>
+                        <Text style={styles.groupDescription}>
+                          {groupDetails.getDescription()}{' '}
+                        </Text>
+                      </View>
+                    </Column>
+                  </View>
+                </Row>
+              </>
+            )}
+          </View>
+          <View style={myStyles.menuOptins}>
+            <CommunityMembers group={groupDetails} />
+          </View>
+          <View style={{ minHeight: 400, backgroundColor: '#fff' }}>
+            <MediaTab guid={groupDetails?.getGuid()} />
+          </View>
+        </ScrollView>
       </View>
     );
   }
   if (user) {
     return (
-      <View style={{ backgroundColor: '#fff' }}>
+      <View style={{ backgroundColor: '#fff', flex: 1 }}>
         <View style={{ height: 270 }}>
           <Header
             title={title}
@@ -981,7 +977,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
             <Text style={myStyles.userName}>{user.getName()}</Text>
           </Column>
         </View>
-        <Row style={myStyles.viewReportBlock} gap={16}>
+        <Row style={[myStyles.viewReportBlock, { height: 80 }]} gap={16}>
           <Column style={myStyles.widthFlex}>
             <Pressable
               onPress={() => {
@@ -1016,7 +1012,7 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
         </Row>
         <View
           style={{
-            height: dimensions.height - 270,
+            height: dimensions.height - 350,
           }}
         >
           <MediaTab uid={user.getUid()} />

@@ -1,9 +1,10 @@
 export const genderArray = [
-  'Male',
-  'Female',
-  'Transman',
-  'Transwoman',
-  'Non-binary',
+  'Man',
+  'Woman',
+  'Trans-man',
+  'Trans-woman',
+  'Non-Binary',
+  'Everyone',
 ];
 export const genderPronounArray = [
   'He/Him',
@@ -160,6 +161,7 @@ export const sexualOrientationArray = [
   'Questioning',
   'Asexual',
   'Demisexual',
+  'Non-Binary'
 ];
 
 export const country = [
@@ -168,9 +170,9 @@ export const country = [
 ];
 
 export const relationship = [
-  'Long-term relationship',
+  'Long-term relationship, open to short-term ',
   'Marriage',
-  'Long-term, open to short',
+  'Short-term relationship, open to long-term',
   'Casual',
   'Prefer not to say',
 ];
@@ -467,6 +469,9 @@ export const feetValues = [
   `4'7"`,
   `4'8"`,
   `4'9"`,
+  `4'10"`,
+  `4'11"`,
+  `4'12"`,
   `5'0"`,
   `5'1"`,
   `5'2"`,
@@ -479,7 +484,7 @@ export const feetValues = [
   `5'9"`,
   `5'10"`,
   `5'11"`,
-  `6'0"`,
+  `5'12"`,
   `6'1"`,
   `6'2"`,
   `6'3"`,
@@ -491,6 +496,19 @@ export const feetValues = [
   `6'9"`,
   `6'10"`,
   `6'11"`,
+  `6'12"`,
+  `7'1"`,
+  `7'2"`,
+  `7'3"`,
+  `7'4"`,
+  `7'5"`,
+  `7'6"`,
+  `7'7"`,
+  `7'8"`,
+  `7'9"`,
+  `7'10"`,
+  `7'11"`,
+  `7'12"`
 ];
 
 export const options = [
