@@ -25,12 +25,10 @@ const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
     <>
       <WelocmeGroupModal isVisible={!isModalVisible} onClose={closeModal} />
       <View style={styles.container}>
-        {showToggleSearchInput && (
-          <SearchGroup
-            toggleSearchInput={toggleSearchInput}
-            handleTextChange={handleTextChange}
-          />
-        )}
+        <SearchGroup
+          toggleSearchInput={toggleSearchInput}
+          handleTextChange={handleTextChange}
+        />
         <GroupsList groups={groups} handleJoinGroup={handleJoinGroup} />
       </View>
     </>

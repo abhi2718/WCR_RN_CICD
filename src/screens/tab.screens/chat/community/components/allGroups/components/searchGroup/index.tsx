@@ -17,7 +17,7 @@ const SearchGroup = (props: SearchGroupProps) => {
         placeholder="Search"
         onChangeText={handleTextChange}
       />
-      <Pressable
+      {/* <Pressable
         onPress={() => {
           handleTextChange('');
           toggleSearchInput();
@@ -28,7 +28,7 @@ const SearchGroup = (props: SearchGroupProps) => {
           resizeMode="contain"
           source={require('../../../../../../../../assets/images/icons/crossIcon.png')}
         />
-      </Pressable>
+      </Pressable> */}
     </Row>
   );
 };
