@@ -5,11 +5,12 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     width: dimensions.width,
-    padding: 8,
+    paddingHorizontal: 8,
   },
   headerViewStyle: {
-    height: 40,
+    // height: 40,
     justifyContent: 'center',
+    paddingHorizontal: 8,
   },
   textStyle: {
     textAlign: 'center',
@@ -17,5 +18,12 @@ export const styles = StyleSheet.create({
   iconStyle: {
     height: 20,
     width: 20,
+  },
+  infoScreenContainer: {
+    width: dimensions.width - 16,
+  },
+  infoScreen: {
+    width: '100%',
+    height: '100%',
   },
 });

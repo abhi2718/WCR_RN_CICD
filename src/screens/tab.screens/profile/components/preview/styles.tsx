@@ -12,6 +12,9 @@ export const styles = StyleSheet.create({
   container: {
     // paddingHorizontal: 16,
   },
+  ph16: {
+    paddingHorizontal: 16,
+  },
   header: {
     marginBottom: 16,
     paddingHorizontal: 16,
@@ -93,9 +96,10 @@ export const styles = StyleSheet.create({
   },
   chip: {
     backgroundColor: colors.ui.deckChipBgColor,
-    paddingVertical: sizes[1],
+    // paddingVertical: sizes[1],
     paddingHorizontal: sizes[2],
     borderRadius: sizes[4],
+    height: 35,
   },
   chipIcon: {
     height: sizes[5],
