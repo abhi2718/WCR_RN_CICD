@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { CometChat } from '../../../../../../../cometchat/sdk/CometChat';
 import { UserProfileRepository } from '../../../../../../../repository/userProfile.repo';
 import { OptionType } from '../../../../../../../types/screen.type/profile.type';
 import {
@@ -30,6 +31,7 @@ export const useViewModal = () => {
   const [_selectedUserDegreeType, _setSelectedUserDegreeType] = useState<any[]>(
     [],
   );
+  const [cometChatBlockedUsers, setCometChatBlockedUsers] = useState<CometChat.User[] | []>([]);
   const fetchGetblockByScope = async () => {
     setLoading(true);
     try {
@@ -65,7 +67,9 @@ export const useViewModal = () => {
   const handleSelectCountry = (item: OptionType) => {
     const filterCountry = country.filter(({ label }) => label !== item.label);
     setCountry(filterCountry);
-    const isCountryExist = selectedCountry.find(({ label }) => label === item.label);
+    const isCountryExist = selectedCountry.find(
+      ({ label }) => label === item.label,
+    );
     if (isCountryExist) {
       return;
     }
@@ -86,7 +90,9 @@ export const useViewModal = () => {
       ({ label }) => label !== item.label,
     );
     setUserDegree(filteredUserDegree);
-    const isSelectUserDegree = selecteduserDegree.find(({ label }) => label === item.label);
+    const isSelectUserDegree = selecteduserDegree.find(
+      ({ label }) => label === item.label,
+    );
     if (isSelectUserDegree) {
       return;
     }
@@ -111,7 +117,9 @@ export const useViewModal = () => {
       ({ label }) => label !== item.label,
     );
     setSelectedUserDegreeType(filterselectedUserDegreeType);
-    const isSelectUserDegreeType = _selectedUserDegreeType.find(({ label }) => label === item.label);
+    const isSelectUserDegreeType = _selectedUserDegreeType.find(
+      ({ label }) => label === item.label,
+    );
     if (isSelectUserDegreeType) {
       return;
     }
@@ -145,6 +153,28 @@ export const useViewModal = () => {
   useEffect(() => {
     fetchGetblockByScope();
   }, []);
+  const fetchCometChatBlockedUsers = async() => {
+    try {
+      let limit: number = 30;
+    let blockedUsersRequest: CometChat.BlockedUsersRequest =
+      new CometChat.BlockedUsersRequestBuilder().setLimit(limit).build();
+      const blockedList = await blockedUsersRequest.fetchNext();
+      setCometChatBlockedUsers(blockedList)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const handleUserUnBlock = async (uid:string) => {
+    try {
+      const blockList = await CometChat.unblockUsers([uid]);
+      fetchCometChatBlockedUsers();
+    } catch (error) {
+       
+    }
+  };
+  useEffect(() => {
+    fetchCometChatBlockedUsers();
+  }, []);
   useEffect(() => {
     if (
       selectedCountry.length ||
@@ -169,6 +199,8 @@ export const useViewModal = () => {
     handleselectedUserDegreeType,
     handledeSelectedUserDegreeType,
     _selectedUserDegreeType,
-    loading
+    loading,
+    cometChatBlockedUsers,
+    handleUserUnBlock
   };
 };

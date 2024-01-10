@@ -88,7 +88,6 @@ const ImageMessage = (props: MediaMessageProps) => {
               if (index === images.length - 1) {
                 return <View style={{ height: 400 }}></View>;
               }
-
               return (
                 <FastImage
                   style={styles.galleryImage}

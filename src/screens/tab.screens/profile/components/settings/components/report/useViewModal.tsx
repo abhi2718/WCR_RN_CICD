@@ -36,7 +36,7 @@ export const useViewModal = (props:any) => {
     console.log(userId)
     if (!messageRef?.current?.length || !subjectRef?.current?.length) {
       return ShowFlashMessage(
-        'Subject and message both fields required !',
+        'Subject and message both fields required!',
         '',
         'danger',
       );
