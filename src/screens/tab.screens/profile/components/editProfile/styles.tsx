@@ -76,10 +76,16 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.ui.text,
     width: '100%',
+    textAlign: 'left',
+    paddingHorizontal: 20,
+    margin: 0,
+    paddingVertical: 12,
   },
   cancelButton: {
-    borderRadius: 4,
-    backgroundColor: '#eee',
+    borderRadius: 23,
+    paddingVertical: 16,
+    backgroundColor: colors.ui.primary,
+    marginHorizontal: 20,
   },
 
   initValueTextStyle: {
@@ -92,6 +98,9 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     color: colors.ui.text,
+    backgroundColor: colors.bg.secondary,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
   },
   selectRow: {
     width: '100%',

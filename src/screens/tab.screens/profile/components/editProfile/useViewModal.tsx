@@ -289,6 +289,13 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
   ];
+  const [letterCount, setLetterCount] = useState(0);
+
+  useEffect(() => {
+    const lettersOnly = userProfile.aboutMe.replace(/[^a-zA-Z]/g, ''); // Remove non-letter characters
+    setLetterCount(lettersOnly.length);
+  }, [userProfile.aboutMe]);
+
   const handleDistanceSliderChange = (
     values: React.SetStateAction<number[]>,
   ) => {
@@ -373,7 +380,7 @@ export const useViewModal = () => {
       };
     } catch (error) {}
   };
-  const validateZipcode = async (zipcode:string) => {
+  const validateZipcode = async (zipcode: string) => {
     const USER = {
       address: {
         zipcode: zipcode,
@@ -384,7 +391,7 @@ export const useViewModal = () => {
       },
     };
     return await updateUserDetailsRepository.validateZipcode({ user: USER });
-  }
+  };
   const editProfile = async () => {
     try {
       if (!userProfile.city.length || !userProfile.zipcode.length) {
@@ -393,15 +400,22 @@ export const useViewModal = () => {
       }
       const phonePattern = /\(\d{3}\) \d{3}-\d{4}/;
       if (!phonePattern.test(userProfile.phone)) {
-       ShowFlashMessage('Please enter a valid 10-digit phone number!', '', 'success');
-       return;
+        ShowFlashMessage(
+          'Please enter a valid 10-digit phone number!',
+          '',
+          'success',
+        );
+        return;
       }
       setSubmitLoading(true);
       const isValid = await validateZipcode(userProfile.zipcode);
-      if (isValid?.user && isValid?.user["address.zipcode"]["message"] === "Zip code is not valid") {
+      if (
+        isValid?.user &&
+        isValid?.user['address.zipcode']['message'] === 'Zip code is not valid'
+      ) {
         ShowFlashMessage('Zip code is not valid!', '', 'success');
         setSubmitLoading(false);
-       return;
+        return;
       }
       const pics = await uploadImage();
       if (!pics) {
@@ -518,7 +532,7 @@ export const useViewModal = () => {
             ...user.address,
             city: userProfile.city,
             state: userProfile.state,
-            zipcode:userProfile.zipcode
+            zipcode: userProfile.zipcode,
           },
         },
       };
@@ -673,6 +687,7 @@ export const useViewModal = () => {
     hobbiesList,
     statesList,
     setUserProfile,
-    submitLoading
+    submitLoading,
+    letterCount,
   };
 };

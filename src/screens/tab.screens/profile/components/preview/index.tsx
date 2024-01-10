@@ -17,27 +17,22 @@ import {
 import { useViewModal } from './previewViewModal';
 import { styles } from './styles';
 import LinearGradient from 'react-native-linear-gradient';
+import { HeaderBar } from '../../../../../components/header';
 
 export const PreviewScreen = () => {
   const { user, goBack } = useViewModal();
+  console.log(user);
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <Row
-          style={styles.header}
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Pressable onPress={goBack}>
-            <Image
-              style={styles.closeIcon}
-              resizeMode="contain"
-              source={require('../../../../../assets/images/icons/back-arrow.png')}
-            />
-          </Pressable>
-          <Text style={styles.headerText}>Preview</Text>
-          <View style={styles.closeIcon} />
-        </Row>
+        <View style={styles.ph16}>
+          <HeaderBar
+            isLogo={false}
+            isText={true}
+            isLoading={false}
+            text="Preview"
+          />
+        </View>
         <View>
           {user && (
             <>
@@ -60,7 +55,9 @@ export const PreviewScreen = () => {
                     <Row alignItems="center" gap={15} style={styles.nameRow}>
                       <Text style={styles.name}>
                         {user.profile.displayName ?? user.profile.name.first}
-                        (He/Him), 27
+                        {user.profile.genderPronoun !== 'Prefer not to say' &&
+                          `, ${user.profile.genderPronoun}`}
+                        , {user.age}
                       </Text>
                       <Image
                         style={styles.badge}
@@ -182,8 +179,13 @@ export const PreviewScreen = () => {
                     )}
 
                     {user.ethnicity.length >= 0 &&
-                      user.ethnicity.map((ethnicity: String,index:number) => (
-                        <Row key={index} gap={10} alignItems="center" style={styles.chip}>
+                      user.ethnicity.map((ethnicity: String, index: number) => (
+                        <Row
+                          key={index}
+                          gap={10}
+                          alignItems="center"
+                          style={styles.chip}
+                        >
                           {/* <Image
                         style={styles.chipIcon}
                         source={require('../../../../../assets/images/icons/USAFlag.png')}

@@ -24,7 +24,7 @@ const Header = (props) => {
   return (
     <View style={[styles.container, styles.shadows]}>
       {showCloseButton && (
-        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+        <TouchableOpacity onPress={onPress}>
           <Image
             source={closeButtonIcon}
             style={{
@@ -36,7 +36,7 @@ const Header = (props) => {
         </TouchableOpacity>
       )}
       <Text style={[styles.headingText, titleStyle]}>{title}</Text>
-      <View />
+      <View style={{ width: 24 }}></View>
     </View>
   );
 };
@@ -48,10 +48,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
   },
-  iconContainer: { paddingRight: 15 },
   headingText: {
-    fontSize: fontSizes.h5,
-    fontWeight: fontWeights.semiBold,
+    fontSize: theme.units.sizes[22],
+    fontWeight: theme.fontWeights.medium,
     color: colors.ui.text,
   },
   shadows: {
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
       },
       android: {
-        elevation: 12,
+        elevation: 2,
       },
     }),
   },

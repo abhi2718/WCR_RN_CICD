@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
-import { View, Image, Text, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { useViewModal } from './useViewModal';
 import SwitchButton from './components/switchButton';
 import AllGroups from './components/allGroups';
-import {
-  Column,
-  Logo,
-  Row,
-  ScreenWrapper,
-  dimensions,
-} from '../../../../components/tools';
 import { styles } from './styles';
 import { HeaderDeck } from '../../../../components/header';
 import { CometChatConversationsWithMessages } from '../../../../cometchat/src';
@@ -24,7 +17,7 @@ export default function CommunityChat() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.paddingH16}>
-      <HeaderDeck
+        <HeaderDeck
           isSearchIcon={state !== 0}
           isPrefrence={false}
           count={count}

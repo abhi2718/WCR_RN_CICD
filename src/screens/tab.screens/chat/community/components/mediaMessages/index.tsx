@@ -81,6 +81,7 @@ const ImageMessage = (props: MediaMessageProps) => {
         <FullLoader />
       ) : (
         <>
+          <Spacer position="top" size={4} />
           <FlatList
             data={images}
             columnWrapperStyle={styles.galleryWrapper}

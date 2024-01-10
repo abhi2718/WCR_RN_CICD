@@ -32,6 +32,7 @@ export default function CardCompoent({ item, height, cardRef }) {
     setShowModal,
     handleReport,
   } = useViewModal(item, cardRef);
+
   return (
     <View style={[cardStyles.deckContainer, cardStyles.shadows]}>
       <Pressable style={cardStyles.shareIconContainer} onPress={handleShare}>
@@ -167,13 +168,18 @@ export default function CardCompoent({ item, height, cardRef }) {
                 )}
 
                 {ethnicity.length >= 0 &&
-                  ethnicity.map((ethnicity,index) => (
-                    <Row key={index} gap={10} alignItems="center" style={cardStyles.chip}>
+                  ethnicity.map((ethnicity, index) => (
+                    <Row
+                      key={index}
+                      gap={10}
+                      alignItems="center"
+                      style={cardStyles.chip}
+                    >
                       <Text style={cardStyles.chipText}>{ethnicity}</Text>
                     </Row>
                   ))}
 
-                {maritalStatus && (
+                {maritalStatus && maritalStatus !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
@@ -183,7 +189,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                   </Row>
                 )}
 
-                {item.religion && (
+                {item.religion && item.religion !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     {item.religion === 'Christian' && (
                       <Image
@@ -206,12 +212,13 @@ export default function CardCompoent({ item, height, cardRef }) {
                     <Text style={cardStyles.chipText}>{item.religion}</Text>
                   </Row>
                 )}
-                {item.politics && (
+                {item.politics && item.politics !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Text style={cardStyles.chipText}>{item.politics}</Text>
                   </Row>
                 )}
                 {item.kids &&
+                  item.kids !== 'Prefer not to say' &&
                   (item.kids === ' Prefer not to say' ? null : (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
                       <Image
@@ -222,19 +229,20 @@ export default function CardCompoent({ item, height, cardRef }) {
                     </Row>
                   ))}
 
-                {item.covidVaccineStatus && (
-                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    <Image
-                      style={cardStyles.chipIcon}
-                      source={require('../../../../../../../assets/images/icons/vaccinated.png')}
-                    />
-                    <Text style={cardStyles.chipText}>
-                      {item.covidVaccineStatus}
-                    </Text>
-                  </Row>
-                )}
+                {item.covidVaccineStatus &&
+                  item.covidVaccineStatus !== 'Prefer not to say' && (
+                    <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/icons/vaccinated.png')}
+                      />
+                      <Text style={cardStyles.chipText}>
+                        {item.covidVaccineStatus}
+                      </Text>
+                    </Row>
+                  )}
 
-                {drinking && (
+                {drinking && drinking !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
@@ -258,7 +266,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                     source={{ uri: url }}
                   />
                   {index === 0 && (
-                    <View style={cardStyles.inBtwnText}>
+                    <View style={[cardStyles.inBtwnText, cardStyles.ph16]}>
                       {bio && (
                         <View>
                           <Text style={cardStyles.headingText}>About</Text>
@@ -305,12 +313,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
               </Pressable>
             </Row>
-
-            {/* <Pressable onPress={handleShare}>
-              <Text style={cardStyles.blockReportText}>
-                Share with a Friend
-              </Text>
-            </Pressable> */}
 
             <Pressable onPress={() => setShowModal(true)}>
               <Text style={cardStyles.blockReportText}>Block/Report</Text>

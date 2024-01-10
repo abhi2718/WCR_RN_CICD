@@ -53,7 +53,10 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
               alignItems="center"
               style={styles.headerContainer}
             >
-              <Column>
+              <Column
+                justifyContent="center"
+                style={{ flex: 1, paddingLeft: 16 }}
+              >
                 <Text style={styles.groupHeading}>Group Members</Text>
               </Column>
               <Pressable onPress={toggleSetShowMembers}>
@@ -68,7 +71,7 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
               <Spacer position="top" size={20}>
                 <Row justifyContent="space-between">
                   <Text style={styles.nameHeading}>Name</Text>
-                  <Text style={styles.nameHeading}>Scope</Text>
+                  <Text style={styles.nameHeading}>Role</Text>
                 </Row>
               </Spacer>
               {members.map((member, index) => (
