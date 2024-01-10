@@ -8,6 +8,7 @@ import {
   isAndroid,
   Row,
   Logo,
+  dimensions,
 } from '../../../../../components/tools';
 import CardCompoent from './components/card.component/card';
 import CardStack from './components/swiper';
@@ -37,18 +38,20 @@ export default function Deck({ route }) {
     updateIsNewUser,
     isMatch,
     handleHideOfIsMatchScreen,
-    startChat
+    startChat,
   } = useViewModal(route);
 
   if (isLoading) {
     return <FullLoader />;
   }
   if (isMatch?.status) {
-    return <MatchScreen
-      isMatch={isMatch}
-      startChat={startChat}
-      handleHideOfIsMatchScreen={handleHideOfIsMatchScreen}
-    />;
+    return (
+      <MatchScreen
+        isMatch={isMatch}
+        startChat={startChat}
+        handleHideOfIsMatchScreen={handleHideOfIsMatchScreen}
+      />
+    );
   }
   return (
     <View
@@ -74,9 +77,16 @@ export default function Deck({ route }) {
             ref={infoScreenRef}
             onSwipedAll={updateIsNewUser}
           >
-            <View>
+            <View
+              style={styles.infoScreenContainer}
+              height={
+                isAndroid ? androidActualHeight - 64 : iOSActualHeight - 70
+              }
+            >
               <Image
+                style={styles.infoScreen}
                 source={require('../../../../../assets/images/infoScreen.png')}
+                resizeMode="stretch"
               />
             </View>
           </CardStack>

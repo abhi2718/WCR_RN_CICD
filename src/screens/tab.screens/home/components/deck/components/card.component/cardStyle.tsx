@@ -7,7 +7,7 @@ import {
 } from '../../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
-import { theme } from '../../../../../../../infrastructure/theme';
+
 export const cardStyles = StyleSheet.create({
   deckContainer: {
     backgroundColor: '#fff',
@@ -88,9 +88,9 @@ export const cardStyles = StyleSheet.create({
   },
   chip: {
     backgroundColor: colors.ui.deckChipBgColor,
-    paddingVertical: sizes[1],
     paddingHorizontal: sizes[2],
     borderRadius: sizes[4],
+    height: 35,
   },
   chipIcon: {
     height: sizes[5],
@@ -109,13 +109,14 @@ export const cardStyles = StyleSheet.create({
     marginTop: sizes[1],
   },
   inBtwnText: {
-    marginVertical: sizes[1],
+    // marginVertical: sizes[1],
   },
   blockReportText: {
     textAlign: 'center',
     marginVertical: sizes[2],
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.title,
+    paddingBottom: sizes[5],
   },
   footerIconRow: {
     marginVertical: sizes[5],

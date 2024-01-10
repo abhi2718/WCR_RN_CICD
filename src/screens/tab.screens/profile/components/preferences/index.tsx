@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Pressable, SafeAreaView, Image } from 'react-native';
 import {
   Column,
@@ -14,8 +14,18 @@ import MultiSlider from './components/MultiSlider';
 import { ActivityIndicator } from 'react-native-paper';
 import { HeaderBar, HeaderDeck } from '../../../../../components/header';
 import { formatNumber } from '../../../../../utils/common.functions';
+import { PreferenceyModal } from '../../../../../components/preferenceModal';
 
 export const PreferencesScreen = () => {
+  const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
+    useState(false);
+  const closeModal = () => {
+    setVerificvationInfoModalVisible(false);
+  };
+  const openModal = () => {
+    setVerificvationInfoModalVisible(true);
+  };
+
   const {
     goBack,
     answer,
@@ -38,13 +48,17 @@ export const PreferencesScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <PreferenceyModal
+        isVisible={isVerificationInfoModalVisible}
+        onClose={closeModal}
+      ></PreferenceyModal>
       <View style={styles.padding16}>
         <HeaderBar
-          button={submitLoading ? () => {} : createPrefrences}
           isText={true}
           text="Dating Preference"
           isLogo={false}
           isLoading={submitLoading}
+          button={submitLoading ? () => {} : createPrefrences}
         />
       </View>
       <View>
@@ -72,11 +86,13 @@ export const PreferencesScreen = () => {
                   <Text style={styles.headerText}>
                     Tap here for more information
                   </Text>
-                  <Image
-                    style={styles.questionMarkIcon}
-                    resizeMode="contain"
-                    source={require('../../../../../assets/images/icons/questionMark.png')}
-                  />
+                  <Pressable onPress={openModal}>
+                    <Image
+                      style={styles.questionMarkIcon}
+                      resizeMode="contain"
+                      source={require('../../../../../assets/images/icons/questionMark.png')}
+                    />
+                  </Pressable>
                 </Row>
               );
             }

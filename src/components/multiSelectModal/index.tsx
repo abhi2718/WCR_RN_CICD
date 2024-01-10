@@ -34,10 +34,12 @@ const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
     const updatedSelected = selected.includes(item)
       ? selected.filter((selectedItem) => selectedItem !== item)
       : [...selected, item];
-    if ("Prefer not to say" === item) {
-      setSelected(["Prefer not to say"]);
+    if ('Prefer not to say' === item) {
+      setSelected(['Prefer not to say']);
     } else {
-      setSelected(updatedSelected.filter(item => item !== "Prefer not to say"));
+      setSelected(
+        updatedSelected.filter((item) => item !== 'Prefer not to say'),
+      );
     }
     onItemSelected(updatedSelected);
   };
@@ -51,27 +53,26 @@ const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
     >
       <View style={styles.container}>
         <ScrollView>
-        <View style={styles.containerView}>
-          <Text>Select Items</Text>
-          {data.map((item, index) => (
-            <Row key={index} style={styles.card}>
-              <Pressable onPress={() => toggleItem(item)}>
-                <CustomCheckbox style={styles.checkBox}>
-                  {selected.includes(item) && (
-                    <Image
-                      style={styles.checkedBoxImg}
-                      source={require('.../../../../assets/images/icons/checkedBox.png')}
-                    />
-                  )}
-                </CustomCheckbox>
-              </Pressable>
-              <Text style={styles.text}>{item}</Text>
-            </Row>
-          ))}
-          <TouchableOpacity onPress={onClose}>
-            <Text>Close</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.containerView}>
+            {data.map((item, index) => (
+              <Row key={index} style={styles.card}>
+                <Pressable onPress={() => toggleItem(item)}>
+                  <CustomCheckbox style={styles.checkBox}>
+                    {selected.includes(item) && (
+                      <Image
+                        style={styles.checkedBoxImg}
+                        source={require('.../../../../assets/images/icons/checkedBox.png')}
+                      />
+                    )}
+                  </CustomCheckbox>
+                </Pressable>
+                <Text style={styles.text}>{item}</Text>
+              </Row>
+            ))}
+            <TouchableOpacity onPress={onClose}>
+              <Text>Close</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     </Modal>
@@ -83,12 +84,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
   containerView: {
     backgroundColor: 'white',
-    padding: 20,
+    padding: 50,
     borderRadius: 10,
-    width: '80%',
+    marginTop: 50,
   },
   card: {
     marginBottom: sizes[4],
