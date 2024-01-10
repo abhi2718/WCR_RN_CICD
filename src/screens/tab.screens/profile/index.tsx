@@ -28,7 +28,6 @@ export const ProfileScreen = ({}) => {
     _logOut,
     loading,
   } = useViewModal();
-  const fonts = ['Urbanist-SemiBold','Urbanist-Regular','Urbanist-Medium','Urbanist-Bold'];
   return (
     <ScreenWrapper>
       <View style={styles.container}>
@@ -124,10 +123,6 @@ export const ProfileScreen = ({}) => {
             </Row>
           </Row>
         </Pressable>
-        <Text style={{
-          fontFamily: fonts[3],
-          fontSize:30
-        }}>Hi There bro</Text>
         <Spacer position={'top'} size={40} />
         <Pressable onPress={() => setLogOutModal(true)}>
           <Row gap={sizes[2]}>
