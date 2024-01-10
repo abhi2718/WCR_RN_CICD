@@ -32,6 +32,7 @@ export default function CardCompoent({ item, height, cardRef }) {
     setShowModal,
     handleReport,
   } = useViewModal(item, cardRef);
+
   return (
     <View style={[cardStyles.deckContainer, cardStyles.shadows]}>
       <Pressable style={cardStyles.shareIconContainer} onPress={handleShare}>
@@ -167,8 +168,13 @@ export default function CardCompoent({ item, height, cardRef }) {
                 )}
 
                 {ethnicity.length >= 0 &&
-                  ethnicity.map((ethnicity,index) => (
-                    <Row key={index} gap={10} alignItems="center" style={cardStyles.chip}>
+                  ethnicity.map((ethnicity, index) => (
+                    <Row
+                      key={index}
+                      gap={10}
+                      alignItems="center"
+                      style={cardStyles.chip}
+                    >
                       <Text style={cardStyles.chipText}>{ethnicity}</Text>
                     </Row>
                   ))}
