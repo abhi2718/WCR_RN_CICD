@@ -215,9 +215,9 @@ export const ProfileView = (props: ProfileViewProps) => {
           showModal={showModal}
           userId={item?.userId?._id}
           toggleModal={toggleModal}
-          showLike={false}
-          showDisLike={false}
-          showSave={false}
+          showLike={true}
+          showDisLike={true}
+          showSave={true}
         />
       </View>
     );

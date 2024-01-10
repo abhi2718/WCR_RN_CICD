@@ -5,15 +5,13 @@ import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../navigation';
 import { CometChat } from '../../../../../../cometchat/sdk/CometChat';
 import { AlertScreen } from '../../../../../../components/alert';
+import { useViewModal } from './useViewModal';
 
-export const AppBarDropDown = (props) => {
+export const AppBarDropDown = (props: any) => {
+  const { ismatched ,unmatch} = useViewModal(props);
   const { user } = props;
   const navigation = useNavigation();
   const memuList = [
-    {
-      title: 'Unmatch',
-      onSelect: () => {},
-    },
     {
       title: 'Media',
       onSelect: () => {
@@ -36,12 +34,23 @@ export const AppBarDropDown = (props) => {
       },
     },
   ];
+
+  if (ismatched) {
+    memuList.unshift({
+      title: 'Unmatch',
+      onSelect: () => {
+        setUnmatchModal(true)
+      },
+    });
+  }
+
   const handleUserBlock = async () => {
     try {
       const blockList = await CometChat.blockUsers([user.uid]);
     } catch (error) {}
   };
   const [showModal, setShowModal] = useState(false);
+  const [showUnmatchModal, setUnmatchModal] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -53,6 +62,14 @@ export const AppBarDropDown = (props) => {
         description={`Are you sure you want to 
         block ${user.name} ?`}
         onPress={handleUserBlock}
+      />
+      <AlertScreen
+        showModal={showUnmatchModal}
+        setShowModal={setUnmatchModal}
+        title="Unmatch"
+        description={`Are you sure you want to 
+        unmatch ${user.name} ?`}
+        onPress={()=>unmatch()}
       />
     </View>
   );
