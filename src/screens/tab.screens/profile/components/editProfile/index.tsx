@@ -36,6 +36,7 @@ export const EditProfile = () => {
     heightRange,
     ethnicity,
     handleItemSelected,
+    hobbies,
     closeModal,
     openModal,
     ethnicityModalVisible,
@@ -371,7 +372,7 @@ export const EditProfile = () => {
                     </Spacer>
                     <MultiSelectModal
                       isVisible={openHobbyModal}
-                      data={ethnicity}
+                      data={hobbies}
                       selectedItems={hobbiesList}
                       onClose={() => closeModal('hobby')}
                       onItemSelected={(selected) =>
