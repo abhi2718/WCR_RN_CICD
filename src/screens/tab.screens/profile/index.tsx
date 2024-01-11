@@ -142,7 +142,6 @@ export const ProfileScreen = ({}) => {
           onPress={_logOut}
         />
       </View>
-     
     </ScreenWrapper>
   );
 };
