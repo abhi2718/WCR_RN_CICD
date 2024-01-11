@@ -4,6 +4,7 @@ import { LogBox, View, StyleSheet } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { ThemeProvider } from 'styled-components/native';
 import CombinedProviders from './src/contexts';
+import { MenuProvider } from 'react-native-popup-menu';
 import Navigator from './src/navigation';
 import { Provider } from 'react-redux';
 import { PaperProvider } from 'react-native-paper';
@@ -16,7 +17,8 @@ LogBox.ignoreLogs([
 ]);
 export default function App() {
   return (
-    <GestureHandlerRootView style={styles.containerStyle}>
+    <MenuProvider>
+      <GestureHandlerRootView style={styles.containerStyle}>
       <View style={styles.containerStyle}>
         <Provider store={store}>
           <PaperProvider>
@@ -30,6 +32,8 @@ export default function App() {
         <FlashMessage position="top" />
       </View>
     </GestureHandlerRootView>
+    </MenuProvider>
+    
   );
 }
 

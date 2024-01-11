@@ -41,7 +41,6 @@ export const ProfileModal = (props: profileProps) => {
     showSave,
     showBlock,
   } = useViewModal(props);
-  console.log(user);
   return (
     <Modal visible={showModal}>
       <SafeAreaView style={{ flex: 1 }}>

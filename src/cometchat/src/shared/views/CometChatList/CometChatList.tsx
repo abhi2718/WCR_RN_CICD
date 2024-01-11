@@ -38,6 +38,7 @@ import { CometChatContextType } from '../../base/Types';
 import { NoFriends } from '../../../../../screens/tab.screens/chat/private/compnents/nofriends';
 import { NoCommunityJoined } from '../../../../../screens/tab.screens/chat/community/components/noCommunityJoined';
 import { CometChat } from '../../../../sdk/CometChat';
+import { TextInput } from 'react-native-paper';
 
 export interface CometChatListActionsInterface {
   updateList: (prop: any) => void;
@@ -129,7 +130,6 @@ export const CometChatList = React.forwardRef<
 >((props, ref) => {
   const connectionListenerId = 'connectionListener_' + new Date().getTime();
   const { theme } = useContext<CometChatContextType>(CometChatContext);
-
   const {
     SubtitleView,
     TailView,
@@ -638,6 +638,7 @@ export const CometChatList = React.forwardRef<
             if (listItem.conversationType === 'group') {
               listWithHeaders.push({ value: listItem, header: false });
             }
+           
           }
           if (listItem.conversationType === 'user') {
             privateChatLength = privateChatLength + 1;
@@ -645,7 +646,7 @@ export const CometChatList = React.forwardRef<
           if (listItem.conversationType === 'group') {
             communityChatLength = communityChatLength + 1;
           }
-        });
+        }); 
         if (isUserWindow && !privateChatLength) {
           return <NoFriends />;
         }
@@ -686,7 +687,6 @@ export const CometChatList = React.forwardRef<
         );
       }
     }
-
     return messageContainer;
   };
 

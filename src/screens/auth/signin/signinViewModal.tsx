@@ -53,7 +53,7 @@ export const useViewModal = (props: ScreenParams) => {
       setLoading(false);
       return data;
     } catch (error) {
-      return ShowFlashMessage('Error', `${error}`, FlashMessageType.DANGER);
+      ShowFlashMessage('Error', `${error}`, FlashMessageType.DANGER);
       setLoading(false);
     }
   };
@@ -90,7 +90,6 @@ export const useViewModal = (props: ScreenParams) => {
             const payload = { user: { ...data.user, token: data?.token } };
             dispatch(addUser(payload));
             navigateToScreen(data.user);
-            // navigateToGenderScreen(data.user._id);
           } else {
             return ShowFlashMessage(
               'warn',
@@ -119,13 +118,10 @@ export const useViewModal = (props: ScreenParams) => {
       };
       dispatch(addUser(payload));
       navigateToScreen(data.user);
-      // navigateToGenderScreen(data.user._id);
     } else {
       navigateToProfile({ email: _email });
     }
   };
-
- 
 
   const getOtpToVerifyEmail = async () => {
     if (!email.length) {
@@ -170,7 +166,6 @@ export const useViewModal = (props: ScreenParams) => {
             const payload = { user: { ...data.user, token: data?.token } };
             dispatch(addUser(payload));
             navigateToScreen(data.user);
-            // navigateToGenderScreen(data.user._id);
           }
         }
       }
@@ -190,8 +185,6 @@ export const useViewModal = (props: ScreenParams) => {
     if (data?.token) {
       dispatch(addUser(data));
       navigateToScreen(data.user);
-      // navigateToGenderScreen(data.user._id);
-      // login path if user had created account with other provider
     }
     if (data?.profile && data?.user) {
       const { email, family_name, given_name } = data?.profile;
@@ -205,7 +198,6 @@ export const useViewModal = (props: ScreenParams) => {
             credential: data.facebookCredential,
           });
         } else {
-          // handle this flow
           navigateToOtpScreen({
             firstName: given_name,
             lastName: family_name,
@@ -213,20 +205,17 @@ export const useViewModal = (props: ScreenParams) => {
           });
         }
       } else {
-        // login path if user had created account with fb
         if (!email) {
           navigateToOtpScreen({
             firstName: given_name,
             lastName: family_name,
             credential: data.facebookCredential,
           });
-          // send user on email verification screen
           return;
         }
         const res = await socialSignInSignUp({ email });
         if (res.token) {
           navigateToScreen(data.user);
-          // navigateToGenderScreen(res.user._id);
         }
       }
     }

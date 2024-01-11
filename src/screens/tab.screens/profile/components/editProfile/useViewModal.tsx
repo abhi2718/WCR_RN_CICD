@@ -522,6 +522,7 @@ export const useViewModal = () => {
             sexualPreference: answer.sexualPreference,
             showSexualPreference: userProfile.showSexualOrientation,
             showGender: userProfile.showGender,
+            phone:userProfile.phone
           },
           profilePicture: pics?.profileImage
             ? pics?.profileImage
@@ -688,6 +689,7 @@ export const useViewModal = () => {
     statesList,
     setUserProfile,
     submitLoading,
+    hobbies,
     letterCount,
   };
 };
