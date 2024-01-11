@@ -1,56 +1,22 @@
 import { View, StyleSheet, Text, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBarMenu } from '../../../../../../components/AppBarMenu';
-import { useNavigation } from '@react-navigation/native';
-import { ROUTES } from '../../../../../../navigation';
-import { CometChat } from '../../../../../../cometchat/sdk/CometChat';
 import { AlertScreen } from '../../../../../../components/alert';
 import { useViewModal } from './useViewModal';
+import { AppBarDropDownProps } from '../../../../../../types/screen.type/home.type';
 
-export const AppBarDropDown = (props: any) => {
-  const { ismatched ,unmatch} = useViewModal(props);
-  const { user } = props;
-  const navigation = useNavigation();
-  const memuList = [
-    {
-      title: 'Media',
-      onSelect: () => {
-        navigation.navigate(ROUTES.PrivateChatMediaScreen, { uid: user.uid });
-      },
-    },
-    {
-      title: 'Report',
-      onSelect: () => {
-        navigation.navigate(ROUTES.Report, {
-          userId: user.uid,
-          name: user.name,
-        });
-      },
-    },
-    {
-      title: 'Block',
-      onSelect: async () => {
-        setShowModal(true);
-      },
-    },
-  ];
-
-  if (ismatched) {
-    memuList.unshift({
-      title: 'Unmatch',
-      onSelect: () => {
-        setUnmatchModal(true)
-      },
-    });
-  }
-
-  const handleUserBlock = async () => {
-    try {
-      const blockList = await CometChat.blockUsers([user.uid]);
-    } catch (error) {}
-  };
-  const [showModal, setShowModal] = useState(false);
-  const [showUnmatchModal, setUnmatchModal] = useState(false);
+export const AppBarDropDown = (props: AppBarDropDownProps) => {
+  const {
+    ismatched,
+    unmatch,
+    showModal,
+    showUnmatchModal,
+    handleUserBlock,
+    memuList,
+    user,
+    setShowModal,
+    setUnmatchModal,
+  } = useViewModal(props);
 
   return (
     <View style={styles.container}>
@@ -69,7 +35,7 @@ export const AppBarDropDown = (props: any) => {
         title="Unmatch"
         description={`Are you sure you want to 
         unmatch ${user.name} ?`}
-        onPress={()=>unmatch()}
+        onPress={() => unmatch()}
       />
     </View>
   );

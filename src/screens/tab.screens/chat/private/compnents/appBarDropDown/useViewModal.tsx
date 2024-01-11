@@ -1,10 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LikeRepository } from '../../../../../../repository/like.repo';
-import { useSelector } from 'react-redux';
+import { CometChat } from '../../../../../../cometchat/sdk/CometChat';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../../../../navigation';
+import { AppBarDropDownProps } from '../../../../../../types/screen.type/home.type';
 
-export const useViewModal = (props: any) => {
+export const useViewModal = (props: AppBarDropDownProps) => {
   const { user } = props;
-  // const { user } = useSelector(({ userState }) => userState);
+  const navigation = useNavigation();
+  const memuList = [
+    {
+      title: 'Media',
+      onSelect: () => {
+        navigation.navigate(ROUTES.PrivateChatMediaScreen, { uid: user.uid });
+      },
+    },
+    {
+      title: 'Report',
+      onSelect: () => {
+        navigation.navigate(ROUTES.Report, {
+          userId: user.uid,
+          name: user.name,
+        });
+      },
+    },
+    {
+      title: 'Block',
+      onSelect: async () => {
+        setShowModal(true);
+      },
+    },
+  ];
+
+  useEffect(() => {
+    if (ismatched) {
+      memuList.unshift({
+        title: 'Unmatch',
+        onSelect: () => {
+          setUnmatchModal(true);
+        },
+      });
+    }
+  }, []);
+
+  const handleUserBlock = async () => {
+    try {
+      const blockList = await CometChat.blockUsers([user.uid]);
+    } catch (error) {}
+  };
+  const [showModal, setShowModal] = useState(false);
+  const [showUnmatchModal, setUnmatchModal] = useState(false);
   const likeRepository = new LikeRepository();
   const [ismatched, setMatched] = useState(false);
   const [documentId, setDocumetId] = useState('');
@@ -31,7 +76,6 @@ export const useViewModal = (props: any) => {
 
   const unmatch = async () => {
     try {
-      
       const unmatched = await likeRepository.removefromMatched(documentId);
     } catch (err) {
     }
@@ -44,5 +88,12 @@ export const useViewModal = (props: any) => {
   return {
     ismatched,
     unmatch,
+    showModal,
+    showUnmatchModal,
+    handleUserBlock,
+    memuList,
+    user,
+    setShowModal,
+    setUnmatchModal,
   };
 };
