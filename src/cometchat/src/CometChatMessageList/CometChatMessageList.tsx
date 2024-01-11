@@ -1337,13 +1337,14 @@ export const CometChatMessageList = forwardRef<
     let isThreaded = item.getReplyCount() > 0;
 
     let style = {
-      color: theme?.palette.getPrimary(),
+      color: '#2357BC',
     };
     if (
       (item.getSender()?.getUid() || item?.['sender']?.['uid']) ==
       loggedInUser.current['uid']
     ) {
-      style.color = theme?.palette.getSecondary();
+      // style.color = theme?.palette.getSecondary();
+      style.color = '#E10810';
     }
 
     return !isThreaded ? null : (
@@ -1355,14 +1356,23 @@ export const CometChatMessageList = forwardRef<
           borderTopWidth: 1,
           borderColor: theme?.palette.getAccent50(),
           justifyContent: 'space-between',
+          alignItems: 'center',
           padding: 4,
         }}
       >
-        <Text style={style}>{`View ${item.getReplyCount()} replies`}</Text>
+        <Text
+          style={[style, { textDecorationLine: 'underline' }]}
+        >{`View ${item.getReplyCount()} replies`}</Text>
         <Image
           style={{
             resizeMode: 'contain',
-            tintColor: theme?.palette.getPrimary(),
+            width: 14,
+            // tintColor: theme?.palette.getPrimary(),
+            tintColor:
+              (item.getSender()?.getUid() || item?.['sender']?.['uid']) ==
+              loggedInUser.current['uid']
+                ? '#E10810'
+                : '#2357BC',
           }}
           source={rightArrowIcon}
         />
