@@ -108,10 +108,10 @@ export const CometChatTextBubble = (props: CometChatTextBubbleInterface) => {
     height,
     width,
   } = _style;
-  if (textColor === "rgba(248, 248, 248, 0.92)") {
-    textColor = "#49454f"
+  if (textColor === 'rgba(248, 248, 248, 0.92)') {
+    textColor = '#49454f';
   } else if (textColor === 'rgb(20, 20, 20)') {
-    textColor = "#1b1a57"
+    textColor = '#1b1a57';
   }
   const { text, textContainerStyle } = props;
   return (
