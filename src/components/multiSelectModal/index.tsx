@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-  Image,
-} from 'react-native';
+import { Modal, View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
@@ -77,7 +69,14 @@ const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
                     )}
                   </CustomCheckbox>
                 </Pressable>
-                <Text style={styles.text}>{item}</Text>
+                <Text
+                  style={[
+                    styles.text,
+                    selected.includes(item) ? styles.selectedText : '',
+                  ]}
+                >
+                  {item}
+                </Text>
               </Row>
             ))}
           </ScrollView>
@@ -129,6 +128,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: sizes[3],
     color: colors.ui.text,
+  },
+  selectedText: {
     fontWeight: 'bold',
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },

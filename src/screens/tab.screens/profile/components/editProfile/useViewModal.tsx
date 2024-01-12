@@ -292,8 +292,9 @@ export const useViewModal = () => {
   const [letterCount, setLetterCount] = useState(0);
 
   useEffect(() => {
-    const lettersOnly = userProfile.aboutMe.replace(/[^a-zA-Z]/g, ''); // Remove non-letter characters
-    setLetterCount(lettersOnly.length);
+    const lettersOnly = userProfile.aboutMe.replace(/[^a-zA-Z]/g, '');
+    const reversedCount = 125 - lettersOnly.length;
+    setLetterCount(reversedCount < 0 ? 0 : reversedCount);
   }, [userProfile.aboutMe]);
 
   const handleDistanceSliderChange = (
