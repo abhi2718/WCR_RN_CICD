@@ -249,7 +249,7 @@ export const useViewModal = () => {
       initValue: 'politics',
     },
     {
-      title: 'Excercise',
+      title: 'Excerise',
       option: excerciseList,
       initValue: 'excercise',
     },
@@ -689,5 +689,6 @@ export const useViewModal = () => {
     setUserProfile,
     submitLoading,
     letterCount,
+    hobbies,
   };
 };

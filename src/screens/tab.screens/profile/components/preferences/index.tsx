@@ -5,6 +5,7 @@ import {
   FullLoader,
   Row,
   Spacer,
+  dimensions,
 } from '../../../../../components/tools';
 import { useViewModal } from './useViewModal';
 import { styles } from './styles';
@@ -229,7 +230,29 @@ export const PreferencesScreen = () => {
                       cancelStyle={styles.cancelButton}
                       selectedItemTextStyle={styles.selectedItem}
                       initValueTextStyle={styles.initValueTextStyle}
-                      selectStyle={{ borderWidth: 0 }}
+                      selectStyle={{
+                        borderWidth: 0,
+                        borderColor: 'transparent',
+                      }}
+                      overlayStyle={{
+                        flex: 1,
+                        marginTop: 50,
+                        paddingBottom: 40,
+                        justifyContent: 'space-between',
+                        backgroundColor: '#fff',
+                        paddingHorizontal: 0,
+                      }}
+                      cancelTextStyle={{
+                        color: '#fff',
+                        fontWeight: 'bold',
+                      }}
+                      optionStyle={{
+                        borderBottomWidth: 0,
+                        borderColor: 'transparent',
+                        padding: 0,
+                        width: dimensions.width,
+                        marginLeft: -10,
+                      }}
                     />
                     <Image
                       resizeMode="contain"

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { ROUTES } from '../../../../../navigation';
 import { UserProfileRepository } from '../../../../../repository/userProfile.repo';
@@ -58,10 +58,15 @@ export const useViewModal = () => {
       return { ...oldState, [option.type]: option.value };
     });
   };
-  const generateListWithNoPreference = (list:string[]) => {
-    const isContainPreferNotToSay = list.find((item)=>item === preferNotToSay)
-    if(isContainPreferNotToSay){
-      return [...list.filter((item) => item !== preferNotToSay), 'No Preference'];
+  const generateListWithNoPreference = (list: string[]) => {
+    const isContainPreferNotToSay = list.find(
+      (item) => item === preferNotToSay,
+    );
+    if (isContainPreferNotToSay) {
+      return [
+        ...list.filter((item) => item !== preferNotToSay),
+        'No Preference',
+      ];
     }
     return list
   }

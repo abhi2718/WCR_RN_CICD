@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   aboutInput: {
     padding: 16,
-    color: '#B3B3B3',
+    color: '#676161',
     fontSize: fontSizes.text,
     paddingBottom: 30,
   },
@@ -43,14 +43,14 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.text,
   },
   fieldValue: {
-    color: '#B3B3B3',
+    color: '#676161',
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.text,
     width: '100%',
   },
   fieldValueContainer: {
     paddingTop: 10,
-    borderBottomColor: '#B3B3B3',
+    borderBottomColor: '#676161',
     borderBottomWidth: 0.4,
   },
   nextArrow: {
@@ -71,6 +71,9 @@ export const styles = StyleSheet.create({
   },
   optionContainer: {
     borderRadius: 4,
+    padding: 0,
+    margin: 0,
+    gap: 0,
   },
   optionText: {
     fontSize: 18,
@@ -89,18 +92,15 @@ export const styles = StyleSheet.create({
   },
 
   initValueTextStyle: {
-    color: '#B3B3B3',
+    color: '#676161',
     marginLeft: -8,
     textAlign: 'left',
     height: 20,
   },
   selectedItem: {
-    marginTop: 10,
     fontSize: 16,
     color: colors.ui.text,
     backgroundColor: colors.bg.secondary,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
   },
   selectRow: {
     width: '100%',

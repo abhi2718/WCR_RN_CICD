@@ -10,11 +10,14 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
-import { ActivityIndicator } from 'react-native-paper';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
 import MultiSelectModal from '../../../../../components/multiSelectModal';
-import { Column, Row, Spacer } from '../../../../../components/tools';
-import { hobbies } from '../../../../../utils/constanst';
+import {
+  Column,
+  Row,
+  Spacer,
+  dimensions,
+} from '../../../../../components/tools';
 import AddProfilePicScreen from '../../../../auth/preRegisterFlow/components/AddProfilePic';
 import MultiSlider from '../preferences/components/MultiSlider';
 import { styles } from './styles';
@@ -56,6 +59,7 @@ export const EditProfile = () => {
     setUserProfile,
     submitLoading,
     letterCount,
+    hobbies,
   } = useViewModal();
 
   return (
@@ -232,8 +236,9 @@ export const EditProfile = () => {
                   optionStyle={{
                     borderBottomWidth: 0,
                     borderColor: 'transparent',
-                    margin: 0,
-                    gap: 0,
+                    padding: 0,
+                    width: dimensions.width,
+                    marginLeft: -10,
                   }}
                 />
                 <Image
@@ -396,6 +401,7 @@ export const EditProfile = () => {
                     <MultiSelectModal
                       isVisible={ethnicityModalVisible}
                       data={ethnicity}
+                      modalHeading="Ethnicity"
                       selectedItems={selectedEthnicityItems}
                       onClose={() => closeModal('ethnicity')}
                       onItemSelected={(selected) =>
@@ -416,7 +422,24 @@ export const EditProfile = () => {
                           justifyContent="space-between"
                           alignItems="center"
                         >
-                          <Text style={styles.fieldValue}>Select</Text>
+                          <View>
+                            <Spacer position="top" size={5} />
+                            {hobbiesList.length === 0 ? (
+                              <Text style={styles.fieldValue}>Select</Text>
+                            ) : hobbiesList.length > 2 ? (
+                              <Text style={styles.fieldValue}>
+                                {hobbiesList[0]}
+                                {' , '}
+                                {hobbiesList[1]}...
+                              </Text>
+                            ) : (
+                              <Text style={styles.fieldValue}>
+                                {hobbiesList.join(', ')}
+                              </Text>
+                            )}
+                            <Spacer position="top" size={5} />
+                          </View>
+
                           <Image
                             resizeMode="contain"
                             style={styles.nextArrow}
@@ -427,14 +450,14 @@ export const EditProfile = () => {
                     </Spacer>
                     <MultiSelectModal
                       isVisible={openHobbyModal}
-                      data={ethnicity}
+                      data={hobbies}
+                      modalHeading="Hobbies"
                       selectedItems={hobbiesList}
                       onClose={() => closeModal('hobby')}
                       onItemSelected={(selected) =>
                         handleItemSelected(selected, 'hobby')
                       }
                     />
-                    <Text>{hobbiesList.join(', ')}</Text>
                   </Spacer>
                 );
               }
@@ -527,8 +550,9 @@ export const EditProfile = () => {
                       optionStyle={{
                         borderBottomWidth: 0,
                         borderColor: 'transparent',
-                        margin: 0,
-                        gap: 0,
+                        padding: 0,
+                        width: dimensions.width,
+                        marginLeft: -10,
                       }}
                     />
                     <Image
