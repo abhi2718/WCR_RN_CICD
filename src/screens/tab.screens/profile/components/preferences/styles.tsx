@@ -60,25 +60,36 @@ export const styles = StyleSheet.create({
   },
   optionContainer: {
     borderRadius: 4,
+    padding: 0,
+    margin: 0,
+    gap: 0,
   },
   optionText: {
     fontSize: 18,
     color: colors.ui.text,
     width: '100%',
+    textAlign: 'left',
+    paddingHorizontal: 20,
+    margin: 0,
+    paddingVertical: 12,
   },
   cancelButton: {
-    borderRadius: 4,
-    backgroundColor: '#eee',
+    borderRadius: 23,
+    paddingVertical: 16,
+    backgroundColor: colors.ui.primary,
+    marginHorizontal: 20,
   },
-  selectedItem: {
-    marginTop: 10,
-    fontSize: 16,
-    color: colors.ui.text,
-  },
+
   initValueTextStyle: {
     color: '#B3B3B3',
     marginLeft: -8,
     textAlign: 'left',
+    height: 20,
+  },
+  selectedItem: {
+    fontSize: 16,
+    color: colors.ui.text,
+    backgroundColor: colors.bg.secondary,
   },
   textColor: {
     color: colors.ui.text,
@@ -101,5 +112,29 @@ export const styles = StyleSheet.create({
     right: 0,
     width: sizes[2],
     height: sizes[2],
+  },
+  optionStyle: {
+    borderBottomWidth: 0,
+    borderColor: 'transparent',
+    padding: 0,
+    width: dimensions.width,
+    marginLeft: -10,
+  },
+  cancelTextStyle: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  },
+  overlayStyle: {
+    flex: 1,
+    marginTop: 50,
+    paddingBottom: 40,
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    paddingHorizontal: 0,
+  },
+  selectStyle: {
+    borderWidth: 0,
+    borderColor: 'transparent',
   },
 });

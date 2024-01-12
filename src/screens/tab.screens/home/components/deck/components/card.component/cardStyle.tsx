@@ -21,7 +21,7 @@ export const cardStyles = StyleSheet.create({
     height: '100%',
     borderRadius: 32,
     shadowColor: '#000',
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.2,
     shadowRadius: 9,
     shadowOffset: { width: 0, height: 0 },
   },
@@ -91,6 +91,7 @@ export const cardStyles = StyleSheet.create({
     paddingHorizontal: sizes[2],
     borderRadius: sizes[4],
     height: 35,
+    marginRight: 20,
   },
   chipIcon: {
     height: sizes[5],
@@ -108,15 +109,24 @@ export const cardStyles = StyleSheet.create({
     fontSize: fontSizes.button,
     marginTop: sizes[1],
   },
-  inBtwnText: {
-    // marginVertical: sizes[1],
+  blockReportView: {
+    borderTopColor: 'rgba(29, 27, 32, 0.20)',
+    borderTopWidth: 1,
+    borderBottomColor: 'rgba(29, 27, 32, 0.20)',
+    borderBottomWidth: 1,
   },
   blockReportText: {
     textAlign: 'center',
-    marginVertical: sizes[2],
+    paddingVertical: sizes[3],
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.title,
-    paddingBottom: sizes[5],
+  },
+  reportText: {
+    color: colors.ui.primary,
+  },
+  hrLine: {
+    borderTopColor: 'rgba(29, 27, 32, 0.20)',
+    borderTopWidth: 1,
   },
   footerIconRow: {
     marginVertical: sizes[5],
@@ -126,5 +136,21 @@ export const cardStyles = StyleSheet.create({
     width: sizes[12],
     overflow: 'visible',
     resizeMode: 'contain',
+  },
+  intrestView: {
+    backgroundColor: colors.ui.deckChipBgColor,
+    paddingHorizontal: sizes[2],
+    borderRadius: sizes[4],
+    height: 35,
+    justifyContent: 'center',
+  },
+  intrestText: {
+    color: colors.ui.text,
+    fontSize: fontSizes.button,
+    alignContent: 'center',
+    textTransform: 'capitalize',
+  },
+  flexWrap: {
+    flexWrap: 'wrap',
   },
 });

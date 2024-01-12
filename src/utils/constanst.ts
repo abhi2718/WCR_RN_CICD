@@ -170,9 +170,10 @@ export const country = [
 ];
 
 export const relationship = [
-  'Long-term relationship, open to short-term ',
+  'Long-term relationship',
+  'Short-term relationship',
+  'Friendship',
   'Marriage',
-  'Short-term relationship, open to long-term',
   'Casual',
   'Prefer not to say',
 ];

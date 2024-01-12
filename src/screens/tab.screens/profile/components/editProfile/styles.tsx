@@ -4,6 +4,7 @@ import {
   fontSizes,
   fontWeights,
 } from '../../../../../infrastructure/theme/fonts';
+import { dimensions } from '../../../../../components/tools';
 
 export const styles = StyleSheet.create({
   editInfoContainer: {
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   aboutInput: {
     padding: 16,
-    color: '#B3B3B3',
+    color: '#676161',
     fontSize: fontSizes.text,
     paddingBottom: 30,
   },
@@ -43,14 +44,14 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.text,
   },
   fieldValue: {
-    color: '#B3B3B3',
+    color: '#676161',
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.text,
     width: '100%',
   },
   fieldValueContainer: {
     paddingTop: 10,
-    borderBottomColor: '#B3B3B3',
+    borderBottomColor: '#676161',
     borderBottomWidth: 0.4,
   },
   nextArrow: {
@@ -71,6 +72,9 @@ export const styles = StyleSheet.create({
   },
   optionContainer: {
     borderRadius: 4,
+    padding: 0,
+    margin: 0,
+    gap: 0,
   },
   optionText: {
     fontSize: 18,
@@ -89,21 +93,44 @@ export const styles = StyleSheet.create({
   },
 
   initValueTextStyle: {
-    color: '#B3B3B3',
+    color: '#676161',
     marginLeft: -8,
     textAlign: 'left',
     height: 20,
   },
   selectedItem: {
-    marginTop: 10,
     fontSize: 16,
     color: colors.ui.text,
     backgroundColor: colors.bg.secondary,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    fontWeight: 'bold',
   },
   selectRow: {
     width: '100%',
     marginTop: -10,
+  },
+
+  optionStyle: {
+    borderBottomWidth: 0,
+    borderColor: 'transparent',
+    padding: 0,
+    width: dimensions.width,
+    marginLeft: -10,
+  },
+  cancelTextStyle: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  },
+  overlayStyle: {
+    flex: 1,
+    marginTop: 50,
+    paddingBottom: 40,
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    paddingHorizontal: 0,
+  },
+  selectStyle: {
+    borderWidth: 0,
+    borderColor: 'transparent',
   },
 });
