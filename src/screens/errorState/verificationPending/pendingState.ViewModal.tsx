@@ -33,7 +33,6 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
           navigation.navigate(ROUTES.Tab);
         }
       } catch (err) {
-        console.log(err);
       }
     };
 

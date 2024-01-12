@@ -59,9 +59,6 @@ export const useheightViewModal = (props: ScreenParams) => {
 
       return { feet, inch };
     } else {
-      console.error( 
-        "Invalid measurement format. Please use the format like '4'1\"'",
-      );
       return null;
     }
   }

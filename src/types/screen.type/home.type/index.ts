@@ -18,3 +18,17 @@ export type SearchModalProps = {
   toggleSearchModal: () => void;
   handleSetProfiles: (item:any) => void;
 };
+export type AppBarDropDownProps = {
+  user: {
+    avatar: string;
+    blockedByMe: boolean;
+    conversationId: string;
+    deactivatedAt: number;
+    hasBlockedMe: boolean;
+    lastActiveAt: number;
+    name: string;
+    role: string;
+    status: string;
+    uid: string;
+  }
+};

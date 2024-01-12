@@ -26,7 +26,6 @@ export const useViewModal = (props: SearchModalProps) => {
             setSearchActive(true);
           }
         } catch (error) {
-          console.log(error);
         }
       } else {
         setSearchActive(false);

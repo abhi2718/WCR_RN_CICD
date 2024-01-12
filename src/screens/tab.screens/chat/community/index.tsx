@@ -9,16 +9,14 @@ import { CometChatConversationsWithMessages } from '../../../../cometchat/src';
 export default function CommunityChat() {
   const { state, setState, count } = useViewModal();
   const [showToggleSearchInput, settoggleSearchInput] = useState(false);
-
   const toggleSearchInput = () => {
     settoggleSearchInput((preValue) => !preValue);
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.paddingH16}>
         <HeaderDeck
-          isSearchIcon={state !== 0}
+          isSearchIcon={false}
           isPrefrence={false}
           count={count}
           toggleSearchInput={toggleSearchInput}

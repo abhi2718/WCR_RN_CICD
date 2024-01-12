@@ -30,6 +30,10 @@ export class LikeRepository {
     const url = `${AppUrl.matchEndPoint}`;
     return this.apiService.getGetApiResponse(url);
   }
+  async removefromMatched(id:any) {
+    const url = `${AppUrl.matchEndPoint}/${id}`;
+    return this.apiService.getDeleteApiResponse(url,{});
+  }
   async addFriend(uid: string) {
     //const url = `${AppUrl.addFriendEndPoint}${uid}/friends`;
     // return this.apiService.getGetApiResponse(url);

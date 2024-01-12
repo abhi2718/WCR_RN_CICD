@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/BungeeSpice-Regular.ttf",
+      "sha1": "95b7defc8e5c59b08c23e6f971d866801ca21cfd"
+    },
+    {
       "path": "src/assets/fonts/Urbanist-Bold.ttf",
       "sha1": "5393e451665e344701f6f250898895ca98dabdbc"
     },

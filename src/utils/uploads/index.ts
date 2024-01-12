@@ -36,6 +36,7 @@ export const pickPhotoFromUrl = async (
     height: 400,
     maxFiles: 1,
     showCropFrame: true,
+    cropperCircleOverlay:true
   },
   path: string,
 ) => {

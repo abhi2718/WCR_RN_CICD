@@ -37,6 +37,7 @@ import { PreferencesScreen } from '../../screens/tab.screens/profile/components/
 import { EditProfile } from '../../screens/tab.screens/profile/components/editProfile';
 import VerificationPending from '../../screens/errorState/verificationPending';
 import { MessageList } from '../../screens/tab.screens/chat/components/chatList';
+import { PrivteChatMediaScreen } from '../../screens/tab.screens/chat/private/compnents/media';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
@@ -58,13 +59,16 @@ export const StackNavigator = () => {
         name={ROUTES.SignIn}
         component={SignInScreen}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.Profile}
         component={Profile}
       />
-      <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.Gender}
+        component={Gender}
+      />
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationPending}
@@ -198,6 +202,11 @@ export const StackNavigator = () => {
         options={optins}
         name={ROUTES.Report}
         component={ReportScreen}
+      />
+       <Stack.Screen
+        // options={optins}
+        name={ROUTES.PrivateChatMediaScreen}
+        component={PrivteChatMediaScreen}
       />
     </Stack.Navigator>
   );
