@@ -137,4 +137,20 @@ export const cardStyles = StyleSheet.create({
     overflow: 'visible',
     resizeMode: 'contain',
   },
+  intrestView: {
+    backgroundColor: colors.ui.deckChipBgColor,
+    paddingHorizontal: sizes[2],
+    borderRadius: sizes[4],
+    height: 35,
+    justifyContent: 'center',
+  },
+  intrestText: {
+    color: colors.ui.text,
+    fontSize: fontSizes.button,
+    alignContent: 'center',
+    textTransform: 'capitalize',
+  },
+  flexWrap: {
+    flexWrap: 'wrap',
+  },
 });

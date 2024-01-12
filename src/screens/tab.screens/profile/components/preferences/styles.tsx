@@ -113,4 +113,28 @@ export const styles = StyleSheet.create({
     width: sizes[2],
     height: sizes[2],
   },
+  optionStyle: {
+    borderBottomWidth: 0,
+    borderColor: 'transparent',
+    padding: 0,
+    width: dimensions.width,
+    marginLeft: -10,
+  },
+  cancelTextStyle: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  },
+  overlayStyle: {
+    flex: 1,
+    marginTop: 50,
+    paddingBottom: 40,
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    paddingHorizontal: 0,
+  },
+  selectStyle: {
+    borderWidth: 0,
+    borderColor: 'transparent',
+  },
 });

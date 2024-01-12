@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, SafeAreaView, Image } from 'react-native';
-import {
-  Column,
-  FullLoader,
-  Row,
-  Spacer,
-  dimensions,
-} from '../../../../../components/tools';
+import { Column, FullLoader, Row } from '../../../../../components/tools';
 import { useViewModal } from './useViewModal';
 import { styles } from './styles';
 import ModalSelector from 'react-native-modal-selector';
 import { ScrollView } from 'react-native-gesture-handler';
 import MultiSlider from './components/MultiSlider';
-import { ActivityIndicator } from 'react-native-paper';
-import { HeaderBar, HeaderDeck } from '../../../../../components/header';
+import { HeaderBar } from '../../../../../components/header';
 import { formatNumber } from '../../../../../utils/common.functions';
 import { PreferenceyModal } from '../../../../../components/preferenceModal';
+import style from '@cometchat/chat-uikit-react-native/src/shared/views/CometChatReceipt/style';
 
 export const PreferencesScreen = () => {
   const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
@@ -230,29 +224,10 @@ export const PreferencesScreen = () => {
                       cancelStyle={styles.cancelButton}
                       selectedItemTextStyle={styles.selectedItem}
                       initValueTextStyle={styles.initValueTextStyle}
-                      selectStyle={{
-                        borderWidth: 0,
-                        borderColor: 'transparent',
-                      }}
-                      overlayStyle={{
-                        flex: 1,
-                        marginTop: 50,
-                        paddingBottom: 40,
-                        justifyContent: 'space-between',
-                        backgroundColor: '#fff',
-                        paddingHorizontal: 0,
-                      }}
-                      cancelTextStyle={{
-                        color: '#fff',
-                        fontWeight: 'bold',
-                      }}
-                      optionStyle={{
-                        borderBottomWidth: 0,
-                        borderColor: 'transparent',
-                        padding: 0,
-                        width: dimensions.width,
-                        marginLeft: -10,
-                      }}
+                      selectStyle={styles.selectStyle}
+                      overlayStyle={styles.overlayStyle}
+                      cancelTextStyle={styles.cancelTextStyle}
+                      optionStyle={styles.optionStyle}
                     />
                     <Image
                       resizeMode="contain"

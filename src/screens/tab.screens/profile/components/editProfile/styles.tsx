@@ -4,6 +4,7 @@ import {
   fontSizes,
   fontWeights,
 } from '../../../../../infrastructure/theme/fonts';
+import { dimensions } from '../../../../../components/tools';
 
 export const styles = StyleSheet.create({
   editInfoContainer: {
@@ -106,5 +107,30 @@ export const styles = StyleSheet.create({
   selectRow: {
     width: '100%',
     marginTop: -10,
+  },
+
+  optionStyle: {
+    borderBottomWidth: 0,
+    borderColor: 'transparent',
+    padding: 0,
+    width: dimensions.width,
+    marginLeft: -10,
+  },
+  cancelTextStyle: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  },
+  overlayStyle: {
+    flex: 1,
+    marginTop: 50,
+    paddingBottom: 40,
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    paddingHorizontal: 0,
+  },
+  selectStyle: {
+    borderWidth: 0,
+    borderColor: 'transparent',
   },
 });

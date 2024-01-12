@@ -280,27 +280,12 @@ export default function CardCompoent({ item, height, cardRef }) {
                           <Row
                             gap={10}
                             alignItems="center"
-                            style={{
-                              flexWrap: 'wrap',
-                            }}
+                            style={cardStyles.flexWrap}
                           >
                             {item?.interests?.map((item, index) => (
-                              <View
-                                style={{
-                                  backgroundColor: colors.ui.deckChipBgColor,
-                                  paddingHorizontal: sizes[2],
-                                  borderRadius: sizes[4],
-                                  height: 35,
-                                  justifyContent: 'center',
-                                }}
-                              >
+                              <View style={cardStyles.intrestView}>
                                 <Text
-                                  style={{
-                                    color: colors.ui.text,
-                                    fontSize: fontSizes.button,
-                                    alignContent: 'center',
-                                    textTransform: 'capitalize',
-                                  }}
+                                  style={cardStyles.intrestText}
                                   key={index}
                                 >
                                   {item}
@@ -334,28 +319,12 @@ export default function CardCompoent({ item, height, cardRef }) {
                               <Row
                                 gap={10}
                                 alignItems="center"
-                                style={{
-                                  flexWrap: 'wrap',
-                                }}
+                                style={cardStyles.flexWrap}
                               >
                                 {item?.interests?.map((item, index) => (
-                                  <View
-                                    style={{
-                                      backgroundColor:
-                                        colors.ui.deckChipBgColor,
-                                      paddingHorizontal: sizes[2],
-                                      borderRadius: sizes[4],
-                                      height: 35,
-                                      justifyContent: 'center',
-                                    }}
-                                  >
+                                  <View style={cardStyles.intrestView}>
                                     <Text
-                                      style={{
-                                        color: colors.ui.text,
-                                        fontSize: fontSizes.button,
-                                        alignContent: 'center',
-                                        textTransform: 'capitalize',
-                                      }}
+                                      style={cardStyles.intrestText}
                                       key={index}
                                     >
                                       {item}
