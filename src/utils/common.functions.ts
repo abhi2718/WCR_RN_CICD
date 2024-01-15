@@ -10,7 +10,7 @@ export const calculateDateLessThan18YearsAgo = (inputDate: Date): Date => {
   return eighteenYearsAgo;
 };
 export function isDate18YearsOrAbove(date: string): boolean {
-  const [month, day, year] = date.split('/').map(Number);
+  const [month, day, year] = date.split('-').map(Number);
   const dateObj = new Date(year, month - 1, day);
   const currentDate = moment();
   const inputDate = moment(dateObj);

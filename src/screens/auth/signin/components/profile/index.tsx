@@ -154,7 +154,7 @@ const Profile = (props: ScreenParams) => {
                 />
                 <FlatInput
                   editable={true}
-                  label="MM/DD/YYYY"
+                  label="MM-DD-YYYY"
                   onChangeText={(text: string) =>
                     handleInputChange('dob', formateDOB(text))
                   }
