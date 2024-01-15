@@ -23,26 +23,6 @@ export default function App() {
         'pk_test_51OWdkPSGkDcyRa3UMpodrMldoKCdOIq9exX1LZDENtELYZyKkIzyRC7uFj7dym9xtpj5z362iDGMZg2UGQLNolpu00SU67MZPp'
       }
       urlScheme="accept-a-payment"
-      threeDSecureParams={{
-        backgroundColor: '#FFFFFF', // iOS only
-        timeout: 5,
-        label: {
-          headingTextColor: '#0000',
-          headingFontSize: 13,
-        },
-        navigationBar: {
-          headerText: '3d secure',
-        },
-        footer: { // iOS only
-          backgroundColor: '#FFFFFF',
-        },
-        submitButton: {
-          backgroundColor: '#000000',
-          //cornerRadius: 12,
-          textColor: '#FFFFFF',
-          textFontSize: 14,
-        },
-      }}
     >
       <MenuProvider>
         <GestureHandlerRootView style={styles.containerStyle}>
