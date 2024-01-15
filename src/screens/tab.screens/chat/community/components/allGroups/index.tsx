@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { InlineLoader, FullLoader } from '../../../../../../components/tools';
-import { theme } from '../../../../../../infrastructure/theme';
+import React from 'react';
+import { View, Text, Image } from 'react-native';
+import { FullLoader, Column } from '../../../../../../components/tools';
 import GroupsList from './components/groupList';
 import SearchGroup from './components/searchGroup';
-import { styles } from './styles';
+import { styles, searchStyle } from './styles';
 import { useViewModal } from './useViewModal';
 import { WelocmeGroupModal } from '../../../../../../components/modal/welocmeGroupModal';
 
@@ -17,7 +16,6 @@ const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
     closeModal,
     isModalVisible,
   } = useViewModal();
-
   if (loading) {
     return <FullLoader />;
   }
@@ -29,7 +27,24 @@ const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
           toggleSearchInput={toggleSearchInput}
           handleTextChange={handleTextChange}
         />
-        <GroupsList groups={groups} handleJoinGroup={handleJoinGroup} />
+        {groups?.length > 0 ? (
+          <GroupsList groups={groups} handleJoinGroup={handleJoinGroup} />
+        ) : (
+          <View style={searchStyle.content}>
+            <Column gap={25} alignItems="center">
+              <Text style={searchStyle.subHeading}>No results found</Text>
+              <Image
+                style={searchStyle.pendingIcon}
+                resizeMode="contain"
+                source={require('../../../../../../assets/images/icons/noSearchResultIcon.png')}
+              />
+              <Text style={searchStyle.text}>
+                We could not find what you {`\n`} were searching for. Please try
+                again.
+              </Text>
+            </Column>
+          </View>
+        )}
       </View>
     </>
   );

@@ -1,12 +1,18 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../infrastructure/theme/colors';
+import { fontSizes } from '../../../../../infrastructure/theme/fonts';
+import { dimensions } from '../../../../../components/tools';
 
 export const styles = StyleSheet.create({
   scrollDiv: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  otpImg: {
+    width: dimensions.width,
+    height: 300,
   },
   viewBox: {
     width: '100%',
@@ -16,11 +22,19 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.ui.inputBg,
     marginTop: sizes[4],
     marginBottom: sizes[4],
+    width: dimensions.width - 32,
   },
   otpText: {
     color: colors.ui.text,
     textAlign: 'center',
     fontWeight: '600',
     lineHeight: sizes[4],
+  },
+  otpEmail: {
+    color: '#007AFF',
+    fontSize: fontSizes.button,
+    textAlign: 'center',
+    marginTop: sizes[1],
+    textTransform: 'lowercase',
   },
 });

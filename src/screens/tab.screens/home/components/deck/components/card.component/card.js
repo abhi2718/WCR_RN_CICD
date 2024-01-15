@@ -71,7 +71,7 @@ export default function CardCompoent({ item, height, cardRef }) {
               </FastImage>
             </View>
             <View style={[cardStyles.userInfo, cardStyles.ph16]}>
-              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/degree.png')}
@@ -80,14 +80,14 @@ export default function CardCompoent({ item, height, cardRef }) {
                   {designation.userDegree}
                 </Text>
               </Row>
-              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/degTitle.png')}
                 />
                 <Text style={cardStyles.userInfoText}>{designation.title}</Text>
               </Row>
-              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/location.png')}
@@ -269,11 +269,11 @@ export default function CardCompoent({ item, height, cardRef }) {
                     source={{ uri: url }}
                   />
                   {index === 1 && (
-                    <View style={[cardStyles.inBtwnText, cardStyles.ph16]}>
+                    <View style={[cardStyles.ph16]}>
                       {item?.interests?.length > 0 && (
                         <>
-                          <Spacer position="top" size={5} />
-                          <Text style={cardStyles.headingText}>
+                          {/* <Spacer position="top" size={5} /> */}
+                          <Text style={cardStyles.aboutHeading}>
                             Interests/Hobbies
                           </Text>
                           <Spacer position="top" size={15} />
@@ -283,7 +283,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                             style={cardStyles.flexWrap}
                           >
                             {item?.interests?.map((item, index) => (
-                              <View style={cardStyles.intrestView}>
+                              <View key={index} style={cardStyles.intrestView}>
                                 <Text
                                   style={cardStyles.intrestText}
                                   key={index}
@@ -299,30 +299,34 @@ export default function CardCompoent({ item, height, cardRef }) {
                   )}
                   {index === 0 && (
                     <View key={index}>
-                      <View style={[cardStyles.inBtwnText, cardStyles.ph16]}>
+                      <View style={[cardStyles.ph16]}>
                         {bio && (
                           <View>
-                            <Text style={cardStyles.headingText}>About</Text>
+                            <Text style={cardStyles.aboutHeading}>About</Text>
+                            <Spacer position="top" size={8} />
                             <Text style={cardStyles.aboutText}>{bio}</Text>
                           </View>
                         )}
                       </View>
                       {item?.photos?.length === 1 && (
-                        <View style={[cardStyles.inBtwnText, cardStyles.ph16]}>
+                        <View style={[cardStyles.ph16]}>
                           {item?.interests?.length > 0 && (
                             <>
-                              <Spacer position="top" size={5} />
-                              <Text style={cardStyles.headingText}>
+                              {/* <Spacer position="top" size={5} /> */}
+                              <Text style={cardStyles.aboutHeading}>
                                 Interests/Hobbies
                               </Text>
-                              <Spacer position="top" size={15} />
+                              <Spacer position="top" size={12} />
                               <Row
                                 gap={10}
                                 alignItems="center"
                                 style={cardStyles.flexWrap}
                               >
                                 {item?.interests?.map((item, index) => (
-                                  <View style={cardStyles.intrestView}>
+                                  <View
+                                    key={index}
+                                    style={cardStyles.intrestView}
+                                  >
                                     <Text
                                       style={cardStyles.intrestText}
                                       key={index}
@@ -344,7 +348,8 @@ export default function CardCompoent({ item, height, cardRef }) {
 
             <Row
               style={[cardStyles.footerIconRow, cardStyles.ph16]}
-              justifyContent="space-around"
+              justifyContent="center"
+              gap={40}
             >
               <Pressable onPress={_handleDisLike}>
                 <Image
@@ -383,7 +388,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 </Text>
               </Pressable>
             </View>
-            <Spacer position="top" size={40} />
+            <Spacer position="top" size={48} />
           </ScrollView>
         </View>
       </Card>
