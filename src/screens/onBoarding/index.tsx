@@ -17,10 +17,10 @@ import { PrimaryButton } from '../../components/button';
 import { styles } from './onBoardingStyle';
 import { useonBoardingViewModal } from './boardingViwModal';
 import { ScreenParams } from '../../types/services.types/firebase.service';
+import PaymentScreen from '../subscribe/payment';
 
 const Onboarding = (props: ScreenParams) => {
   const { currentView, switchView } = useonBoardingViewModal(props);
-
   return (
     <View style={styles.mainContainer}>
       {currentView === 1 && (

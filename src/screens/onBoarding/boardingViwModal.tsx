@@ -9,7 +9,6 @@ export const useonBoardingViewModal = (props: ScreenParams) => {
   const navigateToSignInScreen = () => {
     navigation.navigate(ROUTES.SignIn);
   };
-
   const switchView = () => {
     setCurrentView((prevView) => (prevView % 3) + 1);
 
