@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import  { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useViewModal } from '../../signinViewModal';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { FirebaseService } from '../../../../../services/firebase.service';
@@ -30,8 +30,8 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const {user} = useSelector((state: any) => state.userState);
-  const dispatch = useDispatch()
+  const { user } = useSelector((state: any) => state.userState);
+  const dispatch = useDispatch();
   const handleConfirm = (date: Date) => {
     toggleModal();
     handleDateChange(date);
@@ -46,7 +46,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
-    const date = newDate ? moment(newDate).format('MM/DD/YYYY') : 'N/A';
+    const date = newDate ? moment(newDate).format('MM-DD-YYYY') : 'N/A';
     handleInputChange('dob', date);
   };
 
@@ -69,7 +69,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     const numericString: string = getNumericString(text);
     let result = '';
     if (numericString.length <= 3) {
-     result = `${numericString}`;
+      result = `${numericString}`;
     } else if (numericString.length > 3 && numericString.length <= 6) {
       result = `(${numericString.substr(0, 3)}) ${numericString.substr(3)}`;
     } else if (numericString.length > 6) {
@@ -89,12 +89,12 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     if (numericText.length <= 2) {
       formattedDate = numericText;
     } else if (numericText.length <= 4) {
-      formattedDate = `${numericText.slice(0, 2)}/${numericText.slice(2)}`;
+      formattedDate = `${numericText.slice(0, 2)}-${numericText.slice(2)}`;
     } else {
-      formattedDate = `${numericText.slice(0, 2)}/${numericText.slice(
+      formattedDate = `${numericText.slice(0, 2)}-${numericText.slice(
         2,
         4,
-      )}/${numericText.slice(4, 8)}`;
+      )}-${numericText.slice(4, 8)}`;
     }
     return formattedDate;
   };
@@ -107,7 +107,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     email: '',
     dob: '',
   });
-  
   const [validationErrors, setValidationErrors] = useState<
     Partial<profileTypes>
   >({});
@@ -138,13 +137,13 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       errors.dob = 'You must be at-least 18 yrs old';
     }
     if (!formData.dob.length) {
-     return ShowFlashMessage('Alert', 'Enter your DOB', 'danger');
+      return ShowFlashMessage('Alert', 'Enter your DOB', 'danger');
     }
     if (Object.keys(errors).length) {
-      return setValidationErrors(errors);  
+      return setValidationErrors(errors);
     } else {
       setValidationErrors({});
-      await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
+       await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
     }
   };
 
@@ -156,12 +155,17 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     setWelcomeModalVisible(false);
   };
 
+  const getFormatteddate = (date: string): string => {
+    const dob = moment(date, 'MM-DD-YYYY').format('MM-DD-YYYY');
+    return dob;
+  };
+
   const newUserSignUp = async (
     email?: string,
     credential?: FirebaseAuthTypes.AuthCredential,
     firebaseUid?: string,
   ) => {
-    try{
+    try {
       const password = `$Sg{email}9%`;
       if (credential) {
         let data;
@@ -175,19 +179,19 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
           lastName: formData.lastName,
           displayName: formData.displayName,
           mobile: formData.mobile,
-          dob: formData.dob,
+          dob: getFormatteddate(formData.dob),
         });
       }
-  
+
       if (!email) {
         return ShowFlashMessage('Alert', 'Email is required', 'danger');
       }
-  
+
       const emailData = await firebaseService.signUpWithEmailPassword(
         email,
         password,
       );
-  
+
       if (emailData) {
         createUser({
           email: email!,
@@ -199,8 +203,8 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
           dob: formData.dob,
         });
       }
-    }catch(e) {
-      setLoading(false); 
+    } catch (e) {
+      setLoading(false);
     }
   };
 
@@ -230,13 +234,12 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       const payload = {
         user: {
           ...dataMango.user,
-          token: dataMango?.token
-        }
+          token: dataMango?.token,
+        },
       };
-      dispatch(addUser(payload))
+      dispatch(addUser(payload));
       setLoading(false);
-      if(dataMango.token)
-      navigateToGenderScreen(dataMango.user._id);
+      if (dataMango.token) navigateToGenderScreen(dataMango.user._id);
     } catch (error) {
       setLoading(false);
     }
