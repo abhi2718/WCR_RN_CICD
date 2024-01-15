@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-  Image,
-} from 'react-native';
+import { Modal, View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { CustomCheckbox } from '../checkbox';
-import { Row } from '../tools';
+import { Row, dimensions } from '../tools';
+import { PrimaryButton } from '../button';
+import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
 
 interface MultiSelectModalProps {
   isVisible: boolean;
@@ -20,6 +14,7 @@ interface MultiSelectModalProps {
   selectedItems: string[];
   onClose: () => void;
   onItemSelected: (selected: string[]) => void;
+  modalHeading?: string;
 }
 
 const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
@@ -28,6 +23,7 @@ const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
   selectedItems,
   onClose,
   onItemSelected,
+  modalHeading,
 }) => {
   const [selected, setSelected] = useState<string[]>(selectedItems);
   const toggleItem = (item: string) => {
@@ -52,10 +48,17 @@ const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
       onRequestClose={onClose}
     >
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.containerView}>
+        <View style={styles.containerView}>
+          <Text style={styles.modalHeading}>{modalHeading}</Text>
+          <ScrollView>
             {data.map((item, index) => (
-              <Row key={index} style={styles.card}>
+              <Row
+                key={index}
+                style={[
+                  styles.card,
+                  selected.includes(item) ? styles.cardBg : '',
+                ]}
+              >
                 <Pressable onPress={() => toggleItem(item)}>
                   <CustomCheckbox style={styles.checkBox}>
                     {selected.includes(item) && (
@@ -66,14 +69,21 @@ const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
                     )}
                   </CustomCheckbox>
                 </Pressable>
-                <Text style={styles.text}>{item}</Text>
+                <Text
+                  style={[
+                    styles.text,
+                    selected.includes(item) ? styles.selectedText : '',
+                  ]}
+                >
+                  {item}
+                </Text>
               </Row>
             ))}
-            <TouchableOpacity onPress={onClose}>
-              <Text>Close</Text>
-            </TouchableOpacity>
+          </ScrollView>
+          <View style={styles.PrimaryButton}>
+            <PrimaryButton onPress={onClose} title="Close" />
           </View>
-        </ScrollView>
+        </View>
       </View>
     </Modal>
   );
@@ -86,14 +96,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
   },
+  modalHeading: {
+    textAlign: 'center',
+    fontWeight: fontWeights.semiBold,
+    fontSize: fontSizes.h5,
+    marginBottom: 10,
+  },
+  cardBg: {
+    backgroundColor: colors.bg.secondary,
+  },
+  PrimaryButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 25,
+  },
   containerView: {
     backgroundColor: 'white',
-    padding: 50,
+    paddingVertical: 50,
     borderRadius: 10,
-    marginTop: 50,
+    marginTop: 25,
+    width: dimensions.width,
+    height: dimensions.height,
   },
   card: {
-    marginBottom: sizes[4],
+    paddingVertical: 14,
+    paddingHorizontal: 20,
   },
   checkBox: {
     marginRight: sizes[4],
@@ -101,6 +128,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: sizes[3],
     color: colors.ui.text,
+  },
+  selectedText: {
     fontWeight: 'bold',
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },

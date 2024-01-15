@@ -64,7 +64,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
         <Pressable onPress={button}>
           <View style={headerStyle.actionButtonView}>
             {isLoading ? (
-              <ActivityIndicator />
+              <ActivityIndicator color={colors.ui.primary} />
             ) : (
               <Text style={headerStyle.actionButton}>Save</Text>
             )}

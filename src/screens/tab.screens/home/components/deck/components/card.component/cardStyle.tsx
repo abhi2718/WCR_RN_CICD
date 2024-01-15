@@ -21,7 +21,7 @@ export const cardStyles = StyleSheet.create({
     height: '100%',
     borderRadius: 32,
     shadowColor: '#000',
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.2,
     shadowRadius: 9,
     shadowOffset: { width: 0, height: 0 },
   },
@@ -46,7 +46,7 @@ export const cardStyles = StyleSheet.create({
     left: sizes[4],
   },
   name: {
-    fontSize: fontSizes.h6,
+    fontSize: 22,
     color: colors.ui.white,
     fontWeight: fontWeights.bold,
     fontFamily: fonts.body,
@@ -60,7 +60,7 @@ export const cardStyles = StyleSheet.create({
     width: sizes[5],
   },
   userInfo: {
-    marginVertical: sizes[1],
+    marginVertical: 2,
   },
   userInfoRow: {
     marginTop: sizes[2],
@@ -74,16 +74,23 @@ export const cardStyles = StyleSheet.create({
   userInfoText: {
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    fontWeight: fontWeights.medium,
   },
   headingText: {
     marginTop: sizes[2],
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
-    fontSize: fontSizes.text,
+    fontSize: 22,
+    fontFamily: fonts.body,
+  },
+  aboutHeading: {
+    color: colors.ui.text,
+    fontWeight: fontWeights.bold,
+    fontSize: 22,
     fontFamily: fonts.body,
   },
   vitalSignsChips: {
-    marginVertical: sizes[2],
+    marginVertical: sizes[1],
     flexWrap: 'wrap',
   },
   chip: {
@@ -91,6 +98,7 @@ export const cardStyles = StyleSheet.create({
     paddingHorizontal: sizes[2],
     borderRadius: sizes[4],
     height: 35,
+    marginRight: 0,
   },
   chipIcon: {
     height: sizes[5],
@@ -106,25 +114,51 @@ export const cardStyles = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.button,
-    marginTop: sizes[1],
+    // marginTop: sizes[1],
   },
-  inBtwnText: {
-    // marginVertical: sizes[1],
+  blockReportView: {
+    borderTopColor: 'rgba(29, 27, 32, 0.15)',
+    borderTopWidth: 1,
+    borderBottomColor: 'rgba(29, 27, 32, 0.15)',
+    borderBottomWidth: 1,
   },
   blockReportText: {
     textAlign: 'center',
-    marginVertical: sizes[2],
-    fontWeight: fontWeights.semiBold,
+    paddingVertical: sizes[3],
+    fontWeight: fontWeights.medium,
     fontSize: fontSizes.title,
-    paddingBottom: sizes[5],
+  },
+  reportText: {
+    color: colors.ui.primary,
+    fontWeight: fontWeights.bold,
+  },
+  hrLine: {
+    borderTopColor: 'rgba(29, 27, 32, 0.15)',
+    borderTopWidth: 1,
   },
   footerIconRow: {
     marginVertical: sizes[5],
   },
   footerIcon: {
-    height: sizes[12],
-    width: sizes[12],
+    height: sizes[13],
+    width: sizes[13],
     overflow: 'visible',
     resizeMode: 'contain',
+  },
+  intrestView: {
+    backgroundColor: colors.ui.deckChipBgColor,
+    paddingHorizontal: sizes[2],
+    borderRadius: sizes[4],
+    height: 35,
+    justifyContent: 'center',
+  },
+  intrestText: {
+    color: colors.ui.text,
+    fontSize: fontSizes.button,
+    alignContent: 'center',
+    textTransform: 'capitalize',
+  },
+  flexWrap: {
+    flexWrap: 'wrap',
   },
 });

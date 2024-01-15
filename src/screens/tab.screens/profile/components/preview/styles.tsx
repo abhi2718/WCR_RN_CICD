@@ -9,9 +9,6 @@ import { dimensions } from '../../../../../components/tools';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 
 export const styles = StyleSheet.create({
-  container: {
-    // paddingHorizontal: 16,
-  },
   ph16: {
     paddingHorizontal: 16,
   },
@@ -28,16 +25,20 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
   },
+  aboutHeading: {
+    color: colors.ui.text,
+    fontWeight: fontWeights.bold,
+    fontSize: 22,
+    fontFamily: fonts.body,
+  },
   profilePic: {
     width: dimensions.width,
     height: dimensions.height - 120,
-    // borderRadius: 40,
   },
   pictures: {
     width: dimensions.width,
     height: dimensions.height - 150,
   },
-  //  -----------
 
   imageStyle: {
     width: dimensions.width - sizes[3],
@@ -50,7 +51,7 @@ export const styles = StyleSheet.create({
     left: sizes[4],
   },
   name: {
-    fontSize: fontSizes.h6,
+    fontSize: 22,
     color: colors.ui.white,
     fontWeight: fontWeights.bold,
     fontFamily: fonts.body,
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
     width: sizes[5],
   },
   userInfo: {
-    marginTop: sizes[2],
+    marginTop: sizes[0],
     paddingHorizontal: 16,
   },
   vitalSigns: {
@@ -82,12 +83,13 @@ export const styles = StyleSheet.create({
   userInfoText: {
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    fontWeight: fontWeights.medium,
   },
   headingText: {
     marginTop: sizes[2],
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
-    fontSize: fontSizes.text,
+    fontSize: 22,
     fontFamily: fonts.body,
   },
   vitalSignsChips: {
@@ -96,7 +98,6 @@ export const styles = StyleSheet.create({
   },
   chip: {
     backgroundColor: colors.ui.deckChipBgColor,
-    // paddingVertical: sizes[1],
     paddingHorizontal: sizes[2],
     borderRadius: sizes[4],
     height: 35,
@@ -115,8 +116,19 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.button,
-    marginTop: sizes[1],
+    marginTop: sizes[0],
   },
+  hobbiesChip: {
+    borderRadius: sizes[4],
+    overflow: 'hidden',
+    backgroundColor: colors.ui.deckChipBgColor,
+    paddingHorizontal: sizes[2],
+    marginRight: 8,
+    marginBottom: 8,
+    paddingVertical: 8,
+    color: colors.ui.text,
+  },
+
   inBtwnText: {
     marginVertical: sizes[1],
     paddingHorizontal: 16,

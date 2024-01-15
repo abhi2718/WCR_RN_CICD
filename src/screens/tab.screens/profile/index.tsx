@@ -45,13 +45,13 @@ export const ProfileScreen = ({}) => {
                 style={styles.profileImg}
               />
               <Column gap={5}>
-                <Text>
+                <Text style={styles.userName}>
                   {user.profile.displayName ?? user.profile.name?.first}
                 </Text>
+                <Text style={styles.address}>{user?.address?.city},</Text>
                 <Text style={styles.address}>
-                  {user?.address?.city} {user?.address?.state}
+                  {user?.address?.state}, {user?.address?.country}{' '}
                 </Text>
-                <Text style={styles.address}>{user?.address?.country} </Text>
               </Column>
             </Row>
           </Column>

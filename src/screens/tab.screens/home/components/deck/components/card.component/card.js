@@ -7,7 +7,10 @@ import { Card } from '../swiper';
 import { useViewModal } from './useViewModal';
 import { calculateAge } from '../../../../../../../utils/common.functions';
 import LinearGradient from 'react-native-linear-gradient';
-import { BlockAndReportModal } from '../blockOrReportModal';
+import { AlertScreen } from '../../../../../../../components/alert';
+import { colors } from '../../../../../../../infrastructure/theme/colors';
+import { sizes } from '../../../../../../../infrastructure/theme/sizes';
+import { fontSizes } from '../../../../../../../infrastructure/theme/fonts';
 export default function CardCompoent({ item, height, cardRef }) {
   const heightStyle = { height, ...cardStyles.imageStyle };
   const {
@@ -55,7 +58,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Row alignItems="center" gap={15} style={cardStyles.nameRow}>
                   <Text style={cardStyles.name}>
-                    {first}
+                    {first}{' '}
                     {genderPronoun !== 'Prefer not to say' &&
                       `(${genderPronoun})`}
                     , {calculateAge(dob)}
@@ -68,7 +71,7 @@ export default function CardCompoent({ item, height, cardRef }) {
               </FastImage>
             </View>
             <View style={[cardStyles.userInfo, cardStyles.ph16]}>
-              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/degree.png')}
@@ -77,14 +80,14 @@ export default function CardCompoent({ item, height, cardRef }) {
                   {designation.userDegree}
                 </Text>
               </Row>
-              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/degTitle.png')}
                 />
                 <Text style={cardStyles.userInfoText}>{designation.title}</Text>
               </Row>
-              <Row alignItems="center" style={cardStyles.userInfoRow} gap={15}>
+              <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/location.png')}
@@ -265,12 +268,76 @@ export default function CardCompoent({ item, height, cardRef }) {
                     }}
                     source={{ uri: url }}
                   />
+                  {index === 1 && (
+                    <View style={[cardStyles.ph16]}>
+                      {item?.interests?.length > 0 && (
+                        <>
+                          {/* <Spacer position="top" size={5} /> */}
+                          <Text style={cardStyles.aboutHeading}>
+                            Interests/Hobbies
+                          </Text>
+                          <Spacer position="top" size={15} />
+                          <Row
+                            gap={10}
+                            alignItems="center"
+                            style={cardStyles.flexWrap}
+                          >
+                            {item?.interests?.map((item, index) => (
+                              <View key={index} style={cardStyles.intrestView}>
+                                <Text
+                                  style={cardStyles.intrestText}
+                                  key={index}
+                                >
+                                  {item}
+                                </Text>
+                              </View>
+                            ))}
+                          </Row>
+                        </>
+                      )}
+                    </View>
+                  )}
                   {index === 0 && (
-                    <View style={[cardStyles.inBtwnText, cardStyles.ph16]}>
-                      {bio && (
-                        <View>
-                          <Text style={cardStyles.headingText}>About</Text>
-                          <Text style={cardStyles.aboutText}>{bio}</Text>
+                    <View key={index}>
+                      <View style={[cardStyles.ph16]}>
+                        {bio && (
+                          <View>
+                            <Text style={cardStyles.aboutHeading}>About</Text>
+                            <Spacer position="top" size={8} />
+                            <Text style={cardStyles.aboutText}>{bio}</Text>
+                          </View>
+                        )}
+                      </View>
+                      {item?.photos?.length === 1 && (
+                        <View style={[cardStyles.ph16]}>
+                          {item?.interests?.length > 0 && (
+                            <>
+                              {/* <Spacer position="top" size={5} /> */}
+                              <Text style={cardStyles.aboutHeading}>
+                                Interests/Hobbies
+                              </Text>
+                              <Spacer position="top" size={12} />
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={cardStyles.flexWrap}
+                              >
+                                {item?.interests?.map((item, index) => (
+                                  <View
+                                    key={index}
+                                    style={cardStyles.intrestView}
+                                  >
+                                    <Text
+                                      style={cardStyles.intrestText}
+                                      key={index}
+                                    >
+                                      {item}
+                                    </Text>
+                                  </View>
+                                ))}
+                              </Row>
+                            </>
+                          )}
                         </View>
                       )}
                     </View>
@@ -278,21 +345,11 @@ export default function CardCompoent({ item, height, cardRef }) {
                 </View>
               );
             })}
-            <View style={[cardStyles.inBtwnText, cardStyles.ph16]}>
-              {item?.interests?.length > 0 && (
-                <Text style={cardStyles.headingText}>Interests/Hobbies</Text>
-              )}
-              <Row>
-                {item?.interests?.map((item, index) => (
-                  <Text key={index} style={cardStyles.aboutText}>
-                    {item}{' '}
-                  </Text>
-                ))}
-              </Row>
-            </View>
+
             <Row
               style={[cardStyles.footerIconRow, cardStyles.ph16]}
-              justifyContent="space-around"
+              justifyContent="center"
+              gap={40}
             >
               <Pressable onPress={_handleDisLike}>
                 <Image
@@ -313,18 +370,34 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
               </Pressable>
             </Row>
-
-            <Pressable onPress={() => setShowModal(true)}>
-              <Text style={cardStyles.blockReportText}>Block/Report</Text>
-            </Pressable>
+            <Spacer position="top" size={10} />
+            <View style={cardStyles.blockReportView}>
+              <Pressable onPress={() => setShowModal(true)}>
+                <Text
+                  style={[cardStyles.blockReportText, cardStyles.blockText]}
+                >
+                  Block
+                </Text>
+              </Pressable>
+              <View style={cardStyles.hrLine} />
+              <Pressable onPress={handleReport}>
+                <Text
+                  style={[cardStyles.blockReportText, cardStyles.reportText]}
+                >
+                  Report
+                </Text>
+              </Pressable>
+            </View>
+            <Spacer position="top" size={48} />
           </ScrollView>
         </View>
       </Card>
-      <BlockAndReportModal
+      <AlertScreen
         showModal={showModal}
         setShowModal={setShowModal}
-        handleBlockUser={handleBlockUser}
-        handleReport={handleReport}
+        title="Block"
+        description="Do you want to block this person?"
+        onPress={handleBlockUser}
       />
     </View>
   );
