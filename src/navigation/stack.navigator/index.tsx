@@ -64,11 +64,7 @@ export const StackNavigator = () => {
         name={ROUTES.Profile}
         component={Profile}
       />
-      <Stack.Screen
-        options={options}
-        name={ROUTES.Gender}
-        component={Gender}
-      />
+      <Stack.Screen options={options} name={ROUTES.Gender} component={Gender} />
       <Stack.Screen
         options={options}
         name={ROUTES.VerificationPending}
@@ -203,7 +199,7 @@ export const StackNavigator = () => {
         name={ROUTES.Report}
         component={ReportScreen}
       />
-       <Stack.Screen
+      <Stack.Screen
         // options={optins}
         name={ROUTES.PrivateChatMediaScreen}
         component={PrivteChatMediaScreen}

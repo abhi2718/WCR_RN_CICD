@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   KeyboardAvoidingView,
+  Image,
 } from 'react-native';
 import {
   dimensions,
@@ -48,10 +49,17 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
           behavior={isAndroid ? 'height' : 'padding'}
           style={styles.scrollDiv}
         >
+          <Image
+            style={styles.otpImg}
+            resizeMode="contain"
+            source={require('../../../../../assets/images/otpScreenImg.png')}
+          />
+          <Spacer position="top" size={32} />
           <View style={styles.viewBox}>
             <Text style={styles.otpText}>
               Enter the code we have shared to your email
             </Text>
+            <Text style={styles.otpEmail}>“{email}”</Text>
             <View>
               <OtpCodeInput
                 onChangeOtp={handleInputChange}

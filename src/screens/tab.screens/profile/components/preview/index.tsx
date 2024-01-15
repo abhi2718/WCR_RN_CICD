@@ -1,19 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  ScrollView,
-  SafeAreaView,
-  Image,
-} from 'react-native';
+import { View, Text, ScrollView, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {
-  dimensions,
-  Row,
-  ScreenWrapper,
-  Spacer,
-} from '../../../../../components/tools';
+import { Row, ScreenWrapper, Spacer } from '../../../../../components/tools';
 import { useViewModal } from './previewViewModal';
 import { styles } from './styles';
 import LinearGradient from 'react-native-linear-gradient';
@@ -24,7 +12,7 @@ export const PreviewScreen = () => {
   console.log(user);
   return (
     <ScreenWrapper>
-      <View style={styles.container}>
+      <View>
         <View style={styles.ph16}>
           <HeaderBar
             isLogo={false}
@@ -104,11 +92,11 @@ export const PreviewScreen = () => {
                   )}
                   <Row
                     style={styles.vitalSignsChips}
-                    gap={15}
+                    gap={10}
                     alignItems="center"
                   >
                     {user.profile.gender && (
-                      <Row gap={10} alignItems="center" style={styles.chip}>
+                      <Row gap={0} alignItems="center" style={styles.chip}>
                         {user.profile.gender === 'Female' && (
                           <Image
                             style={styles.chipIcon}
@@ -134,7 +122,6 @@ export const PreviewScreen = () => {
                           />
                         )}
                         <Text style={styles.chipText}>
-                          {' '}
                           {user?.profile?.gender}
                         </Text>
                       </Row>
@@ -278,7 +265,7 @@ export const PreviewScreen = () => {
                       />
                       {index === 0 && user?.bio?.length > 0 && (
                         <View style={styles.inBtwnText}>
-                          <Text style={styles.headingText}>About</Text>
+                          <Text style={styles.aboutHeading}>About</Text>
                           <Text style={styles.aboutText}>{user.bio}</Text>
                         </View>
                       )}
@@ -287,23 +274,37 @@ export const PreviewScreen = () => {
                 })}
                 {user?.interests?.length > 0 && (
                   <View style={styles.inBtwnText}>
-                    <Text style={styles.headingText}>Interests/Hobbies</Text>
+                    <Spacer position="top" size={10} />
+                    <Text style={styles.aboutHeading}>Interests/Hobbies</Text>
                     <Row style={{ flexWrap: 'wrap' }}>
                       {user?.interests?.map((hobby: string, index: number) => {
                         if (user?.interests?.length - 1 === index) {
                           return (
-                            <Text key={index} style={styles.aboutText}>
-                              {hobby}
-                            </Text>
+                            <Row
+                              alignItems="center"
+                              gap={10}
+                              style={{ flexWrap: 'wrap' }}
+                            >
+                              <Text key={index} style={styles.hobbiesChip}>
+                                {hobby}
+                              </Text>
+                            </Row>
                           );
                         }
                         return (
-                          <Text key={index} style={styles.aboutText}>
-                            {hobby},
-                          </Text>
+                          <Row
+                            alignItems="center"
+                            gap={10}
+                            style={{ flexWrap: 'wrap' }}
+                          >
+                            <Text key={index} style={styles.hobbiesChip}>
+                              {hobby}
+                            </Text>
+                          </Row>
                         );
                       })}
                     </Row>
+                    <Spacer position="top" size={10} />
                   </View>
                 )}
               </ScrollView>

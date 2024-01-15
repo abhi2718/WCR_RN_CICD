@@ -9,7 +9,11 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 16,
   },
-
+  userName: {
+    fontSize: 24,
+    color: colors.ui.text,
+    fontWeight: 'bold',
+  },
   profileImg: {
     width: sizes[14] * 2,
     height: sizes[14] * 2,
