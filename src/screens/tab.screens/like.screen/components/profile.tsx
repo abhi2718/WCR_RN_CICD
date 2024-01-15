@@ -50,7 +50,7 @@ export const ProfileView = (props: ProfileViewProps) => {
   };
   if (isMatch) {
     return (
-      <View style={styles.sectionView}>
+      <View>
         <Pressable onPress={toggleModal}>
           <Column style={styles.relative}>
             <Spacer position="right" size={10}>
@@ -168,7 +168,7 @@ export const ProfileView = (props: ProfileViewProps) => {
   }
   if (isLikesReceived) {
     return (
-      <View style={styles.sectionView}>
+      <View>
         <Pressable onPress={toggleModal}>
           <Column>
             <Spacer position="right" size={10}>
@@ -228,10 +228,10 @@ export const ProfileView = (props: ProfileViewProps) => {
   }
   if (isLiked || isFavourite) {
     return (
-      <View style={styles.sectionView}>
+      <View>
         <Pressable onPress={toggleModal}>
           <Column>
-            <Spacer position="right" size={10}>
+            <Spacer position="right" size={0}>
               <FastImage
                 style={
                   path === 'modalView'
@@ -289,11 +289,6 @@ export const ProfileView = (props: ProfileViewProps) => {
 };
 
 export const styles = StyleSheet.create({
-  sectionView: {
-    flex: 1,
-    maxWidth: 200,
-    backgroundColor: theme.colors.ui.white,
-  },
   relative: {
     position: 'relative',
   },
@@ -306,7 +301,7 @@ export const styles = StyleSheet.create({
     borderRadius: theme.units.sizes[100],
   },
   avatarWidth: {
-    width: (dimensions.width - 38) / 2,
+    width: (dimensions.width - 32) / 2,
     height: theme.units.sizes[165],
     borderRadius: theme.units.sizes[30],
   },

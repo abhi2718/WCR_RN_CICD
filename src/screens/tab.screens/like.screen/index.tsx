@@ -49,7 +49,7 @@ export const LikeScreen = () => {
         {isNoEvent > 0 ? (
           <>
             <ScrollView style={{ flex: 1 }}>
-              <View style={styles.container}>
+              <View>
                 {data?.matchedUsersList?.length > 0 ? (
                   <View>
                     <Row
@@ -67,16 +67,17 @@ export const LikeScreen = () => {
                       style={styles.paddingBottom20}
                       horizontal={true}
                     >
-                      {data.matchedUsersList.map((item) => {
+                      {data.matchedUsersList.map((item, index) => {
                         return (
-                          <ProfileView
-                            key={item._id}
-                            item={item}
-                            showDeleteIcon={false}
-                            isMatch={true}
-                            startChat={startChat}
-                            path="scrollView"
-                          />
+                          <Spacer key={item._id} position="right" size={8}>
+                            <ProfileView
+                              item={item}
+                              showDeleteIcon={false}
+                              isMatch={true}
+                              startChat={startChat}
+                              path="scrollView"
+                            />
+                          </Spacer>
                         );
                       })}
                     </ScrollView>
@@ -111,15 +112,16 @@ export const LikeScreen = () => {
                       style={styles.paddingBottom20}
                       horizontal={true}
                     >
-                      {data.likesReceived.map((item) => {
+                      {data.likesReceived.map((item, index) => {
                         return (
-                          <ProfileView
-                            key={item._id}
-                            item={item}
-                            showDeleteIcon={false}
-                            isLikesReceived={true}
-                            path="scrollView"
-                          />
+                          <Spacer key={index} position="right" size={8}>
+                            <ProfileView
+                              item={item}
+                              showDeleteIcon={false}
+                              isLikesReceived={true}
+                              path="scrollView"
+                            />
+                          </Spacer>
                         );
                       })}
                     </ScrollView>
@@ -159,16 +161,17 @@ export const LikeScreen = () => {
                       horizontal={true}
                       style={styles.paddingBottom20}
                     >
-                      {data.liked.map((item) => {
+                      {data.liked.map((item, index) => {
                         return (
-                          <ProfileView
-                            key={item._id}
-                            item={item.actedOn}
-                            deleteLiked={deleteLiked}
-                            showDeleteIcon={true}
-                            isLiked={true}
-                            path="scrollView"
-                          />
+                          <Spacer key={index} position="right" size={8}>
+                            <ProfileView
+                              item={item.actedOn}
+                              deleteLiked={deleteLiked}
+                              showDeleteIcon={true}
+                              isLiked={true}
+                              path="scrollView"
+                            />
+                          </Spacer>
                         );
                       })}
                     </ScrollView>
@@ -209,16 +212,17 @@ export const LikeScreen = () => {
                       style={styles.paddingBottom20}
                       horizontal={true}
                     >
-                      {data.allFavourite.map((item) => {
+                      {data.allFavourite.map((item,index) => {
                         return (
+                          <Spacer key={index} position="right" size={8}>
                           <ProfileView
-                            key={item._id}
                             item={item.favourite}
                             deleteFavourite={deleteFavourite}
                             showDeleteIcon={true}
                             isFavourite={true}
                             path="scrollView"
-                          />
+                            />
+                            </Spacer>
                         );
                       })}
                     </ScrollView>
@@ -238,9 +242,7 @@ export const LikeScreen = () => {
               </View>
             </ScrollView>
             <Modal visible={modalVisible}>
-              <SafeAreaView
-                style={[styles.container, { paddingLeft: 16, paddingRight: 4 }]}
-              >
+              <SafeAreaView>
                 <Row alignItems="center" style={styles.backArrowPadding}>
                   <Pressable onPress={() => toggleModal()}>
                     <Image
@@ -255,6 +257,7 @@ export const LikeScreen = () => {
                     {
                       <FlatList
                         data={data.likesReceived}
+                        columnWrapperStyle={styles.flatListWrapperStyle}
                         renderItem={({ item }) => (
                           <ProfileView
                             key={item._id}
@@ -272,10 +275,11 @@ export const LikeScreen = () => {
                   </>
                 )}
                 {seeAllState.state === 1 && (
-                  <>
+                  <View>
                     {
                       <FlatList
                         data={data.liked}
+                        columnWrapperStyle={styles.flatListWrapperStyle}
                         renderItem={({ item }) => (
                           <ProfileView
                             key={item._id}
@@ -291,13 +295,14 @@ export const LikeScreen = () => {
                         keyExtractor={(item) => item._id}
                       />
                     }
-                  </>
+                  </View>
                 )}
                 {seeAllState.state === 2 && (
                   <>
                     {
                       <FlatList
                         data={data.allFavourite}
+                        columnWrapperStyle={styles.flatListWrapperStyle}
                         renderItem={({ item }) => (
                           <ProfileView
                             key={item._id}
@@ -320,6 +325,7 @@ export const LikeScreen = () => {
                     {
                       <FlatList
                         data={data.matchedUsersList}
+                        columnWrapperStyle={styles.flatListWrapperStyle}
                         renderItem={({ item }) => (
                           <ProfileView
                             key={item._id}

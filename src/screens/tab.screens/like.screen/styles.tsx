@@ -8,13 +8,15 @@ import { theme } from '../../../infrastructure/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     width: dimensions.width,
-    paddingHorizontal: 8,
+    paddingLeft:8,
   },
-
+  flatListWrapperStyle:{
+    width:dimensions.width,
+    flexDirection: "row",
+    justifyContent:"space-evenly"
+  },
   headerViewStyle: {
-    // height: 40,
     justifyContent: 'center',
     paddingHorizontal: 8,
   },
