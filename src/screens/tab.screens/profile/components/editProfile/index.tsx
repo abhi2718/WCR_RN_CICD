@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView} from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
 import { ActivityIndicator } from 'react-native-paper';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
