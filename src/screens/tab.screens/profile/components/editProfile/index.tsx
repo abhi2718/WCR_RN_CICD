@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView} from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
 import MultiSelectModal from '../../../../../components/multiSelectModal';
@@ -24,6 +24,7 @@ import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
+import { formatNumber } from '../../../../../utils/common.functions';
 
 export const EditProfile = () => {
   const {
@@ -93,7 +94,6 @@ export const EditProfile = () => {
               returnKeyLabel="go"
               placeholderTextColor={colors.ui.placeholder}
             />
-
             <Text style={styles.charCount}>{letterCount}</Text>
           </Column>
           <Spacer position="bottom" size={20} />
@@ -165,7 +165,7 @@ export const EditProfile = () => {
             <Spacer position="top" size={20}>
               <Row justifyContent="space-between">
                 <Text style={styles.fieldName}>Height</Text>
-                <Text style={styles.fieldName}>{heightRange[0]}</Text>
+                <Text style={styles.fieldName}>{formatNumber(heightRange[0])}</Text>
               </Row>
               <Column justifyContent="center" alignItems="center">
                 <MultiSlider
@@ -329,7 +329,7 @@ export const EditProfile = () => {
                   <Spacer key={index} position="top" size={20}>
                     <Row justifyContent="space-between">
                       <Text style={styles.fieldName}>Height</Text>
-                      <Text style={styles.fieldName}>{heightRange[0]}</Text>
+                      <Text style={styles.fieldName}>{formatNumber(heightRange[0])}</Text>
                     </Row>
                     <Column justifyContent="center" alignItems="center">
                       <MultiSlider

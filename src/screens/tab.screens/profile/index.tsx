@@ -15,6 +15,7 @@ import { AlertScreen } from '../../../components/alert';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
+import PaymentScreen from '../../subscribe/payment';
 
 export const ProfileScreen = ({}) => {
   const {
@@ -28,6 +29,9 @@ export const ProfileScreen = ({}) => {
     _logOut,
     loading,
   } = useViewModal();
+  // if (1) {
+  //   return (<PaymentScreen />)
+  // }
   return (
     <ScreenWrapper>
       <View style={styles.container}>

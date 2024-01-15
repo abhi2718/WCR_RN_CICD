@@ -31,7 +31,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
     alignItems: 'center',
-
     paddingHorizontal: 20,
   },
   heading: {

@@ -202,7 +202,8 @@ export const useViewModal = () => {
     },
     {},
     {},
-    {},
+    {
+    },
     // {
     //   title: 'Gender',
     //   option: genderList,
@@ -333,7 +334,9 @@ export const useViewModal = () => {
         return undefined;
       }
     } catch (error) {
+
     } finally {
+
     }
   };
   const uploadImage = async () => {
@@ -356,7 +359,10 @@ export const useViewModal = () => {
       return 0;
     }
     try {
-      const profileCloudURL = await uploadImageToCloudinary(profilePicUri);
+      const profileCloudURL =
+        user?.profilePicture?.url === profilePicUri?.path
+          ? user?.profilePicture?.url
+          : await uploadImageToCloudinary(profilePicUri);
       const profileImage = {
         url: profileCloudURL,
         caption: 'User Profile',
@@ -364,7 +370,12 @@ export const useViewModal = () => {
       const photos: object[] = [];
       const allPhotos = [...sidePicUri!, ...bottomUris!];
       for (let i = 0; i < allPhotos.length; i++) {
-        const cloudURL = await uploadImageToCloudinary(allPhotos[i]);
+        const isOldUrl = user?.photos?.find(
+          ({ url }) => url === allPhotos[i]?.path,
+        );
+        const cloudURL = isOldUrl
+          ? isOldUrl.url
+          : await uploadImageToCloudinary(allPhotos[i]);
         if (!cloudURL) {
           ShowFlashMessage(
             'Warning',
@@ -379,7 +390,9 @@ export const useViewModal = () => {
         profileImage,
         photos,
       };
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
   const validateZipcode = async (zipcode: string) => {
     const USER = {
@@ -547,7 +560,7 @@ export const useViewModal = () => {
       };
       dispatch(addUser(profile));
       ShowFlashMessage(
-        'Your profile has been updated succesfully !',
+        'Your profile has been updated succesfully!',
         '',
         'success',
       );
