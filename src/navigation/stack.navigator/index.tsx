@@ -203,6 +203,11 @@ export const StackNavigator = () => {
         // options={optins}
         name={ROUTES.PrivateChatMediaScreen}
         component={PrivteChatMediaScreen}
+        options={{
+          title: 'Media',
+          headerTitleAlign: 'center',
+          headerBackImageSource: require('../../assets/images/icons/back-arrow.png'),
+        }}
       />
     </Stack.Navigator>
   );

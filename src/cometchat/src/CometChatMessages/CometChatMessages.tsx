@@ -342,12 +342,10 @@ export const CometChatMessages = (props: CometChatMessagesInterface) => {
                       style={{
                         flexDirection: 'row',
                         justifyContent: 'flex-end',
-                        marginRight:20
+                        // marginRight: 20,
                       }}
                     >
-                      <AppBarDropDown
-                        user={user}
-                      />
+                      <AppBarDropDown user={user} />
                     </View>
                   );
                 }
