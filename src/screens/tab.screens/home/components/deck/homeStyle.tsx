@@ -8,9 +8,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   headerViewStyle: {
-    // height: 40,
     justifyContent: 'center',
-    paddingHorizontal: 8,
   },
   textStyle: {
     textAlign: 'center',

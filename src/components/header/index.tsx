@@ -192,7 +192,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
         </Row>
         <Logo width={45} height={45} />
         {isPrefrence && (
-          <Pressable onPress={goToPrefrence} style={headerDeckStyle.row}>
+          <Pressable onPress={goToPrefrence}>
             <Image
               style={headerDeckStyle.searchIcon}
               source={require('../../assets/images/Filter.png')}

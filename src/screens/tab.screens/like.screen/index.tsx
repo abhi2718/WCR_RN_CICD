@@ -85,7 +85,12 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Match</Text>
-                    <View style={styles.noDataList}>
+                    <View style={[styles.noDataList, styles.noMatches]}>
+                      <Image
+                        style={styles.noDataImg}
+                        source={require('../../../assets/images/icons/noMatchIcon.png')}
+                      />
+                      <Spacer position="top" size={20} />
                       <Text
                         style={[styles.noDataListText, styles.paddingMatches]}
                       >
@@ -212,17 +217,17 @@ export const LikeScreen = () => {
                       style={styles.paddingBottom20}
                       horizontal={true}
                     >
-                      {data.allFavourite.map((item,index) => {
+                      {data.allFavourite.map((item, index) => {
                         return (
                           <Spacer key={index} position="right" size={8}>
-                          <ProfileView
-                            item={item.favourite}
-                            deleteFavourite={deleteFavourite}
-                            showDeleteIcon={true}
-                            isFavourite={true}
-                            path="scrollView"
+                            <ProfileView
+                              item={item.favourite}
+                              deleteFavourite={deleteFavourite}
+                              showDeleteIcon={true}
+                              isFavourite={true}
+                              path="scrollView"
                             />
-                            </Spacer>
+                          </Spacer>
                         );
                       })}
                     </ScrollView>

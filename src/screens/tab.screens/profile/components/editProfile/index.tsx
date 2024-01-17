@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
 import MultiSelectModal from '../../../../../components/multiSelectModal';
@@ -165,7 +165,9 @@ export const EditProfile = () => {
             <Spacer position="top" size={20}>
               <Row justifyContent="space-between">
                 <Text style={styles.fieldName}>Height</Text>
-                <Text style={styles.fieldName}>{formatNumber(heightRange[0])}</Text>
+                <Text style={styles.fieldName}>
+                  {formatNumber(heightRange[0])}
+                </Text>
               </Row>
               <Column justifyContent="center" alignItems="center">
                 <MultiSlider
@@ -290,7 +292,7 @@ export const EditProfile = () => {
             {optionsList.map((item, index) => {
               if (index === 2) {
                 return (
-                  <Spacer key={index} position="top" size={10}>
+                  <Spacer position="top" size={10}>
                     <Text style={styles.fieldName}>Job Title</Text>
                     <View style={styles.fieldValueContainer}>
                       <TextInput
@@ -307,7 +309,7 @@ export const EditProfile = () => {
               }
               if (index === 3) {
                 return (
-                  <Spacer key={index} position="top" size={10}>
+                  <Spacer position="top" size={10}>
                     <Text style={styles.fieldName}>
                       Institution/School/Practice Name
                     </Text>
@@ -326,10 +328,12 @@ export const EditProfile = () => {
               }
               if (index === 4) {
                 return (
-                  <Spacer key={index} position="top" size={20}>
+                  <Spacer position="top" size={20}>
                     <Row justifyContent="space-between">
                       <Text style={styles.fieldName}>Height</Text>
-                      <Text style={styles.fieldName}>{formatNumber(heightRange[0])}</Text>
+                      <Text style={styles.fieldName}>
+                        {formatNumber(heightRange[0])}
+                      </Text>
                     </Row>
                     <Column justifyContent="center" alignItems="center">
                       <MultiSlider
@@ -345,8 +349,8 @@ export const EditProfile = () => {
               }
               if (item.title === 'Ethnicity') {
                 return (
-                  <Spacer key={index} position="top" size={10}>
-                    <Spacer key={index} position="top" size={10}>
+                  <Spacer position="top" size={10}>
+                    <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>{item.title}</Text>
                       <TouchableOpacity onPress={() => openModal('ethnicity')}>
                         <Row
@@ -394,8 +398,8 @@ export const EditProfile = () => {
               }
               if (item.title === 'Hobby') {
                 return (
-                  <Spacer key={index} position="top" size={10}>
-                    <Spacer key={index} position="top" size={10}>
+                  <Spacer position="top" size={10}>
+                    <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>{item.title}</Text>
                       <TouchableOpacity onPress={() => openModal('hobby')}>
                         <Row
@@ -444,7 +448,7 @@ export const EditProfile = () => {
               }
               if (item.title === 'Relationship level') {
                 return (
-                  <Spacer key={index} position="top" size={10}>
+                  <Spacer position="top" size={10}>
                     <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>{item.title}</Text>
                       <TouchableOpacity
@@ -494,36 +498,38 @@ export const EditProfile = () => {
               }
 
               return (
-                <Spacer key={index} position="top" size={10}>
-                  <Text style={styles.fieldName}>{item.title}</Text>
-                  <Row
-                    style={[styles.selectRow, styles.fieldValueContainer]}
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <ModalSelector
-                      data={item.option!}
-                      initValue={answer[item.initValue]}
-                      onChange={handleInputChange}
-                      style={styles.modalSelector}
-                      cancelText="Close"
-                      optionContainerStyle={styles.optionContainer}
-                      optionTextStyle={styles.optionText}
-                      cancelStyle={styles.cancelButton}
-                      selectedItemTextStyle={styles.selectedItem}
-                      initValueTextStyle={styles.initValueTextStyle}
-                      selectStyle={styles.selectStyle}
-                      overlayStyle={styles.overlayStyle}
-                      cancelTextStyle={styles.cancelTextStyle}
-                      optionStyle={styles.optionStyle}
-                    />
-                    <Image
-                      resizeMode="contain"
-                      style={styles.nextArrow}
-                      source={require('../../../../../assets/images/settings/Next.png')}
-                    />
-                  </Row>
-                </Spacer>
+                <View key={index}>
+                  <Spacer position="top" size={10}>
+                    <Text style={styles.fieldName}>{item.title}</Text>
+                    <Row
+                      style={[styles.selectRow, styles.fieldValueContainer]}
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <ModalSelector
+                        data={item.option!}
+                        initValue={answer[item.initValue]}
+                        onChange={handleInputChange}
+                        style={styles.modalSelector}
+                        cancelText="Close"
+                        optionContainerStyle={styles.optionContainer}
+                        optionTextStyle={styles.optionText}
+                        cancelStyle={styles.cancelButton}
+                        selectedItemTextStyle={styles.selectedItem}
+                        initValueTextStyle={styles.initValueTextStyle}
+                        selectStyle={styles.selectStyle}
+                        overlayStyle={styles.overlayStyle}
+                        cancelTextStyle={styles.cancelTextStyle}
+                        optionStyle={styles.optionStyle}
+                      />
+                      <Image
+                        resizeMode="contain"
+                        style={styles.nextArrow}
+                        source={require('../../../../../assets/images/settings/Next.png')}
+                      />
+                    </Row>
+                  </Spacer>
+                </View>
               );
             })}
           </Column>

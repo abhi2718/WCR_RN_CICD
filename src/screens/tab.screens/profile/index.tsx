@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
 import PaymentScreen from '../../subscribe/payment';
+import { HeaderDeck } from '../../../components/header';
 
 export const ProfileScreen = ({}) => {
   const {
@@ -33,8 +34,9 @@ export const ProfileScreen = ({}) => {
   //   return (<PaymentScreen />)
   // }
   return (
-    <ScreenWrapper>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <HeaderDeck isSearchIcon={false} isPrefrence={false} />
+      <View>
         <Spacer position="bottom" size={20}>
           <Column style={styles.nameContainer}>
             <Row gap={20} alignItems="center">
@@ -146,6 +148,6 @@ export const ProfileScreen = ({}) => {
           onPress={_logOut}
         />
       </View>
-    </ScreenWrapper>
+    </SafeAreaView>
   );
 };

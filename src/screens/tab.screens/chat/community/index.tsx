@@ -14,7 +14,7 @@ export default function CommunityChat() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.paddingH16}>
+      <View style={styles.paddingH8}>
         <HeaderDeck
           isSearchIcon={false}
           isPrefrence={false}
