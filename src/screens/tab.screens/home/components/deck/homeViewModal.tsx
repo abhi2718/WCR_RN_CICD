@@ -37,6 +37,7 @@ export const useViewModal = (route: RouteType) => {
     status: false,
     matchUser: null,
   });
+  const lastDisLikeProfile = useRef(-1);
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;
@@ -82,10 +83,24 @@ export const useViewModal = (route: RouteType) => {
         });
       }
       fetchAll(user._id);
-    } catch (error) {}
+    } catch (error) {
+    }
   };
+  const handleUnDoFeature = () => {
+    if (lastDisLikeProfile.current > -1) {
+    // console.log(  cardRef?.current?.swipeBack)
+      // console.log(lastDisLikeProfile.current);
+      // const p = profiles.slice(lastDisLikeProfile.current);
+      // console.log(p.length)
+      setProfiles([profiles[3],profiles[4]]);
+      lastDisLikeProfile.current = -1;
+    } else {
+      console.log('do not do any things')
+    }
+  }
   const handleDisLike = async (index: number) => {
     try {
+      lastDisLikeProfile.current = index;
       const payLoad = createPayLoafForUserAction(index, 'Dislike');
       await homeDeckRepository.userReactin(payLoad);
     } catch (error) {}
@@ -158,5 +173,6 @@ export const useViewModal = (route: RouteType) => {
     isMatch,
     handleHideOfIsMatchScreen,
     startChat,
+    handleUnDoFeature
   };
 };

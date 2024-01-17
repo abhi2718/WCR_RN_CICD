@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Pressable, Text } from 'react-native';
 import { styles } from './homeStyle';
 import { useViewModal } from './homeViewModal';
 import {
@@ -39,8 +39,8 @@ export default function Deck({ route }) {
     isMatch,
     handleHideOfIsMatchScreen,
     startChat,
+    handleUnDoFeature
   } = useViewModal(route);
-
   if (isLoading) {
     return <FullLoader />;
   }
@@ -67,6 +67,9 @@ export default function Deck({ route }) {
           toggleSearchModal={toggleSearchModal}
           goToNotification={goToNotification}
         />
+        {/* <Pressable onPress={handleUnDoFeature}>
+          <Text>Undo</Text>
+        </Pressable> */}
       </View>
       <Spacer position="bottom" size={8} />
       {!isNewUser ? (
@@ -103,7 +106,8 @@ export default function Deck({ route }) {
                 horizontalThreshold={isAndroid ? 10 : 10}
                 verticalSwipe={false}
                 ref={cardRef}
-                onSwipedAll={clearProfile}
+                    onSwipedAll={clearProfile}
+                    swipeBackCard={true} 
               >
                 {profiles.map((item, index) => (
                   <CardCompoent

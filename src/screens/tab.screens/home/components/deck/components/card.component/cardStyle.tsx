@@ -60,10 +60,11 @@ export const cardStyles = StyleSheet.create({
     width: sizes[5],
   },
   userInfo: {
-    marginVertical: 2,
+    marginTop: 8,
+    marginBottom:10
   },
   userInfoRow: {
-    marginTop: sizes[2],
+    marginTop: 6,
   },
   userInfoIcon: {
     height: sizes[5],

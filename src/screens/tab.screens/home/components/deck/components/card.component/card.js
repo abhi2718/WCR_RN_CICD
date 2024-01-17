@@ -95,12 +95,11 @@ export default function CardCompoent({ item, height, cardRef }) {
                 <Text style={cardStyles.userInfoText}>{state}</Text>
               </Row>
             </View>
-            <View style={[cardStyles.vitalSigns, cardStyles.ph16]}>
+            <View style={[cardStyles.ph16]}>
               <Text style={cardStyles.headingText}>Vital Signs</Text>
-              <Spacer position="top" size={5} />
               <Row
                 style={cardStyles.vitalSignsChips}
-                gap={12}
+                gap={6}
                 alignItems="center"
               >
                 {gender && (

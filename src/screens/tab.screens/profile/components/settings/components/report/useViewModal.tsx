@@ -55,7 +55,7 @@ export const useViewModal = (props:any) => {
       setLoading(false);
       clearAllField();
       ShowFlashMessage(
-        'Reported succesfully !',
+        'Reported succesfully!',
         '',
         'success',
       );
