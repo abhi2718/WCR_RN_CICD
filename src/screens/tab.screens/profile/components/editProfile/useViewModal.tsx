@@ -250,7 +250,7 @@ export const useViewModal = () => {
       initValue: 'politics',
     },
     {
-      title: 'Excerise',
+      title: 'Exercise',
       option: excerciseList,
       initValue: 'excercise',
     },

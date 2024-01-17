@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
 import MultiSelectModal from '../../../../../components/multiSelectModal';
@@ -75,7 +75,7 @@ export const EditProfile = () => {
         />
       </View>
       <ScrollView>
-        <Text style={styles.headingText}>Media</Text>
+        <Text style={styles.headingText}>Photos</Text>
         <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
           <Text style={styles.headingText}>About Me</Text>
@@ -165,7 +165,9 @@ export const EditProfile = () => {
             <Spacer position="top" size={20}>
               <Row justifyContent="space-between">
                 <Text style={styles.fieldName}>Height</Text>
-                <Text style={styles.fieldName}>{formatNumber(heightRange[0])}</Text>
+                <Text style={styles.fieldName}>
+                  {formatNumber(heightRange[0])}
+                </Text>
               </Row>
               <Column justifyContent="center" alignItems="center">
                 <MultiSlider
@@ -329,7 +331,9 @@ export const EditProfile = () => {
                   <Spacer key={index} position="top" size={20}>
                     <Row justifyContent="space-between">
                       <Text style={styles.fieldName}>Height</Text>
-                      <Text style={styles.fieldName}>{formatNumber(heightRange[0])}</Text>
+                      <Text style={styles.fieldName}>
+                        {formatNumber(heightRange[0])}
+                      </Text>
                     </Row>
                     <Column justifyContent="center" alignItems="center">
                       <MultiSlider
@@ -396,7 +400,7 @@ export const EditProfile = () => {
                 return (
                   <Spacer key={index} position="top" size={10}>
                     <Spacer key={index} position="top" size={10}>
-                      <Text style={styles.fieldName}>{item.title}</Text>
+                      <Text style={styles.fieldName}>Interests/Hobbies</Text>
                       <TouchableOpacity onPress={() => openModal('hobby')}>
                         <Row
                           style={[styles.selectRow, styles.fieldValueContainer]}
@@ -432,7 +436,7 @@ export const EditProfile = () => {
                     <MultiSelectModal
                       isVisible={openHobbyModal}
                       data={hobbies}
-                      modalHeading="Hobbies"
+                      modalHeading="Interests/Hobbies"
                       selectedItems={hobbiesList}
                       onClose={() => closeModal('hobby')}
                       onItemSelected={(selected) =>
@@ -459,14 +463,19 @@ export const EditProfile = () => {
                             <Spacer position="top" size={5} />
                             {selectedrelationshipLevelItems.length === 0 ? (
                               <Text style={styles.fieldValue}>Select</Text>
-                            ) : selectedrelationshipLevelItems.length > 2 ? (
-                              <Text style={styles.fieldValue}>
-                                {selectedrelationshipLevelItems[0]}
-                                {' , '}
-                                {selectedrelationshipLevelItems[1]}...
-                              </Text>
+                            ) : selectedrelationshipLevelItems.length > 1 ? (
+                              <Row>
+                                <Text style={styles.fieldValue}>
+                                  {selectedrelationshipLevelItems[0]}...
+                                </Text>
+                              </Row>
                             ) : (
-                              <Text style={styles.fieldValue}>
+                              <Text
+                                style={{
+                                  ...styles.fieldValue,
+                                  flexWrap: 'wrap',
+                                }}
+                              >
                                 {selectedrelationshipLevelItems.join(', ')}
                               </Text>
                             )}
