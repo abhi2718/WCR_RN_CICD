@@ -19,7 +19,7 @@ export const AppBarDropDown = (props: AppBarDropDownProps) => {
   } = useViewModal(props);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.position]}>
       <AppBarMenu memuList={memuList} />
       <AlertScreen
         showModal={showModal}
@@ -44,5 +44,10 @@ export const AppBarDropDown = (props: AppBarDropDownProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  position: {
+    position: 'absolute',
+    top: 20,
+    right: 0,
   },
 });
