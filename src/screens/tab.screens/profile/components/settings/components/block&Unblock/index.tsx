@@ -1,7 +1,12 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Pressable } from 'react-native';
+import { View, Text, SafeAreaView, Pressable, Image } from 'react-native';
 import { DropdownInput } from '../../../../../../../components/inputBox';
-import { FullLoader, Row, Spacer } from '../../../../../../../components/tools';
+import {
+  Column,
+  FullLoader,
+  Row,
+  Spacer,
+} from '../../../../../../../components/tools';
 import { Chip } from './components';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
@@ -26,11 +31,12 @@ export const BlockAndUnBlock = () => {
     _selectedUserDegreeType,
     loading,
     cometChatBlockedUsers,
-    handleUserUnBlock
+    handleUserUnBlock,
   } = useViewModal();
   if (loading) {
     return <FullLoader />;
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -96,13 +102,25 @@ export const BlockAndUnBlock = () => {
               </Row>
             </Row>
           </Spacer>
-          <Text>Blocked Users</Text>
+          <Text style={styles.blockedListText}>Blocked Users</Text>
           {cometChatBlockedUsers.map((user) => (
-            <View key={user.getUid()}>
-              <Row justifyContent="space-between">
-                <Text>{user.getName()}</Text>
-                <Pressable onPress={()=>handleUserUnBlock(user.getUid())}>
-                  <Text>Un Block</Text>
+            <View key={user.getUid()} style={styles.blockUserWrapper}>
+              <Row justifyContent="space-between" alignItems="center">
+                <Row alignItems="center" gap={10}>
+                  <Image
+                    style={styles.blockUserAvatar}
+                    source={{ uri: user.getAvatar() }}
+                  />
+                  <Column>
+                    <Text style={styles.blockUserText}>{user.getName()}</Text>
+                    <Text style={styles.blockedText}>Blocked</Text>
+                  </Column>
+                </Row>
+                <Pressable
+                  onPress={() => handleUserUnBlock(user.getUid())}
+                  style={styles.blockedButton}
+                >
+                  <Text style={styles.blockButtonText}>UnBlock</Text>
                 </Pressable>
               </Row>
             </View>

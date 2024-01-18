@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { CometChatConversationsWithMessages } from '../../../../cometchat/src';
 import { HeaderDeck } from '../../../../components/header';
-import { ScreenContainer, ScreenWrapper } from '../../../../components/tools';
+import { ScreenWrapper } from '../../../../components/tools';
 import { styles } from './styles';
 import { useViewModal } from './useViewMdal';
 
@@ -11,7 +11,7 @@ export const PrivateChatScreen = () => {
   return (
     <ScreenWrapper>
       <View style={styles.containerStyle}>
-        <View style={{ paddingHorizontal: 8 }}>
+        <View style={styles.paddingH8}>
           <HeaderDeck count={count} goToNotification={goToNotification} />
         </View>
         <CometChatConversationsWithMessages isUserWindow={true} />

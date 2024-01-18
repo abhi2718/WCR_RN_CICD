@@ -4,6 +4,7 @@ import {
   fontWeights,
 } from '../../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
+import { theme } from '../../../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -41,5 +42,48 @@ export const styles = StyleSheet.create({
   },
   rowWrap: {
     flexWrap: 'wrap',
+  },
+  blockUserWrapper: {
+    paddingVertical: 8,
+    borderBottomColor: theme.colors.border,
+    borderBottomWidth: 0.5,
+  },
+  blockUserAvatar: {
+    width: 42,
+    height: 42,
+    borderRadius: 50,
+  },
+  blockUserText: {
+    fontSize: 16,
+    fontWeight: theme.fontWeights.bold,
+    textTransform: 'capitalize',
+    color: theme.colors.ui.text,
+  },
+  blockedText: {
+    fontSize: 12,
+    fontWeight: theme.fontWeights.regular,
+    lineHeight: 16,
+    color: theme.colors.ui.textAccent,
+  },
+  blockedButton: {
+    backgroundColor: theme.colors.ui.primary,
+    color: theme.colors.ui.white,
+    borderRadius: 30,
+    paddingHorizontal: 18,
+    paddingVertical: 6,
+  },
+  blockButtonText: {
+    fontSize: 12,
+    fontWeight: theme.fontWeights.semiBold,
+    color: theme.colors.ui.white,
+    textTransform: 'uppercase',
+  },
+  blockedListText: {
+    fontSize: 16,
+    lineHeight: 27,
+    fontWeight: theme.fontWeights.semiBold,
+    color: theme.colors.ui.text,
+    marginTop: 16,
+    marginBottom: 6,
   },
 });
