@@ -326,27 +326,6 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-              if (index === 4) {
-                return (
-                  <Spacer position="top" size={20}>
-                    <Row justifyContent="space-between">
-                      <Text style={styles.fieldName}>Height</Text>
-                      <Text style={styles.fieldName}>
-                        {formatNumber(heightRange[0])}
-                      </Text>
-                    </Row>
-                    <Column justifyContent="center" alignItems="center">
-                      <MultiSlider
-                        values={heightRange}
-                        min={4}
-                        max={7}
-                        step={0.1}
-                        onValuesChange={handleHeightSliderChange}
-                      />
-                    </Column>
-                  </Spacer>
-                );
-              }
               if (item.title === 'Ethnicity') {
                 return (
                   <Spacer position="top" size={10}>

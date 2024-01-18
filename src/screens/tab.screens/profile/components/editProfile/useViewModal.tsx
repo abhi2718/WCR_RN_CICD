@@ -202,8 +202,8 @@ export const useViewModal = () => {
     },
     {},
     {},
-    {
-    },
+    // {
+    // },
     // {
     //   title: 'Gender',
     //   option: genderList,
@@ -334,9 +334,7 @@ export const useViewModal = () => {
         return undefined;
       }
     } catch (error) {
-
     } finally {
-
     }
   };
   const uploadImage = async () => {
@@ -390,9 +388,7 @@ export const useViewModal = () => {
         profileImage,
         photos,
       };
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   const validateZipcode = async (zipcode: string) => {
     const USER = {

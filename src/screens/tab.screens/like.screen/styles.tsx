@@ -19,9 +19,6 @@ export const styles = StyleSheet.create({
   headerViewStyle: {
     justifyContent: 'center',
   },
-  padHorizontal: {
-    paddingHorizontal: sizes[3],
-  },
 
   content: {
     flex: 1,
@@ -59,7 +56,6 @@ export const styles = StyleSheet.create({
     color: theme.colors.ui.primary,
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.medium,
-    lineHeight: 26,
   },
   headerPadding: {
     paddingBottom: theme.units.sizes[10],
@@ -68,6 +64,7 @@ export const styles = StyleSheet.create({
   backArrowPadding: {
     paddingBottom: theme.units.sizes[16],
     paddingTop: theme.units.sizes[2],
+    paddingHorizontal: 8,
   },
   paddingBottom20: {
     paddingBottom: theme.units.sizes[20],
@@ -94,28 +91,29 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.bg.secondary,
     borderRadius: 20,
   },
-  noMatches: {
-    minHeight: 350,
+  noMatch: {
+    minHeight: 300,
   },
   noDataImg: {
     width: 80,
     height: 80,
+  },
+  noLikes: {
+    width: 60,
+    height: 60,
   },
   noDataListText: {
     textAlign: 'center',
     fontSize: theme.fontSizes.button,
     fontWeight: theme.fontWeights.medium,
     color: theme.colors.ui.text,
-    maxWidth: dimensions.width,
   },
 
   paddingMatches: {
     width: dimensions.width - 20,
-    maxWidth: 250,
   },
   paddingReceiveLiked: {
     width: dimensions.width - 60,
-    maxWidth: 300,
   },
   paddingLiked: {
     width: dimensions.width - 60,
@@ -131,5 +129,11 @@ export const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
+  },
+});
+
+export const seeAllstyles = StyleSheet.create({
+  container: {
+    paddingBottom: 55,
   },
 });

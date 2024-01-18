@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { colors } from '../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
@@ -34,6 +38,7 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
+    fontFamily: fonts.body,
   },
   logoutText: {
     fontSize: sizes[3],
