@@ -1304,13 +1304,7 @@ export const CometChatMessageComposer = React.forwardRef(
               >
                 {item.getName()}
               </Text>
-              <Text
-                style={[Style.lightText, Style.textCapitalize]}
-                onPress={() => {
-                  setInputMessage((message) => `${message}${item.getName()}`);
-                  setShowMentationModal(false);
-                }}
-              >
+              <Text style={[Style.lightText, Style.textCapitalize]}>
                 {item.getName()}
               </Text>
             </Row>
