@@ -55,6 +55,7 @@ import {
   MediaRecorderStyle,
 } from '../shared/views/CometChatMediaRecorder';
 import { AIOptionsStyle } from '../AI/AIOptionsStyle';
+import { Row } from '../../../components/tools';
 const { FileManager } = NativeModules;
 
 const uiEventListenerShow = 'uiEvent_show_' + new Date().getTime();
@@ -1268,7 +1269,11 @@ export const CometChatMessageComposer = React.forwardRef(
           .build();
         groupMembersRequest.fetchNext().then(
           (groupMembers) => {
-            setGroupMembers(groupMembers.filter(({uid})=>uid!==loggedInUser.current.uid));
+            setGroupMembers(
+              groupMembers.filter(
+                ({ uid }) => uid !== loggedInUser.current.uid,
+              ),
+            );
           },
           (error) => {},
         );
@@ -1281,17 +1286,34 @@ export const CometChatMessageComposer = React.forwardRef(
     const renderMentionList = () => {
       return (
         <FlatList
+          style={Style.mentionListBox}
           data={groupMembers}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <Text
-              onPress={() => {
-                setInputMessage((message) => `${message}${item.getName()}`);
-                setShowMentationModal(false);
-              }}
-            >
-              {item.getName()}
-            </Text>
+            <Row alignItems="center" gap={10} style={Style.spaceAvatarY}>
+              <Image
+                style={Style.avatarSize}
+                source={{ uri: item.getAvatar() }}
+              />
+              <Text
+                style={[Style.darkText, Style.textCapitalize]}
+                onPress={() => {
+                  setInputMessage((message) => `${message}${item.getName()}`);
+                  setShowMentationModal(false);
+                }}
+              >
+                {item.getName()}
+              </Text>
+              <Text
+                style={[Style.lightText, Style.textCapitalize]}
+                onPress={() => {
+                  setInputMessage((message) => `${message}${item.getName()}`);
+                  setShowMentationModal(false);
+                }}
+              >
+                {item.getName()}
+              </Text>
+            </Row>
           )}
         />
       );
@@ -1314,9 +1336,7 @@ export const CometChatMessageComposer = React.forwardRef(
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           keyboardVerticalOffset={Platform.select({ ios: 60 })}
         >
-          <View style={{ backgroundColor: '#fff' }}>
-            {showMentionModal && renderMentionList()}
-          </View>
+          <View>{showMentionModal && renderMentionList()}</View>
           <View
             style={[
               Style.container,
