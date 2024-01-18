@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     height: 45,
     borderRadius: 35,
     backgroundColor: colors.ui.bgMud,
-    width: dimensions.width - 32,
+    width: dimensions.width - 16,
     marginBottom: 16,
   },
   animatedContainerStyles: {
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     top: 2,
     bottom: 2,
     borderRadius: 35,
-    width: (dimensions.width - 32) / 2,
+    width: dimensions.width / 2,
     backgroundColor: colors.ui.primary,
   },
   touchContainerStyle: {

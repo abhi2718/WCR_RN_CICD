@@ -9,16 +9,15 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: dimensions.width,
-    paddingLeft:8,
+    paddingHorizontal: 8,
   },
-  flatListWrapperStyle:{
-    width:dimensions.width,
-    flexDirection: "row",
-    justifyContent:"space-evenly"
+  flatListWrapperStyle: {
+    width: dimensions.width,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
   headerViewStyle: {
     justifyContent: 'center',
-    paddingHorizontal: 8,
   },
   padHorizontal: {
     paddingHorizontal: sizes[3],
@@ -53,6 +52,8 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.semiBold,
     lineHeight: 26,
+    marginBottom: 10,
+    marginTop: 20,
   },
   seeAll: {
     color: theme.colors.ui.primary,
@@ -84,18 +85,27 @@ export const styles = StyleSheet.create({
     height: theme.units.sizes[21],
   },
   noDataList: {
-    minHeight: 170,
+    minHeight: 200,
     padding: 16,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: theme.colors.bg.secondary,
+    borderRadius: 20,
+  },
+  noMatches: {
+    minHeight: 350,
+  },
+  noDataImg: {
+    width: 80,
+    height: 80,
   },
   noDataListText: {
     textAlign: 'center',
     fontSize: theme.fontSizes.button,
     fontWeight: theme.fontWeights.medium,
-    color: theme.colors.ui.secondary,
+    color: theme.colors.ui.text,
     maxWidth: dimensions.width,
   },
 
