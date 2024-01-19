@@ -2,10 +2,10 @@ import React from 'react';
 //@ts-ignore
 import { StyleSheet } from 'react-native';
 
-
 export const Style = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
     width: '100%',
   },
   rightContainerStyle: {
@@ -13,7 +13,6 @@ export const Style = StyleSheet.create({
     flex: 1,
   },
   avatarViewStyle: {
-    margin: 4,
     justifyContent: 'center',
   },
   defaultStatusStyle: {
@@ -62,4 +61,7 @@ export const Style = StyleSheet.create({
     width: 18,
   },
   optionTitleStyle: { fontWeight: '500', fontSize: 17 },
+  pr12: {
+    paddingRight: 12,
+  },
 });
