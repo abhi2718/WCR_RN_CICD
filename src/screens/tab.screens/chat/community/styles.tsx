@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1,
   },
-  paddingH16: {
-    paddingHorizontal: 16,
+  paddingH8: {
+    paddingHorizontal: 8,
   },
 });

@@ -4,6 +4,7 @@ export const colors = {
     secondary: '#656565',
     tertiary: '#DEDDDF',
     text: '#49454F',
+    textAccent: 'rgba(79, 94, 123, 0.80)',
     textHead: '#253245',
     disabled: '#DEDEDE',
     error: '#D0421B',
@@ -21,4 +22,5 @@ export const colors = {
     primary: '#FFFFFF',
     secondary: '#F9EBEB',
   },
+  border: 'rgba(35, 35, 35, 0.20)',
 };

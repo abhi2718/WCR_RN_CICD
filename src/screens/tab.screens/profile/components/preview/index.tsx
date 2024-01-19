@@ -280,25 +280,23 @@ export const PreviewScreen = () => {
                         if (user?.interests?.length - 1 === index) {
                           return (
                             <Row
+                              key={index}
                               alignItems="center"
                               gap={10}
                               style={{ flexWrap: 'wrap' }}
                             >
-                              <Text key={index} style={styles.hobbiesChip}>
-                                {hobby}
-                              </Text>
+                              <Text style={styles.hobbiesChip}>{hobby}</Text>
                             </Row>
                           );
                         }
                         return (
                           <Row
+                            key={index}
                             alignItems="center"
                             gap={10}
                             style={{ flexWrap: 'wrap' }}
                           >
-                            <Text key={index} style={styles.hobbiesChip}>
-                              {hobby}
-                            </Text>
+                            <Text style={styles.hobbiesChip}>{hobby}</Text>
                           </Row>
                         );
                       })}

@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 16,
+    paddingHorizontal: 8,
   },
   userName: {
     fontSize: 24,
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     height: sizes[2],
   },
   nameContainer: {
-    paddingVertical: sizes[4],
+    paddingVertical: sizes[1],
   },
   text: {
     fontSize: sizes[3],
