@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.ui.text,
     fontWeight: 'bold',
+    //fontFamily:"Urbanist-SemiBold"
   },
   profileImg: {
     width: sizes[14] * 2,

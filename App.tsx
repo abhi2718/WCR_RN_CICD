@@ -16,6 +16,7 @@ LogBox.ignoreAllLogs();
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
+
 export default function App() {
   return (
     <StripeProvider

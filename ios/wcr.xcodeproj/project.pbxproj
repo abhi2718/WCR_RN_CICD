@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* wcrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* wcrTests.m */; };
-		00E5A91DD5247B8AE0B4A933 /* libPods-wcr-wcrTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F217726A453D4B19D5A6281 /* libPods-wcr-wcrTests.a */; };
 		12DFA7C92AC1974E00A7EEF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12DFA7C82AC1974E00A7EEF3 /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		13E4B82D70F14B63B13F0D3C /* BungeeSpice-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2573E66A7DD943B39D6AFFA5 /* BungeeSpice-Regular.ttf */; };
+		3431CE1DA7667C0EE2958C04 /* libPods-wcr-wcrTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F217726A453D4B19D5A6281 /* libPods-wcr-wcrTests.a */; };
+		364FE9E3FB47A0F4EE1E7441 /* libPods-wcr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5364537A87BEC8C3E2288F /* libPods-wcr.a */; };
 		3FEDEFA14C10496E9F66CDF0 /* Urbanist-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A528203E4C6944FD9816CFE2 /* Urbanist-Regular.ttf */; };
 		607AD9CE84E1614DA2757359 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		791499FDFFE0663C4018C50B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
@@ -21,7 +22,6 @@
 		AA29EB72CA484FDA9A952F65 /* Urbanist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A985E30408374E499758AECF /* Urbanist-Medium.ttf */; };
 		D0DC0A84C4364147B5AB82E9 /* Urbanist-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8D75D75A5E2433A95CEF397 /* Urbanist-SemiBold.ttf */; };
 		D2695DCCAEED4D8E839360D7 /* Urbanist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 739ED051E2C74EE199A58E2A /* Urbanist-Bold.ttf */; };
-		ED9279138F8C1436251839C5 /* libPods-wcr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5364537A87BEC8C3E2288F /* libPods-wcr.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				791499FDFFE0663C4018C50B /* BuildFile in Frameworks */,
-				7BA5948A422D072BDE72F089 /* libPods-wcr-wcrTests.a in Frameworks */,
+				3431CE1DA7667C0EE2958C04 /* libPods-wcr-wcrTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607AD9CE84E1614DA2757359 /* BuildFile in Frameworks */,
-				D6295A693EE007E4E701505B /* libPods-wcr.a in Frameworks */,
+				364FE9E3FB47A0F4EE1E7441 /* libPods-wcr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
