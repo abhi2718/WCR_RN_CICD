@@ -77,8 +77,8 @@ export const ProfileView = (props: ProfileViewProps) => {
                           <Column>
                             <Text style={styles.userNameText}>
                               {item?.profile?.displayName ??
-                                item?.profile?.name?.first}{' '}
-                              {calculateAge(item?.profile?.dob)}
+                                item?.profile?.name?.first}
+                              , {calculateAge(item?.profile?.dob)}
                             </Text>
                             <Text
                               style={[
@@ -95,15 +95,18 @@ export const ProfileView = (props: ProfileViewProps) => {
                       )} */}
                           </Column>
                           <Spacer position="right" size={20}>
-                            {isMatch && (
-                              <Pressable onPress={navigateToChat}>
-                                <Image
-                                  style={{ width: 32 }}
-                                  source={require('../../../../assets/images/icons/matchChat.png')}
-                                  resizeMode="contain"
-                                />
-                              </Pressable>
-                            )}
+                            {/* {isMatch && ( */}
+                            <Pressable
+                              style={{ zIndex: 10 }}
+                              onPress={navigateToChat}
+                            >
+                              <Image
+                                style={{ width: 32 }}
+                                source={require('../../../../assets/images/icons/matchChat.png')}
+                                resizeMode="contain"
+                              />
+                            </Pressable>
+                            {/* )} */}
                           </Spacer>
                         </Row>
                       </View>
@@ -314,7 +317,7 @@ export const styles = StyleSheet.create({
     borderRadius: theme.units.sizes[30],
   },
   matchAvatar: {
-    width: (dimensions.width - 38) / 2,
+    width: dimensions.width / 1.7,
     height: theme.units.sizes[300],
     borderRadius: theme.units.sizes[30],
   },

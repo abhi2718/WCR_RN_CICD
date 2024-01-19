@@ -70,6 +70,7 @@ export const styles = StyleSheet.create({
   },
   vitalSigns: {
     paddingHorizontal: 16,
+    marginTop: 5,
   },
   userInfoRow: {
     marginTop: sizes[2],
@@ -121,6 +122,7 @@ export const styles = StyleSheet.create({
   hobbiesChip: {
     borderRadius: sizes[4],
     overflow: 'hidden',
+    height: 35,
     backgroundColor: colors.ui.deckChipBgColor,
     paddingHorizontal: sizes[2],
     marginRight: 8,

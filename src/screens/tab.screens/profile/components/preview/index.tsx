@@ -91,7 +91,7 @@ export const PreviewScreen = () => {
                   )}
                   <Row
                     style={styles.vitalSignsChips}
-                    gap={10}
+                    gap={8}
                     alignItems="center"
                   >
                     {user.profile.gender && (

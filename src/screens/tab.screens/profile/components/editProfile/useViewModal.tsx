@@ -191,7 +191,7 @@ export const useViewModal = () => {
   };
   const optionsList = [
     {
-      title: 'Degree category',
+      title: 'Degree Category',
       option: _userDegree,
       initValue: 'degreeCategory',
     },
@@ -220,7 +220,7 @@ export const useViewModal = () => {
       initValue: 'interests',
     },
     {
-      title: 'Marital status',
+      title: 'Marital Status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
@@ -235,7 +235,7 @@ export const useViewModal = () => {
       initValue: 'sexualPreference',
     },
     {
-      title: 'Relationship level',
+      title: 'Relationship Level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },

@@ -7,21 +7,12 @@ import {
   ScrollView,
   Pressable,
   Image,
-  StyleSheet,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import { Column, FullLoader, Row, Spacer, dimensions } from '../tools';
+import { FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
-import { theme } from '../../infrastructure/theme';
-import { colors } from '../../infrastructure/theme/colors';
-import {
-  fontSizes,
-  fontWeights,
-  fonts,
-} from '../../infrastructure/theme/fonts';
-import { sizes } from '../../infrastructure/theme/sizes';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
 import { calculateAge } from '../../utils/common.functions';
 import { styles } from './style';

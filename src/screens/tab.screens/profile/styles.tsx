@@ -6,6 +6,7 @@ import {
   fonts,
 } from '../../../infrastructure/theme/fonts';
 import { colors } from '../../../infrastructure/theme/colors';
+import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -17,6 +18,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.ui.text,
     fontWeight: 'bold',
+    fontFamily: 'Urbanist-Regular',
   },
   profileImg: {
     width: sizes[14] * 2,

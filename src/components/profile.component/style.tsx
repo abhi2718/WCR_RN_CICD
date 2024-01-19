@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: 'column',
     paddingHorizontal: 16,
-    gap: 14,
+    gap: 5,
   },
   gallery: {
     fontSize: 22,
