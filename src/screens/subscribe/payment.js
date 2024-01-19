@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback,useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -28,8 +28,8 @@ const PaymentScreen = () => {
     useStripe();
   const handleDeepLink = useCallback(
     async (url) => {
-          if (url) {
-          console.log(url)
+      if (url) {
+        console.log(url);
         const stripeHandled = await handleURLCallback(url);
         if (stripeHandled) {
           // This was a Stripe URL - you can return or add extra handling here as you see fit
@@ -41,10 +41,10 @@ const PaymentScreen = () => {
     [handleURLCallback],
   );
   useEffect(() => {
-      const getUrlAsync = async () => {
-        console.log('calling')
-          const initialUrl = await Linking.getInitialURL();
-          console.log('calling',initialUrl)
+    const getUrlAsync = async () => {
+      console.log('calling');
+      const initialUrl = await Linking.getInitialURL();
+      console.log('calling', initialUrl);
       handleDeepLink(initialUrl);
     };
 
@@ -74,14 +74,13 @@ const PaymentScreen = () => {
     try {
       //const res = await creatPaymentIntent(apiData)
       const res = await stripeRepository.getIntent(apiData);
-      console.log('payment intent create succesfully...!!!', res);
       const { error: paymentSheetError } = await initPaymentSheet({
         merchantDisplayName: 'hu',
         paymentIntentClientSecret: res.clientSecret,
         defaultBillingDetails: {
           name: 'huu',
-          },
-       // returnURL:"accept-a-payment://wcr.com"
+        },
+        // returnURL:"accept-a-payment://wcr.com"
       });
       console.log('oooo', paymentSheetError);
       if (paymentSheetError) {

@@ -9,7 +9,6 @@ import { HeaderBar } from '../../../../../components/header';
 
 export const PreviewScreen = () => {
   const { user, goBack } = useViewModal();
-  console.log(user);
   return (
     <ScreenWrapper>
       <View>

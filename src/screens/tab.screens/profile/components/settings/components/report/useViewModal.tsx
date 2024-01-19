@@ -33,7 +33,6 @@ export const useViewModal = (props:any) => {
   }
   const handleSubmit = async () => {
     const { userId, name } = props?.route?.params;
-    console.log(userId)
     if (!messageRef?.current?.length || !subjectRef?.current?.length) {
       return ShowFlashMessage(
         'Subject and message both fields required!',
@@ -61,7 +60,6 @@ export const useViewModal = (props:any) => {
       );
       navigation.goBack();
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };

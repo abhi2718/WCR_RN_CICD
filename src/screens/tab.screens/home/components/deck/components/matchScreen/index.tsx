@@ -12,9 +12,6 @@ export const MatchScreen = (props) => {
   const { user } = useSelector(({ userState }) => userState);
   return (
     <View style={styles.container}>
-      {/* <Pressable onPress={handleHideOfIsMatchScreen}>
-        <Text>Back</Text>
-      </Pressable> */}
       <HeaderBar goBack={handleHideOfIsMatchScreen} />
       <View style={styles.hrLine} />
       <View style={styles.content}>
@@ -29,7 +26,6 @@ export const MatchScreen = (props) => {
             style={styles.matchBgImgTwo}
             source={require('../../../../../../../assets/images/icons/matchBgImg.png')}
           />
-
           <Image
             source={{
               uri: user?.profilePicture?.url,
@@ -39,8 +35,6 @@ export const MatchScreen = (props) => {
           <Image
             source={{
               uri: isMatch?.matchUser?.profilePicture?.url
-                ? isMatch?.matchUser?.profilePicture?.url
-                : 'https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg?cs=srgb&dl=pexels-svetozar-milashevich-1490908.jpg&fm=jpg',
             }}
             style={[styles.image, styles.imageRight]}
           />

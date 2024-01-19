@@ -4,8 +4,12 @@ import { ApiService } from '../../data/network/apiService';
 export class NotificationRepository {
   apiService = new ApiService();
   async getNotification(query?: { page?: number; pageSize?: number }) {
-    const url = `${AppUrl.notificationEndPoint}?page=${query?.page}&&pageSize=${query?.pageSize}`;
-    return this.apiService.getGetApiResponse(url);
+    const url = `${AppUrl.notificationEndPoint}?page=${query?.page}&pageSize=${query?.pageSize}`;
+    return this.apiService.getGetApiResponse(AppUrl.notificationEndPoint);
+  }
+  async createNotification(payload:any) {
+    const url = `${AppUrl.notificationEndPoint}`;
+    return this.apiService.getPostApiResponse(url,payload)
   }
   async getNotificationCount() {
     const url = `${AppUrl.notificationCountEndPoint}`;

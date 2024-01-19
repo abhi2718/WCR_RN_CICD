@@ -70,20 +70,19 @@ export function calculateAge(dob: string) {
   );
   return age;
 }
-export function formatNumber(inputNumber:number) {
+export function formatNumber(inputNumber: number) {
   const numberString = inputNumber.toString();
   const [wholePart, decimalPart] = numberString.split('.');
   if (!decimalPart) {
     return wholePart;
   }
   return `${wholePart}'${decimalPart}`;
-};
-
+}
 
 export const useNavigateToScreen = () => {
   const navigation = useNavigation();
 
-  const navigateToScreen = (user:any) => {
+  const navigateToScreen = (user: any) => {
     if (user.verification.status === 'Verified') {
       navigation.navigate(ROUTES.Tab);
     } else {
@@ -110,12 +109,12 @@ export const useNavigateToScreen = () => {
           case 5:
             user.steps = 5;
             navigation.navigate(ROUTES.ProfilePic);
-  
+
             break;
           case 6:
             user.steps = 6;
             navigation.navigate(ROUTES.Height);
-  
+
             break;
           case 7:
             user.steps = 7;
@@ -144,7 +143,7 @@ export const useNavigateToScreen = () => {
           case 13:
             user.steps = 13;
             navigation.navigate(ROUTES.Hobbies);
-  
+
           case 14:
             user.steps = 14;
             navigation.navigate(ROUTES.VerificationStepOne);
@@ -154,6 +153,31 @@ export const useNavigateToScreen = () => {
         }
       }
     }
+  };
+  return { navigateToScreen };
+};
+
+export const createNotifications = (
+  type: string,
+  userId: string,
+  name: string,
+) => {
+  switch (type) {
+    case 'like':
+      return {
+        document: {
+          userId: userId,
+          message: `You have received a like from ${name}!`,
+          type: 'Like',
+        },
+      };
+    case 'match':
+      return {
+        document: {
+          userId: userId,
+          message: `You got a match with ${name}, start chatting now!`,
+          type: 'Match',
+        },
+      };
   }
- return{navigateToScreen}
 };

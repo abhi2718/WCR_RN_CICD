@@ -39,7 +39,7 @@ export default function Deck({ route }) {
     isMatch,
     handleHideOfIsMatchScreen,
     startChat,
-    handleUnDoFeature
+    handleUnDoFeature,
   } = useViewModal(route);
   if (isLoading) {
     return <FullLoader />;
@@ -67,9 +67,9 @@ export default function Deck({ route }) {
           toggleSearchModal={toggleSearchModal}
           goToNotification={goToNotification}
         />
-        {/* <Pressable onPress={handleUnDoFeature}>
+        <Pressable onPress={handleUnDoFeature}>
           <Text>Undo</Text>
-        </Pressable> */}
+        </Pressable>
       </View>
       <Spacer position="bottom" size={8} />
       {!isNewUser ? (
@@ -106,8 +106,8 @@ export default function Deck({ route }) {
                 horizontalThreshold={isAndroid ? 10 : 10}
                 verticalSwipe={false}
                 ref={cardRef}
-                    onSwipedAll={clearProfile}
-                    swipeBackCard={true} 
+                onSwipedAll={clearProfile}
+                swipeBackCard={true}
               >
                 {profiles.map((item, index) => (
                   <CardCompoent

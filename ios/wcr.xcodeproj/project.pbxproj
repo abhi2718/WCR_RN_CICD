@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				791499FDFFE0663C4018C50B /* (null) in Frameworks */,
+				791499FDFFE0663C4018C50B /* BuildFile in Frameworks */,
 				7BA5948A422D072BDE72F089 /* libPods-wcr-wcrTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607AD9CE84E1614DA2757359 /* (null) in Frameworks */,
+				607AD9CE84E1614DA2757359 /* BuildFile in Frameworks */,
 				D6295A693EE007E4E701505B /* libPods-wcr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
