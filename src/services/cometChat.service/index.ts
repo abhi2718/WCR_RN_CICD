@@ -25,7 +25,6 @@ export const useCometChatInit = () => {
       } catch (error) {}
     };
     if (user?._id) {
-      console.log(user?._id)
       inItCometChat();
     }
   }, []);
