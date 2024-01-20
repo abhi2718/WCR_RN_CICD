@@ -43,7 +43,7 @@ export const SearchModal = (props: SearchModalProps) => {
                 <TextInput
                   style={searchStyle.searchBox}
                   onChangeText={handleSearch}
-                  placeholder="Search"
+                    placeholder="Search"
                 />
                 <Pressable onPress={handleClose} style={searchStyle.crossBox}>
                   <Image

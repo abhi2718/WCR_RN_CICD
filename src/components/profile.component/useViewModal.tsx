@@ -5,7 +5,6 @@ import { LikeContext } from '../../contexts/likes.context';
 import { HomeDeckRepository } from '../../repository/homeDeck.repo';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
 import { profileProps, UserProfile } from '../../types/components/profile.type';
-import { AppUrl } from '../../utils/appUrl';
 export const useViewModal = (props: profileProps) => {
   const userProfileRepository = useMemo(() => new UserProfileRepository(), []);
   const homeDeckRepository = new HomeDeckRepository();

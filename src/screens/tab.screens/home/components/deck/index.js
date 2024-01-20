@@ -31,9 +31,7 @@ export default function Deck({ route }) {
     handleSetProfiles,
     goToNotification,
     count,
-    isNewUser,
     user,
-    infoScreenRef,
     clearProfile,
     updateIsNewUser,
     isMatch,
@@ -67,49 +65,46 @@ export default function Deck({ route }) {
           toggleSearchModal={toggleSearchModal}
           goToNotification={goToNotification}
         />
-        <Pressable onPress={handleUnDoFeature}>
+        {/* <Pressable onPress={handleUnDoFeature}>
           <Text>Undo</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
       <Spacer position="bottom" size={8} />
-      {!isNewUser ? (
-        <>
-          <CardStack
-            horizontalThreshold={isAndroid ? 10 : 10}
-            verticalSwipe={false}
-            ref={infoScreenRef}
-            onSwipedAll={updateIsNewUser}
-          >
-            <View
-              style={styles.infoScreenContainer}
-              height={
-                isAndroid ? androidActualHeight - 64 : iOSActualHeight - 70
-              }
+      <>
+        {!user?.isVisible ? (
+          <PausedProfile />
+        ) : user?.dailyClickActions < 6 && profiles?.length > 0 ? (
+          <>
+            <CardStack
+              onSwipedLeft={handleDisLike}
+              onSwipedRight={handleLike}
+              horizontalThreshold={isAndroid ? 10 : 10}
+              verticalSwipe={false}
+              ref={cardRef}
+              onSwipedAll={clearProfile}
+              swipeBackCard={true}
             >
-              <Image
-                style={styles.infoScreen}
-                source={require('../../../../../assets/images/infoScreen.png')}
-                resizeMode="stretch"
-              />
-            </View>
-          </CardStack>
-        </>
-      ) : (
-        <>
-          {!user?.isVisible ? (
-            <PausedProfile />
-          ) : user?.dailyClickActions < 6 && profiles?.length > 0 ? (
-            <>
-              <CardStack
-                onSwipedLeft={handleDisLike}
-                onSwipedRight={handleLike}
-                horizontalThreshold={isAndroid ? 10 : 10}
-                verticalSwipe={false}
-                ref={cardRef}
-                onSwipedAll={clearProfile}
-                swipeBackCard={true}
-              >
-                {profiles.map((item, index) => (
+              {profiles.map((item, index) => {
+                if (!user?.homeInfoModal && index === 0) {
+                  return (
+                    <View
+                      key={index}
+                      style={styles.infoScreenContainer}
+                      height={
+                        isAndroid
+                          ? androidActualHeight - 64
+                          : iOSActualHeight - 70
+                      }
+                    >
+                      <Image
+                        style={styles.infoScreen}
+                        source={require('../../../../../assets/images/infoScreen.png')}
+                        resizeMode="stretch"
+                      />
+                    </View>
+                  );
+                }
+                return (
                   <CardCompoent
                     height={
                       isAndroid
@@ -120,16 +115,16 @@ export default function Deck({ route }) {
                     item={item}
                     cardRef={cardRef}
                   />
-                ))}
-              </CardStack>
-            </>
-          ) : (
-            <>
-              <RunOutOffProfile />
-            </>
-          )}
-        </>
-      )}
+                );
+              })}
+            </CardStack>
+          </>
+        ) : (
+          <>
+            <RunOutOffProfile />
+          </>
+        )}
+      </>
       <SearchModal
         showSearchModal={showSearchModal}
         toggleSearchModal={toggleSearchModal}

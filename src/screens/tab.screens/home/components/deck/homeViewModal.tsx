@@ -27,11 +27,9 @@ export const useViewModal = (route: RouteType) => {
   const androidActualHeight = useRef(dimensions.height - tabBarHeight).current;
   const { top, bottom } = useSafeAreaInsets();
   const cardRef = useRef();
-  const infoScreenRef = useRef();
   const { user } = useSelector(({ userState }) => userState);
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
-  const [isNewUser, setIsNewUser] = useState(user.homeInfoModal);
   const { fetchAll } = useContext(LikeContext);
   const { count } = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
@@ -65,7 +63,6 @@ export const useViewModal = (route: RouteType) => {
   const handleSetProfiles = (item: any) => setProfiles([item, ...profiles]);
   const clearProfile = () => setProfiles([]);
   const updateIsNewUser = async () => {
-    setIsNewUser(true);
     updateUserDetails();
   };
   const goToNotification = () => navigate(ROUTES.Notification);
@@ -82,6 +79,10 @@ export const useViewModal = (route: RouteType) => {
   };
   const handleLike = async (index: number) => {
     try {
+      if (!user?.homeInfoModal) {
+        updateIsNewUser();
+        return;
+      }
       const payLoad = createPayLoafForUserAction(index, 'Like');
       const { data } = await homeDeckRepository.userReactin(payLoad);
       fetchAll(user._id);
@@ -115,6 +116,10 @@ export const useViewModal = (route: RouteType) => {
   };
   const handleDisLike = async (index: number) => {
     try {
+      if (!user?.homeInfoModal) {
+        updateIsNewUser();
+        return;
+      }
       const disLikeProfile = profiles[index];
       setLastDisLikeProfile(disLikeProfile);
       const payLoad = createPayLoafForUserAction(index, 'Dislike');
@@ -173,7 +178,6 @@ export const useViewModal = (route: RouteType) => {
     handleDisLike,
     cardRef,
     updateIsNewUser,
-    infoScreenRef,
     toggleSearchModal,
     showSearchModal,
     handleCloseModal,
@@ -181,8 +185,6 @@ export const useViewModal = (route: RouteType) => {
     goToNotification,
     count,
     user,
-    isNewUser,
-    setIsNewUser,
     clearProfile,
     isMatch,
     handleHideOfIsMatchScreen,

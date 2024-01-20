@@ -53,10 +53,12 @@ export const ProfileModal = (props: profileProps) => {
             <Spacer position="top" size={10} />
             <Row style={styles.backHeaderPadding}>
               <Pressable onPress={() => toggleModal()}>
-                <Image
+                  <View style={{width:60}}>
+                  <Image
                   style={styles.backArrowSize}
                   source={require('../../assets/images/icons/back-arrow.png')}
                 />
+               </View>
               </Pressable>
             </Row>
             <View style={styles.sectionWhite}>
@@ -111,10 +113,6 @@ export const ProfileModal = (props: profileProps) => {
                           <Text style={styles.aboutText}>{user.state}</Text>
                         </Row>
                       </View>
-                      {/* <View style={styles.userInfo}>
-                        <Text style={styles.vitalSigns}>Vital Signs</Text>
-                      </View> */}
-
                       <View style={styles.vitalSigns}>
                         {(user?.gender?.length > 0 ||
                           user?.drinking?.length > 0 ||
@@ -163,7 +161,6 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.showSexualPreference &&
                             user.sexualPreference && (
                               <Row
@@ -212,20 +209,16 @@ export const ProfileModal = (props: profileProps) => {
                           )}
 
                           {user.ethnicity.length >= 0 &&
-                            user.ethnicity.map((ethnicity: String) => (
+                            user.ethnicity.map((ethnicity: String,key:number) => (
                               <Row
                                 gap={10}
+                                key={key}
                                 alignItems="center"
                                 style={styles.chip}
                               >
-                                {/* <Image
-                        style={styles.chipIcon}
-                        source={require('../../assets/images/icons/USAFlag.png')}
-                      /> */}
                                 <Text style={styles.chipText}>{ethnicity}</Text>
                               </Row>
                             ))}
-
                           {user.maritalStatus && (
                             <Row
                               gap={10}
@@ -330,8 +323,6 @@ export const ProfileModal = (props: profileProps) => {
                           )}
                         </Row>
                       </View>
-
-                      {/* End Vital */}
                     </View>
                     <View style={styles.marginY}>
                       {user?.photos.map(({ url, _id }, index) => {
