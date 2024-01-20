@@ -1,17 +1,26 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Share from 'react-native-share';
 import { useSelector } from 'react-redux';
 import { LikeContext } from '../../contexts/likes.context';
+import { ROUTES } from '../../navigation';
 import { HomeDeckRepository } from '../../repository/homeDeck.repo';
+import { NotificationRepository } from '../../repository/notification.repo';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
 import { profileProps, UserProfile } from '../../types/components/profile.type';
+import { createNotifications } from '../../utils/common.functions';
 export const useViewModal = (props: profileProps) => {
   const userProfileRepository = useMemo(() => new UserProfileRepository(), []);
   const homeDeckRepository = new HomeDeckRepository();
+  const notificationRepository = new NotificationRepository();
   const { fetchAll } = useContext(LikeContext);
   const [loading, setLoading] = useState(false);
   const { user: me } = useSelector(({ userState }) => userState);
   const [user, setUser] = useState<null | UserProfile>(null);
+  const [isMatch, setIsMatch] = useState({
+    status: false,
+    matchUser: null,
+  });
   const {
     showModal,
     toggleModal,
@@ -60,10 +69,23 @@ export const useViewModal = (props: profileProps) => {
     try {
       setLoading(true);
       const payLoad = createPayLoafForUserAction('Like');
-      await homeDeckRepository.userReactin(payLoad);
+      const { data } = await homeDeckRepository.userReactin(payLoad);
       setLoading(false);
-      toggleModal();
-      fetchAll(me._id);
+      if (data?.isMatch) {
+        setIsMatch({
+          status: true,
+          matchUser: user,
+        });
+        await notificationRepository.createNotification(
+          createNotifications('match', user._id, me.fullName),
+        );
+      } else {
+        toggleModal();
+        fetchAll(me._id);
+        await notificationRepository.createNotification(
+          createNotifications('like', user._id, me.fullName),
+        );
+      }
     } catch (error) {
       setLoading(false);
     }
@@ -108,6 +130,24 @@ export const useViewModal = (props: profileProps) => {
       toggleModal();
     } catch (error) {}
   };
+  const handleHideOfIsMatchScreen = () => {
+    setIsMatch({
+      status: false,
+      matchUser: null,
+    });
+    toggleModal();
+    fetchAll(me._id);
+  };
+  const navigation = useNavigation();
+  const startChat = () => {
+    if (isMatch?.matchUser) {
+      handleHideOfIsMatchScreen();
+      navigation.navigate(ROUTES.CommunityPrivateChat, {
+        senderId: isMatch?.matchUser?._id,
+        name: isMatch?.matchUser?.first,
+      });
+    }
+  };
   return {
     showModal,
     toggleModal,
@@ -122,5 +162,8 @@ export const useViewModal = (props: profileProps) => {
     showDisLike,
     showSave,
     showBlock,
+    isMatch,
+    startChat,
+    handleHideOfIsMatchScreen,
   };
 };

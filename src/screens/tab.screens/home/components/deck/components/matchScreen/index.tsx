@@ -6,8 +6,9 @@ import { styles } from './styles';
 import { Spacer, dimensions } from '../../../../../../../components/tools';
 import { HeaderBar } from '../../../../../../../components/header';
 import { PrimaryButton } from '../../../../../../../components/button';
+import { MatchScreenPropsType } from '../../../../../../../types/screen.type/home.type';
 
-export const MatchScreen = (props) => {
+export const MatchScreen = (props:MatchScreenPropsType) => {
   const { handleHideOfIsMatchScreen, isMatch, startChat } = props;
   const { user } = useSelector(({ userState }) => userState);
   return (
@@ -34,11 +35,17 @@ export const MatchScreen = (props) => {
           />
           <Image
             source={{
-              uri: isMatch?.matchUser?.profilePicture?.url
+              uri: isMatch?.matchUser?.profilePicture?.url,
             }}
             style={[styles.image, styles.imageRight]}
           />
         </View>
+        <Lottie
+          source={require('../../../../../../../assets/lotties/success.json')}
+          autoPlay
+          loop
+          style={styles.lottieStyle}
+        />
         <View style={styles.footerContainer}>
           <Image
             resizeMode="contain"
@@ -48,28 +55,14 @@ export const MatchScreen = (props) => {
           <Text style={styles.subText}>
             Don't keep them waiting. Say hello now!
           </Text>
-
           <View>
             <Spacer position="top" size={25} />
-            <Pressable onPress={startChat}>
-              <PrimaryButton title="Say Hello" />
-            </Pressable>
+            <PrimaryButton onPress={startChat} title="Say Hello" />
             <Spacer position="top" size={25} />
             <Pressable onPress={handleHideOfIsMatchScreen}>
               <Text style={styles.keepSwiping}>Keep Swiping</Text>
             </Pressable>
             <Spacer position="top" size={15} />
-            <Lottie
-              source={require('../../../../../../../assets/lotties/success.json')}
-              autoPlay
-              loop
-              style={{
-                width: dimensions.width,
-                height: dimensions.height - 100,
-                position: 'absolute',
-                bottom: 0,
-              }}
-            />
           </View>
         </View>
       </View>

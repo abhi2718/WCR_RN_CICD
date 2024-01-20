@@ -32,3 +32,8 @@ export type AppBarDropDownProps = {
     uid: string;
   }
 };
+export type MatchScreenPropsType = {
+  isMatch: any,
+  startChat: () => void,
+  handleHideOfIsMatchScreen: () => void
+}

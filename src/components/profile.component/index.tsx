@@ -24,6 +24,7 @@ import {
 import { sizes } from '../../infrastructure/theme/sizes';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
 import { calculateAge } from '../../utils/common.functions';
+import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -40,25 +41,34 @@ export const ProfileModal = (props: profileProps) => {
     showDisLike,
     showSave,
     showBlock,
+    isMatch,
+    startChat,
+    handleHideOfIsMatchScreen,
   } = useViewModal(props);
   return (
     <Modal visible={showModal}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.containerWrapperStyle}>
         {loading ? (
-          <View style={{ flex: 1 }}>
+          <View style={styles.containerWrapperStyle}>
             <FullLoader />
           </View>
+        ) : isMatch?.status ? (
+          <MatchScreen
+            isMatch={isMatch}
+            startChat={startChat}
+            handleHideOfIsMatchScreen={handleHideOfIsMatchScreen}
+          />
         ) : (
           <View>
             <Spacer position="top" size={10} />
             <Row style={styles.backHeaderPadding}>
               <Pressable onPress={() => toggleModal()}>
-                  <View style={{width:60}}>
+                <View style={styles.backButtonStyle}>
                   <Image
-                  style={styles.backArrowSize}
-                  source={require('../../assets/images/icons/back-arrow.png')}
-                />
-               </View>
+                    style={styles.backArrowSize}
+                    source={require('../../assets/images/icons/back-arrow.png')}
+                  />
+                </View>
               </Pressable>
             </Row>
             <View style={styles.sectionWhite}>
@@ -122,12 +132,12 @@ export const ProfileModal = (props: profileProps) => {
                         )}
                         <Row
                           style={styles.vitalSignsChips}
-                          gap={15}
+                          gap={6}
                           alignItems="center"
                         >
                           {user.gender && (
                             <Row
-                              gap={10}
+                              gap={0}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -164,7 +174,7 @@ export const ProfileModal = (props: profileProps) => {
                           {user.showSexualPreference &&
                             user.sexualPreference && (
                               <Row
-                                gap={10}
+                                gap={0}
                                 alignItems="center"
                                 style={styles.chip}
                               >
@@ -194,7 +204,7 @@ export const ProfileModal = (props: profileProps) => {
 
                           {user.userHeight && (
                             <Row
-                              gap={10}
+                              gap={0}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -209,16 +219,20 @@ export const ProfileModal = (props: profileProps) => {
                           )}
 
                           {user.ethnicity.length >= 0 &&
-                            user.ethnicity.map((ethnicity: String,key:number) => (
-                              <Row
-                                gap={10}
-                                key={key}
-                                alignItems="center"
-                                style={styles.chip}
-                              >
-                                <Text style={styles.chipText}>{ethnicity}</Text>
-                              </Row>
-                            ))}
+                            user.ethnicity.map(
+                              (ethnicity: String, key: number) => (
+                                <Row
+                                  gap={0}
+                                  key={key}
+                                  alignItems="center"
+                                  style={styles.chip}
+                                >
+                                  <Text style={styles.chipText}>
+                                    {ethnicity}
+                                  </Text>
+                                </Row>
+                              ),
+                            )}
                           {user.maritalStatus && (
                             <Row
                               gap={10}
@@ -234,10 +248,9 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.religion && (
                             <Row
-                              gap={10}
+                              gap={0}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -266,7 +279,7 @@ export const ProfileModal = (props: profileProps) => {
                           )}
                           {user.politics && (
                             <Row
-                              gap={10}
+                              gap={0}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -278,7 +291,7 @@ export const ProfileModal = (props: profileProps) => {
                           {user.kids &&
                             (user.kids === ' Prefer not to say' ? null : (
                               <Row
-                                gap={10}
+                                gap={0}
                                 alignItems="center"
                                 style={styles.chip}
                               >
@@ -289,10 +302,9 @@ export const ProfileModal = (props: profileProps) => {
                                 <Text style={styles.chipText}>{user.kids}</Text>
                               </Row>
                             ))}
-
                           {user.covidVaccineStatus && (
                             <Row
-                              gap={10}
+                              gap={0}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -305,10 +317,9 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.drinking && (
                             <Row
-                              gap={10}
+                              gap={0}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -404,6 +415,12 @@ export const ProfileModal = (props: profileProps) => {
 };
 
 export const styles = StyleSheet.create({
+  backButtonStyle: {
+    width: 60,
+  },
+  containerWrapperStyle: {
+    flex: 1,
+  },
   profileImage: {
     width: '100%',
     height: 600,

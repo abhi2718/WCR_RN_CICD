@@ -33,7 +33,6 @@ export default function Deck({ route }) {
     count,
     user,
     clearProfile,
-    updateIsNewUser,
     isMatch,
     handleHideOfIsMatchScreen,
     startChat,
