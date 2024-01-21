@@ -299,14 +299,7 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
   ];
-  const [letterCount, setLetterCount] = useState(0);
-
-  useEffect(() => {
-    const lettersOnly = userProfile.aboutMe.replace(/[^a-zA-Z]/g, '');
-    const reversedCount = 125 - lettersOnly.length;
-    setLetterCount(reversedCount < 0 ? 0 : reversedCount);
-  }, [userProfile.aboutMe]);
-
+  const [letterCount, setLetterCount] = useState(userProfile?.aboutMe?.length?userProfile.aboutMe.length:0);
   const handleDistanceSliderChange = (
     values: React.SetStateAction<number[]>,
   ) => {
@@ -617,6 +610,11 @@ export const useViewModal = () => {
     });
   };
   const _handleInputChange = (text: string, key: string) => {
+    if (key === "aboutMe") {
+      setLetterCount(() => {
+        return text.replace(/\s/g, '').length;
+      });
+    }
     setUserProfile((oldState) => {
       return {
         ...oldState,

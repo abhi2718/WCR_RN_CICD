@@ -82,6 +82,7 @@ export const PreviewScreen = () => {
                     </Text>
                   </Row>
                 </View>
+                <Spacer position='top' size={16} />
                 <View style={styles.vitalSigns}>
                   {(user?.profile?.gender?.length > 0 ||
                     user?.drinking?.length > 0 ||
@@ -91,7 +92,7 @@ export const PreviewScreen = () => {
                   )}
                   <Row
                     style={styles.vitalSignsChips}
-                    gap={10}
+                    gap={6}
                     alignItems="center"
                   >
                     {user.profile.gender && (
