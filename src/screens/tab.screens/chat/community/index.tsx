@@ -28,7 +28,6 @@ export default function CommunityChat() {
       ) : (
         <AllGroups
           toggleSearchInput={toggleSearchInput}
-          showToggleSearchInput={showToggleSearchInput}
         />
       )}
     </SafeAreaView>

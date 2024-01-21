@@ -59,10 +59,12 @@ export const Member = (props: MemberProps) => {
         <SafeAreaView>
           <Row style={styles.profileHeader}>
             <Pressable onPress={toggleModal}>
+              <View style={styles.backButtonContainer}>
               <Image
                 source={require('../../../../../../../assets/images/icons/back-arrow.png')}
                 style={styles.arrowStyle}
               />
+             </View>
             </Pressable>
             <View style={styles.logoHeadContainer}>
               <Image
