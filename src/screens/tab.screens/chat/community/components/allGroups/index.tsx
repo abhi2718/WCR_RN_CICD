@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Pressable, Keyboard } from 'react-native';
 import { FullLoader, Column } from '../../../../../../components/tools';
 import GroupsList from './components/groupList';
 import SearchGroup from './components/searchGroup';
 import { styles, searchStyle } from './styles';
 import { useViewModal } from './useViewModal';
 import { WelocmeGroupModal } from '../../../../../../components/modal/welocmeGroupModal';
-
-const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
+export type AllGroupsProps = {
+  toggleSearchInput: () => void;
+};
+const AllGroups = (props: AllGroupsProps) => {
   const {
     groups,
     handleTextChange,
@@ -16,11 +18,12 @@ const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
     closeModal,
     isModalVisible,
   } = useViewModal();
+  const { toggleSearchInput } = props;
   if (loading) {
     return <FullLoader />;
   }
   return (
-    <>
+    <Pressable style={styles.container} onPress={Keyboard.dismiss}>
       <WelocmeGroupModal isVisible={!isModalVisible} onClose={closeModal} />
       <View style={styles.container}>
         <SearchGroup
@@ -46,7 +49,7 @@ const AllGroups = ({ showToggleSearchInput, toggleSearchInput }: any) => {
           </View>
         )}
       </View>
-    </>
+    </Pressable>
   );
 };
 

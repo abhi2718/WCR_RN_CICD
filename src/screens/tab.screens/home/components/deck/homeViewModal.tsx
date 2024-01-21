@@ -13,51 +13,56 @@ import { RouteType } from '../../../../../types/navigation.type';
 import { useCometChatInit } from '../../../../../services/cometChat.service';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { addUser } from '../../../../../store/reducers/user.reducer';
+import { NotificationRepository } from '../../../../../repository/notification.repo';
+import { createNotifications } from '../../../../../utils/common.functions';
+
 export const useViewModal = (route: RouteType) => {
   const [profiles, setProfiles] = useState([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const homeDeckRepository = new HomeDeckRepository();
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
+  const notificationRepository = new NotificationRepository();
   const tabBarHeight = useBottomTabBarHeight();
   const androidActualHeight = useRef(dimensions.height - tabBarHeight).current;
   const { top, bottom } = useSafeAreaInsets();
   const cardRef = useRef();
-  const infoScreenRef = useRef();
   const { user } = useSelector(({ userState }) => userState);
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
-  const [isNewUser, setIsNewUser] = useState(user.homeInfoModal);
   const { fetchAll } = useContext(LikeContext);
   const { count } = useContext(NotificationCountContext);
   const { navigate } = useNavigation();
   notificationuseViewModal();
   useCometChatInit();
+  const [lastDisLikeProfile, setLastDisLikeProfile] = useState<any>(null);
   const [isMatch, setIsMatch] = useState({
     status: false,
     matchUser: null,
   });
-  const lastDisLikeProfile = useRef(-1);
   const iOSActualHeight = useRef(
     dimensions.height - (top + tabBarHeight),
   ).current;
-  const fetchProfiles = async () => {
+  const fetchProfiles = async (path: number) => {
     setLoading(true);
     try {
       const data = await homeDeckRepository.getProfiles();
-      setProfiles(data);
+      if (path) {
+        setProfiles([lastDisLikeProfile, ...data]);
+      } else {
+        setProfiles(data);
+      }
       setLoading(false);
     } catch (error) {
       setLoading(false);
     }
   };
   useEffect(() => {
-    fetchProfiles();
+    fetchProfiles(0);
   }, [route?.params]);
   const handleSetProfiles = (item: any) => setProfiles([item, ...profiles]);
   const clearProfile = () => setProfiles([]);
   const updateIsNewUser = async () => {
-    setIsNewUser(true);
     updateUserDetails();
   };
   const goToNotification = () => navigate(ROUTES.Notification);
@@ -74,33 +79,49 @@ export const useViewModal = (route: RouteType) => {
   };
   const handleLike = async (index: number) => {
     try {
+      if (!user?.homeInfoModal) {
+        updateIsNewUser();
+        return;
+      }
       const payLoad = createPayLoafForUserAction(index, 'Like');
       const { data } = await homeDeckRepository.userReactin(payLoad);
+      fetchAll(user._id);
       if (data?.isMatch) {
         setIsMatch({
           status: true,
           matchUser: profiles[index],
         });
+        await notificationRepository.createNotification(
+          createNotifications('match', profiles[index]._id, user.fullName),
+        );
+      } else {
+        await notificationRepository.createNotification(
+          createNotifications('like', profiles[index]._id, user.fullName),
+        );
       }
-      fetchAll(user._id);
     } catch (error) {
     }
   };
-  const handleUnDoFeature = () => {
-    if (lastDisLikeProfile.current > -1) {
-    // console.log(  cardRef?.current?.swipeBack)
-      // console.log(lastDisLikeProfile.current);
-      // const p = profiles.slice(lastDisLikeProfile.current);
-      // console.log(p.length)
-      setProfiles([profiles[3],profiles[4]]);
-      lastDisLikeProfile.current = -1;
-    } else {
-      console.log('do not do any things')
+  const handleUnDoFeature = async () => {
+    // setLoading(true);
+    //await homeDeckRepository.deleteDisLike(lastDisLikeProfile._id);
+    if (lastDisLikeProfile) {
+      if (profiles?.length) {
+        fetchProfiles(1);
+      } else {
+        setProfiles([lastDisLikeProfile]);
+        return;
+      }
     }
-  }
+  };
   const handleDisLike = async (index: number) => {
     try {
-      lastDisLikeProfile.current = index;
+      if (!user?.homeInfoModal) {
+        updateIsNewUser();
+        return;
+      }
+      const disLikeProfile = profiles[index];
+      setLastDisLikeProfile(disLikeProfile);
       const payLoad = createPayLoafForUserAction(index, 'Dislike');
       await homeDeckRepository.userReactin(payLoad);
     } catch (error) {}
@@ -109,13 +130,11 @@ export const useViewModal = (route: RouteType) => {
   const handleCloseModal = () => {
     toggleSearchModal();
   };
-
   const updateUserDetails = async () => {
     try {
       const update = {
         homeInfoModal: true,
       };
-
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         {
@@ -159,7 +178,6 @@ export const useViewModal = (route: RouteType) => {
     handleDisLike,
     cardRef,
     updateIsNewUser,
-    infoScreenRef,
     toggleSearchModal,
     showSearchModal,
     handleCloseModal,
@@ -167,12 +185,10 @@ export const useViewModal = (route: RouteType) => {
     goToNotification,
     count,
     user,
-    isNewUser,
-    setIsNewUser,
     clearProfile,
     isMatch,
     handleHideOfIsMatchScreen,
     startChat,
-    handleUnDoFeature
+    handleUnDoFeature,
   };
 };

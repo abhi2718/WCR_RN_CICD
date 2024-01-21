@@ -53,7 +53,6 @@ export const StackNavigator = () => {
         name={ROUTES.Onboarding}
         component={Onboarding}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.SignIn}
@@ -85,13 +84,11 @@ export const StackNavigator = () => {
         name={ROUTES.VerificationStepTwo}
         component={VerificationStepTwo}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.AddEthnicity}
         component={AddEthnicityScreen}
       />
-
       <Stack.Screen
         options={options}
         name={ROUTES.ProfilePic}
@@ -200,14 +197,9 @@ export const StackNavigator = () => {
         component={ReportScreen}
       />
       <Stack.Screen
-        // options={optins}
         name={ROUTES.PrivateChatMediaScreen}
         component={PrivteChatMediaScreen}
-        options={{
-          title: 'Media',
-          headerTitleAlign: 'center',
-          headerBackImageSource: require('../../assets/images/icons/back-arrow.png'),
-        }}
+        options={optins}
       />
     </Stack.Navigator>
   );

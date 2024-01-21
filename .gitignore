@@ -136,8 +136,8 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-# react-native-vector-icons specific
-fonts/
+# # react-native-vector-icons specific
+# fonts/
 
 
 # Compiled Java class files

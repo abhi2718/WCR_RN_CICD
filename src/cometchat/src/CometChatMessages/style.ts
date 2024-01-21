@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet } from 'react-native';
 
 export const Style = StyleSheet.create({
@@ -24,5 +23,6 @@ export const Style = StyleSheet.create({
   appBarPosition: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    backgroundColor:"red"
   },
 });
