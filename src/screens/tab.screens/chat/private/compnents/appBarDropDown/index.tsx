@@ -1,10 +1,9 @@
-import { View, StyleSheet, Text, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import React from 'react';
 import { AppBarMenu } from '../../../../../../components/AppBarMenu';
 import { AlertScreen } from '../../../../../../components/alert';
 import { useViewModal } from './useViewModal';
 import { AppBarDropDownProps } from '../../../../../../types/screen.type/home.type';
-
 export const AppBarDropDown = (props: AppBarDropDownProps) => {
   const {
     ismatched,
@@ -17,7 +16,6 @@ export const AppBarDropDown = (props: AppBarDropDownProps) => {
     setShowModal,
     setUnmatchModal,
   } = useViewModal(props);
-
   return (
     <View style={[styles.container, styles.position]}>
       <AppBarMenu memuList={memuList} />
@@ -26,7 +24,7 @@ export const AppBarDropDown = (props: AppBarDropDownProps) => {
         setShowModal={setShowModal}
         title="Block"
         description={`Are you sure you want to 
-        block ${user.name} ?`}
+        block ${user.getName()} ?`}
         onPress={handleUserBlock}
       />
       <AlertScreen
@@ -34,13 +32,12 @@ export const AppBarDropDown = (props: AppBarDropDownProps) => {
         setShowModal={setUnmatchModal}
         title="Unmatch"
         description={`Are you sure you want to 
-        unmatch ${user.name} ?`}
+        unmatch ${user.getName()} ?`}
         onPress={() => unmatch()}
       />
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
