@@ -398,7 +398,6 @@ export const useViewModal = () => {
         loadProfile: true,
       });
     } catch (error) {
-      console.log(error);
       setSubmitLoading(false);
     }
   };
