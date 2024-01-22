@@ -427,7 +427,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.h6,
     color: theme.colors.ui.white,
     fontWeight: theme.fontWeights.bold,
-    fontFamily: theme.fontFamily.body,
+    fontFamily: 'Urbanist-Regular',
   },
   gradient: {
     height: '100%',
@@ -438,6 +438,7 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     fontSize: theme.fontSizes.text,
     paddingLeft: 6,
+    fontFamily: 'Urbanist-Regular',
   },
   userInfo: {
     padding: 16,
@@ -507,13 +508,14 @@ export const styles = StyleSheet.create({
   chipText: {
     color: colors.ui.text,
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   headingText: {
     marginTop: sizes[2],
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.text,
-    fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   inBtwnText: {
     marginVertical: sizes[1],
@@ -535,5 +537,6 @@ export const styles = StyleSheet.create({
     marginVertical: sizes[2],
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.title,
+    fontFamily: 'Urbanist-Regular',
   },
 });

@@ -41,6 +41,7 @@ export const modalStyle = StyleSheet.create({
     fontWeight: '700',
     marginVertical: 20,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   messageBtn: {
     backgroundColor: colors.bg.secondary,
@@ -52,6 +53,7 @@ export const modalStyle = StyleSheet.create({
     paddingVertical: 14,
     color: colors.ui.primary,
     fontWeight: '700',
+    fontFamily: 'Urbanist-Regular',
   },
   profileBtn: {
     fontWeight: '700',
@@ -63,5 +65,6 @@ export const modalStyle = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 14,
     color: colors.ui.white,
+    fontFamily: 'Urbanist-Regular',
   },
 });

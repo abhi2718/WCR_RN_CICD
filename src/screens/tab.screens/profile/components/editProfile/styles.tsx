@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   container: {
     flex: 1,
@@ -30,6 +31,7 @@ export const styles = StyleSheet.create({
     color: '#676161',
     fontSize: fontSizes.text,
     paddingBottom: 30,
+    fontFamily: 'Urbanist-Regular',
   },
   charCount: {
     position: 'absolute',
@@ -37,17 +39,20 @@ export const styles = StyleSheet.create({
     right: 16,
     color: colors.ui.primary,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   fieldName: {
     color: colors.ui.textHead,
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   fieldValue: {
     color: '#676161',
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.text,
     width: '100%',
+    fontFamily: 'Urbanist-Regular',
   },
   fieldValueContainer: {
     paddingTop: 10,
@@ -84,6 +89,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     margin: 0,
     paddingVertical: 12,
+    fontFamily: 'Urbanist-Regular',
   },
   cancelButton: {
     borderRadius: 23,
@@ -97,12 +103,14 @@ export const styles = StyleSheet.create({
     marginLeft: -8,
     textAlign: 'left',
     height: 20,
+    fontFamily: 'Urbanist-Regular',
   },
   selectedItem: {
     fontSize: 16,
     color: colors.ui.text,
     backgroundColor: colors.bg.secondary,
     fontWeight: 'bold',
+    fontFamily: 'Urbanist-Regular',
   },
   selectRow: {
     width: '100%',

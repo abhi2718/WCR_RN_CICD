@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: theme.units.sizes[22],
     fontWeight: theme.fontWeights.medium,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   shadows: {
     padding: theme.units.sizes[3],

@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: colors.ui.text,
     fontWeight: fontWeights.semiBold,
+    fontFamily: 'Urbanist-Regular',
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });

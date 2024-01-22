@@ -43,15 +43,18 @@ export const modalStyle = StyleSheet.create({
     color: colors.ui.textHead,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   subHeader: {
     color: colors.ui.text,
     fontSize: fontSizes.button,
     fontWeight: fontWeights.regular,
+    fontFamily: 'Urbanist-Regular',
   },
   contentHeader: {
     color: colors.ui.textHead,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
     fontWeight: fontWeights.semiBold,
   },
   contentText: {
@@ -59,6 +62,7 @@ export const modalStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.regular,
     marginBottom: 12,
+    fontFamily: 'Urbanist-Regular',
   },
   footerView: {
     paddingVertical: 20,
@@ -69,11 +73,13 @@ export const modalStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.semiBold,
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
   footerRedText: {
     color: colors.ui.primary,
     fontSize: fontSizes.h6 + 2,
     fontWeight: fontWeights.bold,
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
 });

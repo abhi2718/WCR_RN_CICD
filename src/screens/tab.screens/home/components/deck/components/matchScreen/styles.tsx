@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
   },
   matchBgImgOne: {
     position: 'absolute',
-   //zIndex: 10,
+    //zIndex: 10,
     width: 50,
     height: 50,
     left: 0,
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   },
   matchBgImgTwo: {
     position: 'absolute',
-   //zIndex: 10,
+    //zIndex: 10,
     width: 50,
     height: 50,
     right: 0,
@@ -78,12 +78,14 @@ export const styles = StyleSheet.create({
     color: 'rgba(35, 35, 35, 0.70)',
     textAlign: 'center',
     marginTop: 12,
+    fontFamily: 'Urbanist-Regular',
   },
   keepSwiping: {
     backgroundColor: colors.bg.secondary,
     borderRadius: 28,
     overflow: 'hidden',
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
     borderWidth: 1,
     borderColor: colors.ui.primary,
     paddingVertical: 15,

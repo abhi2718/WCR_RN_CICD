@@ -29,6 +29,7 @@ export const Style = StyleSheet.create({
   },
   newMessageIndicatorText: {
     color: 'white',
+    fontFamily: 'Urbanist-Regular',
   },
   msgContainerStyle: {
     flex: 1,
@@ -44,6 +45,7 @@ export const Style = StyleSheet.create({
     textAlign: 'center',
     width: '100%',
     color: 'rgba(20, 20, 20, 0.33)',
+    fontFamily: 'Urbanist-Regular',
   },
   msgImgStyle: {
     tintColor: 'rgba(20, 20, 20, 0.58)',
@@ -58,5 +60,6 @@ export const Style = StyleSheet.create({
     fontWeight: theme.fontWeights.bold,
     color: theme.colors.ui.text,
     textTransform: 'capitalize',
+    fontFamily: 'Urbanist-Regular',
   },
 });

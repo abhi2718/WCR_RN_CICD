@@ -26,6 +26,7 @@ export const genderStyle = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     fontSize: fontSizes.text,
@@ -45,6 +46,7 @@ export const genderStyle = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   rowView: {
     marginBottom: sizes[1],

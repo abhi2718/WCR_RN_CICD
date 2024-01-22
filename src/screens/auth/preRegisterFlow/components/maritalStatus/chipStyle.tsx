@@ -32,6 +32,7 @@ export const ChipStyle = StyleSheet.create({
     color: colors.ui.text,
     marginTop: sizes[5],
     marginBottom: sizes[3],
+    fontFamily: 'Urbanist-Regular',
   },
   chipRow: {
     gap: sizes[1],
@@ -46,6 +47,7 @@ export const ChipStyle = StyleSheet.create({
     borderRadius: sizes[12],
     borderColor: '#a5a4a6',
     padding: 0,
+    fontFamily: 'Urbanist-Regular',
   },
   chipSelected: {
     margin: 0,
@@ -57,5 +59,6 @@ export const ChipStyle = StyleSheet.create({
     borderWidth: 2,
     borderRadius: sizes[12],
     padding: 0,
+    fontFamily: 'Urbanist-Regular',
   },
 });

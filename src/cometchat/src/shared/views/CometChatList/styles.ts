@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginLeft: 8,
     alignSelf: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
   searchButtonStyle: {
     width: 16,

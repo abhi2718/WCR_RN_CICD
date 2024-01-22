@@ -7,11 +7,13 @@ export const styles = StyleSheet.create({
     marginTop: 32,
     padding: 8,
     borderBottomWidth: 1,
+    fontFamily: 'Urbanist-Regular',
   },
   textInputAnswers: {
     marginTop: 32,
     padding: 8,
     borderBottomWidth: 1,
+    fontFamily: 'Urbanist-Regular',
   },
   errorContainer: {
     flexDirection: 'row',
@@ -31,10 +33,12 @@ export const styles = StyleSheet.create({
   },
   errorTextTitle: {
     marginStart: 8,
+    fontFamily: 'Urbanist-Regular',
   },
   errorTextContainer: { flex: 1 },
   errorText: {
     marginStart: 8,
+    fontFamily: 'Urbanist-Regular',
   },
   addAnswerButtonContainer: { marginTop: 30, marginBottom: 10 },
 });

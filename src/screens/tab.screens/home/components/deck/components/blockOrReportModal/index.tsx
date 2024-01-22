@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 15,
+    fontFamily: 'Urbanist-Regular',
   },
   buttonContainer: {
     alignItems: 'center',
@@ -100,16 +101,19 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.title,
+    fontFamily: 'Urbanist-Regular',
   },
   textOne: {
     color: colors.ui.primary,
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.title,
+    fontFamily: 'Urbanist-Regular',
   },
   textTwo: {
     color: colors.ui.textHead,
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
 
   backButton: {

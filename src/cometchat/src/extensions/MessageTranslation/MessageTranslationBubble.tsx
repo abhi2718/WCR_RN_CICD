@@ -120,5 +120,6 @@ export const MessageTranslationBubble = (props: MessageTranslationBubble) => {
 const styles = StyleSheet.create({
   textsPadding: {
     paddingVertical: 5,
+    fontFamily: 'Urbanist-Regular',
   },
 });

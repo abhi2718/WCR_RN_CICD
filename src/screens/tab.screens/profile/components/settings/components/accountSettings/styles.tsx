@@ -20,10 +20,12 @@ export const styles = StyleSheet.create({
   text: {
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   deletBtn: {
     color: colors.ui.primary,
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.title,
+    fontFamily: 'Urbanist-Regular',
   },
 });

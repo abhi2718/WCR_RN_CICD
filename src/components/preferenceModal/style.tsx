@@ -33,6 +33,7 @@ export const modalStylePreference = StyleSheet.create({
     fontSize: fontSizes.h5,
     color: colors.ui.text,
     marginBottom: sizes[4],
+    fontFamily: 'Urbanist-Regular',
   },
   subHeading: {
     fontWeight: fontWeights.bold,
@@ -49,6 +50,7 @@ export const modalStylePreference = StyleSheet.create({
     color: colors.ui.text,
     fontSize: sizes[3],
     flex: 1,
+    fontFamily: 'Urbanist-Regular',
   },
   icon: {
     width: sizes[4],

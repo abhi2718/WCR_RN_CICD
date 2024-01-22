@@ -9,6 +9,7 @@ export const Style = StyleSheet.create({
   },
   titleStyle: {
     lineHeight: 22,
+    fontFamily: 'Urbanist-Regular',
   },
   layoutBtnStyle: {
     height: 24,

@@ -32,6 +32,7 @@ export const AboutStyle = StyleSheet.create({
     color: colors.ui.text,
     marginTop: sizes[6],
     marginBottom: sizes[3],
+    fontFamily: 'Urbanist-Regular',
   },
   input: {
     borderWidth: 1,
@@ -43,5 +44,6 @@ export const AboutStyle = StyleSheet.create({
     letterSpacing: 0.1,
     borderRadius: sizes[4],
     height: sizes[9] * 6,
+    fontFamily: 'Urbanist-Regular',
   },
 });

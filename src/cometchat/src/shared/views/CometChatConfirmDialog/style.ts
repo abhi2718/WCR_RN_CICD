@@ -22,6 +22,7 @@ export const Style = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     letterSpacing: -0.08,
+    fontFamily: 'Urbanist-Regular',
   },
   messageTextStyle: {
     opacity: 1,
@@ -30,6 +31,7 @@ export const Style = StyleSheet.create({
     fontStyle: 'normal',
     textAlign: 'left',
     letterSpacing: -0.08,
+    fontFamily: 'Urbanist-Regular',
   },
   buttonViewStyle: {
     justifyContent: 'flex-end',
@@ -59,5 +61,6 @@ export const Style = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'right',
     lineHeight: 20,
+    fontFamily: 'Urbanist-Regular',
   },
 });

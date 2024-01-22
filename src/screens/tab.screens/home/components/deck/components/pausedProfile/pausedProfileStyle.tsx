@@ -19,12 +19,13 @@ export const pausedProfileStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
-
+    fontFamily: 'Urbanist-Regular',
     fontSize: fontSizes.button,
   },
   pendingIcon: {

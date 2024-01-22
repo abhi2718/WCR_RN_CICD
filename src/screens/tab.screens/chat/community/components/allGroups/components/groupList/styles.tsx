@@ -30,11 +30,13 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.bold,
     color: theme.colors.ui.text,
     textTransform: 'capitalize',
+    fontFamily: 'Urbanist-Regular',
   },
   groupMembers: {
     fontWeight: '400',
     fontSize: 12,
     marginTop: 4,
+    fontFamily: 'Urbanist-Regular',
   },
   joinedBtn: {
     borderRadius: 15,
@@ -45,6 +47,7 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: '700',
     color: colors.ui.placeholder,
+    fontFamily: 'Urbanist-Regular',
   },
   joinBtn: {
     borderRadius: 15,
@@ -55,5 +58,6 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: '700',
     color: colors.ui.white,
+    fontFamily: 'Urbanist-Regular',
   },
 });

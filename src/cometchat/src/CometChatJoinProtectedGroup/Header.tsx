@@ -47,6 +47,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconContainer: { paddingRight: 15 },
-  headingText: { fontSize: 20, fontWeight: '600', color: '#000' },
+  headingText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#000',
+    fontFamily: 'Urbanist-Regular',
+  },
 });
 export default Header;

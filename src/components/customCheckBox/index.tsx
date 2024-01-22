@@ -22,7 +22,7 @@ export const CustomCheckboxWrapper = styled.View`
   border: 2px solid #49454f;
 `;
 export const CustomCheckBox = (props) => {
-  const { onPress, isChecked, label, } = props;
+  const { onPress, isChecked, label } = props;
 
   return (
     <Row style={styles.card}>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: colors.ui.text,
     fontWeight: 'bold',
+    fontFamily: 'Urbanist-Regular',
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });

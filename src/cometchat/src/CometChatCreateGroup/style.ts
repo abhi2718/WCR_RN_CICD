@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
   },
   errorTextTitle: {
     marginStart: 8,
+    fontFamily: 'Urbanist-Regular',
   },
   errorTextContainer: { flex: 1 },
   errorText: {

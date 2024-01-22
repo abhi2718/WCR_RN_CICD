@@ -23,11 +23,12 @@ export const pendingStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
-
+    fontFamily: 'Urbanist-Regular',
     fontSize: fontSizes.button,
   },
   pendingIcon: {
@@ -36,6 +37,7 @@ export const pendingStyle = StyleSheet.create({
   },
   primaryButton: {
     width: '80%',
+    fontFamily: 'Urbanist-Regular',
   },
 
   mainContainerDeclined: {
@@ -58,11 +60,12 @@ export const pendingStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   textDeclined: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
-
+    fontFamily: 'Urbanist-Regular',
     fontSize: fontSizes.button,
   },
   pendingIconDeclined: {
@@ -81,11 +84,13 @@ export const pendingStyle = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.text,
     marginBottom: sizes[2],
+    fontFamily: 'Urbanist-Regular',
   },
   redBoxText: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.button,
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
 });

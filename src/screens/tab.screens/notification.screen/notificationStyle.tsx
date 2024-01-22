@@ -30,6 +30,7 @@ export const notificationStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   subHeadingInner: {
     color: colors.ui.text,
@@ -37,12 +38,14 @@ export const notificationStyle = StyleSheet.create({
     fontWeight: fontWeights.bold,
     paddingHorizontal: 16,
     paddingVertical: 10,
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   pendingIcon: {
     width: sizes[12] * 2,

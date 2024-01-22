@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
 import { FontStyle } from '../../shared/base';
-import { CometChatContext } from "../../shared/CometChatContext";
+import { CometChatContext } from '../../shared/CometChatContext';
 import { makeExtentionCall } from '../../shared/utils/CometChatMessageHelper';
 import { ICONS } from './resources';
 //@ts-ignore
@@ -119,8 +119,7 @@ export const PollsBubble = (props: PollsBubbleInterface) => {
   };
 
   const handleResult = ({ id }: any) => {
-    if (loggedInUser['uid'] == senderUid)
-      return;
+    if (loggedInUser['uid'] == senderUid) return;
     choosePoll && choosePoll(id);
     setSelectedOption((prev) => ({ ...prev, [id]: !prev[id] }));
     makeExtentionCall('polls', 'POST', 'v2/vote', {
@@ -289,10 +288,12 @@ const style = StyleSheet.create({
   questionText: {
     marginHorizontal: 10,
     marginVertical: 5,
+    fontFamily: 'Urbanist-Regular',
   },
   voteText: {
     marginHorizontal: 10,
     marginVertical: 5,
+    fontFamily: 'Urbanist-Regular',
   },
   optionItemContainer: {
     marginHorizontal: 5,
@@ -312,6 +313,7 @@ const style = StyleSheet.create({
   },
   valueText: {
     marginLeft: 10,
+    fontFamily: 'Urbanist-Regular',
   },
   resultMask: {
     alignItems: 'center',

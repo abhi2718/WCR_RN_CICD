@@ -61,22 +61,26 @@ export const NotificationScreen = () => {
           data={notifications.notifications}
           renderItem={({ item, index }) => {
             if (index === notifications.notifications.length - 1) {
-              return (<Spacer position='bottom' size={100}>
-                <View>
-                  <Spacer position='top' size={40}>
-                  <Text style={styles.notificationEndText}>👋 That’s it for now! </Text>
-                  </Spacer>
-                </View>
-              </Spacer>)
+              return (
+                <Spacer position="bottom" size={100}>
+                  <View>
+                    <Spacer position="top" size={40}>
+                      <Text style={styles.notificationEndText}>
+                        👋 That’s it for now!{' '}
+                      </Text>
+                    </Spacer>
+                  </View>
+                </Spacer>
+              );
             }
-            return(
+            return (
               <SwipeableListItem
                 item={item}
                 onDelete={onDeleteItem}
                 markAsRead={markAsRead}
                 htmlTextConvertPlainText={htmlTextConvertPlainText}
               />
-            )
+            );
           }}
         />
       )}
@@ -89,6 +93,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: theme.fontSizes.h6,
     fontWeight: theme.fontWeights.semiBold,
-    color:theme.colors.ui.text
-  }
-})
+    color: theme.colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
+  },
+});

@@ -31,6 +31,7 @@ export const location = StyleSheet.create({
     color: colors.ui.text,
     marginTop: sizes[6],
     marginBottom: sizes[3],
+    fontFamily: 'Urbanist-Regular',
   },
 
   innerView: {

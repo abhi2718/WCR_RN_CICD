@@ -24,6 +24,7 @@ export const profileStyles = StyleSheet.create({
   skipBtn: {
     fontSize: 20,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   subHeader: {
     fontSize: fontSizes.title,
@@ -31,11 +32,13 @@ export const profileStyles = StyleSheet.create({
     color: colors.ui.text,
     marginVertical: sizes[6],
     lineHeight: sizes[7],
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: 'Urbanist-Regular',
   },
 
   innerView: {

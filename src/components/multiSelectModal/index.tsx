@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.h5,
     marginBottom: 10,
+    fontFamily: 'Urbanist-Regular',
   },
   cardBg: {
     backgroundColor: colors.bg.secondary,
@@ -128,9 +129,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: sizes[3],
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   selectedText: {
     fontWeight: 'bold',
+    fontFamily: 'Urbanist-Regular',
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });

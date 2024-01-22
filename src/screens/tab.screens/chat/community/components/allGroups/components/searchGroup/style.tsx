@@ -18,5 +18,6 @@ export const styles = StyleSheet.create({
   },
   searchInput: {
     width: '80%',
+    fontFamily: 'Urbanist-Regular',
   },
 });

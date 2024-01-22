@@ -8,12 +8,9 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import {
-  FontStyleInterface,
-  ImageType,
-} from '../../shared/base';
-import { localize } from "../../shared/resources/CometChatLocalize";
-import { CometChatConfirmDialog } from "../../shared/views";
+import { FontStyleInterface, ImageType } from '../../shared/base';
+import { localize } from '../../shared/resources/CometChatLocalize';
+import { CometChatConfirmDialog } from '../../shared/views';
 import { ExtensionConstants } from '../ExtensionConstants';
 import { getExtentionData } from '../ExtensionModerator';
 import { ICONS } from './resources';
@@ -33,7 +30,7 @@ export interface ImageModerationFilterInterface {
   warningImage?: ImageType;
 }
 export const ImageModerationFilter = (
-  props: ImageModerationFilterInterface
+  props: ImageModerationFilterInterface,
 ) => {
   const { message, ChildView, warningText, style, warningImage } = props;
   const [hideUnSafe, setHideUnSafe] = useState(true);
@@ -66,7 +63,7 @@ export const ImageModerationFilter = (
   const CheckModeration = () => {
     let imagemoderation = getExtentionData(
       message,
-      ExtensionConstants.imageModeration
+      ExtensionConstants.imageModeration,
     );
     if (imagemoderation?.unsafe == 'yes' && hideUnSafe) {
       return (
@@ -141,5 +138,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
     fontWeight: '500',
+    fontFamily: 'Urbanist-Regular',
   },
 });

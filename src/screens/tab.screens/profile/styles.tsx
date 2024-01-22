@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.ui.text,
     fontWeight: 'bold',
-    fontFamily:"Urbanist-SemiBold"
+    fontFamily: 'Urbanist-Regular',
   },
   profileImg: {
     width: sizes[14] * 2,
@@ -35,11 +35,13 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
+    fontFamily: 'Urbanist-Regular',
   },
   logoutText: {
     fontSize: sizes[3],
     color: colors.ui.primary,
     fontWeight: fontWeights.regular,
+    fontFamily: 'Urbanist-Regular',
   },
   nameHead: {
     fontSize: sizes[7],
@@ -56,5 +58,6 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: 'rgba(64, 64, 64, 0.50)',
     fontWeight: fontWeights.regular,
+    fontFamily: 'Urbanist-Regular',
   },
 });

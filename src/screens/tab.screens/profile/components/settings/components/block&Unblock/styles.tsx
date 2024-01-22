@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   chip: {
     borderColor: colors.ui.primary,
@@ -35,6 +36,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     color: colors.ui.text,
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   chipImage: {
     width: 10,
@@ -58,12 +60,14 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.bold,
     textTransform: 'capitalize',
     color: theme.colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   blockedText: {
     fontSize: 12,
     fontWeight: theme.fontWeights.regular,
     lineHeight: 16,
     color: theme.colors.ui.textAccent,
+    fontFamily: 'Urbanist-Regular',
   },
   blockedButton: {
     backgroundColor: theme.colors.ui.primary,
@@ -77,6 +81,7 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.semiBold,
     color: theme.colors.ui.white,
     textTransform: 'uppercase',
+    fontFamily: 'Urbanist-Regular',
   },
   blockedListText: {
     fontSize: 16,
@@ -85,5 +90,6 @@ export const styles = StyleSheet.create({
     color: theme.colors.ui.text,
     marginTop: 16,
     marginBottom: 6,
+    fontFamily: 'Urbanist-Regular',
   },
 });

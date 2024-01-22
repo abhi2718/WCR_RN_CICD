@@ -170,5 +170,6 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.h6,
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
+    fontFamily: 'Urbanist-Regular',
   },
 });

@@ -32,10 +32,12 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
     fontWeight: fontWeights.regular,
+    fontFamily: 'Urbanist-Regular',
   },
   whiteTextStyle: {
     fontSize: 16,
     color: '#fff',
     fontWeight: fontWeights.regular,
+    fontFamily: 'Urbanist-Regular',
   },
 });

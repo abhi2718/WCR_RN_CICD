@@ -16,23 +16,27 @@ export const verificationStyle = StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: 'Urbanist-Regular',
   },
   btnText: {
     marginLeft: sizes[3],
     fontSize: sizes[3],
     fontWeight: fontWeights.semiBold,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   rowView: {
     marginBottom: sizes[1],
   },
   textBox: {
     marginBottom: sizes[2],
+    fontFamily: 'Urbanist-Regular',
   },
   footerDiv: {
     paddingBottom: 20,
@@ -41,20 +45,23 @@ export const verificationStyle = StyleSheet.create({
     paddingHorizontal: 16,
     gap: 15,
     flex: 1,
-    justifyContent:"flex-end"
+    justifyContent: 'flex-end',
   },
   subText: {
     fontSize: fontSizes.text,
     marginBottom: sizes[4],
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   redDot: {
     color: colors.ui.primary,
     fontSize: 8,
+    fontFamily: 'Urbanist-Regular',
   },
   optionalText: {
     color: colors.ui.primary,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   pointsRow: {
     marginBottom: sizes[2],
@@ -63,11 +70,13 @@ export const verificationStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     marginLeft: sizes[3],
+    fontFamily: 'Urbanist-Regular',
   },
   footerText: {
     color: colors.ui.text,
     fontSize: fontSizes.text,
     marginVertical: sizes[5],
+    fontFamily: 'Urbanist-Regular',
   },
   imageViewProfile: {
     borderRadius: sizes[4],
@@ -96,6 +105,7 @@ export const verificationStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     textAlign: 'center',
     color: colors.ui.primary,
+    fontFamily: 'Urbanist-Regular',
   },
 });
 
@@ -136,6 +146,7 @@ export const firstModalStyle = StyleSheet.create({
     fontSize: sizes[4],
     color: '#000',
     paddingVertical: sizes[2],
+    fontFamily: 'Urbanist-Regular',
   },
   borderView: {
     borderBottomWidth: 0.5,
@@ -147,5 +158,6 @@ export const firstModalStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: sizes[4],
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
 });

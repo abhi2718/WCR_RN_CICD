@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     fontSize: 22,
     fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   profilePic: {
     width: dimensions.width,
@@ -54,7 +55,7 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     color: colors.ui.white,
     fontWeight: fontWeights.bold,
-    fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   gradient: {
     height: '100%',
@@ -84,13 +85,14 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
+    fontFamily: 'Urbanist-Regular',
   },
   headingText: {
     marginTop: sizes[2],
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
     fontSize: 22,
-    fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   vitalSignsChips: {
     marginVertical: sizes[2],
@@ -111,12 +113,14 @@ export const styles = StyleSheet.create({
   chipText: {
     color: colors.ui.text,
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   aboutText: {
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.button,
     marginTop: sizes[0],
+    fontFamily: 'Urbanist-Regular',
   },
   hobbiesChip: {
     borderRadius: sizes[4],
@@ -127,17 +131,20 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     paddingVertical: 8,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
 
   inBtwnText: {
     marginVertical: sizes[1],
     paddingHorizontal: 16,
+    fontFamily: 'Urbanist-Regular',
   },
   blockReportText: {
     textAlign: 'center',
     marginVertical: sizes[2],
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.title,
+    fontFamily: 'Urbanist-Regular',
   },
   footerIconRow: {
     marginVertical: sizes[5],

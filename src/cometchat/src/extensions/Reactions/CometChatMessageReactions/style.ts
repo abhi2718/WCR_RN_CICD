@@ -38,5 +38,6 @@ export const Styles = StyleSheet.create({
   reactionCountStyle: {
     paddingRight: 2,
     paddingLeft: 4,
+    fontFamily: 'Urbanist-Regular',
   },
 });

@@ -320,6 +320,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.bold,
     lineHeight: 30,
+    fontFamily: 'Urbanist-Regular',
   },
   textDegree: {
     color: theme.colors.ui.primary,
@@ -327,9 +328,11 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     lineHeight: 14,
     letterSpacing: 0.59,
+    fontFamily: 'Urbanist-Regular',
   },
   textDesignation: {
     color: theme.colors.ui.white,
+    fontFamily: 'Urbanist-Regular',
   },
   gradient: {
     height: '100%',
@@ -344,7 +347,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.h6,
     color: theme.colors.ui.white,
     fontWeight: theme.fontWeights.bold,
-    fontFamily: theme.fontFamily.body,
+    fontFamily: 'Urbanist-Regular',
   },
   chatButton: {
     padding: theme.units.sizes[3],
@@ -356,6 +359,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.caption,
     textTransform: 'uppercase',
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
   textBlack: {
     color: theme.colors.ui.black,

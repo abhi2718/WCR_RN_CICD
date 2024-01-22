@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     lineHeight: sizes[4],
+    fontFamily: 'Urbanist-Regular',
   },
   otpEmail: {
     color: '#007AFF',
@@ -36,5 +37,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: sizes[1],
     textTransform: 'lowercase',
+    fontFamily: 'Urbanist-Regular',
   },
 });

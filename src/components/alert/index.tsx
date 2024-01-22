@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     color: colors.ui.black,
     fontSize: fontSizes.title,
     fontWeight: fontWeights.semiBold,
+    fontFamily: 'Urbanist-Regular',
   },
 
   description: {
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
 
   primeBtn: {
@@ -102,6 +104,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: colors.ui.white,
       fontWeight: fontWeights.semiBold,
+      fontFamily: 'Urbanist-Regular',
     },
   },
   secondBtn: {
@@ -117,6 +120,7 @@ const styles = StyleSheet.create({
       fontSize: fontSizes.h6,
       fontWeight: fontWeights.regular,
       color: colors.ui.text,
+      fontFamily: 'Urbanist-Regular',
     },
   },
 });

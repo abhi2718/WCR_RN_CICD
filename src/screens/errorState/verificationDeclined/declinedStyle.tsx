@@ -24,11 +24,12 @@ export const declinedStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
-
+    fontFamily: 'Urbanist-Regular',
     fontSize: fontSizes.button,
   },
   pendingIcon: {
@@ -47,12 +48,14 @@ export const declinedStyle = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.text,
     marginBottom: sizes[2],
+    fontFamily: 'Urbanist-Regular',
   },
   redBoxText: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.button,
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
   primaryButton: {
     width: '80%',

@@ -107,6 +107,7 @@ export const headerStyle = StyleSheet.create({
   skipBtn: {
     fontSize: sizes[4],
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   infoIcon: {
     height: sizes[4],
@@ -126,6 +127,7 @@ export const headerStyle = StyleSheet.create({
     fontSize: fontSizes.h5,
     color: colors.ui.text,
     fontWeight: fontWeights.semiBold,
+    fontFamily: 'Urbanist-Regular',
   },
   actionButtonView: {
     width: 50,
@@ -135,6 +137,7 @@ export const headerStyle = StyleSheet.create({
     color: '#007AFF',
     fontWeight: fontWeights.regular,
     textAlign: 'right',
+    fontFamily: 'Urbanist-Regular',
   },
 });
 
@@ -241,6 +244,7 @@ export const headerDeckStyle = StyleSheet.create({
     borderWidth: 2,
     zIndex: sizes[2],
     fontWeight: 'bold',
+    fontFamily: 'Urbanist-Regular',
   },
   row: {
     width: sizes[10],

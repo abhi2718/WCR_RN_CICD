@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   subHeading: {
     color: colors.ui.text,
     fontSize: fontSizes.h6,
+    fontFamily: 'Urbanist-Regular',
     fontWeight: fontWeights.bold,
   },
   noGroupIcon: {
@@ -55,5 +56,6 @@ const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
 });

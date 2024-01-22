@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   noChatIcon: {
     width: sizes[12] * 2,
@@ -53,5 +54,6 @@ const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
 });

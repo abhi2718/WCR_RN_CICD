@@ -18,5 +18,6 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
 });

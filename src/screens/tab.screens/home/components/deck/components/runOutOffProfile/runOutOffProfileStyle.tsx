@@ -25,7 +25,7 @@ export const runOutOffProfileStyle = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
-
+    fontFamily: 'Urbanist-Regular',
     fontSize: fontSizes.button,
   },
   pendingIcon: {

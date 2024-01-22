@@ -4,5 +4,6 @@ import { StyleSheet } from 'react-native';
 export const Style = StyleSheet.create({
   textStyle: {
     textAlign: 'auto',
+    fontFamily: 'Urbanist-Regular',
   },
 });

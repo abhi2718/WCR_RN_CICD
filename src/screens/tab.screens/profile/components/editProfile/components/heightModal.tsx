@@ -18,7 +18,7 @@ interface Measurement {
   heightInCm?: number;
 }
 export const HeightModal = (props) => {
-  const { showHeightModal, setShowHeightModal,setheight } = props;
+  const { showHeightModal, setShowHeightModal, setheight } = props;
   const { user } = useSelector((state: any) => state.userState);
   const savedHeight: Measurement = user.height;
   const [heightFormat, setheightFormat] = useState('feet');
@@ -77,9 +77,11 @@ export const HeightModal = (props) => {
       <SafeAreaView style={styles.containerStyle}>
         <View>
           <Pressable onPress={() => setShowHeightModal(false)}>
-            <Text>Close</Text>
+            <Text style={{ fontFamily: 'Urbanist-Regular' }}>Close</Text>
           </Pressable>
-          <Text style={{ fontSize: 20 }}>Height</Text>
+          <Text style={{ fontSize: 20, fontFamily: 'Urbanist-Regular' }}>
+            Height
+          </Text>
           <Picker
             textSize={34}
             isShowSelectBackground={false}

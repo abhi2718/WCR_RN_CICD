@@ -26,11 +26,13 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.text,
     marginVertical: 10,
+    fontFamily: 'Urbanist-Regular',
   },
   headerText: {
     color: colors.ui.textHead,
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   questionMarkIcon: {
     width: 25,
@@ -48,6 +50,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 8,
     color: 'black',
+    fontFamily: 'Urbanist-Regular',
   },
   modalSelector: {
     borderWidth: 0,
@@ -57,6 +60,7 @@ export const styles = StyleSheet.create({
     marginRight: 8,
     color: colors.ui.text,
     fontSize: 16,
+    fontFamily: 'Urbanist-Regular',
   },
   optionContainer: {
     borderRadius: 4,
@@ -72,6 +76,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     margin: 0,
     paddingVertical: 12,
+    fontFamily: 'Urbanist-Regular',
   },
   cancelButton: {
     borderRadius: 23,
@@ -90,9 +95,11 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.ui.text,
     backgroundColor: colors.bg.secondary,
+    fontFamily: 'Urbanist-Regular',
   },
   textColor: {
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   multiSelector: {
     marginTop: 10,
@@ -103,6 +110,7 @@ export const styles = StyleSheet.create({
   optionName: {
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   selectRow: {
     width: '100%',
@@ -124,6 +132,7 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     textTransform: 'capitalize',
+    fontFamily: 'Urbanist-Regular',
   },
   overlayStyle: {
     flex: 1,

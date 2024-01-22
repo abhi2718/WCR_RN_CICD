@@ -17,12 +17,14 @@ export const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontSize: sizes[2] + 1,
     fontWeight: fontWeights.regular,
+    fontFamily: 'Urbanist-Regular',
   },
 
   memberNameText: {
     color: '#1B1B1B',
     fontSize: sizes[3] - 2,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
 
   arrowStyle: {
@@ -34,6 +36,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: sizes[4],
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
 
   viewProfileBtn: {
@@ -50,6 +53,7 @@ export const styles = StyleSheet.create({
     color: '#D31335',
     fontSize: sizes[3],
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   messageBtn: {
     width: 160,
@@ -60,11 +64,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.ui.primary,
+    fontFamily: 'Urbanist-Regular',
   },
   msgBtnText: {
     color: '#FEFBFD',
     fontSize: sizes[3],
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
 
   profileHeader: {

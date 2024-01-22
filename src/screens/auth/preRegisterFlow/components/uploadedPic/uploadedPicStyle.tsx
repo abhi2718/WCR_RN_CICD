@@ -22,6 +22,7 @@ export const uploadedPic = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginTop: sizes[6],
+    fontFamily: 'Urbanist-Regular',
   },
   imageContainer: {
     justifyContent: 'center',
@@ -51,15 +52,18 @@ export const uploadedPic = StyleSheet.create({
     fontWeight: '700',
     fontSize: fontSizes.h5,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   degree: {
     fontWeight: '500',
     fontSize: fontSizes.title,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   loaction: {
     fontWeight: '600',
     fontSize: fontSizes.button,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
 });

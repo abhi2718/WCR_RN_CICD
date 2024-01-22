@@ -49,7 +49,7 @@ export const cardStyles = StyleSheet.create({
     fontSize: 22,
     color: colors.ui.white,
     fontWeight: fontWeights.bold,
-    fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   gradient: {
     height: '100%',
@@ -61,7 +61,7 @@ export const cardStyles = StyleSheet.create({
   },
   userInfo: {
     marginTop: 8,
-    marginBottom:10
+    marginBottom: 10,
   },
   userInfoRow: {
     marginTop: 6,
@@ -76,19 +76,20 @@ export const cardStyles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
+    fontFamily: 'Urbanist-Regular',
   },
   headingText: {
     marginTop: sizes[2],
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
     fontSize: 22,
-    fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   aboutHeading: {
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
     fontSize: 22,
-    fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   vitalSignsChips: {
     marginVertical: sizes[1],
@@ -110,12 +111,14 @@ export const cardStyles = StyleSheet.create({
   chipText: {
     color: colors.ui.text,
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   aboutText: {
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.button,
     // marginTop: sizes[1],
+    fontFamily: 'Urbanist-Regular',
   },
   blockReportView: {
     borderTopColor: 'rgba(29, 27, 32, 0.15)',
@@ -128,10 +131,12 @@ export const cardStyles = StyleSheet.create({
     paddingVertical: sizes[3],
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.title,
+    fontFamily: 'Urbanist-Regular',
   },
   reportText: {
     color: colors.ui.primary,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   hrLine: {
     borderTopColor: 'rgba(29, 27, 32, 0.15)',
@@ -158,6 +163,7 @@ export const cardStyles = StyleSheet.create({
     fontSize: fontSizes.button,
     alignContent: 'center',
     textTransform: 'capitalize',
+    fontFamily: 'Urbanist-Regular',
   },
   flexWrap: {
     flexWrap: 'wrap',

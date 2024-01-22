@@ -1228,6 +1228,7 @@ const myStyles = StyleSheet.create({
   leaveBtn: {
     color: colors.ui.primary,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   viewReportBlock: {
     padding: 20,
@@ -1262,9 +1263,11 @@ const myStyles = StyleSheet.create({
   },
   textRed: {
     color: theme.colors.ui.primary,
+    fontFamily: 'Urbanist-Regular',
   },
   textWhite: {
     color: theme.colors.ui.white,
+    fontFamily: 'Urbanist-Regular',
   },
   widthFlex: {
     flex: 1,
@@ -1274,6 +1277,7 @@ const myStyles = StyleSheet.create({
     fontWeight: theme.fontWeights.bold,
     marginVertical: 12,
     color: theme.colors.ui.secondary,
+    fontFamily: 'Urbanist-Regular',
   },
   userAvatar: {
     width: 150,

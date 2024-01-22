@@ -30,7 +30,7 @@ export const OtpCodeInput = ({
     setOtpValue(text);
     onChangeOtp(text);
   };
- 
+
   return (
     <SafeAreaView style={styles.root}>
       <CodeField
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     color: colors.ui.black,
     fontSize: sizes[4],
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
   focusCell: {
     borderBottomColor: colors.ui.primary,

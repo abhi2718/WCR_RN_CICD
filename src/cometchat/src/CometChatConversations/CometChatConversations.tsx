@@ -631,7 +631,9 @@ export const CometChatConversations = (props: ConversationInterface) => {
     if (!disableTyping && params.typingText) {
       return (
         <View style={Style.row}>
-          <Text>{params.typingText}</Text>
+          <Text style={{ fontFamily: 'Urbanist-Regular' }}>
+            {params.typingText}
+          </Text>
         </View>
       );
     }
@@ -678,7 +680,13 @@ export const CometChatConversations = (props: ConversationInterface) => {
         />
         {params.unreadCount > 0 && isUserWindow ? (
           <View style={Style.yourTurnBadge}>
-            <Text style={{ color: 'white', textTransform: 'uppercase' }}>
+            <Text
+              style={{
+                color: 'white',
+                textTransform: 'uppercase',
+                fontFamily: 'Urbanist-Regular',
+              }}
+            >
               Your Turn
             </Text>
           </View>

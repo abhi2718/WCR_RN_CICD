@@ -23,17 +23,20 @@ export const SexualOrientationStyle = StyleSheet.create({
   skipBtn: {
     fontSize: 20,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: 'Urbanist-Regular',
   },
 
   innerView: {
@@ -49,6 +52,7 @@ export const SexualOrientationStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   rowView: {
     marginBottom: sizes[1],

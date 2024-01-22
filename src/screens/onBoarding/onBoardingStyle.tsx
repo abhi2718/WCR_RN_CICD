@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     fontSize: sizes[6],
     fontWeight: fontWeights.bold,
     marginTop: sizes[3],
-    fontFamily: fonts.body,
+    fontFamily: 'Urbanist-Regular',
   },
   subHeading: {
     color: colors.ui.text,
@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
     fontSize: sizes[4],
     fontWeight: fontWeights.regular,
     marginTop: sizes[2],
+    fontFamily: 'Urbanist-Regular',
   },
   scrollImg: {
     height: sizes[1],
@@ -58,5 +59,6 @@ export const styles = StyleSheet.create({
     padding: 250,
     fontSize: 25,
     marginBottom: 40,
+    fontFamily: 'Urbanist-Regular',
   },
 });

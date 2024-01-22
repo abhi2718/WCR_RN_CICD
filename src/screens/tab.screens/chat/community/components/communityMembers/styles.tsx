@@ -34,11 +34,13 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   nameHeading: {
     fontSize: sizes[3] + 1,
     fontWeight: fontWeights.bold,
     color: colors.ui.primary,
+    fontFamily: 'Urbanist-Regular',
   },
 
   groupHeading: {
@@ -46,6 +48,7 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     color: colors.ui.text,
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
   square: {
     alignSelf: 'center',

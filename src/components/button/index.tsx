@@ -114,6 +114,7 @@ const roundStyles = StyleSheet.create({
     color: '#000',
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
+    fontFamily: 'Urbanist-Regular',
   },
 });
 
@@ -129,6 +130,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: sizes[3],
+    fontFamily: 'Urbanist-Regular',
   },
   primaryButton: {
     padding: sizes[3],
@@ -148,5 +150,6 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     fontStyle: 'normal',
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
 });

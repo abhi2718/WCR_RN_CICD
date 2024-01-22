@@ -24,6 +24,7 @@ export const searchStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
 
   text: {
@@ -31,6 +32,7 @@ export const searchStyle = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   pendingIcon: {
     width: sizes[12] * 2,

@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#000',
+    fontFamily: 'Urbanist-Regular',
   },
   listItemTailIcon: { height: 12, width: 12 },
   groupName: {
@@ -29,6 +30,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: colors.ui.text,
     textAlign: 'center',
+    fontFamily: 'Urbanist-Regular',
   },
   descContainer: {
     backgroundColor: '#F7F7F7',
@@ -42,6 +44,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     width: dimensions.width - 40,
     lineHeight: 21,
+    fontFamily: 'Urbanist-Regular',
   },
   participantCount: {
     fontSize: sizes[2] + 2,

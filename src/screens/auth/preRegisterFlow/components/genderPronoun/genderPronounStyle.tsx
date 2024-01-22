@@ -26,11 +26,13 @@ export const genderPronounStyle = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: 'Urbanist-Regular',
   },
 
   innerView: {
@@ -46,6 +48,7 @@ export const genderPronounStyle = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: '500',
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   rowView: {
     marginBottom: sizes[1],

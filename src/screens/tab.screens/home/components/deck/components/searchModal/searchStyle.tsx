@@ -29,6 +29,7 @@ export const searchStyle = StyleSheet.create({
     marginBottom: 10,
     fontSize: fontSizes.title,
     backgroundColor: colors.ui.inputBg,
+    fontFamily: 'Urbanist-Regular',
   },
   crossImg: {
     width: 15,
@@ -44,10 +45,12 @@ export const searchStyle = StyleSheet.create({
   firstName: {
     fontSize: fontSizes.title,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   ctiy: {
     fontSize: fontSizes.text,
     color: colors.ui.placeholder,
+    fontFamily: 'Urbanist-Regular',
   },
   content: {
     flex: 1,
@@ -61,6 +64,7 @@ export const searchStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   subHeadingInner: {
     color: colors.ui.text,
@@ -68,12 +72,14 @@ export const searchStyle = StyleSheet.create({
     fontWeight: fontWeights.bold,
     paddingHorizontal: 16,
     paddingVertical: 10,
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   pendingIcon: {
     width: sizes[12] * 2,

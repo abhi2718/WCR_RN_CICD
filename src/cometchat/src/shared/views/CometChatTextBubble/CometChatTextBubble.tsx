@@ -12,7 +12,11 @@ import { TextBubbleStyle, TextBubbleStyleInterface } from './TextBubbleStyle';
 const Link = ({ text, url, style }) => {
   return (
     <Text
-      style={{ ...style, textDecorationLine: 'underline' }}
+      style={{
+        ...style,
+        textDecorationLine: 'underline',
+        fontFamily: 'Urbanist-Regular',
+      }}
       onPress={() => {
         let finalUrl = url.startsWith('http') ? url : `http://${url}`;
         Linking.canOpenURL(finalUrl)
@@ -22,9 +26,7 @@ const Link = ({ text, url, style }) => {
               return;
             }
           })
-          .catch((err) => {
-           
-          });
+          .catch((err) => {});
       }}
     >
       {text}
@@ -55,8 +57,14 @@ export const FormatTextForLinks = ({ str, style }) => {
     if (email) urlLink = 'mailto:';
     if (phone) urlLink = 'tel:';
     return (
-      <Text style={{ ...style.textFont, color: style.textColor }}>
-        <Text>{pre}</Text>
+      <Text
+        style={{
+          ...style.textFont,
+          color: style.textColor,
+          fontFamily: 'Urbanist-Regular',
+        }}
+      >
+        <Text style={{ fontFamily: 'Urbanist-Regular' }}>{pre}</Text>
         <Link
           text={resPart[0]}
           url={urlLink + resPart[0].trim()}

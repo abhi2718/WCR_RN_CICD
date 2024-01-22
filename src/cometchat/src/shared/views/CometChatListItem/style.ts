@@ -2,7 +2,6 @@ import React from 'react';
 //@ts-ignore
 import { StyleSheet } from 'react-native';
 
-
 export const Style = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -31,7 +30,7 @@ export const Style = StyleSheet.create({
 
   titleTextStyle: {
     opacity: 1,
-
+    fontFamily: 'Urbanist-Regular',
     textAlign: 'left',
   },
   tailViewStyle: {
@@ -61,5 +60,9 @@ export const Style = StyleSheet.create({
     height: 18,
     width: 18,
   },
-  optionTitleStyle: { fontWeight: '500', fontSize: 17 },
+  optionTitleStyle: {
+    fontWeight: '500',
+    fontSize: 17,
+    fontFamily: 'Urbanist-Regular',
+  },
 });

@@ -1,75 +1,72 @@
-import React, { useCallback, useImperativeHandle, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Emojis } from './emojis';
 import { Styles } from './style';
 import { CometChatTheme } from '../../resources/CometChatTheme';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 
 const emojiValues = Object.values(Emojis);
 
 const viewConfig = {
   waitForInteraction: true,
-  viewAreaCoveragePercentThreshold: 30
-}
+  viewAreaCoveragePercentThreshold: 30,
+};
 
 type CategoryListInterface = {
-  theme: CometChatTheme,
-  onCategorySelected: (id: string, index: number) => void
-}
+  theme: CometChatTheme;
+  onCategorySelected: (id: string, index: number) => void;
+};
 
 type CategoryListActions = {
-  updateCategory: (newCateory: string, index: number) => void
-}
+  updateCategory: (newCateory: string, index: number) => void;
+};
 
 const CategoryList = React.forwardRef<
-CategoryListActions,
-CategoryListInterface
->((
-  {theme, onCategorySelected}, ref) => {
+  CategoryListActions,
+  CategoryListInterface
+>(({ theme, onCategorySelected }, ref) => {
   const [activeCategory, setActiveCategory] = useState('people');
 
   useImperativeHandle(ref, () => {
     return {
-      updateCategory: updateCategory
-    }
+      updateCategory: updateCategory,
+    };
   });
   const updateCategory = (newCategory, index) => {
     setActiveCategory(newCategory);
-  }
+  };
 
   return (
     <>
-      {
-        Emojis.map((value, index) => {
-          let emojiCategory = Object.values(value)[0];
-          return (
-            <TouchableOpacity
-              style={[Styles.getListStyle]}
-              key={emojiCategory.id}
-              onPress={() => {
-                onCategorySelected && onCategorySelected(emojiCategory.id,index);
-              }}
-            >
-              <Image
-                style={{
-                  tintColor: activeCategory == emojiCategory.id
+      {Emojis.map((value, index) => {
+        let emojiCategory = Object.values(value)[0];
+        return (
+          <TouchableOpacity
+            style={[Styles.getListStyle]}
+            key={emojiCategory.id}
+            onPress={() => {
+              onCategorySelected && onCategorySelected(emojiCategory.id, index);
+            }}
+          >
+            <Image
+              style={{
+                tintColor:
+                  activeCategory == emojiCategory.id
                     ? theme?.palette?.getPrimary()
                     : theme?.palette?.getAccent600(),
-                }}
-                source={emojiCategory.symbol}
-              />
-            </TouchableOpacity>
-          );
-        })
-      }
+              }}
+              source={emojiCategory.symbol}
+            />
+          </TouchableOpacity>
+        );
+      })}
     </>
-  )
+  );
 });
 
 /**
@@ -117,6 +114,7 @@ const CometChatEmojiKeyboard = (props) => {
             theme?.typography?.heading,
             {
               color: theme?.palette?.getPrimary(),
+              fontFamily: 'Urbanist-Regular',
             },
           ]}
         >
@@ -138,7 +136,10 @@ const CometChatEmojiKeyboard = (props) => {
             Styles.emojiCategoryTitle,
             theme?.typography?.caption1,
             ...props.style?.sectionHeaderFont,
-            { color: theme?.palette?.getAccent500() },
+            {
+              color: theme?.palette?.getAccent500(),
+              fontFamily: 'Urbanist-Regular',
+            },
           ]}
         >
           {name}
@@ -184,7 +185,7 @@ const CometChatEmojiKeyboard = (props) => {
         ]}
         data={emojiValues}
         viewabilityConfig={viewConfig}
-        onViewableItemsChanged={({changed, viewableItems}) => {
+        onViewableItemsChanged={({ changed, viewableItems }) => {
           let changedItem = changed[0];
           if (changedItem.isViewable) {
             categoryRef.current?.updateCategory(changedItem.key);

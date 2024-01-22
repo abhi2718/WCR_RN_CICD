@@ -36,16 +36,19 @@ export const Style = StyleSheet.create({
   },
   textCapitalize: {
     textTransform: 'capitalize',
+    fontFamily: 'Urbanist-Regular',
   },
   darkText: {
     fontSize: 16,
     fontWeight: theme.fontWeights.semiBold,
     color: theme.colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   lightText: {
     fontSize: 12,
     fontWeight: theme.fontWeights.regular,
     color: theme.colors.ui.textAccent,
+    fontFamily: 'Urbanist-Regular',
   },
   mentionListBox: {
     backgroundColor: theme.colors.ui.white,

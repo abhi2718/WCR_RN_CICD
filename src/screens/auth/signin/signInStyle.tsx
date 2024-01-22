@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.text,
     color: colors.ui.text,
     paddingVertical: sizes[3],
+    fontFamily: 'Urbanist-Regular',
   },
   emailIconStyle: {
     height: sizes[3] + 1.5,

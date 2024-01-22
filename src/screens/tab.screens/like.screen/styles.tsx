@@ -36,6 +36,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: 'Urbanist-Regular',
   },
   noMatchIcon: {
     width: sizes[12] * 2,
@@ -46,6 +47,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: 'Urbanist-Regular',
   },
   matchHeading: {
     color: theme.colors.ui.textHead,
@@ -54,12 +56,14 @@ export const styles = StyleSheet.create({
     lineHeight: 26,
     marginBottom: 10,
     marginTop: 20,
+    fontFamily: 'Urbanist-Regular',
   },
   seeAll: {
     color: theme.colors.ui.primary,
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.medium,
     lineHeight: 26,
+    fontFamily: 'Urbanist-Regular',
   },
   headerPadding: {
     paddingBottom: theme.units.sizes[10],
@@ -79,6 +83,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     flex: 1,
     paddingRight: 21,
+    fontFamily: 'Urbanist-Regular',
   },
   backArrowSize: {
     width: theme.units.sizes[21],
@@ -107,11 +112,13 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     color: theme.colors.ui.text,
     maxWidth: dimensions.width,
+    fontFamily: 'Urbanist-Regular',
   },
 
   paddingMatches: {
     width: dimensions.width - 20,
     maxWidth: 250,
+    fontFamily: 'Urbanist-Regular',
   },
   paddingReceiveLiked: {
     width: dimensions.width - 60,

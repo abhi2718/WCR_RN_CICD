@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    fontFamily: 'Urbanist-Regular',
   },
   input: {
     borderWidth: 1,
@@ -28,5 +29,6 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.1,
     borderRadius: sizes[4],
     height: sizes[9] * 6,
+    fontFamily: 'Urbanist-Regular',
   },
 });

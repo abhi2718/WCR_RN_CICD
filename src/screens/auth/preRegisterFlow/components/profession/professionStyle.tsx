@@ -24,17 +24,20 @@ export const profession = StyleSheet.create({
   skipBtn: {
     fontSize: 20,
     color: colors.ui.text,
+    fontFamily: 'Urbanist-Regular',
   },
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: 'Urbanist-Regular',
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: 'Urbanist-Regular',
   },
   innerView: {
     flex: 1,
@@ -43,9 +46,11 @@ export const profession = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 2,
     background: 'white',
+    fontFamily: 'Urbanist-Regular',
   },
   rowHeader: {
     width: dimensions.width,
     maxWidth: '100%',
+    fontFamily: 'Urbanist-Regular',
   },
 });
