@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   ImageProps,
   Modal,
   Text,
   View,
-  SafeAreaView,
   Pressable,
-  Button,
-  StyleSheet,
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
-  Platform,
-  ScrollView,
   Keyboard,
 } from 'react-native';
 
@@ -24,26 +19,16 @@ import {
   isAndroid,
 } from '../../../components/tools';
 import { HeaderBar } from '../../../components/header';
-import { RadioButton } from 'react-native-paper';
-import { colors } from '../../../infrastructure/theme/colors';
 import {
   firstModalStyle,
   verificationStyle,
 } from '../stepOne/verificationSteps';
 import { FlatInput } from '../../../components/inputBox';
-import { ErrorText } from '../../auth/signin/signInStyle';
 import { PrimaryButton } from '../../../components/button';
-import {
-  pickPhotoFromCammera,
-  pickPhotoFromGallary,
-} from '../../../utils/uploads';
 import { ImageOrVideo } from 'react-native-image-crop-picker';
-import { sizes } from '../../../infrastructure/theme/sizes';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
 import { useVerificationViewModal } from './stepTwo.ViewModal';
 import {
-  VerificationInfoModal,
   IdverifyModal,
   IdverifyStudentModal,
 } from '../../../components/verificationModal';

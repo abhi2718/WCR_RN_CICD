@@ -1,12 +1,10 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
 import { PrimaryButton } from '../../../components/button';
 import {
-  ImageContainer,
   Row,
   ScreenContainer,
-  Spacer,
 } from '../../../components/tools';
 import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
