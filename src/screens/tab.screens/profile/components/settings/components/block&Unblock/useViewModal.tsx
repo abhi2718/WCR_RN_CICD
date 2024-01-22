@@ -161,7 +161,6 @@ export const useViewModal = () => {
       const blockedList = await blockedUsersRequest.fetchNext();
       setCometChatBlockedUsers(blockedList)
     } catch (error) {
-      console.log(error);
     }
   }
   const handleUserUnBlock = async (uid:string) => {

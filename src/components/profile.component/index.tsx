@@ -7,14 +7,24 @@ import {
   ScrollView,
   Pressable,
   Image,
+  StyleSheet,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import { FullLoader, Row, Spacer } from '../tools';
+import { Column, FullLoader, Row, Spacer, dimensions } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
+import { theme } from '../../infrastructure/theme';
+import { colors } from '../../infrastructure/theme/colors';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
+import { sizes } from '../../infrastructure/theme/sizes';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
 import { calculateAge } from '../../utils/common.functions';
+import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
 import { styles } from './style';
 
 export const ProfileModal = (props: profileProps) => {
@@ -32,234 +42,199 @@ export const ProfileModal = (props: profileProps) => {
     showDisLike,
     showSave,
     showBlock,
+    isMatch,
+    startChat,
+    handleHideOfIsMatchScreen,
   } = useViewModal(props);
   return (
     <Modal visible={showModal}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.containerWrapperStyle}>
         {loading ? (
-          <View style={{ flex: 1 }}>
+          <View style={styles.containerWrapperStyle}>
             <FullLoader />
           </View>
+        ) : isMatch?.status ? (
+          <MatchScreen
+            isMatch={isMatch}
+            startChat={startChat}
+            handleHideOfIsMatchScreen={handleHideOfIsMatchScreen}
+          />
         ) : (
           <View>
             <Spacer position="top" size={10} />
             <Row style={styles.backHeaderPadding}>
               <Pressable onPress={() => toggleModal()}>
-                <Image
-                  style={styles.backArrowSize}
-                  resizeMode="contain"
-                  source={require('../../assets/images/icons/back-arrow1.png')}
-                />
+                <View style={styles.backButtonStyle}>
+                  <Image
+                    style={styles.backArrowSize}
+                    source={require('../../assets/images/icons/back-arrow.png')}
+                  />
+                </View>
               </Pressable>
             </Row>
             <View style={styles.sectionWhite}>
-              <Pressable
-                style={styles.shareIconContainer}
-                onPress={handleShare}
-              >
-                <Image
-                  style={styles.shareIconTop}
-                  source={require('../../assets/images/icons/Share.png')}
-                />
-              </Pressable>
               <View>
                 {user && (
                   <ScrollView bounces={false}>
                     <View>
-                      <FastImage
-                        style={styles.profileImage}
-                        source={{ uri: user.profilePicture.url }}
-                      >
-                        <LinearGradient
-                          colors={[
-                            'rgba(0, 0, 0, 0.00)',
-                            ' rgba(0, 0, 0, 0.9)',
-                          ]}
-                          style={styles.gradient}
-                        />
-                        <Row
-                          alignItems="center"
-                          gap={15}
-                          style={styles.nameRow}
+                      <Row style={styles.relative}>
+                        <FastImage
+                          style={styles.profileImage}
+                          source={{ uri: user.profilePicture.url }}
                         >
-                          <Text style={styles.name}>
+                          <LinearGradient
+                            colors={[
+                              'rgba(0, 0, 0, 0.00)',
+                              ' rgba(0, 0, 0, 0.9)',
+                            ]}
+                            style={styles.gradient}
+                          />
+                          <Text style={styles.userNameText}>
                             {user.displayName ?? user.first}{' '}
                             {user?.genderPronoun !== 'Prefer not to say' &&
                               `(${user?.genderPronoun})`}
                             , {calculateAge(user?.dob)}
                           </Text>
+                        </FastImage>
+                      </Row>
+                      <View style={styles.userInfo}>
+                        <Row alignItems="center">
                           <Image
-                            style={styles.badge}
-                            source={require('../../assets/images/icons/badge.png')}
+                            style={styles.imageIcon}
+                            source={require('../../assets/images/icons/degree.png')}
                           />
+                          <Text style={styles.aboutText}>
+                            {user.designation.userDegree}
+                          </Text>
                         </Row>
-                      </FastImage>
-                    </View>
-
-                    <View style={styles.userInfo}>
-                      <Row alignItems="center" gap={10}>
-                        <Image
-                          style={styles.imageIcon}
-                          source={require('../../assets/images/icons/degree.png')}
-                        />
-                        <Text style={styles.aboutText}>
-                          {user.designation.userDegree}
-                        </Text>
-                      </Row>
-                      <Row alignItems="center" gap={10}>
-                        <Image
-                          style={styles.imageIcon}
-                          source={require('../../assets/images/icons/degTitle.png')}
-                        />
-                        <Text style={styles.aboutText}>
-                          {user.designation.title}
-                        </Text>
-                      </Row>
-                      <Row alignItems="center" gap={10}>
-                        <Image
-                          style={styles.imageIcon}
-                          source={require('../../assets/images/icons/location.png')}
-                        />
-                        <Text style={styles.aboutText}>{user.state}</Text>
-                      </Row>
-                    </View>
-
-                    <View style={styles.vitalSigns}>
-                      {(user?.gender?.length > 0 ||
-                        user?.drinking?.length > 0 ||
-                        user?.ethnicity?.length > 0 ||
-                        user?.maritalStatus) && (
-                        <Text style={styles.headingText}>Vital Signs</Text>
-                      )}
-                      <Row
-                        style={styles.vitalSignsChips}
-                        gap={8}
-                        alignItems="center"
-                      >
-                        {user.gender && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            {user.gender === 'Female' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/femailAvatar.png')}
-                              />
-                            )}
-                            {user.gender === 'Male' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/maleAvatar.png')}
-                              />
-                            )}
-                            {user.gender === 'Transman' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/transmanAvatar.png')}
-                              />
-                            )}
-                            {user.gender === 'Transwomen' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/transwomenAvator.png')}
-                              />
-                            )}
-                            <Text style={styles.chipText}> {user?.gender}</Text>
-                          </Row>
+                        <Row alignItems="center">
+                          <Image
+                            style={styles.imageIcon}
+                            source={require('../../assets/images/icons/degTitle.png')}
+                          />
+                          <Text style={styles.aboutText}>
+                            {user.designation.title}
+                          </Text>
+                        </Row>
+                        <Row alignItems="center">
+                          <Image
+                            style={styles.imageIcon}
+                            source={require('../../assets/images/icons/location.png')}
+                          />
+                          <Text style={styles.aboutText}>{user.state}</Text>
+                        </Row>
+                      </View>
+                      <View style={styles.vitalSigns}>
+                        {(user?.gender?.length > 0 ||
+                          user?.drinking?.length > 0 ||
+                          user?.ethnicity?.length > 0 ||
+                          user?.maritalStatus) && (
+                          <Text style={styles.headingText}>Vital Signs</Text>
                         )}
-
-                        {user.showSexualPreference && user.sexualPreference && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            {user.sexualPreference === 'Straight' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/straight.png')}
-                              />
-                            )}
-                            {user.sexualPreference === 'Lesbian' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/lesbian.png')}
-                              />
-                            )}
-                            {user.sexualPreference === 'Gay' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/gay.png')}
-                              />
-                            )}
-                            <Text style={styles.chipText}>
-                              {user.sexualPreference}
-                            </Text>
-                          </Row>
-                        )}
-
-                        {user.userHeight && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            <Image
-                              style={styles.chipIcon}
-                              source={require('../../assets/images/icons/heightScale.png')}
-                            />
-                            <Text style={styles.chipText}>
-                              {user.userHeight.feet}"{user.userHeight.inch}'
-                            </Text>
-                          </Row>
-                        )}
-
-                        {user.ethnicity.length >= 0 &&
-                          user.ethnicity.map(
-                            (ethnicity: String, index: number) => (
+                        <Row
+                          style={styles.vitalSignsChips}
+                          gap={6}
+                          alignItems="center"
+                        >
+                          {user.gender && (
+                            <Row
+                              gap={0}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              {user.gender === 'Female' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/femailAvatar.png')}
+                                />
+                              )}
+                              {user.gender === 'Male' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/maleAvatar.png')}
+                                />
+                              )}
+                              {user.gender === 'Transman' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/transmanAvatar.png')}
+                                />
+                              )}
+                              {user.gender === 'Transwomen' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/transwomenAvator.png')}
+                                />
+                              )}
+                              <Text style={styles.chipText}>
+                                {' '}
+                                {user?.gender}
+                              </Text>
+                            </Row>
+                          )}
+                          {user.showSexualPreference &&
+                            user.sexualPreference && (
                               <Row
-                                gap={10}
+                                gap={0}
                                 alignItems="center"
                                 style={styles.chip}
-                                key={index}
                               >
-                                <Text style={styles.chipText}>{ethnicity}</Text>
+                                {user.sexualPreference === 'Straight' && (
+                                  <Image
+                                    style={styles.chipIcon}
+                                    source={require('../../assets/images/icons/straight.png')}
+                                  />
+                                )}
+                                {user.sexualPreference === 'Lesbian' && (
+                                  <Image
+                                    style={styles.chipIcon}
+                                    source={require('../../assets/images/icons/lesbian.png')}
+                                  />
+                                )}
+                                {user.sexualPreference === 'Gay' && (
+                                  <Image
+                                    style={styles.chipIcon}
+                                    source={require('../../assets/images/icons/gay.png')}
+                                  />
+                                )}
+                                <Text style={styles.chipText}>
+                                  {user.sexualPreference}
+                                </Text>
                               </Row>
-                            ),
+                            )}
+
+                          {user.userHeight && (
+                            <Row
+                              gap={0}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/icons/heightScale.png')}
+                              />
+                              <Text style={styles.chipText}>
+                                {user.userHeight.feet}"{user.userHeight.inch}'
+                              </Text>
+                            </Row>
                           )}
 
-                        {user.maritalStatus && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            <Image
-                              style={styles.chipIcon}
-                              source={require('../../assets/images/icons/heartVitialSign.png')}
-                            />
-                            <Text style={styles.chipText}>
-                              {user.maritalStatus}
-                            </Text>
-                          </Row>
-                        )}
-
-                        {user.religion && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            {user.religion === 'Christian' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/Christian.png')}
-                              />
+                          {user.ethnicity.length >= 0 &&
+                            user.ethnicity.map(
+                              (ethnicity: String, key: number) => (
+                                <Row
+                                  gap={0}
+                                  key={key}
+                                  alignItems="center"
+                                  style={styles.chip}
+                                >
+                                  <Text style={styles.chipText}>
+                                    {ethnicity}
+                                  </Text>
+                                </Row>
+                              ),
                             )}
-                            {user.religion === 'Muslim' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/Muslim.png')}
-                              />
-                            )}
-                            {user.religion === 'Hindu' && (
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/icons/hindu.png')}
-                              />
-                            )}
-                            <Text style={styles.chipText}>{user.religion}</Text>
-                          </Row>
-                        )}
-                        {user.politics && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            <Text style={styles.chipText}>{user.politics}</Text>
-                          </Row>
-                        )}
-                        {user.kids &&
-                          (user.kids === ' Prefer not to say' ? null : (
+                          {user.maritalStatus && (
                             <Row
                               gap={10}
                               alignItems="center"
@@ -267,36 +242,100 @@ export const ProfileModal = (props: profileProps) => {
                             >
                               <Image
                                 style={styles.chipIcon}
-                                source={require('../../assets/images/icons/kids.png')}
+                                source={require('../../assets/images/icons/heartVitialSign.png')}
                               />
-                              <Text style={styles.chipText}>{user.kids}</Text>
+                              <Text style={styles.chipText}>
+                                {user.maritalStatus}
+                              </Text>
                             </Row>
-                          ))}
-
-                        {user.covidVaccineStatus && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            <Image
-                              style={styles.chipIcon}
-                              source={require('../../assets/images/icons/vaccinated.png')}
-                            />
-                            <Text style={styles.chipText}>
-                              {user.covidVaccineStatus}
-                            </Text>
-                          </Row>
-                        )}
-
-                        {user.drinking && (
-                          <Row gap={10} alignItems="center" style={styles.chip}>
-                            <Image
-                              style={styles.chipIcon}
-                              source={require('../../assets/images/icons/drinks.png')}
-                            />
-                            <Text style={styles.chipText}>{user.drinking}</Text>
-                          </Row>
-                        )}
-                      </Row>
+                          )}
+                          {user.religion && (
+                            <Row
+                              gap={0}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              {user.religion === 'Christian' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/Christian.png')}
+                                />
+                              )}
+                              {user.religion === 'Muslim' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/Muslim.png')}
+                                />
+                              )}
+                              {user.religion === 'Hindu' && (
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/hindu.png')}
+                                />
+                              )}
+                              <Text style={styles.chipText}>
+                                {user.religion}
+                              </Text>
+                            </Row>
+                          )}
+                          {user.politics && (
+                            <Row
+                              gap={0}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Text style={styles.chipText}>
+                                {user.politics}
+                              </Text>
+                            </Row>
+                          )}
+                          {user.kids &&
+                            (user.kids === ' Prefer not to say' ? null : (
+                              <Row
+                                gap={0}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/icons/kids.png')}
+                                />
+                                <Text style={styles.chipText}>{user.kids}</Text>
+                              </Row>
+                            ))}
+                          {user.covidVaccineStatus && (
+                            <Row
+                              gap={0}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/icons/vaccinated.png')}
+                              />
+                              <Text style={styles.chipText}>
+                                {user.covidVaccineStatus}
+                              </Text>
+                            </Row>
+                          )}
+                          {user.drinking && (
+                            <Row
+                              gap={0}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/icons/drinks.png')}
+                              />
+                              <Text style={styles.chipText}>
+                                {user.drinking}
+                              </Text>
+                            </Row>
+                          )}
+                        </Row>
+                      </View>
                     </View>
-
                     <View style={styles.marginY}>
                       {user?.photos.map(({ url, _id }, index) => {
                         return (
@@ -305,11 +344,19 @@ export const ProfileModal = (props: profileProps) => {
                               source={{ uri: url }}
                               style={styles.pictures}
                               resizeMode={FastImage.resizeMode.cover}
-                            />
+                            >
+                              <LinearGradient
+                                colors={[
+                                  'rgba(0, 0, 0, 0.00)',
+                                  ' rgba(0, 0, 0, 0.9)',
+                                ]}
+                                style={styles.gradient}
+                              />
+                            </FastImage>
                             {index === 0 && user?.bio?.length > 0 && (
                               <View style={styles.inBtwnText}>
                                 <Text style={styles.headingText}>About</Text>
-                                <Text style={styles.bioText}>{user.bio}</Text>
+                                <Text style={styles.aboutText}>{user.bio}</Text>
                               </View>
                             )}
                           </View>
@@ -317,7 +364,7 @@ export const ProfileModal = (props: profileProps) => {
                       })}
                     </View>
                     <View style={styles.shareWrapper}>
-                      <Row alignItems="center" justifyContent="center" gap={50}>
+                      <Row justifyContent="space-between">
                         {showDisLike && (
                           <Pressable onPress={handleDisLike}>
                             <Image
@@ -343,6 +390,11 @@ export const ProfileModal = (props: profileProps) => {
                           </Pressable>
                         )}
                       </Row>
+                      <Pressable onPress={handleShare}>
+                        <Text style={styles.blockReportText}>
+                          Share with a Friend
+                        </Text>
+                      </Pressable>
                       {showBlock && (
                         <Pressable onPress={handleBlockUser}>
                           <Text style={styles.blockReportText}>
@@ -351,7 +403,7 @@ export const ProfileModal = (props: profileProps) => {
                         </Pressable>
                       )}
                     </View>
-                    <Spacer position="bottom" size={100} />
+                    <Spacer position="bottom" size={60} />
                   </ScrollView>
                 )}
               </View>

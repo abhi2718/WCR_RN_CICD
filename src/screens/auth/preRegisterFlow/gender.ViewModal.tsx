@@ -15,7 +15,7 @@ export const useGenderViewModal = (props: ScreenParams) => {
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
   const { navigation } = props;
-  const updatedGender = user?.profile?.gender ?? 'Male';
+  const updatedGender = user?.profile?.gender ?? 'Man';
   const token = useRef(user?.token ? user?.token : null).current;
   const [gender, setGender] = useState(updatedGender);
   const [checkboxState, setCheckboxState] = useState(true);

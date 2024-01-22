@@ -14,7 +14,24 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 600,
   },
-
+  containerWrapperStyle: {
+    flex: 1,
+  },
+  backButtonStyle: {
+    width: 60,
+  },
+  userNameText: {
+    position: 'absolute',
+    bottom: theme.units?.sizes[20],
+    left: theme.units.sizes[16],
+    fontSize: theme.fontSizes.h6,
+    color: theme.colors.ui.white,
+    fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fontFamily.body,
+  },
+  relative: {
+    position: 'relative',
+  },
   shareIconContainer: {
     position: 'absolute',
     top: 16,

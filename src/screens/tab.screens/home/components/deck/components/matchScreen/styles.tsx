@@ -8,11 +8,15 @@ import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
+  lottieStyle: {
+    width: dimensions.width,
+    height: 310,
+    position: 'absolute',
+  },
   container: {
     flex: 1,
     paddingHorizontal: 16,
   },
-
   hrLine: {
     borderBottomColor: 'rgba(35, 35, 35, 0.20)',
     borderBottomWidth: 0.5,
@@ -29,8 +33,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 60,
-    // borderColor: 'red',
-    // borderWidth: 1,
     position: 'relative',
   },
   matchBgImgOne: {
@@ -55,12 +57,6 @@ export const styles = StyleSheet.create({
     height: 250,
     backgroundColor: 'rgba(255, 51, 51, 0.07)',
     borderRadius: 12,
-    overflow: 'hidden',
-    elevation: 5, // for Android
-    shadowColor: 'rgba(187, 0, 0, 0.20)', // for iOS
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 30,
-    shadowOpacity: 1,
   },
   imageLeft: {
     transform: [{ rotate: '-10deg' }],

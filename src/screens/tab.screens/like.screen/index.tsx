@@ -48,7 +48,7 @@ export const LikeScreen = () => {
         </View>
         {isNoEvent > 0 ? (
           <>
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView style={styles.flexContainer}>
               <View>
                 {data?.matchedUsersList?.length > 0 ? (
                   <View>
@@ -56,12 +56,11 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
+                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Match</Text>
                       <Pressable onPress={() => handleSetSeeAllState(3)}>
-                        <Spacer position="right" size={12}>
-                          <Text style={styles.seeAll}>See All</Text>
-                        </Spacer>
+                        <Text style={styles.seeAll}>See All</Text>
                       </Pressable>
                     </Row>
                     <ScrollView
@@ -107,12 +106,11 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
+                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Likes Received</Text>
                       <Pressable onPress={() => handleSetSeeAllState(0)}>
-                        <Spacer position="right" size={12}>
-                          <Text style={styles.seeAll}>See All</Text>
-                        </Spacer>
+                        <Text style={styles.seeAll}>See All</Text>
                       </Pressable>
                     </Row>
                     <ScrollView
@@ -159,12 +157,11 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
+                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Liked</Text>
                       <Pressable onPress={() => handleSetSeeAllState(1)}>
-                        <Spacer position="right" size={12}>
-                          <Text style={styles.seeAll}>See All</Text>
-                        </Spacer>
+                        <Text style={styles.seeAll}>See All</Text>
                       </Pressable>
                     </Row>
                     <ScrollView
@@ -217,12 +214,11 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
+                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Saved</Text>
                       <Pressable onPress={() => handleSetSeeAllState(2)}>
-                        <Spacer position="right" size={12}>
-                          <Text style={styles.seeAll}>See All</Text>
-                        </Spacer>
+                        <Text style={styles.seeAll}>See All</Text>
                       </Pressable>
                     </Row>
                     <ScrollView
@@ -268,10 +264,12 @@ export const LikeScreen = () => {
               <SafeAreaView>
                 <Row alignItems="center" style={styles.backArrowPadding}>
                   <Pressable onPress={() => toggleModal()}>
-                    <Image
-                      style={styles.backArrowSize}
-                      source={require('../../../assets/images/icons/back-arrow.png')}
-                    />
+                    <View style={styles.modalBackButtonContainer}>
+                      <Image
+                        style={styles.backArrowSize}
+                        source={require('../../../assets/images/icons/back-arrow.png')}
+                      />
+                    </View>
                   </Pressable>
                   <Text style={styles.headerText}>{seeAllState.title}</Text>
                 </Row>
@@ -281,15 +279,23 @@ export const LikeScreen = () => {
                       <FlatList
                         data={data.likesReceived}
                         columnWrapperStyle={styles.flatListWrapperStyle}
-                        renderItem={({ item }) => (
-                          <ProfileView
+                        renderItem={({ item, index }) => (
+                          <Spacer
+                            position="bottom"
+                            size={
+                              index === data.likesReceived.length - 1 ? 200 : 16
+                            }
                             key={item._id}
-                            item={item}
-                            showDeleteIcon={false}
-                            isLikesReceived={true}
-                            handleToggleOuterModal={toggleModal}
-                            path="modalView"
-                          />
+                          >
+                            <ProfileView
+                              key={item._id}
+                              item={item}
+                              showDeleteIcon={false}
+                              isLikesReceived={true}
+                              handleToggleOuterModal={toggleModal}
+                              path="modalView"
+                            />
+                          </Spacer>
                         )}
                         numColumns={2}
                         keyExtractor={(item) => item._id}
@@ -303,16 +309,22 @@ export const LikeScreen = () => {
                       <FlatList
                         data={data.liked}
                         columnWrapperStyle={styles.flatListWrapperStyle}
-                        renderItem={({ item }) => (
-                          <ProfileView
+                        renderItem={({ item, index }) => (
+                          <Spacer
+                            position="bottom"
+                            size={index === data.liked.length - 1 ? 200 : 16}
                             key={item._id}
-                            item={item.actedOn}
-                            deleteLiked={deleteLiked}
-                            showDeleteIcon={true}
-                            isLiked={true}
-                            handleToggleOuterModal={toggleModal}
-                            path="modalView"
-                          />
+                          >
+                            <ProfileView
+                              key={item._id}
+                              item={item.actedOn}
+                              deleteLiked={deleteLiked}
+                              showDeleteIcon={true}
+                              isLiked={true}
+                              handleToggleOuterModal={toggleModal}
+                              path="modalView"
+                            />
+                          </Spacer>
                         )}
                         numColumns={2}
                         keyExtractor={(item) => item._id}
@@ -326,16 +338,24 @@ export const LikeScreen = () => {
                       <FlatList
                         data={data.allFavourite}
                         columnWrapperStyle={styles.flatListWrapperStyle}
-                        renderItem={({ item }) => (
-                          <ProfileView
+                        renderItem={({ item, index }) => (
+                          <Spacer
+                            position="bottom"
+                            size={
+                              index === data.allFavourite.length - 1 ? 200 : 16
+                            }
                             key={item._id}
-                            item={item.favourite}
-                            deleteFavourite={deleteFavourite}
-                            showDeleteIcon={true}
-                            isFavourite={true}
-                            handleToggleOuterModal={toggleModal}
-                            path="modalView"
-                          />
+                          >
+                            <ProfileView
+                              key={item._id}
+                              item={item.favourite}
+                              deleteFavourite={deleteFavourite}
+                              showDeleteIcon={true}
+                              isFavourite={true}
+                              handleToggleOuterModal={toggleModal}
+                              path="modalView"
+                            />
+                          </Spacer>
                         )}
                         numColumns={2}
                         keyExtractor={(item) => item._id}
@@ -349,17 +369,27 @@ export const LikeScreen = () => {
                       <FlatList
                         data={data.matchedUsersList}
                         columnWrapperStyle={styles.flatListWrapperStyle}
-                        renderItem={({ item }) => (
-                          <ProfileView
+                        renderItem={({ item, index }) => (
+                          <Spacer
+                            position="bottom"
+                            size={
+                              index === data.matchedUsersList.length - 1
+                                ? 200
+                                : 16
+                            }
                             key={item._id}
-                            item={item}
-                            showDeleteIcon={false}
-                            isFavourite={false}
-                            isMatch={true}
-                            startChat={startChat}
-                            handleToggleOuterModal={toggleModal}
-                            path="modalView"
-                          />
+                          >
+                            <ProfileView
+                              key={item._id}
+                              item={item}
+                              showDeleteIcon={false}
+                              isFavourite={false}
+                              isMatch={true}
+                              startChat={startChat}
+                              handleToggleOuterModal={toggleModal}
+                              path="modalView"
+                            />
+                          </Spacer>
                         )}
                         numColumns={2}
                         keyExtractor={(item) => item._id}

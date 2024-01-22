@@ -44,6 +44,7 @@ export type MediaMessageProps = {
   guid?: string;
   type?: string;
   uid?: string;
+  isPrivateChatScreen?: boolean;
 };
 export type CommunityMembersProps = {
   group?: CometChat.Group;

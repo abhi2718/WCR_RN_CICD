@@ -72,13 +72,29 @@ export const ProfileView = (props: ProfileViewProps) => {
                       colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
                       style={styles.gradient}
                     >
+                      <Row justifyContent="flex-end">
+                        <Spacer position="right" size={20}>
+                          {isMatch && (
+                            <Pressable onPress={navigateToChat}>
+                              <Image
+                                style={styles.chatIcon}
+                                source={require('../../../../assets/images/icons/matchNew.png')}
+                                resizeMode="contain"
+                              />
+                            </Pressable>
+                          )}
+                        </Spacer>
+                      </Row>
                       <View style={[styles.userTextView, { width: '100%' }]}>
                         <Row justifyContent="space-between" alignItems="center">
-                          <Column>
-                            <Text style={styles.userNameText}>
+                          <Column style={styles.columnWrapper}>
+                            {/* <Text style={styles.userNameText}>
                               {item?.profile?.displayName ??
-                                item?.profile?.name?.first}
-                              , {calculateAge(item?.profile?.dob)}
+                                item?.profile?.name?.first}{' '}
+                              {calculateAge(item?.profile?.dob)}
+                            </Text> */}
+                            <Text style={styles.userNameText}>
+                              {item?.profile?.name?.first}
                             </Text>
                             <Text
                               style={[
@@ -88,26 +104,7 @@ export const ProfileView = (props: ProfileViewProps) => {
                             >
                               {item?.designation?.title}
                             </Text>
-                            {/* {showDeleteIcon && (
-                        <Pressable onPress={handleRemove}>
-                          <Text>Remove</Text>
-                        </Pressable>
-                      )} */}
                           </Column>
-                          <Spacer position="right" size={20}>
-                            {/* {isMatch && ( */}
-                            <Pressable
-                              style={{ zIndex: 10 }}
-                              onPress={navigateToChat}
-                            >
-                              <Image
-                                style={{ width: 32 }}
-                                source={require('../../../../assets/images/icons/matchChat.png')}
-                                resizeMode="contain"
-                              />
-                            </Pressable>
-                            {/* )} */}
-                          </Spacer>
                         </Row>
                       </View>
                     </LinearGradient>
@@ -116,7 +113,21 @@ export const ProfileView = (props: ProfileViewProps) => {
                     <LinearGradient
                       colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
                       style={styles.gradient}
-                    />
+                    >
+                      <Column alignItems="flex-end">
+                        <Spacer position="right" size={20}>
+                          {isMatch && (
+                            <Pressable onPress={navigateToChat}>
+                              <Image
+                                style={styles.chatIcon}
+                                source={require('../../../../assets/images/icons/matchNew.png')}
+                                resizeMode="contain"
+                              />
+                            </Pressable>
+                          )}
+                        </Spacer>
+                      </Column>
+                    </LinearGradient>
                   )}
                 </FastImage>
               </Spacer>
@@ -146,13 +157,6 @@ export const ProfileView = (props: ProfileViewProps) => {
                         />
                       </Pressable>
                     )}
-                    <Spacer position="right" size={20}>
-                      {isMatch && (
-                        <Pressable onPress={navigateToChat}>
-                          <Text style={styles.chatButton}>Chat</Text>
-                        </Pressable>
-                      )}
-                    </Spacer>
                   </Row>
                 </Spacer>
               </Column>
@@ -285,16 +289,24 @@ export const ProfileView = (props: ProfileViewProps) => {
           showModal={showModal}
           userId={item?._id}
           toggleModal={toggleModal}
-          showLike={false}
-          showDisLike={false}
+          showLike={isFavourite ? true : false}
+          showDisLike={isFavourite ? true : false}
           showSave={false}
         />
       </View>
     );
   }
+  return <View></View>;
 };
 
 export const styles = StyleSheet.create({
+  columnWrapper: {
+    width: (dimensions.width - 38) / 2,
+    paddingLeft: 8,
+  },
+  chatIcon: {
+    width: 32,
+  },
   relative: {
     position: 'relative',
   },
@@ -344,7 +356,6 @@ export const styles = StyleSheet.create({
   userTextView: {
     position: 'absolute',
     bottom: theme.units.sizes[20],
-    left: theme.units.sizes[12],
   },
   userNameText: {
     fontSize: theme.fontSizes.h6,

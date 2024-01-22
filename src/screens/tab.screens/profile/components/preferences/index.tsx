@@ -9,8 +9,6 @@ import MultiSlider from './components/MultiSlider';
 import { HeaderBar } from '../../../../../components/header';
 import { formatNumber } from '../../../../../utils/common.functions';
 import { PreferenceyModal } from '../../../../../components/preferenceModal';
-import style from '@cometchat/chat-uikit-react-native/src/shared/views/CometChatReceipt/style';
-
 export const PreferencesScreen = () => {
   const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
     useState(false);
@@ -57,14 +55,6 @@ export const PreferencesScreen = () => {
         />
       </View>
       <View>
-        {/* <Pressable onPress={submitLoading ? () => {} : createPrefrences}>
-          <Row>
-            <Text>Save</Text>
-            {submitLoading && <ActivityIndicator />}
-          </Row>
-        </Pressable> */}
-
-        {/* <Text style={styles.headerText}>Healthcare Professional</Text> */}
         <ScrollView
           style={[styles.padding16, styles.scrollSection]}
           showsVerticalScrollIndicator={false}

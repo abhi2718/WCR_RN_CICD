@@ -25,6 +25,7 @@ import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { formatNumber } from '../../../../../utils/common.functions';
+import { HeightModal } from './components/heightModal';
 
 export const EditProfile = () => {
   const {
@@ -61,8 +62,12 @@ export const EditProfile = () => {
     submitLoading,
     letterCount,
     hobbies,
+    showHeightModal,
+    setShowHeightModal,
+    _setShowHeightModal,
+    height,
+    setheight,
   } = useViewModal();
-
   return (
     <SafeAreaView style={styles.editInfoContainer}>
       <View style={styles.ph16}>
@@ -162,26 +167,32 @@ export const EditProfile = () => {
                 <Text style={styles.fieldValue}>{userProfile.dob}</Text>
               </View>
             </Spacer>
-            <Spacer position="top" size={20}>
-              <Row justifyContent="space-between">
-                <Text style={styles.fieldName}>Height</Text>
-                <Text style={styles.fieldName}>
-                  {formatNumber(heightRange[0])}
-                </Text>
-              </Row>
-              <Column justifyContent="center" alignItems="center">
-                <MultiSlider
-                  values={heightRange}
-                  min={4}
-                  max={7}
-                  step={0.1}
-                  onValuesChange={handleHeightSliderChange}
-                />
-              </Column>
+            <Spacer position="top" size={10}>
+              <HeightModal
+                showHeightModal={showHeightModal}
+                setShowHeightModal={setShowHeightModal}
+                setheight={setheight}
+              />
+              <Pressable onPress={() => _setShowHeightModal()}>
+                <Row>
+                  <Column>
+                    <Text style={styles.fieldName}>Height</Text>
+                    <Spacer position="top" size={10}>
+                      <Text style={styles.fieldName}>
+                        {height?.feet}'{height?.inch}
+                      </Text>
+                    </Spacer>
+                  </Column>
+                  <Image
+                    resizeMode="contain"
+                    style={styles.nextArrow}
+                    source={require('../../../../../assets/images/settings/Next.png')}
+                  />
+                </Row>
+              </Pressable>
             </Spacer>
           </Column>
           <Text style={styles.headingText}>Identity/Orientation</Text>
-
           <Column style={styles.ph16}>
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Gender</Text>
@@ -292,7 +303,7 @@ export const EditProfile = () => {
             {optionsList.map((item, index) => {
               if (index === 2) {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Text style={styles.fieldName}>Job Title</Text>
                     <View style={styles.fieldValueContainer}>
                       <TextInput
@@ -309,7 +320,7 @@ export const EditProfile = () => {
               }
               if (index === 3) {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Text style={styles.fieldName}>
                       Institution/School/Practice Name
                     </Text>
@@ -326,9 +337,30 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
+              if (index === 4) {
+                return (
+                  <Spacer key={index} position="top" size={20}>
+                    {/* <Row justifyContent="space-between">
+                      <Text style={styles.fieldName}>Height</Text>
+                      <Text style={styles.fieldName}>
+                        {formatNumber(heightRange[0])}
+                      </Text>
+                    </Row>
+                    <Column justifyContent="center" alignItems="center">
+                      <MultiSlider
+                        values={heightRange}
+                        min={4}
+                        max={7}
+                        step={0.1}
+                        onValuesChange={handleHeightSliderChange}
+                      />
+                    </Column> */}
+                  </Spacer>
+                );
+              }
               if (item.title === 'Ethnicity') {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>{item.title}</Text>
                       <TouchableOpacity onPress={() => openModal('ethnicity')}>
@@ -427,7 +459,7 @@ export const EditProfile = () => {
               }
               if (item.title === 'Relationship level') {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>{item.title}</Text>
                       <TouchableOpacity
