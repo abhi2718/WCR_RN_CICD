@@ -38,99 +38,95 @@ export const BlockAndUnBlock = () => {
   }
 
   return (
-    <>
-      <View style={{ paddingHorizontal: 16 }}>
-        <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
-      </View>
-      <SafeAreaView style={styles.container}>
-        <ScrollView>
-          <View style={styles.container}>
-            <Spacer style={styles.rowOne} position="top" size={20}>
-              <Text style={styles.text}>Block by Country</Text>
-              <DropdownInput
-                data={country}
-                onFocus={() => {}}
-                labelField="label"
-                valueField="value"
-                placeholder="Country"
-                onChange={handleSelectCountry}
-              />
-              <Row alignItems="center" gap={10}>
-                {selectedCountry.map((item, index) => (
-                  <Chip
-                    key={index}
-                    item={item}
-                    onPress={() => handleDeSelectCountry(item)}
-                  />
-                ))}
-              </Row>
-            </Spacer>
-            <Spacer style={styles.rowOne} position="top" size={20}>
-              <Text style={styles.text}>Block by Degree Category/ Type</Text>
-              <DropdownInput
-                data={_userDegree}
-                onFocus={() => {}}
-                labelField="label"
-                valueField="value"
-                placeholder="Select Degree Category"
-                onChange={handleSelectUserDegree}
-              />
-              <Spacer style={styles.rowOne} position="bottom" size={10}>
-                <DropdownInput
-                  data={selectedUserDegreeType}
-                  onFocus={() => {}}
-                  labelField="label"
-                  valueField="value"
-                  placeholder="Select Degree Type"
-                  onChange={handleselectedUserDegreeType}
+    <SafeAreaView style={styles.container}>
+      <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
+      <ScrollView>
+        <View style={styles.container}>
+          <Spacer style={styles.rowOne} position="top" size={20}>
+            <Text style={styles.text}>Block by Country</Text>
+            <DropdownInput
+              data={country}
+              onFocus={() => {}}
+              labelField="label"
+              valueField="value"
+              placeholder="Country"
+              onChange={handleSelectCountry}
+            />
+            <Row alignItems="center" gap={10}>
+              {selectedCountry.map((item, index) => (
+                <Chip
+                  key={index}
+                  item={item}
+                  onPress={() => handleDeSelectCountry(item)}
                 />
-              </Spacer>
+              ))}
+            </Row>
+          </Spacer>
+          <Spacer style={styles.rowOne} position="top" size={20}>
+            <Text style={styles.text}>Block by Degree Category/ Type</Text>
+            <DropdownInput
+              data={_userDegree}
+              onFocus={() => {}}
+              labelField="label"
+              valueField="value"
+              placeholder="Select Degree Category"
+              onChange={handleSelectUserDegree}
+            />
+            <Spacer style={styles.rowOne} position="bottom" size={10}>
+              <DropdownInput
+                data={selectedUserDegreeType}
+                onFocus={() => {}}
+                labelField="label"
+                valueField="value"
+                placeholder="Select Degree Type"
+                onChange={handleselectedUserDegreeType}
+              />
+            </Spacer>
 
+            <Row style={styles.rowWrap} alignItems="center">
+              {selecteduserDegree.map((item, index) => (
+                <Chip
+                  key={index}
+                  item={item}
+                  onPress={() => handleDeSelectUserDegree(item)}
+                />
+              ))}
               <Row style={styles.rowWrap} alignItems="center">
-                {selecteduserDegree.map((item, index) => (
+                {_selectedUserDegreeType.map((item, index) => (
                   <Chip
                     key={index}
                     item={item}
-                    onPress={() => handleDeSelectUserDegree(item)}
+                    onPress={() => handledeSelectedUserDegreeType(item)}
                   />
                 ))}
-                <Row style={styles.rowWrap} alignItems="center">
-                  {_selectedUserDegreeType.map((item, index) => (
-                    <Chip
-                      key={index}
-                      item={item}
-                      onPress={() => handledeSelectedUserDegreeType(item)}
-                    />
-                  ))}
-                </Row>
               </Row>
-            </Spacer>
-            <Text style={styles.blockedListText}>Blocked Users</Text>
-            {cometChatBlockedUsers.map((user) => (
-              <View key={user.getUid()} style={styles.blockUserWrapper}>
-                <Row justifyContent="space-between" alignItems="center">
-                  <Row alignItems="center" gap={10}>
-                    <Image
-                      style={styles.blockUserAvatar}
-                      source={{ uri: user.getAvatar() }}
-                    />
-                    <Column>
-                      <Text style={styles.blockUserText}>{user.getName()}</Text>
-                      <Text style={styles.blockedText}>Blocked</Text>
-                    </Column>
-                  </Row>
-                  <Pressable
-                    onPress={() => handleUserUnBlock(user.getUid())}
-                    style={styles.blockedButton}
-                  >
-                    <Text style={styles.blockButtonText}>UnBlock</Text>
-                  </Pressable>
+            </Row>
+          </Spacer>
+          <Text style={styles.blockedListText}>Blocked Users</Text>
+          {cometChatBlockedUsers.map((user) => (
+            <View key={user.getUid()} style={styles.blockUserWrapper}>
+              <Row justifyContent="space-between" alignItems="center">
+                <Row alignItems="center" gap={10}>
+                  <Image
+                    style={styles.blockUserAvatar}
+                    source={{ uri: user.getAvatar() }}
+                  />
+                  <Column>
+                    <Text style={styles.blockUserText}>{user.getName()}</Text>
+                    <Text style={styles.blockedText}>Blocked</Text>
+                  </Column>
                 </Row>
-              </View>
-            ))}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+                <Pressable
+                  onPress={() => handleUserUnBlock(user.getUid())}
+                  style={styles.blockedButton}
+                >
+                  <Text style={styles.blockButtonText}>UnBlock</Text>
+                </Pressable>
+              </Row>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
