@@ -26,6 +26,7 @@ import { cardStyles } from '../../screens/tab.screens/home/components/deck/compo
 import { calculateAge } from '../../utils/common.functions';
 import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
 import { styles } from './style';
+import { AlertScreen } from '../alert';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -45,6 +46,9 @@ export const ProfileModal = (props: profileProps) => {
     isMatch,
     startChat,
     handleHideOfIsMatchScreen,
+    showBlockModal,
+    setShowBlockModal,
+    handleReport,
   } = useViewModal(props);
   return (
     <Modal visible={showModal}>
@@ -103,7 +107,7 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.imageIcon}
                             source={require('../../assets/images/icons/degree.png')}
                           />
-                          <Text style={styles.aboutText}>
+                          <Text style={styles.userInfoText}>
                             {user.designation.userDegree}
                           </Text>
                         </Row>
@@ -112,7 +116,7 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.imageIcon}
                             source={require('../../assets/images/icons/degTitle.png')}
                           />
-                          <Text style={styles.aboutText}>
+                          <Text style={styles.userInfoText}>
                             {user.designation.title}
                           </Text>
                         </Row>
@@ -121,7 +125,7 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.imageIcon}
                             source={require('../../assets/images/icons/location.png')}
                           />
-                          <Text style={styles.aboutText}>{user.state}</Text>
+                          <Text style={styles.userInfoText}>{user.state}</Text>
                         </Row>
                       </View>
                       <View style={styles.vitalSigns}>
@@ -138,7 +142,7 @@ export const ProfileModal = (props: profileProps) => {
                         >
                           {user.gender && (
                             <Row
-                              gap={0}
+                              gap={10}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -167,7 +171,6 @@ export const ProfileModal = (props: profileProps) => {
                                 />
                               )}
                               <Text style={styles.chipText}>
-                                {' '}
                                 {user?.gender}
                               </Text>
                             </Row>
@@ -175,7 +178,7 @@ export const ProfileModal = (props: profileProps) => {
                           {user.showSexualPreference &&
                             user.sexualPreference && (
                               <Row
-                                gap={0}
+                                gap={10}
                                 alignItems="center"
                                 style={styles.chip}
                               >
@@ -205,7 +208,7 @@ export const ProfileModal = (props: profileProps) => {
 
                           {user.userHeight && (
                             <Row
-                              gap={0}
+                              gap={10}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -223,7 +226,7 @@ export const ProfileModal = (props: profileProps) => {
                             user.ethnicity.map(
                               (ethnicity: String, key: number) => (
                                 <Row
-                                  gap={0}
+                                  gap={10}
                                   key={key}
                                   alignItems="center"
                                   style={styles.chip}
@@ -251,7 +254,7 @@ export const ProfileModal = (props: profileProps) => {
                           )}
                           {user.religion && (
                             <Row
-                              gap={0}
+                              gap={10}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -280,7 +283,7 @@ export const ProfileModal = (props: profileProps) => {
                           )}
                           {user.politics && (
                             <Row
-                              gap={0}
+                              gap={10}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -292,7 +295,7 @@ export const ProfileModal = (props: profileProps) => {
                           {user.kids &&
                             (user.kids === ' Prefer not to say' ? null : (
                               <Row
-                                gap={0}
+                                gap={10}
                                 alignItems="center"
                                 style={styles.chip}
                               >
@@ -305,7 +308,7 @@ export const ProfileModal = (props: profileProps) => {
                             ))}
                           {user.covidVaccineStatus && (
                             <Row
-                              gap={0}
+                              gap={10}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -320,7 +323,7 @@ export const ProfileModal = (props: profileProps) => {
                           )}
                           {user.drinking && (
                             <Row
-                              gap={0}
+                              gap={10}
                               alignItems="center"
                               style={styles.chip}
                             >
@@ -364,7 +367,7 @@ export const ProfileModal = (props: profileProps) => {
                       })}
                     </View>
                     <View style={styles.shareWrapper}>
-                      <Row justifyContent="space-between">
+                      <Row justifyContent="center" gap={32}>
                         {showDisLike && (
                           <Pressable onPress={handleDisLike}>
                             <Image
@@ -390,11 +393,33 @@ export const ProfileModal = (props: profileProps) => {
                           </Pressable>
                         )}
                       </Row>
-                      <Pressable onPress={handleShare}>
+                      {/* <Pressable onPress={handleShare}>
                         <Text style={styles.blockReportText}>
                           Share with a Friend
                         </Text>
-                      </Pressable>
+                      </Pressable> */}
+
+                      {/* --------- */}
+                      <Spacer position="top" size={50} />
+                      <View style={cardStyles.blockReportView}>
+                        <Pressable onPress={() => setShowBlockModal(true)}>
+                          <Text style={[cardStyles.blockReportText]}>
+                            Block
+                          </Text>
+                        </Pressable>
+                        <View style={cardStyles.hrLine} />
+                        <Pressable onPress={handleReport}>
+                          <Text
+                            style={[
+                              cardStyles.blockReportText,
+                              cardStyles.reportText,
+                            ]}
+                          >
+                            Report
+                          </Text>
+                        </Pressable>
+                      </View>
+                      <Spacer position="top" size={48} />
                       {showBlock && (
                         <Pressable onPress={handleBlockUser}>
                           <Text style={styles.blockReportText}>
@@ -410,6 +435,13 @@ export const ProfileModal = (props: profileProps) => {
             </View>
           </View>
         )}
+        <AlertScreen
+          showModal={showBlockModal}
+          setShowModal={setShowBlockModal}
+          title="Block"
+          description="Do you want to block this person?"
+          onPress={handleBlockUser}
+        />
       </SafeAreaView>
     </Modal>
   );

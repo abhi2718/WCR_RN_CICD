@@ -52,11 +52,16 @@ export const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  aboutText: {
+  userInfoText: {
     color: theme.colors.ui.text,
     fontWeight: theme.fontWeights.medium,
     fontSize: theme.fontSizes.text,
     paddingLeft: 6,
+  },
+  aboutText: {
+    color: theme.colors.ui.text,
+    fontWeight: theme.fontWeights.medium,
+    fontSize: theme.fontSizes.text,
   },
   bioText: {
     color: colors.ui.text,
