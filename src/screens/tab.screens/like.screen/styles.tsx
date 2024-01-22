@@ -6,16 +6,24 @@ import { dimensions } from '../../../components/tools';
 import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
+  header: {
+    height: 58,
+    // paddingHorizontal: 16,
+    backgroundColor: '#fff',
+    borderBottomColor: theme.colors.border,
+    borderBottomWidth: theme.units.borderSize.headerBorderWidth,
+    marginBottom: 16,
+  },
   flexContainer: {
-    flex: 1
+    flex: 1,
   },
   modalBackButtonContainer: {
     width: 80,
     height: 40,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    paddingLeft:16,
-    alignItems:"center"
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingLeft: 16,
+    alignItems: 'center',
   },
   container: {
     flex: 1,

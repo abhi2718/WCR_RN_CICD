@@ -63,6 +63,7 @@ export default function Deck({ route }) {
           count={count}
           toggleSearchModal={toggleSearchModal}
           goToNotification={goToNotification}
+          handleUnDoFeature={handleUnDoFeature}
         />
         {/* <Pressable onPress={handleUnDoFeature}>
           <Text>Undo</Text>

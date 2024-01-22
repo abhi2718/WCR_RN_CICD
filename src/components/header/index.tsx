@@ -8,6 +8,7 @@ import { ROUTES } from '../../navigation';
 import { DltLogOutModal } from '../dltLogOutModal';
 import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
 import { ActivityIndicator } from 'react-native-paper';
+import { theme } from '../../infrastructure/theme';
 
 interface HeaderBarProps {
   skip?: () => void;
@@ -145,6 +146,7 @@ interface HeaderDeckProps {
   isPrefrence?: boolean;
   isSearchIcon?: boolean;
   toggleSearchInput?: any;
+  handleUnDoFeature: () => void;
 }
 
 export const HeaderDeck = (props: HeaderDeckProps) => {
@@ -155,6 +157,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
     isPrefrence = true,
     isSearchIcon = false,
     toggleSearchInput,
+    handleUnDoFeature,
   } = props;
   const { navigate } = useNavigation();
   const goToPrefrence = () => navigate(ROUTES.Preferences);
@@ -182,6 +185,17 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
             />
           </Pressable>
           {toggleSearchModal && (
+            <Pressable onPress={handleUnDoFeature}>
+              <Image
+                style={headerDeckStyle.undoIcon}
+                source={require('../../assets/images/icons/undo-icon.png')}
+              />
+            </Pressable>
+          )}
+        </Row>
+
+        <Row alignItems="center" gap={24}>
+          {toggleSearchModal && (
             <Pressable onPress={toggleSearchModal}>
               <Image
                 style={headerDeckStyle.searchIcon}
@@ -189,27 +203,26 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
               />
             </Pressable>
           )}
+          {isPrefrence && (
+            <Pressable onPress={goToPrefrence}>
+              <Image
+                style={headerDeckStyle.searchIcon}
+                source={require('../../assets/images/Filter.png')}
+              />
+            </Pressable>
+          )}
+          {isSearchIcon && (
+            <Pressable onPress={toggleSearchInput}>
+              <Image
+                style={headerDeckStyle.searchIcon}
+                source={require('../../assets/images/Magnifier.png')}
+              />
+            </Pressable>
+          )}
+          {!isPrefrence && !isSearchIcon && (
+            <View style={headerDeckStyle.searchIcon} />
+          )}
         </Row>
-        <Logo width={45} height={45} />
-        {isPrefrence && (
-          <Pressable onPress={goToPrefrence}>
-            <Image
-              style={headerDeckStyle.searchIcon}
-              source={require('../../assets/images/Filter.png')}
-            />
-          </Pressable>
-        )}
-        {isSearchIcon && (
-          <Pressable onPress={toggleSearchInput}>
-            <Image
-              style={headerDeckStyle.searchIcon}
-              source={require('../../assets/images/Magnifier.png')}
-            />
-          </Pressable>
-        )}
-        {!isPrefrence && !isSearchIcon && (
-          <View style={headerDeckStyle.searchIcon} />
-        )}
       </Row>
     </View>
   );
@@ -223,6 +236,10 @@ export const headerDeckStyle = StyleSheet.create({
   searchIcon: {
     width: sizes[6],
     height: sizes[6],
+  },
+  undoIcon: {
+    width: 24,
+    height: 24,
   },
   count: {
     position: 'absolute',

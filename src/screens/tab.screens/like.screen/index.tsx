@@ -57,7 +57,7 @@ export const LikeScreen = () => {
                       style={styles.headerPadding}
                       alignItems="center"
                     >
-                      <Text style={styles.matchHeading}>Match</Text>
+                      <Text style={styles.matchHeading}>Match </Text>
                       <Pressable onPress={() => handleSetSeeAllState(3)}>
                         <Text style={styles.seeAll}>See All</Text>
                       </Pressable>
@@ -244,7 +244,7 @@ export const LikeScreen = () => {
             </ScrollView>
             <Modal visible={modalVisible}>
               <SafeAreaView>
-                <Row alignItems="center" style={styles.backArrowPadding}>
+                <Row alignItems="center" style={styles.header}>
                   <Pressable onPress={() => toggleModal()}>
                     <View style={styles.modalBackButtonContainer}>
                       <Image

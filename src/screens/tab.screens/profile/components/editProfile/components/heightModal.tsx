@@ -10,15 +10,23 @@ import {
 import { Picker } from 'react-native-wheel-pick';
 import { useSelector } from 'react-redux';
 import { colors } from '../../../../../../infrastructure/theme/colors';
-import { cmValues, feetValues } from '../../../../../../utils/constanst';
+import {
+  cmValues,
+  feetValues,
+  options,
+} from '../../../../../../utils/constanst';
 import { HeightStyle } from '../../../../../auth/preRegisterFlow/components/height/heightStyle';
+import { Column } from '../../../../../../components/tools';
+import SwitchSelector from 'react-native-switch-selector';
+import { PrimaryButton } from '../../../../../../components/button';
+
 interface Measurement {
   feet: number;
   inch: number;
   heightInCm?: number;
 }
 export const HeightModal = (props) => {
-  const { showHeightModal, setShowHeightModal,setheight } = props;
+  const { showHeightModal, setShowHeightModal, setheight } = props;
   const { user } = useSelector((state: any) => state.userState);
   const savedHeight: Measurement = user.height;
   const [heightFormat, setheightFormat] = useState('feet');
@@ -72,25 +80,49 @@ export const HeightModal = (props) => {
       inch: remainingInches,
     };
   }
+
   return (
     <Modal visible={showHeightModal}>
-      <SafeAreaView style={styles.containerStyle}>
-        <View>
-          <Pressable onPress={() => setShowHeightModal(false)}>
-            <Text>Close</Text>
-          </Pressable>
-          <Text style={{ fontSize: 20 }}>Height</Text>
-          <Picker
-            textSize={34}
-            isShowSelectBackground={false}
-            selectTextColor={colors.ui.black}
-            style={HeightStyle.picker}
-            isShowSelectLine={false} // Default is true
-            pickerData={heightFormat === 'feet' ? feetValues : cmValues}
-            selectedValue={currentHeight}
-            onValueChange={handleValueChange}
-          />
-        </View>
+      <SafeAreaView style={HeightStyle.flex1}>
+        <Column justifyContent="space-between" style={HeightStyle.flex1}>
+          <View style={HeightStyle.heightHeader}>
+            <Text style={HeightStyle.heightHeaderTitle}>Height</Text>
+          </View>
+          <View>
+            <Picker
+              textSize={34}
+              isShowSelectBackground={false}
+              selectTextColor={colors.ui.black}
+              style={HeightStyle.picker}
+              isShowSelectLine={false} // Default is true
+              pickerData={heightFormat === 'feet' ? feetValues : cmValues}
+              selectedValue={currentHeight}
+              onValueChange={handleValueChange}
+            />
+          </View>
+          <Column style={HeightStyle.heightFooter}>
+            <View style={HeightStyle.switchDiv}>
+              <SwitchSelector
+                style={HeightStyle.switch}
+                buttonColor={colors.ui.primary}
+                backgroundColor={colors.bg.secondary}
+                borderColor={colors.bg.secondary}
+                hasPadding={true}
+                valuePadding={4}
+                height={50}
+                bold={true}
+                options={options}
+                initial={0}
+                onPress={(value: string) => handleValueChange(value)}
+              />
+            </View>
+
+            <PrimaryButton
+              title="Close"
+              onPress={() => setShowHeightModal(false)}
+            />
+          </Column>
+        </Column>
       </SafeAreaView>
     </Modal>
   );

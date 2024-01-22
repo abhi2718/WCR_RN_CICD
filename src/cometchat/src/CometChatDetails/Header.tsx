@@ -10,33 +10,25 @@ import React from 'react';
 import { colors } from '../../../infrastructure/theme/colors';
 import { theme } from '../../../infrastructure/theme';
 export type HeaderType = {
-  title: string,
-  showCloseButton: boolean,
+  title: string;
+  showCloseButton: boolean;
   closeButtonIcon: {
     uri: string;
-  },
-  onPress: () => void,
-  titleStyle:{
-    padding: number,
-  },
-}
-const Header = (props:HeaderType) => {
-  const {
-    title,
-    showCloseButton,
-    closeButtonIcon,
-    onPress,
-    titleStyle,
-  } = props;
+  };
+  onPress: () => void;
+  titleStyle: {
+    padding: number;
+  };
+};
+const Header = (props: HeaderType) => {
+  const { title, showCloseButton, closeButtonIcon, onPress, titleStyle } =
+    props;
   return (
     <View style={[styles.container, styles.shadows]}>
       {showCloseButton && (
         <TouchableOpacity onPress={onPress}>
           <View style={styles.backButtonStyle}>
-            <Image
-              source={closeButtonIcon}
-              style={styles.imageStyle}
-            />
+            <Image source={closeButtonIcon} style={styles.imageStyle} />
           </View>
         </TouchableOpacity>
       )}
@@ -48,11 +40,12 @@ const Header = (props:HeaderType) => {
 
 const styles = StyleSheet.create({
   tailContainer: {
-    width: 30
+    width: 30,
   },
   imageStyle: {
     height: 24,
     width: 24,
+    justifyContent: 'flex-start',
   },
   backButtonStyle: {
     width: 50,
@@ -71,19 +64,22 @@ const styles = StyleSheet.create({
     color: colors.ui.text,
   },
   shadows: {
-    padding: theme.units.sizes[3],
+    height: 58,
+    paddingHorizontal: 16,
     backgroundColor: '#fff',
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 10, height: 10 },
-        shadowOpacity: 0.04,
-        shadowRadius: 40,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
+    borderBottomColor: theme.colors.border,
+    borderBottomWidth: theme.units.borderSize.headerBorderWidth,
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: 'black',
+    //     shadowOffset: { width: 10, height: 10 },
+    //     shadowOpacity: 0.04,
+    //     shadowRadius: 40,
+    //   },
+    //   android: {
+    //     elevation: 2,
+    //   },
+    // }),
   },
 });
 export default Header;
