@@ -1,18 +1,16 @@
-import { CommonActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Share from 'react-native-share';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
-import { useLogOutViewModal } from '../../../../../utils/logOut';
+
 
 export const useViewModal = () => {
-  const { user } = useSelector(({ userState }) => userState);
   const navigation = useNavigation();
-
   const [showModal, setShowModal] = useState(false);
   const [link, setLink] = useState('');
   const handleToggleModal = () => setShowModal((oldValue) => !oldValue);
-  const goBack = () => navigation.goBack();
+
   const handleShare = () => {
     try {
       const shareOptions = {

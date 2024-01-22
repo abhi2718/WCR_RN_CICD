@@ -5,21 +5,19 @@ import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 import { fontWeights } from '../../../../../../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
+  backButtonContainer:{width:40,height:40},
   imageStyle: { width: 40, height: 40, borderRadius: 30 },
-
   profileAvatar: {
     height: 200,
     width: 200,
     borderRadius: 100,
   },
-
   scopeMemberText: {
     color: '#7A7A7A',
     fontSize: sizes[2] + 1,
     fontWeight: fontWeights.regular,
     fontFamily: 'Urbanist-Regular',
   },
-
   memberNameText: {
     color: '#1B1B1B',
     fontSize: sizes[3] - 2,

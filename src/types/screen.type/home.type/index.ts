@@ -1,3 +1,5 @@
+import { CometChat } from "../../../cometchat/sdk/CometChat";
+
 export type User = {
   color: string;
   id: string;
@@ -5,11 +7,9 @@ export type User = {
   pantone_value: string;
   year: string;
 };
-
 export type UserListProps = {
   userList: User[];
 };
-
 export type UserItemProps = {
   user: User;
 };
@@ -19,16 +19,10 @@ export type SearchModalProps = {
   handleSetProfiles: (item:any) => void;
 };
 export type AppBarDropDownProps = {
-  user: {
-    avatar: string;
-    blockedByMe: boolean;
-    conversationId: string;
-    deactivatedAt: number;
-    hasBlockedMe: boolean;
-    lastActiveAt: number;
-    name: string;
-    role: string;
-    status: string;
-    uid: string;
-  }
+  user: CometChat.User;
 };
+export type MatchScreenPropsType = {
+  isMatch: any,
+  startChat: () => void,
+  handleHideOfIsMatchScreen: () => void
+}

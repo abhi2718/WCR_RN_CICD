@@ -6,6 +6,17 @@ import { dimensions } from '../../../components/tools';
 import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+  },
+  modalBackButtonContainer: {
+    width: 80,
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingLeft: 16,
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     width: dimensions.width,
@@ -82,7 +93,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.ui.textHead,
     textAlign: 'center',
     flex: 1,
-    paddingRight: 21,
+    paddingRight: 80,
     fontFamily: 'Urbanist-Regular',
   },
   backArrowSize: {

@@ -66,8 +66,8 @@ export const styles = StyleSheet.create({
       ios: {
         shadowColor: 'black',
         shadowOffset: { width: 10, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
+        shadowOpacity: 0.01,
+        shadowRadius: 0,
       },
       android: {
         elevation: 2,

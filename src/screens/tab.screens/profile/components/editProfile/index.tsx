@@ -25,7 +25,6 @@ import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { formatNumber } from '../../../../../utils/common.functions';
-import HeightSlider from './components';
 import { HeightModal } from './components/heightModal';
 
 export const EditProfile = () => {
@@ -69,9 +68,6 @@ export const EditProfile = () => {
     height,
     setheight,
   } = useViewModal();
-  // if (1) {
-  //   return <HeightSlider />;
-  // }
   return (
     <SafeAreaView style={styles.editInfoContainer}>
       <View style={styles.ph16}>
@@ -307,7 +303,7 @@ export const EditProfile = () => {
             {optionsList.map((item, index) => {
               if (index === 2) {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Text style={styles.fieldName}>Job Title</Text>
                     <View style={styles.fieldValueContainer}>
                       <TextInput
@@ -324,7 +320,7 @@ export const EditProfile = () => {
               }
               if (index === 3) {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Text style={styles.fieldName}>
                       Institution/School/Practice Name
                     </Text>
@@ -364,7 +360,7 @@ export const EditProfile = () => {
               }
               if (item.title === 'Ethnicity') {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>{item.title}</Text>
                       <TouchableOpacity onPress={() => openModal('ethnicity')}>
@@ -463,7 +459,7 @@ export const EditProfile = () => {
               }
               if (item.title === 'Relationship level') {
                 return (
-                  <Spacer position="top" size={10}>
+                  <Spacer key={index} position="top" size={10}>
                     <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>{item.title}</Text>
                       <TouchableOpacity

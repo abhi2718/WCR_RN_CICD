@@ -876,9 +876,6 @@ export const CometChatDetails = (props: CometChatDetailsInterface) => {
             titleStyle={{
               padding: 10,
             }}
-            closeIconTint={
-              detailsStyle?.closeIconTint ?? theme.palette.getPrimary()
-            }
           />
           <AlertScreen
             showModal={showModal}
