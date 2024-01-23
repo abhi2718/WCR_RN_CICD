@@ -11,7 +11,6 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderDeck } from '../../../components/header';
 import {
-  dimensions,
   FullLoader,
   Row,
   ScreenWrapper,

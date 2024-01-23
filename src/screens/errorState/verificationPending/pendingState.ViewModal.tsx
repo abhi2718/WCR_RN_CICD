@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../navigation';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { addUser } from '../../../store/reducers/user.reducer';
+import { useNavigateToScreen } from '../../../utils/common.functions';
 
 export const usePandingStateViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
@@ -13,7 +14,7 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
   const dispatch = useDispatch();
   const state = user?.verification?.status;
   const isFormSubmitted = user?.verificationId?.submitted;
-
+  const {resetState} = useNavigateToScreen();
   useEffect(() => {
     const me = async () => {
       try {
@@ -30,20 +31,15 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
         if (userdata.user.verification.status === 'Verified') {
-          navigation.navigate(ROUTES.Tab);
+          resetState(ROUTES.Tab)
         }
       } catch (err) {
       }
     };
-
     me();
   }, []);
-
   const navigateToGender = () => {
     navigation.navigate(ROUTES.Gender);
   };
-  if (user?.verification?.status === 'Verified') {
-    navigation.navigate(ROUTES.Tab);
-  }
   return { state, isFormSubmitted, navigateToGender };
 };

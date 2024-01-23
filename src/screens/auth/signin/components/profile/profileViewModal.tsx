@@ -220,7 +220,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
   }: socialSignInSignUpPayload) {
     try {
       setLoading(true);
-
       const dataMango = await socialSignInSignUp({
         firebaseUid,
         email,
@@ -239,7 +238,8 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       };
       dispatch(addUser(payload));
       setLoading(false);
-      if (dataMango.token) navigateToGenderScreen(dataMango.user._id);
+      if (dataMango.token)
+        navigateToGenderScreen(dataMango.user._id);
     } catch (error) {
       setLoading(false);
     }
