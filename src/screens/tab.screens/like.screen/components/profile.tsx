@@ -7,6 +7,7 @@ import { ProfileViewProps } from '../../../../types/screen.type/like.type';
 import { theme } from '../../../../infrastructure/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import { calculateAge } from '../../../../utils/common.functions';
+import { fonts } from '../../../../infrastructure/theme/fonts';
 
 export const ProfileView = (props: ProfileViewProps) => {
   const {
@@ -338,6 +339,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.bold,
     lineHeight: 30,
+    fontFamily: fonts.body,
   },
   textDegree: {
     color: theme.colors.ui.primary,
@@ -345,9 +347,11 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     lineHeight: 14,
     letterSpacing: 0.59,
+    fontFamily: fonts.body,
   },
   textDesignation: {
     color: theme.colors.ui.white,
+    fontFamily: fonts.body,
   },
   gradient: {
     height: '100%',
@@ -361,7 +365,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.h6,
     color: theme.colors.ui.white,
     fontWeight: theme.fontWeights.bold,
-    fontFamily: theme.fontFamily.body,
+    fontFamily: fonts.body,
   },
   chatButton: {
     padding: theme.units.sizes[3],
@@ -373,6 +377,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.caption,
     textTransform: 'uppercase',
     textAlign: 'center',
+    fontFamily: fonts.body,
   },
   textBlack: {
     color: theme.colors.ui.black,

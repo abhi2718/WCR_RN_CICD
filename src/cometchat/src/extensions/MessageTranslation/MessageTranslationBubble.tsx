@@ -4,6 +4,7 @@ import { CometChatContext } from '../../shared/CometChatContext';
 import { CometChatTextBubble, TextBubbleStyle } from '../../shared/views';
 import { FontStyleInterface } from '../../shared/base';
 import { FormatTextForLinks } from '../../shared/views/CometChatTextBubble';
+import { fonts } from '../../../../infrastructure/theme/fonts';
 
 interface textStyle extends FontStyleInterface {
   color?: string;
@@ -120,5 +121,6 @@ export const MessageTranslationBubble = (props: MessageTranslationBubble) => {
 const styles = StyleSheet.create({
   textsPadding: {
     paddingVertical: 5,
+    fontFamily: fonts.body,
   },
 });

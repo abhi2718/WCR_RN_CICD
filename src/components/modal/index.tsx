@@ -5,7 +5,7 @@ import { ImageContainer, Row } from '../tools';
 import { PrimaryButton } from '../button';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
-import { fontSizes } from '../../infrastructure/theme/fonts';
+import { fontSizes, fonts } from '../../infrastructure/theme/fonts';
 
 export const WelcomeModalComponent = (props: ModalProps) => {
   const { isVisible, onClose } = props;
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: sizes[7],
     color: colors.ui.textHead,
+    fontFamily: fonts.body,
   },
   subHeading: {
     paddingVertical: 16,
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     lineHeight: sizes[4],
     letterSpacing: 0.5,
+    fontFamily: fonts.body,
   },
   row: {
     gap: sizes[1],
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     fontWeight: '400',
+    fontFamily: fonts.body,
     lineHeight: sizes[4],
   },
   icon: {
@@ -112,5 +115,6 @@ const styles = StyleSheet.create({
     fontSize: sizes[4],
     marginVertical: sizes[3],
     color: colors.ui.textHead,
+    fontFamily: fonts.body,
   },
 });

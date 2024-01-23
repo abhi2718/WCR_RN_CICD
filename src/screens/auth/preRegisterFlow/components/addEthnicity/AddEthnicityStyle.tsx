@@ -25,12 +25,14 @@ export const addEthnicityStyle = StyleSheet.create({
     fontSize: fontSizes.title,
     fontWeight: '700',
     color: colors.ui.text,
+    fontFamily: fonts.body,
     marginVertical: sizes[6],
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: fonts.body,
   },
   rowView: {
     marginVertical: 10,
@@ -39,5 +41,6 @@ export const addEthnicityStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     color: colors.ui.text,
     fontWeight: '600',
+    fontFamily: fonts.body,
   },
 });

@@ -1,14 +1,14 @@
 //@ts-ignore
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 export const Styles = StyleSheet.create({
- 
   containerStyle: {
     overflow: 'hidden',
     borderStyle: 'solid',
     alignItems: 'center',
     justifyContent: 'center',
-  }, 
+  },
   outerViewStyle: {
     position: 'absolute',
   },
@@ -21,5 +21,6 @@ export const Styles = StyleSheet.create({
   textStyle: {
     textAlign: 'center',
     textAlignVertical: 'center',
+    fontFamily: fonts.body,
   },
 });

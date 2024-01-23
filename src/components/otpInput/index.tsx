@@ -9,6 +9,7 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import { fonts } from '../../infrastructure/theme/fonts';
 
 const CELL_COUNT = 6;
 type otpTypes = {
@@ -30,7 +31,7 @@ export const OtpCodeInput = ({
     setOtpValue(text);
     onChangeOtp(text);
   };
- 
+
   return (
     <SafeAreaView style={styles.root}>
       <CodeField
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     color: colors.ui.black,
     fontSize: sizes[4],
     textAlign: 'center',
+    fontFamily: fonts.body,
   },
   focusCell: {
     borderBottomColor: colors.ui.primary,

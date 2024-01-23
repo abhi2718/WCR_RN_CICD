@@ -4,6 +4,7 @@ import { colors } from '../../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
 
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
   subHeading: {
     color: colors.ui.text,
     fontSize: fontSizes.h6,
+    fontFamily: fonts.body,
     fontWeight: fontWeights.bold,
   },
   noGroupIcon: {
@@ -55,5 +57,6 @@ const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
 });

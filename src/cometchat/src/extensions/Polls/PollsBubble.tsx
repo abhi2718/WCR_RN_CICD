@@ -1,11 +1,12 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
 import { FontStyle } from '../../shared/base';
-import { CometChatContext } from "../../shared/CometChatContext";
+import { CometChatContext } from '../../shared/CometChatContext';
 import { makeExtentionCall } from '../../shared/utils/CometChatMessageHelper';
 import { ICONS } from './resources';
 //@ts-ignore
 import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { fonts } from '../../../../infrastructure/theme/fonts';
 
 export interface PollsBubbleStyleInterface {
   questionTextStyle: FontStyle;
@@ -119,8 +120,7 @@ export const PollsBubble = (props: PollsBubbleInterface) => {
   };
 
   const handleResult = ({ id }: any) => {
-    if (loggedInUser['uid'] == senderUid)
-      return;
+    if (loggedInUser['uid'] == senderUid) return;
     choosePoll && choosePoll(id);
     setSelectedOption((prev) => ({ ...prev, [id]: !prev[id] }));
     makeExtentionCall('polls', 'POST', 'v2/vote', {
@@ -289,10 +289,12 @@ const style = StyleSheet.create({
   questionText: {
     marginHorizontal: 10,
     marginVertical: 5,
+    fontFamily: fonts.body,
   },
   voteText: {
     marginHorizontal: 10,
     marginVertical: 5,
+    fontFamily: fonts.body,
   },
   optionItemContainer: {
     marginHorizontal: 5,
@@ -312,6 +314,7 @@ const style = StyleSheet.create({
   },
   valueText: {
     marginLeft: 10,
+    fontFamily: fonts.body,
   },
   resultMask: {
     alignItems: 'center',

@@ -1,7 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { dimensions } from '../../../components/tools';
 import { colors } from '../../../infrastructure/theme/colors';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { sizes } from '../../../infrastructure/theme/sizes';
 export const genderStyle = StyleSheet.create({
   container: {
@@ -26,6 +30,7 @@ export const genderStyle = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: fonts.body,
   },
   text: {
     fontSize: fontSizes.text,
@@ -45,6 +50,7 @@ export const genderStyle = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
   rowView: {
     marginBottom: sizes[1],

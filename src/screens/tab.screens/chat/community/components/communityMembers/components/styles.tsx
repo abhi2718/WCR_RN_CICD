@@ -2,10 +2,13 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
-import { fontWeights } from '../../../../../../../infrastructure/theme/fonts';
+import {
+  fontWeights,
+  fonts,
+} from '../../../../../../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
-  backButtonContainer:{width:40,height:40},
+  backButtonContainer: { width: 40, height: 40 },
   imageStyle: { width: 40, height: 40, borderRadius: 30 },
   profileAvatar: {
     height: 200,
@@ -16,11 +19,13 @@ export const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontSize: sizes[2] + 1,
     fontWeight: fontWeights.regular,
+    fontFamily: fonts.body,
   },
   memberNameText: {
     color: '#1B1B1B',
     fontSize: sizes[3] - 2,
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
 
   arrowStyle: {
@@ -32,6 +37,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: sizes[4],
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
 
   viewProfileBtn: {
@@ -48,6 +54,7 @@ export const styles = StyleSheet.create({
     color: '#D31335',
     fontSize: sizes[3],
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
   messageBtn: {
     width: 160,
@@ -58,11 +65,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.ui.primary,
+    fontFamily: fonts.body,
   },
   msgBtnText: {
     color: '#FEFBFD',
     fontSize: sizes[3],
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
 
   profileHeader: {

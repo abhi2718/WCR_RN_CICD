@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../../../../../infrastructure/theme/colors';
+import { fonts } from '../../../../../../../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
   searchBarContainer: {
@@ -18,5 +19,6 @@ export const styles = StyleSheet.create({
   },
   searchInput: {
     width: '80%',
+    fontFamily: fonts.body,
   },
 });

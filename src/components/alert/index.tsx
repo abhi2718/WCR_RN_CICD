@@ -11,7 +11,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AlertScreenType } from '../../types/components/alert.type';
 import { Column, dimensions, Row, Spacer } from '../tools';
 import { colors } from '../../infrastructure/theme/colors';
-import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 import { sizes } from '../../infrastructure/theme/sizes';
 
 export const AlertScreen = (props: AlertScreenType) => {
@@ -80,6 +84,7 @@ const styles = StyleSheet.create({
     color: colors.ui.black,
     fontSize: fontSizes.title,
     fontWeight: fontWeights.semiBold,
+    fontFamily: fonts.body,
   },
 
   description: {
@@ -87,6 +92,7 @@ const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     textAlign: 'center',
+    fontFamily: fonts.body,
   },
 
   primeBtn: {
@@ -102,6 +108,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: colors.ui.white,
       fontWeight: fontWeights.semiBold,
+      fontFamily: fonts.body,
     },
   },
   secondBtn: {
@@ -117,6 +124,7 @@ const styles = StyleSheet.create({
       fontSize: fontSizes.h6,
       fontWeight: fontWeights.regular,
       color: colors.ui.text,
+      fontFamily: fonts.body,
     },
   },
 });

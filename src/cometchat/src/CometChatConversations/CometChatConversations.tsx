@@ -61,6 +61,7 @@ import { BadgeStyleInterface } from '../shared/views/CometChatBadge';
 import { InteractiveMessageUtils } from '../shared/utils/InteractiveMessageUtils';
 import { NoFriends } from '../../../screens/tab.screens/chat/private/compnents/nofriends';
 import { NoCommunityJoined } from '../../../screens/tab.screens/chat/community/components/noCommunityJoined';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 const conversationListenerId = 'chatlist_' + new Date().getTime();
 const userListenerId = 'chatlist_user_' + new Date().getTime();
@@ -631,7 +632,9 @@ export const CometChatConversations = (props: ConversationInterface) => {
     if (!disableTyping && params.typingText) {
       return (
         <View style={Style.row}>
-          <Text>{params.typingText}</Text>
+          <Text style={{ fontFamily: 'Urbanist-Regular' }}>
+            {params.typingText}
+          </Text>
         </View>
       );
     }
@@ -678,7 +681,13 @@ export const CometChatConversations = (props: ConversationInterface) => {
         />
         {params.unreadCount > 0 && isUserWindow ? (
           <View style={Style.yourTurnBadge}>
-            <Text style={{ color: 'white', textTransform: 'uppercase' }}>
+            <Text
+              style={{
+                color: 'white',
+                textTransform: 'uppercase',
+                fontFamily: fonts.body,
+              }}
+            >
               Your Turn
             </Text>
           </View>
