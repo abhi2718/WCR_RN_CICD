@@ -39,8 +39,8 @@ export const styles = StyleSheet.create({
     zIndex: 9999,
   },
   shareIconTop: {
-    width: 48,
-    height: 48,
+    width: 40,
+    height: 40,
   },
   name: {
     fontSize: 22,
@@ -116,8 +116,8 @@ export const styles = StyleSheet.create({
     top: 60,
   },
   shareIcon: {
-    width: 40,
-    height: 40,
+    width: 48,
+    height: 48,
   },
   marginBottom: {
     marginBottom: 16,

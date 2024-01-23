@@ -78,7 +78,7 @@ export const ProfileModal = (props: profileProps) => {
             </Row>
             <Pressable style={styles.shareIconView} onPress={handleShare}>
               <Image
-                style={styles.shareIcon}
+                style={styles.shareIconTop}
                 source={require('../../assets/images/icons/Share.png')}
               />
             </Pressable>
@@ -399,15 +399,11 @@ export const ProfileModal = (props: profileProps) => {
                           </Pressable>
                         )}
                       </Row>
-                      {/* <Pressable onPress={handleShare}>
-                        <Text style={styles.blockReportText}>
-                          Share with a Friend
-                        </Text>
-                      </Pressable> */}
 
-                      {/* --------- */}
                       <Spacer position="top" size={20} />
-                      <View style={cardStyles.blockReportView}>
+                      {/* Block report section is commented for now */}
+
+                      {/* <View style={cardStyles.blockReportView}>
                         <Pressable onPress={() => setShowBlockModal(true)}>
                           <Text style={[cardStyles.blockReportText]}>
                             Block
@@ -424,15 +420,8 @@ export const ProfileModal = (props: profileProps) => {
                             Report
                           </Text>
                         </Pressable>
-                      </View>
+                      </View> */}
                       <Spacer position="top" size={48} />
-                      {showBlock && (
-                        <Pressable onPress={handleBlockUser}>
-                          <Text style={styles.blockReportText}>
-                            Block/Report
-                          </Text>
-                        </Pressable>
-                      )}
                     </View>
                     <Spacer position="bottom" size={60} />
                   </ScrollView>
