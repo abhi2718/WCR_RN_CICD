@@ -83,7 +83,7 @@ export const EditProfile = () => {
         <Text style={styles.headingText}>Photos</Text>
         <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
-          <Text style={styles.headingText}>About Me</Text>
+          <Text style={styles.headingText}>About Yourself</Text>
           <Column>
             <TextInput
               placeholder="About Me"
@@ -102,7 +102,7 @@ export const EditProfile = () => {
             <Text style={styles.charCount}>{letterCount}</Text>
           </Column>
           <Spacer position="bottom" size={20} />
-          <Text style={styles.headingText}>Personal info</Text>
+          <Text style={styles.headingText}>Personal Info</Text>
           <Spacer position="bottom" size={10} />
           <Column style={styles.ph16}>
             <Text style={styles.fieldName}>First Name</Text>

@@ -17,6 +17,7 @@ export const useViewModal = (props: profileProps) => {
   const [loading, setLoading] = useState(false);
   const { user: me } = useSelector(({ userState }) => userState);
   const [user, setUser] = useState<null | UserProfile>(null);
+  const [showBlockModal, setShowBlockModal] = useState(false);
   const [isMatch, setIsMatch] = useState({
     status: false,
     matchUser: null,
@@ -148,6 +149,11 @@ export const useViewModal = (props: profileProps) => {
       });
     }
   };
+  const handleReport = () => {
+    setShowBlockModal(false);
+    // Need to handle this functionality
+    // navigation.navigate(ROUTES.Report, { userId: item._id, name: first });
+  };
   return {
     showModal,
     toggleModal,
@@ -165,5 +171,8 @@ export const useViewModal = (props: profileProps) => {
     isMatch,
     startChat,
     handleHideOfIsMatchScreen,
+    handleReport,
+    showBlockModal,
+    setShowBlockModal,
   };
 };

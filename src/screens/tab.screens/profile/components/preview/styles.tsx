@@ -12,6 +12,16 @@ export const styles = StyleSheet.create({
   ph16: {
     paddingHorizontal: 16,
   },
+  shareIconView: {
+    position: 'absolute',
+    zIndex: 20,
+    right: 15,
+    top: 20,
+  },
+  shareIcon: {
+    width: 40,
+    height: 40,
+  },
   header: {
     marginBottom: 16,
     paddingHorizontal: 16,
@@ -71,6 +81,7 @@ export const styles = StyleSheet.create({
   },
   vitalSigns: {
     paddingHorizontal: 16,
+    marginTop: 5,
   },
   userInfoRow: {
     marginTop: sizes[2],
@@ -125,6 +136,7 @@ export const styles = StyleSheet.create({
   hobbiesChip: {
     borderRadius: sizes[4],
     overflow: 'hidden',
+    height: 35,
     backgroundColor: colors.ui.deckChipBgColor,
     paddingHorizontal: sizes[2],
     marginRight: 8,

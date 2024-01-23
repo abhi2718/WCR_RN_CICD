@@ -200,7 +200,7 @@ export const useViewModal = () => {
   };
   const optionsList = [
     {
-      title: 'Degree category',
+      title: 'Degree Category',
       option: _userDegree,
       initValue: 'degreeCategory',
     },
@@ -211,8 +211,8 @@ export const useViewModal = () => {
     },
     {},
     {},
-    {
-    },
+    // {
+    // },
     // {
     //   title: 'Gender',
     //   option: genderList,
@@ -229,7 +229,7 @@ export const useViewModal = () => {
       initValue: 'interests',
     },
     {
-      title: 'Marital status',
+      title: 'Marital Status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
@@ -244,7 +244,7 @@ export const useViewModal = () => {
       initValue: 'sexualPreference',
     },
     {
-      title: 'Relationship level',
+      title: 'Relationship Level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
@@ -336,9 +336,7 @@ export const useViewModal = () => {
         return undefined;
       }
     } catch (error) {
-
     } finally {
-
     }
   };
   const uploadImage = async () => {
@@ -392,9 +390,7 @@ export const useViewModal = () => {
         profileImage,
         photos,
       };
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   const validateZipcode = async (zipcode: string) => {
     const USER = {
