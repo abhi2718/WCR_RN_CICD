@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../../../../../infrastructure/theme/colors';
 import { dimensions } from '../../../../../../../../components/tools';
 import { theme } from '../../../../../../../../infrastructure/theme';
+import { fonts } from '../../../../../../../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
   container: {
@@ -30,13 +31,13 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.bold,
     color: theme.colors.ui.text,
     textTransform: 'capitalize',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   groupMembers: {
     fontWeight: '400',
     fontSize: 12,
     marginTop: 4,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   joinedBtn: {
     borderRadius: 15,
@@ -47,7 +48,7 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: '700',
     color: colors.ui.placeholder,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   joinBtn: {
     borderRadius: 15,
@@ -58,6 +59,6 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontWeight: '700',
     color: colors.ui.white,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

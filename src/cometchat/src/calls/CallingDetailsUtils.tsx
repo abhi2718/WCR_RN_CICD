@@ -11,6 +11,7 @@ import {
 import { CometChatCallButtons } from './CometChatCallButtons';
 import { CallUtils } from './CallUtils';
 import { NextArrowIcon } from './resources';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 export class CallingDetailsUtils {
   static getDefaultDetailsTemplates(
@@ -71,7 +72,7 @@ export class CallingDetailsUtils {
                   {
                     marginHorizontal: 10,
                     color: theme.palette.getAccent(),
-                    fontFamily: 'Urbanist-Regular',
+                    fontFamily: fonts.body,
                   },
                   theme.typography.subtitle1,
                 ]}
@@ -87,7 +88,7 @@ export class CallingDetailsUtils {
                 {
                   marginHorizontal: 10,
                   color: theme.palette.getAccent(),
-                  fontFamily: 'Urbanist-Regular',
+                  fontFamily: fonts.body,
                 },
                 theme.typography.subtitle1,
               ]}
@@ -178,7 +179,7 @@ export class CallingDetailsUtils {
                     style={[
                       {
                         color: theme.palette.getAccent(),
-                        fontFamily: 'Urbanist-Regular',
+                        fontFamily: fonts.body,
                       },
                       theme.typography.title2,
                     ]}

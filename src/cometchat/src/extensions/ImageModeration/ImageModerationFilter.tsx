@@ -16,6 +16,7 @@ import { getExtentionData } from '../ExtensionModerator';
 import { ICONS } from './resources';
 //@ts-ignore
 import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { fonts } from '../../../../infrastructure/theme/fonts';
 
 export interface ImageModerationFilterInterface {
   message?: CometChat.BaseMessage;
@@ -138,6 +139,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
     fontWeight: '500',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

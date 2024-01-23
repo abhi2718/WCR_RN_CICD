@@ -1,6 +1,7 @@
 import React from 'react';
 //@ts-ignore
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 export const Style = StyleSheet.create({
   container: {
@@ -30,7 +31,7 @@ export const Style = StyleSheet.create({
 
   titleTextStyle: {
     opacity: 1,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
     textAlign: 'left',
   },
   tailViewStyle: {
@@ -63,6 +64,6 @@ export const Style = StyleSheet.create({
   optionTitleStyle: {
     fontWeight: '500',
     fontSize: 17,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

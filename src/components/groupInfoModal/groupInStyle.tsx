@@ -2,7 +2,11 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { dimensions } from '../tools';
-import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 
 export const modalStyle = StyleSheet.create({
   centeredView: {
@@ -43,18 +47,18 @@ export const modalStyle = StyleSheet.create({
     color: colors.ui.textHead,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   subHeader: {
     color: colors.ui.text,
     fontSize: fontSizes.button,
     fontWeight: fontWeights.regular,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   contentHeader: {
     color: colors.ui.textHead,
     fontSize: fontSizes.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
     fontWeight: fontWeights.semiBold,
   },
   contentText: {
@@ -62,7 +66,7 @@ export const modalStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.regular,
     marginBottom: 12,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   footerView: {
     paddingVertical: 20,
@@ -73,13 +77,13 @@ export const modalStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.semiBold,
     textAlign: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   footerRedText: {
     color: colors.ui.primary,
     fontSize: fontSizes.h6 + 2,
     fontWeight: fontWeights.bold,
     textAlign: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

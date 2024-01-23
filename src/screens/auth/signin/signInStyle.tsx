@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
-import { fontSizes } from '../../../infrastructure/theme/fonts';
+import { fontSizes, fonts } from '../../../infrastructure/theme/fonts';
 
 export const ErrorText = styled.Text`
   color: ${colors.ui.primary};
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.text,
     color: colors.ui.text,
     paddingVertical: sizes[3],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   emailIconStyle: {
     height: sizes[3] + 1.5,

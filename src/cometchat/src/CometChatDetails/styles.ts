@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
-import { fontWeights } from '../../../infrastructure/theme/fonts';
+import { fontWeights, fonts } from '../../../infrastructure/theme/fonts';
 import { colors } from '../../../infrastructure/theme/colors';
 import { dimensions } from '../../../components/tools';
 
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#000',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   listItemTailIcon: { height: 12, width: 12 },
   groupName: {
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: colors.ui.text,
     textAlign: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   descContainer: {
     backgroundColor: '#F7F7F7',
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     width: dimensions.width - 40,
     lineHeight: 21,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   participantCount: {
     fontSize: sizes[2] + 2,

@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     color: colors.ui.text,
     fontSize: fontSizes.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   input: {
     borderWidth: 1,
@@ -29,6 +30,6 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.1,
     borderRadius: sizes[4],
     height: sizes[9] * 6,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

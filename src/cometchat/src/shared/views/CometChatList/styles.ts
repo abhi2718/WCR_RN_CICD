@@ -1,5 +1,6 @@
 //@ts-ignore
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginLeft: 8,
     alignSelf: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   searchButtonStyle: {
     width: 16,

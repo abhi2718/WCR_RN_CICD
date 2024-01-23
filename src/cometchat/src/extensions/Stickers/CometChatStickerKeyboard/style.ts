@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 // import { localize } from "../../shared";
 
 export const Styles = StyleSheet.create({
@@ -43,7 +44,7 @@ export const Styles = StyleSheet.create({
   stickerMsgTxtStyle: {
     margin: 0,
     height: 30,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   stickerImageStyle: {
     width: '100%',

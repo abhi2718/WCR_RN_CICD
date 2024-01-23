@@ -5,6 +5,7 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../infrastructure/theme/fonts';
 export const SexualOrientationStyle = StyleSheet.create({
   container: {
@@ -23,20 +24,20 @@ export const SexualOrientationStyle = StyleSheet.create({
   skipBtn: {
     fontSize: 20,
     color: colors.ui.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 
   innerView: {
@@ -52,7 +53,7 @@ export const SexualOrientationStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   rowView: {
     marginBottom: sizes[1],

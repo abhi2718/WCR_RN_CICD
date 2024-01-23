@@ -29,7 +29,7 @@ export const LookingForStyle = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   text: {
     fontSize: fontSizes.text,

@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 export const Style = StyleSheet.create({
   optionTextStyle: {
     textAlign: 'center',
     padding: 8,
     width: '100%',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   changeDialogContainer: {
     height: '100%',
@@ -28,6 +29,6 @@ export const Style = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: '700',
     fontSize: 20,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

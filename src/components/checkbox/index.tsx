@@ -18,7 +18,7 @@ import { makeFalseDefaultValue } from '../../utils/common.functions';
 import { Row } from '../tools';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
-import { fontWeights } from '../../infrastructure/theme/fonts';
+import { fontWeights, fonts } from '../../infrastructure/theme/fonts';
 
 export const CustomCheckbox = styled.View`
   width: 20px;
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: colors.ui.text,
     fontWeight: fontWeights.semiBold,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });

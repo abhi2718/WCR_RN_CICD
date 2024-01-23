@@ -1,5 +1,6 @@
 //@ts-ignore
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../infrastructure/theme/fonts';
 
 export const Styles = (props) =>
   StyleSheet.create({
@@ -15,7 +16,7 @@ export const Styles = (props) =>
 
     titleStyle: {
       opacity: 1,
-      fontFamily: 'Urbanist-Regular',
+      fontFamily: fonts.body,
       color: props.titleColor || 'rgba(20,20,20,1)',
       ...(props.titleFont || {
         fontFamily: undefined,
@@ -30,7 +31,7 @@ export const Styles = (props) =>
 
     subtitleStyle: {
       opacity: 1,
-      fontFamily: 'Urbanist-Regular',
+      fontFamily: fonts.body,
       color: props.subTitleColor || 'rgba(20,20,20,0.58)',
       ...(props.subTitleFont || {
         fontFamily: undefined,
@@ -45,7 +46,7 @@ export const Styles = (props) =>
 
     imageContainerStyle: {
       padding: 8,
-      fontFamily: 'Urbanist-Regular',
+      fontFamily: fonts.body,
     },
 
     imageStyle: {
@@ -70,7 +71,7 @@ export const Styles = (props) =>
     linkStyle: {
       opacity: 1,
       color: props.buttonTextColor || 'rgba(51,153,255,1)',
-      fontFamily: 'Urbanist-Regular',
+      fontFamily: fonts.body,
       ...(props.buttonTextFont || {
         fontFamily: undefined,
         fontSize: 17,

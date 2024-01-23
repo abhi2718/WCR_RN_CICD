@@ -6,6 +6,7 @@ import { makeExtentionCall } from '../../shared/utils/CometChatMessageHelper';
 import { ICONS } from './resources';
 //@ts-ignore
 import { CometChat } from '@cometchat/chat-sdk-react-native';
+import { fonts } from '../../../../infrastructure/theme/fonts';
 
 export interface PollsBubbleStyleInterface {
   questionTextStyle: FontStyle;
@@ -288,12 +289,12 @@ const style = StyleSheet.create({
   questionText: {
     marginHorizontal: 10,
     marginVertical: 5,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   voteText: {
     marginHorizontal: 10,
     marginVertical: 5,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   optionItemContainer: {
     marginHorizontal: 5,
@@ -313,7 +314,7 @@ const style = StyleSheet.create({
   },
   valueText: {
     marginLeft: 10,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   resultMask: {
     alignItems: 'center',

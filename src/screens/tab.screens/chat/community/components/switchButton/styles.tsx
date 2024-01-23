@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { dimensions } from '../../../../../../components/tools';
-import { fontWeights } from '../../../../../../infrastructure/theme/fonts';
+import {
+  fontWeights,
+  fonts,
+} from '../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({
@@ -32,12 +35,12 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
     fontWeight: fontWeights.regular,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   whiteTextStyle: {
     fontSize: 16,
     color: '#fff',
     fontWeight: fontWeights.regular,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

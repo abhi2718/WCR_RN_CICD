@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 export const Styles = StyleSheet.create({
   messageReactionListStyle: {
@@ -38,6 +39,6 @@ export const Styles = StyleSheet.create({
   reactionCountStyle: {
     paddingRight: 2,
     paddingLeft: 4,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

@@ -28,14 +28,14 @@ export const notificationStyles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   pendingIcon: {
     width: sizes[12] * 2,

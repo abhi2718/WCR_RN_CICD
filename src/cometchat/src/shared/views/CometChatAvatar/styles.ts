@@ -1,5 +1,6 @@
 //@ts-ignore
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 export const Styles = StyleSheet.create({
   containerStyle: {
@@ -20,6 +21,6 @@ export const Styles = StyleSheet.create({
   textStyle: {
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

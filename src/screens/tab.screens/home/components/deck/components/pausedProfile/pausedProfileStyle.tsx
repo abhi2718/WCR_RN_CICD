@@ -3,6 +3,7 @@ import { colors } from '../../../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 
@@ -19,13 +20,13 @@ export const pausedProfileStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
     fontSize: fontSizes.button,
   },
   pendingIcon: {

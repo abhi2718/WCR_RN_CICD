@@ -3,6 +3,7 @@ import { dimensions } from '../../../../../../../components/tools';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
@@ -75,14 +76,14 @@ export const styles = StyleSheet.create({
     color: 'rgba(35, 35, 35, 0.70)',
     textAlign: 'center',
     marginTop: 12,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   keepSwiping: {
     backgroundColor: colors.bg.secondary,
     borderRadius: 28,
     overflow: 'hidden',
     textAlign: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
     borderWidth: 1,
     borderColor: colors.ui.primary,
     paddingVertical: 15,

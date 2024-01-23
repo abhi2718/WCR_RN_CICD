@@ -10,6 +10,7 @@ import { Hooks } from './hooks';
 import { ICONS } from './resources';
 import { CometChatContextType } from '../../base/Types';
 import { ActionItemInterface } from './ActionItem';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 const layoutType = Object.freeze({
   list: 'list',
   grid: 'grid',
@@ -69,10 +70,10 @@ const OptionListView = ({
             ...(style?.listItemTitleFont || {
               fontSize: 17,
               fontWeight: '400',
-              fontFamily: 'Urbanist-Regular',
+              fontFamily: fonts.body,
             }),
             color: style?.listItemTitleColor || 'rgb(20,20,20)',
-            fontFamily: 'Urbanist-Regular',
+            fontFamily: fonts.body,
           },
           titleStyle,
           Style.listTitleStyle,
@@ -132,7 +133,7 @@ const OptionGridView = ({
               ...(style?.listItemTitleFont || {
                 fontSize: 17,
                 fontWeight: '400',
-                fontFamily: 'Urbanist-Regular',
+                fontFamily: fonts.body,
               }),
               color: style?.listItemTitleColor || 'rgb(20,20,20)',
             },

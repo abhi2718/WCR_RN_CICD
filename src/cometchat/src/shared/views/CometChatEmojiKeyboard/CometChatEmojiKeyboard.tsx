@@ -9,6 +9,7 @@ import { Emojis } from './emojis';
 import { Styles } from './style';
 import { CometChatTheme } from '../../resources/CometChatTheme';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 const emojiValues = Object.values(Emojis);
 
@@ -114,7 +115,7 @@ const CometChatEmojiKeyboard = (props) => {
             theme?.typography?.heading,
             {
               color: theme?.palette?.getPrimary(),
-              fontFamily: 'Urbanist-Regular',
+              fontFamily: fonts.body,
             },
           ]}
         >
@@ -138,7 +139,7 @@ const CometChatEmojiKeyboard = (props) => {
             ...props.style?.sectionHeaderFont,
             {
               color: theme?.palette?.getAccent500(),
-              fontFamily: 'Urbanist-Regular',
+              fontFamily: fonts.body,
             },
           ]}
         >

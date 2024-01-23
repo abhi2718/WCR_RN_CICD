@@ -61,6 +61,7 @@ import { BadgeStyleInterface } from '../shared/views/CometChatBadge';
 import { InteractiveMessageUtils } from '../shared/utils/InteractiveMessageUtils';
 import { NoFriends } from '../../../screens/tab.screens/chat/private/compnents/nofriends';
 import { NoCommunityJoined } from '../../../screens/tab.screens/chat/community/components/noCommunityJoined';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 const conversationListenerId = 'chatlist_' + new Date().getTime();
 const userListenerId = 'chatlist_user_' + new Date().getTime();
@@ -684,7 +685,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
               style={{
                 color: 'white',
                 textTransform: 'uppercase',
-                fontFamily: 'Urbanist-Regular',
+                fontFamily: fonts.body,
               }}
             >
               Your Turn

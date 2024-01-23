@@ -14,6 +14,7 @@ import { theme } from '../../../infrastructure/theme';
 import { SwipeableListItem } from './components/tiles';
 import { notificationStyle } from './notificationStyle';
 import { useViewModal } from './useViewModal';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 export const NotificationScreen = () => {
   const {
@@ -94,6 +95,6 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizes.h6,
     fontWeight: theme.fontWeights.semiBold,
     color: theme.colors.ui.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

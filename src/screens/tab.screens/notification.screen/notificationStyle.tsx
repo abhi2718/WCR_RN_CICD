@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../infrastructure/theme/colors';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { sizes } from '../../../infrastructure/theme/sizes';
 
 export const notificationStyle = StyleSheet.create({
@@ -30,7 +34,7 @@ export const notificationStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   subHeadingInner: {
     color: colors.ui.text,
@@ -38,14 +42,14 @@ export const notificationStyle = StyleSheet.create({
     fontWeight: fontWeights.bold,
     paddingHorizontal: 16,
     paddingVertical: 10,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   pendingIcon: {
     width: sizes[12] * 2,

@@ -47,7 +47,11 @@ import { CommunityMembers } from '../../../screens/tab.screens/chat/community/co
 import { MediaTab } from '../../../screens/tab.screens/chat/community/components/mediaMessages';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { GroupInfoModal } from '../../../components/groupInfoModal';
 import { AlertScreen } from '../../../components/alert';
 import FastImage from 'react-native-fast-image';
@@ -1225,7 +1229,7 @@ const myStyles = StyleSheet.create({
   leaveBtn: {
     color: colors.ui.primary,
     fontSize: fontSizes.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   viewReportBlock: {
     padding: 20,
@@ -1260,11 +1264,11 @@ const myStyles = StyleSheet.create({
   },
   textRed: {
     color: theme.colors.ui.primary,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   textWhite: {
     color: theme.colors.ui.white,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   widthFlex: {
     flex: 1,
@@ -1274,7 +1278,7 @@ const myStyles = StyleSheet.create({
     fontWeight: theme.fontWeights.bold,
     marginVertical: 12,
     color: theme.colors.ui.secondary,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   userAvatar: {
     width: 150,

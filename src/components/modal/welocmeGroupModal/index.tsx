@@ -13,7 +13,7 @@ import { ImageContainer, Row, Spacer } from '../../tools';
 import { PrimaryButton } from '../../button';
 import { colors } from '../../../infrastructure/theme/colors';
 import { sizes } from '../../../infrastructure/theme/sizes';
-import { fontSizes } from '../../../infrastructure/theme/fonts';
+import { fontSizes, fonts } from '../../../infrastructure/theme/fonts';
 
 export const WelocmeGroupModal = (props: ModalProps) => {
   const { isVisible, onClose } = props;
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 26,
     color: colors.ui.textHead,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   subHeading: {
     paddingVertical: 16,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     lineHeight: sizes[4],
     letterSpacing: 0.5,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   row: {
     gap: sizes[1],
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: '400',
     lineHeight: sizes[4],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   icon: {
     width: sizes[5],
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: sizes[4],
     color: colors.ui.textHead,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   centerContent: {
     display: 'flex',

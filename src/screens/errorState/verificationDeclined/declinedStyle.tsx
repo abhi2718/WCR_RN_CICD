@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../infrastructure/theme/colors';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { sizes } from '../../../infrastructure/theme/sizes';
 
 export const declinedStyle = StyleSheet.create({
@@ -24,12 +28,12 @@ export const declinedStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   text: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
     fontSize: fontSizes.button,
   },
   pendingIcon: {
@@ -48,14 +52,14 @@ export const declinedStyle = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.text,
     marginBottom: sizes[2],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   redBoxText: {
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.button,
     textAlign: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   primaryButton: {
     width: '80%',

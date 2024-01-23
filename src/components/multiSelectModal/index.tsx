@@ -6,7 +6,11 @@ import { sizes } from '../../infrastructure/theme/sizes';
 import { CustomCheckbox } from '../checkbox';
 import { Row, dimensions } from '../tools';
 import { PrimaryButton } from '../button';
-import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 
 interface MultiSelectModalProps {
   isVisible: boolean;
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.h5,
     marginBottom: 10,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   cardBg: {
     backgroundColor: colors.bg.secondary,
@@ -129,11 +133,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: sizes[3],
     color: colors.ui.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   selectedText: {
     fontWeight: 'bold',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });

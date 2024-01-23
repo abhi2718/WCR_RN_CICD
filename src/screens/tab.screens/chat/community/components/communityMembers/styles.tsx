@@ -1,6 +1,9 @@
 import { View, StyleSheet, Platform } from 'react-native';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
-import { fontWeights } from '../../../../../../infrastructure/theme/fonts';
+import {
+  fontWeights,
+  fonts,
+} from '../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../infrastructure/theme/colors';
 import { theme } from '../../../../../../infrastructure/theme';
 
@@ -34,13 +37,13 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   nameHeading: {
     fontSize: sizes[3] + 1,
     fontWeight: fontWeights.bold,
     color: colors.ui.primary,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 
   groupHeading: {
@@ -48,7 +51,7 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     color: colors.ui.text,
     textAlign: 'center',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   square: {
     alignSelf: 'center',

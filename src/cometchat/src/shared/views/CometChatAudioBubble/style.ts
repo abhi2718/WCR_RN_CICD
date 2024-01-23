@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 export const Style = StyleSheet.create({
   container: {
@@ -16,11 +17,11 @@ export const Style = StyleSheet.create({
     letterSpacing: -0.1,
     textAlign: 'left',
     lineHeight: 18,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   subtitleStyle: {
     color: 'rgba(20,20,20,0.58)',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   imageStyle: {
     height: 24,

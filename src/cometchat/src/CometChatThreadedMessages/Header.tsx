@@ -12,6 +12,7 @@ import {
 import React from 'react';
 import { ICONS } from './resources';
 import { FontStyleInterface, ImageType } from '../shared';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 const Header = (props: {
   title: string;
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: '#000',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });
 export default Header;

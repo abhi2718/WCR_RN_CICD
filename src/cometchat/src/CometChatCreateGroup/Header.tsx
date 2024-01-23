@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import React from 'react';
 import { ICONS } from './resources';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 const Header = (props) => {
   const {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: '#000',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });
 export default Header;

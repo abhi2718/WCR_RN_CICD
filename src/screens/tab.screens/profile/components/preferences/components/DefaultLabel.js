@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { View, Text, StyleSheet } from 'react-native';
+import { fonts } from '../../../../../../infrastructure/theme/fonts';
 
 const sliderRadius = 3;
 const width = 50;
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontStyle: 'normal',
     fontSize: 11,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   markerPressed: {
     borderWidth: 2,

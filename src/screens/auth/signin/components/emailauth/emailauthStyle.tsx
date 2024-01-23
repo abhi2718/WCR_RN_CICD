@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { fontSizes } from '../../../../../infrastructure/theme/fonts';
+import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { dimensions } from '../../../../../components/tools';
 
 export const styles = StyleSheet.create({
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     lineHeight: sizes[4],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   otpEmail: {
     color: '#007AFF',
@@ -37,6 +37,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: sizes[1],
     textTransform: 'lowercase',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

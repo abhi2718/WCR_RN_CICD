@@ -4,6 +4,7 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 
@@ -31,7 +32,7 @@ export const location = StyleSheet.create({
     color: colors.ui.text,
     marginTop: sizes[6],
     marginBottom: sizes[3],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 
   innerView: {

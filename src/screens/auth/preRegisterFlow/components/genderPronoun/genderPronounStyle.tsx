@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { dimensions } from '../../../../../components/tools';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
-import { fontSizes } from '../../../../../infrastructure/theme/fonts';
+import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 export const genderPronounStyle = StyleSheet.create({
   container: {
     flex: 1,
@@ -26,13 +26,13 @@ export const genderPronounStyle = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 
   innerView: {
@@ -48,7 +48,7 @@ export const genderPronounStyle = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: '500',
     color: colors.ui.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   rowView: {
     marginBottom: sizes[1],

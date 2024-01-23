@@ -11,7 +11,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import { ButtonProps } from '../../types/components/button.type';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
-import { fontWeights } from '../../infrastructure/theme/fonts';
+import { fontWeights, fonts } from '../../infrastructure/theme/fonts';
 import { ImageContainer } from '../tools';
 
 export const Button = (props: ButtonProps) => {
@@ -114,7 +114,7 @@ const roundStyles = StyleSheet.create({
     color: '#000',
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });
 
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: sizes[3],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   primaryButton: {
     padding: sizes[3],
@@ -150,6 +150,6 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     fontStyle: 'normal',
     fontWeight: fontWeights.bold,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
 });

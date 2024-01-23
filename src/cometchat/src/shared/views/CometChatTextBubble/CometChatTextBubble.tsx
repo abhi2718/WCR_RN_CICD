@@ -8,6 +8,7 @@ import {
   urlPattern,
 } from '../../constants/UIKitConstants';
 import { TextBubbleStyle, TextBubbleStyleInterface } from './TextBubbleStyle';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 const Link = ({ text, url, style }) => {
   return (
@@ -15,7 +16,7 @@ const Link = ({ text, url, style }) => {
       style={{
         ...style,
         textDecorationLine: 'underline',
-        fontFamily: 'Urbanist-Regular',
+        fontFamily: fonts.body,
       }}
       onPress={() => {
         let finalUrl = url.startsWith('http') ? url : `http://${url}`;
@@ -61,7 +62,7 @@ export const FormatTextForLinks = ({ str, style }) => {
         style={{
           ...style.textFont,
           color: style.textColor,
-          fontFamily: 'Urbanist-Regular',
+          fontFamily: fonts.body,
         }}
       >
         <Text style={{ fontFamily: 'Urbanist-Regular' }}>{pre}</Text>

@@ -13,6 +13,7 @@ import styles from './styles';
 import { ICONS } from '../shared/assets/images';
 import { ImageType } from '../shared/helper/types';
 import { BorderStyleInterface, FontStyleInterface } from '../shared';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 export function Header(props: {
   backButtonIcon?: ImageType;
@@ -100,7 +101,7 @@ export function Header(props: {
                 styles.titleStyle,
                 {
                   color: titleColor ?? undefined,
-                  fontFamily: 'Urbanist-Regular',
+                  fontFamily: fonts.body,
                 },
                 titleFontStyle ?? {},
               ]}
@@ -171,7 +172,7 @@ export function Header(props: {
               searchTextFontStyle ?? {},
               {
                 color: searchTextColor ?? undefined,
-                fontFamily: 'Urbanist-Regular',
+                fontFamily: fonts.body,
               },
             ]}
             onSubmitEditing={onSubmitEditing}

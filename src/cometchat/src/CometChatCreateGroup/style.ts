@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
   container: { flex: 1, paddingHorizontal: 15 },
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   errorTextTitle: {
     marginStart: 8,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   errorTextContainer: { flex: 1 },
   errorText: {

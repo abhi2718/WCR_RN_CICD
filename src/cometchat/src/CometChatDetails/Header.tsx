@@ -9,34 +9,27 @@ import {
 import React from 'react';
 import { colors } from '../../../infrastructure/theme/colors';
 import { theme } from '../../../infrastructure/theme';
+import { fonts } from '../../../infrastructure/theme/fonts';
 export type HeaderType = {
-  title: string,
-  showCloseButton: boolean,
+  title: string;
+  showCloseButton: boolean;
   closeButtonIcon: {
     uri: string;
-  },
-  onPress: () => void,
-  titleStyle:{
-    padding: number,
-  },
-}
-const Header = (props:HeaderType) => {
-  const {
-    title,
-    showCloseButton,
-    closeButtonIcon,
-    onPress,
-    titleStyle,
-  } = props;
+  };
+  onPress: () => void;
+  titleStyle: {
+    padding: number;
+  };
+};
+const Header = (props: HeaderType) => {
+  const { title, showCloseButton, closeButtonIcon, onPress, titleStyle } =
+    props;
   return (
     <View style={[styles.container, styles.shadows]}>
       {showCloseButton && (
         <TouchableOpacity onPress={onPress}>
           <View style={styles.backButtonStyle}>
-            <Image
-              source={closeButtonIcon}
-              style={styles.imageStyle}
-            />
+            <Image source={closeButtonIcon} style={styles.imageStyle} />
           </View>
         </TouchableOpacity>
       )}
@@ -48,7 +41,7 @@ const Header = (props:HeaderType) => {
 
 const styles = StyleSheet.create({
   tailContainer: {
-    width: 30
+    width: 30,
   },
   imageStyle: {
     height: 24,
@@ -69,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: theme.units.sizes[22],
     fontWeight: theme.fontWeights.medium,
     color: colors.ui.text,
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   shadows: {
     padding: theme.units.sizes[3],

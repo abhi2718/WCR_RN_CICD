@@ -18,7 +18,7 @@ export const HeightStyle = StyleSheet.create({
     color: colors.ui.text,
     marginTop: sizes[6],
     marginBottom: sizes[3],
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fonts.body,
   },
   pickerContainer: {
     flex: 1,
