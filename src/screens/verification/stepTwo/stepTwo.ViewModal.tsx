@@ -15,6 +15,7 @@ import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.r
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../store/reducers/user.reducer';
 import { ROUTES } from '../../../navigation';
+import { useNavigateToScreen } from '../../../utils/common.functions';
 
 export const useVerificationViewModal = (props: AvatarProps) => {
   const { optionData, verificationOption } =
@@ -61,9 +62,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
     return result;
   };
-
+  const {resetState} = useNavigateToScreen();
   const navigateToVerificationState = () => {
-    navigation.navigate(ROUTES.VerificationPending);
+    resetState(ROUTES.VerificationPending);
   };
 
   const [previousSetVerificationOption, setPreviousSetVerificationOption] =
@@ -255,7 +256,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-      //navigateToHeightScreen(loggInUserId);
       return user;
     } catch (err) {
     } finally {

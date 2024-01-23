@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Pressable, StyleSheet, Text, View, BackHandler } from 'react-native';
 import { Row, Logo } from '../tools';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
 import { ROUTES } from '../../navigation';
@@ -34,12 +34,19 @@ export const HeaderBar = (props: HeaderBarProps) => {
     isVerificartionScreen = false,
     flagType,
   } = props;
-
   const navigation = useNavigation();
-  const _goBack = goBack ? goBack : navigation.goBack;
+  const navigationState = useNavigationState(state => state);
+  const handleGoBack = () => {
+    if (navigationState?.routes?.length === 1) {
+      BackHandler.exitApp();
+      return;
+    }
+    navigation.goBack();
+  };
+  const _goBack = goBack ? goBack : handleGoBack;
   return (
     <Row justifyContent="space-between" alignItems="center">
-      <Pressable onPress={_goBack}>
+       <Pressable onPress={_goBack}>
         <View style={headerStyle.arrowContainer}>
           <Image
             style={headerStyle.arrow}

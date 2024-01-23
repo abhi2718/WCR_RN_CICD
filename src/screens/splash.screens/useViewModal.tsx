@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ROUTES } from '../../navigation';
@@ -23,7 +23,12 @@ export const useViewModal = () => {
       dispatch(addUser(data));
       return navigateToScreen(data.user)
     }
-    navigation.navigate(ROUTES.Onboarding);
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: ROUTES.Onboarding }],
+      }),
+    )
   };
   useEffect(() => {
     checkIsUserLoggedIn();

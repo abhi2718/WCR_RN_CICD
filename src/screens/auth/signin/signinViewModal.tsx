@@ -16,6 +16,7 @@ import {
 import { addUser } from '../../../store/reducers/user.reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigateToScreen } from '../../../utils/common.functions';
+import { CommonActions } from '@react-navigation/native';
 
 export const useViewModal = (props: ScreenParams) => {
   const { navigation } = props;
@@ -25,9 +26,8 @@ export const useViewModal = (props: ScreenParams) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [fbdata, setFbData] = useState(null);
-  const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
-  const {navigateToScreen} = useNavigateToScreen()
+  const { navigateToScreen } = useNavigateToScreen();
   const socialSignInSignUp = async ({
     firebaseUid,
     email,
@@ -162,11 +162,9 @@ export const useViewModal = (props: ScreenParams) => {
         }
       } else {
         if (data?.token) {
-          if (data?.token) {
-            const payload = { user: { ...data.user, token: data?.token } };
-            dispatch(addUser(payload));
-            navigateToScreen(data.user);
-          }
+          const payload = { user: { ...data.user, token: data?.token } };
+          dispatch(addUser(payload));
+          navigateToScreen(data.user);
         }
       }
     } catch (e) {}
@@ -227,7 +225,12 @@ export const useViewModal = (props: ScreenParams) => {
   }, [fbdata]);
 
   const navigateToGenderScreen = (id: string) => {
-    navigation.navigate(ROUTES.Gender, { data: id });
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: ROUTES.Gender}],
+      }),
+    )
   };
 
   const navigateToProfile = ({
