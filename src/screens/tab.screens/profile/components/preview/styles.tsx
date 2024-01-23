@@ -12,6 +12,16 @@ export const styles = StyleSheet.create({
   ph16: {
     paddingHorizontal: 16,
   },
+  shareIconView: {
+    position: 'absolute',
+    zIndex: 20,
+    right: 15,
+    top: 20,
+  },
+  shareIcon: {
+    width: 40,
+    height: 40,
+  },
   header: {
     marginBottom: 16,
     paddingHorizontal: 16,

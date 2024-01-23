@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, Pressable } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Row, ScreenWrapper, Spacer } from '../../../../../components/tools';
 import { useViewModal } from './previewViewModal';
@@ -21,6 +21,12 @@ export const PreviewScreen = () => {
           />
         </View>
         <View>
+          <Pressable style={styles.shareIconView}>
+            <Image
+              style={styles.shareIcon}
+              source={require('../../../../../assets/images/icons/Share.png')}
+            />
+          </Pressable>
           {user && (
             <>
               <ScrollView

@@ -104,9 +104,20 @@ export const styles = StyleSheet.create({
   },
   sectionWhite: {
     backgroundColor: theme.colors.ui.white,
+    position: 'relative',
   },
   marginY: {
     // marginVertical: 16,
+  },
+  shareIconView: {
+    position: 'absolute',
+    zIndex: 20,
+    right: 15,
+    top: 60,
+  },
+  shareIcon: {
+    width: 40,
+    height: 40,
   },
   marginBottom: {
     marginBottom: 16,
@@ -164,12 +175,6 @@ export const styles = StyleSheet.create({
   },
   shareWrapper: {
     marginVertical: 20,
-  },
-  shareIcon: {
-    height: sizes[12],
-    width: sizes[12],
-    overflow: 'visible',
-    resizeMode: 'contain',
   },
   blockReportText: {
     textAlign: 'center',

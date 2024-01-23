@@ -76,6 +76,12 @@ export const ProfileModal = (props: profileProps) => {
                 </View>
               </Pressable>
             </Row>
+            <Pressable style={styles.shareIconView} onPress={handleShare}>
+              <Image
+                style={styles.shareIcon}
+                source={require('../../assets/images/icons/Share.png')}
+              />
+            </Pressable>
             <View style={styles.sectionWhite}>
               <View>
                 {user && (
@@ -400,7 +406,7 @@ export const ProfileModal = (props: profileProps) => {
                       </Pressable> */}
 
                       {/* --------- */}
-                      <Spacer position="top" size={50} />
+                      <Spacer position="top" size={20} />
                       <View style={cardStyles.blockReportView}>
                         <Pressable onPress={() => setShowBlockModal(true)}>
                           <Text style={[cardStyles.blockReportText]}>
