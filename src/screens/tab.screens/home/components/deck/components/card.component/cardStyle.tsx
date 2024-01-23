@@ -61,7 +61,7 @@ export const cardStyles = StyleSheet.create({
   },
   userInfo: {
     marginTop: 8,
-    marginBottom:10
+    marginBottom: 10,
   },
   userInfoRow: {
     marginTop: 6,

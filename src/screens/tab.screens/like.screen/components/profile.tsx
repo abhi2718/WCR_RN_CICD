@@ -52,6 +52,7 @@ export const ProfileView = (props: ProfileViewProps) => {
     return (
       <View>
         <Pressable onPress={toggleModal}>
+          <Spacer position="bottom" size={10} />
           <Column style={styles.relative}>
             <Spacer position="right" size={10}>
               <Spacer position="bottom" size={10}>
@@ -177,6 +178,7 @@ export const ProfileView = (props: ProfileViewProps) => {
     return (
       <View>
         <Pressable onPress={toggleModal}>
+          <Spacer position="bottom" size={10} />
           <Column>
             <Spacer position="right" size={10}>
               <FastImage
@@ -237,6 +239,7 @@ export const ProfileView = (props: ProfileViewProps) => {
     return (
       <View>
         <Pressable onPress={toggleModal}>
+          <Spacer position="bottom" size={10} />
           <Column>
             <Spacer position="right" size={0}>
               <FastImage
@@ -250,10 +253,10 @@ export const ProfileView = (props: ProfileViewProps) => {
                 }}
                 resizeMode={FastImage.resizeMode.cover}
               >
-                <LinearGradient
+                {/* <LinearGradient
                   colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
                   style={styles.gradient}
-                />
+                /> */}
               </FastImage>
             </Spacer>
             <Column justifyContent="center" alignItems="center">
@@ -326,7 +329,7 @@ export const styles = StyleSheet.create({
     borderRadius: theme.units.sizes[30],
   },
   matchAvatar: {
-    width: (dimensions.width - 38) / 2,
+    width: dimensions.width / 1.7,
     height: theme.units.sizes[300],
     borderRadius: theme.units.sizes[30],
   },

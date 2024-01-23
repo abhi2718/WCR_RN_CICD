@@ -59,8 +59,8 @@ export const ProfileScreen = ({}) => {
           </Column>
         </Spacer>
         <Pressable onPress={goToPreview}>
-          <Row justifyContent="space-between">
-            <Row gap={sizes[2]}>
+          <Row justifyContent="space-between" alignItems="center">
+            <Row gap={sizes[2]} alignItems="center">
               <Image
                 style={styles.iconStyle}
                 source={require('../../../assets/images/Pewview.png')}
@@ -75,10 +75,10 @@ export const ProfileScreen = ({}) => {
             </Row>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={40} />
+        <Spacer position={'top'} size={30} />
         <Pressable onPress={goToEditProfile}>
-          <Row justifyContent="space-between">
-            <Row gap={sizes[2]}>
+          <Row justifyContent="space-between" alignItems="center">
+            <Row gap={sizes[2]} alignItems="center">
               <Image
                 style={styles.iconStyle}
                 source={require('../../../assets/images/EditProfile.png')}
@@ -93,10 +93,10 @@ export const ProfileScreen = ({}) => {
             </Row>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={40} />
+        <Spacer position={'top'} size={30} />
         <Pressable onPress={goToPreferences}>
-          <Row justifyContent="space-between">
-            <Row gap={sizes[2]}>
+          <Row justifyContent="space-between" alignItems="center">
+            <Row gap={sizes[2]} alignItems="center">
               <Image
                 style={styles.iconStyle}
                 source={require('../../../assets/images/Preferences.png')}
@@ -111,10 +111,10 @@ export const ProfileScreen = ({}) => {
             </Row>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={40} />
+        <Spacer position={'top'} size={30} />
         <Pressable onPress={goToSetting}>
-          <Row justifyContent="space-between">
-            <Row gap={sizes[2]}>
+          <Row justifyContent="space-between" alignItems="center">
+            <Row gap={sizes[2]} alignItems="center">
               <Image
                 style={styles.iconStyle}
                 source={require('../../../assets/images/Setting.png')}
@@ -129,9 +129,9 @@ export const ProfileScreen = ({}) => {
             </Row>
           </Row>
         </Pressable>
-        <Spacer position={'top'} size={40} />
+        <Spacer position={'top'} size={30} />
         <Pressable onPress={() => setLogOutModal(true)}>
-          <Row gap={sizes[2]}>
+          <Row gap={sizes[2]} alignItems="center">
             <Image
               style={styles.iconStyle}
               source={require('../../../assets/images/logout.png')}

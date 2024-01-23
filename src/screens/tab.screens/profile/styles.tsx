@@ -1,7 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { colors } from '../../../infrastructure/theme/colors';
+import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -13,7 +18,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.ui.text,
     fontWeight: 'bold',
-    fontFamily:"Urbanist-SemiBold"
+    // fontFamily: 'Urbanist-Regular',
   },
   profileImg: {
     width: sizes[14] * 2,
@@ -35,6 +40,7 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
+    fontFamily: fonts.body,
   },
   logoutText: {
     fontSize: sizes[3],

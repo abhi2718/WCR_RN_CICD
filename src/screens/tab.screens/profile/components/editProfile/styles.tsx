@@ -123,7 +123,7 @@ export const styles = StyleSheet.create({
   },
   overlayStyle: {
     flex: 1,
-    marginTop: 50,
+    paddingTop: 50,
     paddingBottom: 40,
     justifyContent: 'space-between',
     backgroundColor: '#fff',
