@@ -273,7 +273,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                         <>
                           {/* <Spacer position="top" size={5} /> */}
                           <Text style={cardStyles.aboutHeading}>
-                            Interests/Hobbies
+                            Interests & Hobbies
                           </Text>
                           <Spacer position="top" size={15} />
                           <Row
@@ -304,6 +304,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                             <Text style={cardStyles.aboutHeading}>About</Text>
                             <Spacer position="top" size={8} />
                             <Text style={cardStyles.aboutText}>{bio}</Text>
+                            <Spacer position="bottom" size={12} />
                           </View>
                         )}
                       </View>
@@ -313,7 +314,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                             <>
                               {/* <Spacer position="top" size={5} /> */}
                               <Text style={cardStyles.aboutHeading}>
-                                Interests/Hobbies
+                                Interests & Hobbies
                               </Text>
                               <Spacer position="top" size={12} />
                               <Row
