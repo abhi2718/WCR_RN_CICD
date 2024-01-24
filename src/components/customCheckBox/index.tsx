@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { Row } from '../tools';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
+import { fonts } from '../../infrastructure/theme/fonts';
 export const CustomCheckboxWrapper = styled.View`
   width: 20px;
   height: 20px;
@@ -22,7 +23,7 @@ export const CustomCheckboxWrapper = styled.View`
   border: 2px solid #49454f;
 `;
 export const CustomCheckBox = (props) => {
-  const { onPress, isChecked, label, } = props;
+  const { onPress, isChecked, label } = props;
 
   return (
     <Row style={styles.card}>
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     fontSize: sizes[3],
     color: colors.ui.text,
     fontWeight: 'bold',
+    fontFamily: fonts.body,
   },
   checkedBoxImg: { height: sizes[4], width: sizes[4] },
 });

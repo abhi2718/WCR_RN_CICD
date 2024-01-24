@@ -3,6 +3,7 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../infrastructure/theme/fonts';
 import { dimensions } from '../../../../../components/tools';
 
@@ -20,6 +21,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.text,
+    fontFamily: fonts.body,
   },
   container: {
     flex: 1,
@@ -30,6 +32,7 @@ export const styles = StyleSheet.create({
     color: '#676161',
     fontSize: fontSizes.text,
     paddingBottom: 30,
+    fontFamily: fonts.body,
   },
   charCount: {
     position: 'absolute',
@@ -37,17 +40,20 @@ export const styles = StyleSheet.create({
     right: 16,
     color: colors.ui.primary,
     fontSize: fontSizes.text,
+    fontFamily: fonts.body,
   },
   fieldName: {
     color: colors.ui.textHead,
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.text,
+    fontFamily: fonts.body,
   },
   fieldValue: {
     color: '#676161',
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.text,
     width: '100%',
+    fontFamily: fonts.body,
   },
   fieldValueContainer: {
     paddingTop: 10,
@@ -84,6 +90,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     margin: 0,
     paddingVertical: 12,
+    fontFamily: fonts.body,
   },
   cancelButton: {
     borderRadius: 23,
@@ -97,12 +104,14 @@ export const styles = StyleSheet.create({
     marginLeft: -8,
     textAlign: 'left',
     height: 20,
+    fontFamily: fonts.body,
   },
   selectedItem: {
     fontSize: 16,
     color: colors.ui.text,
     backgroundColor: colors.bg.secondary,
     fontWeight: 'bold',
+    fontFamily: fonts.body,
   },
   selectRow: {
     width: '100%',

@@ -16,8 +16,10 @@ const HeightSlider: React.FC = () => {
   };
 
   return (
-    <View style={{ marginTop: 200 ,padding:16}}>
-      <Text>{`Height: ${feet} feet ${inches} inches`}</Text>
+    <View style={{ marginTop: 200, padding: 16 }}>
+      <Text
+        style={{ fontFamily: 'Urbanist-Regular' }}
+      >{`Height: ${feet} feet ${inches} inches`}</Text>
 
       <Slider
         style={{ width: 200, marginVertical: 10 }}
@@ -38,8 +40,8 @@ const HeightSlider: React.FC = () => {
       />
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text>Feet</Text>
-        <Text>Inches</Text>
+        <Text style={{ fontFamily: 'Urbanist-Regular' }}>Feet</Text>
+        <Text style={{ fontFamily: 'Urbanist-Regular' }}>Inches</Text>
       </View>
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -49,7 +51,11 @@ const HeightSlider: React.FC = () => {
           style={{ height: 50, width: 100 }}
         >
           {[...Array(5).keys()].map((value) => (
-            <Picker.Item key={value} label={`${value + 3} ft`} value={value + 3} />
+            <Picker.Item
+              key={value}
+              label={`${value + 3} ft`}
+              value={value + 3}
+            />
           ))}
         </Picker>
 
@@ -68,4 +74,3 @@ const HeightSlider: React.FC = () => {
 };
 
 export default HeightSlider;
-

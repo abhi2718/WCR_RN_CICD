@@ -2,7 +2,11 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { dimensions } from '../tools';
-import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 
 export const modalStyle = StyleSheet.create({
   centeredView: {
@@ -36,12 +40,14 @@ export const modalStyle = StyleSheet.create({
     color: colors.ui.text,
     marginBottom: sizes[4],
     textTransform: 'uppercase',
+    fontFamily: fonts.body,
   },
   subHeading: {
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.title,
     color: colors.ui.text,
     marginBottom: sizes[4],
+    fontFamily: fonts.body,
   },
   row: {
     gap: sizes[1],
@@ -52,6 +58,7 @@ export const modalStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: sizes[3],
     flex: 1,
+    fontFamily: fonts.body,
   },
   textHead: {
     fontWeight: fontWeights.bold,
@@ -68,6 +75,7 @@ export const modalStyle = StyleSheet.create({
     fontSize: sizes[4],
     marginVertical: sizes[3],
     color: colors.ui.black,
+    fontFamily: fonts.body,
   },
 });
 export const insModalStyle = StyleSheet.create({
@@ -95,6 +103,7 @@ export const insModalStyle = StyleSheet.create({
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.h5,
     marginBottom: 20,
+    fontFamily: fonts.body,
   },
   rowOneImg: {
     marginTop: 10,
@@ -107,5 +116,6 @@ export const insModalStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.reqular,
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
 });

@@ -14,11 +14,13 @@ export const addPicture = StyleSheet.create({
     fontWeight: '700',
     color: colors.ui.text,
     marginTop: sizes[6],
+    fontFamily: fonts.body,
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[0],
+    fontFamily: fonts.body,
   },
   row: {
     width: '100%',
@@ -86,6 +88,7 @@ export const addPicture = StyleSheet.create({
     overflow: 'hidden',
     borderColor: colors.ui.white,
     borderWidth: 1,
+    fontFamily: fonts.body,
   },
 });
 

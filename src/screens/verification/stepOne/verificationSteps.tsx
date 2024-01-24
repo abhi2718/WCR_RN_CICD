@@ -1,5 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { colors } from '../../../infrastructure/theme/colors';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { dimensions } from '../../../components/tools';
@@ -16,23 +20,27 @@ export const verificationStyle = StyleSheet.create({
     fontWeight: fontWeights.bold,
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: fonts.body,
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: fonts.body,
   },
   btnText: {
     marginLeft: sizes[3],
     fontSize: sizes[3],
     fontWeight: fontWeights.semiBold,
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
   rowView: {
     marginBottom: sizes[1],
   },
   textBox: {
     marginBottom: sizes[2],
+    fontFamily: fonts.body,
   },
   footerDiv: {
     paddingBottom: 20,
@@ -41,20 +49,23 @@ export const verificationStyle = StyleSheet.create({
     paddingHorizontal: 16,
     gap: 15,
     flex: 1,
-    justifyContent:"flex-end"
+    justifyContent: 'flex-end',
   },
   subText: {
     fontSize: fontSizes.text,
     marginBottom: sizes[4],
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
   redDot: {
     color: colors.ui.primary,
     fontSize: 8,
+    fontFamily: fonts.body,
   },
   optionalText: {
     color: colors.ui.primary,
     fontSize: fontSizes.text,
+    fontFamily: fonts.body,
   },
   pointsRow: {
     marginBottom: sizes[2],
@@ -63,11 +74,13 @@ export const verificationStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     marginLeft: sizes[3],
+    fontFamily: fonts.body,
   },
   footerText: {
     color: colors.ui.text,
     fontSize: fontSizes.text,
     marginVertical: sizes[5],
+    fontFamily: fonts.body,
   },
   imageViewProfile: {
     borderRadius: sizes[4],
@@ -96,6 +109,7 @@ export const verificationStyle = StyleSheet.create({
     fontSize: fontSizes.text,
     textAlign: 'center',
     color: colors.ui.primary,
+    fontFamily: fonts.body,
   },
 });
 
@@ -136,6 +150,7 @@ export const firstModalStyle = StyleSheet.create({
     fontSize: sizes[4],
     color: '#000',
     paddingVertical: sizes[2],
+    fontFamily: fonts.body,
   },
   borderView: {
     borderBottomWidth: 0.5,
@@ -147,5 +162,6 @@ export const firstModalStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: sizes[4],
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
 });

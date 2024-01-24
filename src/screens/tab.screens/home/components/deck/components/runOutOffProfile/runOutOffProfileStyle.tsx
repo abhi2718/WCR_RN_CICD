@@ -4,6 +4,7 @@ import { colors } from '../../../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 
@@ -25,7 +26,7 @@ export const runOutOffProfileStyle = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
     textAlign: 'center',
-
+    fontFamily: fonts.body,
     fontSize: fontSizes.button,
   },
   pendingIcon: {

@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, View, BackHandler } from 'react-native';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  BackHandler,
+} from 'react-native';
 import { Row, Logo } from '../tools';
 import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
 import { ROUTES } from '../../navigation';
 import { DltLogOutModal } from '../dltLogOutModal';
-import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 import { ActivityIndicator } from 'react-native-paper';
 
 interface HeaderBarProps {
@@ -35,7 +46,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
     flagType,
   } = props;
   const navigation = useNavigation();
-  const navigationState = useNavigationState(state => state);
+  const navigationState = useNavigationState((state) => state);
   const handleGoBack = () => {
     if (navigationState?.routes?.length === 1) {
       BackHandler.exitApp();
@@ -46,7 +57,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
   const _goBack = goBack ? goBack : handleGoBack;
   return (
     <Row justifyContent="space-between" alignItems="center">
-       <Pressable onPress={_goBack}>
+      <Pressable onPress={_goBack}>
         <View style={headerStyle.arrowContainer}>
           <Image
             style={headerStyle.arrow}
@@ -114,6 +125,7 @@ export const headerStyle = StyleSheet.create({
   skipBtn: {
     fontSize: sizes[4],
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
   infoIcon: {
     height: sizes[4],
@@ -133,6 +145,7 @@ export const headerStyle = StyleSheet.create({
     fontSize: fontSizes.h5,
     color: colors.ui.text,
     fontWeight: fontWeights.semiBold,
+    fontFamily: fonts.body,
   },
   actionButtonView: {
     width: 50,
@@ -142,6 +155,7 @@ export const headerStyle = StyleSheet.create({
     color: '#007AFF',
     fontWeight: fontWeights.regular,
     textAlign: 'right',
+    fontFamily: fonts.body,
   },
 });
 
@@ -248,6 +262,7 @@ export const headerDeckStyle = StyleSheet.create({
     borderWidth: 2,
     zIndex: sizes[2],
     fontWeight: 'bold',
+    fontFamily: fonts.body,
   },
   row: {
     width: sizes[10],

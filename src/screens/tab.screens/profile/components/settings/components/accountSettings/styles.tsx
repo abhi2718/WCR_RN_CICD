@@ -4,6 +4,7 @@ import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../../../infrastructure/theme/fonts';
 
 export const styles = StyleSheet.create({
@@ -20,10 +21,12 @@ export const styles = StyleSheet.create({
   text: {
     color: colors.ui.text,
     fontSize: fontSizes.text,
+    fontFamily: fonts.body,
   },
   deletBtn: {
     color: colors.ui.primary,
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.title,
+    fontFamily: fonts.body,
   },
 });

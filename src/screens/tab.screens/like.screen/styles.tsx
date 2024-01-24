@@ -1,7 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { dimensions } from '../../../components/tools';
 import { theme } from '../../../infrastructure/theme';
 
@@ -44,6 +48,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
   noMatchIcon: {
     width: sizes[12] * 2,
@@ -54,16 +59,20 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
   matchHeading: {
     color: theme.colors.ui.textHead,
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.semiBold,
+    fontFamily: fonts.body,
   },
   seeAll: {
     color: theme.colors.ui.primary,
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.medium,
+    lineHeight: 26,
+    fontFamily: fonts.body,
   },
   headerPadding: {
     paddingBottom: theme.units.sizes[10],
@@ -84,6 +93,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     flex: 1,
     paddingRight: 80,
+    fontFamily: fonts.body,
   },
   backArrowSize: {
     width: theme.units.sizes[21],
@@ -115,10 +125,14 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.button,
     fontWeight: theme.fontWeights.medium,
     color: theme.colors.ui.text,
+    maxWidth: dimensions.width,
+    fontFamily: fonts.body,
   },
 
   paddingMatches: {
     width: dimensions.width - 20,
+    maxWidth: 250,
+    fontFamily: fonts.body,
   },
   paddingReceiveLiked: {
     width: dimensions.width - 60,

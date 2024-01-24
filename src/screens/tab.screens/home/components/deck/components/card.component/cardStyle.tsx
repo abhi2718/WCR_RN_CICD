@@ -76,6 +76,7 @@ export const cardStyles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
+    fontFamily: fonts.body,
   },
   headingText: {
     marginTop: sizes[2],
@@ -110,12 +111,14 @@ export const cardStyles = StyleSheet.create({
   chipText: {
     color: colors.ui.text,
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
   aboutText: {
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.button,
     // marginTop: sizes[1],
+    fontFamily: fonts.body,
   },
   blockReportView: {
     borderTopColor: 'rgba(29, 27, 32, 0.15)',
@@ -128,10 +131,12 @@ export const cardStyles = StyleSheet.create({
     paddingVertical: sizes[3],
     fontWeight: fontWeights.medium,
     fontSize: fontSizes.title,
+    fontFamily: fonts.body,
   },
   reportText: {
     color: colors.ui.primary,
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
   hrLine: {
     borderTopColor: 'rgba(29, 27, 32, 0.15)',
@@ -158,6 +163,7 @@ export const cardStyles = StyleSheet.create({
     fontSize: fontSizes.button,
     alignContent: 'center',
     textTransform: 'capitalize',
+    fontFamily: fonts.body,
   },
   flexWrap: {
     flexWrap: 'wrap',
