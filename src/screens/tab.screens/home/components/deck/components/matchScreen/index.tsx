@@ -6,15 +6,13 @@ import { styles } from './styles';
 import { Spacer, dimensions } from '../../../../../../../components/tools';
 import { HeaderBar } from '../../../../../../../components/header';
 import { PrimaryButton } from '../../../../../../../components/button';
+import { MatchScreenPropsType } from '../../../../../../../types/screen.type/home.type';
 
-export const MatchScreen = (props) => {
+export const MatchScreen = (props:MatchScreenPropsType) => {
   const { handleHideOfIsMatchScreen, isMatch, startChat } = props;
   const { user } = useSelector(({ userState }) => userState);
   return (
     <View style={styles.container}>
-      {/* <Pressable onPress={handleHideOfIsMatchScreen}>
-        <Text>Back</Text>
-      </Pressable> */}
       <HeaderBar goBack={handleHideOfIsMatchScreen} />
       <View style={styles.hrLine} />
       <View style={styles.content}>
@@ -29,7 +27,6 @@ export const MatchScreen = (props) => {
             style={styles.matchBgImgTwo}
             source={require('../../../../../../../assets/images/icons/matchBgImg.png')}
           />
-
           <Image
             source={{
               uri: user?.profilePicture?.url,
@@ -38,13 +35,17 @@ export const MatchScreen = (props) => {
           />
           <Image
             source={{
-              uri: isMatch?.matchUser?.profilePicture?.url
-                ? isMatch?.matchUser?.profilePicture?.url
-                : 'https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg?cs=srgb&dl=pexels-svetozar-milashevich-1490908.jpg&fm=jpg',
+              uri: isMatch?.matchUser?.profilePicture?.url,
             }}
             style={[styles.image, styles.imageRight]}
           />
         </View>
+        <Lottie
+          source={require('../../../../../../../assets/lotties/success.json')}
+          autoPlay
+          loop
+          style={styles.lottieStyle}
+        />
         <View style={styles.footerContainer}>
           <Image
             resizeMode="contain"
@@ -54,28 +55,14 @@ export const MatchScreen = (props) => {
           <Text style={styles.subText}>
             Don't keep them waiting. Say hello now!
           </Text>
-
           <View>
             <Spacer position="top" size={25} />
-            <Pressable onPress={startChat}>
-              <PrimaryButton title="Say Hello" />
-            </Pressable>
+            <PrimaryButton onPress={startChat} title="Say Hello" />
             <Spacer position="top" size={25} />
             <Pressable onPress={handleHideOfIsMatchScreen}>
               <Text style={styles.keepSwiping}>Keep Swiping</Text>
             </Pressable>
             <Spacer position="top" size={15} />
-            <Lottie
-              source={require('../../../../../../../assets/lotties/success.json')}
-              autoPlay
-              loop
-              style={{
-                width: dimensions.width,
-                height: dimensions.height - 100,
-                position: 'absolute',
-                bottom: 0,
-              }}
-            />
           </View>
         </View>
       </View>

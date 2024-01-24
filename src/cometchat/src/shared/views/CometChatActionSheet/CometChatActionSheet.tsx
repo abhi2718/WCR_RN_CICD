@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, FlatList, Text, Image, TouchableOpacity } from 'react-native';
 import { CometChatContext } from '../../CometChatContext';
-import { localize } from "../../resources/CometChatLocalize";
+import { localize } from '../../resources/CometChatLocalize';
 // import grid from './resources/grid.png';
 // import list from './resources/list.png';
 import { ActionSheetStyles } from './ActionSheetStyle';
@@ -10,6 +10,7 @@ import { Hooks } from './hooks';
 import { ICONS } from './resources';
 import { CometChatContextType } from '../../base/Types';
 import { ActionItemInterface } from './ActionItem';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 const layoutType = Object.freeze({
   list: 'list',
   grid: 'grid',
@@ -43,30 +44,36 @@ const OptionListView = ({
       ]}
       onPress={onPress}
     >
-      {Boolean(iconUrl) && <Image
-        source={iconUrl}
-        style={[
-          Style.listItemImageStyle,
-          {
-            tintColor:
-              iconTint || style?.listItemIconTint || 'rgba(20,20,20,0.69)',
-            backgroundColor:
-              iconBackgroundColor ||
-              style?.listItemIconBackground ||
-              'transparent',
-            borderRadius:
-              listItemIconBorderRadius || style?.listItemIconBorderRadius || 0,
-          },
-        ]}
-      />}
+      {Boolean(iconUrl) && (
+        <Image
+          source={iconUrl}
+          style={[
+            Style.listItemImageStyle,
+            {
+              tintColor:
+                iconTint || style?.listItemIconTint || 'rgba(20,20,20,0.69)',
+              backgroundColor:
+                iconBackgroundColor ||
+                style?.listItemIconBackground ||
+                'transparent',
+              borderRadius:
+                listItemIconBorderRadius ||
+                style?.listItemIconBorderRadius ||
+                0,
+            },
+          ]}
+        />
+      )}
       <Text
         style={[
           {
             ...(style?.listItemTitleFont || {
               fontSize: 17,
               fontWeight: '400',
+              fontFamily: fonts.body,
             }),
             color: style?.listItemTitleColor || 'rgb(20,20,20)',
+            fontFamily: fonts.body,
           },
           titleStyle,
           Style.listTitleStyle,
@@ -126,6 +133,7 @@ const OptionGridView = ({
               ...(style?.listItemTitleFont || {
                 fontSize: 17,
                 fontWeight: '400',
+                fontFamily: fonts.body,
               }),
               color: style?.listItemTitleColor || 'rgb(20,20,20)',
             },
@@ -158,7 +166,7 @@ export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
       titleColor: theme.palette.getAccent(),
       titleFont: theme.typography.name,
       backgroundColor: props.style?.backgroundColor,
-      paddingHorizontal: props.style?.paddingHorizontal
+      paddingHorizontal: props.style?.paddingHorizontal,
     }),
     ...props.style,
   };
@@ -170,11 +178,24 @@ export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
 
   const _render = ({ item }) => {
     return (
-      <OptionListView key={item.id} {...item} iconUrl={item.icon || item.iconUrl} theme={theme} backgroundColor={style.listItemBackground} style={style} />
+      <OptionListView
+        key={item.id}
+        {...item}
+        iconUrl={item.icon || item.iconUrl}
+        theme={theme}
+        backgroundColor={style.listItemBackground}
+        style={style}
+      />
     );
   };
   const _renderGrid = ({ item }) => (
-    <OptionGridView key={item.id} {...item} iconUrl={item.icon || item.iconUrl} theme={theme} style={style} />
+    <OptionGridView
+      key={item.id}
+      {...item}
+      iconUrl={item.icon || item.iconUrl}
+      theme={theme}
+      style={style}
+    />
   );
 
   const getList = () => {
@@ -192,7 +213,8 @@ export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
                 style={{
                   height: 1,
                   backgroundColor:
-                    props.style?.actionSheetSeparatorTint || props.style?.optionsSeparatorTint ||
+                    props.style?.actionSheetSeparatorTint ||
+                    props.style?.optionsSeparatorTint ||
                     theme.palette.getAccent200(),
                 }}
               />
@@ -247,23 +269,25 @@ export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
         style?.border,
       ]}
     >
-      {!props.hideHeader && <View style={Style.headerStyle}>
-        <Text
-          style={[
-            Style.titleStyle,
-            {
-              ...(style?.titleFont || {
-                fontSize: 17,
-                fontWeight: '500',
-              }),
-              color: style?.titleColor || 'rgba(20, 20, 20,0.9)',
-            },
-          ]}
-        >
-          {props.title}
-        </Text>
-        {getLayoutModeIcon()}
-      </View>}
+      {!props.hideHeader && (
+        <View style={Style.headerStyle}>
+          <Text
+            style={[
+              Style.titleStyle,
+              {
+                ...(style?.titleFont || {
+                  fontSize: 17,
+                  fontWeight: '500',
+                }),
+                color: style?.titleColor || 'rgba(20, 20, 20,0.9)',
+              },
+            ]}
+          >
+            {props.title}
+          </Text>
+          {getLayoutModeIcon()}
+        </View>
+      )}
       {getList()}
     </View>
   );

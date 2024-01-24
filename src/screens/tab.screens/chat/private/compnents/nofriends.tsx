@@ -5,6 +5,7 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../infrastructure/theme/fonts';
 
 export const NoFriends = () => {
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
   noChatIcon: {
     width: sizes[12] * 2,
@@ -53,5 +55,6 @@ const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
 });

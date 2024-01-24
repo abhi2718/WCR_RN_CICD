@@ -24,6 +24,9 @@ import {
 import { sizes } from '../../infrastructure/theme/sizes';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
 import { calculateAge } from '../../utils/common.functions';
+import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
+import { styles } from './style';
+import { AlertScreen } from '../alert';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -40,25 +43,45 @@ export const ProfileModal = (props: profileProps) => {
     showDisLike,
     showSave,
     showBlock,
+    isMatch,
+    startChat,
+    handleHideOfIsMatchScreen,
+    showBlockModal,
+    setShowBlockModal,
+    handleReport,
   } = useViewModal(props);
   return (
     <Modal visible={showModal}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.containerWrapperStyle}>
         {loading ? (
-          <View style={{ flex: 1 }}>
+          <View style={styles.containerWrapperStyle}>
             <FullLoader />
           </View>
+        ) : isMatch?.status ? (
+          <MatchScreen
+            isMatch={isMatch}
+            startChat={startChat}
+            handleHideOfIsMatchScreen={handleHideOfIsMatchScreen}
+          />
         ) : (
           <View>
             <Spacer position="top" size={10} />
             <Row style={styles.backHeaderPadding}>
               <Pressable onPress={() => toggleModal()}>
-                <Image
-                  style={styles.backArrowSize}
-                  source={require('../../assets/images/icons/back-arrow.png')}
-                />
+                <View style={styles.backButtonStyle}>
+                  <Image
+                    style={styles.backArrowSize}
+                    source={require('../../assets/images/icons/back-arrow.png')}
+                  />
+                </View>
               </Pressable>
             </Row>
+            <Pressable style={styles.shareIconView} onPress={handleShare}>
+              <Image
+                style={styles.shareIconTop}
+                source={require('../../assets/images/icons/Share.png')}
+              />
+            </Pressable>
             <View style={styles.sectionWhite}>
               <View>
                 {user && (
@@ -90,7 +113,7 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.imageIcon}
                             source={require('../../assets/images/icons/degree.png')}
                           />
-                          <Text style={styles.aboutText}>
+                          <Text style={styles.userInfoText}>
                             {user.designation.userDegree}
                           </Text>
                         </Row>
@@ -99,7 +122,7 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.imageIcon}
                             source={require('../../assets/images/icons/degTitle.png')}
                           />
-                          <Text style={styles.aboutText}>
+                          <Text style={styles.userInfoText}>
                             {user.designation.title}
                           </Text>
                         </Row>
@@ -108,13 +131,9 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.imageIcon}
                             source={require('../../assets/images/icons/location.png')}
                           />
-                          <Text style={styles.aboutText}>{user.state}</Text>
+                          <Text style={styles.userInfoText}>{user.state}</Text>
                         </Row>
                       </View>
-                      {/* <View style={styles.userInfo}>
-                        <Text style={styles.vitalSigns}>Vital Signs</Text>
-                      </View> */}
-
                       <View style={styles.vitalSigns}>
                         {(user?.gender?.length > 0 ||
                           user?.drinking?.length > 0 ||
@@ -124,7 +143,7 @@ export const ProfileModal = (props: profileProps) => {
                         )}
                         <Row
                           style={styles.vitalSignsChips}
-                          gap={15}
+                          gap={6}
                           alignItems="center"
                         >
                           {user.gender && (
@@ -158,12 +177,10 @@ export const ProfileModal = (props: profileProps) => {
                                 />
                               )}
                               <Text style={styles.chipText}>
-                                {' '}
                                 {user?.gender}
                               </Text>
                             </Row>
                           )}
-
                           {user.showSexualPreference &&
                             user.sexualPreference && (
                               <Row
@@ -212,20 +229,20 @@ export const ProfileModal = (props: profileProps) => {
                           )}
 
                           {user.ethnicity.length >= 0 &&
-                            user.ethnicity.map((ethnicity: String) => (
-                              <Row
-                                gap={10}
-                                alignItems="center"
-                                style={styles.chip}
-                              >
-                                {/* <Image
-                        style={styles.chipIcon}
-                        source={require('../../assets/images/icons/USAFlag.png')}
-                      /> */}
-                                <Text style={styles.chipText}>{ethnicity}</Text>
-                              </Row>
-                            ))}
-
+                            user.ethnicity.map(
+                              (ethnicity: String, key: number) => (
+                                <Row
+                                  gap={10}
+                                  key={key}
+                                  alignItems="center"
+                                  style={styles.chip}
+                                >
+                                  <Text style={styles.chipText}>
+                                    {ethnicity}
+                                  </Text>
+                                </Row>
+                              ),
+                            )}
                           {user.maritalStatus && (
                             <Row
                               gap={10}
@@ -241,7 +258,6 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.religion && (
                             <Row
                               gap={10}
@@ -296,7 +312,6 @@ export const ProfileModal = (props: profileProps) => {
                                 <Text style={styles.chipText}>{user.kids}</Text>
                               </Row>
                             ))}
-
                           {user.covidVaccineStatus && (
                             <Row
                               gap={10}
@@ -312,7 +327,6 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.drinking && (
                             <Row
                               gap={10}
@@ -330,8 +344,6 @@ export const ProfileModal = (props: profileProps) => {
                           )}
                         </Row>
                       </View>
-
-                      {/* End Vital */}
                     </View>
                     <View style={styles.marginY}>
                       {user?.photos.map(({ url, _id }, index) => {
@@ -361,7 +373,7 @@ export const ProfileModal = (props: profileProps) => {
                       })}
                     </View>
                     <View style={styles.shareWrapper}>
-                      <Row justifyContent="space-between">
+                      <Row justifyContent="center" gap={32}>
                         {showDisLike && (
                           <Pressable onPress={handleDisLike}>
                             <Image
@@ -387,18 +399,29 @@ export const ProfileModal = (props: profileProps) => {
                           </Pressable>
                         )}
                       </Row>
-                      <Pressable onPress={handleShare}>
-                        <Text style={styles.blockReportText}>
-                          Share with a Friend
-                        </Text>
-                      </Pressable>
-                      {showBlock && (
-                        <Pressable onPress={handleBlockUser}>
-                          <Text style={styles.blockReportText}>
-                            Block/Report
+
+                      <Spacer position="top" size={20} />
+                      {/* Block report section is commented for now */}
+
+                      {/* <View style={cardStyles.blockReportView}>
+                        <Pressable onPress={() => setShowBlockModal(true)}>
+                          <Text style={[cardStyles.blockReportText]}>
+                            Block
                           </Text>
                         </Pressable>
-                      )}
+                        <View style={cardStyles.hrLine} />
+                        <Pressable onPress={handleReport}>
+                          <Text
+                            style={[
+                              cardStyles.blockReportText,
+                              cardStyles.reportText,
+                            ]}
+                          >
+                            Report
+                          </Text>
+                        </Pressable>
+                      </View> */}
+                      <Spacer position="top" size={48} />
                     </View>
                     <Spacer position="bottom" size={60} />
                   </ScrollView>
@@ -407,133 +430,14 @@ export const ProfileModal = (props: profileProps) => {
             </View>
           </View>
         )}
+        <AlertScreen
+          showModal={showBlockModal}
+          setShowModal={setShowBlockModal}
+          title="Block"
+          description="Do you want to block this person?"
+          onPress={handleBlockUser}
+        />
       </SafeAreaView>
     </Modal>
   );
 };
-
-export const styles = StyleSheet.create({
-  profileImage: {
-    width: '100%',
-    height: 600,
-  },
-  relative: {
-    position: 'relative',
-  },
-  userNameText: {
-    position: 'absolute',
-    bottom: theme.units?.sizes[20],
-    left: theme.units.sizes[16],
-    fontSize: theme.fontSizes.h6,
-    color: theme.colors.ui.white,
-    fontWeight: theme.fontWeights.bold,
-    fontFamily: theme.fontFamily.body,
-  },
-  gradient: {
-    height: '100%',
-    width: '100%',
-  },
-  aboutText: {
-    color: theme.colors.ui.text,
-    fontWeight: theme.fontWeights.medium,
-    fontSize: theme.fontSizes.text,
-    paddingLeft: 6,
-  },
-  userInfo: {
-    padding: 16,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 14,
-  },
-  gallery: {
-    fontSize: 22,
-    fontWeight: theme.fontWeights.semiBold,
-  },
-  pictures: {
-    width: dimensions.width,
-    height: dimensions.height - 150,
-  },
-  backHeaderPadding: {
-    paddingTop: theme.units.sizes[0],
-    paddingBottom: theme.units.sizes[10],
-    paddingLeft: theme.units.sizes[10],
-  },
-  backArrowSize: {
-    width: theme.units.sizes[21],
-    height: theme.units.sizes[21],
-  },
-  sectionWhite: {
-    backgroundColor: theme.colors.ui.white,
-  },
-  marginY: {
-    marginVertical: 16,
-  },
-  marginBottom: {
-    marginBottom: 16,
-  },
-  imageView: {
-    padding: theme.units.sizes[10],
-    flexBasis: '50%',
-  },
-  imageIcon: {
-    width: theme.units.sizes[19],
-    height: theme.units.sizes[19],
-    resizeMode: 'contain',
-  },
-  userGallery: {
-    paddingTop: 5,
-    paddingBottom: 24,
-  },
-
-  vitalSigns: {
-    paddingHorizontal: 16,
-  },
-  vitalSignsChips: {
-    marginVertical: sizes[2],
-    flexWrap: 'wrap',
-  },
-  chip: {
-    backgroundColor: colors.ui.deckChipBgColor,
-    paddingVertical: sizes[1],
-    paddingHorizontal: sizes[2],
-    borderRadius: sizes[4],
-  },
-  chipIcon: {
-    height: sizes[5],
-    width: sizes[5],
-    overflow: 'visible',
-    resizeMode: 'contain',
-  },
-  chipText: {
-    color: colors.ui.text,
-    fontSize: fontSizes.button,
-  },
-  headingText: {
-    marginTop: sizes[2],
-    color: colors.ui.text,
-    fontWeight: fontWeights.bold,
-    fontSize: fontSizes.text,
-    fontFamily: fonts.body,
-  },
-  inBtwnText: {
-    marginVertical: sizes[1],
-    paddingHorizontal: 16,
-  },
-  shareWrapper: {
-    minHeight: 180,
-    paddingHorizontal: 16,
-    paddingBottom: 20,
-  },
-  shareIcon: {
-    height: sizes[12],
-    width: sizes[12],
-    overflow: 'visible',
-    resizeMode: 'contain',
-  },
-  blockReportText: {
-    textAlign: 'center',
-    marginVertical: sizes[2],
-    fontWeight: fontWeights.semiBold,
-    fontSize: fontSizes.title,
-  },
-});

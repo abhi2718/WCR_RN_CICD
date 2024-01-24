@@ -3,8 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../navigation';
 import { useLogOutViewModal } from '../../../utils/logOut';
-import useStripeViewModal from '../../subscribe';
-
 export const useViewModal = () => {
   const { logOut } = useLogOutViewModal();
   const { user } = useSelector(({ userState }) => userState);
@@ -23,7 +21,6 @@ export const useViewModal = () => {
       logOut();
     },2000)
   };
- //const {onCheckout} = useStripeViewModal()
   return {
     user,
     goToPreview,

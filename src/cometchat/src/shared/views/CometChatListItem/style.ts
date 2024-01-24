@@ -1,6 +1,7 @@
 import React from 'react';
 //@ts-ignore
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 export const Style = StyleSheet.create({
   container: {
@@ -18,7 +19,7 @@ export const Style = StyleSheet.create({
   defaultStatusStyle: {
     position: 'absolute',
     end: 0,
-    top: '60%',
+    top: '36%',
   },
   middleViewStyle: {
     flexDirection: 'column',
@@ -30,7 +31,7 @@ export const Style = StyleSheet.create({
 
   titleTextStyle: {
     opacity: 1,
-
+    fontFamily: fonts.body,
     textAlign: 'left',
   },
   tailViewStyle: {
@@ -60,7 +61,11 @@ export const Style = StyleSheet.create({
     height: 18,
     width: 18,
   },
-  optionTitleStyle: { fontWeight: '500', fontSize: 17 },
+  optionTitleStyle: {
+    fontWeight: '500',
+    fontSize: 17,
+    fontFamily: fonts.body,
+  },
   pr12: {
     paddingRight: 12,
   },

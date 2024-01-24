@@ -12,6 +12,10 @@ export class HomeDeckRepository {
     const url = `${AppUrl.userReactionEndPoint}`;
     return this.apiService.getPostApiResponse(url, payload);
   }
+  async deleteDisLike(id:string) {
+    const url = `${AppUrl.userReactionEndPoint}/undo/${id}`;
+    return this.apiService.getDeleteApiResponse(url,{})
+  }
   async addFavourite(payload: any) {
     const url = `${AppUrl.favouriteEndPoint}`;
     return this.apiService.getPostApiResponse(url, payload);

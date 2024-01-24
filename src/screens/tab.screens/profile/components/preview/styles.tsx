@@ -12,6 +12,16 @@ export const styles = StyleSheet.create({
   ph16: {
     paddingHorizontal: 16,
   },
+  shareIconView: {
+    position: 'absolute',
+    zIndex: 20,
+    right: 15,
+    top: 20,
+  },
+  shareIcon: {
+    width: 40,
+    height: 40,
+  },
   header: {
     marginBottom: 16,
     paddingHorizontal: 16,
@@ -70,6 +80,7 @@ export const styles = StyleSheet.create({
   },
   vitalSigns: {
     paddingHorizontal: 16,
+    marginTop: 5,
   },
   userInfoRow: {
     marginTop: sizes[2],
@@ -84,6 +95,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
+    fontFamily: fonts.body,
   },
   headingText: {
     marginTop: sizes[2],
@@ -111,33 +123,39 @@ export const styles = StyleSheet.create({
   chipText: {
     color: colors.ui.text,
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
   aboutText: {
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.button,
     marginTop: sizes[0],
+    fontFamily: fonts.body,
   },
   hobbiesChip: {
     borderRadius: sizes[4],
     overflow: 'hidden',
+    height: 35,
     backgroundColor: colors.ui.deckChipBgColor,
     paddingHorizontal: sizes[2],
     marginRight: 8,
     marginBottom: 8,
     paddingVertical: 8,
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
 
   inBtwnText: {
     marginVertical: sizes[1],
     paddingHorizontal: 16,
+    fontFamily: fonts.body,
   },
   blockReportText: {
     textAlign: 'center',
     marginVertical: sizes[2],
     fontWeight: fontWeights.semiBold,
     fontSize: fontSizes.title,
+    fontFamily: fonts.body,
   },
   footerIconRow: {
     marginVertical: sizes[5],

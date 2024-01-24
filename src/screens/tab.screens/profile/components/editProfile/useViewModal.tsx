@@ -32,7 +32,11 @@ import {
   hobbies,
 } from '../../../../../utils/constanst';
 import { ImageDataType } from '../../../../auth/preRegisterFlow/components/AddProfilePic/addProfilePic.ViewModal';
-
+interface Measurement {
+  feet: number;
+  inch: number;
+  heightInCm?: number;
+}
 export const useViewModal = () => {
   const dispatch = useDispatch();
   const updateUserDetailsRepository = useMemo(
@@ -67,6 +71,7 @@ export const useViewModal = () => {
       ? user?.profile?.genderPronoun
       : 'Select',
   });
+  const [showHeightModal, setShowHeightModal] = useState(false);
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
       return { ...oldState, [option.type]: option.value };
@@ -134,6 +139,10 @@ export const useViewModal = () => {
   const [distanceRange, setDistanceRange] = useState([0]);
   const [ageRange, setAgeRange] = useState([20, 60]);
   const [heightRange, setHeightRange] = useState([5]);
+  const savedHeight: Measurement = user.height;
+  const [height, setheight] = useState<Measurement>(
+    savedHeight ?? null,
+  );
   const [ethnicityModalVisible, setEthnicityModalVisible] = useState(false);
   const [selectedEthnicityItems, setEthnicitySelectedItems] = useState<
     string[]
@@ -191,7 +200,7 @@ export const useViewModal = () => {
   };
   const optionsList = [
     {
-      title: 'Degree category',
+      title: 'Degree Category',
       option: _userDegree,
       initValue: 'degreeCategory',
     },
@@ -202,8 +211,8 @@ export const useViewModal = () => {
     },
     {},
     {},
-    {
-    },
+    // {
+    // },
     // {
     //   title: 'Gender',
     //   option: genderList,
@@ -220,7 +229,7 @@ export const useViewModal = () => {
       initValue: 'interests',
     },
     {
-      title: 'Marital status',
+      title: 'Marital Status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
@@ -235,7 +244,7 @@ export const useViewModal = () => {
       initValue: 'sexualPreference',
     },
     {
-      title: 'Relationship level',
+      title: 'Relationship Level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
@@ -290,14 +299,7 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
   ];
-  const [letterCount, setLetterCount] = useState(0);
-
-  useEffect(() => {
-    const lettersOnly = userProfile.aboutMe.replace(/[^a-zA-Z]/g, '');
-    const reversedCount = 125 - lettersOnly.length;
-    setLetterCount(reversedCount < 0 ? 0 : reversedCount);
-  }, [userProfile.aboutMe]);
-
+  const [letterCount, setLetterCount] = useState(userProfile?.aboutMe?.length?userProfile.aboutMe.length:0);
   const handleDistanceSliderChange = (
     values: React.SetStateAction<number[]>,
   ) => {
@@ -334,9 +336,7 @@ export const useViewModal = () => {
         return undefined;
       }
     } catch (error) {
-
     } finally {
-
     }
   };
   const uploadImage = async () => {
@@ -390,9 +390,7 @@ export const useViewModal = () => {
         profileImage,
         photos,
       };
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   const validateZipcode = async (zipcode: string) => {
     const USER = {
@@ -462,10 +460,8 @@ export const useViewModal = () => {
       };
       let update: any = {
         height: {
-          feet: Number(`${heightRange[0]}`.split('.')[0]),
-          inch: `${heightRange[0]}`.includes('.')
-            ? Number(`${heightRange[0]}`.split('.')[1])
-            : 0,
+          feet: height?.feet,
+          inch: height?.inch
         },
       };
       for (let key in preferences) {
@@ -610,6 +606,11 @@ export const useViewModal = () => {
     });
   };
   const _handleInputChange = (text: string, key: string) => {
+    if (key === "aboutMe") {
+      setLetterCount(() => {
+        return text.replace(/\s/g, '').length;
+      });
+    }
     setUserProfile((oldState) => {
       return {
         ...oldState,
@@ -671,6 +672,7 @@ export const useViewModal = () => {
       }
     }
   }, []);
+  const _setShowHeightModal = (state:boolean=true)=>setShowHeightModal(true)
   return {
     answer,
     optionsList,
@@ -705,5 +707,10 @@ export const useViewModal = () => {
     submitLoading,
     hobbies,
     letterCount,
+    showHeightModal,
+    setShowHeightModal,
+    _setShowHeightModal,
+    height,
+    setheight
   };
 };

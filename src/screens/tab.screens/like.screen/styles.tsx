@@ -1,11 +1,26 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
-import { fontSizes, fontWeights } from '../../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../../infrastructure/theme/fonts';
 import { dimensions } from '../../../components/tools';
 import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+  },
+  modalBackButtonContainer: {
+    width: 80,
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingLeft: 16,
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     width: dimensions.width,
@@ -18,9 +33,6 @@ export const styles = StyleSheet.create({
   },
   headerViewStyle: {
     justifyContent: 'center',
-  },
-  padHorizontal: {
-    paddingHorizontal: sizes[3],
   },
 
   content: {
@@ -36,6 +48,7 @@ export const styles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
   noMatchIcon: {
     width: sizes[12] * 2,
@@ -46,6 +59,7 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
   matchHeading: {
     color: theme.colors.ui.textHead,
@@ -54,12 +68,14 @@ export const styles = StyleSheet.create({
     lineHeight: 26,
     marginBottom: 10,
     marginTop: 20,
+    fontFamily: fonts.body,
   },
   seeAll: {
     color: theme.colors.ui.primary,
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.medium,
     lineHeight: 26,
+    fontFamily: fonts.body,
   },
   headerPadding: {
     paddingBottom: theme.units.sizes[10],
@@ -68,6 +84,7 @@ export const styles = StyleSheet.create({
   backArrowPadding: {
     paddingBottom: theme.units.sizes[16],
     paddingTop: theme.units.sizes[2],
+    paddingHorizontal: 8,
   },
   paddingBottom20: {
     paddingBottom: theme.units.sizes[20],
@@ -78,7 +95,8 @@ export const styles = StyleSheet.create({
     color: theme.colors.ui.textHead,
     textAlign: 'center',
     flex: 1,
-    paddingRight: 21,
+    paddingRight: 80,
+    fontFamily: fonts.body,
   },
   backArrowSize: {
     width: theme.units.sizes[21],
@@ -94,12 +112,16 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.bg.secondary,
     borderRadius: 20,
   },
-  noMatches: {
-    minHeight: 350,
+  noMatch: {
+    minHeight: 300,
   },
   noDataImg: {
     width: 80,
     height: 80,
+  },
+  noLikes: {
+    width: 60,
+    height: 60,
   },
   noDataListText: {
     textAlign: 'center',
@@ -107,15 +129,16 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     color: theme.colors.ui.text,
     maxWidth: dimensions.width,
+    fontFamily: fonts.body,
   },
 
   paddingMatches: {
     width: dimensions.width - 20,
     maxWidth: 250,
+    fontFamily: fonts.body,
   },
   paddingReceiveLiked: {
     width: dimensions.width - 60,
-    maxWidth: 300,
   },
   paddingLiked: {
     width: dimensions.width - 60,
@@ -131,5 +154,11 @@ export const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
+  },
+});
+
+export const seeAllstyles = StyleSheet.create({
+  container: {
+    paddingBottom: 55,
   },
 });

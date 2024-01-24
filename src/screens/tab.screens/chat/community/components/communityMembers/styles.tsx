@@ -1,6 +1,9 @@
 import { View, StyleSheet, Platform } from 'react-native';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
-import { fontWeights } from '../../../../../../infrastructure/theme/fonts';
+import {
+  fontWeights,
+  fonts,
+} from '../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../infrastructure/theme/colors';
 import { theme } from '../../../../../../infrastructure/theme';
 
@@ -34,11 +37,13 @@ export const styles = StyleSheet.create({
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
   nameHeading: {
     fontSize: sizes[3] + 1,
     fontWeight: fontWeights.bold,
     color: colors.ui.primary,
+    fontFamily: fonts.body,
   },
 
   groupHeading: {
@@ -46,6 +51,7 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     color: colors.ui.text,
     textAlign: 'center',
+    fontFamily: fonts.body,
   },
   square: {
     alignSelf: 'center',
@@ -63,8 +69,8 @@ export const styles = StyleSheet.create({
       ios: {
         shadowColor: 'black',
         shadowOffset: { width: 10, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
+        shadowOpacity: 0.01,
+        shadowRadius: 0,
       },
       android: {
         elevation: 2,

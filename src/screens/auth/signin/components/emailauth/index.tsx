@@ -10,6 +10,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   SafeAreaView,
+  Pressable,
 } from 'react-native';
 import {
   Column,
@@ -78,7 +79,7 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
                 <Text style={styles.otpText}>
                   Enter the OTP code we have shared to your email
                 </Text>
-                <Text style={styles.otpEmail}>“{email}”</Text>
+                <Text style={styles.otpEmail}>{email}</Text>
                 <View>
                   <OtpCodeInput
                     onChangeOtp={handleInputChange}

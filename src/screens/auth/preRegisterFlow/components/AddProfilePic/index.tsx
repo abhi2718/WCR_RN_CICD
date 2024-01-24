@@ -101,14 +101,17 @@ const AddProfilePicScreen = (props: any) => {
                     </TouchableOpacity>
                   </View>
                 ) : (
-                  <View style={addPicture.imageViewProfile}>
-                    <TouchableOpacity onPress={pickProfilePicture}>
+                  <TouchableOpacity
+                    style={addPicture.imageViewProfile}
+                    onPress={pickProfilePicture}
+                  >
+                    <View>
                       <Image
                         style={addPicture.imageIcon}
                         source={require('../../../../../assets/images/icons/addImg.png')}
                       />
-                    </TouchableOpacity>
-                  </View>
+                    </View>
+                  </TouchableOpacity>
                 )}
 
                 <Column style={addPicture.columnOne}>

@@ -7,6 +7,7 @@ import { ProfileViewProps } from '../../../../types/screen.type/like.type';
 import { theme } from '../../../../infrastructure/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import { calculateAge } from '../../../../utils/common.functions';
+import { fonts } from '../../../../infrastructure/theme/fonts';
 
 export const ProfileView = (props: ProfileViewProps) => {
   const {
@@ -52,6 +53,7 @@ export const ProfileView = (props: ProfileViewProps) => {
     return (
       <View>
         <Pressable onPress={toggleModal}>
+          <Spacer position="bottom" size={10} />
           <Column style={styles.relative}>
             <Spacer position="right" size={10}>
               <Spacer position="bottom" size={10}>
@@ -71,13 +73,29 @@ export const ProfileView = (props: ProfileViewProps) => {
                       colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
                       style={styles.gradient}
                     >
+                      <Row justifyContent="flex-end">
+                        <Spacer position="right" size={20}>
+                          {isMatch && (
+                            <Pressable onPress={navigateToChat}>
+                              <Image
+                                style={styles.chatIcon}
+                                source={require('../../../../assets/images/icons/matchNew.png')}
+                                resizeMode="contain"
+                              />
+                            </Pressable>
+                          )}
+                        </Spacer>
+                      </Row>
                       <View style={[styles.userTextView, { width: '100%' }]}>
                         <Row justifyContent="space-between" alignItems="center">
-                          <Column>
-                            <Text style={styles.userNameText}>
+                          <Column style={styles.columnWrapper}>
+                            {/* <Text style={styles.userNameText}>
                               {item?.profile?.displayName ??
                                 item?.profile?.name?.first}{' '}
                               {calculateAge(item?.profile?.dob)}
+                            </Text> */}
+                            <Text style={styles.userNameText}>
+                              {item?.profile?.name?.first}
                             </Text>
                             <Text
                               style={[
@@ -87,23 +105,7 @@ export const ProfileView = (props: ProfileViewProps) => {
                             >
                               {item?.designation?.title}
                             </Text>
-                            {/* {showDeleteIcon && (
-                        <Pressable onPress={handleRemove}>
-                          <Text>Remove</Text>
-                        </Pressable>
-                      )} */}
                           </Column>
-                          <Spacer position="right" size={20}>
-                            {isMatch && (
-                              <Pressable onPress={navigateToChat}>
-                                <Image
-                                  style={{ width: 32 }}
-                                  source={require('../../../../assets/images/icons/matchChat.png')}
-                                  resizeMode="contain"
-                                />
-                              </Pressable>
-                            )}
-                          </Spacer>
                         </Row>
                       </View>
                     </LinearGradient>
@@ -112,7 +114,21 @@ export const ProfileView = (props: ProfileViewProps) => {
                     <LinearGradient
                       colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
                       style={styles.gradient}
-                    />
+                    >
+                      <Column alignItems="flex-end">
+                        <Spacer position="right" size={20}>
+                          {isMatch && (
+                            <Pressable onPress={navigateToChat}>
+                              <Image
+                                style={styles.chatIcon}
+                                source={require('../../../../assets/images/icons/matchNew.png')}
+                                resizeMode="contain"
+                              />
+                            </Pressable>
+                          )}
+                        </Spacer>
+                      </Column>
+                    </LinearGradient>
                   )}
                 </FastImage>
               </Spacer>
@@ -142,13 +158,6 @@ export const ProfileView = (props: ProfileViewProps) => {
                         />
                       </Pressable>
                     )}
-                    <Spacer position="right" size={20}>
-                      {isMatch && (
-                        <Pressable onPress={navigateToChat}>
-                          <Text style={styles.chatButton}>Chat</Text>
-                        </Pressable>
-                      )}
-                    </Spacer>
                   </Row>
                 </Spacer>
               </Column>
@@ -170,6 +179,7 @@ export const ProfileView = (props: ProfileViewProps) => {
     return (
       <View>
         <Pressable onPress={toggleModal}>
+          <Spacer position="bottom" size={10} />
           <Column>
             <Spacer position="right" size={10}>
               <FastImage
@@ -230,6 +240,7 @@ export const ProfileView = (props: ProfileViewProps) => {
     return (
       <View>
         <Pressable onPress={toggleModal}>
+          <Spacer position="bottom" size={10} />
           <Column>
             <Spacer position="right" size={0}>
               <FastImage
@@ -243,10 +254,10 @@ export const ProfileView = (props: ProfileViewProps) => {
                 }}
                 resizeMode={FastImage.resizeMode.cover}
               >
-                <LinearGradient
+                {/* <LinearGradient
                   colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
                   style={styles.gradient}
-                />
+                /> */}
               </FastImage>
             </Spacer>
             <Column justifyContent="center" alignItems="center">
@@ -279,16 +290,24 @@ export const ProfileView = (props: ProfileViewProps) => {
           showModal={showModal}
           userId={item?._id}
           toggleModal={toggleModal}
-          showLike={false}
-          showDisLike={false}
+          showLike={isFavourite ? true : false}
+          showDisLike={isFavourite ? true : false}
           showSave={false}
         />
       </View>
     );
   }
+  return <View></View>;
 };
 
 export const styles = StyleSheet.create({
+  columnWrapper: {
+    width: (dimensions.width - 38) / 2,
+    paddingLeft: 8,
+  },
+  chatIcon: {
+    width: 32,
+  },
   relative: {
     position: 'relative',
   },
@@ -311,7 +330,7 @@ export const styles = StyleSheet.create({
     borderRadius: theme.units.sizes[30],
   },
   matchAvatar: {
-    width: (dimensions.width - 38) / 2,
+    width: dimensions.width / 1.7,
     height: theme.units.sizes[300],
     borderRadius: theme.units.sizes[30],
   },
@@ -320,6 +339,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.bold,
     lineHeight: 30,
+    fontFamily: fonts.body,
   },
   textDegree: {
     color: theme.colors.ui.primary,
@@ -327,9 +347,11 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     lineHeight: 14,
     letterSpacing: 0.59,
+    fontFamily: fonts.body,
   },
   textDesignation: {
     color: theme.colors.ui.white,
+    fontFamily: fonts.body,
   },
   gradient: {
     height: '100%',
@@ -338,13 +360,12 @@ export const styles = StyleSheet.create({
   userTextView: {
     position: 'absolute',
     bottom: theme.units.sizes[20],
-    left: theme.units.sizes[12],
   },
   userNameText: {
     fontSize: theme.fontSizes.h6,
     color: theme.colors.ui.white,
     fontWeight: theme.fontWeights.bold,
-    fontFamily: theme.fontFamily.body,
+    fontFamily: fonts.body,
   },
   chatButton: {
     padding: theme.units.sizes[3],
@@ -356,6 +377,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.caption,
     textTransform: 'uppercase',
     textAlign: 'center',
+    fontFamily: fonts.body,
   },
   textBlack: {
     color: theme.colors.ui.black,

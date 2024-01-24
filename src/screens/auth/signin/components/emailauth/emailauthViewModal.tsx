@@ -3,13 +3,10 @@ import { OtpRepository } from '../../../../../repository/otp.repo';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { useViewModal } from '../../signinViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
-import { options } from '../../../../../utils/constanst';
 
 export const useEmailAuthViewModal = (props: ScreenParams) => {
-  const { navigation } = props;
   const receivedData = props.route?.params?.data || 'No data received';
   let fbId = receivedData?.fbId;
-
   let email = receivedData.email;
   let firebaseUid = receivedData.firebaseUid;
   let credential = receivedData.credential;

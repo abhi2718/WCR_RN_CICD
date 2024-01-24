@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { fontSizes } from '../../../../../infrastructure/theme/fonts';
+import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { dimensions } from '../../../../../components/tools';
 import { theme } from '../../../../../infrastructure/theme';
 
@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
   },
   dFlex: {
     flex: 1,
+    backgroundColor: theme.colors.ui.white,
   },
   vMargin16: {
     marginVertical: 16,
@@ -40,6 +41,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     lineHeight: sizes[4],
+    fontFamily: fonts.body,
   },
   otpEmail: {
     color: '#007AFF',
@@ -47,5 +49,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: sizes[1],
     textTransform: 'lowercase',
+    fontFamily: fonts.body,
   },
 });

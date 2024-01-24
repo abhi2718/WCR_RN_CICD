@@ -1,5 +1,6 @@
 import { Platform, StyleSheet } from 'react-native';
 import { theme } from '../../../infrastructure/theme';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 export const Style = StyleSheet.create({
   container: {
@@ -36,16 +37,19 @@ export const Style = StyleSheet.create({
   },
   textCapitalize: {
     textTransform: 'capitalize',
+    fontFamily: fonts.body,
   },
   darkText: {
     fontSize: 16,
     fontWeight: theme.fontWeights.semiBold,
     color: theme.colors.ui.text,
+    fontFamily: fonts.body,
   },
   lightText: {
     fontSize: 12,
     fontWeight: theme.fontWeights.regular,
     color: theme.colors.ui.textAccent,
+    fontFamily: fonts.body,
   },
   closeMentionList: {
     position: 'absolute',

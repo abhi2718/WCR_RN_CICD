@@ -48,7 +48,7 @@ export interface CometChatListItemInterface {
   tailViewContainerStyle?: StyleProp<ViewStyle>;
   bodyViewContainerStyle?: StyleProp<ViewStyle>;
   unreadCount: any;
-  backArrow?: any;
+  backArrow?: React.ReactNode;
 }
 export const CometChatListItem = (props: CometChatListItemInterface) => {
   //state for translateX

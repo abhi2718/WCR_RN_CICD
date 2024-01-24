@@ -1,9 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './stack.navigator';
-import { useCometChatInit } from '../services/cometChat.service';
-
-
 export enum ROUTES {
   SPLASH = '/splash',
   SignIn = 'SignIn',

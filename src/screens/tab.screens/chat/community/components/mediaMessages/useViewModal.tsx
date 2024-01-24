@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {MediaMessageProps} from '../../../../../../types/screen.type/communityChat';
 const type = ['image', 'video', 'audio', 'file'];
 export const useViewModal = (props: MediaMessageProps) => {
-  const { guid, type: mediaType,uid } = props;
+  const { guid, type: mediaType,uid,isPrivateChatScreen } = props;
   const [loading, setLoading] = useState(false);
   const [images, setImage] = useState<any[]>([]);
   const [videos, setVideo] = useState<any[]>(["https://vjs.zencdn.net/v/oceans.mp4"]);
@@ -68,18 +68,17 @@ export const useViewModal = (props: MediaMessageProps) => {
       setVideo(videoCollections);
       setLoading(false);
     } catch (error) {
-      console.log(error);
     }
   };
   useEffect(() => {
     mediaMessageRequestBuilder();
   }, []);
-
   return {
     loading,
     images,
     videos,
     mediaType,
-    mediaMessageRequestBuilder
+    mediaMessageRequestBuilder,
+    isPrivateChatScreen
   };
 };

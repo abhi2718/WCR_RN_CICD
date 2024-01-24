@@ -16,11 +16,12 @@ LogBox.ignoreAllLogs();
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
+
 export default function App() {
   return (
     <StripeProvider
       publishableKey={
-        'pk_test_51OWdkPSGkDcyRa3UMpodrMldoKCdOIq9exX1LZDENtELYZyKkIzyRC7uFj7dym9xtpj5z362iDGMZg2UGQLNolpu00SU67MZPp'
+        'pk_test_51OLhmuILb85dzDST7I4QIzg7ySW2r2a5hXLUeLgCqw1ujyxUZbtW1PTUyx5kg0cmbB5Y2Aw8KcP91UpREG5ZCmau0073JGv0fo'
       }
       urlScheme="accept-a-payment"
     >

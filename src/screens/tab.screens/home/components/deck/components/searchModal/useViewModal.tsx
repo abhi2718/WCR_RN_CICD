@@ -19,7 +19,7 @@ export const useViewModal = (props: SearchModalProps) => {
           const data = await homeDeckRepository.searchUser(query);
           setUser(() => {
             return textRef.current.length
-              ? data.filter((user) => user.first.includes(text))
+              ? data.filter(({first}) =>first.toLowerCase().startsWith(text.toLowerCase()))
               : [];
           });
           if (!data.length) {

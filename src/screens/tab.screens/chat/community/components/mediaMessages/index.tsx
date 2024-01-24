@@ -3,11 +3,8 @@ import { View, FlatList } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
 import {
-  Column,
   dimensions,
   FullLoader,
-  ImageContainer,
-  Row,
   Spacer,
 } from '../../../../../../components/tools';
 const type = ['image', 'video', 'audio', 'file'];
@@ -17,7 +14,6 @@ import VedioPlayer from './components/video-player';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { styles } from './styles';
 import { theme } from '../../../../../../infrastructure/theme';
-import { Text } from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -50,9 +46,18 @@ export const MediaTab = (props: MediaMessageProps) => {
   );
 };
 const ViedoMessage = (props: MediaMessageProps) => {
-  const { loading, videos } = useViewModal(props);
+  const { loading, videos, isPrivateChatScreen } = useViewModal(props);
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        isPrivateChatScreen
+          ? {
+              ...styles.container,
+              height: dimensions.height,
+            }
+          : styles.container
+      }
+    >
       {loading ? (
         <FullLoader />
       ) : (
@@ -74,9 +79,18 @@ const ViedoMessage = (props: MediaMessageProps) => {
   );
 };
 const ImageMessage = (props: MediaMessageProps) => {
-  const { loading, images } = useViewModal(props);
+  const { loading, images, isPrivateChatScreen } = useViewModal(props);
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        isPrivateChatScreen
+          ? {
+              ...styles.container,
+              height: dimensions.height,
+            }
+          : styles.container
+      }
+    >
       {loading ? (
         <FullLoader />
       ) : (
