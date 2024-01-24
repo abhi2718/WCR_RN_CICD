@@ -65,9 +65,6 @@ export const styles = StyleSheet.create({
     color: theme.colors.ui.textHead,
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.semiBold,
-    lineHeight: 26,
-    marginBottom: 10,
-    marginTop: 20,
     fontFamily: fonts.body,
   },
   seeAll: {
@@ -79,7 +76,7 @@ export const styles = StyleSheet.create({
   },
   headerPadding: {
     paddingBottom: theme.units.sizes[10],
-    paddingTop: theme.units.sizes[0],
+    marginTop: theme.units.sizes[10],
   },
   backArrowPadding: {
     paddingBottom: theme.units.sizes[16],

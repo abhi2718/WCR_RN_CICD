@@ -140,9 +140,7 @@ export const useViewModal = () => {
   const [ageRange, setAgeRange] = useState([20, 60]);
   const [heightRange, setHeightRange] = useState([5]);
   const savedHeight: Measurement = user.height;
-  const [height, setheight] = useState<Measurement>(
-    savedHeight ?? null,
-  );
+  const [height, setheight] = useState<Measurement>(savedHeight ?? null);
   const [ethnicityModalVisible, setEthnicityModalVisible] = useState(false);
   const [selectedEthnicityItems, setEthnicitySelectedItems] = useState<
     string[]
@@ -289,7 +287,7 @@ export const useViewModal = () => {
       initValue: 'kids',
     },
     {
-      title: 'Family plan',
+      title: 'Family Plan',
       option: familyPlanList,
       initValue: 'familyPlan',
     },
@@ -299,7 +297,9 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
   ];
-  const [letterCount, setLetterCount] = useState(userProfile?.aboutMe?.length?userProfile.aboutMe.length:0);
+  const [letterCount, setLetterCount] = useState(
+    userProfile?.aboutMe?.length ? userProfile.aboutMe.length : 0,
+  );
   const handleDistanceSliderChange = (
     values: React.SetStateAction<number[]>,
   ) => {
@@ -461,7 +461,7 @@ export const useViewModal = () => {
       let update: any = {
         height: {
           feet: height?.feet,
-          inch: height?.inch
+          inch: height?.inch,
         },
       };
       for (let key in preferences) {
@@ -606,7 +606,7 @@ export const useViewModal = () => {
     });
   };
   const _handleInputChange = (text: string, key: string) => {
-    if (key === "aboutMe") {
+    if (key === 'aboutMe') {
       setLetterCount(() => {
         return text.replace(/\s/g, '').length;
       });
@@ -672,7 +672,8 @@ export const useViewModal = () => {
       }
     }
   }, []);
-  const _setShowHeightModal = (state:boolean=true)=>setShowHeightModal(true)
+  const _setShowHeightModal = (state: boolean = true) =>
+    setShowHeightModal(true);
   return {
     answer,
     optionsList,
@@ -711,6 +712,6 @@ export const useViewModal = () => {
     setShowHeightModal,
     _setShowHeightModal,
     height,
-    setheight
+    setheight,
   };
 };

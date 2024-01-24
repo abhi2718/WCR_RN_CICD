@@ -95,6 +95,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.ui.text,
     backgroundColor: colors.bg.secondary,
+    fontWeight: 'bold',
     fontFamily: fonts.body,
   },
   textColor: {

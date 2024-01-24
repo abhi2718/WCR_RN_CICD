@@ -68,8 +68,8 @@ export const useViewModal = () => {
         'No Preference',
       ];
     }
-    return list
-  }
+    return list;
+  };
   const generateList = (list: any[], type: string) => {
     return generateListWithNoPreference(list)?.map((item: any, index) => ({
       value: item,
@@ -88,11 +88,8 @@ export const useViewModal = () => {
     generateList([], 'degreeType'),
   );
   const genderList = generateList(genderArray, 'gender');
-  
-  const ethnicityList = generateList(
-    ethnicity,
-    'ethnicity',
-  );
+
+  const ethnicityList = generateList(ethnicity, 'ethnicity');
   const maritalStatusList = generateList(maritalStatus, 'maritalStatus');
   const relationshipLevelList = generateList(relationship, 'relationshipLevel');
   const religionList = generateList(religion, 'religion');
@@ -114,7 +111,7 @@ export const useViewModal = () => {
   const optionsList = [
     {},
     {
-      title: 'Gender of interest',
+      title: 'Gender Of Interest',
       option: genderList,
       initValue: 'gender',
     },
@@ -123,7 +120,7 @@ export const useViewModal = () => {
     {}, // height prefrence
     {},
     {
-      title: 'Degree category',
+      title: 'Degree Category',
       option: _userDegree,
       initValue: 'degreeCategory',
     },
@@ -139,12 +136,12 @@ export const useViewModal = () => {
       initValue: 'ethnicity',
     },
     {
-      title: 'Marital status',
+      title: 'Marital Status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
     {
-      title: 'Relationship level',
+      title: 'Relationship Level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
@@ -189,7 +186,7 @@ export const useViewModal = () => {
       initValue: 'kids',
     },
     {
-      title: 'Family plan',
+      title: 'Family Plan',
       option: familyPlanList,
       initValue: 'familyPlan',
     },
@@ -329,7 +326,9 @@ export const useViewModal = () => {
         const typeOfKey = typeof value;
         if (key === 'healthcareProfessionals') {
           if (
-            !preferences.healthcareProfessionals.userDegree.includes('No Preference')
+            !preferences.healthcareProfessionals.userDegree.includes(
+              'No Preference',
+            )
           ) {
             updates = {
               ...updates,
