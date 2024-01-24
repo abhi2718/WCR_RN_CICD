@@ -63,8 +63,7 @@ export const AccountSettingScreen = () => {
               {
               loading && <ActivityIndicator color='red' />
             }
-            </Pressable>
-           
+            </Pressable> 
           </Row>
         </Spacer>
         <AlertScreen

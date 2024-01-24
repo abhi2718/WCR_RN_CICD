@@ -94,7 +94,7 @@ export const EditProfile = () => {
               textAlignVertical="top"
               style={styles.aboutInput}
               multiline={true}
-              maxLength={150}
+              maxLength={500}
               numberOfLines={10}
               returnKeyLabel="go"
               placeholderTextColor={colors.ui.placeholder}
