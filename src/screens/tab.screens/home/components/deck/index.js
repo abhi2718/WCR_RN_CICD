@@ -66,7 +66,7 @@ export default function Deck({ route }) {
           handleUnDoFeature={handleUnDoFeature}
         />
         {/* <Pressable onPress={handleUnDoFeature}>
-          <Text>Undo</Text>
+          <Text style={{ fontFamily: 'Urbanist-Regular' }}>Undo</Text>
         </Pressable> */}
       </View>
       <Spacer position="bottom" size={8} />

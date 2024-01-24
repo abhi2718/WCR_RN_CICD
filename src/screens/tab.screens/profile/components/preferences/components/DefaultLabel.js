@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { View, Text, StyleSheet } from 'react-native';
+import { fonts } from '../../../../../../infrastructure/theme/fonts';
 
 const sliderRadius = 3;
 const width = 50;
 export default class DefaultLabel extends React.Component {
   static propTypes = {
-
     oneMarkerValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     twoMarkerValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -17,7 +17,6 @@ export default class DefaultLabel extends React.Component {
     oneMarkerPressed: PropTypes.bool,
     twoMarkerPressed: PropTypes.bool,
   };
-
 
   render() {
     const {
@@ -74,6 +73,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontStyle: 'normal',
     fontSize: 11,
+    fontFamily: fonts.body,
   },
   markerPressed: {
     borderWidth: 2,

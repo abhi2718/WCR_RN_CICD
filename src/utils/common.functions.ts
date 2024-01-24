@@ -1,8 +1,9 @@
 import moment from 'moment';
 import { CheckBoxDataType } from '../types/components/checkbox.type';
 import { preferNotToSay } from './constanst';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../navigation';
+import { User } from '../types/screen.type/profile.type';
 
 export const calculateDateLessThan18YearsAgo = (inputDate: Date): Date => {
   const eighteenYearsAgo = new Date(inputDate);
@@ -81,80 +82,84 @@ export function formatNumber(inputNumber: number) {
 
 export const useNavigateToScreen = () => {
   const navigation = useNavigation();
-
-  const navigateToScreen = (user: any) => {
+  const resetState = (route:string) => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: route}],
+      }),
+    )
+   }
+  const navigateToScreen = (user: User) => {
     if (user.verification.status === 'Verified') {
-      navigation.navigate(ROUTES.Tab);
+      resetState(ROUTES.Tab)
     } else {
       if (user.verificationId.submitted) {
-        navigation.navigate(ROUTES.VerificationPending);
+        resetState(ROUTES.VerificationPending)
       } else {
         switch (user.steps) {
           case 1:
             user.steps = 1;
-            navigation.navigate(ROUTES.GenderPronoun);
+            resetState(ROUTES.GenderPronoun)
             break;
           case 2:
             user.steps = 2;
-            navigation.navigate(ROUTES.SexualOrientation);
+            resetState(ROUTES.SexualOrientation)
             break;
           case 3:
             user.steps = 3;
-            navigation.navigate(ROUTES.Location);
+            resetState(ROUTES.Location)
             break;
           case 4:
             user.steps = 4;
-            navigation.navigate(ROUTES.Profession);
+            resetState(ROUTES.Profession)
             break;
           case 5:
             user.steps = 5;
-            navigation.navigate(ROUTES.ProfilePic);
-
+            resetState(ROUTES.ProfilePic)
             break;
           case 6:
             user.steps = 6;
-            navigation.navigate(ROUTES.Height);
-
+            resetState(ROUTES.Height)
             break;
           case 7:
             user.steps = 7;
-            navigation.navigate(ROUTES.AddEthnicity);
+            resetState(ROUTES.AddEthnicity);
             break;
           case 8:
             user.steps = 8;
-            navigation.navigate(ROUTES.LookingFor);
+            resetState(ROUTES.LookingFor);
             break;
           case 9:
             user.steps = 9;
-            navigation.navigate(ROUTES.MaritalStatus);
+            resetState(ROUTES.MaritalStatus);
             break;
           case 10:
             user.steps = 10;
-            navigation.navigate(ROUTES.Kids);
+            resetState(ROUTES.Kids);
             break;
           case 11:
             user.steps = 11;
-            navigation.navigate(ROUTES.Habits);
+            resetState(ROUTES.Habits);
             break;
           case 12:
             user.steps = 12;
-            navigation.navigate(ROUTES.About);
+            resetState(ROUTES.About);
             break;
           case 13:
             user.steps = 13;
-            navigation.navigate(ROUTES.Hobbies);
-
+            resetState(ROUTES.Hobbies);
           case 14:
             user.steps = 14;
-            navigation.navigate(ROUTES.VerificationStepOne);
+            resetState(ROUTES.VerificationStepOne);
             break;
           default:
-            navigation.navigate(ROUTES.Gender);
+            resetState(ROUTES.Gender);
         }
       }
     }
   };
-  return { navigateToScreen };
+  return { navigateToScreen,resetState };
 };
 
 export const createNotifications = (

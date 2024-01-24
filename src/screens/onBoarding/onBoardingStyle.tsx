@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
     fontSize: sizes[4],
     fontWeight: fontWeights.regular,
     marginTop: sizes[2],
+    fontFamily: fonts.body,
   },
   scrollImg: {
     height: sizes[1],
@@ -58,5 +59,6 @@ export const styles = StyleSheet.create({
     padding: 250,
     fontSize: 25,
     marginBottom: 40,
+    fontFamily: fonts.body,
   },
 });

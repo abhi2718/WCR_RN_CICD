@@ -1,7 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
-import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 import { dimensions } from '../tools';
 export const modalStylePreference = StyleSheet.create({
   centeredView: {
@@ -33,6 +37,7 @@ export const modalStylePreference = StyleSheet.create({
     fontSize: fontSizes.h5,
     color: colors.ui.text,
     marginBottom: sizes[4],
+    fontFamily: fonts.body,
   },
   subHeading: {
     fontWeight: fontWeights.bold,
@@ -49,6 +54,7 @@ export const modalStylePreference = StyleSheet.create({
     color: colors.ui.text,
     fontSize: sizes[3],
     flex: 1,
+    fontFamily: fonts.body,
   },
   icon: {
     width: sizes[4],

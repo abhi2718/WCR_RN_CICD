@@ -33,4 +33,5 @@ export type InputProps = {
   labelColor?: string;
   maxLength?: number;
   onPress?: any;
+  searchPlaceholder?: string;
 };

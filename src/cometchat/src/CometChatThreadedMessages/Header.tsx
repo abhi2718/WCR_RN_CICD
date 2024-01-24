@@ -12,6 +12,7 @@ import {
 import React from 'react';
 import { ICONS } from './resources';
 import { FontStyleInterface, ImageType } from '../shared';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 const Header = (props: {
   title: string;
@@ -52,6 +53,11 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   iconContainer: { paddingRight: 25, alignItems: 'center' },
-  headingText: { fontSize: 20, fontWeight: '600', color: '#000' },
+  headingText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#000',
+    fontFamily: fonts.body,
+  },
 });
 export default Header;

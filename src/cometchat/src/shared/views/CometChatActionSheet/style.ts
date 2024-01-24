@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { fonts } from '../../../../../infrastructure/theme/fonts';
 
 export const Style = StyleSheet.create({
   headerStyle: {
@@ -9,6 +10,7 @@ export const Style = StyleSheet.create({
   },
   titleStyle: {
     lineHeight: 22,
+    fontFamily: fonts.body,
   },
   layoutBtnStyle: {
     height: 24,

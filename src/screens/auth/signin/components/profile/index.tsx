@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Text,
-  TextInput,
   View,
   ScrollView,
   TouchableOpacity,
@@ -10,27 +9,18 @@ import {
   Pressable,
   Keyboard,
 } from 'react-native';
-
 import { PrimaryButton } from '../../../../../components/button';
 import {
-  ImageContainer,
-  Row,
   ScreenContainer,
   Spacer,
-  dimensions,
 } from '../../../../../components/tools';
-import { useViewModal } from '../../signinViewModal';
 import { useProfileUseViewModal } from './profileViewModal';
 import { profileStyles } from './profileStyle';
 import DatePicker from 'react-native-date-picker';
-//import {calculateDateLessThan18YearsAgo} from '../../../../utils/common.functions';
-//import {ModalComponent} from '../../../../components/modal/index';
-import moment from 'moment';
 import { WelcomeModalComponent } from '../../../../../components/modal';
 import { calculateDateLessThan18YearsAgo } from '../../../../../utils/common.functions';
 import { FlatInput } from '../../../../../components/inputBox/index';
 import { ErrorText } from '../../signInStyle';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { HeaderBar } from '../../../../../components/header';
 import { isAndroid } from '../../../../../components/tools';
@@ -39,7 +29,6 @@ const Profile = (props: ScreenParams) => {
   const receivedData = props.route?.params?.data || 'No data received';
   let credential = receivedData.credential;
   let email = receivedData.email;
-  let appleId = receivedData?.appleId;
   let {
     formData,
     handleInputChange,
@@ -167,7 +156,6 @@ const Profile = (props: ScreenParams) => {
               </View>
             </KeyboardAvoidingView>
             </ScrollView>
-           
           </View>
           <View>
             <Spacer position="top" size={25}>

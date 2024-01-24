@@ -1,37 +1,48 @@
 //@ts-ignore
-import { View, Text, TouchableOpacity, TextInput, Image, NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  NativeSyntheticEvent,
+  TextInputSubmitEditingEventData,
+} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { ICONS } from '../shared/assets/images';
 import { ImageType } from '../shared/helper/types';
 import { BorderStyleInterface, FontStyleInterface } from '../shared';
+import { fonts } from '../../../infrastructure/theme/fonts';
 
 export function Header(props: {
-  backButtonIcon?: ImageType,
-  showBackButton?: boolean,
-  onBack?: () => void,
-  title?: string,
-  AppBarOptions?: () => JSX.Element,
-  shouldSelect?: boolean,
-  onSelectionHandler?: () => void,
-  hideSearch?: boolean,
-  searchBoxIcon?: ImageType,
-  searchPlaceholderText?: string,
-  searchPlaceholderTextColor?: string,
-  searchHandler?: (text: string) => void,
-  searchInput?: string,
-  onSubmitEditing?: (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => void,
-  selectionIcon?: ImageType,
-  titleFontStyle?: FontStyleInterface,
-  titleColor?: string,
-  backIconTint?: string,
-  searchBorderStyle?: BorderStyleInterface,
-  searchBorderRadius?: number,
-  searchTextFontStyle?: FontStyleInterface,
-  searchTextColor?: string,
-  searchIconTint?: string,
-  searchBackgroundColor?: string,
-  selectionIconTint?: string,
+  backButtonIcon?: ImageType;
+  showBackButton?: boolean;
+  onBack?: () => void;
+  title?: string;
+  AppBarOptions?: () => JSX.Element;
+  shouldSelect?: boolean;
+  onSelectionHandler?: () => void;
+  hideSearch?: boolean;
+  searchBoxIcon?: ImageType;
+  searchPlaceholderText?: string;
+  searchPlaceholderTextColor?: string;
+  searchHandler?: (text: string) => void;
+  searchInput?: string;
+  onSubmitEditing?: (
+    e: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
+  ) => void;
+  selectionIcon?: ImageType;
+  titleFontStyle?: FontStyleInterface;
+  titleColor?: string;
+  backIconTint?: string;
+  searchBorderStyle?: BorderStyleInterface;
+  searchBorderRadius?: number;
+  searchTextFontStyle?: FontStyleInterface;
+  searchTextColor?: string;
+  searchIconTint?: string;
+  searchBackgroundColor?: string;
+  selectionIconTint?: string;
 }) {
   const {
     backButtonIcon,
@@ -88,7 +99,10 @@ export function Header(props: {
               numberOfLines={1}
               style={[
                 styles.titleStyle,
-                { color: titleColor ?? undefined },
+                {
+                  color: titleColor ?? undefined,
+                  fontFamily: fonts.body,
+                },
                 titleFontStyle ?? {},
               ]}
             >
@@ -156,7 +170,10 @@ export function Header(props: {
             style={[
               styles.searchTextStyle,
               searchTextFontStyle ?? {},
-              { color: searchTextColor ?? undefined },
+              {
+                color: searchTextColor ?? undefined,
+                fontFamily: fonts.body,
+              },
             ]}
             onSubmitEditing={onSubmitEditing}
           />

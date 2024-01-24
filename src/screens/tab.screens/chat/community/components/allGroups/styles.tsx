@@ -3,6 +3,7 @@ import { colors } from '../../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
 
@@ -24,6 +25,7 @@ export const searchStyle = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.h6,
     fontWeight: fontWeights.bold,
+    fontFamily: fonts.body,
   },
 
   text: {
@@ -31,6 +33,7 @@ export const searchStyle = StyleSheet.create({
     fontWeight: fontWeights.medium,
     textAlign: 'center',
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
   pendingIcon: {
     width: sizes[12] * 2,

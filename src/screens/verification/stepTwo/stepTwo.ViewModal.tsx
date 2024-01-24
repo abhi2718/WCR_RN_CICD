@@ -15,21 +15,22 @@ import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.r
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../store/reducers/user.reducer';
 import { ROUTES } from '../../../navigation';
+import { useNavigateToScreen } from '../../../utils/common.functions';
 
 export const useVerificationViewModal = (props: AvatarProps) => {
   const { optionData, verificationOption } =
-    props.route?.params.data || 'No optionData received';
+    props.route?.params?.data || 'No optionData received';
   const { user } = useSelector((state: any) => state.userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const userWebsite =
-    user.verificationId.licenceWebsite ||
-    user.verificationId.studentEmail ||
-    user.verificationId.healthCareProfessionalEmail ||
-    user.verificationId.userWebsite
-      ? user.verificationId.licenceWebsite ||
-        user.verificationId.studentEmail ||
-        user.verificationId.healthCareProfessionalEmail ||
-        user.verificationId.userWebsite
+    user.verificationId?.licenceWebsite ||
+    user.verificationId?.studentEmail ||
+    user.verificationId?.healthCareProfessionalEmail ||
+    user.verificationId?.userWebsite
+      ? user.verificationId?.licenceWebsite ||
+        user.verificationId?.studentEmail ||
+        user.verificationId?.healthCareProfessionalEmail ||
+        user.verificationId?.userWebsite
       : '';
 
   const { navigation } = props;
@@ -48,22 +49,22 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   const alreadySetVerificationOption = () => {
     let result;
-    if (user.verificationId.idType === 'npi') {
+    if (user.verificationId?.idType === 'npi') {
       result = 'NPI Number';
-    } else if (user.verificationId.idType === 'medicalLicense') {
+    } else if (user.verificationId?.idType === 'medicalLicense') {
       result = 'License Number';
-    } else if (user.verificationId.isPhd) {
+    } else if (user.verificationId?.isPhd) {
       result = 'Others';
-    } else if (user.verificationId.isDoctoralCandidate) {
+    } else if (user.verificationId?.isDoctoralCandidate) {
       result = 'Student';
-    } else if (user.verificationId.territory) {
+    } else if (user.verificationId?.territory) {
       result = 'HealthCare';
     }
     return result;
   };
-
+  const {resetState} = useNavigateToScreen();
   const navigateToVerificationState = () => {
-    navigation.navigate(ROUTES.VerificationPending);
+    resetState(ROUTES.VerificationPending);
   };
 
   const [previousSetVerificationOption, setPreviousSetVerificationOption] =
@@ -255,7 +256,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-      //navigateToHeightScreen(loggInUserId);
       return user;
     } catch (err) {
     } finally {

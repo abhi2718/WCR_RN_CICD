@@ -9,6 +9,7 @@ import {
 } from '../../../components/flashBar';
 import { ROUTES } from '../../../navigation';
 import { useSelector } from 'react-redux';
+import { useNavigateToScreen } from '../../../utils/common.functions';
 
 export const useVerificationViewModal = (props: ScreenParams) => {
   const { navigation } = props;
@@ -16,7 +17,6 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   const { user } = useSelector((state: any) => state.userState);
   const [verificationOption, setVerificationOption] = useState('');
   const country = user.address.country;
-  const id = user.verificationId.idNumber;
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
     state: '',
@@ -32,13 +32,12 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     degreeIdentifier: '',
     degreeIdentifierType: '',
   });
-
   useEffect(() => {
     setVerificationOptionState();
   }, []);
-
+  const {resetState} = useNavigateToScreen();
   const navigateToVerificationState = () => {
-    navigation.navigate(ROUTES.VerificationPending);
+    resetState(ROUTES.VerificationPending);
   };
 
   useEffect(() => {

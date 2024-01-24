@@ -11,14 +11,13 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderDeck } from '../../../components/header';
 import {
-  dimensions,
   FullLoader,
   Row,
   ScreenWrapper,
   Spacer,
 } from '../../../components/tools';
 import { ProfileView } from './components/profile';
-import { styles } from './styles';
+import { styles, seeAllstyles } from './styles';
 import { useViewModal } from './useViewModal';
 import { BlurView } from '@react-native-community/blur';
 
@@ -54,6 +53,7 @@ export const LikeScreen = () => {
                   <View>
                     <Row
                       justifyContent="space-between"
+                      alignItems="center"
                       style={styles.headerPadding}
                       alignItems="center"
                     >
@@ -84,7 +84,7 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Match</Text>
-                    <View style={[styles.noDataList, styles.noMatches]}>
+                    <View style={[styles.noDataList, styles.noMatch]}>
                       <Image
                         style={styles.noDataImg}
                         source={require('../../../assets/images/icons/noMatchIcon.png')}
@@ -103,6 +103,7 @@ export const LikeScreen = () => {
                   <View>
                     <Row
                       justifyContent="space-between"
+                      alignItems="center"
                       style={styles.headerPadding}
                       alignItems="center"
                     >
@@ -132,12 +133,14 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Likes Received</Text>
-                    <View style={styles.noDataList}>
+                    <View style={[styles.noDataList]}>
+                      <Image
+                        style={styles.noLikes}
+                        source={require('../../../assets/images/icons/noLikes.png')}
+                      />
+                      <Spacer position="top" size={20} />
                       <Text
-                        style={[
-                          styles.noDataListText,
-                          styles.paddingReceiveLiked,
-                        ]}
+                        style={[styles.noDataListText, styles.paddingMatches]}
                       >
                         Someone Liked you, Unlock the Premium feature to
                         discover who's interested in you.
@@ -151,6 +154,7 @@ export const LikeScreen = () => {
                   <View>
                     <Row
                       justifyContent="space-between"
+                      alignItems="center"
                       style={styles.headerPadding}
                       alignItems="center"
                     >
@@ -181,18 +185,24 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Liked</Text>
-                    <View style={styles.noDataList}>
+                    <View style={[styles.noDataList]}>
+                      <Image
+                        style={styles.noLikes}
+                        source={require('../../../assets/images/icons/noLkeDislike.png')}
+                      />
+
+                      <Spacer position="top" size={20} />
                       <Text
-                        style={[styles.noDataListText, styles.paddingLiked]}
+                        style={[styles.noDataListText, styles.paddingMatches]}
                       >
                         Start swiping and giving likes to view profiles here.
                       </Text>
-                      <BlurView
+                      {/* <BlurView
                         style={styles.likedTextBlur}
                         blurType="light"
                         blurAmount={2}
                         reducedTransparencyFallbackColor="white"
-                      />
+                      /> */}
                     </View>
                   </View>
                 )}
@@ -201,6 +211,7 @@ export const LikeScreen = () => {
                   <View>
                     <Row
                       justifyContent="space-between"
+                      alignItems="center"
                       style={styles.headerPadding}
                       alignItems="center"
                     >
@@ -231,9 +242,15 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Saved</Text>
-                    <View style={styles.noDataList}>
+                    <View style={[styles.noDataList]}>
+                      <Image
+                        style={styles.noLikes}
+                        source={require('../../../assets/images/icons/noSavedIcon.png')}
+                      />
+
+                      <Spacer position="top" size={20} />
                       <Text
-                        style={[styles.noDataListText, styles.paddingSaved]}
+                        style={[styles.noDataListText, styles.paddingMatches]}
                       >
                         Start saving profiles to like them later.
                       </Text>
@@ -256,7 +273,7 @@ export const LikeScreen = () => {
                   <Text style={styles.headerText}>{seeAllState.title}</Text>
                 </Row>
                 {seeAllState.state === 0 && (
-                  <>
+                  <View style={seeAllstyles.container}>
                     {
                       <FlatList
                         data={data.likesReceived}
@@ -283,10 +300,10 @@ export const LikeScreen = () => {
                         keyExtractor={(item) => item._id}
                       />
                     }
-                  </>
+                  </View>
                 )}
                 {seeAllState.state === 1 && (
-                  <View>
+                  <View style={seeAllstyles.container}>
                     {
                       <FlatList
                         data={data.liked}
@@ -315,7 +332,7 @@ export const LikeScreen = () => {
                   </View>
                 )}
                 {seeAllState.state === 2 && (
-                  <>
+                  <View style={seeAllstyles.container}>
                     {
                       <FlatList
                         data={data.allFavourite}
@@ -343,10 +360,10 @@ export const LikeScreen = () => {
                         keyExtractor={(item) => item._id}
                       />
                     }
-                  </>
+                  </View>
                 )}
                 {seeAllState.state === 3 && (
-                  <>
+                  <View style={seeAllstyles.container}>
                     {
                       <FlatList
                         data={data.matchedUsersList}
@@ -377,7 +394,7 @@ export const LikeScreen = () => {
                         keyExtractor={(item) => item._id}
                       />
                     }
-                  </>
+                  </View>
                 )}
               </SafeAreaView>
             </Modal>

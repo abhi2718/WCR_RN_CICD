@@ -14,7 +14,11 @@ import { UserProfileRepository } from '../../repository/userProfile.repo';
 import { useLogOutViewModal } from '../../utils/logOut';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
-import { fontSizes, fontWeights } from '../../infrastructure/theme/fonts';
+import {
+  fontSizes,
+  fontWeights,
+  fonts,
+} from '../../infrastructure/theme/fonts';
 
 export const DltLogOutModal = (props: DltLogOutType) => {
   const { showModal, setShowModal } = props;
@@ -170,5 +174,6 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.h6,
     color: colors.ui.text,
     fontWeight: fontWeights.medium,
+    fontFamily: fonts.body,
   },
 });

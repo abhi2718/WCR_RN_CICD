@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import { colors } from '../../../infrastructure/theme/colors';
 import { theme } from '../../../infrastructure/theme';
+import { fonts } from '../../../infrastructure/theme/fonts';
 export type HeaderType = {
   title: string;
   showCloseButton: boolean;
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
     fontSize: theme.units.sizes[22],
     fontWeight: theme.fontWeights.medium,
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
   shadows: {
     height: 58,

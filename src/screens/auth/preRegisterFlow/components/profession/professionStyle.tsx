@@ -4,6 +4,7 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
   fontWeights,
+  fonts,
 } from '../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 
@@ -24,17 +25,20 @@ export const profession = StyleSheet.create({
   skipBtn: {
     fontSize: 20,
     color: colors.ui.text,
+    fontFamily: fonts.body,
   },
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
     color: colors.ui.text,
     marginVertical: sizes[6],
+    fontFamily: fonts.body,
   },
   text: {
     fontSize: fontSizes.text,
     color: colors.ui.text,
     marginTop: sizes[5],
+    fontFamily: fonts.body,
   },
   innerView: {
     flex: 1,
@@ -43,9 +47,11 @@ export const profession = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 2,
     background: 'white',
+    fontFamily: fonts.body,
   },
   rowHeader: {
     width: dimensions.width,
     maxWidth: '100%',
+    fontFamily: fonts.body,
   },
 });

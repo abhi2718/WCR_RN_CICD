@@ -24,9 +24,11 @@ export const notificationStyles = StyleSheet.create({
     fontWeight: fontWeights.medium,
     color: colors.ui.placeholder,
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
   notifyiMsg: {
     fontSize: fontSizes.button,
+    fontFamily: fonts.body,
   },
   deletBtn: {
     color: 'white',
