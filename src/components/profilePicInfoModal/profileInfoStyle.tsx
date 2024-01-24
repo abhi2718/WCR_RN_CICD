@@ -53,9 +53,13 @@ export const modalStyle = StyleSheet.create({
     fontSize: sizes[3],
     flex: 1,
   },
+  textHead: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.text,
+  },
   icon: {
-    width: sizes[5],
-    height: sizes[5],
+    width: sizes[4],
+    height: sizes[4],
     marginRight: sizes[2],
   },
   footerText: {

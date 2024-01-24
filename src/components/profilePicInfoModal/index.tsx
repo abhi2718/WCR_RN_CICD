@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Modal, Text, View } from 'react-native';
-import { Row } from '../tools';
+import { Row, Spacer } from '../tools';
 import { PrimaryButton } from '../button';
 import { ProfilePicInfoModalProps } from '../../types/components/modal.type';
 import { modalStyle } from './profileInfoStyle';
@@ -13,44 +13,57 @@ export const ProfilePicInfoModal = (props: ProfilePicInfoModalProps) => {
       <View style={modalStyle.centeredView}>
         <View style={modalStyle.modalView}>
           <View>
-            <Text style={modalStyle.heading}>Profile</Text>
+            <Text style={modalStyle.heading}>Profile photo:</Text>
             <Row style={modalStyle.row}>
               <Image
                 style={modalStyle.icon}
-                source={require('../../assets/images/icons/blackCheck.png')}
+                source={require('../../assets/images/icons/pp1.png')}
               />
               <Text style={modalStyle.text}>
-                Required: We need that fabulous face front and center - no
-                shades, masks, or obstructions.
+                <Text style={modalStyle.textHead}>Required-</Text>
+                We need that fabulous face front and center - no shades, masks,
+                or obstructions.
               </Text>
             </Row>
             <Row style={modalStyle.row}>
               <Image
                 style={modalStyle.icon}
-                source={require('../../assets/images/icons/blackCheck.png')}
+                source={require('../../assets/images/icons/pp2.png')}
               />
               <Text style={modalStyle.text}>
-                Opt for soft, natural light for that genuine, flattering glow.
+                <Text style={modalStyle.textHead}> Your best invite?</Text>A
+                real, friendly smile
+              </Text>
+            </Row>
+            <Spacer position="top" size={15} />
+            <Text style={modalStyle.heading}>Additional photos:</Text>
+            <Row style={modalStyle.row}>
+              <Image
+                style={modalStyle.icon}
+                source={require('../../assets/images/icons/pp3.png')}
+              />
+              <Text style={modalStyle.text}>
+                <Text style={modalStyle.textHead}>Showcase your world - </Text>
+                Capture your personality, both professional/personal sides, and
+                highlight interests/hobbies
               </Text>
             </Row>
             <Row style={modalStyle.row}>
               <Image
                 style={modalStyle.icon}
-                source={require('../../assets/images/icons/blackCheck.png')}
+                source={require('../../assets/images/icons/pp4.png')}
               />
               <Text style={modalStyle.text}>
-                Your best invite? A real, friendly smile!
+                <Text style={modalStyle.textHead}> Mix it up - </Text>
+                from wearing a white coat/scrubs to sharing your passions and
+                latest adventures- to reflect the vibrant, unique you!
               </Text>
             </Row>
           </View>
-          <View>
-            <Text style={modalStyle.footerText}>
-              Now, let's find your perfect match!
-            </Text>
-            <Row>
-              <PrimaryButton onPress={() => onClose()} title="Continue" />
-            </Row>
-          </View>
+          <Spacer position="top" size={15} />
+          <Row>
+            <PrimaryButton onPress={() => onClose()} title="Continue" />
+          </Row>
         </View>
       </View>
     </Modal>
