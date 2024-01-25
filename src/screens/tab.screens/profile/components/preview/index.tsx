@@ -21,12 +21,6 @@ export const PreviewScreen = () => {
           />
         </View>
         <View>
-          <Pressable style={styles.shareIconView}>
-            <Image
-              style={styles.shareIcon}
-              source={require('../../../../../assets/images/icons/Share.png')}
-            />
-          </Pressable>
           {user && (
             <>
               <ScrollView
@@ -49,7 +43,7 @@ export const PreviewScreen = () => {
                       <Text style={styles.name}>
                         {user.profile.displayName ?? user.profile.name.first}
                         {user.profile.genderPronoun !== 'Prefer not to say' &&
-                          `, ${user.profile.genderPronoun}`}
+                          `, (${user.profile.genderPronoun})`}
                         , {user.age}
                       </Text>
                       <Image
@@ -281,7 +275,7 @@ export const PreviewScreen = () => {
                 {user?.interests?.length > 0 && (
                   <View style={styles.inBtwnText}>
                     <Spacer position="top" size={10} />
-                    <Text style={styles.aboutHeading}>Interests/Hobbies</Text>
+                    <Text style={styles.aboutHeading}>Interests & Hobbies</Text>
                     <Row style={{ flexWrap: 'wrap' }}>
                       {user?.interests?.map((hobby: string, index: number) => {
                         if (user?.interests?.length - 1 === index) {

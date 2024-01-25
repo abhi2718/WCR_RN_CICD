@@ -60,9 +60,13 @@ export const modalStyle = StyleSheet.create({
     flex: 1,
     fontFamily: fonts.body,
   },
+  textHead: {
+    fontWeight: fontWeights.bold,
+    fontSize: fontSizes.text,
+  },
   icon: {
-    width: sizes[5],
-    height: sizes[5],
+    width: sizes[4],
+    height: sizes[4],
     marginRight: sizes[2],
   },
   footerText: {

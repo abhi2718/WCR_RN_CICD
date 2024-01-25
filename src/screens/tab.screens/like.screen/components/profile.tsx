@@ -192,12 +192,7 @@ export const ProfileView = (props: ProfileViewProps) => {
                   uri: item?.userId?.profilePicture?.url,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-              >
-                <LinearGradient
-                  colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
-                  style={styles.gradient}
-                />
-              </FastImage>
+              ></FastImage>
             </Spacer>
             <Column>
               <Spacer position="bottom" size={10}>
@@ -339,6 +334,7 @@ export const styles = StyleSheet.create({
     fontSize: theme.fontSizes.text,
     fontWeight: theme.fontWeights.bold,
     lineHeight: 30,
+    textAlign: 'center',
     fontFamily: fonts.body,
   },
   textDegree: {
@@ -347,6 +343,7 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     lineHeight: 14,
     letterSpacing: 0.59,
+    textAlign: 'center',
     fontFamily: fonts.body,
   },
   textDesignation: {

@@ -86,7 +86,7 @@ export const PreferencesScreen = () => {
                 <View key={index} style={styles.multiSelector}>
                   <Row alignItems="center" justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Distance preference
+                      Distance Preference
                     </Text>
                     {distanceRange[0] === 600 ? (
                       <Text style={styles.silderSubText}>No Max</Text>
@@ -121,7 +121,7 @@ export const PreferencesScreen = () => {
                 <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Age preference
+                      Age Preference
                     </Text>
                     <Text style={styles.silderSubText}>
                       {ageRange[0]} - {ageRange[1]}
@@ -144,7 +144,7 @@ export const PreferencesScreen = () => {
                 <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Height preference
+                      Height Preference
                     </Text>
                     <Text style={styles.silderSubText}>
                       {formatNumber(heightRange[0])} -{' '}
