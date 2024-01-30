@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Share from 'react-native-share';
+import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { LikeContext } from '../../contexts/likes.context';
 import { ROUTES } from '../../navigation';
@@ -31,6 +32,17 @@ export const useViewModal = (props: profileProps) => {
     showSave,
     showBlock,
   } = props;
+  const showAlert = () => {
+    Alert.alert(
+      'Custom Alert Title',
+      'This is a custom alert message.',
+      [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+        // Add more buttons if needed
+      ],
+      { cancelable: false }
+    );
+  };
   const handleShare = () => {
     try {
       const shareOptions = {
@@ -174,5 +186,6 @@ export const useViewModal = (props: profileProps) => {
     handleReport,
     showBlockModal,
     setShowBlockModal,
+    showAlert
   };
 };

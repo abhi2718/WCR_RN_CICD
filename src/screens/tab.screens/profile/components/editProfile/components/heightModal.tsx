@@ -8,15 +8,22 @@ import {
   Pressable,
 } from 'react-native';
 import { Picker } from 'react-native-wheel-pick';
+import SwitchSelector from 'react-native-switch-selector';
 import { useSelector } from 'react-redux';
+import { PrimaryButton } from '../../../../../../components/button';
+import { Column } from '../../../../../../components/tools';
 import { colors } from '../../../../../../infrastructure/theme/colors';
-import { cmValues, feetValues } from '../../../../../../utils/constanst';
-import { HeightStyle } from '../../../../../auth/preRegisterFlow/components/height/heightStyle';
+import { HeightStyle } from './heightStyle';
 interface Measurement {
   feet: number;
   inch: number;
   heightInCm?: number;
 }
+import {
+  cmValues,
+  feetValues,
+  options,
+} from '../../../../../../utils/constanst';
 export const HeightModal = (props) => {
   const { showHeightModal, setShowHeightModal, setheight } = props;
   const { user } = useSelector((state: any) => state.userState);
@@ -43,8 +50,12 @@ export const HeightModal = (props) => {
     } else {
       const height = convertCmToFeetAndInches(Number(value));
       setheightValue(height!);
+      setheight(height);
     }
   };
+  // const handleFormatChange = (value: string) => {
+  //   setheightFormat(value);
+  // };
   function parseMeasurement(measurementString: string): Measurement | null {
     const regex = /^(\d+)\'(\d+)\"$/;
     const match = measurementString.match(regex);
@@ -72,27 +83,53 @@ export const HeightModal = (props) => {
       inch: remainingInches,
     };
   }
+  const handleFormatChange = (value: string) => {
+    setheightFormat(value);
+  };
   return (
     <Modal visible={showHeightModal}>
-      <SafeAreaView style={styles.containerStyle}>
-        <View>
-          <Pressable onPress={() => setShowHeightModal(false)}>
-            <Text style={{ fontFamily: 'Urbanist-Regular' }}>Close</Text>
-          </Pressable>
-          <Text style={{ fontSize: 20, fontFamily: 'Urbanist-Regular' }}>
-            Height
-          </Text>
-          <Picker
-            textSize={34}
-            isShowSelectBackground={false}
-            selectTextColor={colors.ui.black}
-            style={HeightStyle.picker}
-            isShowSelectLine={false} // Default is true
-            pickerData={heightFormat === 'feet' ? feetValues : cmValues}
-            selectedValue={currentHeight}
-            onValueChange={handleValueChange}
-          />
-        </View>
+     <SafeAreaView style={HeightStyle.flex1}>
+        <Column justifyContent="space-between" style={HeightStyle.flex1}>
+          <View style={HeightStyle.heightHeader}>
+            <Text style={HeightStyle.heightHeaderTitle}>Height</Text>
+          </View>
+          <View>
+            <Picker
+              textSize={34}
+              isShowSelectBackground={false}
+              selectTextColor={colors.ui.black}
+              style={HeightStyle.picker}
+              isShowSelectLine={false} // Default is true
+              pickerData={heightFormat === 'feet' ? feetValues : cmValues}
+              selectedValue={currentHeight}
+              onValueChange={handleValueChange}
+            />
+          </View>
+          <Column style={HeightStyle.heightFooter}>
+            <View style={HeightStyle.switchDiv}>
+              <SwitchSelector
+                style={HeightStyle.switch}
+                buttonColor={colors.ui.primary}
+                backgroundColor={colors.bg.secondary}
+                borderColor={colors.bg.secondary}
+                hasPadding={true}
+                valuePadding={4}
+                height={50}
+                bold={true}
+                options={options}
+                initial={0}
+                onPress={(value: string) => handleFormatChange(value)}
+              />
+            </View>
+            <PrimaryButton
+              title="Close"
+              onPress={() => {
+                setheightFormat("feet");
+                setShowHeightModal(false);
+              }}
+            />
+          </Column>
+        </Column>
       </SafeAreaView>
     </Modal>
   );

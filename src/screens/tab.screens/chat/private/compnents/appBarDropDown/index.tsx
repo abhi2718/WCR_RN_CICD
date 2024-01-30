@@ -33,7 +33,7 @@ export const AppBarDropDown = (props: AppBarDropDownProps) => {
         title="Unmatch"
         description={`Are you sure you want to 
         unmatch ${user.getName()} ?`}
-        onPress={() => unmatch()}
+        onPress={unmatch}
       />
     </View>
   );

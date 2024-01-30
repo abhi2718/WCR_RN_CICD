@@ -8,20 +8,13 @@ import {
   Pressable,
   Image,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import { Column, FullLoader, Row, Spacer, dimensions } from '../tools';
+import { CustomSnakeBar, FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
-import { theme } from '../../infrastructure/theme';
-import { colors } from '../../infrastructure/theme/colors';
-import {
-  fontSizes,
-  fontWeights,
-  fonts,
-} from '../../infrastructure/theme/fonts';
-import { sizes } from '../../infrastructure/theme/sizes';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
 import { calculateAge } from '../../utils/common.functions';
 import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
@@ -49,7 +42,9 @@ export const ProfileModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     handleReport,
+    showAlert
   } = useViewModal(props);
+  
   return (
     <Modal visible={showModal}>
       <SafeAreaView style={styles.containerWrapperStyle}>
@@ -372,8 +367,11 @@ export const ProfileModal = (props: profileProps) => {
                         );
                       })}
                     </View>
-                    <View style={styles.shareWrapper}>
-                      <Row justifyContent="center" gap={32}>
+                        <View style={styles.shareWrapper}>
+                          <Row justifyContent="center" gap={32}>
+                            {/* <Pressable onPress={showAlert}>
+                              <Text>Press </Text>
+                            </Pressable> */}
                         {showDisLike && (
                           <Pressable onPress={handleDisLike}>
                             <Image
