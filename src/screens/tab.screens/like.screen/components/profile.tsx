@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Pressable, Text, View, StyleSheet, Image } from 'react-native';
+import { Pressable, Text, View, StyleSheet, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ProfileModal } from '../../../../components/profile.component';
 import { Column, Row, Spacer, dimensions } from '../../../../components/tools';
@@ -249,10 +249,6 @@ export const ProfileView = (props: ProfileViewProps) => {
                 }}
                 resizeMode={FastImage.resizeMode.cover}
               >
-                {/* <LinearGradient
-                  colors={['rgba(0, 0, 0, 0.00)', ' rgba(0, 0, 0, 0.9)']}
-                  style={styles.gradient}
-                /> */}
               </FastImage>
             </Spacer>
             <Column justifyContent="center" alignItems="center">
