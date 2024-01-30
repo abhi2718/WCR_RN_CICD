@@ -11,18 +11,26 @@ export const useAboutViewModal = (props: ScreenParams) => {
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
-  const maxLength = 1000;
+  const maxLength = 150;
   let bio = user?.bio;
   const [aboutText, setAboutText] = useState<string>(bio ?? '');
+  const [letterCount, setLetterCount] = useState(
+    user?.bio?.length ? user?.bio?.length : 0,
+  );
   const [loading, setLoading] = useState(false);
 
   const handleText = (text: string) => {
+    setLetterCount(() => {
+      return text.replace(/\s/g, '').length;
+    });
     setAboutText(text);
   };
 
   const navigateTohabitsScreen = () => {
     navigation.navigate(ROUTES.Hobbies);
   };
+
+  
 
   const updateUserDetails = async () => {
     try {
@@ -67,6 +75,7 @@ export const useAboutViewModal = (props: ScreenParams) => {
     loading,
     updateUserDetails,
     maxLength,
+    letterCount,
     navigateTohabitsScreen
   };
 };

@@ -161,53 +161,76 @@ export const EditProfile = () => {
                 />
               </View>
             </Spacer>
-            <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>DOB</Text>
-              <View style={styles.fieldValueContainer}>
-                <Text style={styles.fieldValue}>{userProfile.dob}</Text>
-              </View>
-            </Spacer>
-            <Spacer position="top" size={10}>
-              <HeightModal
-                showHeightModal={showHeightModal}
-                setShowHeightModal={setShowHeightModal}
-                setheight={setheight}
-              />
-              <Pressable onPress={() => _setShowHeightModal()}>
-                <Row>
-                  <Column>
-                    <Text style={styles.fieldName}>Height</Text>
-                    <Spacer position="top" size={10}>
-                      <Text style={styles.fieldName}>
-                        {height?.feet}'{height?.inch}
-                      </Text>
-                    </Spacer>
-                  </Column>
-                  <Image
-                    resizeMode="contain"
-                    style={styles.nextArrow}
-                    source={require('../../../../../assets/images/settings/Next.png')}
-                  />
-                </Row>
-              </Pressable>
-            </Spacer>
           </Column>
+          <Text style={styles.headingText}>DOB</Text>
+          <Spacer position="top" size={10}>
+            <Pressable onPress={() => {}}>
+              <Row>
+                <Column>
+                  <Spacer position="top" size={10}>
+                    <Text style={styles.fieldName}>{userProfile.dob}</Text>
+                  </Spacer>
+                </Column>
+                <Image
+                  resizeMode="contain"
+                  style={styles.nextArrow}
+                  source={require('../../../../../assets/images/settings/Next.png')}
+                />
+              </Row>
+            </Pressable>
+          </Spacer>
+          <Text style={styles.headingText}>Height</Text>
+
+          <Spacer position="top" size={10}>
+            <HeightModal
+              showHeightModal={showHeightModal}
+              setShowHeightModal={setShowHeightModal}
+              setheight={setheight}
+            />
+            <Pressable onPress={() => _setShowHeightModal()}>
+              <Row>
+                <Column>
+                  <Spacer position="top" size={10}>
+                    <Text style={styles.fieldName}>
+                      {height?.feet}'{height?.inch}
+                    </Text>
+                  </Spacer>
+                </Column>
+                <Text>Update</Text>
+
+                <Image
+                  resizeMode="contain"
+                  style={styles.nextArrow}
+                  source={require('../../../../../assets/images/settings/Next.png')}
+                />
+              </Row>
+            </Pressable>
+          </Spacer>
+          <Text style={styles.headingText}>Gender</Text>
+          <Spacer position="top" size={10}>
+            <View style={styles.fieldValueContainer}>
+              <Row>
+                <Column>
+                  <Text style={styles.fieldValue}>{userProfile.gender}</Text>
+                </Column>
+
+                <Image
+                  resizeMode="contain"
+                  style={styles.nextArrow}
+                  source={require('../../../../../assets/images/settings/Next.png')}
+                />
+              </Row>
+            </View>
+          </Spacer>
+
           <Text style={styles.headingText}>Identity/Orientation</Text>
           <Column style={styles.ph16}>
-            <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Gender</Text>
-              <View style={styles.fieldValueContainer}>
-                <Text style={styles.fieldValue}>{userProfile.gender}</Text>
-              </View>
-            </Spacer>
-
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Country</Text>
               <View style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>{user?.address?.country}</Text>
               </View>
             </Spacer>
-
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>State/Territory</Text>
               <Row
@@ -285,6 +308,18 @@ export const EditProfile = () => {
                 label="Show Gender on profile"
               />
             </Spacer>
+            <CustomCheckBox
+              onPress={() => {
+                setUserProfile((oldstate) => {
+                  return {
+                    ...oldstate,
+                    showSexualOrientation: !userProfile.showSexualOrientation,
+                  };
+                });
+              }}
+              isChecked={userProfile.showGender}
+              label="Show Gender Pronoun on profile"
+            />
             <CustomCheckBox
               onPress={() => {
                 setUserProfile((oldstate) => {

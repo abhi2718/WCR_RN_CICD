@@ -10,6 +10,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { AlertScreen } from '../../../../../../../components/alert';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
+import {
+  addInitials,
+} from '../../../../../../../utils/common.functions';
 import { fontSizes } from '../../../../../../../infrastructure/theme/fonts';
 export default function CardCompoent({ item, height, cardRef }) {
   const heightStyle = { height, ...cardStyles.imageStyle };
@@ -19,7 +22,10 @@ export default function CardCompoent({ item, height, cardRef }) {
     first,
     genderPronoun,
     designation,
+    institution,
     state,
+    city,
+    country,
     _handleLike,
     _handleDisLike,
     addFavourite,
@@ -35,7 +41,6 @@ export default function CardCompoent({ item, height, cardRef }) {
     setShowModal,
     handleReport,
   } = useViewModal(item, cardRef);
-
   return (
     <View style={[cardStyles.deckContainer, cardStyles.shadows]}>
       <Pressable style={cardStyles.shareIconContainer} onPress={handleShare}>
@@ -77,7 +82,11 @@ export default function CardCompoent({ item, height, cardRef }) {
                   source={require('../../../../../../../assets/images/icons/degree.png')}
                 />
                 <Text style={cardStyles.userInfoText}>
-                  {designation.userDegree}
+                  {designation.userDegree},{' '}
+                  {addInitials(
+                    designation.userDegree,
+                    designation.primaryDegree,
+                  )}
                 </Text>
               </Row>
               <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
@@ -85,14 +94,18 @@ export default function CardCompoent({ item, height, cardRef }) {
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/degTitle.png')}
                 />
-                <Text style={cardStyles.userInfoText}>{designation.title}</Text>
+                <Text style={cardStyles.userInfoText}>
+                  {designation.title}, {institution}
+                </Text>
               </Row>
               <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/location.png')}
                 />
-                <Text style={cardStyles.userInfoText}>{state}</Text>
+                <Text style={cardStyles.userInfoText}>
+                  {city}, {addInitials(country,state)}
+                </Text>
               </Row>
             </View>
             <View style={[cardStyles.ph16]}>
