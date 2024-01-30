@@ -25,6 +25,7 @@ export type UserProfile = {
   };
   showGender: boolean;
   state: string;
+  country: string;
   drinking: string;
   maritalStatus: string[];
   sexualPreference: string;

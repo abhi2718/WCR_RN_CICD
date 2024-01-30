@@ -23,7 +23,7 @@ import {
 } from '../../infrastructure/theme/fonts';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
-import { calculateAge } from '../../utils/common.functions';
+import { addInitials, calculateAge } from '../../utils/common.functions';
 import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
 import { styles } from './style';
 import { AlertScreen } from '../alert';
@@ -114,7 +114,11 @@ export const ProfileModal = (props: profileProps) => {
                             source={require('../../assets/images/icons/degree.png')}
                           />
                           <Text style={styles.userInfoText}>
-                            {user.designation.userDegree}
+                            {user.designation.userDegree},{' '}
+                            {addInitials(
+                              user.designation.userDegree,
+                              user.designation.primaryDegree,
+                            )}
                           </Text>
                         </Row>
                         <Row alignItems="center">
@@ -131,7 +135,10 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.imageIcon}
                             source={require('../../assets/images/icons/location.png')}
                           />
-                          <Text style={styles.userInfoText}>{user.state}</Text>
+                          <Text style={styles.userInfoText}>
+                            {user?.city},
+                            {addInitials(user?.country, user?.state)}
+                          </Text>
                         </Row>
                       </View>
                       <View style={styles.vitalSigns}>

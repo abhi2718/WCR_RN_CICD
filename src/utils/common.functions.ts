@@ -199,7 +199,7 @@ export function separateWords(inputString: string) {
   }
 }
 
-const provinces= [
+const provinces = [
   { name: 'Alberta', initials: 'AB' },
   { name: 'British Columbia', initials: 'BC' },
   { name: 'Manitoba', initials: 'MB' },
@@ -278,32 +278,25 @@ const convertedArr = [
 ];
 
 export function addInitials(userDegree: string, primaryDegree: string) {
-  console.log(userDegree)
   if (userDegree === 'PhD in Health-Related Field') {
     for (let i = 0; i < convertedArray.length; i++) {
       if (primaryDegree.includes(convertedArray[i].name)) {
         return convertedArray[i].initials;
       }
     }
-    
   } else if (userDegree === 'Doctoral Student in Health-Related Field') {
     for (let i = 0; i < convertedArr.length; i++) {
       if (primaryDegree.includes(convertedArr[i].name)) {
         return convertedArr[i].initials;
       }
     }
-  }else if (userDegree === 'Canada') {
-    console.log(primaryDegree)
+  } else if (userDegree === 'Canada') {
     for (let i = 0; i < convertedArr.length; i++) {
       if (primaryDegree.includes(provinces[i].name)) {
         return provinces[i].initials;
       }
     }
-  }else{
-    return separateWords(primaryDegree)
+  } else {
+    return separateWords(primaryDegree);
   }
-
-
-
-  
 }
