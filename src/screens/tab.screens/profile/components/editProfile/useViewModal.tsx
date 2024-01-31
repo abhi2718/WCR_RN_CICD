@@ -104,6 +104,9 @@ export const useViewModal = () => {
     showSexualOrientation: user?.profile?.showSexualPreference
       ? user?.profile?.showSexualPreference
       : false,
+    sexualPreference: user?.profile.sexualPreference
+      ? user?.profile.sexualPreference
+      : '',
     showGender: user?.profile.showGender ? user?.profile.showGender : false,
   });
   const [_primaryDegree, setPrimaryDegree] = useState(
@@ -195,55 +198,56 @@ export const useViewModal = () => {
       setHobbies(selected);
     }
   };
-  const optionsList = [
+
+  const healthcareProfessionals = [
     {
       title: 'Degree Category',
       option: _userDegree,
       initValue: 'degreeCategory',
+      isArrow: true,
     },
     {
       title: 'Degree Type',
       option: _primaryDegree,
       initValue: 'degreeType',
+      isArrow: true,
     },
     {},
     {},
-    // {
-    // },
-    // {
-    //   title: 'Gender',
-    //   option: genderList,
-    //   initValue: 'gender',
-    // },
+  ];
+
+  const locationDetails = [
+    {
+      title: 'Degree Category',
+      option: _userDegree,
+      initValue: 'degreeCategory',
+      isArrow: true,
+    },
+    {
+      title: 'Degree Type',
+      option: _primaryDegree,
+      initValue: 'degreeType',
+      isArrow: true,
+    },
+    {},
+    {},
+  ];
+
+  const vitalSigns = [
     {
       title: 'Ethnicity',
       option: ethnicityList,
       initValue: 'ethnicity',
     },
     {
-      title: 'Hobby',
-      option: hobbyList,
-      initValue: 'interests',
+      title: 'Relationship Level',
+      option: relationshipLevelList,
+      initValue: 'relationshipLevel',
     },
     {
       title: 'Marital Status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
-    },
-    {
-      title: 'Gender Pronoun',
-      option: genderPronounList,
-      initValue: 'genderPronoun',
-    },
-    {
-      title: 'Sexual Orientation',
-      option: sexualOrientationArrayList,
-      initValue: 'sexualPreference',
-    },
-    {
-      title: 'Relationship Level',
-      option: relationshipLevelList,
-      initValue: 'relationshipLevel',
     },
     {
       title: 'Religion',
@@ -256,9 +260,19 @@ export const useViewModal = () => {
       initValue: 'politics',
     },
     {
-      title: 'Exercise',
-      option: excerciseList,
-      initValue: 'excercise',
+      title: 'Kids',
+      option: kidsList,
+      initValue: 'kids',
+    },
+    {
+      title: 'Family Plan',
+      option: familyPlanList,
+      initValue: 'familyPlan',
+    },
+    {
+      title: 'Covid',
+      option: covidList,
+      initValue: 'covidVaccineStatus',
     },
     {
       title: 'Diet',
@@ -271,24 +285,14 @@ export const useViewModal = () => {
       initValue: 'drinking',
     },
     {
-      title: 'Covid',
-      option: covidList,
-      initValue: 'covidVaccineStatus',
-    },
-    {
       title: 'Smoking',
       option: smokingList,
       initValue: 'smoking',
     },
     {
-      title: 'Kids',
-      option: kidsList,
-      initValue: 'kids',
-    },
-    {
-      title: 'Family Plan',
-      option: familyPlanList,
-      initValue: 'familyPlan',
+      title: 'Exercise',
+      option: excerciseList,
+      initValue: 'excercise',
     },
     {
       title: 'Pets',
@@ -296,7 +300,27 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
   ];
-  const [letterCount, setLetterCount] = useState(userProfile?.aboutMe?.length?500 - userProfile.aboutMe.length:500);
+
+  const optionsList = [
+    {
+      title: 'Healthcare Professionals',
+      mainTitle: true,
+      values: healthcareProfessionals,
+    },
+    {
+      title: 'Location Details',
+      mainTitle: true,
+      values: [],
+    },
+    {
+      title: 'Vital signs',
+      mainTitle: true,
+      values: vitalSigns,
+    },
+  ];
+  const [letterCount, setLetterCount] = useState(
+    userProfile?.aboutMe?.length ? 500 - userProfile.aboutMe.length : 500,
+  );
   const handleDistanceSliderChange = (
     values: React.SetStateAction<number[]>,
   ) => {
