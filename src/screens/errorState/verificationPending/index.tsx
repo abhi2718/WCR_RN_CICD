@@ -82,7 +82,9 @@ const VerificationPending = (props: ScreenParams) => {
               complete your account verification.
             </Text>
             <View style={pendingStyle.primaryButton}>
-              <PrimaryButton title="Update profile" />
+              <PrimaryButton title="Update profile"
+              onPress={navigateToGender}
+              />
             </View>
           </Column>
         </View>
