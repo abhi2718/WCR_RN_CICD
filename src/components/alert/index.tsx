@@ -4,12 +4,11 @@ import {
   Pressable,
   Text,
   StyleSheet,
-  TouchableOpacity,
   Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AlertScreenType } from '../../types/components/alert.type';
-import { Column, dimensions, Row, Spacer } from '../tools';
+import { dimensions, Row, Spacer } from '../tools';
 import { colors } from '../../infrastructure/theme/colors';
 import {
   fontSizes,

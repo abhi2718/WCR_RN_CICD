@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Modal,
-  StyleSheet,
   SafeAreaView,
   Text,
   TextInput,
@@ -15,7 +14,6 @@ import {
   Column,
   FullLoader,
   Row,
-  ScreenContainer,
 } from '../../../../../../../components/tools';
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 import { useViewModal } from './useViewModal';
@@ -53,7 +51,6 @@ export const SearchModal = (props: SearchModalProps) => {
                   />
                 </Pressable>
               </Row>
-
               {isSearchActive && users.length === 0 ? (
                 <View style={searchStyle.content}>
                   <Column gap={25} alignItems="center">

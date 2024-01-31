@@ -81,9 +81,12 @@ export const EditProfile = () => {
       </View>
       <ScrollView>
         <Text style={styles.headingText}>Photos</Text>
-        <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
+        <AddProfilePicScreen
+          showHeader={false}
+          setAllPics={setAllPics}
+        />
         <View style={styles.container}>
-          <Text style={styles.headingText}>About Yourself</Text>
+          <Text style={styles.headingText}>About Me</Text>
           <Column>
             <TextInput
               placeholder="About Me"
@@ -94,7 +97,7 @@ export const EditProfile = () => {
               textAlignVertical="top"
               style={styles.aboutInput}
               multiline={true}
-              maxLength={150}
+              maxLength={500}
               numberOfLines={10}
               returnKeyLabel="go"
               placeholderTextColor={colors.ui.placeholder}
@@ -446,7 +449,7 @@ export const EditProfile = () => {
                 return (
                   <Spacer key={index} position="top" size={10}>
                     <Spacer key={index} position="top" size={10}>
-                      <Text style={styles.fieldName}>Interests/Hobbies</Text>
+                      <Text style={styles.fieldName}>Interests & Hobbies</Text>
                       <TouchableOpacity onPress={() => openModal('hobby')}>
                         <Row
                           style={[styles.selectRow, styles.fieldValueContainer]}
