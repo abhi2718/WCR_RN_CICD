@@ -30,9 +30,6 @@ export const ProfileScreen = ({}) => {
     _logOut,
     loading,
   } = useViewModal();
-  // if (1) {
-  //   return (<PaymentScreen />)
-  // }
   return (
     <SafeAreaView style={styles.container}>
       <HeaderDeck isSearchIcon={false} isPrefrence={false} />

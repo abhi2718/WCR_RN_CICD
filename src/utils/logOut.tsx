@@ -1,4 +1,3 @@
-import React from 'react';
 import { clearAsynStorage } from './asyncStorage';
 import { useDispatch } from 'react-redux';
 import { useNavigation, CommonActions } from '@react-navigation/native';

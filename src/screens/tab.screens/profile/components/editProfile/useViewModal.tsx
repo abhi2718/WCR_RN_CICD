@@ -15,7 +15,6 @@ import {
   ethnicity,
   exercise,
   familyPlan,
-  genderArray,
   genderPronounArray,
   kids,
   maritalStatus,
@@ -297,9 +296,7 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
   ];
-  const [letterCount, setLetterCount] = useState(
-    userProfile?.aboutMe?.length ? userProfile.aboutMe.length : 0,
-  );
+  const [letterCount, setLetterCount] = useState(userProfile?.aboutMe?.length?500 - userProfile.aboutMe.length:500);
   const handleDistanceSliderChange = (
     values: React.SetStateAction<number[]>,
   ) => {
@@ -608,7 +605,7 @@ export const useViewModal = () => {
   const _handleInputChange = (text: string, key: string) => {
     if (key === 'aboutMe') {
       setLetterCount(() => {
-        return text.replace(/\s/g, '').length;
+        return 500 - text.replace(/\s/g, '').length;
       });
     }
     setUserProfile((oldState) => {
