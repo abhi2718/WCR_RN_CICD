@@ -6,6 +6,7 @@ import { fonts } from '../../../../../infrastructure/theme/fonts';
 export const Style = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
     width: '100%',
   },
   rightContainerStyle: {
@@ -13,13 +14,12 @@ export const Style = StyleSheet.create({
     flex: 1,
   },
   avatarViewStyle: {
-    margin: 4,
     justifyContent: 'center',
   },
   defaultStatusStyle: {
     position: 'absolute',
     end: 0,
-    top: '60%',
+    top: '36%',
   },
   middleViewStyle: {
     flexDirection: 'column',
@@ -65,5 +65,8 @@ export const Style = StyleSheet.create({
     fontWeight: '500',
     fontSize: 17,
     fontFamily: fonts.body,
+  },
+  pr12: {
+    paddingRight: 12,
   },
 });

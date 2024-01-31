@@ -9,6 +9,7 @@ import {
   Modal,
   FlatList,
   Text,
+  Pressable,
 } from 'react-native';
 import { Style } from './styles';
 import {
@@ -1285,31 +1286,45 @@ export const CometChatMessageComposer = React.forwardRef(
     }, [group]);
     const renderMentionList = () => {
       return (
-        <FlatList
-          style={Style.mentionListBox}
-          data={groupMembers}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <Row alignItems="center" gap={10} style={Style.spaceAvatarY}>
-              <Image
-                style={Style.avatarSize}
-                source={{ uri: item.getAvatar() }}
-              />
-              <Text
-                style={[Style.darkText, Style.textCapitalize]}
-                onPress={() => {
-                  setInputMessage((message) => `${message}${item.getName()}`);
-                  setShowMentationModal(false);
-                }}
-              >
-                {item.getName()}
-              </Text>
-              <Text style={[Style.lightText, Style.textCapitalize]}>
-                {item.getName()}
-              </Text>
-            </Row>
-          )}
-        />
+        <View style={Style.mentionListBox}>
+          <FlatList
+            data={groupMembers}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <Row alignItems="center" gap={10} style={Style.spaceAvatarY}>
+                <Pressable
+                  onPress={() => {
+                    setInputMessage((message) => `${message}${item.getName()}`);
+                    setShowMentationModal(false);
+                  }}
+                >
+                  <Image
+                    style={Style.avatarSize}
+                    source={{ uri: item.getAvatar() }}
+                  />
+                </Pressable>
+                <Text
+                  style={[Style.darkText, Style.textCapitalize]}
+                  onPress={() => {
+                    setInputMessage((message) => `${message}${item.getName()}`);
+                    setShowMentationModal(false);
+                  }}
+                >
+                  {item.getName()}
+                </Text>
+              </Row>
+            )}
+          />
+          <Pressable
+            onPress={() => setShowMentationModal(false)}
+            style={Style.closeMentionList}
+          >
+            <Image
+              style={Style.closeIcon}
+              source={require('../../../assets/images/icons/crossIcon.png')}
+            />
+          </Pressable>
+        </View>
       );
     };
     return (

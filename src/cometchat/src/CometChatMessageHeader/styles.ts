@@ -3,10 +3,9 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: { flexDirection: 'row', width: '100%' },
-  backButtonStyle: {
-    justifyContent: 'center',
-    paddingLeft: 15,
-    paddingRight: 6,
+  backArrow: {
+    width: 24,
+    height: 24,
   },
   backButtonIconStyle: {
     height: 25,
