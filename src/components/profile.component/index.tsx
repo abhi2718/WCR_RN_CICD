@@ -397,11 +397,8 @@ export const ProfileModal = (props: profileProps) => {
                           </Pressable>
                         )}
                       </Row>
-
                       <Spacer position="top" size={20} />
-                      {/* Block report section is commented for now */}
-
-                      {/* <View style={cardStyles.blockReportView}>
+                      <View style={cardStyles.blockReportView}>
                         <Pressable onPress={() => setShowBlockModal(true)}>
                           <Text style={[cardStyles.blockReportText]}>
                             Block
@@ -418,7 +415,7 @@ export const ProfileModal = (props: profileProps) => {
                             Report
                           </Text>
                         </Pressable>
-                      </View> */}
+                      </View>
                       <Spacer position="top" size={48} />
                     </View>
                     <Spacer position="bottom" size={60} />
