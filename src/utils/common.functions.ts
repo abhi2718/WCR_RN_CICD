@@ -4,6 +4,7 @@ import { preferNotToSay } from './constanst';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../navigation';
 import { User } from '../types/screen.type/profile.type';
+import { Measurement } from '../types/commonFunction.type';
 
 export const calculateDateLessThan18YearsAgo = (inputDate: Date): Date => {
   const eighteenYearsAgo = new Date(inputDate);
@@ -186,3 +187,52 @@ export const createNotifications = (
       };
   }
 };
+export function parseMeasurement(measurementString: string): Measurement | null {
+  const regex = /^(\d+)\'(\d+)\"$/;
+  const match = measurementString.match(regex);
+  if (match) {
+    const feet = parseInt(match[1], 10);
+    const inch = Math.floor(parseInt(match[2], 10));
+    return { feet, inch };
+  } else {
+    return null;
+  }
+}
+
+export function convertCmToFeetAndInches(cm: number): Measurement {
+  const inches = cm / 2.54;
+  const feet = Math.floor(inches / 12); 
+  const remainingInches = Math.floor(inches % 12);
+
+  return {
+    feet: feet,
+    inch: remainingInches,
+  };
+}
+
+export function formatNumberWithSingleQuote(num: number): string {
+  if (Number.isInteger(num)) {
+      // If the number is an integer, return it as is
+      return num.toString();
+  } else {
+      // If the number has a decimal point, format it with a single quote
+      const parts = num.toString().split('.');
+      const integerPart = parts[0];
+      const decimalPart = parts[1];
+
+      return `${integerPart}'${decimalPart}"`;
+  }
+}
+
+export function feetAndInchesToCm(feet: number, inches: number): string {
+  // 1 foot = 30.48 cm
+  // 1 inch = 2.54 cm
+
+  const feetInCm = feet * 30.48;
+  const inchesInCm = inches * 2.54;
+
+  // Total length in centimeters
+  const totalCm = feetInCm + inchesInCm;
+  return Math.floor(totalCm).toString();
+}
+

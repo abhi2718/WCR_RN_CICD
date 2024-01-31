@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import {
   View,
   Text,
@@ -24,7 +24,12 @@ import {
   feetValues,
   options,
 } from '../../../../../../utils/constanst';
-export const HeightModal = (props) => {
+interface HeightModalProps {
+  showHeightModal: boolean;
+  setShowHeightModal: Dispatch<SetStateAction<boolean>>;
+  setheight: Dispatch<SetStateAction<Measurement>>;
+}
+export const HeightModal = (props:HeightModalProps) => {
   const { showHeightModal, setShowHeightModal, setheight } = props;
   const { user } = useSelector((state: any) => state.userState);
   const savedHeight: Measurement = user.height;
@@ -53,17 +58,12 @@ export const HeightModal = (props) => {
       setheight(height);
     }
   };
-  // const handleFormatChange = (value: string) => {
-  //   setheightFormat(value);
-  // };
   function parseMeasurement(measurementString: string): Measurement | null {
     const regex = /^(\d+)\'(\d+)\"$/;
     const match = measurementString.match(regex);
-
     if (match) {
       const feet = parseInt(match[1], 10);
       const inch = Math.floor(parseInt(match[2], 10));
-
       return { feet, inch };
     } else {
       return null;
@@ -71,10 +71,7 @@ export const HeightModal = (props) => {
   }
 
   function convertCmToFeetAndInches(cm: number): Measurement {
-    // 1 inch is approximately 2.54 cm
     const inches = cm / 2.54;
-
-    // 1 foot is 12 inches
     const feet = Math.floor(inches / 12);
     const remainingInches = Math.floor(inches % 12);
 
@@ -88,7 +85,7 @@ export const HeightModal = (props) => {
   };
   return (
     <Modal visible={showHeightModal}>
-     <SafeAreaView style={HeightStyle.flex1}>
+      <SafeAreaView style={HeightStyle.flex1}>
         <Column justifyContent="space-between" style={HeightStyle.flex1}>
           <View style={HeightStyle.heightHeader}>
             <Text style={HeightStyle.heightHeaderTitle}>Height</Text>
@@ -99,7 +96,7 @@ export const HeightModal = (props) => {
               isShowSelectBackground={false}
               selectTextColor={colors.ui.black}
               style={HeightStyle.picker}
-              isShowSelectLine={false} // Default is true
+              isShowSelectLine={false}
               pickerData={heightFormat === 'feet' ? feetValues : cmValues}
               selectedValue={currentHeight}
               onValueChange={handleValueChange}
@@ -124,7 +121,7 @@ export const HeightModal = (props) => {
             <PrimaryButton
               title="Close"
               onPress={() => {
-                setheightFormat("feet");
+                setheightFormat('feet');
                 setShowHeightModal(false);
               }}
             />
