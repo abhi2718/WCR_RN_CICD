@@ -18,6 +18,7 @@ import {
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 import { useViewModal } from './useViewModal';
 import { searchStyle } from './searchStyle';
+import { calculateAge } from '../../../../../../../utils/common.functions';
 
 export const SearchModal = (props: SearchModalProps) => {
   const {
@@ -105,7 +106,7 @@ export const SearchModal = (props: SearchModalProps) => {
                             <Text style={searchStyle.ctiy}>
                               {user.designation.title}
                             </Text>
-                            <Text style={searchStyle.ctiy}>, {user.city}</Text>
+                            <Text style={searchStyle.ctiy}>, {user.city},{calculateAge(user.dob)}</Text>
                           </Row>
                         </Column>
                       </Row>

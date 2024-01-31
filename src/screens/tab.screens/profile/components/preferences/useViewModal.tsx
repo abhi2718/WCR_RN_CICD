@@ -196,7 +196,7 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
     {
-      title: 'Covid Vaccine Status',
+      title: 'Covid',
       option: covidVaccineStatusList,
       initValue: 'covidVaccineStatus',
     },
