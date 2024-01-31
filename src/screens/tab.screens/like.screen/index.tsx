@@ -45,6 +45,7 @@ export const LikeScreen = () => {
         <View style={styles.headerViewStyle}>
           <HeaderDeck count={count} goToNotification={goToNotification} />
         </View>
+        <Spacer position="top" size={10} />
         {isNoEvent > 0 ? (
           <>
             <ScrollView style={styles.flexContainer}>
@@ -83,6 +84,7 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Match</Text>
+                    <Spacer position="top" size={15} />
                     <View style={[styles.noDataList, styles.noMatch]}>
                       <Image
                         style={styles.noDataImg}
@@ -131,6 +133,7 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Likes Received</Text>
+                    <Spacer position="top" size={15} />
                     <View style={[styles.noDataList]}>
                       <Image
                         style={styles.noLikes}
@@ -182,6 +185,7 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Liked</Text>
+                    <Spacer position="top" size={15} />
                     <View style={[styles.noDataList]}>
                       <Image
                         style={styles.noLikes}
@@ -238,6 +242,7 @@ export const LikeScreen = () => {
                 ) : (
                   <View>
                     <Text style={styles.matchHeading}>Saved</Text>
+                    <Spacer position="top" size={15} />
                     <View style={[styles.noDataList]}>
                       <Image
                         style={styles.noLikes}

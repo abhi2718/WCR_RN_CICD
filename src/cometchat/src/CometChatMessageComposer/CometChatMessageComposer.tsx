@@ -1304,9 +1304,9 @@ export const CometChatMessageComposer = React.forwardRef(
               >
                 {item.getName()}
               </Text>
-              <Text style={[Style.lightText, Style.textCapitalize]}>
+              {/* <Text style={[Style.lightText, Style.textCapitalize]}>
                 {item.getName()}
-              </Text>
+              </Text> */}
             </Row>
           )}
         />

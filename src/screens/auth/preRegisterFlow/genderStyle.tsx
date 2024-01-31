@@ -46,7 +46,6 @@ export const genderStyle = StyleSheet.create({
     maxWidth: '100%',
   },
   btnText: {
-    marginLeft: sizes[1],
     fontSize: sizes[3],
     fontWeight: fontWeights.medium,
     color: colors.ui.text,

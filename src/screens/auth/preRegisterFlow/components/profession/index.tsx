@@ -42,7 +42,7 @@ const Profession = (props: ScreenParams) => {
                   labelField="label"
                   valueField="value"
                   placeholder="Select degree category"
-                  searchPlaceholder="Search degree category"
+                  searchPlaceholder="Search"
                   value={professionForm.userDegree}
                   onChange={(item: any) => {
                     changePrimaryDegreeOption(item.value);
@@ -55,11 +55,11 @@ const Profession = (props: ScreenParams) => {
                 <SearchableDropdownInput
                   data={primaryDegreeOption}
                   onFocus={() => {}}
-                  maxHeight={200}
+                  maxHeight={500}
                   labelField="label"
                   valueField="value"
                   placeholder={professionForm.primaryDegree}
-                  searchPlaceholder="Search degree type"
+                  searchPlaceholder="Search"
                   value={professionForm.primaryDegree}
                   placeholderStyle={{
                     color: 'black',
