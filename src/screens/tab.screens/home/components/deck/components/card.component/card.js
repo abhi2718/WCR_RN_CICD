@@ -275,7 +275,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                           <Text style={cardStyles.aboutHeading}>
                             Interests & Hobbies
                           </Text>
-                          <Spacer position="top" size={15} />
+                          <Spacer position="top" size={12} />
                           <Row
                             gap={10}
                             alignItems="center"

@@ -40,14 +40,13 @@ export const useViewModal = (props: profileProps) => {
         { text: 'OK', onPress: () => console.log('OK Pressed') },
         // Add more buttons if needed
       ],
-      { cancelable: false }
+      { cancelable: false },
     );
   };
   const handleShare = () => {
     try {
       const shareOptions = {
-        message: `White Coat Romance profile share
-            Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you `,
+        message: `Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you `,
         url: 'https://staging.whitecoatromance.com/assets/images/e-wcr.png',
       };
       Share.open(shareOptions);
@@ -186,6 +185,6 @@ export const useViewModal = (props: profileProps) => {
     handleReport,
     showBlockModal,
     setShowBlockModal,
-    showAlert
+    showAlert,
   };
 };

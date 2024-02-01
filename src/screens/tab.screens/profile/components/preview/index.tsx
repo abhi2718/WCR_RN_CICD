@@ -43,7 +43,7 @@ export const PreviewScreen = () => {
                       <Text style={styles.name}>
                         {user.profile.displayName ?? user.profile.name.first}
                         {user.profile.genderPronoun !== 'Prefer not to say' &&
-                          `, (${user.profile.genderPronoun})`}
+                          ` (${user.profile.genderPronoun})`}
                         , {user.age}
                       </Text>
                       <Image

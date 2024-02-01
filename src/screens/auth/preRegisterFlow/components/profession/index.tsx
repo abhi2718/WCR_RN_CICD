@@ -40,6 +40,7 @@ const Profession = (props: ScreenParams) => {
                   data={userDegree}
                   onFocus={() => setIsFocus(true)}
                   labelField="label"
+                  maxHeight={500}
                   valueField="value"
                   placeholder="Select degree category"
                   searchPlaceholder="Search"

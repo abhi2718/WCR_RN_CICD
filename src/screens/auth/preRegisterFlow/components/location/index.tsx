@@ -56,7 +56,7 @@ const LocationScreen = (props: ScreenParams) => {
                   onFocus={() => setIsFocus(true)}
                   labelField="label"
                   valueField="value"
-                  placeholder="State/territory"
+                  placeholder="State/Territory"
                   value={locationForm.state}
                   onChange={(text: any) =>
                     handleInputChange('state', text.value)

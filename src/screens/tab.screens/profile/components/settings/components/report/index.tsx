@@ -33,7 +33,9 @@ export const ReportScreen = (props: any) => {
           <View>
             <HeaderBar isLogo={false} isText={true} text="Report User" />
             <Spacer position="top" size={20}>
-              <Text style={styles.text}>Subject</Text>
+              <Text style={styles.text}>
+                What is your reason for reporting?
+              </Text>
             </Spacer>
             <DropdownInput
               data={reasonOfReport}
@@ -44,7 +46,7 @@ export const ReportScreen = (props: any) => {
               onChange={handleSubject}
             />
             <Spacer position="top" size={20}>
-              <Text style={styles.text}>Subject</Text>
+              <Text style={styles.text}>Reason in detail (optional)</Text>
             </Spacer>
             <Spacer position="top" size={20}>
               <TextInput
@@ -56,7 +58,7 @@ export const ReportScreen = (props: any) => {
                 textAlignVertical="top"
                 returnKeyType="done"
                 placeholderTextColor={colors.ui.placeholder}
-                onSubmitEditing={() => { }}
+                onSubmitEditing={() => {}}
                 blurOnSubmit={true}
               />
             </Spacer>

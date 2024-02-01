@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { LogBox, View, StyleSheet } from 'react-native';
+import { LogBox, View, StyleSheet, Text, TextInput } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { ThemeProvider } from 'styled-components/native';
 import CombinedProviders from './src/contexts';
@@ -18,6 +18,13 @@ LogBox.ignoreLogs([
 ]);
 
 export default function App() {
+  useEffect(() => {
+    if (Text.defaultProps == null) Text.defaultProps = {};
+    Text.defaultProps.allowFontScaling = false;
+    if (TextInput.defaultProps == null) TextInput.defaultProps = {};
+    TextInput.defaultProps.allowFontScaling = false;
+  }, []);
+
   return (
     <StripeProvider
       publishableKey={
