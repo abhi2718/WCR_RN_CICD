@@ -16,15 +16,12 @@ import {
   Column,
   Row,
   Spacer,
-  dimensions,
 } from '../../../../../components/tools';
 import AddProfilePicScreen from '../../../../auth/preRegisterFlow/components/AddProfilePic';
-import MultiSlider from '../preferences/components/MultiSlider';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { formatNumber } from '../../../../../utils/common.functions';
 import { HeightModal } from './components/heightModal';
 
 export const EditProfile = () => {
@@ -81,10 +78,7 @@ export const EditProfile = () => {
       </View>
       <ScrollView>
         <Text style={styles.headingText}>Photos</Text>
-        <AddProfilePicScreen
-          showHeader={false}
-          setAllPics={setAllPics}
-        />
+        <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
           <Text style={styles.headingText}>About Me</Text>
           <Column>

@@ -20,6 +20,7 @@ import { ImageType } from '../../base';
 import { AvatarStyleInterface } from '../CometChatAvatar/AvatarStyle';
 import { CometChatOptions } from '../../modals';
 import { CometChatContextType } from '../../base/Types';
+import { Row } from '../../../../../components/tools';
 
 /**
  *
@@ -47,6 +48,7 @@ export interface CometChatListItemInterface {
   tailViewContainerStyle?: StyleProp<ViewStyle>;
   bodyViewContainerStyle?: StyleProp<ViewStyle>;
   unreadCount: any;
+  backArrow?: React.ReactNode;
 }
 export const CometChatListItem = (props: CometChatListItemInterface) => {
   //state for translateX
@@ -73,6 +75,7 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
     onPress,
     onLongPress,
     unreadCount,
+    backArrow,
   } = props;
 
   const defaultlistItemStyleProps = new ListItemStyle({
@@ -301,11 +304,12 @@ export const CometChatListItem = (props: CometChatListItemInterface) => {
             borderBottomColor: 'rgba(35, 35, 35, 0.20)',
             borderStyle: listItemStyle?.border?.borderStyle ?? 'solid',
             height: listItemStyle?.height ?? 72,
-            paddingLeft: 16,
-            paddingRight: 16,
+            paddingLeft: 8,
+            paddingRight: 8,
           },
         ]}
       >
+        <View style={Style.pr12}>{backArrow}</View>
         {Boolean(avatarURL || avatarName) && <AvatarView />}
         <View
           style={[
