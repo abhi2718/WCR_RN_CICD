@@ -17,6 +17,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
 import PaymentScreen from '../../subscribe/payment';
 import { HeaderDeck } from '../../../components/header';
+import useStripeViewModal from '../../subscribe';
 
 export const ProfileScreen = ({}) => {
   const {
@@ -30,6 +31,14 @@ export const ProfileScreen = ({}) => {
     _logOut,
     loading,
   } = useViewModal();
+
+  if (1) {
+    return (
+      <View style={{ flex: 1, marginTop: 200 }}>
+        <PaymentScreen />
+      </View>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <HeaderDeck isSearchIcon={false} isPrefrence={false} />

@@ -9,7 +9,9 @@ export class StripeRepository {
     return await this.apiService.getGetApiResponse(url);
   }
   async getIntent(payload:any): Promise<any> {
+    // const url = `${AppUrl.stripeEndPoint}`;
+    // return await this.apiService.getPostApiResponse(url,payload);
     const url = `${AppUrl.stripeEndPoint}`;
-    return await this.apiService.getPostApiResponse(url,payload);
+    return await this.apiService.getGetApiResponse(url);
   }
 }
