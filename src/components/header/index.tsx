@@ -165,9 +165,7 @@ interface HeaderDeckProps {
   toggleSearchModal?: any;
   goToNotification?: any;
   isPrefrence?: boolean;
-  isSearchIcon?: boolean;
-  toggleSearchInput?: any;
-  handleUnDoFeature: () => void;
+  handleUnDoFeature?: () => void;
 }
 
 export const HeaderDeck = (props: HeaderDeckProps) => {
@@ -176,8 +174,6 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
     toggleSearchModal,
     goToNotification,
     isPrefrence = true,
-    isSearchIcon = false,
-    toggleSearchInput,
     handleUnDoFeature,
   } = props;
   const { navigate } = useNavigation();
@@ -205,7 +201,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
               source={require('../../assets/images/icons/notificationIcon.png')}
             />
           </Pressable>
-          {toggleSearchModal && (
+          {handleUnDoFeature && (
             <Pressable onPress={handleUnDoFeature}>
               <Image
                 style={headerDeckStyle.undoIcon}
@@ -215,7 +211,12 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
           )}
         </Row>
         <Logo width={45} height={45} />
-        <Row alignItems="center" gap={24}>
+        <Row
+          alignItems="center"
+          justifyContent="flex-end"
+          gap={24}
+          style={headerDeckStyle.row}
+        >
           {toggleSearchModal && (
             <Pressable onPress={toggleSearchModal}>
               <Image
@@ -231,17 +232,6 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
                 source={require('../../assets/images/Filter.png')}
               />
             </Pressable>
-          )}
-          {isSearchIcon && (
-            <Pressable onPress={toggleSearchInput}>
-              <Image
-                style={headerDeckStyle.searchIcon}
-                source={require('../../assets/images/Magnifier.png')}
-              />
-            </Pressable>
-          )}
-          {!isPrefrence && !isSearchIcon && (
-            <View style={headerDeckStyle.searchIcon} />
           )}
         </Row>
       </Row>
@@ -282,7 +272,7 @@ export const headerDeckStyle = StyleSheet.create({
     fontFamily: fonts.body,
   },
   row: {
-    width: sizes[10],
+    width: '35%',
   },
 });
 
