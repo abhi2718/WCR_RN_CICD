@@ -1,5 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import Share from 'react-native-share';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -137,7 +143,7 @@ export const useViewModal = (props: profileProps) => {
         },
       };
       setLoading(true);
-      await homeDeckRepository.blockUser(payLoad);
+      let data = await homeDeckRepository.blockUser(payLoad);
       setLoading(false);
       toggleModal();
     } catch (error) {}
@@ -160,11 +166,13 @@ export const useViewModal = (props: profileProps) => {
       });
     }
   };
-  const handleReport = () => {
-    setShowBlockModal(false);
-    // Need to handle this functionality
-    // navigation.navigate(ROUTES.Report, { userId: item._id, name: first });
-  };
+  const handleReport = useCallback(() => {
+    toggleModal();
+    navigation.navigate(ROUTES.Report, {
+      userId: user?._id,
+      name: user?.first,
+    });
+  },[user]);
   return {
     showModal,
     toggleModal,

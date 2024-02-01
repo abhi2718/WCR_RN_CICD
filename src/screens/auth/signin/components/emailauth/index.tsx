@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -6,8 +6,14 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Image,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
+  SafeAreaView,
+  Pressable,
 } from 'react-native';
 import {
+  Column,
   dimensions,
   InputBox,
   ScreenContainer,
@@ -35,47 +41,56 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
     loading,
     handleInputChange,
   } = useEmailAuthViewModal(props);
+
   return (
-    <ScreenContainer>
-      <View>
-        <HeaderBar />
-      </View>
-      <ScrollView
-        contentContainerStyle={styles.scrollDiv}
-        keyboardShouldPersistTaps="always"
+    <SafeAreaView style={styles.dFlex}>
+      <KeyboardAvoidingView
+        enabled
+        behavior={isAndroid ? 'height' : 'padding'}
+        style={styles.vFullHeight}
       >
-        <KeyboardAvoidingView
-          enabled
-          behavior={isAndroid ? 'height' : 'padding'}
-          style={styles.scrollDiv}
+        <ScrollView
+          contentContainerStyle={styles.vFullHeight}
+          keyboardShouldPersistTaps="handled"
         >
-          <Image
-            style={styles.otpImg}
-            resizeMode="contain"
-            source={require('../../../../../assets/images/otpScreenImg.png')}
-          />
-          <Spacer position="top" size={32} />
-          <View style={styles.viewBox}>
-            <Text style={styles.otpText}>
-              Enter the code we have shared to your email
-            </Text>
-            <Text style={styles.otpEmail}>“{email}”</Text>
-            <View>
-              <OtpCodeInput
-                onChangeOtp={handleInputChange}
-                otpValue={otpValue}
-                setOtpValue={setOtpValue}
+          <Column justifyContent="space-between" style={styles.colWrapper}>
+            <HeaderBar />
+            <Column
+              justifyContent="center"
+              alignItems="center"
+              style={styles.vFullHeight}
+            >
+              <Image
+                style={styles.otpImg}
+                resizeMode="contain"
+                source={require('../../../../../assets/images/otpScreenImg.png')}
               />
-            </View>
-          </View>
-          {!email && (
-            <View style={styles.viewBox}>
-              <Text style={styles.otpText}>Enter your email </Text>
-              <KeyboardAvoidingView
-                enabled
-                behavior={isAndroid ? 'height' : 'padding'}
-              >
+            </Column>
+            <View style={styles.vMargin16}>
+              <View style={styles.viewBox}>
+                <View style={styles.vMargin16}>
+                  <Text style={styles.otpText}>
+                    Please check your spam mail
+                  </Text>
+                  <Text style={styles.otpText}>
+                    if you do not see the email in your inbox.
+                  </Text>
+                </View>
+                <Text style={styles.otpText}>
+                  Enter the OTP code we have shared to your email
+                </Text>
+                <Text style={styles.otpEmail}>{email}</Text>
                 <View>
+                  <OtpCodeInput
+                    onChangeOtp={handleInputChange}
+                    otpValue={otpValue}
+                    setOtpValue={setOtpValue}
+                  />
+                </View>
+              </View>
+              {!email && (
+                <View style={styles.viewBox}>
+                  <Text style={styles.otpText}>Enter your email </Text>
                   <InputBox
                     style={styles.inputBox}
                     placeholder={'Enter email'}
@@ -83,14 +98,9 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
                     onChangeText={(value: string) => setEmailInput(value)}
                   />
                 </View>
-              </KeyboardAvoidingView>
+              )}
             </View>
-          )}
-          <KeyboardAvoidingView
-            enabled
-            behavior={isAndroid ? 'height' : 'padding'}
-          >
-            <Spacer position="top" size={32}>
+            <Column gap={20}>
               <View style={{ width: dimensions.width - 32 }}>
                 <PrimaryButton
                   title={'Continue'}
@@ -98,18 +108,13 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
                   isLoading={loading}
                 />
               </View>
-            </Spacer>
-          </KeyboardAvoidingView>
-          <KeyboardAvoidingView
-            enabled
-            behavior={isAndroid ? 'height' : 'padding'}
-          >
-            <TouchableOpacity onPress={resendOtp} style={{ marginTop: 20 }}>
-              <Text style={styles.otpText}>Resend code</Text>
-            </TouchableOpacity>
-          </KeyboardAvoidingView>
-        </KeyboardAvoidingView>
-      </ScrollView>
-    </ScreenContainer>
+              <TouchableOpacity onPress={resendOtp}>
+                <Text style={styles.otpText}>Resend code</Text>
+              </TouchableOpacity>
+            </Column>
+          </Column>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }

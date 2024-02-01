@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
+    justifyContent: 'center',
     resizeMode: 'cover', // or 'stretch' or 'contain'
   },
   container: {
