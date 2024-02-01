@@ -100,13 +100,13 @@ export const SearchModal = (props: SearchModalProps) => {
                         />
                         <Column gap={5}>
                           <Text style={searchStyle.firstName}>
-                            {user.first}
+                            {user.first}, {calculateAge(user.dob)}
                           </Text>
                           <Row>
                             <Text style={searchStyle.ctiy}>
                               {user.designation.title}
                             </Text>
-                            <Text style={searchStyle.ctiy}>, {user.city},{calculateAge(user.dob)}</Text>
+                            <Text style={searchStyle.ctiy}>, {user.city}</Text>
                           </Row>
                         </Column>
                       </Row>

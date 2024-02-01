@@ -103,11 +103,13 @@ export const useViewModal = () => {
     zipcode: user?.address?.state ? user?.address?.zipcode : '',
     showSexualOrientation: user?.profile?.showSexualPreference
       ? user?.profile?.showSexualPreference
-      : false,
+      : true,
     sexualPreference: user?.profile.sexualPreference
       ? user?.profile.sexualPreference
       : '',
-    showGender: user?.profile.showGender ? user?.profile.showGender : false,
+    showGender: user?.profile.showGender ? user?.profile.showGender : true,
+    showGenderPronoun: user?.profile?.showGenderPronoun ??  true,
+    genderProunoun : user?.profile.genderPronoun ? user?.profile.genderPronoun : '',
   });
   const [_primaryDegree, setPrimaryDegree] = useState(
     generateList([], 'degreeType'),
@@ -552,6 +554,7 @@ export const useViewModal = () => {
             genderPronoun: answer.genderPronoun,
             sexualPreference: answer.sexualPreference,
             showSexualPreference: userProfile.showSexualOrientation,
+            showGenderPronoun: userProfile.showGenderPronoun,
             showGender: userProfile.showGender,
             phone: userProfile.phone,
           },

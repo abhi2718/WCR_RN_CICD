@@ -99,7 +99,7 @@ export const EditProfile = () => {
               returnKeyLabel="go"
               placeholderTextColor={colors.ui.placeholder}
             />
-            <Text style={styles.charCount}>{letterCount}</Text>
+            <Text style={styles.charCount}>{letterCount}/500</Text>
           </Column>
 
           <Spacer position="top" size={10}>
@@ -226,7 +226,7 @@ export const EditProfile = () => {
                     <Text style={styles.fieldName}>Height</Text>
                     <Spacer position="top" size={10}>
                       <Text style={styles.fieldName}>
-                        {height?.feet}'{height?.inch}
+                        {height?.feet}'{height?.inch} ft
                       </Text>
                     </Spacer>
                   </Column>
@@ -264,7 +264,7 @@ export const EditProfile = () => {
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Gender Pronoun</Text>
               <View style={styles.fieldValueContainer}>
-                <Text style={styles.fieldValue}>{userProfile.gender}</Text>
+                <Text style={styles.fieldValue}>{userProfile.genderProunoun}</Text>
               </View>
               <Spacer position="top" size={10}>
                 <CustomCheckBox
@@ -272,11 +272,11 @@ export const EditProfile = () => {
                     setUserProfile((oldstate) => {
                       return {
                         ...oldstate,
-                        showGender: !userProfile.showGender,
+                        showGenderPronoun: !userProfile.showGenderPronoun,
                       };
                     });
                   }}
-                  isChecked={userProfile.showGender}
+                  isChecked={userProfile.showGenderPronoun}
                   label="Show Gender Pronoun on profile"
                 />
               </Spacer>
@@ -299,7 +299,7 @@ export const EditProfile = () => {
                       };
                     });
                   }}
-                  isChecked={userProfile.showGender}
+                  isChecked={userProfile.showSexualOrientation}
                   label="Show Sexual Orientation on profile"
                 />
               </Spacer>
@@ -308,27 +308,7 @@ export const EditProfile = () => {
 
           <Column>
             {optionsList.map((item, index) => {
-              if (index === 4) {
-                return (
-                  <Spacer key={index} position="top" size={20}>
-                    {/* <Row justifyContent="space-between">
-                      <Text style={styles.fieldName}>Height</Text>
-                      <Text style={styles.fieldName}>
-                        {formatNumber(heightRange[0])}
-                      </Text>
-                    </Row>
-                    <Column justifyContent="center" alignItems="center">
-                      <MultiSlider
-                        values={heightRange}
-                        min={4}
-                        max={7}
-                        step={0.1}
-                        onValuesChange={handleHeightSliderChange}
-                      />
-                    </Column> */}
-                  </Spacer>
-                );
-              }
+    
               if (item.title === 'Ethnicity') {
                 return (
                   <Spacer key={index} position="top" size={10}>
@@ -435,7 +415,7 @@ export const EditProfile = () => {
                 );
               }
               return (
-                <View>
+                <View key={index}>
                   <Text style={styles.headingText}>{item?.title}</Text>
                   <Column style={styles.ph16}>
                     {item.title == 'Location Details' && (
