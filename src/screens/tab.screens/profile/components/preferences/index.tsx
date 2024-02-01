@@ -9,18 +9,9 @@ import MultiSlider from './components/MultiSlider';
 import { HeaderBar } from '../../../../../components/header';
 import { formatNumber } from '../../../../../utils/common.functions';
 import { PreferenceyModal } from '../../../../../components/preferenceModal';
+import { HeightPrefrence } from './components/heightPrefrence';
 export const PreferencesScreen = () => {
-  const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
-    useState(false);
-  const closeModal = () => {
-    setVerificvationInfoModalVisible(false);
-  };
-  const openModal = () => {
-    setVerificvationInfoModalVisible(true);
-  };
-
   const {
-    goBack,
     answer,
     handleInputChange,
     optionsList,
@@ -30,9 +21,14 @@ export const PreferencesScreen = () => {
     handleDistanceSliderChange,
     ageRange,
     handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     submitLoading,
+    showHeightModal,
+    handleHeightModal,
+    openModal,
+    closeModal,
+    isVerificationInfoModalVisible,
+    heightRange,
+    setHeightRange,
   } = useViewModal();
 
   if (loading) {
@@ -86,7 +82,7 @@ export const PreferencesScreen = () => {
                 <View key={index} style={styles.multiSelector}>
                   <Row alignItems="center" justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Distance preference
+                      Distance Preference
                     </Text>
                     {distanceRange[0] === 600 ? (
                       <Text style={styles.silderSubText}>No Max</Text>
@@ -121,7 +117,7 @@ export const PreferencesScreen = () => {
                 <View key={index} style={styles.multiSelector}>
                   <Row justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Age preference
+                      Age Preference
                     </Text>
                     <Text style={styles.silderSubText}>
                       {ageRange[0]} - {ageRange[1]}
@@ -142,24 +138,23 @@ export const PreferencesScreen = () => {
             if (index === 4) {
               return (
                 <View key={index} style={styles.multiSelector}>
+                  <Pressable onPress={handleHeightModal}>
                   <Row justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Height preference
+                      Height Preference
                     </Text>
                     <Text style={styles.silderSubText}>
                       {formatNumber(heightRange[0])} -{' '}
                       {formatNumber(heightRange[1])}
                     </Text>
                   </Row>
-                  <Column justifyContent="center" alignItems="center">
-                    <MultiSlider
-                      values={heightRange}
-                      min={3}
-                      max={7}
-                      step={0.1}
-                      onValuesChange={handleHeightSliderChange}
-                    />
-                  </Column>
+                 </Pressable>
+                  <HeightPrefrence
+                    visible={showHeightModal}
+                    handleHeightModal={handleHeightModal}
+                    heightRange={heightRange}
+                    setHeightRange={setHeightRange}
+                  />
                 </View>
               );
             }

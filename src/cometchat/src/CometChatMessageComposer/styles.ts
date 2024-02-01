@@ -51,6 +51,15 @@ export const Style = StyleSheet.create({
     color: theme.colors.ui.textAccent,
     fontFamily: fonts.body,
   },
+  closeMentionList: {
+    position: 'absolute',
+    right: 15,
+    top: 15,
+  },
+  closeIcon: {
+    width: 10,
+    height: 10,
+  },
   mentionListBox: {
     backgroundColor: theme.colors.ui.white,
     padding: 12,

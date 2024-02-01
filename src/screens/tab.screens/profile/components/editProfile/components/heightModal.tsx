@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import {
   View,
   Text,
@@ -8,24 +8,28 @@ import {
   Pressable,
 } from 'react-native';
 import { Picker } from 'react-native-wheel-pick';
-import { useSelector } from 'react-redux';
-import { colors } from '../../../../../../infrastructure/theme/colors';
-import {
-  cmValues,
-  feetValues,
-  options,
-} from '../../../../../../utils/constanst';
-import { HeightStyle } from '../../../../../auth/preRegisterFlow/components/height/heightStyle';
-import { Column } from '../../../../../../components/tools';
 import SwitchSelector from 'react-native-switch-selector';
+import { useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../../../../components/button';
-
+import { Column } from '../../../../../../components/tools';
+import { colors } from '../../../../../../infrastructure/theme/colors';
+import { HeightStyle } from './heightStyle';
 interface Measurement {
   feet: number;
   inch: number;
   heightInCm?: number;
 }
-export const HeightModal = (props) => {
+import {
+  cmValues,
+  feetValues,
+  options,
+} from '../../../../../../utils/constanst';
+interface HeightModalProps {
+  showHeightModal: boolean;
+  setShowHeightModal: Dispatch<SetStateAction<boolean>>;
+  setheight: Dispatch<SetStateAction<Measurement>>;
+}
+export const HeightModal = (props: HeightModalProps) => {
   const { showHeightModal, setShowHeightModal, setheight } = props;
   const { user } = useSelector((state: any) => state.userState);
   const savedHeight: Measurement = user.height;
@@ -51,16 +55,15 @@ export const HeightModal = (props) => {
     } else {
       const height = convertCmToFeetAndInches(Number(value));
       setheightValue(height!);
+      setheight(height);
     }
   };
   function parseMeasurement(measurementString: string): Measurement | null {
     const regex = /^(\d+)\'(\d+)\"$/;
     const match = measurementString.match(regex);
-
     if (match) {
       const feet = parseInt(match[1], 10);
       const inch = Math.floor(parseInt(match[2], 10));
-
       return { feet, inch };
     } else {
       return null;
@@ -68,10 +71,7 @@ export const HeightModal = (props) => {
   }
 
   function convertCmToFeetAndInches(cm: number): Measurement {
-    // 1 inch is approximately 2.54 cm
     const inches = cm / 2.54;
-
-    // 1 foot is 12 inches
     const feet = Math.floor(inches / 12);
     const remainingInches = Math.floor(inches % 12);
 
@@ -80,7 +80,9 @@ export const HeightModal = (props) => {
       inch: remainingInches,
     };
   }
-
+  const handleFormatChange = (value: string) => {
+    setheightFormat(value);
+  };
   return (
     <Modal visible={showHeightModal}>
       <SafeAreaView style={HeightStyle.flex1}>
@@ -94,7 +96,7 @@ export const HeightModal = (props) => {
               isShowSelectBackground={false}
               selectTextColor={colors.ui.black}
               style={HeightStyle.picker}
-              isShowSelectLine={false} // Default is true
+              isShowSelectLine={false}
               pickerData={heightFormat === 'feet' ? feetValues : cmValues}
               selectedValue={currentHeight}
               onValueChange={handleValueChange}
@@ -113,13 +115,15 @@ export const HeightModal = (props) => {
                 bold={true}
                 options={options}
                 initial={0}
-                onPress={(value: string) => handleValueChange(value)}
+                onPress={(value: string) => handleFormatChange(value)}
               />
             </View>
-
             <PrimaryButton
               title="Close"
-              onPress={() => setShowHeightModal(false)}
+              onPress={() => {
+                setheightFormat('feet');
+                setShowHeightModal(false);
+              }}
             />
           </Column>
         </Column>

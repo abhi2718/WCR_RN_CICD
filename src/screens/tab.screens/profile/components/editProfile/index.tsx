@@ -16,15 +16,12 @@ import {
   Column,
   Row,
   Spacer,
-  dimensions,
 } from '../../../../../components/tools';
 import AddProfilePicScreen from '../../../../auth/preRegisterFlow/components/AddProfilePic';
-import MultiSlider from '../preferences/components/MultiSlider';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { formatNumber } from '../../../../../utils/common.functions';
 import { HeightModal } from './components/heightModal';
 
 export const EditProfile = () => {
@@ -83,7 +80,7 @@ export const EditProfile = () => {
         <Text style={styles.headingText}>Photos</Text>
         <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
-          <Text style={styles.headingText}>About Yourself</Text>
+          <Text style={styles.headingText}>About Me</Text>
           <Column>
             <TextInput
               placeholder="About Me"
@@ -94,7 +91,7 @@ export const EditProfile = () => {
               textAlignVertical="top"
               style={styles.aboutInput}
               multiline={true}
-              maxLength={150}
+              maxLength={500}
               numberOfLines={10}
               returnKeyLabel="go"
               placeholderTextColor={colors.ui.placeholder}
@@ -200,14 +197,12 @@ export const EditProfile = () => {
                 <Text style={styles.fieldValue}>{userProfile.gender}</Text>
               </View>
             </Spacer>
-
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Country</Text>
               <View style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>{user?.address?.country}</Text>
               </View>
             </Spacer>
-
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>State/Territory</Text>
               <Row
@@ -411,7 +406,7 @@ export const EditProfile = () => {
                 return (
                   <Spacer key={index} position="top" size={10}>
                     <Spacer key={index} position="top" size={10}>
-                      <Text style={styles.fieldName}>Interests/Hobbies</Text>
+                      <Text style={styles.fieldName}>Interests & Hobbies</Text>
                       <TouchableOpacity onPress={() => openModal('hobby')}>
                         <Row
                           style={[styles.selectRow, styles.fieldValueContainer]}

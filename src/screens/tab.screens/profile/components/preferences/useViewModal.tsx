@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ShowFlashMessage } from '../../../../../components/flashBar';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector} from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 import { UserProfileRepository } from '../../../../../repository/userProfile.repo';
 import { handleInputChangeType } from '../../../../../types/screen.type/profile.type';
@@ -32,7 +31,7 @@ export const useViewModal = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
-  const goBack = () => navigation.goBack();
+  const [showHeightModal,setShowHeightModal] = useState(false);
   const isPrefrenceCreated = useRef(false);
   const [answer, setAnswer] = useState({
     degreeCategory: 'No Preference',
@@ -68,8 +67,8 @@ export const useViewModal = () => {
         'No Preference',
       ];
     }
-    return list
-  }
+    return list;
+  };
   const generateList = (list: any[], type: string) => {
     return generateListWithNoPreference(list)?.map((item: any, index) => ({
       value: item,
@@ -88,11 +87,7 @@ export const useViewModal = () => {
     generateList([], 'degreeType'),
   );
   const genderList = generateList(genderArray, 'gender');
-  
-  const ethnicityList = generateList(
-    ethnicity,
-    'ethnicity',
-  );
+  const ethnicityList = generateList(ethnicity, 'ethnicity');
   const maritalStatusList = generateList(maritalStatus, 'maritalStatus');
   const relationshipLevelList = generateList(relationship, 'relationshipLevel');
   const religionList = generateList(religion, 'religion');
@@ -114,7 +109,7 @@ export const useViewModal = () => {
   const optionsList = [
     {},
     {
-      title: 'Gender of interest',
+      title: 'Gender Of Interest',
       option: genderList,
       initValue: 'gender',
     },
@@ -123,7 +118,7 @@ export const useViewModal = () => {
     {}, // height prefrence
     {},
     {
-      title: 'Degree category',
+      title: 'Degree Category',
       option: _userDegree,
       initValue: 'degreeCategory',
     },
@@ -139,12 +134,12 @@ export const useViewModal = () => {
       initValue: 'ethnicity',
     },
     {
-      title: 'Marital status',
+      title: 'Marital Status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
     {
-      title: 'Relationship level',
+      title: 'Relationship Level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
@@ -189,7 +184,7 @@ export const useViewModal = () => {
       initValue: 'kids',
     },
     {
-      title: 'Family plan',
+      title: 'Family Plan',
       option: familyPlanList,
       initValue: 'familyPlan',
     },
@@ -329,7 +324,9 @@ export const useViewModal = () => {
         const typeOfKey = typeof value;
         if (key === 'healthcareProfessionals') {
           if (
-            !preferences.healthcareProfessionals.userDegree.includes('No Preference')
+            !preferences.healthcareProfessionals.userDegree.includes(
+              'No Preference',
+            )
           ) {
             updates = {
               ...updates,
@@ -411,12 +408,6 @@ export const useViewModal = () => {
   const handleAgeSliderChange = (values: React.SetStateAction<number[]>) => {
     setAgeRange(values);
   };
-  const handleHeightSliderChange = (values: any) => {
-    const roundedArray = values.map(
-      (number: number) => Math.round(number * 10) / 10,
-    );
-    setHeightRange(roundedArray);
-  };
   useEffect(() => {
     getPrefrences();
   }, []);
@@ -427,8 +418,21 @@ export const useViewModal = () => {
       );
     }
   }, [answer.degreeCategory]);
+  const handleHeightModal = useCallback(() => {
+    setShowHeightModal(oldValue => !oldValue);
+  }, []);
+  const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
+    useState(false);
+  const closeModal = () => {
+    setVerificvationInfoModalVisible(false);
+  };
+  const openModal = () => {
+    setVerificvationInfoModalVisible(true);
+  };
   return {
-    goBack,
+    openModal,
+    closeModal,
+    isVerificationInfoModalVisible,
     answer,
     handleInputChange,
     optionsList,
@@ -438,8 +442,10 @@ export const useViewModal = () => {
     handleDistanceSliderChange,
     ageRange,
     handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     submitLoading,
+    showHeightModal,
+    handleHeightModal,
+    heightRange,
+    setHeightRange,
   };
 };

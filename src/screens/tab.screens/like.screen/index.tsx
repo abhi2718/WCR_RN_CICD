@@ -55,7 +55,6 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
-                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Match </Text>
                       <Pressable onPress={() => handleSetSeeAllState(3)}>
@@ -105,7 +104,6 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
-                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Likes Received</Text>
                       <Pressable onPress={() => handleSetSeeAllState(0)}>
@@ -156,7 +154,6 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
-                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Liked</Text>
                       <Pressable onPress={() => handleSetSeeAllState(1)}>
@@ -213,7 +210,6 @@ export const LikeScreen = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       style={styles.headerPadding}
-                      alignItems="center"
                     >
                       <Text style={styles.matchHeading}>Saved</Text>
                       <Pressable onPress={() => handleSetSeeAllState(2)}>

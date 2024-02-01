@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type OptionType = {
     _index: number;
     label: string;
@@ -138,3 +140,9 @@ export interface User {
 }
 
 
+export interface heightPrefrenceProps{
+  visible:boolean,
+  handleHeightModal:()=>void,
+  heightRange:number[],
+  setHeightRange:Dispatch<SetStateAction<number[]>>
+}

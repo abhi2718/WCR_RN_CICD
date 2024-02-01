@@ -1,10 +1,8 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components/native';
-import { NativeModules } from 'react-native';
 import {
   Platform,
   Dimensions,
-  TextInput,
   Image,
   SafeAreaView,
   View,
@@ -65,7 +63,19 @@ export const Logo = ({
     />
   );
 };
-
+export type CustomSnakeBarProps = {
+  visible: boolean;
+  message: string;
+  actionText: string;
+  actionHandler: () => void;
+};
+export const CustomSnakeBar = (props: CustomSnakeBarProps) => {
+  const { visible, message, actionText, actionHandler } = props;
+  return (
+    <View>
+    </View>
+  );
+};
 const PageLoaderContainer = styled.View`
   flex: 1;
   justify-content: center;
@@ -176,12 +186,11 @@ type spacerProos = {
   size: number;
   children?: ReactNode;
   style?: object;
- 
 };
 export const Spacer = (props: spacerProos) => {
-  const { position, size, children, style} = props;
+  const { position, size, children, style } = props;
   const computedStyle = getVariant(position, size);
-  return <SpacerView  style={[computedStyle, style]}>{children}</SpacerView>;
+  return <SpacerView style={[computedStyle, style]}>{children}</SpacerView>;
 };
 
 export const isAndroid = Platform.OS === 'android';
