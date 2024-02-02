@@ -13,6 +13,7 @@ import {
   CardField,
   confirmPayment,
   useStripe,
+  createPaymentMethod
 } from '@stripe/stripe-react-native';
 import { StripeRepository } from '../../repository/StripeRepository.repo';
 
@@ -24,31 +25,7 @@ const PaymentScreen = () => {
   const [accessToken, setAccessToken] = useState(null);
   const { initPaymentSheet, presentPaymentSheet, handleURLCallback } =
     useStripe();
-  const handleDeepLink = useCallback(
-    async (url) => {
-      if (url) {
-        console.log(url);
-        const stripeHandled = await handleURLCallback(url);
-        if (stripeHandled) {
-          // This was a Stripe URL - you can return or add extra handling here as you see fit
-        } else {
-          // This was NOT a Stripe URL – handle as you normally would
-        }
-      }
-    },
-    [handleURLCallback],
-  );
-  useEffect(() => {
-    const getUrlAsync = async () => {
-      const initialUrl = await Linking.getInitialURL();
-      handleDeepLink(initialUrl);
-    };
-    getUrlAsync();
-    const deepLinkListener = Linking.addEventListener('url', (event) => {
-      handleDeepLink(event.url);
-    });
-    return () => deepLinkListener.remove();
-  }, [handleDeepLink]);
+ 
   const fetchCardDetail = (cardDetail) => {
     if (cardDetail.complete) {
       setCardInfo(cardDetail);
@@ -64,6 +41,7 @@ const PaymentScreen = () => {
 
     try {
       const res = await stripeRepository.getIntent(apiData);
+      console.log(res.id);
       const { error: paymentSheetError } = await initPaymentSheet({
         merchantDisplayName: 'hu',
         paymentIntentClientSecret: res.clientSecret,
@@ -75,11 +53,13 @@ const PaymentScreen = () => {
         Alert.alert('Something went wrong', paymentSheetError.message);
         return;
       }
-      const { error: paymentError } = await presentPaymentSheet();
-      if (paymentError) {
-        Alert.alert(`Error code: ${paymentError.code}`, paymentError.message);
-        return;
-      }
+      // const { error: paymentError }
+      const data = await presentPaymentSheet();
+      console.log("data is --->",data);
+      // if (paymentError) {
+      //   Alert.alert(`Error code: ${paymentError.code}`, paymentError.message);
+      //   return;
+      // }
     } catch (error) {
       console.log('Error rasied during payment intent', error);
     }

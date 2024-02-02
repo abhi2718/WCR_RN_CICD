@@ -15,9 +15,9 @@ import { AlertScreen } from '../../../components/alert';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
-import PaymentScreen from '../../subscribe/payment';
+import  YourComponent from '../../subscribe/components';
 import { HeaderDeck } from '../../../components/header';
-import useStripeViewModal from '../../subscribe';
+
 
 export const ProfileScreen = ({}) => {
   const {
@@ -35,7 +35,7 @@ export const ProfileScreen = ({}) => {
   if (1) {
     return (
       <View style={{ flex: 1, marginTop: 200 }}>
-        <PaymentScreen />
+        <YourComponent />
       </View>
     );
   }
