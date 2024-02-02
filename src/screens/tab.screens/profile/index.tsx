@@ -32,13 +32,13 @@ export const ProfileScreen = ({}) => {
     loading,
   } = useViewModal();
 
-  if (1) {
-    return (
-      <View style={{ flex: 1, marginTop: 200 }}>
-        <YourComponent />
-      </View>
-    );
-  }
+  // if (1) {
+  //   return (
+  //     <View style={{ flex: 1, marginTop: 200 }}>
+  //       <YourComponent />
+  //     </View>
+  //   );
+  // }
   return (
     <SafeAreaView style={styles.container}>
       <HeaderDeck isSearchIcon={false} isPrefrence={false} />
