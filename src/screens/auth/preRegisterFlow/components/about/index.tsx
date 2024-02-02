@@ -62,7 +62,7 @@ const About = (props: ScreenParams) => {
               }}
               placeholderTextColor={colors.ui.placeholder}
             />
-            <Text style={AboutStyle.charCount}>{letterCount}</Text>
+            <Text style={AboutStyle.charCount}>{letterCount}/500</Text>
               </View>
             </ScrollView>
           </View>
