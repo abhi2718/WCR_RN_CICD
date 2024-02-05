@@ -10,6 +10,7 @@ export const config = {
   REGION: 'us',
   COMETCHAT_USERID: '6499476d12c6b5d6b1093b2a',
   COMET_CHAT_API_KEY: '571e6e5ee3f7c6447878c4b05e7ea68769e6d1a6',
+  STRIPE_KEY:'pk_test_51OLhmuILb85dzDST7I4QIzg7ySW2r2a5hXLUeLgCqw1ujyxUZbtW1PTUyx5kg0cmbB5Y2Aw8KcP91UpREG5ZCmau0073JGv0fo',
   CloudinaryUploadURL:
     'https://api.cloudinary.com/v1_1/wcr-byldd/image/upload?api_key=262427781712771',
 };
