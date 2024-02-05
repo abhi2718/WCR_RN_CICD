@@ -42,7 +42,7 @@ export const ContactUs = () => {
             />
 
             <Spacer position="top" size={20}>
-              <Text style={styles.text}>Subject</Text>
+              <Text style={styles.text}>Message</Text>
             </Spacer>
             <Spacer position="top" size={20}>
               <TextInput

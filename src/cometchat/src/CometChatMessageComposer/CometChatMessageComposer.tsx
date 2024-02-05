@@ -1286,8 +1286,9 @@ export const CometChatMessageComposer = React.forwardRef(
     }, [group]);
     const renderMentionList = () => {
       return (
-        <View style={Style.mentionListBox}>
+        <View>
           <FlatList
+            style={Style.mentionListBox}
             data={groupMembers}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
@@ -1315,7 +1316,7 @@ export const CometChatMessageComposer = React.forwardRef(
               </Row>
             )}
           />
-          <Pressable
+          {/* <Pressable
             onPress={() => setShowMentationModal(false)}
             style={Style.closeMentionList}
           >
@@ -1323,7 +1324,7 @@ export const CometChatMessageComposer = React.forwardRef(
               style={Style.closeIcon}
               source={require('../../../assets/images/icons/crossIcon.png')}
             />
-          </Pressable>
+          </Pressable> */}
         </View>
       );
     };

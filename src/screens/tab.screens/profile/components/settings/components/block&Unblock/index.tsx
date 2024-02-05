@@ -120,7 +120,7 @@ export const BlockAndUnBlock = () => {
                   onPress={() => handleUserUnBlock(user.getUid())}
                   style={styles.blockedButton}
                 >
-                  <Text style={styles.blockButtonText}>UnBlock</Text>
+                  <Text style={styles.blockButtonText}>Unblock</Text>
                 </Pressable>
               </Row>
             </View>

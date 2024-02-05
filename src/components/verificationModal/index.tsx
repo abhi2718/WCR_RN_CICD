@@ -101,7 +101,7 @@ export const IdverifyModal = (props: VerificationInfoProps) => {
               style={insModalStyle.rowOneImg}
               source={require('../../assets/images/virificationModal1.png')}
             />
-            <Spacer position="top" size={10} />
+            <Spacer position="top" size={20} />
             <Row>
               <Text style={insModalStyle.text}>2.</Text>
               <Text style={insModalStyle.text}>
@@ -150,7 +150,7 @@ export const IdverifyStudentModal = (props: VerificationInfoProps) => {
               style={insModalStyle.rowOneImg}
               source={require('../../assets/images/virificationModal3.png')}
             />
-            <Spacer position="top" size={10} />
+            <Spacer position="top" size={20} />
             <Row>
               <Text style={insModalStyle.text}>2.</Text>
               <Text style={insModalStyle.text}>

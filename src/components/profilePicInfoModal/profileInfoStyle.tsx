@@ -106,11 +106,10 @@ export const insModalStyle = StyleSheet.create({
     fontFamily: fonts.body,
   },
   rowOneImg: {
-    marginTop: 10,
-    // borderWidth: 2,
-    // borderColor: 'red',
+    marginTop: 5,
     width: '100%',
     height: 300,
+    resizeMode: 'contain',
   },
   text: {
     fontSize: fontSizes.text,

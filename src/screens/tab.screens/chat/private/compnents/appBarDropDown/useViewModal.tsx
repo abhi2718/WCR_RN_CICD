@@ -70,7 +70,7 @@ export const useViewModal = (props: AppBarDropDownProps) => {
           return oldState.map((item) => {
             if (item.title === 'Block') {
               return {
-                title: 'UnBlock',
+                title: 'Unblock',
                 onSelect: async () => {
                   handleUserUnBlock(user.getUid());
                 },
@@ -89,7 +89,7 @@ export const useViewModal = (props: AppBarDropDownProps) => {
         return oldState.map((item) => {
           if (item.title === 'Block') {
             return {
-              title: 'UnBlock',
+              title: 'Unblock',
               onSelect: async () => {
                 handleUserUnBlock(user.getUid());
               },
@@ -105,7 +105,7 @@ export const useViewModal = (props: AppBarDropDownProps) => {
       await CometChat.unblockUsers([uid]);
       setMenuList((oldState) => {
         return oldState.map((item) => {
-          if (item.title === 'UnBlock') {
+          if (item.title === 'Unblock') {
             return {
               title: 'Block',
               onSelect: async () => {

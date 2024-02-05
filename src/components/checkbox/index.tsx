@@ -78,7 +78,7 @@ export const MultipleCheckBoxList: React.FC<CheckBoxProps> = ({
         data={renderData}
         renderItem={({ item }) => {
           return (
-            <Row style={styles.card}>
+            <Row gap={10} style={styles.card}>
               <Pressable onPress={() => handleChange(item.id)}>
                 <CustomCheckbox style={styles.checkBox}>
                   {item.isChecked && (
@@ -104,9 +104,6 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: sizes[4],
-  },
-  checkBox: {
-    marginRight: sizes[4],
   },
   text: {
     fontSize: sizes[3],

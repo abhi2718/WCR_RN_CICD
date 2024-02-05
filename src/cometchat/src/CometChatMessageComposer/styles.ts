@@ -53,7 +53,7 @@ export const Style = StyleSheet.create({
   },
   closeMentionList: {
     position: 'absolute',
-    right: 15,
+    right: 20,
     top: 15,
   },
   closeIcon: {
@@ -64,6 +64,9 @@ export const Style = StyleSheet.create({
     backgroundColor: theme.colors.ui.white,
     padding: 12,
     marginHorizontal: 12,
+    maxHeight: 250,
+    borderColor: '#D7DADF',
+    borderWidth: 1,
     borderRadius: 10,
     ...Platform.select({
       ios: {
