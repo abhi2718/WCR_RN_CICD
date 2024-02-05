@@ -1,3 +1,4 @@
+#import "RNFBMessagingModule.h"
 #import <Firebase.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
@@ -14,8 +15,8 @@
   self.moduleName = @"wcr";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
-  self.initialProps = @{};
-
+ //self.initialProps = @{};
+  self.initialProps = [RNFBMessagingModule addCustomPropsToUserProps:nil withLaunchOptions:launchOptions];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

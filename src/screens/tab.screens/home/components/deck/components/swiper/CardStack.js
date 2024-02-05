@@ -9,7 +9,6 @@ import {
   Text,
   Platform,
 } from 'react-native';
-import { dimensions } from '../../../../../../../components/tools';
 const {height, width} = Dimensions.get('window');
 class CardStack extends Component {
   static distance(x, y) {

@@ -1,9 +1,10 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { dimensions, isAndroid } from '../../../../../components/tools';
 import { HomeDeckRepository } from '../../../../../repository/homeDeck.repo';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import messaging from '@react-native-firebase/messaging';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../navigation';
 import { LikeContext } from '../../../../../contexts/likes.context';
@@ -15,6 +16,7 @@ import { UpdateUserDetailsRepository } from '../../../../../repository/pregister
 import { addUser } from '../../../../../store/reducers/user.reducer';
 import { NotificationRepository } from '../../../../../repository/notification.repo';
 import { createNotifications } from '../../../../../utils/common.functions';
+import { CometChat } from '../../../../../cometchat/sdk/CometChat';
 
 export const useViewModal = (route: RouteType) => {
   const [profiles, setProfiles] = useState([]);
@@ -60,6 +62,38 @@ export const useViewModal = (route: RouteType) => {
   useEffect(() => {
     fetchProfiles(0);
   }, [route?.params]);
+  async function checkApplicationPermission() {
+    const authorizationStatus = await messaging().requestPermission();
+  
+    if (authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED) {
+      console.log('User has notification permissions enabled.');
+    } else if (authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL) {
+      console.log('User has provisional notification permissions.');
+    } else {
+      console.log('User has notification permissions disabled');
+    }
+  }
+  useEffect(() => {
+    checkApplicationPermission()
+  }, []);
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+    // messaging().setBackgroundMessageHandler(async remoteMessage => {
+    //   console.log('Message handled in the background!', remoteMessage);
+    // });
+    return unsubscribe;
+  }, []);
+  const fetchToken = useCallback(async () => {
+    const token = await messaging().getToken();
+    const data = await CometChat.registerTokenForPushNotification(token);
+    console.log(token);
+    console.log('token --->', data);
+  },[]);
+  useEffect(() => {
+    fetchToken();
+  },[]);
   const handleSetProfiles = (item: any) => setProfiles([item, ...profiles]);
   const clearProfile = () => setProfiles([]);
   const updateIsNewUser = async () => {
@@ -168,7 +202,7 @@ export const useViewModal = (route: RouteType) => {
         name: isMatch?.matchUser?.profile?.name?.first,
       });
     }
-  };
+  };  
   return {
     isLoading,
     profiles,
