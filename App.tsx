@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { LogBox, View, StyleSheet } from 'react-native';
+import { LogBox, View, StyleSheet, Alert } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { ThemeProvider } from 'styled-components/native';
 import CombinedProviders from './src/contexts';
@@ -9,6 +9,7 @@ import Navigator from './src/navigation';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import { Provider } from 'react-redux';
 import { PaperProvider } from 'react-native-paper';
+import messaging from '@react-native-firebase/messaging';
 import { store } from './src/store';
 import { theme } from './src/infrastructure/theme';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
@@ -18,6 +19,7 @@ LogBox.ignoreLogs([
 ]);
 
 export default function App() {
+  
   return (
     <StripeProvider
       publishableKey={
