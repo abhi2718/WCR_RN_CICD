@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: 24,
     width: 24,
+    justifyContent: 'flex-start',
   },
   backButtonStyle: {
     width: 50,
@@ -65,19 +66,22 @@ const styles = StyleSheet.create({
     fontFamily: fonts.body,
   },
   shadows: {
-    padding: theme.units.sizes[3],
+    height: 58,
+    paddingHorizontal: 16,
     backgroundColor: '#fff',
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 10, height: 10 },
-        shadowOpacity: 0.04,
-        shadowRadius: 40,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
+    borderBottomColor: theme.colors.border,
+    borderBottomWidth: theme.units.borderSize.headerBorderWidth,
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: 'black',
+    //     shadowOffset: { width: 10, height: 10 },
+    //     shadowOpacity: 0.04,
+    //     shadowRadius: 40,
+    //   },
+    //   android: {
+    //     elevation: 2,
+    //   },
+    // }),
   },
 });
 export default Header;

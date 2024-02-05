@@ -29,7 +29,7 @@ interface HeightModalProps {
   setShowHeightModal: Dispatch<SetStateAction<boolean>>;
   setheight: Dispatch<SetStateAction<Measurement>>;
 }
-export const HeightModal = (props:HeightModalProps) => {
+export const HeightModal = (props: HeightModalProps) => {
   const { showHeightModal, setShowHeightModal, setheight } = props;
   const { user } = useSelector((state: any) => state.userState);
   const savedHeight: Measurement = user.height;

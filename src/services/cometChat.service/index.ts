@@ -20,6 +20,7 @@ export const useCometChatInit = () => {
         if (CometChatUIKit) {
           await CometChatUIKit.init(uikitSettings);
           await CometChatUIKit.login({ uid: user._id });
+
           setIsInitialized(true);
         }
       } catch (error) {}

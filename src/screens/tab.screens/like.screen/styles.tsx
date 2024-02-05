@@ -10,6 +10,14 @@ import { dimensions } from '../../../components/tools';
 import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
+  header: {
+    height: 58,
+    // paddingHorizontal: 16,
+    backgroundColor: '#fff',
+    borderBottomColor: theme.colors.border,
+    borderBottomWidth: theme.units.borderSize.headerBorderWidth,
+    marginBottom: 16,
+  },
   flexContainer: {
     flex: 1,
   },
