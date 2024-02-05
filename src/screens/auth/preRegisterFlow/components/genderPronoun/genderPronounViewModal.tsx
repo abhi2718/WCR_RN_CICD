@@ -19,7 +19,7 @@ export const useGenderPronounViewModal = (props: any) => {
   const { navigation } = props;
   const updateGenderPronoun = user?.profile?.genderPronoun ?? '';
   const [genderPronoun, setGenderPrPronoun] = useState(updateGenderPronoun);
-  const [checkboxState, setCheckboxState] = useState(true);
+  const [checkboxState, setCheckboxState] = useState(false);
 
   const handleGenderPronounValue = (value: string) => {
     setGenderPrPronoun(value);
@@ -43,10 +43,9 @@ export const useGenderPronounViewModal = (props: any) => {
         );
       }
 
-      
       if (user.profile.genderPronoun === genderPronoun) {
         navigateToSexualOrientationScreen();
-        return
+        return;
       }
       setLoading(true);
       const genderPronounData = {
@@ -54,19 +53,24 @@ export const useGenderPronounViewModal = (props: any) => {
           genderPronoun: genderPronoun,
           showGenderPronoun: checkboxState,
         },
-        steps:2
+        steps: 2,
       };
-      const userData = await updateUserDetailsRepository.updateUserDetails(user._id, {
-        update: genderPronounData,
-      });
-      const data = token ? {
-        user: {
-          ...userData,
-          token
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update: genderPronounData,
         },
-      }  :{
-        user: userData,
-      };
+      );
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
 

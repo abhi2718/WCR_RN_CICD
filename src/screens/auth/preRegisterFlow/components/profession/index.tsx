@@ -42,7 +42,7 @@ const Profession = (props: ScreenParams) => {
                   labelField="label"
                   maxHeight={500}
                   valueField="value"
-                  placeholder="Select degree category"
+                  placeholder="Select Degree Category"
                   searchPlaceholder="Search"
                   value={professionForm.userDegree}
                   onChange={(item: any) => {

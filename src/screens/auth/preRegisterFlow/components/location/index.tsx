@@ -55,6 +55,7 @@ const LocationScreen = (props: ScreenParams) => {
                   data={getStatesOptions()}
                   onFocus={() => setIsFocus(true)}
                   labelField="label"
+                  maxHeight={500}
                   valueField="value"
                   placeholder="State/Territory"
                   value={locationForm.state}
