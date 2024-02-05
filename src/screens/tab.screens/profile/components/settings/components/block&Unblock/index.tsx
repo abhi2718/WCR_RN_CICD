@@ -15,8 +15,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export const BlockAndUnBlock = () => {
   const {
-    user,
-    goBack,
     country,
     handleSelectCountry,
     selectedCountry,
@@ -39,7 +37,9 @@ export const BlockAndUnBlock = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
+      <Spacer position="left" size={16}>
+        <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
+      </Spacer>
       <ScrollView>
         <View style={styles.container}>
           <Spacer style={styles.rowOne} position="top" size={20}>

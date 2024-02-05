@@ -127,6 +127,7 @@ export const useViewModal = (props: AppBarDropDownProps) => {
         userTwoID: doc.users[1]._id,
       };
     });
+    console.log(matchedUser)
     const matchedUser = matchedUsers.filter(
       (user: { docId: string; userOneID: string; userTwoID: string }) =>
         user.userOneID === userId || user.userTwoID === userId,

@@ -89,13 +89,9 @@ export const ProfileView = (props: ProfileViewProps) => {
                       <View style={[styles.userTextView, { width: '100%' }]}>
                         <Row justifyContent="space-between" alignItems="center">
                           <Column style={styles.columnWrapper}>
-                            {/* <Text style={styles.userNameText}>
-                              {item?.profile?.displayName ??
-                                item?.profile?.name?.first}{' '}
-                              {calculateAge(item?.profile?.dob)}
-                            </Text> */}
                             <Text style={styles.userNameText}>
-                              {item?.profile?.name?.first}
+                              {item?.profile?.name?.first},{' '}
+                              {calculateAge(item?.profile?.dob)}
                             </Text>
                             <Text
                               style={[
@@ -134,14 +130,14 @@ export const ProfileView = (props: ProfileViewProps) => {
               </Spacer>
             </Spacer>
             {path === 'modalView' && (
-              <Column>
+              <Column justifyContent="center" alignItems="center">
                 <Spacer position="bottom" size={10}>
                   <Row justifyContent="space-between" alignItems="center">
                     <Column>
                       <Text style={styles.textName}>
                         {item?.profile?.displayName ??
-                          item?.profile?.name?.first}{' '}
-                        {calculateAge(item?.profile?.dob)}
+                          item?.profile?.name?.first}
+                        , {calculateAge(item?.profile?.dob)}
                       </Text>
                       <Text style={styles.textDegree}>
                         {item?.designation?.title}
