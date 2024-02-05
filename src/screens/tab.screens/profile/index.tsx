@@ -29,10 +29,14 @@ export const ProfileScreen = ({}) => {
     setLogOutModal,
     _logOut,
     loading,
+    count
   } = useViewModal();
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderDeck isSearchIcon={false} isPrefrence={false} />
+      <HeaderDeck
+        isPrefrence={false}
+        count={count}
+      />
       <View>
         <Spacer position="bottom" size={20}>
           <Column style={styles.nameContainer}>
