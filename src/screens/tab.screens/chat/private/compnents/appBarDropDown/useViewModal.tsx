@@ -123,14 +123,16 @@ export const useViewModal = (props: AppBarDropDownProps) => {
     const matchedUsers = data?.map((doc: matchUser) => {
       return {
         docId: doc._id,
-        userOneID: doc.users[0]._id,
-        userTwoID: doc.users[1]._id,
+        userOneID: doc?.users[0]?._id,
+        userTwoID: doc?.users[1]?._id,
       };
     });
-    console.log(matchedUser)
     const matchedUser = matchedUsers.filter(
-      (user: { docId: string; userOneID: string; userTwoID: string }) =>
-        user.userOneID === userId || user.userTwoID === userId,
+      (user: { docId: string; userOneID: string; userTwoID: string }) => {
+        if (user.userOneID === userId || user.userTwoID === userId) {
+          return true;
+        }
+      }   
     );
     if (matchedUser?.length) {
       const matchUserId = matchedUser[0].docId;
@@ -170,7 +172,7 @@ export const useViewModal = (props: AppBarDropDownProps) => {
   }, []);
   return {
     ismatched,
-    unmatch,
+    unmatch, 
     showModal,
     showUnmatchModal,
     handleUserBlock,
