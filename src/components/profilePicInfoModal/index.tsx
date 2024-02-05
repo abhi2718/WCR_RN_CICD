@@ -20,9 +20,9 @@ export const ProfilePicInfoModal = (props: ProfilePicInfoModalProps) => {
                 source={require('../../assets/images/icons/pp1.png')}
               />
               <Text style={modalStyle.text}>
-                <Text style={modalStyle.textHead}>Required-</Text>
-                We need that fabulous face front and center - no shades, masks,
-                or obstructions.
+                <Text style={modalStyle.textHead}>Required</Text> - We need that
+                fabulous face front and center - no shades, masks, or
+                obstructions.
               </Text>
             </Row>
             <Row style={modalStyle.row}>
@@ -31,7 +31,7 @@ export const ProfilePicInfoModal = (props: ProfilePicInfoModalProps) => {
                 source={require('../../assets/images/icons/pp2.png')}
               />
               <Text style={modalStyle.text}>
-                <Text style={modalStyle.textHead}> Your best invite?</Text>A
+                <Text style={modalStyle.textHead}>Your best invite?</Text>A
                 real, friendly smile
               </Text>
             </Row>
@@ -43,9 +43,9 @@ export const ProfilePicInfoModal = (props: ProfilePicInfoModalProps) => {
                 source={require('../../assets/images/icons/pp3.png')}
               />
               <Text style={modalStyle.text}>
-                <Text style={modalStyle.textHead}>Showcase your world - </Text>
+                <Text style={modalStyle.textHead}>Showcase your world</Text> -
                 Capture your personality, both professional/personal sides, and
-                highlight interests/hobbies
+                highlight interests & hobbies
               </Text>
             </Row>
             <Row style={modalStyle.row}>
@@ -54,9 +54,9 @@ export const ProfilePicInfoModal = (props: ProfilePicInfoModalProps) => {
                 source={require('../../assets/images/icons/pp4.png')}
               />
               <Text style={modalStyle.text}>
-                <Text style={modalStyle.textHead}> Mix it up - </Text>
-                from wearing a white coat/scrubs to sharing your passions and
-                latest adventures- to reflect the vibrant, unique you!
+                <Text style={modalStyle.textHead}>Mix it up</Text> - from
+                wearing a white coat/scrubs to sharing your passions and latest
+                adventures- to reflect the vibrant, unique you!
               </Text>
             </Row>
           </View>

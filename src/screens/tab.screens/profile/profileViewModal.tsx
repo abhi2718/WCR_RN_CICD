@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../navigation';
 import { useLogOutViewModal } from '../../../utils/logOut';
+import { NotificationCountContext } from '../../../contexts/notificationCount.context';
 export const useViewModal = () => {
   const { logOut } = useLogOutViewModal();
   const { user } = useSelector(({ userState }) => userState);
   const [loading, setLoading] = useState(false);
+  const { count } = useContext(NotificationCountContext);
   const navigation = useNavigation();
   const [showLogOutModal, setLogOutModal] = useState(false);
   const goToPreview = () => navigation.navigate(ROUTES.Preview);
@@ -31,5 +33,6 @@ export const useViewModal = () => {
     showLogOutModal,
     setLogOutModal,
     loading,
+    count
   };
 };

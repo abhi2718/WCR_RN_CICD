@@ -10,8 +10,6 @@ import {
 } from '../../../../../components/flashBar';
 
 export const useSexualOrientationViewModal = (props: ScreenParams) => {
-
-
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
   const { user } = useSelector((state: any) => state.userState);
@@ -22,7 +20,7 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
   const updatedOrientation = user?.profile?.sexualPreference ?? '';
   const [sexualOrientation, setSexualOrientation] =
     useState(updatedOrientation);
-  const [checkboxState, setCheckboxState] = useState(true);
+  const [checkboxState, setCheckboxState] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSexualOrientationValue = (value: string) => {
@@ -49,7 +47,7 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
 
       if (user.profile.sexualPreference === sexualOrientation) {
         navigateTolocationCreen();
-        return
+        return;
       }
       setLoading(true);
       const genderData = {
@@ -57,11 +55,14 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
           sexualPreference: sexualOrientation,
           showSexualPreference: checkboxState,
         },
-        steps:3
+        steps: 3,
       };
-      const userData = await updateUserDetailsRepository.updateUserDetails(user._id, {
-        update: genderData,
-      });
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update: genderData,
+        },
+      );
       const data = token
         ? {
             user: {

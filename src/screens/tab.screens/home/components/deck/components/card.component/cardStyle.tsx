@@ -79,7 +79,7 @@ export const cardStyles = StyleSheet.create({
     fontFamily: fonts.body,
   },
   headingText: {
-    marginTop: sizes[2],
+    marginTop: sizes[1],
     color: colors.ui.text,
     fontWeight: fontWeights.bold,
     fontSize: 22,
@@ -90,6 +90,8 @@ export const cardStyles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     fontSize: 22,
     fontFamily: fonts.body,
+    marginBottom: 0,
+    marginTop: 10,
   },
   vitalSignsChips: {
     marginVertical: sizes[1],

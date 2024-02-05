@@ -73,7 +73,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
     openModal,
     closeStudentInfoModal,
     openStudentInfoModal,
-    isStudentInfoModalVisible
+    isStudentInfoModalVisible,
   } = useVerificationViewModal(props);
   const { top, bottom } = useSafeAreaInsets();
   return (
@@ -84,8 +84,8 @@ const VerificationStepTwo = (props: AvatarProps) => {
           onClose={closeModal}
         ></IdverifyModal>
         <IdverifyStudentModal
-        isVisible={isStudentInfoModalVisible}
-        onClose={closeStudentInfoModal}
+          isVisible={isStudentInfoModalVisible}
+          onClose={closeStudentInfoModal}
         ></IdverifyStudentModal>
         <HeaderBar isVerificartionScreen={false} info={openModal} />
         <KeyboardAvoidingView
@@ -147,7 +147,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
           </View>
           <View style={{ ...verificationStyle.footerDiv }}>
             {verificationOption === 'License Number' && (
-              <>
+              <View style={verificationStyle.white}>
                 <Text>
                   <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
@@ -165,10 +165,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     onChangeText={handleWebsite}
                   />
                 </KeyboardAvoidingView>
-              </>
+              </View>
             )}
             {verificationOption === 'HealthCare' && (
-              <>
+              <View style={verificationStyle.white}>
                 <Text>
                   <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
@@ -186,10 +186,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     onChangeText={handleWebsite}
                   />
                 </KeyboardAvoidingView>
-              </>
+              </View>
             )}
             {verificationOption === 'Student' && (
-              <>
+              <View style={verificationStyle.white}>
                 <Text>
                   <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
@@ -208,7 +208,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     value={website}
                   />
                 </KeyboardAvoidingView>
-              </>
+              </View>
             )}
             {verificationOption === 'License Number' && (
               <Text style={verificationStyle.footerText}>

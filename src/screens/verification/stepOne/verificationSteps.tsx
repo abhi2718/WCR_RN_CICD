@@ -50,7 +50,9 @@ export const verificationStyle = StyleSheet.create({
     gap: 15,
     flex: 1,
     justifyContent: 'flex-end',
+    backgroundColor: '#fff',
   },
+  white: { backgroundColor: '#fff', paddingTop: 10 },
   subText: {
     fontSize: fontSizes.text,
     marginBottom: sizes[4],

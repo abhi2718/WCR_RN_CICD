@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 
-
 export const useViewModal = () => {
   const navigation = useNavigation();
   const [showModal, setShowModal] = useState(false);
@@ -14,8 +13,7 @@ export const useViewModal = () => {
   const handleShare = () => {
     try {
       const shareOptions = {
-        message: `White Coat Romance profile share
-         The White Coat Romance dating app and thought it would be perfect for you. `,
+        message: `The White Coat Romance dating app and thought it would be perfect for you. `,
         url: 'https://staging.whitecoatromance.com/assets/images/e-wcr.png',
       };
       Share.open(shareOptions);

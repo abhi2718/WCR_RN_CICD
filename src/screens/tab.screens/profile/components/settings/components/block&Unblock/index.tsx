@@ -39,9 +39,9 @@ export const BlockAndUnBlock = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
       <ScrollView>
         <View style={styles.container}>
-          <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
           <Spacer style={styles.rowOne} position="top" size={20}>
             <Text style={styles.text}>Block by Country</Text>
             <DropdownInput
@@ -120,7 +120,7 @@ export const BlockAndUnBlock = () => {
                   onPress={() => handleUserUnBlock(user.getUid())}
                   style={styles.blockedButton}
                 >
-                  <Text style={styles.blockButtonText}>UnBlock</Text>
+                  <Text style={styles.blockButtonText}>Unblock</Text>
                 </Pressable>
               </Row>
             </View>

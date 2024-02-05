@@ -62,19 +62,22 @@ export const styles = StyleSheet.create({
     width: 150,
   },
   headerContainer: {
-    padding: sizes[3],
-    backgroundColor: '#fff',
+    height: 58,
+    paddingHorizontal: 16,
     marginBottom: 10,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 10, height: 4 },
-        shadowOpacity: 0.01,
-        shadowRadius: 0,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
+    backgroundColor: '#fff',
+    borderBottomColor: theme.colors.border,
+    borderBottomWidth: theme.units.borderSize.headerBorderWidth,
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: 'black',
+    //     shadowOffset: { width: 10, height: 4 },
+    //     shadowOpacity: 0.01,
+    //     shadowRadius: 0,
+    //   },
+    //   android: {
+    //     elevation: 2,
+    //   },
+    // }),
   },
 });

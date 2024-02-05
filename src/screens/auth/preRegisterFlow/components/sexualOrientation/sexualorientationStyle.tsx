@@ -49,7 +49,6 @@ export const SexualOrientationStyle = StyleSheet.create({
     maxWidth: '100%',
   },
   btnText: {
-    marginLeft: sizes[3],
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
     color: colors.ui.text,
