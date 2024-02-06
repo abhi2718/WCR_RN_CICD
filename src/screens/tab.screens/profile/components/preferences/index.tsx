@@ -139,16 +139,16 @@ export const PreferencesScreen = () => {
               return (
                 <View key={index} style={styles.multiSelector}>
                   <Pressable onPress={handleHeightModal}>
-                  <Row justifyContent="space-between">
-                    <Text style={[styles.textColor, styles.optionName]}>
-                      Height Preference
-                    </Text>
-                    <Text style={styles.silderSubText}>
-                      {formatNumber(heightRange[0])} -{' '}
-                      {formatNumber(heightRange[1])}
-                    </Text>
-                  </Row>
-                 </Pressable>
+                    <Row justifyContent="space-between">
+                      <Text style={[styles.textColor, styles.optionName]}>
+                        Height Preference
+                      </Text>
+                      <Text style={styles.silderSubText}>
+                        {formatNumber(heightRange[0])} -{' '}
+                        {formatNumber(heightRange[1])}
+                      </Text>
+                    </Row>
+                  </Pressable>
                   <HeightPrefrence
                     visible={showHeightModal}
                     handleHeightModal={handleHeightModal}
@@ -204,6 +204,9 @@ export const PreferencesScreen = () => {
                       initValue={answer[item.initValue]}
                       onChange={handleInputChange}
                       style={styles.modalSelector}
+                      header={
+                        <Text style={styles.modalHeading}>{item.title}</Text>
+                      }
                       optionContainerStyle={styles.optionContainer}
                       optionTextStyle={styles.optionText}
                       cancelStyle={styles.cancelButton}

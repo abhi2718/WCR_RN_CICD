@@ -142,4 +142,11 @@ export const styles = StyleSheet.create({
     borderWidth: 0,
     borderColor: 'transparent',
   },
+  modalHeading: {
+    textAlign: 'center',
+    fontWeight: fontWeights.semiBold,
+    fontSize: fontSizes.h5,
+    marginVertical: 10,
+    fontFamily: fonts.body,
+  },
 });

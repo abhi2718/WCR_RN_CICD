@@ -86,10 +86,11 @@ export const styles = StyleSheet.create({
   },
 
   initValueTextStyle: {
-    color: '#B3B3B3',
+    color: '#676161',
     marginLeft: -8,
     textAlign: 'left',
     height: 20,
+    fontFamily: fonts.body,
   },
   selectedItem: {
     fontSize: 16,
@@ -146,5 +147,12 @@ export const styles = StyleSheet.create({
   selectStyle: {
     borderWidth: 0,
     borderColor: 'transparent',
+  },
+  modalHeading: {
+    textAlign: 'center',
+    fontWeight: fontWeights.semiBold,
+    fontSize: fontSizes.h5,
+    marginVertical: 10,
+    fontFamily: fonts.body,
   },
 });
