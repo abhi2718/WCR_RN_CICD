@@ -214,30 +214,6 @@ export const EditProfile = () => {
                 <Text style={styles.fieldValue}>{userProfile.dob}</Text>
               </View>
             </Spacer>
-            <Spacer position="top" size={10}>
-              <HeightModal
-                showHeightModal={showHeightModal}
-                setShowHeightModal={setShowHeightModal}
-                setheight={setheight}
-              />
-              <Pressable onPress={() => _setShowHeightModal()}>
-                <Row>
-                  <Column>
-                    <Text style={styles.fieldName}>Height</Text>
-                    <Spacer position="top" size={10}>
-                      <Text style={styles.fieldName}>
-                        {height?.feet}'{height?.inch} ft
-                      </Text>
-                    </Spacer>
-                  </Column>
-                  <Image
-                    resizeMode="contain"
-                    style={styles.nextArrow}
-                    source={require('../../../../../assets/images/settings/Next.png')}
-                  />
-                </Row>
-              </Pressable>
-            </Spacer>
           </Column>
           <Text style={styles.headingText}>Identity/Orientation</Text>
           <Column style={styles.ph16}>
@@ -264,7 +240,9 @@ export const EditProfile = () => {
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Gender Pronoun</Text>
               <View style={styles.fieldValueContainer}>
-                <Text style={styles.fieldValue}>{userProfile.genderProunoun}</Text>
+                <Text style={styles.fieldValue}>
+                  {userProfile.genderProunoun}
+                </Text>
               </View>
               <Spacer position="top" size={10}>
                 <CustomCheckBox
@@ -308,112 +286,6 @@ export const EditProfile = () => {
 
           <Column>
             {optionsList.map((item, index) => {
-    
-              if (item.title === 'Ethnicity') {
-                return (
-                  <Spacer key={index} position="top" size={10}>
-                    <Spacer position="top" size={10}>
-                      <Text style={styles.fieldName}>{item.title}</Text>
-                      <TouchableOpacity onPress={() => openModal('ethnicity')}>
-                        <Row
-                          style={[styles.selectRow, styles.fieldValueContainer]}
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <View>
-                            <Spacer position="top" size={5} />
-                            {selectedEthnicityItems.length === 0 ? (
-                              <Text style={styles.fieldValue}>Select</Text>
-                            ) : selectedEthnicityItems.length > 2 ? (
-                              <Text style={styles.fieldValue}>
-                                {selectedEthnicityItems[0]}
-                                {' , '}
-                                {selectedEthnicityItems[1]}...
-                              </Text>
-                            ) : (
-                              <Text style={styles.fieldValue}>
-                                {selectedEthnicityItems.join(', ')}
-                              </Text>
-                            )}
-                            <Spacer position="top" size={5} />
-                          </View>
-                          <Image
-                            resizeMode="contain"
-                            style={styles.nextArrow}
-                            source={require('../../../../../assets/images/settings/Next.png')}
-                          />
-                        </Row>
-                      </TouchableOpacity>
-                    </Spacer>
-                    <MultiSelectModal
-                      isVisible={ethnicityModalVisible}
-                      data={ethnicity}
-                      modalHeading="Ethnicity"
-                      selectedItems={selectedEthnicityItems}
-                      onClose={() => closeModal('ethnicity')}
-                      onItemSelected={(selected) =>
-                        handleItemSelected(selected, 'ethnicity')
-                      }
-                    />
-                  </Spacer>
-                );
-              }
-
-              if (item.title === 'Relationship level') {
-                return (
-                  <Spacer key={index} position="top" size={10}>
-                    <Spacer position="top" size={10}>
-                      <Text style={styles.fieldName}>{item.title}</Text>
-                      <TouchableOpacity
-                        onPress={() => openModal('relationshipLevel')}
-                      >
-                        <Row
-                          style={[styles.selectRow, styles.fieldValueContainer]}
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <View>
-                            <Spacer position="top" size={5} />
-                            {selectedrelationshipLevelItems.length === 0 ? (
-                              <Text style={styles.fieldValue}>Select</Text>
-                            ) : selectedrelationshipLevelItems.length > 1 ? (
-                              <Row>
-                                <Text style={styles.fieldValue}>
-                                  {selectedrelationshipLevelItems[0]}...
-                                </Text>
-                              </Row>
-                            ) : (
-                              <Text
-                                style={{
-                                  ...styles.fieldValue,
-                                  flexWrap: 'wrap',
-                                }}
-                              >
-                                {selectedrelationshipLevelItems.join(', ')}
-                              </Text>
-                            )}
-                            <Spacer position="top" size={5} />
-                          </View>
-                          <Image
-                            resizeMode="contain"
-                            style={styles.nextArrow}
-                            source={require('../../../../../assets/images/settings/Next.png')}
-                          />
-                        </Row>
-                      </TouchableOpacity>
-                    </Spacer>
-                    <MultiSelectModal
-                      isVisible={relationshipLevelModalVisible}
-                      data={relationship}
-                      selectedItems={selectedrelationshipLevelItems}
-                      onClose={() => closeModal('relationshipLevel')}
-                      onItemSelected={(selected) =>
-                        handleItemSelected(selected, 'relationshipLevel')
-                      }
-                    />
-                  </Spacer>
-                );
-              }
               return (
                 <View key={index}>
                   <Text style={styles.headingText}>{item?.title}</Text>
@@ -500,6 +372,136 @@ export const EditProfile = () => {
                     )}
 
                     {item?.values?.map((value, index) => {
+                      if (value.title === 'Ethnicity') {
+                        return (
+                          <Spacer key={index} position="top" size={10}>
+                            <Spacer position="top" size={10}>
+                              <Text style={styles.fieldName}>
+                                {value.title}
+                              </Text>
+                              <TouchableOpacity
+                                onPress={() => openModal('ethnicity')}
+                              >
+                                <Row
+                                  style={[
+                                    styles.selectRow,
+                                    styles.fieldValueContainer,
+                                  ]}
+                                  justifyContent="space-between"
+                                  alignItems="center"
+                                >
+                                  <View>
+                                    <Spacer position="top" size={5} />
+                                    {selectedEthnicityItems.length === 0 ? (
+                                      <Text style={styles.fieldValue}>
+                                        Select
+                                      </Text>
+                                    ) : selectedEthnicityItems.length > 2 ? (
+                                      <Text style={styles.fieldValue}>
+                                        {selectedEthnicityItems[0]}
+                                        {' , '}
+                                        {selectedEthnicityItems[1]}...
+                                      </Text>
+                                    ) : (
+                                      <Text style={styles.fieldValue}>
+                                        {selectedEthnicityItems.join(', ')}
+                                      </Text>
+                                    )}
+                                    <Spacer position="top" size={5} />
+                                  </View>
+                                  <Image
+                                    resizeMode="contain"
+                                    style={styles.nextArrow}
+                                    source={require('../../../../../assets/images/settings/Next.png')}
+                                  />
+                                </Row>
+                              </TouchableOpacity>
+                            </Spacer>
+                            <MultiSelectModal
+                              isVisible={ethnicityModalVisible}
+                              data={ethnicity}
+                              modalHeading="Ethnicity"
+                              selectedItems={selectedEthnicityItems}
+                              onClose={() => closeModal('ethnicity')}
+                              onItemSelected={(selected) =>
+                                handleItemSelected(selected, 'ethnicity')
+                              }
+                            />
+                          </Spacer>
+                        );
+                      }
+
+                      if (value.title === 'Relationship Level') {
+                        return (
+                          <Spacer key={index} position="top" size={10}>
+                            <Spacer position="top" size={10}>
+                              <Text style={styles.fieldName}>
+                                {value.title}
+                              </Text>
+                              <TouchableOpacity
+                                onPress={() => openModal('relationshipLevel')}
+                              >
+                                <Row
+                                  style={[
+                                    styles.selectRow,
+                                    styles.fieldValueContainer,
+                                  ]}
+                                  justifyContent="space-between"
+                                  alignItems="center"
+                                >
+                                  <View>
+                                    <Spacer position="top" size={5} />
+                                    {selectedrelationshipLevelItems.length ===
+                                    0 ? (
+                                      <Text style={styles.fieldValue}>
+                                        Select
+                                      </Text>
+                                    ) : selectedrelationshipLevelItems.length >
+                                      1 ? (
+                                      <Row>
+                                        <Text style={styles.fieldValue}>
+                                          {selectedrelationshipLevelItems[0]}...
+                                        </Text>
+                                      </Row>
+                                    ) : (
+                                      <Text
+                                        style={{
+                                          ...styles.fieldValue,
+                                          flexWrap: 'wrap',
+                                        }}
+                                      >
+                                        {selectedrelationshipLevelItems.join(
+                                          ', ',
+                                        )}
+                                      </Text>
+                                    )}
+                                    <Spacer position="top" size={5} />
+                                  </View>
+                                  <Image
+                                    resizeMode="contain"
+                                    style={styles.nextArrow}
+                                    source={require('../../../../../assets/images/settings/Next.png')}
+                                  />
+                                </Row>
+                              </TouchableOpacity>
+                            </Spacer>
+                            <MultiSelectModal
+                              isVisible={relationshipLevelModalVisible}
+                              data={relationship}
+                              modalHeading={value.title}
+                              selectedItems={selectedrelationshipLevelItems}
+                              onClose={() => closeModal('relationshipLevel')}
+                              onItemSelected={(selected) =>
+                                handleItemSelected(
+                                  selected,
+                                  'relationshipLevel',
+                                )
+                              }
+                            />
+                          </Spacer>
+                        );
+                      }
+
                       if (
                         item.title === 'Healthcare Professionals' &&
                         index === 2
@@ -539,6 +541,35 @@ export const EditProfile = () => {
                                 style={styles.fieldValue}
                               />
                             </View>
+                          </Spacer>
+                        );
+                      }
+
+                      if (item.title === 'Vital signs' && index === 2) {
+                        return (
+                          <Spacer position="top" size={10}>
+                            <HeightModal
+                              showHeightModal={showHeightModal}
+                              setShowHeightModal={setShowHeightModal}
+                              setheight={setheight}
+                            />
+                            <Pressable onPress={() => _setShowHeightModal()}>
+                              <Row>
+                                <Column>
+                                  <Text style={styles.fieldName}>Height</Text>
+                                  <Spacer position="top" size={10}>
+                                    <Text style={styles.fieldName}>
+                                      {height?.feet}'{height?.inch} ft
+                                    </Text>
+                                  </Spacer>
+                                </Column>
+                                <Image
+                                  resizeMode="contain"
+                                  style={styles.nextArrow}
+                                  source={require('../../../../../assets/images/settings/Next.png')}
+                                />
+                              </Row>
+                            </Pressable>
                           </Spacer>
                         );
                       }

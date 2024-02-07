@@ -108,8 +108,10 @@ export const useViewModal = () => {
       ? user?.profile.sexualPreference
       : '',
     showGender: user?.profile.showGender ? user?.profile.showGender : true,
-    showGenderPronoun: user?.profile?.showGenderPronoun ??  true,
-    genderProunoun : user?.profile.genderPronoun ? user?.profile.genderPronoun : '',
+    showGenderPronoun: user?.profile?.showGenderPronoun ?? true,
+    genderProunoun: user?.profile.genderPronoun
+      ? user?.profile.genderPronoun
+      : '',
   });
   const [_primaryDegree, setPrimaryDegree] = useState(
     generateList([], 'degreeType'),
@@ -246,6 +248,7 @@ export const useViewModal = () => {
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
+    {},
     {
       title: 'Marital Status',
       option: maritalStatusList,
