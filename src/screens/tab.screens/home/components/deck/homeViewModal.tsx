@@ -17,9 +17,11 @@ import { addUser } from '../../../../../store/reducers/user.reducer';
 import { NotificationRepository } from '../../../../../repository/notification.repo';
 import { createNotifications } from '../../../../../utils/common.functions';
 import { CometChat } from '../../../../../cometchat/sdk/CometChat';
+import { ShowFlashMessage } from '../../../../../components/flashBar';
+import { Profile } from '../../../../../types/screen.type/home.type';
 
 export const useViewModal = (route: RouteType) => {
-  const [profiles, setProfiles] = useState([]);
+  const [profiles, setProfiles] = useState<Profile[] | []>([]);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const homeDeckRepository = new HomeDeckRepository();
@@ -27,7 +29,7 @@ export const useViewModal = (route: RouteType) => {
   const notificationRepository = new NotificationRepository();
   const tabBarHeight = useBottomTabBarHeight();
   const androidActualHeight = useRef(dimensions.height - tabBarHeight).current;
-  const { top, bottom } = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
   const cardRef = useRef();
   const { user } = useSelector(({ userState }) => userState);
   const dispatch = useDispatch();
@@ -50,7 +52,12 @@ export const useViewModal = (route: RouteType) => {
     try {
       const data = await homeDeckRepository.getProfiles();
       if (path) {
-        setProfiles([lastDisLikeProfile, ...data]);
+        const _lastDisLikeProfile = lastDisLikeProfile;
+        const remaningProfileToShow = data.filter(
+          (profile: Profile) => profile._id !== _lastDisLikeProfile._id,
+        );
+        setProfiles([_lastDisLikeProfile, ...remaningProfileToShow]);
+        setLastDisLikeProfile(null);
       } else {
         setProfiles(data);
       }
@@ -64,36 +71,38 @@ export const useViewModal = (route: RouteType) => {
   }, [route?.params]);
   async function checkApplicationPermission() {
     const authorizationStatus = await messaging().requestPermission();
-  
+
     if (authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED) {
       console.log('User has notification permissions enabled.');
-    } else if (authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL) {
+    } else if (
+      authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL
+    ) {
       console.log('User has provisional notification permissions.');
     } else {
       console.log('User has notification permissions disabled');
     }
   }
   useEffect(() => {
-    checkApplicationPermission()
+    checkApplicationPermission();
   }, []);
   useEffect(() => {
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
       console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
-    // messaging().setBackgroundMessageHandler(async remoteMessage => {
-    //   console.log('Message handled in the background!', remoteMessage);
-    // });
+    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+      console.log('Message handled in the background!', remoteMessage);
+    });
     return unsubscribe;
   }, []);
   const fetchToken = useCallback(async () => {
     const token = await messaging().getToken();
-    const data = await CometChat.registerTokenForPushNotification(token);
-    console.log(token);
-    console.log('token --->', data);
-  },[]);
+    console.log('Fetching token...', token);
+    await CometChat.registerTokenForPushNotification(token);
+    //updateUserDetails({ deviceToken: token });
+  }, []);
   useEffect(() => {
     fetchToken();
-  },[]);
+  }, []);
   const handleSetProfiles = (item: any) => setProfiles([item, ...profiles]);
   const clearProfile = () => setProfiles([]);
   const updateIsNewUser = async () => {
@@ -133,19 +142,15 @@ export const useViewModal = (route: RouteType) => {
           createNotifications('like', profiles[index]._id, user.fullName),
         );
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
   const handleUnDoFeature = async () => {
-    // setLoading(true);
-    //await homeDeckRepository.deleteDisLike(lastDisLikeProfile._id);
-    if (lastDisLikeProfile) {
-      if (profiles?.length) {
-        fetchProfiles(1);
-      } else {
-        setProfiles([lastDisLikeProfile]);
-        return;
-      }
+    if (lastDisLikeProfile?._id) {
+      setLoading(true);
+      await homeDeckRepository.deleteDisLike(lastDisLikeProfile._id);
+      fetchProfiles(1);
+    } else {
+      ShowFlashMessage('No left swipe action to revert.', '', 'warning');
     }
   };
   const handleDisLike = async (index: number) => {
@@ -164,11 +169,13 @@ export const useViewModal = (route: RouteType) => {
   const handleCloseModal = () => {
     toggleSearchModal();
   };
-  const updateUserDetails = async () => {
+  const updateUserDetails = async (newUpdate?: any) => {
     try {
-      const update = {
-        homeInfoModal: true,
-      };
+      const update = newUpdate
+        ? newUpdate
+        : {
+            homeInfoModal: true,
+          };
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         {
@@ -202,7 +209,7 @@ export const useViewModal = (route: RouteType) => {
         name: isMatch?.matchUser?.profile?.name?.first,
       });
     }
-  };  
+  };
   return {
     isLoading,
     profiles,

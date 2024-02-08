@@ -8,9 +8,6 @@ import { useViewModal } from './useViewModal';
 import { calculateAge } from '../../../../../../../utils/common.functions';
 import LinearGradient from 'react-native-linear-gradient';
 import { AlertScreen } from '../../../../../../../components/alert';
-import { colors } from '../../../../../../../infrastructure/theme/colors';
-import { sizes } from '../../../../../../../infrastructure/theme/sizes';
-import { fontSizes } from '../../../../../../../infrastructure/theme/fonts';
 export default function CardCompoent({ item, height, cardRef }) {
   const heightStyle = { height, ...cardStyles.imageStyle };
   const {
@@ -279,7 +276,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                         <View style={[cardStyles.ph16]}>
                           {item?.interests?.length > 0 && (
                             <>
-                              {/* <Spacer position="top" size={5} /> */}
                               <Text style={cardStyles.aboutHeading}>
                                 Interests & Hobbies
                               </Text>
