@@ -5,6 +5,8 @@ import {
   ScrollView,
   Text,
   KeyboardAvoidingView,
+  Pressable,
+  Keyboard,
 } from 'react-native';
 import { useViewModal } from './signinViewModal';
 import { styles } from './signInStyle';
@@ -26,35 +28,35 @@ export default function SignInScreen(props: ScreenParams) {
     email,
     setEmail,
     loading,
+    handleLoadingState,
   } = useViewModal(props);
   return (
-    <ScreenContainer>
+    <Pressable style={styles.wrapper} onPress={Keyboard.dismiss}>
+      <ScreenContainer>
       <ScrollView
         contentContainerStyle={styles.scrollDiv}
         keyboardShouldPersistTaps="always"
       >
-        <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-        >
+        <View style={styles.container}>
           <ImageContainer
             height={sizes[10]}
             width={sizes[10]}
             source={require('../../../assets/images/logo.png')}
           />
         </View>
-        <RoundedButtonWithIconAndText
-          onPress={loading ? () => {} : _onFbLogIn}
+        {/* <RoundedButtonWithIconAndText
+          onPress={loading ? handleLoadingState : _onFbLogIn}
           title={'Continue with Facebook'}
           iconSource={require('../../../assets/images/facebookLogo.png')}
-        />
+        /> */}
         <RoundedButtonWithIconAndText
-          onPress={loading ? () => {} : _googleSignIn}
+          onPress={loading ? handleLoadingState : _googleSignIn}
           title={'Continue with Google'}
           iconSource={require('../../../assets/images/googleLogo.png')}
         />
         {!isAndroid && (
           <RoundedButtonWithIconAndText
-            onPress={loading ? () => {} : handleAppleSignIn}
+            onPress={loading ? handleLoadingState : handleAppleSignIn}
             title={'Continue with Apple'}
             iconSource={require('../../../assets/images/appleLogo.png')}
           />
@@ -75,6 +77,7 @@ export default function SignInScreen(props: ScreenParams) {
               onChangeText={(email: string) => {
                 setEmail(email);
               }}
+              returnKeyType="done"
               placeholderTextColor="rgba(35, 35, 35, 0.4)"
             />
           </View>
@@ -86,5 +89,6 @@ export default function SignInScreen(props: ScreenParams) {
         </KeyboardAvoidingView>
       </ScrollView>
     </ScreenContainer>
+    </Pressable>
   );
 }

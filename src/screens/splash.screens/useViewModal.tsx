@@ -13,7 +13,6 @@ export const useViewModal = () => {
   const checkIsUserLoggedIn = async () => {
     const { data: user } = await getDataFromAsynStorage('profile');
     const { data: token } = await getDataFromAsynStorage('token');
-    console.log(user,token)
     if (user && token) {
       const data = {
         user: {

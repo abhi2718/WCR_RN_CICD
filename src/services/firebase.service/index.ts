@@ -31,8 +31,7 @@ export class FirebaseService {
   ) {
     try {
       GoogleSignin.configure({
-        webClientId:
-          '646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com',
+        webClientId:config.WEBCLIENTID
       });
       await GoogleSignin.hasPlayServices();
       const {user} = await GoogleSignin.signIn();
@@ -207,7 +206,7 @@ export class FirebaseService {
   }
   async appleSignIn(
     checkAppleUser: (appleId: string) => Promise<any>,
-    provider?: string,
+    setLoading: (loadingState: boolean) => void,
   ) {
     try {
       let email;
@@ -215,6 +214,7 @@ export class FirebaseService {
         requestedOperation: appleAuth.Operation.LOGIN,
         requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
       });
+      setLoading(true)
       const credentialState = await appleAuth.getCredentialStateForUser(
         appleAuthRequestResponse.user,
       );

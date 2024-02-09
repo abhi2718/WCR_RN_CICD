@@ -143,7 +143,8 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       return setValidationErrors(errors);
     } else {
       setValidationErrors({});
-       await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
+      console.log()
+      // await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
     }
   };
 

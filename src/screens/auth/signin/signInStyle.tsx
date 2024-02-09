@@ -8,11 +8,14 @@ export const ErrorText = styled.Text`
   color: ${colors.ui.primary};
 `;
 export const styles = StyleSheet.create({
+  wrapper: {
+    flex:1
+  },
   scrollDiv: {
     flex: 1,
     paddingBottom: sizes[6],
   },
-
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   emailInputBox: {
     flex: 1,
     fontSize: fontSizes.text,

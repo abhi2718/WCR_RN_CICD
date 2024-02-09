@@ -52,6 +52,7 @@ export const useEmailAuthViewModal = (props: ScreenParams) => {
       setLoading(true);
       resetOtp();
       const data = await getOtpOnEmail(email);
+      ShowFlashMessage('', 'OTP sent to your email', 'info');
     } catch (error) {}
   };
 

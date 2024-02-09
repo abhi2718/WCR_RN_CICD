@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Keyboard } from 'react-native';
 import { AuthRepository } from '../../../repository/auth.repo';
 import { FirebaseService } from '../../../services/firebase.service';
 import {
@@ -14,7 +15,7 @@ import {
   ScreenParams,
 } from '../../../types/services.types/firebase.service';
 import { addUser } from '../../../store/reducers/user.reducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigateToScreen } from '../../../utils/common.functions';
 import { CommonActions } from '@react-navigation/native';
 
@@ -70,12 +71,13 @@ export const useViewModal = (props: ScreenParams) => {
   const _setLoading = (loadingState: boolean) => setLoading(loadingState);
   const _googleSignIn = async () => {
     try {
+      Keyboard.dismiss();
       const data = await firebaseService.signInWithGoogle(
         _setLoading,
         socialSignInSignUp,
       );
       if (data?.profile && data?.user) {
-        const { email, family_name, given_name, name, picture } = data?.profile;
+        const { email, family_name, given_name } = data?.profile;
         if (data?.isNewUser) {
           await firebaseService.deleteUserFromFirebase();
           navigateToProfile({
@@ -146,7 +148,9 @@ export const useViewModal = (props: ScreenParams) => {
   };
   const handleAppleSignIn = async () => {
     try {
-      const data = await firebaseService.appleSignIn(checkAppleUser);
+      Keyboard.dismiss();
+      const data = await firebaseService.appleSignIn(checkAppleUser,setLoading);
+      setLoading(false);
       if (data?.isNewUser) {
         if (data?.email) {
           navigateToProfile({
@@ -272,7 +276,7 @@ export const useViewModal = (props: ScreenParams) => {
       },
     });
   };
-
+  const handleLoadingState = useCallback(() => { }, []);
   return {
     loading,
     _googleSignIn,
@@ -287,5 +291,6 @@ export const useViewModal = (props: ScreenParams) => {
     checkIsNewUser,
     navigateToGenderScreen,
     getOtpOnEmail,
+    handleLoadingState
   };
 };

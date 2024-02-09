@@ -32,7 +32,6 @@ export const ProfileScreen = ({}) => {
     loading,
     count
   } = useViewModal();
-
   // if (1) {
   //   return (
   //     <View style={{ flex: 1, marginTop: 200 }}>
