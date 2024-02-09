@@ -73,7 +73,7 @@ export default function SignInScreen(props: ScreenParams) {
               />
             )}
             {
-              <Spacer position="bottom" size={!email?.length ? 16 : 0}>
+              <Spacer position="bottom" size={0}>
                 <View style={styles.inputContainerr}>
                   <ImageContainer
                     source={require('../../../assets/images/Email-icon.png')}
@@ -91,19 +91,19 @@ export default function SignInScreen(props: ScreenParams) {
               </Spacer>
             }
             {!isValidEmail && email?.length ? (
-              <Spacer size={16} position="bottom">
-                <Text style={styles.errorText}>
-                  Please enter a valid email address.
-                </Text>
-              </Spacer>
+              <Text style={styles.errorText}>
+                Please enter a valid email address.
+              </Text>
             ) : (
               <View />
             )}
-            <PrimaryButton
-              title="Continue"
-              onPress={getOtpToVerifyEmail}
-              isLoading={loading}
-            />
+            <Spacer size={20} position="top">
+              <PrimaryButton
+                title="Continue"
+                onPress={getOtpToVerifyEmail}
+                isLoading={loading}
+              />
+            </Spacer>
           </ScrollView>
         </ScreenContainer>
       </Pressable>

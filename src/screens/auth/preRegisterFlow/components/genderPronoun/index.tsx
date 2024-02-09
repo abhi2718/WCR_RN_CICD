@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import React from 'react';
+import { View } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
 import { PrimaryButton } from '../../../../../components/button';
 import {
-  ImageContainer,
   Row,
   ScreenContainer,
-  Spacer,
 } from '../../../../../components/tools';
 import { genderPronounStyle } from './genderPronounStyle';
 import { useGenderPronounViewModal } from './genderPronounViewModal';
 import { genderPronounArray } from '../../../../../utils/constanst';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { goBack } from '../../../../../utils/common.functions';
 import { HeaderBar } from '../../../../../components/header';
 import { CheckBox } from '../../../../../components/inputBox';
 
@@ -24,7 +19,6 @@ const GenderProunoun = (props: any) => {
     handleGenderPronounValue,
     updateUserDetails,
     checkboxState,
-    setCheckboxState,
     handleCheckboxChange,
     loading,
   } = useGenderPronounViewModal(props);
@@ -32,7 +26,7 @@ const GenderProunoun = (props: any) => {
     <ScreenContainer>
       <View style={genderPronounStyle.container}>
         <View style={genderPronounStyle.innerView}>
-          <View style={{ flex: 1 }}>
+          <View style={genderPronounStyle.wrapper}>
             <HeaderBar></HeaderBar>
             <Text style={genderPronounStyle.subHeader}>
               How would you like to be addressed?
@@ -55,16 +49,12 @@ const GenderProunoun = (props: any) => {
               ))}
             </View>
           </View>
-
           <View>
             <Row style={genderPronounStyle.rowView} alignItems="center">
               <CheckBox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
-                fillColor={colors.ui.primary}
-                unfillColor="#FFFFFF"
               />
-              {/* <Checkbox status="checked" /> */}
               <Text style={genderPronounStyle.btnText}>Visible on profile</Text>
             </Row>
             <PrimaryButton

@@ -34,6 +34,7 @@ export const addPicture = StyleSheet.create({
     width: dimensions.width / 1.7,
     justifyContent: 'center',
     alignItems: 'center',
+    height: dimensions.width / 1.65,
   },
   profilePic: {
     borderRadius: sizes[4],
@@ -46,7 +47,7 @@ export const addPicture = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: colors.ui.primary,
-    height: sizes[6] * 4,
+    height: dimensions.width / 3.5,
     width: dimensions.width / 3.5,
     justifyContent: 'center',
     alignItems: 'center',

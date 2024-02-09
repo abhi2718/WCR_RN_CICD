@@ -1,21 +1,14 @@
 import React from 'react';
-import { Button, Image, ScrollView, Text, View } from 'react-native';
-import {
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../../../../components/tools';
+import { Image, Text, View } from 'react-native';
+import { ScreenContainer } from '../../../../../components/tools';
 import { uploadedPic } from './uploadedPicStyle';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { PrimaryButton } from '../../../../../components/button';
-import { ProfilePicInfoModal } from '../../../../../components/profilePicInfoModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useUploadPicViewModal } from './uploadPic.viewModal';
 import { HeaderBar } from '../../../../../components/header';
 
 const UploadedPic = (props: ScreenParams) => {
-  const { isPicUploadInfoModalVisible, closeModal, openModal } =
-    useUploadPicViewModal(props);
+  const { openModal } = useUploadPicViewModal(props);
   return (
     <ScreenContainer>
       <View style={uploadedPic.container}>

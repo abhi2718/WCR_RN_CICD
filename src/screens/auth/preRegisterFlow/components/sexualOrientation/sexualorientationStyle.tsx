@@ -8,6 +8,7 @@ import {
   fonts,
 } from '../../../../../infrastructure/theme/fonts';
 export const SexualOrientationStyle = StyleSheet.create({
+  wrapper:{ flex: 1 },
   container: {
     flex: 1,
     justifyContent: 'space-between',

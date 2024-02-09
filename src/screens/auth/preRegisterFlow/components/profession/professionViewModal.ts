@@ -1,6 +1,5 @@
 import { ROUTES } from './../../../../../navigation/index';
-import { useNavigation } from '@react-navigation/native';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ScreenParams,
@@ -97,7 +96,7 @@ export const useProfessionModal = (props: ScreenParams) => {
           title: professionForm.title,
         },
         institution: professionForm.institution,
-        steps:5
+        steps: 5,
       };
       if (
         user?.designation?.userDegree === professionForm.userDegree &&
@@ -140,6 +139,6 @@ export const useProfessionModal = (props: ScreenParams) => {
     primaryDegreeOption,
     handleSubmit,
     handleInputChange,
-    changePrimaryDegreeOption
+    changePrimaryDegreeOption,
   };
 };

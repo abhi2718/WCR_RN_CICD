@@ -7,7 +7,7 @@ import {
   View,
   BackHandler,
 } from 'react-native';
-import { Row, Logo } from '../tools';
+import { Row, Logo, isAndroid } from '../tools';
 import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
@@ -19,8 +19,6 @@ import {
   fonts,
 } from '../../infrastructure/theme/fonts';
 import { ActivityIndicator } from 'react-native-paper';
-import { theme } from '../../infrastructure/theme';
-
 interface HeaderBarProps {
   skip?: () => void;
   info?: () => void;
@@ -48,6 +46,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
   } = props;
   const navigation = useNavigation();
   const navigationState = useNavigationState((state) => state);
+  const [hideBackButton, setHideBackButton] = useState(false);
   const handleGoBack = () => {
     if (navigationState?.routes?.length === 1) {
       BackHandler.exitApp();
@@ -55,15 +54,25 @@ export const HeaderBar = (props: HeaderBarProps) => {
     }
     navigation.goBack();
   };
+  useEffect(() => {
+    if (navigationState?.routes?.length === 1 && !isAndroid) {
+      setHideBackButton(true);
+    }
+  }, []);
   const _goBack = goBack ? goBack : handleGoBack;
   return (
-    <Row justifyContent="space-between" alignItems="center">
-      <Pressable onPress={_goBack}>
+    <Row
+      justifyContent={'space-between'}
+      alignItems="center"
+    >
+      <Pressable onPress={hideBackButton ? () => {} : _goBack}>
         <View style={headerStyle.arrowContainer}>
-          <Image
-            style={headerStyle.arrow}
-            source={require('../../assets/images/icons/back-arrow.png')}
-          />
+          {!hideBackButton && (
+            <Image
+              style={headerStyle.arrow}
+              source={require('../../assets/images/icons/back-arrow.png')}
+            />
+          )}
         </View>
       </Pressable>
       {isLogo && <Logo width={50} height={35} />}
