@@ -143,8 +143,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       return setValidationErrors(errors);
     } else {
       setValidationErrors({});
-      console.log()
-      // await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
+      await newUserSignUp(formData.email, credential, receivedData.firebaseUid);
     }
   };
 
@@ -167,6 +166,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     firebaseUid?: string,
   ) => {
     try {
+      setLoading(true);
       const password = `$Sg{email}9%`;
       if (credential) {
         let data;
@@ -185,6 +185,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       }
 
       if (!email) {
+        setLoading(false);
         return ShowFlashMessage('Alert', 'Email is required', 'danger');
       }
 
@@ -203,6 +204,8 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
           mobile: formData.mobile,
           dob: formData.dob,
         });
+      } else {
+        setLoading(false);
       }
     } catch (e) {
       setLoading(false);
@@ -220,7 +223,6 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
     fbId,
   }: socialSignInSignUpPayload) {
     try {
-      setLoading(true);
       const dataMango = await socialSignInSignUp({
         firebaseUid,
         email,
@@ -233,14 +235,14 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       });
       const payload = {
         user: {
-          ...dataMango.user,
+          ...dataMango?.user,
           token: dataMango?.token,
         },
       };
       dispatch(addUser(payload));
       setLoading(false);
-      if (dataMango.token)
-        navigateToGenderScreen(dataMango.user._id);
+      if (dataMango?.token)
+        navigateToGenderScreen(dataMango?.user?._id);
     } catch (error) {
       setLoading(false);
     }

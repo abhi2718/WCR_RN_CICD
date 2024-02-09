@@ -8,6 +8,9 @@ export const ErrorText = styled.Text`
   color: ${colors.ui.primary};
 `;
 export const styles = StyleSheet.create({
+  errorText: {
+    color:colors.ui.error
+  },
   wrapper: {
     flex:1
   },
@@ -32,10 +35,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.ui.inputBg,
-    //paddingVertical:sizes[2],
     borderRadius: sizes[9],
     paddingHorizontal: sizes[3],
     marginTop: sizes[0],
-    marginBottom: sizes[4],
+    marginBottom: sizes[0],
   },
 });

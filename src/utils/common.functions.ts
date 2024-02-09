@@ -236,3 +236,8 @@ export function feetAndInchesToCm(feet: number, inches: number): string {
   return Math.floor(totalCm).toString();
 }
 
+export const validateEmail = (email:string) => {
+  // Regular expression for email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};

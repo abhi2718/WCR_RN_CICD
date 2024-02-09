@@ -16,7 +16,7 @@ import {
 } from '../../../types/services.types/firebase.service';
 import { addUser } from '../../../store/reducers/user.reducer';
 import { useDispatch } from 'react-redux';
-import { useNavigateToScreen } from '../../../utils/common.functions';
+import { useNavigateToScreen, validateEmail } from '../../../utils/common.functions';
 import { CommonActions } from '@react-navigation/native';
 
 export const useViewModal = (props: ScreenParams) => {
@@ -26,6 +26,7 @@ export const useViewModal = (props: ScreenParams) => {
   const firebaseService = new FirebaseService();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const [isValidEmail,setIsValidEmail] = useState(false);
   const [fbdata, setFbData] = useState(null);
   const dispatch = useDispatch();
   const { navigateToScreen } = useNavigateToScreen();
@@ -130,6 +131,12 @@ export const useViewModal = (props: ScreenParams) => {
       return ShowFlashMessage(
         'Alert',
         'Please enter your email address',
+        'danger',
+      );
+    } else if (!validateEmail(email)) {
+      return ShowFlashMessage(
+        'Alert',
+        'Please enter a valid email address.',
         'danger',
       );
     }
@@ -277,6 +284,11 @@ export const useViewModal = (props: ScreenParams) => {
     });
   };
   const handleLoadingState = useCallback(() => { }, []);
+  const validateUserEmail = (email: string) => { 
+    const isValid = validateEmail(email);
+    setEmail(email);
+    setIsValidEmail(isValid);
+  }
   return {
     loading,
     _googleSignIn,
@@ -291,6 +303,8 @@ export const useViewModal = (props: ScreenParams) => {
     checkIsNewUser,
     navigateToGenderScreen,
     getOtpOnEmail,
-    handleLoadingState
+    handleLoadingState,
+    validateUserEmail,
+    isValidEmail
   };
 };
