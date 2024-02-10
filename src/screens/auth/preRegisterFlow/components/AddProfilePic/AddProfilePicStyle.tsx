@@ -94,6 +94,9 @@ export const addPicture = StyleSheet.create({
 });
 
 export const modalStyles = StyleSheet.create({
+  logoWrapper: {
+    marginLeft: -40
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -106,7 +109,7 @@ export const modalStyles = StyleSheet.create({
   },
   arrow: {
     height: sizes[4],
-    width: sizes[2],
+    width: sizes[4],
   },
   logo: {
     marginLeft: -25,
@@ -120,6 +123,12 @@ export const modalStyles = StyleSheet.create({
     backgroundColor: 'white',
     padding: sizes[4],
     borderRadius: sizes[1],
+    alignItems: 'center',
+  },
+  backButtonWrapper:{
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   row: {

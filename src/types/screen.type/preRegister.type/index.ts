@@ -1,3 +1,6 @@
+import { ImageOrVideo } from "react-native-image-crop-picker";
+import { ImageProps } from "react-native/types";
+
 export type ModalImageSelectedType = {
     path: string;
     index: number;
@@ -15,3 +18,8 @@ export type ModalImageSelectedType = {
     setAllPics: (payload: any) => void;
     showHeader?: boolean;
   };
+  export interface AvatarProps extends ImageProps {
+    onChange?: (image: ImageOrVideo) => void;
+    navigation: any;
+    route: any;
+  }
