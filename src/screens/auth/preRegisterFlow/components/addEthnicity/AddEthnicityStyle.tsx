@@ -4,6 +4,9 @@ import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../infrastructure/theme/colors';
 
 export const addEthnicityStyle = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'space-between',

@@ -1,12 +1,17 @@
-export type CheckBoxProps = {
-  data: CheckBoxDataType[];
-  preferNotTosayflag: any;
-  onChangeValue: any;
-  onChangeListValue: any;
+export type MultipleCheckBoxListProps = {
+  data: MultipleCheckBoxListDataType[];
+  handleListChange: (data: MultipleCheckBoxListDataType[]) => void
 };
 
-export type CheckBoxDataType = {
+export type MultipleCheckBoxListDataType = {
   id: number;
   text: string;
   isChecked: boolean;
+};
+
+export type CheckBoxProps = {
+  isChecked: boolean;
+  label: string;
+  id: number;
+  handleChange: (id: number) => void;
 };
