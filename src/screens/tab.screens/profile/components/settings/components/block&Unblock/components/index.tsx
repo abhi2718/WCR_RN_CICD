@@ -4,7 +4,7 @@ import {
   DropdownInput,
   FlatInput,
 } from '../../../../../../../../components/inputBox';
-import { Row, Spacer } from '../../../../../../../../components/tools';
+import { Column, Row, Spacer } from '../../../../../../../../components/tools';
 import { styles } from '../styles';
 type ChipProps = {
   item: {
@@ -28,3 +28,34 @@ export const Chip = (props: ChipProps) => {
     </Row>
   );
 };
+export type BlockedUserProps = {
+  id: string;
+  profileUrl: string;
+  name: string;
+  onPress:(id:string)=>void;
+};
+export const BlockedUser = (props: BlockedUserProps) => {
+  const { id,profileUrl,name,onPress } = props;
+  return (
+    <View key={id} style={styles.blockUserWrapper}>
+      <Row justifyContent="space-between" alignItems="center">
+        <Row alignItems="center" gap={10}>
+          <Image
+            style={styles.blockUserAvatar}
+            source={{ uri: profileUrl }}
+          />
+          <Column>
+            <Text style={styles.blockUserText}>{name}</Text>
+            <Text style={styles.blockedText}>Blocked</Text>
+          </Column>
+        </Row>
+        <Pressable
+          onPress={() => onPress(id)}
+          style={styles.blockedButton}
+        >
+          <Text style={styles.blockButtonText}>Unblock</Text>
+        </Pressable>
+      </Row>
+    </View>
+  );
+}

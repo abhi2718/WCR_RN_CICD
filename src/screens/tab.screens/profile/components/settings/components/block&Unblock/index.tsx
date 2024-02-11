@@ -7,7 +7,7 @@ import {
   Row,
   Spacer,
 } from '../../../../../../../components/tools';
-import { Chip } from './components';
+import { BlockedUser, Chip } from './components';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../../../components/header';
@@ -29,7 +29,10 @@ export const BlockAndUnBlock = () => {
     _selectedUserDegreeType,
     loading,
     cometChatBlockedUsers,
-    handleUserUnBlock,
+    handleCometChatUserUnBlock,
+    voidFunc,
+    inAppBlockedUsers,
+    unBlockInAppBlockUser,
   } = useViewModal();
   if (loading) {
     return <FullLoader />;
@@ -46,7 +49,7 @@ export const BlockAndUnBlock = () => {
             <Text style={styles.text}>Block by Country</Text>
             <DropdownInput
               data={country}
-              onFocus={() => {}}
+              onFocus={voidFunc}
               labelField="label"
               valueField="value"
               placeholder="Country"
@@ -66,7 +69,7 @@ export const BlockAndUnBlock = () => {
             <Text style={styles.text}>Block by Degree Category/ Type</Text>
             <DropdownInput
               data={_userDegree}
-              onFocus={() => {}}
+              onFocus={voidFunc}
               labelField="label"
               valueField="value"
               placeholder="Select Degree Category"
@@ -75,14 +78,13 @@ export const BlockAndUnBlock = () => {
             <Spacer style={styles.rowOne} position="bottom" size={10}>
               <DropdownInput
                 data={selectedUserDegreeType}
-                onFocus={() => {}}
+                onFocus={voidFunc}
                 labelField="label"
                 valueField="value"
                 placeholder="Select Degree Type"
                 onChange={handleselectedUserDegreeType}
               />
             </Spacer>
-
             <Row style={styles.rowWrap} alignItems="center">
               {selecteduserDegree.map((item, index) => (
                 <Chip
@@ -104,26 +106,22 @@ export const BlockAndUnBlock = () => {
           </Spacer>
           <Text style={styles.blockedListText}>Blocked Users</Text>
           {cometChatBlockedUsers.map((user) => (
-            <View key={user.getUid()} style={styles.blockUserWrapper}>
-              <Row justifyContent="space-between" alignItems="center">
-                <Row alignItems="center" gap={10}>
-                  <Image
-                    style={styles.blockUserAvatar}
-                    source={{ uri: user.getAvatar() }}
-                  />
-                  <Column>
-                    <Text style={styles.blockUserText}>{user.getName()}</Text>
-                    <Text style={styles.blockedText}>Blocked</Text>
-                  </Column>
-                </Row>
-                <Pressable
-                  onPress={() => handleUserUnBlock(user.getUid())}
-                  style={styles.blockedButton}
-                >
-                  <Text style={styles.blockButtonText}>Unblock</Text>
-                </Pressable>
-              </Row>
-            </View>
+            <BlockedUser
+              key={user.getUid()}
+              id={user.getUid()}
+              name={user.getName()}
+              profileUrl={user.getAvatar()}
+              onPress={handleCometChatUserUnBlock}
+            />
+          ))}
+          {inAppBlockedUsers.map(({ profile, _id, profilePicture }) => (
+            <BlockedUser
+              key={_id}
+              id={_id}
+              name={profile.name.first}
+              profileUrl={profilePicture.url}
+              onPress={unBlockInAppBlockUser}
+            />
           ))}
         </View>
       </ScrollView>

@@ -7,19 +7,17 @@ import {
   Pressable,
   Keyboard,
 } from 'react-native';
-import { Button, PrimaryButton } from '../../../../../../../components/button';
+import { PrimaryButton } from '../../../../../../../components/button';
 import { DropdownInput } from '../../../../../../../components/inputBox';
 import { Spacer } from '../../../../../../../components/tools';
-import { report } from '../../../../../../../utils/constanst';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../../../components/header';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
+import { ScreenParams } from '../../../../../../../types/services.types/firebase.service';
 
-export const ReportScreen = (props: any) => {
+export const ReportScreen = (props: ScreenParams) => {
   const {
-    user,
-    goBack,
     handleSubject,
     handleMessage,
     handleSubmit,
@@ -28,7 +26,7 @@ export const ReportScreen = (props: any) => {
   } = useViewModal(props);
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+      <Pressable style={styles.wrapper} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View>
             <HeaderBar isLogo={false} isText={true} text="Report User" />
@@ -54,7 +52,7 @@ export const ReportScreen = (props: any) => {
                 placeholder="Enter here "
                 style={styles.input}
                 multiline={true}
-                numberOfLines={10} // Set the number of lines to display
+                numberOfLines={10}
                 textAlignVertical="top"
                 returnKeyType="done"
                 placeholderTextColor={colors.ui.placeholder}

@@ -2,7 +2,7 @@ import { CLIENTID } from '@env';
 export const config = {
   API_URL:
     //'https://staging.whitecoatromance.com/api',
-    'http:/192.168.247.254:8000/api',
+    'http:/192.168.1.3:8000/api',
   CLIENTID,
   WEBCLIENTID:
     '646347262122-r6p03otrumh84bl4r5clq38hgk3t839u.apps.googleusercontent.com',
