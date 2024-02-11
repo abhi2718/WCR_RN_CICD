@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, ScrollView, Text, Pressable, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Row, Spacer } from '../../../../../../../components/tools';
@@ -138,8 +138,8 @@ export default function CardCompoent({ item, height, cardRef }) {
                   </Row>
                 )}
 
-                {ethnicity.length >= 0 &&
-                  ethnicity.map((ethnicity, index) => (
+                {ethnicity?.length >= 0 &&
+                  ethnicity?.map((ethnicity, index) => (
                     <Row
                       key={index}
                       gap={10}
@@ -174,7 +174,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                     <Text style={cardStyles.chipText}>{item.religion}</Text>
                   </Row>
                 )}
-                {item.politics && item.politics !== 'Prefer not to say' && (
+                {item?.politics && item?.politics !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
@@ -183,27 +183,27 @@ export default function CardCompoent({ item, height, cardRef }) {
                     <Text style={cardStyles.chipText}>{item.politics}</Text>
                   </Row>
                 )}
-                {item.kids &&
-                  item.kids !== 'Prefer not to say' &&
-                  (item.kids === ' Prefer not to say' ? null : (
+                {item?.kids &&
+                  item?.kids !== 'Prefer not to say' &&
+                  (item?.kids === ' Prefer not to say' ? null : (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
                       <Image
                         style={cardStyles.chipIcon}
                         source={require('../../../../../../../assets/images/vitalIcons/haveKid.png')}
                       />
-                      <Text style={cardStyles.chipText}>{item.kids}</Text>
+                      <Text style={cardStyles.chipText}>{item?.kids}</Text>
                     </Row>
                   ))}
 
-                {item.covidVaccineStatus &&
-                  item.covidVaccineStatus !== 'Prefer not to say' && (
+                {item?.covidVaccineStatus &&
+                  item?.covidVaccineStatus !== 'Prefer not to say' && (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
                       <Image
                         style={cardStyles.chipIcon}
                         source={require('../../../../../../../assets/images/vitalIcons/corona.png')}
                       />
                       <Text style={cardStyles.chipText}>
-                        {item.covidVaccineStatus}
+                        {item?.covidVaccineStatus}
                       </Text>
                     </Row>
                   )}
@@ -235,7 +235,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                     <View style={[cardStyles.ph16]}>
                       {item?.interests?.length > 0 && (
                         <>
-                          {/* <Spacer position="top" size={5} /> */}
                           <Text style={cardStyles.aboutHeading}>
                             Interests & Hobbies
                           </Text>

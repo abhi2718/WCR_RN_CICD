@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { dimensions, isAndroid } from '../../../../../components/tools';
+import { dimensions } from '../../../../../components/tools';
 import { HomeDeckRepository } from '../../../../../repository/homeDeck.repo';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
@@ -71,15 +71,14 @@ export const useViewModal = (route: RouteType) => {
   }, [route?.params]);
   async function checkApplicationPermission() {
     const authorizationStatus = await messaging().requestPermission();
-
     if (authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED) {
-      console.log('User has notification permissions enabled.');
+      //'User has notification permissions enabled.'
     } else if (
       authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL
     ) {
-      console.log('User has provisional notification permissions.');
+      //'User has provisional notification permissions.'
     } else {
-      console.log('User has notification permissions disabled');
+      // 'User has notification permissions disabled'
     }
   }
   useEffect(() => {
@@ -96,9 +95,8 @@ export const useViewModal = (route: RouteType) => {
   }, []);
   const fetchToken = useCallback(async () => {
     const token = await messaging().getToken();
-    console.log('Fetching token...', token);
     await CometChat.registerTokenForPushNotification(token);
-    //updateUserDetails({ deviceToken: token });
+    updateUserDetails({ deviceToken: token });
   }, []);
   useEffect(() => {
     fetchToken();

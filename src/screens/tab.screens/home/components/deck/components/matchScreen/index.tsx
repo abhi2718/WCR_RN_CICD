@@ -8,7 +8,7 @@ import { HeaderBar } from '../../../../../../../components/header';
 import { PrimaryButton } from '../../../../../../../components/button';
 import { MatchScreenPropsType } from '../../../../../../../types/screen.type/home.type';
 
-export const MatchScreen = (props:MatchScreenPropsType) => {
+export const MatchScreen = (props: MatchScreenPropsType) => {
   const { handleHideOfIsMatchScreen, isMatch, startChat } = props;
   const { user } = useSelector(({ userState }) => userState);
   return (

@@ -23,18 +23,18 @@ export const FriendContextProvider = (props:FriendContextProviderProps) => {
   const [numberOfGroups, setNumberOfGroups] = useState(0);
   const [numberOfFriends, setNumberOfFriends] = useState(0);
   const fetchPrivateFriends = async () => {
-    try {
-      setLoading(true);
-      const data = await Promise.all([likeRepository.getFriends(config.COMETCHAT_USERID),
-      likeRepository.getFriends(config.COMETCHAT_USERID,"group")])
-      const _myFriends = data[0].data.map((friend:Conversation) => friend.conversationWith);
-      setNumberOfGroups(data[1].data.length)
-      setFriends(_myFriends);
-      setNumberOfFriends(_myFriends.length);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
+    // try {
+    //   setLoading(true);
+    //   const data = await Promise.all([likeRepository.getFriends(config.COMETCHAT_USERID),
+    //   likeRepository.getFriends(config.COMETCHAT_USERID,"group")])
+    //   const _myFriends = data[0].data.map((friend:Conversation) => friend.conversationWith);
+    //   setNumberOfGroups(data[1].data.length)
+    //   setFriends(_myFriends);
+    //   setNumberOfFriends(_myFriends.length);
+    //   setLoading(false);
+    // } catch (error) {
+    //   setLoading(false);
+    // }
   };
   const value = {
     friends,

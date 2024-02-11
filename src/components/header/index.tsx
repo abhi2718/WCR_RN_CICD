@@ -61,10 +61,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
   }, []);
   const _goBack = goBack ? goBack : handleGoBack;
   return (
-    <Row
-      justifyContent={'space-between'}
-      alignItems="center"
-    >
+    <Row justifyContent={'space-between'} alignItems="center">
       <Pressable onPress={hideBackButton ? () => {} : _goBack}>
         <View style={headerStyle.arrowContainer}>
           {!hideBackButton && (
@@ -300,11 +297,15 @@ export const ErrorScreenHeader = () => {
         <View style={errorScreenHeaderStyle.emptyView} />
         <Logo width={40} height={40} />
         <Pressable onPress={modalShow}>
-          <Image
-            style={errorScreenHeaderStyle.threeDots}
-            resizeMode="contain"
-            source={require('../../assets/images/icons/threeDots.png')}
-          />
+          <View
+            style={errorScreenHeaderStyle.threeDotWrapper}
+          >
+            <Image
+              style={errorScreenHeaderStyle.threeDots}
+              resizeMode="contain"
+              source={require('../../assets/images/icons/threeDots.png')}
+            />
+          </View>
         </Pressable>
       </Row>
       <DltLogOutModal
@@ -316,6 +317,12 @@ export const ErrorScreenHeader = () => {
 };
 
 export const errorScreenHeaderStyle = StyleSheet.create({
+  threeDotWrapper: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerRow: {
     width: '100%',
     paddingHorizontal: sizes[3],

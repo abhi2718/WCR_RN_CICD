@@ -1,8 +1,8 @@
 export const genderArray = [
   'Man',
   'Woman',
-  'Trans-man',
-  'Trans-woman',
+  'Trans-Man',
+  'Trans-Woman',
   'Non-Binary',
   'Everyone',
 ];

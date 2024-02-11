@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import { LikeContext } from '../../../../../../../contexts/likes.context';
 import { ROUTES } from '../../../../../../../navigation';
 import { HomeDeckRepository } from '../../../../../../../repository/homeDeck.repo';
-export const useViewModal = (item: any, cardRef: any) => {
+import { Profile } from '../../../../../../../types/screen.type/home.type';
+
+export const useViewModal = (item:Profile, cardRef: any) => {
   const homeDeckRepository = new HomeDeckRepository();
   const { user } = useSelector(({ userState }) => userState);
   const { fetchAll } = useContext(LikeContext);

@@ -9,7 +9,7 @@ import {
   Keyboard,
 } from 'react-native';
 import { useViewModal } from './signinViewModal';
-import { styles } from './signInStyle';
+import { ErrorText, styles } from './signInStyle';
 
 import {
   RoundedButtonWithIconAndText,
@@ -91,9 +91,9 @@ export default function SignInScreen(props: ScreenParams) {
               </Spacer>
             }
             {!isValidEmail && email?.length ? (
-              <Text style={styles.errorText}>
+              <ErrorText>
                 Please enter a valid email address.
-              </Text>
+              </ErrorText>
             ) : (
               <View />
             )}
