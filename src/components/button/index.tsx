@@ -12,7 +12,6 @@ import { ButtonProps } from '../../types/components/button.type';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { fontWeights, fonts } from '../../infrastructure/theme/fonts';
-import { ImageContainer } from '../tools';
 
 export const Button = (props: ButtonProps) => {
   const { title, onPress, isLoading } = props;

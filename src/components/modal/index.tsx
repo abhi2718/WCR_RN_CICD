@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
+import React from 'react';
+import { Modal, StyleSheet, Text, View } from 'react-native';
 import { ModalProps } from './../../types/components/modal.type';
 import { ImageContainer, Row } from '../tools';
 import { PrimaryButton } from '../button';

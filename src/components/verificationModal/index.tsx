@@ -15,11 +15,9 @@ import {
   modalStyle,
   insModalStyle,
 } from '../profilePicInfoModal/profileInfoStyle';
-// import { modalStyle } from './profileInfoStyle';
 
 export const VerificationInfoModal = (props: VerificationInfoProps) => {
   const { isVisible, onClose } = props;
-
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={modalStyle.centeredView}>
@@ -27,7 +25,6 @@ export const VerificationInfoModal = (props: VerificationInfoProps) => {
           <View>
             <Text style={modalStyle.heading}>You’re halfway {'\n'} there!</Text>
             <Text style={modalStyle.subHeading}>Your Safety Matters!</Text>
-
             <Row style={modalStyle.row}>
               <Image
                 resizeMode="contain"

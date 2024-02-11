@@ -8,7 +8,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Row, Spacer, dimensions } from '../tools';
+import { Row,dimensions } from '../tools';
 import { AlertScreen } from '../alert';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
 import { useLogOutViewModal } from '../../utils/logOut';
@@ -97,7 +97,7 @@ export const DltLogOutModal = (props: DltLogOutType) => {
         title="Logout?"
         description="Are you sure want to log out?"
         onPress={handleLogOut}
-      ></AlertScreen>
+      />
       <AlertScreen
         showModal={showDeleteModal}
         setShowModal={setDeleteModal}
@@ -105,7 +105,7 @@ export const DltLogOutModal = (props: DltLogOutType) => {
         description="Are you sure you want to 
          delete your account permanently?"
         onPress={() => hardDeleteUser()}
-      ></AlertScreen>
+      />
     </>
   );
 };

@@ -1,15 +1,13 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
+import { NotificationCountContextProviderProps, NotificationCountContextType } from '../../types/context.type/notification.type';
 
 export const NotificationCountContext =
   createContext<NotificationCountContextType>({
     _setCount: (countNumber: number) => {},
     count: 0,
   });
-type NotificationCountContextType = {
-  _setCount: (countNumber: number) => void;
-  count: number;
-};
-export const NotificationCountContextProvider = (props) => {
+
+export const NotificationCountContextProvider = (props:NotificationCountContextProviderProps) => {
   const [count, setCount] = useState<number>(0);
   const _setCount = (countNumber: number) => setCount(countNumber);
   const value = {
