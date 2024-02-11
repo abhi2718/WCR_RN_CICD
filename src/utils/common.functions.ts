@@ -30,8 +30,8 @@ export const unixToDate = (unix: string) => {
 
 export const makeFalseDefaultValue = (
   ethnicityConstantData: string[],
-): CheckBoxDataType[] => {
-  const defaultData: CheckBoxDataType[] = ethnicityConstantData.map(
+): MultipleCheckBoxListDataType[] => {
+  const defaultData: MultipleCheckBoxListDataType[] = ethnicityConstantData.map(
     (item, index) => {
       if (item == preferNotToSay) {
         return { id: index, text: item, isChecked: true };

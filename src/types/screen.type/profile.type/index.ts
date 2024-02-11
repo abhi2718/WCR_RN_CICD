@@ -166,3 +166,16 @@ export type BlockedProfile = {
     url: string;
   };
 }
+export type BlockedUserProps = {
+  id: string;
+  profileUrl: string;
+  name: string;
+  onPress:(id:string)=>void;
+};
+export type ChipProps = {
+  item: {
+    label: string;
+    value: string;
+  };
+  onPress: () => void;
+};

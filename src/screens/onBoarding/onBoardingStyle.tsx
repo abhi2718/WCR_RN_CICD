@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { fontWeights, fonts } from '../../infrastructure/theme/fonts';
-import { dimensions } from '../../components/tools';
+
 
 export const styles = StyleSheet.create({
   mainContainer: {

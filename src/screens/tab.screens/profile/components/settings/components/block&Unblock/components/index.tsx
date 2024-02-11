@@ -1,18 +1,9 @@
 import React from 'react';
 import { View, Text, Pressable, ScrollView, Image } from 'react-native';
-import {
-  DropdownInput,
-  FlatInput,
-} from '../../../../../../../../components/inputBox';
 import { Column, Row, Spacer } from '../../../../../../../../components/tools';
+import { BlockedUserProps, ChipProps } from '../../../../../../../../types/screen.type/profile.type';
 import { styles } from '../styles';
-type ChipProps = {
-  item: {
-    label: string;
-    value: string;
-  };
-  onPress: () => void;
-};
+
 export const Chip = (props: ChipProps) => {
   const { item, onPress } = props;
   return (
@@ -28,12 +19,7 @@ export const Chip = (props: ChipProps) => {
     </Row>
   );
 };
-export type BlockedUserProps = {
-  id: string;
-  profileUrl: string;
-  name: string;
-  onPress:(id:string)=>void;
-};
+
 export const BlockedUser = (props: BlockedUserProps) => {
   const { id,profileUrl,name,onPress } = props;
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Pressable, Image } from 'react-native';
+import { View, Text, SafeAreaView,ScrollView } from 'react-native';
 import { DropdownInput } from '../../../../../../../components/inputBox';
 import {
   Column,
@@ -11,7 +11,6 @@ import { BlockedUser, Chip } from './components';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../../../components/header';
-import { ScrollView } from 'react-native-gesture-handler';
 
 export const BlockAndUnBlock = () => {
   const {

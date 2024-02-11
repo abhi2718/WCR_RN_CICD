@@ -1,23 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Image,
   ImageBackground,
-  SafeAreaView,
-  ScrollView,
   Text,
   View,
 } from 'react-native';
-import {
-  dimensions,
-  ImageContainer,
-  Row,
-  ScreenContainer,
-} from '../../components/tools';
+
 import { PrimaryButton } from '../../components/button';
 import { styles } from './onBoardingStyle';
 import { useonBoardingViewModal } from './boardingViwModal';
 import { ScreenParams } from '../../types/services.types/firebase.service';
-import PaymentScreen from '../subscribe/payment';
+
 
 const Onboarding = (props: ScreenParams) => {
   const { currentView, switchView } = useonBoardingViewModal(props);

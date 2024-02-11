@@ -1,8 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../infrastructure/theme/colors';
+import { dimensions } from '../../../../../components/tools';
 
 export const styles = StyleSheet.create({
+  wrapper: { height: dimensions.height, width: dimensions.width },
+  webViewWrapper:{
+    height: dimensions.height - 100,
+    width: dimensions.width,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',

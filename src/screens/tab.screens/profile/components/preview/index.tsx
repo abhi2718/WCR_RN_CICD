@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, Image, Pressable } from 'react-native';
+import { View, Text, ScrollView, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Row, ScreenWrapper, Spacer } from '../../../../../components/tools';
 import { useViewModal } from './previewViewModal';
@@ -8,7 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { HeaderBar } from '../../../../../components/header';
 
 export const PreviewScreen = () => {
-  const { user, goBack } = useViewModal();
+  const { user} = useViewModal();
   return (
     <ScreenWrapper>
       <View>
