@@ -3,7 +3,6 @@ import { colors } from '../../infrastructure/theme/colors';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { fontWeights, fonts } from '../../infrastructure/theme/fonts';
 
-
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,

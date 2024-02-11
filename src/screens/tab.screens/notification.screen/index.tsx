@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   FlatList,
   Image,
   SafeAreaView,
-  RefreshControl,
   StyleSheet,
 } from 'react-native';
 import { HeaderBar } from '../../../components/header';
@@ -22,8 +21,6 @@ export const NotificationScreen = () => {
     notifications,
     notificationLoading,
     markAsRead,
-    handleEndReached,
-    flatListRef,
     htmlTextConvertPlainText,
   } = useViewModal();
   if (notificationLoading) {

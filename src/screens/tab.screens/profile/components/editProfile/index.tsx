@@ -25,17 +25,11 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeightModal } from './components/heightModal';
 
 export const EditProfile = () => {
-  const {
+  const { 
     answer,
     optionsList,
     handleInputChange,
     editProfile,
-    distanceRange,
-    handleDistanceSliderChange,
-    ageRange,
-    handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     ethnicity,
     handleItemSelected,
     closeModal,
@@ -49,8 +43,6 @@ export const EditProfile = () => {
     _handleInputChange,
     user,
     formatMobile,
-    openAgePickerModal,
-    handleDateChange,
     setAllPics,
     openHobbyModal,
     hobbiesList,
@@ -64,6 +56,7 @@ export const EditProfile = () => {
     _setShowHeightModal,
     height,
     setheight,
+    voidFun
   } = useViewModal();
   return (
     <SafeAreaView style={styles.editInfoContainer}>
@@ -73,7 +66,7 @@ export const EditProfile = () => {
           isText={true}
           isLoading={submitLoading}
           text="Edit info"
-          button={submitLoading ? () => {} : editProfile}
+          button={submitLoading ? voidFun : editProfile}
         />
       </View>
       <ScrollView>
@@ -332,27 +325,6 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-              if (index === 4) {
-                return (
-                  <Spacer key={index} position="top" size={20}>
-                    {/* <Row justifyContent="space-between">
-                      <Text style={styles.fieldName}>Height</Text>
-                      <Text style={styles.fieldName}>
-                        {formatNumber(heightRange[0])}
-                      </Text>
-                    </Row>
-                    <Column justifyContent="center" alignItems="center">
-                      <MultiSlider
-                        values={heightRange}
-                        min={4}
-                        max={7}
-                        step={0.1}
-                        onValuesChange={handleHeightSliderChange}
-                      />
-                    </Column> */}
-                  </Spacer>
-                );
-              }
               if (item.title === 'Ethnicity') {
                 return (
                   <Spacer key={index} position="top" size={10}>
@@ -452,7 +424,7 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-              if (item.title === 'Relationship level') {
+              if (item.title === 'Relationship Level') {
                 return (
                   <Spacer key={index} position="top" size={10}>
                     <Spacer position="top" size={10}>
@@ -507,7 +479,6 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-
               return (
                 <View key={index}>
                   <Spacer position="top" size={10}>

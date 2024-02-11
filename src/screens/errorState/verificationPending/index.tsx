@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, SafeAreaView, Text, View } from 'react-native';
-import { Column, Logo, Row, ScreenContainer } from '../../../components/tools';
-import { ErrorScreenHeader, HeaderDeck } from '../../../components/header';
+import { Column} from '../../../components/tools';
+import { ErrorScreenHeader} from '../../../components/header';
 import { PrimaryButton } from '../../../components/button';
 import { pendingStyle } from './pendingStyle';
 import { usePandingStateViewModal } from './pendingState.ViewModal';

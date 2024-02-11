@@ -69,3 +69,20 @@ export type Profile = {
   showSexualPreference: boolean;
   state: string;
 };
+export type matchUser = {
+  _id: string;
+  createdAt: string;
+  isChat: boolean;
+  isDeleted: boolean;
+  isVisible: boolean;
+  updatedAt: string;
+  users: Array<{
+    _id: string;
+    designation: any;
+    isDeleted: boolean;
+    isVisible: boolean;
+    profile: any;
+    profilePicture: any;
+  }>;
+  viewed: string[];
+};

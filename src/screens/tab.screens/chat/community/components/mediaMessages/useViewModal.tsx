@@ -1,5 +1,5 @@
 import {CometChat} from '@cometchat/chat-sdk-react-native';
-import React, {useEffect, useState} from 'react';
+import  {useEffect, useState} from 'react';
 import {MediaMessageProps} from '../../../../../../types/screen.type/communityChat';
 const type = ['image', 'video', 'audio', 'file'];
 export const useViewModal = (props: MediaMessageProps) => {

@@ -5,12 +5,10 @@ import {
   Text,
   View,
 } from 'react-native';
-
 import { PrimaryButton } from '../../components/button';
 import { styles } from './onBoardingStyle';
 import { useonBoardingViewModal } from './boardingViwModal';
 import { ScreenParams } from '../../types/services.types/firebase.service';
-
 
 const Onboarding = (props: ScreenParams) => {
   const { currentView, switchView } = useonBoardingViewModal(props);

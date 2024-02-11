@@ -6,7 +6,6 @@ import { useViewModal } from './useViewModal';
 import { AppBarDropDownProps } from '../../../../../../types/screen.type/home.type';
 export const AppBarDropDown = (props: AppBarDropDownProps) => {
   const {
-    ismatched,
     unmatch,
     showModal,
     showUnmatchModal,

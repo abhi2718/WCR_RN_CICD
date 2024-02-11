@@ -1,16 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Animated,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, Animated, TouchableOpacity } from 'react-native';
 import { SwitchButtonProps } from '../../../../../../types/screen.type/communityChat';
 import { styles } from './styles';
-import {useViewModal} from './useViewModal';
+import { useViewModal } from './useViewModal';
 
 const SwitchButton = (props: SwitchButtonProps) => {
-  const {rotationX, transformX, stage, setMyGroup, setAllGroup} =
+  const { rotationX, transformX, stage, setMyGroup, setAllGroup } =
     useViewModal(props);
 
   return (
@@ -23,18 +18,22 @@ const SwitchButton = (props: SwitchButtonProps) => {
               translateX: rotationX,
             },
           ],
-        }}></Animated.View>
+        }}
+      ></Animated.View>
       <TouchableOpacity style={styles.touchContainerStyle} onPress={setMyGroup}>
         <Text
-          style={stage === 0 ? styles.whiteTextStyle : styles.blackTextStyle}>
+          style={stage === 0 ? styles.whiteTextStyle : styles.blackTextStyle}
+        >
           My Groups
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.touchContainerStyle}
-        onPress={setAllGroup}>
+        onPress={setAllGroup}
+      >
         <Text
-          style={stage === 1 ? styles.whiteTextStyle : styles.blackTextStyle}>
+          style={stage === 1 ? styles.whiteTextStyle : styles.blackTextStyle}
+        >
           All Groups
         </Text>
       </TouchableOpacity>

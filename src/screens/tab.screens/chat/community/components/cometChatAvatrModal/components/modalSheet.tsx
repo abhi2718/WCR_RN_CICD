@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Modal, Text, SafeAreaView, Pressable, Image, StyleSheet} from 'react-native';
-import { Column, Row, Spacer } from '../../../../../../../components/tools';
+import { Column, Row } from '../../../../../../../components/tools';
 import { modalStyle } from '../styles';
 import { useViewMdal } from './useviewModal';
 import { ProfileModalSheetProps } from '../../../../../../../types/screen.type/privateChat';
@@ -9,6 +9,7 @@ import { ROUTES } from '../../../../../../../navigation';
 import { ProfileModal } from '../../../../../../../components/profile.component';
 import { CometChat } from '../../../../../../../cometchat/sdk/CometChat';
 import { CometChatMessages } from '../../../../../../../cometchat/src';
+import { ScreenParams } from '../../../../../../../types/services.types/firebase.service';
 
 export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
   const { visible, toggleVisiblity, image, name, navigateToPrivateChat,senderId, toggleModal,
@@ -58,8 +59,8 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
   );
 };
 
-export const PrivateChatWindowWrapper = ({ route }) => {
-  const { senderId, name } = route.params;
+export const PrivateChatWindowWrapper = (props:ScreenParams) => {
+  const { senderId, name } = props?.route?.params;
   const navigation = useNavigation();
   let user = new CometChat.User(senderId, name);
   return (

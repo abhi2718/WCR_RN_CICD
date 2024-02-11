@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Pressable, Keyboard } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { FullLoader, Column } from '../../../../../../components/tools';
 import GroupsList from './components/groupList';
 import SearchGroup from './components/searchGroup';
@@ -7,7 +7,6 @@ import { styles, searchStyle } from './styles';
 import { useViewModal } from './useViewModal';
 import { WelocmeGroupModal } from '../../../../../../components/modal/welocmeGroupModal';
 export type AllGroupsProps = {
-  toggleSearchInput: () => void;
 };
 const AllGroups = (props: AllGroupsProps) => {
   const {
@@ -18,16 +17,15 @@ const AllGroups = (props: AllGroupsProps) => {
     closeModal,
     isModalVisible,
   } = useViewModal();
-  const { toggleSearchInput } = props;
+  const {} = props;
   if (loading) {
     return <FullLoader />;
   }
   return (
-    <Pressable style={styles.container} onPress={Keyboard.dismiss}>
-      <WelocmeGroupModal isVisible={!isModalVisible} onClose={closeModal} />
+    <View style={styles.container}>
+        <WelocmeGroupModal isVisible={!isModalVisible} onClose={closeModal} />
       <View style={styles.container}>
         <SearchGroup
-          toggleSearchInput={toggleSearchInput}
           handleTextChange={handleTextChange}
         />
         {groups?.length > 0 ? (
@@ -49,7 +47,7 @@ const AllGroups = (props: AllGroupsProps) => {
           </View>
         )}
       </View>
-    </Pressable>
+    </View>
   );
 };
 
