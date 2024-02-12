@@ -1,9 +1,6 @@
 import {
   Text,
-  View,
   Pressable,
-  StatusBar,
-  FlatList,
   StyleSheet,
   Image,
 } from 'react-native';
@@ -22,7 +19,12 @@ export const CustomCheckboxWrapper = styled.View`
   border-radius: 2px;
   border: 2px solid #49454f;
 `;
-export const CustomCheckBox = (props) => {
+export type CustomCheckBoxProps = {
+  onPress: () => void;
+  isChecked: boolean;
+  label: string;
+}
+export const CustomCheckBox = (props:CustomCheckBoxProps) => {
   const { onPress, isChecked, label } = props;
 
   return (

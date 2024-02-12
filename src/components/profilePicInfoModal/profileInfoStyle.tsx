@@ -24,8 +24,6 @@ export const modalStyle = StyleSheet.create({
     paddingBottom: sizes[4],
     paddingHorizontal: sizes[3],
     shadowColor: colors.ui.black,
-    // height: dimensions.height - 300,
-
     shadowOffset: {
       width: 0,
       height: 2,
