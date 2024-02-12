@@ -94,6 +94,7 @@ export const addPicture = StyleSheet.create({
 });
 
 export const modalStyles = StyleSheet.create({
+  backButtonWrapper:{width:40,height:40,backgroundColor:'red',justifyContent:'center',alignItems:'center'},
   logoWrapper: {
     marginLeft: -40
   },

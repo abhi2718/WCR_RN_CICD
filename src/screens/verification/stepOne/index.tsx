@@ -173,7 +173,6 @@ const VerificationStepOne = (props: ScreenParams) => {
       </Pressable>
     </ScreenContainer>
     </KeyboardAvoidingView>
-   
   );
 };
  

@@ -9,6 +9,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { dimensions } from '../../../components/tools';
 
 export const verificationStyle = StyleSheet.create({
+  
   backButtonWrapper: {
     padding:16
   },

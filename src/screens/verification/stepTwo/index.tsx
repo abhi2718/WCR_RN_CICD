@@ -390,11 +390,13 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   alignItems="center"
                 >
                   <View style={modalStyles.backButtonWrapper}>
-                    <Pressable onPress={closePicModal}>
+                    <Pressable onPress={closePhdOptionModalModal}>
+                      <View style={modalStyles.backButtonWrapper}>
                       <Image
                         style={modalStyles.arrow}
                         source={require('../../../assets/images/icons/arrow.png')}
                       />
+                      </View>
                     </Pressable>
                   </View>
                   <View style={modalStyles.logoWrapper}>
@@ -404,7 +406,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 </Row>
                 <View style={verificationStyle.container}>
                   <Text>{validationErrorMessage}</Text>
-                  <View style={{flex:1}}>
+                  <View style={verificationStyle.wrapper}>
                     <Text style={verificationStyle.subHeader}>
                       Provide The Following Degree Verification (Step III)
                     </Text>
@@ -431,7 +433,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
                       We may request additional proof of degree if needed.
                     </Text>
                   </View>
-                  {/* <KeyboardAvoidingView behavior="position"> */}
                   <View style={verificationStyle.footerDiv}>
                     <FlatInput
                       label="Enter website"
@@ -445,7 +446,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
                       isLoading={loading}
                     />
                   </View>
-                  {/* </KeyboardAvoidingView> */}
                 </View>
               </ScrollView>
             </KeyboardAvoidingView>
