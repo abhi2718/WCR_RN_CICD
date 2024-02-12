@@ -1,4 +1,4 @@
-import { View, StyleSheet, Platform } from 'react-native';
+import { StyleSheet} from 'react-native';
 import { sizes } from '../../../../../../infrastructure/theme/sizes';
 import {
   fontWeights,
@@ -8,6 +8,8 @@ import { colors } from '../../../../../../infrastructure/theme/colors';
 import { theme } from '../../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
+  pressable: { paddingHorizontal: 16 },
+  column:{ flex: 1, paddingLeft: 16 },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -68,16 +70,5 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomColor: theme.colors.border,
     borderBottomWidth: theme.units.borderSize.headerBorderWidth,
-    // ...Platform.select({
-    //   ios: {
-    //     shadowColor: 'black',
-    //     shadowOffset: { width: 10, height: 4 },
-    //     shadowOpacity: 0.01,
-    //     shadowRadius: 0,
-    //   },
-    //   android: {
-    //     elevation: 2,
-    //   },
-    // }),
   },
 });

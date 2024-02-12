@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import Share from 'react-native-share';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 
 export const useViewModal = () => {

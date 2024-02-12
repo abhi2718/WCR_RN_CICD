@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../infrastructure/theme/colors';
-import { sizes } from '../../infrastructure/theme/sizes';
+import { colors } from '../infrastructure/theme/colors';
+import { sizes } from '../infrastructure/theme/sizes';
+
 
 export const inputBoxStyle = StyleSheet.create({
   dropdown: {

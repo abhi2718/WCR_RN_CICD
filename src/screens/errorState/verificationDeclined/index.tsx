@@ -1,10 +1,9 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
-import { Column, Logo, Row, ScreenContainer } from '../../../components/tools';
-import { ErrorScreenHeader, HeaderDeck } from '../../../components/header';
+import { Column } from '../../../components/tools';
+import { ErrorScreenHeader} from '../../../components/header';
 import { declinedStyle } from './declinedStyle';
 import { PrimaryButton } from '../../../components/button';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const VerificationDeclined = () => {
   return (

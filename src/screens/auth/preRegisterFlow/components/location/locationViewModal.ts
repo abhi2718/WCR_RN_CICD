@@ -15,17 +15,13 @@ import { addUser } from '../../../../../store/reducers/user.reducer';
 
 export const useLocationViewModal = (props: ScreenParams) => {
   const { navigation } = props;
-
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
   const { user } = useSelector((state: any) => state.userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
   const [stateOption, setStatesOption] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
-
   const Country = user.address.country;
   const City = user.address.city;
   const Zipcode = user.address.zipcode;
@@ -36,11 +32,9 @@ export const useLocationViewModal = (props: ScreenParams) => {
     city: City ? City : '',
     zipcode: Zipcode ? Zipcode : '',
   });
-
   const [validationErrors, setValidationErrors] = useState<
     Partial<addressTypes>
   >({});
-
   const handleInputChange = (name: keyof addressTypes, value: string) => {
     setLocationForm((oldLocationData) => {
       if (name === 'country' && oldLocationData?.country != value) {
@@ -50,9 +44,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
       }
     });
   };
-
   const [zipPlaceHolder, setPlaceholder] = useState('Ex: 55555');
-
   useEffect(() => {
     getStatesOptions();
     handleZipPlaceHolder(user.address.country)
@@ -60,16 +52,13 @@ export const useLocationViewModal = (props: ScreenParams) => {
   useEffect(() => {
     setStatesOption(statesOption[locationForm.country]);
   }, [locationForm.country]);
-
   const handleCountry = (selectedItem: string) => {
     handleInputChange('country', selectedItem);
     getStatesOptions();
     handleZipPlaceHolder(selectedItem);
   };
-
   const handleSubmit = async () => {
     const errors: Partial<addressTypes> = {};
-
     if (!locationForm?.country) {
       errors.country = 'Please enter country';
     }
@@ -82,7 +71,6 @@ export const useLocationViewModal = (props: ScreenParams) => {
     if (!locationForm.zipcode?.trim()?.length) {
       errors.zipcode = 'Please enter zipcode';
     }
-
     if (Object.keys(errors).length) {
       return setValidationErrors(errors);
     } else {
@@ -147,21 +135,18 @@ export const useLocationViewModal = (props: ScreenParams) => {
       }
       setLoading(true);
       const validateZipcodeData = await validateZipcode();
-
       if (
         validateZipcodeData?.user != null &&
         validateZipcodeData?.user['address.zipcode']['message'] ===
           'Zip code is not valid'
       ) {
         setLoading(false);
-
         return ShowFlashMessage(
           'Warning',
           'Zip code is not valid',
           FlashMessageType.DANGER,
         );
       }
-
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         {
@@ -180,13 +165,11 @@ export const useLocationViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-
       navigateToProfessionScreen();
     } catch (err: any) {
       setLoading(false);
     }
   };
-
   return {
     loading,
     handleCountry,

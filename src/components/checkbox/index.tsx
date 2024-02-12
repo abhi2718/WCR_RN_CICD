@@ -2,7 +2,6 @@ import {
   Text,
   View,
   Pressable,
-  StatusBar,
   FlatList,
   StyleSheet,
   Image,
@@ -10,11 +9,11 @@ import {
 import styled from 'styled-components/native';
 import React, { useEffect, useState } from 'react';
 import {
-  CheckBoxDataType,
   CheckBoxProps,
+  MultipleCheckBoxListDataType,
+  MultipleCheckBoxListProps,
 } from '../../types/components/checkbox.type';
 import { preferNotToSay } from '../../utils/constanst';
-import { makeFalseDefaultValue } from '../../utils/common.functions';
 import { Row } from '../tools';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
@@ -30,74 +29,86 @@ export const CustomCheckbox = styled.View`
   border: 2px solid #49454f;
 `;
 
-export const MultipleCheckBoxList: React.FC<CheckBoxProps> = ({
+export const CheckBox = (props: CheckBoxProps) => {
+  const { isChecked, label, id, handleChange } = props;
+  return (
+    <Row gap={10} style={styles.card}>
+      <Pressable onPress={() => handleChange(id)}>
+        <CustomCheckbox>
+          {isChecked && (
+            <Image
+              style={styles.checkedBoxImg}
+              source={require('.../../../../assets/images/icons/checkedBox.png')}
+            />
+          )}
+        </CustomCheckbox>
+      </Pressable>
+      <Text style={styles.text}>{label}</Text>
+    </Row>
+  );
+};
+export const MultipleCheckBoxList: React.FC<MultipleCheckBoxListProps> = ({
   data,
-  preferNotTosayflag,
-  onChangeValue,
-  onChangeListValue,
+  handleListChange,
 }) => {
-  const [products, setProducts] = useState<CheckBoxDataType[]>(data);
-  const handleChange = (id: any) => {
-    let temp = products.map((product) => {
-      if (id === product?.id!) {
-        return { ...product, isChecked: !product.isChecked };
-      }
-      return product;
-    });
-    setProducts(temp);
-    onChangeListValue(temp);
-    let selected = temp.filter((product) => product.isChecked);
-    onChangeValue(products[id].text, selected);
-    if (selected.find((item) => item.text === preferNotToSay)) {
-      setProducts((oldState) => {
-        const temp = oldState.map((item) => {
-          if (item.text === preferNotToSay) {
-            return {
-              ...item,
-              isChecked: false,
-            };
-          }
-          return item;
-        });
-        return temp;
+  const [products, setProducts] =
+    useState<MultipleCheckBoxListDataType[]>(data);
+  const [isPreferNotToSayChecked, setIsPreferNotToSayChecked] = useState(false);
+  const handleChange = (id: number) => {
+    if (isPreferNotToSayChecked) {
+      setIsPreferNotToSayChecked(false);
+    }
+    setProducts((oldState) => {
+      const updates = oldState.map((product) => {
+        if (id === product?.id!) {
+          return { ...product, isChecked: !product.isChecked };
+        }
+        return product;
       });
-    }
+      return updates;
+    });
   };
-
-  useEffect(() => {
-    if (preferNotTosayflag === preferNotToSay) {
-      setProducts(
-        makeFalseDefaultValue(products.map((product) => product.text)),
-      );
-    }
-  }, [preferNotTosayflag]);
-
-  const renderFlatList = (renderData: any) => {
-    return (
-      <FlatList
-        data={renderData}
-        renderItem={({ item }) => {
-          return (
-            <Row gap={10} style={styles.card}>
-              <Pressable onPress={() => handleChange(item.id)}>
-                <CustomCheckbox style={styles.checkBox}>
-                  {item.isChecked && (
-                    <Image
-                      style={styles.checkedBoxImg}
-                      source={require('.../../../../assets/images/icons/checkedBox.png')}
-                    />
-                  )}
-                </CustomCheckbox>
-              </Pressable>
-              <Text style={styles.text}>{item.text}</Text>
-            </Row>
-          );
-        }}
-      />
+  const handlePreferNotToSay = (id: number) => {
+    setIsPreferNotToSayChecked((oldState) => !oldState);
+    setProducts((oldState) =>
+      oldState.map((product) => ({ ...product, isChecked: false })),
     );
+    handleListChange(data.filter((product) => product.text === preferNotToSay));
   };
+  useEffect(() => {
+    if (products.some((product) => product.isChecked)) {
+      handleListChange(products.filter((product) => product.isChecked));
+    }
+  }, [products]);
+  const renderFlatList = (renderData: MultipleCheckBoxListDataType[]) => (
+    <FlatList
+      data={renderData}
+      renderItem={(_item) => {
+        const { item, index } = _item;
+        if (index === data.length - 1 && item.text === preferNotToSay) {
+          return (
+            <CheckBox
+              isChecked={isPreferNotToSayChecked}
+              label={preferNotToSay}
+              id={data.length}
+              handleChange={handlePreferNotToSay}
+            />
+          );
+        }
+        return (
+          <CheckBox
+            isChecked={item.isChecked}
+            label={item.text}
+            id={item.id}
+            handleChange={handleChange}
+          />
+        );
+      }}
+    />
+  );
   return <View style={styles.container}>{renderFlatList(products)}</View>;
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

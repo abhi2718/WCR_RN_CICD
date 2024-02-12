@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Pressable, SafeAreaView, Image } from 'react-native';
 import { Column, FullLoader, Row } from '../../../../../components/tools';
 import { useViewModal } from './useViewModal';
@@ -29,6 +29,7 @@ export const PreferencesScreen = () => {
     isVerificationInfoModalVisible,
     heightRange,
     setHeightRange,
+    voidFun,
   } = useViewModal();
 
   if (loading) {
@@ -40,14 +41,14 @@ export const PreferencesScreen = () => {
       <PreferenceyModal
         isVisible={isVerificationInfoModalVisible}
         onClose={closeModal}
-      ></PreferenceyModal>
+      />
       <View style={styles.padding16}>
         <HeaderBar
           isText={true}
           text="Dating Preference"
           isLogo={false}
           isLoading={submitLoading}
-          button={submitLoading ? () => {} : createPrefrences}
+          button={submitLoading ? voidFun : createPrefrences}
         />
       </View>
       <View>
@@ -192,7 +193,6 @@ export const PreferencesScreen = () => {
                 <Text style={[styles.textColor, styles.optionName]}>
                   {item.title}
                 </Text>
-
                 <SafeAreaView>
                   <Row
                     style={styles.selectRow}

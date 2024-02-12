@@ -1,4 +1,4 @@
-import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
 export const pickPhotoFromGallary = async (
   options = {

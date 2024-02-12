@@ -50,6 +50,7 @@ export class ApiService {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token ? token : '',
+        //Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2YWxpZCI6dHJ1ZSwiaWQiOiI2NWJiNWQ4MWY3MmYwYzQ3ZTY2YzNhMzEiLCJleHBpcmVzIjoiMjAyNC0wNC0wMSAwODo1OSJ9.K7_X3T5QjCWW1xq7Xh0wkK2_K0u0i5ejpklsme33bVI',
       },
     };
 

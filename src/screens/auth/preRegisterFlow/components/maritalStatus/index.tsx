@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { ChipStyle } from './chipStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { useNavigation } from '@react-navigation/native';
 import { HeaderBar } from '../../../../../components/header';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { useMaritalStatusViewModal } from './marital.Viewmodal';
@@ -33,7 +32,7 @@ const MaritalStatus = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar skip={() => navigateToKidsScreen()}></HeaderBar>
+          <HeaderBar skip={navigateToKidsScreen} />
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>

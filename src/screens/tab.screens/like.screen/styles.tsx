@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { colors } from '../../../infrastructure/theme/colors';
 import {
@@ -12,7 +12,6 @@ import { theme } from '../../../infrastructure/theme';
 export const styles = StyleSheet.create({
   header: {
     height: 58,
-    // paddingHorizontal: 16,
     backgroundColor: '#fff',
     borderBottomColor: theme.colors.border,
     borderBottomWidth: theme.units.borderSize.headerBorderWidth,

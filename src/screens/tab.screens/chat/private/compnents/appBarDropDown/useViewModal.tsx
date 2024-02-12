@@ -3,26 +3,10 @@ import { LikeRepository } from '../../../../../../repository/like.repo';
 import { CometChat } from '../../../../../../cometchat/sdk/CometChat';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../navigation';
-import { AppBarDropDownProps } from '../../../../../../types/screen.type/home.type';
+import { AppBarDropDownProps, matchUser } from '../../../../../../types/screen.type/home.type';
 import { LikeContext } from '../../../../../../contexts/likes.context';
 import { useSelector } from 'react-redux';
-type matchUser = {
-  _id: string;
-  createdAt: string;
-  isChat: boolean;
-  isDeleted: boolean;
-  isVisible: boolean;
-  updatedAt: string;
-  users: Array<{
-    _id: string;
-    designation: any;
-    isDeleted: boolean;
-    isVisible: boolean;
-    profile: any;
-    profilePicture: any;
-  }>;
-  viewed: string[];
-};
+
 export const useViewModal = (props: AppBarDropDownProps) => {
   const { user } = props;
   const { user: me } = useSelector(({ userState }) => userState);
@@ -31,7 +15,6 @@ export const useViewModal = (props: AppBarDropDownProps) => {
   const [showModal, setShowModal] = useState(false);
   const [showUnmatchModal, setUnmatchModal] = useState(false);
   const likeRepository = new LikeRepository();
-  const [ismatched, setMatched] = useState(false);
   const [documentId, setDocumetId] = useState('');
   const [memuList, setMenuList] = useState([
     {
@@ -44,8 +27,8 @@ export const useViewModal = (props: AppBarDropDownProps) => {
       title: 'Report',
       onSelect: () => {
         navigation.navigate(ROUTES.Report, {
-          userId: user.uid,
-          name: user.name,
+          userId: user.getUid(),
+          name: user.getName(),
         });
       },
     },
@@ -123,13 +106,16 @@ export const useViewModal = (props: AppBarDropDownProps) => {
     const matchedUsers = data?.map((doc: matchUser) => {
       return {
         docId: doc._id,
-        userOneID: doc.users[0]._id,
-        userTwoID: doc.users[1]._id,
+        userOneID: doc?.users[0]?._id,
+        userTwoID: doc?.users[1]?._id,
       };
     });
     const matchedUser = matchedUsers.filter(
-      (user: { docId: string; userOneID: string; userTwoID: string }) =>
-        user.userOneID === userId || user.userTwoID === userId,
+      (user: { docId: string; userOneID: string; userTwoID: string }) => {
+        if (user.userOneID === userId || user.userTwoID === userId) {
+          return true;
+        }
+      }   
     );
     if (matchedUser?.length) {
       const matchUserId = matchedUser[0].docId;
@@ -144,7 +130,6 @@ export const useViewModal = (props: AppBarDropDownProps) => {
           },
         ];
       });
-      setMatched(true);
       setDocumetId(matchUserId);
     }
   };
@@ -168,8 +153,7 @@ export const useViewModal = (props: AppBarDropDownProps) => {
     fetchCometChatBlockedUsers();
   }, []);
   return {
-    ismatched,
-    unmatch,
+    unmatch, 
     showModal,
     showUnmatchModal,
     handleUserBlock,

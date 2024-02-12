@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { pausedProfileStyle } from './pausedProfileStyle';
 import { PrimaryButton } from '../../../../../../../components/button';
-import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../../../../../../navigation';
 

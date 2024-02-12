@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   View,
   Image,
@@ -678,13 +678,7 @@ export const CometChatMessageComposer = React.forwardRef(
         );
       }
     };
-    const [showMentionModal, setShowMentationModal] = useState(false);
-    const textChangeHandler = (txt: string) => {
-      setShowMentationModal(txt.endsWith('@'));
-      onChangeText && onChangeText(txt);
-      startTyping();
-      setInputMessage(txt);
-    };
+   
 
     const liveReactionHandler = () => {
       if (hideLiveReaction) return;
@@ -1260,7 +1254,31 @@ export const CometChatMessageComposer = React.forwardRef(
     };
     const [groupMembers, setGroupMembers] = useState<
       CometChat.GroupMember[] | []
-    >([]);
+      >([]);
+      const [showMentionModal, setShowMentationModal] = useState(false);
+      const memberRef = useRef<CometChat.GroupMember[] | []>([]);
+      const textChangeHandler = (txt: string) => {
+        setShowMentationModal(txt.includes('@'));
+        const regex = /@(\w+)/;
+        onChangeText && onChangeText(txt);
+        startTyping();
+        setInputMessage(txt);
+        if (txt) {
+          const result = txt.match(regex);
+          const username = result ? result[1]?.toLowerCase() : null;
+          if (!username) {
+            return setGroupMembers(memberRef?.current);
+          }
+          const filteredList = memberRef?.current?.filter((member) => {
+            return member?.getName()?.toLowerCase()?.startsWith(username);
+          });
+          if (!filteredList?.length) {
+            setShowMentationModal(false)
+            return setGroupMembers([]);
+          }
+          setGroupMembers(filteredList);
+        }
+      };
     useEffect(() => {
       const getGroupMembersList = () => {
         let groupMembersRequest = new CometChat.GroupMembersRequestBuilder(
@@ -1270,11 +1288,11 @@ export const CometChatMessageComposer = React.forwardRef(
           .build();
         groupMembersRequest.fetchNext().then(
           (groupMembers) => {
-            setGroupMembers(
-              groupMembers.filter(
-                ({ uid }) => uid !== loggedInUser.current.uid,
-              ),
+            const memberList = groupMembers.filter(
+              ({ uid }) => uid !== loggedInUser.current.uid,
             );
+            setGroupMembers(memberList);
+            memberRef.current = memberList;
           },
           (error) => {},
         );

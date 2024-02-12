@@ -11,30 +11,24 @@ import {
 
 export const useSexualOrientationViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
-
   const { navigation } = props;
   const updatedOrientation = user?.profile?.sexualPreference ?? '';
   const [sexualOrientation, setSexualOrientation] =
     useState(updatedOrientation);
-  const [checkboxState, setCheckboxState] = useState(false);
+  const [checkboxState, setCheckboxState] = useState(user?.profile?.showSexualPreference);
   const [loading, setLoading] = useState(false);
-
   const handleSexualOrientationValue = (value: string) => {
     setSexualOrientation(value);
   };
-
   const handleCheckboxChange = () => {
     setCheckboxState(!checkboxState);
   };
-
   const navigateTolocationCreen = () => {
     navigation.navigate(ROUTES.Location);
   };
-
   const updateUserDetails = async () => {
     try {
       if (!sexualOrientation) {
@@ -44,7 +38,6 @@ export const useSexualOrientationViewModal = (props: ScreenParams) => {
           FlashMessageType.DANGER,
         );
       }
-
       if (user.profile.sexualPreference === sexualOrientation) {
         navigateTolocationCreen();
         return;

@@ -7,12 +7,10 @@ import {
   ScrollView,
   Pressable,
   Image,
-  StyleSheet,
-  Alert,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import { CustomSnakeBar, FullLoader, Row, Spacer } from '../tools';
+import {  FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';

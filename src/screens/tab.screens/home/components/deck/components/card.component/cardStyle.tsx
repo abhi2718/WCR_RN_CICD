@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { dimensions } from '../../../../../../../components/tools';
 import {
   fontSizes,
@@ -119,7 +119,6 @@ export const cardStyles = StyleSheet.create({
     color: colors.ui.text,
     fontWeight: fontWeights.regular,
     fontSize: fontSizes.button,
-    // marginTop: sizes[1],
     fontFamily: fonts.body,
   },
   blockReportView: {

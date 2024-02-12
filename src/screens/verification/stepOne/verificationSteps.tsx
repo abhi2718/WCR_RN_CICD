@@ -9,10 +9,14 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { dimensions } from '../../../components/tools';
 
 export const verificationStyle = StyleSheet.create({
+  backButtonWrapper: {
+    padding:16
+  },
+  wrapper: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    // borderColor: 'red',
-    // borderWidth: 1,
     justifyContent: 'space-between',
   },
   subHeader: {
@@ -52,7 +56,10 @@ export const verificationStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: '#fff',
   },
-  white: { backgroundColor: '#fff', paddingTop: 10 },
+  white: {
+    backgroundColor: '#fff',
+    paddingTop: 10
+  },
   subText: {
     fontSize: fontSizes.text,
     marginBottom: sizes[4],
@@ -89,7 +96,6 @@ export const verificationStyle = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: colors.ui.primary,
-    // width: dimensions.width,
     justifyContent: 'center',
     height: 400,
     alignItems: 'center',
@@ -121,16 +127,11 @@ export const firstModalStyle = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: colors.ui.opacity,
-    // borderColor: 'red',
-    // borderWidth: 2,
   },
-
   modalView: {
     position: 'relative',
     margin: 0,
     borderRadius: sizes[4],
-    paddingTop: sizes[4],
-    paddingBottom: sizes[4],
     shadowColor: colors.ui.black,
     width: dimensions.width - sizes[3],
     marginBottom: 14,
@@ -139,14 +140,6 @@ export const firstModalStyle = StyleSheet.create({
   modalViewTwo: {
     backgroundColor: colors.ui.white,
   },
-  // absolute: {
-  //   position: 'absolute',
-  //   borderRadius: sizes[4],
-  //   top: 0,
-  //   left: 0,
-  //   bottom: 0,
-  //   right: 0,
-  // },
   text: {
     textAlign: 'center',
     fontSize: sizes[4],

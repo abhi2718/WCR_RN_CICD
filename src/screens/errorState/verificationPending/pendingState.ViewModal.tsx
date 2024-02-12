@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef} from 'react';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../navigation';

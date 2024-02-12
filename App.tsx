@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { PaperProvider } from 'react-native-paper';
 import { store } from './src/store';
 import { theme } from './src/infrastructure/theme';
+import { config } from './src/utils/config';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs([
@@ -27,9 +28,7 @@ export default function App() {
 
   return (
     <StripeProvider
-      publishableKey={
-        'pk_test_51OLhmuILb85dzDST7I4QIzg7ySW2r2a5hXLUeLgCqw1ujyxUZbtW1PTUyx5kg0cmbB5Y2Aw8KcP91UpREG5ZCmau0073JGv0fo'
-      }
+      publishableKey={config.STRIPE_KEY}
       urlScheme="accept-a-payment"
     >
       <MenuProvider>

@@ -14,8 +14,6 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   rowOne: {
-    // borderColor: 'red',
-    // borderWidth: 1,
   },
   text: {
     fontWeight: fontWeights.semiBold,

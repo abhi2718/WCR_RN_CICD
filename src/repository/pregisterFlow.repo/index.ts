@@ -1,6 +1,5 @@
 import { AppUrl } from '../../utils/appUrl';
 import { ApiService } from '../../data/network/apiService';
-import { UpdateUserPayload } from '../../types/repo.type/update.user.type';
 
 export class UpdateUserDetailsRepository {
   apiService = new ApiService();

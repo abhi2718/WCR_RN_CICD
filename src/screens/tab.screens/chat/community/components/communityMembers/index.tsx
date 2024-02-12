@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -13,9 +13,7 @@ import { Member } from './components';
 import { styles } from './styles';
 import { useViewMdal } from './useViewModal';
 import { CommunityMembersProps } from '../../../../../../types/screen.type/communityChat';
-import ChatAvatorModal from '../cometChatAvatrModal';
-import { useNavigation } from '@react-navigation/native';
-import { ROUTES } from '../../../../../../navigation';
+
 
 export const CommunityMembers = (props: CommunityMembersProps) => {
   const { members, showMembers, toggleSetShowMembers } = useViewMdal(props);
@@ -25,7 +23,7 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
       {!showMembers && (
         <Pressable
           onPress={toggleSetShowMembers}
-          style={{ paddingHorizontal: 16 }}
+          style={styles.pressable}
         >
           <Row justifyContent="space-between">
             <Row alignItems="center" gap={4}>
@@ -55,7 +53,7 @@ export const CommunityMembers = (props: CommunityMembersProps) => {
             >
               <Column
                 justifyContent="center"
-                style={{ flex: 1, paddingLeft: 16 }}
+                style={styles.column}
               >
                 <Text style={styles.groupHeading}>Group Members</Text>
               </Column>

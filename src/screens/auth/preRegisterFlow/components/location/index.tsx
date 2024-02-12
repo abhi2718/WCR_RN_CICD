@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row, ScreenContainer } from '../../../../../components/tools';
-import { Image, Text, View, Keyboard, Pressable } from 'react-native';
+import { ScreenContainer } from '../../../../../components/tools';
+import { Text, View, Keyboard, Pressable } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { location } from './locationStyle';
 import {
@@ -13,6 +13,7 @@ import { useLocationViewModal } from './locationViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ErrorText } from '../../../signin/signInStyle';
 import { HeaderBar } from '../../../../../components/header';
+import { OptionType } from '../../../../../types/components/input.type';
 
 const LocationScreen = (props: ScreenParams) => {
   const {
@@ -28,12 +29,12 @@ const LocationScreen = (props: ScreenParams) => {
   } = useLocationViewModal(props);
 
   return (
-    <Pressable style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+    <Pressable style={location.innerView} onPress={Keyboard.dismiss}>
       <ScreenContainer>
         <View style={location.container}>
           <View style={location.innerView}>
-            <View style={{ flex: 1 }}>
-              <HeaderBar></HeaderBar>
+            <View style={location.innerView}>
+              <HeaderBar />
               <Text style={location.subHeader}>
                 Let's find matches near you
               </Text>
@@ -45,12 +46,11 @@ const LocationScreen = (props: ScreenParams) => {
                   valueField="value"
                   placeholder="Country"
                   value={locationForm.country}
-                  onChange={(text: any) => handleCountry(text.value)}
+                  onChange={(text: OptionType) => handleCountry(text.value)}
                 />
                 {validationErrors.country && (
                   <ErrorText> {validationErrors.country}</ErrorText>
                 )}
-
                 <SearchableDropdownInput
                   data={getStatesOptions()}
                   onFocus={() => setIsFocus(true)}
@@ -59,40 +59,39 @@ const LocationScreen = (props: ScreenParams) => {
                   valueField="value"
                   placeholder="State/Territory"
                   value={locationForm.state}
-                  onChange={(text: any) =>
-                    handleInputChange('state', text.value)
-                  }
+                  onChange={(text: OptionType) => {
+                    handleInputChange('state', text.value);
+                  }}
                 />
                 {validationErrors.state && (
                   <ErrorText> {validationErrors.state}</ErrorText>
                 )}
-
                 <FlatInput
                   label="City"
                   value={locationForm.city}
-                  onChangeText={(text: any) => handleInputChange('city', text)}
+                  onChangeText={(text: string) =>
+                    handleInputChange('city', text)
+                  }
                   error={validationErrors.city}
                 />
                 {validationErrors.city && (
                   <ErrorText> {validationErrors.city}</ErrorText>
                 )}
-
                 <FlatInput
                   label="Zip code"
                   placeholder={zipPlaceHolder}
                   maxLength={locationForm.country === 'USA' ? 5 : 6}
                   value={locationForm.zipcode}
-                  onChangeText={(text: any) =>
+                  onChangeText={(text: string) =>
                     handleInputChange('zipcode', text)
                   }
                   error={validationErrors.zipcode}
                 />
                 {validationErrors.zipcode && (
-                  <ErrorText> {validationErrors.zipcode}</ErrorText>
+                  <ErrorText>{validationErrors.zipcode}</ErrorText>
                 )}
               </View>
             </View>
-
             <View>
               <PrimaryButton
                 title="Next"

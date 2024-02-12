@@ -1,14 +1,11 @@
 import React from 'react';
-import { View, Image, Pressable, Text } from 'react-native';
+import { View, Image } from 'react-native';
 import { styles } from './homeStyle';
 import { useViewModal } from './homeViewModal';
 import {
   FullLoader,
   Spacer,
   isAndroid,
-  Row,
-  Logo,
-  dimensions,
 } from '../../../../../components/tools';
 import CardCompoent from './components/card.component/card';
 import CardStack from './components/swiper';
@@ -65,9 +62,6 @@ export default function Deck({ route }) {
           goToNotification={goToNotification}
           handleUnDoFeature={handleUnDoFeature}
         />
-        {/* <Pressable onPress={handleUnDoFeature}>
-          <Text style={{ fontFamily: 'Urbanist-Regular' }}>Undo</Text>
-        </Pressable> */}
       </View>
       <Spacer position="bottom" size={8} />
       <>
