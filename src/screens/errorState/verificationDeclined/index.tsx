@@ -8,7 +8,7 @@ import { PrimaryButton } from '../../../components/button';
 const VerificationDeclined = () => {
   return (
     <View style={declinedStyle.mainContainer}>
-      <ErrorScreenHeader />
+      {/* <ErrorScreenHeader /> */}
       <View style={declinedStyle.content}>
         <Column gap={25} alignItems="center">
           <Text style={declinedStyle.subHeading}>
