@@ -43,7 +43,7 @@ export const verificationStyle = StyleSheet.create({
     marginBottom: sizes[1],
   },
   textBox: {
-    marginBottom: sizes[2],
+    marginBottom: sizes[0],
     fontFamily: fonts.body,
   },
   footerDiv: {

@@ -123,7 +123,7 @@ export const modalStyles = StyleSheet.create({
     backgroundColor: 'white',
     padding: sizes[4],
     borderRadius: sizes[1],
-    alignItems: 'center',
+   // alignItems: 'center',
   },
   backButtonWrapper:{
     width: 50,

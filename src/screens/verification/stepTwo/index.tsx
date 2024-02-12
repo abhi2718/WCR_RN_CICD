@@ -31,6 +31,7 @@ import {
 } from '../../../components/verificationModal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const VerificationStepTwo = (props: AvatarProps) => {
   const {
@@ -370,42 +371,67 @@ const VerificationStepTwo = (props: AvatarProps) => {
               </View>
             </View>
           </Modal>
+
           <Modal
             animationType="slide"
             transparent={true}
             visible={PhdOptionModal}
             onRequestClose={closePhdOptionModalModal}
           >
-            <View style={modalStyles.modalContent}>
-              <HeaderBar></HeaderBar>
-              <View style={verificationStyle.container}>
-                <Text>{validationErrorMessage}</Text>
-                <View>
-                  <Text style={verificationStyle.subHeader}>
-                    Provide The Following Degree Verification (Step III)
-                  </Text>
-                  <Text style={verificationStyle.subText}>
-                    Upload Proof of Degree from USA showing name, institution,
-                    degree, date degree awarded
-                  </Text>
-                  <Text style={verificationStyle.subText}>
-                    ( e.g., Diploma, Transcript, Certificate of Completion,
-                    Degree Verification )
-                  </Text>
-                  <TouchableOpacity
-                    style={verificationStyle.uploadBtn}
-                    onPress={() => uploadPhdOptionPhotos()}
-                  >
-                    <Text style={verificationStyle.uploadBtnText}>Uplpoad</Text>
-                  </TouchableOpacity>
-                  <Text style={verificationStyle.subText}>
-                    Enter website to show proof of degree (e.g., Professional
-                    licensing website, Institution website showing name and year
-                    of graduation, Work website showing name and title). We may
-                    request additional proof of degree if needed.
-                  </Text>
-                </View>
-                <KeyboardAvoidingView behavior="position">
+            <KeyboardAvoidingView
+              style={verificationStyle.wrapper}
+              enabled
+              behavior={isAndroid ? 'height' : 'padding'}
+            >
+              <ScrollView style={modalStyles.modalContent}>
+                <Row
+                  style={modalStyles.row}
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <View style={modalStyles.backButtonWrapper}>
+                    <Pressable onPress={closePicModal}>
+                      <Image
+                        style={modalStyles.arrow}
+                        source={require('../../../assets/images/icons/arrow.png')}
+                      />
+                    </Pressable>
+                  </View>
+                  <View style={modalStyles.logoWrapper}>
+                    <Logo width={50} height={35} />
+                  </View>
+                  <View />
+                </Row>
+                <View style={verificationStyle.container}>
+                  <Text>{validationErrorMessage}</Text>
+                  <View style={{flex:1}}>
+                    <Text style={verificationStyle.subHeader}>
+                      Provide The Following Degree Verification (Step III)
+                    </Text>
+                    <Text style={verificationStyle.subText}>
+                      Upload Proof of Degree from USA showing name, institution,
+                      degree, date degree awarded
+                    </Text>
+                    <Text style={verificationStyle.subText}>
+                      ( e.g., Diploma, Transcript, Certificate of Completion,
+                      Degree Verification )
+                    </Text>
+                    <TouchableOpacity
+                      style={verificationStyle.uploadBtn}
+                      onPress={() => uploadPhdOptionPhotos()}
+                    >
+                      <Text style={verificationStyle.uploadBtnText}>
+                        Uplpoad
+                      </Text>
+                    </TouchableOpacity>
+                    <Text style={verificationStyle.subText}>
+                      Enter website to show proof of degree (e.g., Professional
+                      licensing website, Institution website showing name and
+                      year of graduation, Work website showing name and title).
+                      We may request additional proof of degree if needed.
+                    </Text>
+                  </View>
+                  {/* <KeyboardAvoidingView behavior="position"> */}
                   <View style={verificationStyle.footerDiv}>
                     <FlatInput
                       label="Enter website"
@@ -419,9 +445,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                       isLoading={loading}
                     />
                   </View>
-                </KeyboardAvoidingView>
-              </View>
-            </View>
+                  {/* </KeyboardAvoidingView> */}
+                </View>
+              </ScrollView>
+            </KeyboardAvoidingView>
           </Modal>
         </View>
       </ScreenContainer>
