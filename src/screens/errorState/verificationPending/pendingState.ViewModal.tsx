@@ -1,4 +1,4 @@
-import { useEffect, useRef} from 'react';
+import { useEffect, useRef, useState} from 'react';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../navigation';
@@ -14,6 +14,7 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
   const dispatch = useDispatch();
   const state = user?.verification?.status;
   const isFormSubmitted = user?.verificationId?.submitted;
+  const [declineReason, setDeclineReason] = useState('');
   const {resetState} = useNavigateToScreen();
   useEffect(() => {
     const me = async () => {
@@ -38,8 +39,26 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
     };
     me();
   }, []);
+
+  useEffect(() => {
+    getRor();
+  }, []);
+
+  const getRor = () => {
+    if (user.verification.status !== 'Rejected') {
+      return;
+    }
+    const reason = user.verification.ROR[user.verification.ROR.length - 1]
+      .reason
+      ? user.verification.ROR[user.verification.ROR.length - 1].reason
+      : Object.values(
+          user.verification.ROR[user.verification.ROR.length - 1],
+        ).join('');
+    setDeclineReason(reason);
+  };
+
   const navigateToGender = () => {
     navigation.navigate(ROUTES.Gender);
   };
-  return { state, isFormSubmitted, navigateToGender };
+  return { state, isFormSubmitted, navigateToGender,declineReason };
 };

@@ -8,7 +8,7 @@ import { usePandingStateViewModal } from './pendingState.ViewModal';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 
 const VerificationPending = (props: ScreenParams) => {
-  const { state, isFormSubmitted, navigateToGender } =
+  const { state, isFormSubmitted, navigateToGender,declineReason } =
     usePandingStateViewModal(props);
   return (
     <SafeAreaView style={pendingStyle.mainContainer}>
@@ -72,9 +72,7 @@ const VerificationPending = (props: ScreenParams) => {
               See the following reason:
             </Text>
             <Text style={pendingStyle.redBoxText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              eget volutpat arcu.Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Curabitur eget volutpat arcu.{' '}
+              {declineReason}
             </Text>
           </View>
           <Column gap={25} alignItems="center">
