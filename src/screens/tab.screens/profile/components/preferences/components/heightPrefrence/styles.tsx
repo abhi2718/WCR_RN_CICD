@@ -6,7 +6,7 @@ import { theme } from '../../../../../../../infrastructure/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.ui.white,
   },
   innerContainer: {
     flex: 1,
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   wheelStyle: {
     width: dimensions.width / 2 - 32,
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.ui.white,
     height: dimensions.height / 2,
   },
   closeBtn: {
