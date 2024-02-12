@@ -204,6 +204,9 @@ export const PreferencesScreen = () => {
                       initValue={answer[item.initValue]}
                       onChange={handleInputChange}
                       style={styles.modalSelector}
+                      header={
+                        <Text style={styles.modalHeading}>{item.title}</Text>
+                      }
                       optionContainerStyle={styles.optionContainer}
                       optionTextStyle={styles.optionText}
                       cancelStyle={styles.cancelButton}

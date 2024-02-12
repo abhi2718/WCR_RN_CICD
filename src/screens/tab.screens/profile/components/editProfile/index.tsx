@@ -12,11 +12,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
 import MultiSelectModal from '../../../../../components/multiSelectModal';
-import {
-  Column,
-  Row,
-  Spacer,
-} from '../../../../../components/tools';
+import { Column, Row, Spacer } from '../../../../../components/tools';
 import AddProfilePicScreen from '../../../../auth/preRegisterFlow/components/AddProfilePic';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
@@ -25,7 +21,7 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeightModal } from './components/heightModal';
 
 export const EditProfile = () => {
-  const { 
+  const {
     answer,
     optionsList,
     handleInputChange,
@@ -56,7 +52,7 @@ export const EditProfile = () => {
     _setShowHeightModal,
     height,
     setheight,
-    voidFun
+    voidFun,
   } = useViewModal();
   return (
     <SafeAreaView style={styles.editInfoContainer}>
@@ -211,6 +207,9 @@ export const EditProfile = () => {
                     _handleInputChange('', 'city');
                     _handleInputChange('', 'zipcode');
                   }}
+                  header={
+                    <Text style={styles.modalHeading}>State/Territory</Text>
+                  }
                   style={styles.modalSelector}
                   cancelText="Close"
                   optionContainerStyle={styles.optionContainer}
@@ -492,6 +491,9 @@ export const EditProfile = () => {
                         data={item.option!}
                         initValue={answer[item.initValue]}
                         onChange={handleInputChange}
+                        header={
+                          <Text style={styles.modalHeading}>{item.title}</Text>
+                        }
                         style={styles.modalSelector}
                         cancelText="Close"
                         optionContainerStyle={styles.optionContainer}
