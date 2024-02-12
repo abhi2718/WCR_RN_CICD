@@ -24,7 +24,7 @@ export const HeightStyle = StyleSheet.create({
     justifyContent: 'center',
   },
   picker: {
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.ui.white,
   },
   switchDiv: {
     alignItems: 'flex-end',

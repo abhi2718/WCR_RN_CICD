@@ -6,11 +6,12 @@ import {
   fonts,
 } from '../../../../../infrastructure/theme/fonts';
 import { dimensions } from '../../../../../components/tools';
+import { theme } from '../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   editInfoContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.ui.white,
   },
   ph16: {
     paddingHorizontal: 16,
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.ui.white,
   },
   aboutInput: {
     padding: 16,
@@ -126,7 +127,7 @@ export const styles = StyleSheet.create({
     marginLeft: -10,
   },
   cancelTextStyle: {
-    color: '#fff',
+    color: theme.colors.ui.white,
     fontWeight: 'bold',
     textTransform: 'capitalize',
   },
@@ -135,7 +136,7 @@ export const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 40,
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.ui.white,
     paddingHorizontal: 0,
   },
   selectStyle: {
