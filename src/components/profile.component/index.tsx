@@ -7,12 +7,10 @@ import {
   ScrollView,
   Pressable,
   Image,
-  StyleSheet,
-  Alert,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import { CustomSnakeBar, FullLoader, Row, Spacer } from '../tools';
+import {  FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
@@ -42,9 +40,9 @@ export const ProfileModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     handleReport,
-    showAlert
+    showAlert,
   } = useViewModal(props);
-  
+
   return (
     <Modal visible={showModal}>
       <SafeAreaView style={styles.containerWrapperStyle}>
@@ -154,30 +152,11 @@ export const ProfileModal = (props: profileProps) => {
                               alignItems="center"
                               style={styles.chip}
                             >
-                              {user.gender === 'Female' && (
-                                <Image
-                                  style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/femailAvatar.png')}
-                                />
-                              )}
-                              {user.gender === 'Male' && (
-                                <Image
-                                  style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/maleAvatar.png')}
-                                />
-                              )}
-                              {user.gender === 'Transman' && (
-                                <Image
-                                  style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/transmanAvatar.png')}
-                                />
-                              )}
-                              {user.gender === 'Transwomen' && (
-                                <Image
-                                  style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/transwomenAvator.png')}
-                                />
-                              )}
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/vitalIcons/Gender.png')}
+                              />
+
                               <Text style={styles.chipText}>
                                 {user?.gender}
                               </Text>
@@ -190,24 +169,11 @@ export const ProfileModal = (props: profileProps) => {
                                 alignItems="center"
                                 style={styles.chip}
                               >
-                                {user.sexualPreference === 'Straight' && (
-                                  <Image
-                                    style={styles.chipIcon}
-                                    source={require('../../assets/images/icons/straight.png')}
-                                  />
-                                )}
-                                {user.sexualPreference === 'Lesbian' && (
-                                  <Image
-                                    style={styles.chipIcon}
-                                    source={require('../../assets/images/icons/lesbian.png')}
-                                  />
-                                )}
-                                {user.sexualPreference === 'Gay' && (
-                                  <Image
-                                    style={styles.chipIcon}
-                                    source={require('../../assets/images/icons/gay.png')}
-                                  />
-                                )}
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/love.png')}
+                                />
+
                                 <Text style={styles.chipText}>
                                   {user.sexualPreference}
                                 </Text>
@@ -222,7 +188,7 @@ export const ProfileModal = (props: profileProps) => {
                             >
                               <Image
                                 style={styles.chipIcon}
-                                source={require('../../assets/images/icons/heightScale.png')}
+                                source={require('../../assets/images/vitalIcons/height.png')}
                               />
                               <Text style={styles.chipText}>
                                 {user.userHeight.feet}"{user.userHeight.inch}'
@@ -253,7 +219,7 @@ export const ProfileModal = (props: profileProps) => {
                             >
                               <Image
                                 style={styles.chipIcon}
-                                source={require('../../assets/images/icons/heartVitialSign.png')}
+                                source={require('../../assets/images/vitalIcons/married.png')}
                               />
                               <Text style={styles.chipText}>
                                 {user.maritalStatus}
@@ -266,24 +232,11 @@ export const ProfileModal = (props: profileProps) => {
                               alignItems="center"
                               style={styles.chip}
                             >
-                              {user.religion === 'Christian' && (
-                                <Image
-                                  style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/Christian.png')}
-                                />
-                              )}
-                              {user.religion === 'Muslim' && (
-                                <Image
-                                  style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/Muslim.png')}
-                                />
-                              )}
-                              {user.religion === 'Hindu' && (
-                                <Image
-                                  style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/hindu.png')}
-                                />
-                              )}
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../assets/images/vitalIcons/Religion.png')}
+                              />
+
                               <Text style={styles.chipText}>
                                 {user.religion}
                               </Text>
@@ -309,7 +262,7 @@ export const ProfileModal = (props: profileProps) => {
                               >
                                 <Image
                                   style={styles.chipIcon}
-                                  source={require('../../assets/images/icons/kids.png')}
+                                  source={require('../../assets/images/vitalIcons/wantKids.png')}
                                 />
                                 <Text style={styles.chipText}>{user.kids}</Text>
                               </Row>
@@ -322,7 +275,7 @@ export const ProfileModal = (props: profileProps) => {
                             >
                               <Image
                                 style={styles.chipIcon}
-                                source={require('../../assets/images/icons/vaccinated.png')}
+                                source={require('../../assets/images/vitalIcons/corona.png')}
                               />
                               <Text style={styles.chipText}>
                                 {user.covidVaccineStatus}
@@ -337,7 +290,7 @@ export const ProfileModal = (props: profileProps) => {
                             >
                               <Image
                                 style={styles.chipIcon}
-                                source={require('../../assets/images/icons/drinks.png')}
+                                source={require('../../assets/images/vitalIcons/drinks.png')}
                               />
                               <Text style={styles.chipText}>
                                 {user.drinking}
@@ -374,9 +327,9 @@ export const ProfileModal = (props: profileProps) => {
                         );
                       })}
                     </View>
-                        <View style={styles.shareWrapper}>
-                          <Row justifyContent="center" gap={32}>
-                            {/* <Pressable onPress={showAlert}>
+                    <View style={styles.shareWrapper}>
+                      <Row justifyContent="center" gap={32}>
+                        {/* <Pressable onPress={showAlert}>
                               <Text>Press </Text>
                             </Pressable> */}
                         {showDisLike && (

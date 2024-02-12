@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
-import { Row, ScreenContainer } from '../../../../../components/tools';
+import { Text, View } from 'react-native';
+import { ScreenContainer } from '../../../../../components/tools';
 import { addEthnicityStyle } from './AddEthnicityStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { MultipleCheckBoxList } from '../../../../../components/checkbox';
@@ -13,27 +13,21 @@ const AddEthnicityScreen = (props: ScreenParams) => {
     loading,
     ethnicityList,
     handleListChange,
-    handleSeletedList,
     updateUserDetails,
-    ethnicityflag,
     navigateToRelationshipScreen,
   } = useEthnicityViewModal(props);
   return (
     <ScreenContainer>
       <View style={addEthnicityStyle.container}>
-        <View style={{ flex: 1 }}>
-          <HeaderBar
-            skip={() => navigateToRelationshipScreen()}
-          ></HeaderBar>
+        <View style={addEthnicityStyle.wrapper}>
+          <HeaderBar skip={() => navigateToRelationshipScreen()}></HeaderBar>
           <Text style={addEthnicityStyle.subHeader}>
             Tell us your ethnicity
           </Text>
-          <View style={{ flex: 1 }}>
+          <View style={addEthnicityStyle.wrapper}>
             <MultipleCheckBoxList
               data={ethnicityList}
-              onChangeValue={handleSeletedList}
-              onChangeListValue={handleListChange}
-              preferNotTosayflag={ethnicityflag}
+              handleListChange={handleListChange}
             />
           </View>
         </View>

@@ -3,7 +3,6 @@ import {
   pickPhotoFromGallary,
   pickPhotoFromUrl,
 } from '../../../../../utils/uploads';
-import { AvatarProps } from '.';
 import { CloudinaryRepository } from '../../../../../repository/cloudinary.repo';
 import {
   FlashMessageType,
@@ -15,31 +14,23 @@ import { UpdateUserDetailsRepository } from '../../../../../repository/pregister
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 import { ROUTES } from '../../../../../navigation';
+import {
+  AddProfilePicScreenProps,
+  ImageDataType,
+  ModalImageSelectedType,
+} from '../../../../../types/screen.type/preRegister.type';
 
-export type ModalImageSelectedType = {
-  path: string;
-  index: number;
-  type: string;
-};
-export type ImageDataType = {
-  path: string;
-  mime: string;
-  name: string;
-};
-export const useAddProfilePicViewModal = (props: any) => {
+export const useAddProfilePicViewModal = (props: AddProfilePicScreenProps) => {
   const { user } = useSelector(({ userState }) => userState);
   const sidePicConstant = 'sidePicConstant';
   const bottomPicConstant = 'bottomPicConstant';
   const cloudinaryRepository = new CloudinaryRepository();
   const [loading, setLoading] = useState(false);
   const { navigation } = props;
-
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [isPicUploadInfoModalVisible, setPicUploadInfoModalVisible] =
     useState(false);
-
   const token = useRef(user?.token ? user?.token : null).current;
-
   const dispatch = useDispatch();
   const closeModal = () => {
     setPicUploadInfoModalVisible(false);
@@ -47,15 +38,12 @@ export const useAddProfilePicViewModal = (props: any) => {
   const openModal = () => {
     setPicUploadInfoModalVisible(true);
   };
-
-  useEffect(()=>{
-    openModal()
-  },[])
-
+  useEffect(() => {
+    openModal();
+  }, []);
   const [profilePicUri, setProfilePicUri] = useState<ImageDataType | null>(
     props.source?.uri || undefined,
   );
-
   const pickProfilePicture = async () => {
     const image: Image = await pickPhotoFromGallary(null, true);
     if (image?.cropRect) {
@@ -65,18 +53,14 @@ export const useAddProfilePicViewModal = (props: any) => {
         name: image?.path?.split('/').pop()!,
       };
       setProfilePicUri(resultImage);
-      props.onChange?.(image);
     }
   };
-
   const removeProfilePic = () => {
     setProfilePicUri(null);
   };
-
   const [sidePicUri, setSidePicUris] = useState<ImageDataType[] | null>(
     Array(2).fill(null),
   );
-
   const sidePickPhoto = async (index: number) => {
     const image: Image = await pickPhotoFromGallary(null, false);
     const updatedUris = [...sidePicUri!];
@@ -88,11 +72,9 @@ export const useAddProfilePicViewModal = (props: any) => {
     updatedUris[index] = resultImage;
     setSidePicUris(updatedUris);
   };
-
   const [bottomUris, setBottomUris] = useState<ImageDataType[] | null>(
     Array(3).fill(null),
   );
-
   const bottomPicPhoto = async (index: number) => {
     const image: Image = await pickPhotoFromGallary(null, false);
     const resultImage: ImageDataType = {
@@ -103,7 +85,6 @@ export const useAddProfilePicViewModal = (props: any) => {
     const updatedUris = [...bottomUris!];
     updatedUris[index] = resultImage;
     setBottomUris(updatedUris);
-    // props.onChange?.(updatedUris);
   };
   useEffect(() => {
     if (props?.setAllPics) {
@@ -118,7 +99,6 @@ export const useAddProfilePicViewModal = (props: any) => {
     if (!photos) {
       return [];
     }
-
     const newPhotos = [];
     if (photos?.length < 6) {
       let count = 0;
@@ -150,12 +130,10 @@ export const useAddProfilePicViewModal = (props: any) => {
       };
       setProfilePicUri(resultImage);
     }
-
     if (photos) {
       let indexForBottomPics = 0;
       const updatedUris = [...sidePicUri!];
       const updatedBottomUris = [...bottomUris!];
-
       photos.forEach((photo: any, index: number) => {
         if (index < 2) {
           updatedUris[index] = photo;
@@ -174,9 +152,9 @@ export const useAddProfilePicViewModal = (props: any) => {
     getSavedPics();
   }, []);
 
-const setProfilePicFromModel = async (imageValue: ModalImageSelectedType) => {
-    const image: Image = await pickPhotoFromUrl(undefined, imageValue.path); 
-    if(image?.cropRect) {
+  const setProfilePicFromModel = async (imageValue: ModalImageSelectedType) => {
+    const image: Image = await pickPhotoFromUrl(undefined, imageValue.path);
+    if (image?.cropRect) {
       imageValue.path = image?.path;
     }
     if (imageValue.type == sidePicConstant) {
@@ -294,7 +272,7 @@ const setProfilePicFromModel = async (imageValue: ModalImageSelectedType) => {
           update: {
             profilePicture: profileImage,
             photos: photos,
-            steps:6
+            steps: 6,
           },
         },
       );

@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import { LikeContext } from '../../../../../../../contexts/likes.context';
 import { ROUTES } from '../../../../../../../navigation';
 import { HomeDeckRepository } from '../../../../../../../repository/homeDeck.repo';
-export const useViewModal = (item: any, cardRef: any) => {
+import { Profile } from '../../../../../../../types/screen.type/home.type';
+
+export const useViewModal = (item:Profile, cardRef: any) => {
   const homeDeckRepository = new HomeDeckRepository();
   const { user } = useSelector(({ userState }) => userState);
   const { fetchAll } = useContext(LikeContext);
@@ -31,8 +33,7 @@ export const useViewModal = (item: any, cardRef: any) => {
   const handleShare = () => {
     try {
       const shareOptions = {
-        message: `White Coat Romance profile share
-        Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you. `,
+        message: `Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you. `,
         url: 'https://staging.whitecoatromance.com/assets/images/e-wcr.png',
       };
       Share.open(shareOptions);

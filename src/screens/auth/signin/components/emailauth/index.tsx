@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -6,23 +6,16 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Image,
-  Platform,
-  Keyboard,
-  TouchableWithoutFeedback,
   SafeAreaView,
-  Pressable,
 } from 'react-native';
 import {
   Column,
   dimensions,
   InputBox,
-  ScreenContainer,
-  Spacer,
 } from '../../../../../components/tools';
 import { styles } from './emailauthStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { OtpCodeInput } from '../../../../../components/otpInput';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { useEmailAuthViewModal } from './emailauthViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { isAndroid } from '../../../../../components/tools';
@@ -32,7 +25,6 @@ export default function EmailAuthByOtpScreeen(props: ScreenParams) {
   let {
     otpValue,
     setOtpValue,
-    resetOtp,
     verifyEmail,
     resendOtp,
     emailInput,

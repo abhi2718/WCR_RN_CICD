@@ -1,12 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import {
-  fontSizes,
   fontWeights,
   fonts,
 } from '../../../infrastructure/theme/fonts';
 import { colors } from '../../../infrastructure/theme/colors';
-import { theme } from '../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {

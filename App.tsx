@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { LogBox, View, StyleSheet } from 'react-native';
+import { LogBox, View, StyleSheet, Text, TextInput } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { ThemeProvider } from 'styled-components/native';
 import CombinedProviders from './src/contexts';
@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { PaperProvider } from 'react-native-paper';
 import { store } from './src/store';
 import { theme } from './src/infrastructure/theme';
+import { config } from './src/utils/config';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs([
@@ -18,11 +19,16 @@ LogBox.ignoreLogs([
 ]);
 
 export default function App() {
+  useEffect(() => {
+    if (Text.defaultProps == null) Text.defaultProps = {};
+    Text.defaultProps.allowFontScaling = false;
+    if (TextInput.defaultProps == null) TextInput.defaultProps = {};
+    TextInput.defaultProps.allowFontScaling = false;
+  }, []);
+
   return (
     <StripeProvider
-      publishableKey={
-        'pk_test_51OLhmuILb85dzDST7I4QIzg7ySW2r2a5hXLUeLgCqw1ujyxUZbtW1PTUyx5kg0cmbB5Y2Aw8KcP91UpREG5ZCmau0073JGv0fo'
-      }
+      publishableKey={config.STRIPE_KEY}
       urlScheme="accept-a-payment"
     >
       <MenuProvider>

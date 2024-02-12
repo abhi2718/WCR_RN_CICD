@@ -8,6 +8,9 @@ import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 
 export const styles = StyleSheet.create({
+  wrapper: {
+    flex:1,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 16,

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ImageProps,
   Modal,
   Text,
   View,
@@ -10,7 +9,6 @@ import {
   KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
-
 import {
   Logo,
   Row,
@@ -25,7 +23,6 @@ import {
 } from '../stepOne/verificationSteps';
 import { FlatInput } from '../../../components/inputBox';
 import { PrimaryButton } from '../../../components/button';
-import { ImageOrVideo } from 'react-native-image-crop-picker';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
 import { useVerificationViewModal } from './stepTwo.ViewModal';
 import {
@@ -33,12 +30,7 @@ import {
   IdverifyStudentModal,
 } from '../../../components/verificationModal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-interface AvatarProps extends ImageProps {
-  onChange?: (image: ImageOrVideo) => void;
-  navigation: any;
-  route: any;
-}
+import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 
 const VerificationStepTwo = (props: AvatarProps) => {
   const {
@@ -73,19 +65,19 @@ const VerificationStepTwo = (props: AvatarProps) => {
     openModal,
     closeStudentInfoModal,
     openStudentInfoModal,
-    isStudentInfoModalVisible
+    isStudentInfoModalVisible,
   } = useVerificationViewModal(props);
   const { top, bottom } = useSafeAreaInsets();
   return (
-    <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
+    <Pressable onPress={Keyboard.dismiss} style={verificationStyle.wrapper}>
       <ScreenContainer>
         <IdverifyModal
           isVisible={isVerificationInfoModalVisible}
           onClose={closeModal}
         ></IdverifyModal>
         <IdverifyStudentModal
-        isVisible={isStudentInfoModalVisible}
-        onClose={closeStudentInfoModal}
+          isVisible={isStudentInfoModalVisible}
+          onClose={closeStudentInfoModal}
         ></IdverifyStudentModal>
         <HeaderBar isVerificartionScreen={false} info={openModal} />
         <KeyboardAvoidingView
@@ -97,7 +89,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
             height: dimensions.height - (top + bottom + 110),
           }}
         >
-          <View style={{ flex: 1 }}>
+          <View style={verificationStyle.wrapper}>
             <Text style={verificationStyle.subHeader}>
               Photo Verification (Step II)
             </Text>
@@ -117,7 +109,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
                   <Text style={verificationStyle.pointText}>White Coat</Text>
                 </Row>
-
                 <Row style={verificationStyle.pointsRow} alignItems="center">
                   <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
                   <Text style={verificationStyle.pointText}>Scrubs</Text>
@@ -147,7 +138,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
           </View>
           <View style={{ ...verificationStyle.footerDiv }}>
             {verificationOption === 'License Number' && (
-              <>
+              <View style={verificationStyle.white}>
                 <Text>
                   <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
@@ -165,10 +156,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     onChangeText={handleWebsite}
                   />
                 </KeyboardAvoidingView>
-              </>
+              </View>
             )}
             {verificationOption === 'HealthCare' && (
-              <>
+              <View style={verificationStyle.white}>
                 <Text>
                   <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
@@ -186,10 +177,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     onChangeText={handleWebsite}
                   />
                 </KeyboardAvoidingView>
-              </>
+              </View>
             )}
             {verificationOption === 'Student' && (
-              <>
+              <View style={verificationStyle.white}>
                 <Text>
                   <Text style={verificationStyle.optionalText}>Optional: </Text>
                   <Text style={verificationStyle.pointText}>
@@ -208,7 +199,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     value={website}
                   />
                 </KeyboardAvoidingView>
-              </>
+              </View>
             )}
             {verificationOption === 'License Number' && (
               <Text style={verificationStyle.footerText}>
@@ -241,16 +232,17 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   <Text style={firstModalStyle.text}> Choose from library</Text>
                 </TouchableOpacity>
               </View>
-              <View
-                style={[
-                  firstModalStyle.modalView,
-                  firstModalStyle.modalViewTwo,
-                ]}
-              >
-                <TouchableOpacity onPress={toggleModal}>
+              <TouchableOpacity onPress={toggleModal}>
+                <View
+                  style={[
+                    firstModalStyle.modalView,
+                    firstModalStyle.modalViewTwo,
+                    verificationStyle.backButtonWrapper,
+                  ]}
+                >
                   <Text style={firstModalStyle.backBtnText}>Back</Text>
-                </TouchableOpacity>
-              </View>
+                </View>
+              </TouchableOpacity>
             </View>
           </Modal>
           <Modal
@@ -266,12 +258,16 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 alignItems="center"
               >
                 <Pressable onPress={closePicModal}>
-                  <Image
-                    style={modalStyles.arrow}
-                    source={require('../../../assets/images/icons/arrow.png')}
-                  />
+                  <View style={modalStyles.backButtonWrapper}>
+                    <Image
+                      style={modalStyles.arrow}
+                      source={require('../../../assets/images/icons/arrow.png')}
+                    />
+                  </View>
                 </Pressable>
-                <Logo width={50} height={35} />
+                <View style={modalStyles.logoWrapper}>
+                  <Logo width={50} height={35} />
+                </View>
                 <View />
               </Row>
               {!isSelfie ? (
@@ -346,13 +342,17 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Pressable onPress={closePicModal}>
-                  <Image
-                    style={modalStyles.arrow}
-                    source={require('../../../assets/images/icons/arrow.png')}
-                  />
-                </Pressable>
-                <Logo width={50} height={35} />
+                <View style={modalStyles.backButtonWrapper}>
+                  <Pressable onPress={closePicModal}>
+                    <Image
+                      style={modalStyles.arrow}
+                      source={require('../../../assets/images/icons/arrow.png')}
+                    />
+                  </Pressable>
+                </View>
+                <View style={modalStyles.logoWrapper}>
+                  <Logo width={50} height={35} />
+                </View>
                 <View />
               </Row>
               <View style={modalStyles.content}>

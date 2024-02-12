@@ -17,8 +17,6 @@ export const declinedStyle = StyleSheet.create({
   },
   content: {
     flex: 1,
-    // borderColor: 'red',
-    // borderWidth: 1,
     width: '100%',
     padding: 16,
     justifyContent: 'space-around',

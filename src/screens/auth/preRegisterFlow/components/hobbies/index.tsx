@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
-import { Alert, Image, Text, View } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { ChipStyle } from '../maritalStatus/chipStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { Chip } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../../../../infrastructure/theme/colors';
-
 import { hobbies } from '../../../../../utils/constanst';
 import { HeaderBar } from '../../../../../components/header';
 import { useHobbyViewModal } from './hobby.viewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 const Hobbies = (props: ScreenParams) => {
   const { selectedHobbies, handleHobbies ,updateUserDetails,loading,navigateToVerificationScreen} = useHobbyViewModal(props);
-
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
-          <HeaderBar skip={() => navigateToVerificationScreen()}></HeaderBar>
+          <HeaderBar skip={navigateToVerificationScreen}/>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>

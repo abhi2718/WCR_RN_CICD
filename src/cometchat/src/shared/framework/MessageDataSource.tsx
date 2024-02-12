@@ -1,56 +1,33 @@
 import React from 'react';
 //@ts-ignore
-import { CometChat } from '@cometchat/chat-sdk-react-native';
-import {
-  CometChatMessageTypes,
-  GroupMemberScope,
-  MessageBubbleAlignmentType,
-  MessageCategoryConstants,
-  MessageOptionConstants,
-  MessageTypeConstants,
-} from '../constants/UIKitConstants';
-import { CometChatMessageOption } from '../modals/CometChatMessageOption';
-import { CometChatMessageTemplate } from '../modals/CometChatMessageTemplate';
-import { DataSource } from './DataSource';
-import { localize } from '../resources/CometChatLocalize';
-import { CometChatTextBubble } from '../views/CometChatTextBubble';
-import {
-  CometChatVideoBubble,
-  VideoBubbleStyleInterface,
-} from '../views/CometChatVideoBubble';
-import { CometChatTheme } from '../resources/CometChatTheme';
-import {
-  CometChatImageBubble,
-  ImageBubbleStyleInterface,
-} from '../views/CometChatImageBubble';
-import {
-  AudioBubbleStyleInterface,
-  CometChatAudioBubble,
-} from '../views/CometChatAudioBubble';
-import {
-  CometChatFileBubble,
-  FileBubbleStyleInterface,
-} from '../views/CometChatFileBubble';
-import { ChatConfigurator } from './ChatConfigurator';
-import { CometChatMessageComposerActionInterface } from '../helper/types';
-import { ICONS } from './resources';
-import { CometChatConversationUtils } from '../utils/conversationUtils';
-import { AIOptionsStyle } from '../../AI/AIOptionsStyle';
-import { CometChatFormBubble, CometChatCardBubble } from '../views';
-import { CardMessage, FormMessage } from '../modals/InteractiveData';
-import { FormBubbleStyle } from '../views/CometChatFormBubble/FormBubbleStyle';
-import { CardBubbleStyle } from '../views/CometChatCardBubble/CardBubbleStyle';
-import { getExtentionData } from '../../extensions/ExtensionModerator';
-import { ExtensionConstants } from '@cometchat/chat-uikit-react-native';
-import { Empty } from '../../extensions/ThumbnailGeneration/resources';
+import { CometChat } from "@cometchat/chat-sdk-react-native";
+import { CometChatMessageTypes, GroupMemberScope, MessageBubbleAlignmentType, MessageCategoryConstants, MessageOptionConstants, MessageTypeConstants } from "../constants/UIKitConstants";
+import { CometChatMessageOption } from "../modals/CometChatMessageOption";
+import { CometChatMessageTemplate } from "../modals/CometChatMessageTemplate";
+import { DataSource } from "./DataSource";
+import { localize } from "../resources/CometChatLocalize";
+import { CometChatTextBubble } from "../views/CometChatTextBubble"
+import { CometChatVideoBubble, VideoBubbleStyleInterface } from "../views/CometChatVideoBubble";
+import { CometChatTheme } from "../resources/CometChatTheme";
+import { CometChatImageBubble, ImageBubbleStyleInterface } from "../views/CometChatImageBubble";
+import { AudioBubbleStyleInterface, CometChatAudioBubble } from "../views/CometChatAudioBubble";
+import { CometChatFileBubble, FileBubbleStyleInterface } from "../views/CometChatFileBubble";
+import { ChatConfigurator } from "./ChatConfigurator";
+import { CometChatMessageComposerActionInterface } from "../helper/types";
+import { ICONS } from "./resources";
+import { CometChatConversationUtils } from "../utils/conversationUtils";
+import { AIOptionsStyle } from "../../AI/AIOptionsStyle";
+import { CometChatFormBubble, CometChatCardBubble } from "../views";
+import { CardMessage, FormMessage } from "../modals/InteractiveData";
+import { FormBubbleStyle } from "../views/CometChatFormBubble/FormBubbleStyle";
+import { CardBubbleStyle } from "../views/CometChatCardBubble/CardBubbleStyle";
+import { getExtentionData } from "../../extensions/ExtensionModerator";
+import { ExtensionConstants } from "@cometchat/chat-uikit-react-native";
+import { Empty } from "../../extensions/ThumbnailGeneration/resources";
 
-function isAudioMessage(
-  message: CometChat.BaseMessage,
-): message is CometChat.MediaMessage {
-  return (
-    message.getCategory() == CometChat.CATEGORY_MESSAGE &&
-    message.getType() == CometChat.MESSAGE_TYPE.AUDIO
-  );
+function isAudioMessage(message: CometChat.BaseMessage): message is CometChat.MediaMessage {
+    return message.getCategory() == CometChat.CATEGORY_MESSAGE &&
+        message.getType() == CometChat.MESSAGE_TYPE.AUDIO;
 }
 
 function isVideoMessage(
@@ -436,76 +413,32 @@ export class MessageDataSource implements DataSource {
     return null;
   }
 
-  getDeleteMessageBubble(
-    message: CometChat.BaseMessage,
-    theme: CometChatTheme,
-  ): JSX.Element {
-    return (
-      <CometChatTextBubble
-        textContainerStyle={{ marginStart: 4, marginEnd: 4 }}
-        text={localize('MESSAGE_IS_DELETED')}
-        style={{
-          backgroundColor: 'transparent',
-          textFont: {
-            fontSize: theme?.typography?.subtitle2?.fontSize,
-            fontWeight: theme?.typography?.subtitle2?.fontWeight,
-          },
-          textColor: theme?.palette?.getAccent600(),
-        }}
-      />
-    );
-  }
-
-  checkThumbnail(message: any) {
-    let image: { uri: string } = { uri: null };
-    let thumbnailData = getExtentionData(
-      message,
-      ExtensionConstants.thumbnailGeneration,
-    );
-    if (thumbnailData == undefined) {
-      image = message.getType() === 'image' ? message?.data?.url : Empty; //default image for type video
-    } else {
-      let attachmentData = thumbnailData['attachments'];
-      if (attachmentData.length == 1) {
-        let dataObj = attachmentData[0];
-
-        if (!dataObj['error']) {
-          let imageLink = dataObj?.['data']?.['thumbnails']?.['url_small'];
-          image = imageLink
-            ? { uri: dataObj['data']['thumbnails']['url_small'] }
-            : Empty; //if imageLink is empty or does not exist then load default image
-        } else {
-          image = Empty; //default image
-        }
-      }
-    }
-    return image;
-  }
-
-  getVideoMessageBubble(
-    videoUrl: string,
-    thumbnailUrl: string,
-    message: CometChat.MediaMessage,
-    theme: CometChatTheme,
-    videoBubbleStyle: VideoBubbleStyleInterface,
-  ) {
-    if (isVideoMessage(message)) {
-      const image = this.checkThumbnail(message);
-      return (
-        <CometChatVideoBubble
-          videoUrl={videoUrl}
-          thumbnailUrl={{ uri: image.uri }}
-          style={{
-            height: 200,
-            width: 200,
-            borderRadius: 8,
-            ...videoBubbleStyle,
-          }}
+    getDeleteMessageBubble(message: CometChat.BaseMessage, theme: CometChatTheme): JSX.Element {
+        return <CometChatTextBubble
+            textContainerStyle={{ marginStart: 4, marginEnd: 4 }}
+            text={localize("MESSAGE_IS_DELETED")}
+            style={{
+                backgroundColor: "transparent",
+                textFont: {
+                    fontSize: theme?.typography?.subtitle2?.fontSize,
+                    fontWeight: theme?.typography?.subtitle2?.fontWeight,
+                },
+                textColor: theme?.palette?.getAccent600()
+            }}
         />
-      );
     }
-    return null;
-  }
+
+    getVideoMessageBubble(videoUrl: string, thumbnailUrl: string, message: CometChat.MediaMessage, theme: CometChatTheme, videoBubbleStyle: VideoBubbleStyleInterface) {
+        if (isVideoMessage(message)) {
+          const image = this.checkThumbnail(message);
+            return <CometChatVideoBubble
+                videoUrl={videoUrl}
+                thumbnailUrl={{ uri: image.uri }}
+                style={{ height: 200, width: 200, borderRadius: 8, ...videoBubbleStyle }}
+            />
+        }
+        return null;
+    }
 
   getTextMessageBubble(
     messageText: string,
@@ -842,130 +775,95 @@ export class MessageDataSource implements DataSource {
     });
   }
 
-  getAudioMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
-    return new CometChatMessageTemplate({
-      type: MessageTypeConstants.audio,
-      category: MessageCategoryConstants.message,
-      ContentView: (
-        message: CometChat.BaseMessage,
-        alignment: MessageBubbleAlignmentType,
-      ) => {
-        if (isDeletedMessage(message)) {
-          return ChatConfigurator.dataSource.getDeleteMessageBubble(
-            message,
-            theme,
-          );
-        } else
-          return ChatConfigurator.dataSource.getAudioMessageContentView(
-            message,
-            alignment,
-            theme,
-          );
-      },
-      options: (loggedInuser, message, group) =>
-        ChatConfigurator.dataSource.getAudioMessageOptions(
-          loggedInuser,
-          message,
-          group,
-        ),
-    });
-  }
-  getVideoMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
-    return new CometChatMessageTemplate({
-      type: MessageTypeConstants.video,
-      category: MessageCategoryConstants.message,
-      ContentView: (
-        message: CometChat.BaseMessage,
-        alignment: MessageBubbleAlignmentType,
-      ) => {
-        if (isDeletedMessage(message)) {
-          return ChatConfigurator.dataSource.getDeleteMessageBubble(
-            message,
-            theme,
-          );
-        } else
-          return ChatConfigurator.dataSource.getVideoMessageContentView(
-            message,
-            alignment,
-            theme,
-          );
-      },
-      options: (loggedInuser, message, group) =>
-        ChatConfigurator.dataSource.getVideoMessageOptions(
-          loggedInuser,
-          message,
-          group,
-        ),
-    });
-  }
-  getImageMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
-    return new CometChatMessageTemplate({
-      type: MessageTypeConstants.image,
-      category: MessageCategoryConstants.message,
-      ContentView: (
-        message: CometChat.BaseMessage,
-        alignment: MessageBubbleAlignmentType,
-      ) => {
-        if (isDeletedMessage(message)) {
-          return ChatConfigurator.dataSource.getDeleteMessageBubble(
-            message,
-            theme,
-          );
-        } else
-          return ChatConfigurator.dataSource.getImageMessageContentView(
-            message,
-            alignment,
-            theme,
-          );
-      },
-      options: (loggedInuser, message, group) =>
-        ChatConfigurator.dataSource.getImageMessageOptions(
-          loggedInuser,
-          message,
-          group,
-        ),
-    });
-  }
-  getFileMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
-    return new CometChatMessageTemplate({
-      type: MessageTypeConstants.file,
-      category: MessageCategoryConstants.message,
-      ContentView: (
-        message: CometChat.BaseMessage,
-        alignment: MessageBubbleAlignmentType,
-      ) => {
-        if (isDeletedMessage(message)) {
-          return ChatConfigurator.dataSource.getDeleteMessageBubble(
-            message,
-            theme,
-          );
-        } else
-          return ChatConfigurator.dataSource.getFileMessageContentView(
-            message,
-            alignment,
-            theme,
-          );
-      },
-      options: (loggedInuser, message, group) =>
-        ChatConfigurator.dataSource.getFileMessageOptions(
-          loggedInuser,
-          message,
-          group,
-        ),
-    });
-  }
-  getGroupActionTemplate(theme: CometChatTheme): CometChatMessageTemplate {
-    return new CometChatMessageTemplate({
-      type: MessageTypeConstants.groupMember,
-      category: MessageCategoryConstants.action,
-      ContentView: (
-        message: CometChat.BaseMessage,
-        alignment: MessageBubbleAlignmentType,
-      ) => {
-        return ChatConfigurator.dataSource.getGroupActionBubble(message, theme);
-      },
-    });
-  }
+
+    checkThumbnail(message: any) {
+      let image: { uri: string } = { uri: null };
+      let thumbnailData = getExtentionData(
+        message,
+        ExtensionConstants.thumbnailGeneration,
+      );
+      if (thumbnailData == undefined) {
+        image = message.getType() === 'image' ? message?.data?.url : Empty; //default image for type video
+      } else {
+        let attachmentData = thumbnailData['attachments'];
+        if (attachmentData.length == 1) {
+          let dataObj = attachmentData[0];
+  
+          if (!dataObj['error']) {
+            let imageLink = dataObj?.['data']?.['thumbnails']?.['url_small'];
+            image = imageLink
+              ? { uri: dataObj['data']['thumbnails']['url_small'] }
+              : Empty; //if imageLink is empty or does not exist then load default image
+          } else {
+            image = Empty; //default image
+          }
+        }
+      }
+      return image;
+    }
+
+    getAudioMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
+        return new CometChatMessageTemplate({
+            type: MessageTypeConstants.audio,
+            category: MessageCategoryConstants.message,
+            ContentView: (message: CometChat.BaseMessage, alignment: MessageBubbleAlignmentType) => {
+                if (isDeletedMessage(message)) {
+                    return ChatConfigurator.dataSource.getDeleteMessageBubble(message, theme);
+                } else
+                    return ChatConfigurator.dataSource.getAudioMessageContentView(message, alignment, theme);
+            },
+            options: (loggedInuser, message, group) => ChatConfigurator.dataSource.getAudioMessageOptions(loggedInuser, message, group),
+        })
+    }
+    getVideoMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
+        return new CometChatMessageTemplate({
+            type: MessageTypeConstants.video,
+            category: MessageCategoryConstants.message,
+            ContentView: (message: CometChat.BaseMessage, alignment: MessageBubbleAlignmentType) => {
+                if (isDeletedMessage(message)) {
+                    return ChatConfigurator.dataSource.getDeleteMessageBubble(message, theme);
+                } else
+                    return ChatConfigurator.dataSource.getVideoMessageContentView(message, alignment, theme);
+            },
+            options: (loggedInuser, message, group) => ChatConfigurator.dataSource.getVideoMessageOptions(loggedInuser, message, group),
+        })
+    }
+    getImageMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
+        return new CometChatMessageTemplate({
+            type: MessageTypeConstants.image,
+            category: MessageCategoryConstants.message,
+            ContentView: (message: CometChat.BaseMessage, alignment: MessageBubbleAlignmentType) => {
+                if (isDeletedMessage(message)) {
+                    return ChatConfigurator.dataSource.getDeleteMessageBubble(message, theme);
+                } else
+                    return ChatConfigurator.dataSource.getImageMessageContentView(message, alignment, theme);
+            },
+            options: (loggedInuser, message, group) => ChatConfigurator.dataSource.getImageMessageOptions(loggedInuser, message, group),
+        })
+    }
+    getFileMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {
+        return new CometChatMessageTemplate({
+            type: MessageTypeConstants.file,
+            category: MessageCategoryConstants.message,
+            ContentView: (message: CometChat.BaseMessage, alignment: MessageBubbleAlignmentType) => {
+                if (isDeletedMessage(message)) {
+                    return ChatConfigurator.dataSource.getDeleteMessageBubble(message, theme);
+                } else
+                    return ChatConfigurator.dataSource.getFileMessageContentView(message, alignment, theme);
+            },
+            options: (loggedInuser, message, group) => ChatConfigurator.dataSource.getFileMessageOptions(loggedInuser, message, group),
+        });
+    }
+    getGroupActionTemplate(theme: CometChatTheme): CometChatMessageTemplate {
+        return new CometChatMessageTemplate({
+            type: MessageTypeConstants.groupMember,
+            category: MessageCategoryConstants.action,
+            ContentView: (message: CometChat.BaseMessage,
+                alignment: MessageBubbleAlignmentType) => {
+                return ChatConfigurator.dataSource.getGroupActionBubble(message, theme);
+            }
+        });
+    }
 
   getAllMessageTemplates(theme: CometChatTheme): CometChatMessageTemplate[] {
     return [
