@@ -84,9 +84,12 @@ export const HeightPrefrence = (props: heightPrefrenceProps) => {
               />
             </Row>
             <Row justifyContent="center">
-              <Pressable style={styles.closeBtn} onPress={_handleHeightModal}>
-                <PrimaryButton title="Close" />
-              </Pressable>
+              <View style={styles.closeBtn}>
+                <PrimaryButton
+                  onPress={_handleHeightModal}
+                  title="Close"
+                />
+              </View>
             </Row>
           </View>
         </SafeAreaView>
