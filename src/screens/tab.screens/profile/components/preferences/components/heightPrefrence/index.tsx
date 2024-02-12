@@ -33,6 +33,7 @@ export const HeightPrefrence = (props: heightPrefrenceProps) => {
             style={styles.colOne}
             justifyContent="center"
             alignItems="center"
+            gap={20}
           >
             <Column justifyContent="center" alignItems="center">
               <Text style={styles.subHeading}>Minimum</Text>
@@ -49,6 +50,7 @@ export const HeightPrefrence = (props: heightPrefrenceProps) => {
                 }
               />
             </Column>
+            <View style={styles.hrLine} />
             <Column justifyContent="center">
               <Text style={styles.subHeading}>Maximum</Text>
               <Picker
