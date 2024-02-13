@@ -11,6 +11,7 @@ import {
   addInitials,
   showDisplayOrFirstName,
 } from '../../../../../utils/common.functions';
+import { preferNotToSay } from '../../../../../utils/constanst';
 
 export const PreviewScreen = () => {
   const { user } = useViewModal();
@@ -46,7 +47,10 @@ export const PreviewScreen = () => {
                     />
                     <Row alignItems="center" gap={15} style={styles.nameRow}>
                       <Text style={styles.name}>
-                        {showDisplayOrFirstName(user?.profile?.displayName,user?.profile?.name?.first)}
+                        {showDisplayOrFirstName(
+                          user?.profile?.displayName,
+                          user?.profile?.name?.first,
+                        )}
                         {user.profile.genderPronoun !== 'Prefer not to say' &&
                           ` (${user.profile.genderPronoun})`}
                         , {user.age}
@@ -69,7 +73,7 @@ export const PreviewScreen = () => {
                       {addInitials(
                         user.designation?.userDegree,
                         user.designation?.primaryDegree,
-                      )}
+                      )}{' '}
                     </Text>
                   </Row>
                   <Row alignItems="center" style={styles.userInfoRow} gap={15}>
@@ -139,61 +143,78 @@ export const PreviewScreen = () => {
                         </Text>
                       </Row>
                     )}
-                    {user.ethnicity.length >= 0 &&
-                      user.ethnicity.map((ethnicity: String, index: number) => (
-                        <Row
-                          key={index}
-                          gap={10}
-                          alignItems="center"
-                          style={styles.chip}
-                        >
-                          <Image
-                            style={styles.chipIcon}
-                            source={require('../../../../../assets/images/vitalIcons/ethincity.png')}
-                          />
-                          <Text style={styles.chipText}>{ethnicity}</Text>
-                        </Row>
-                      ))}
 
-                    {user.relationship.length >= 0 &&
+                    {user.ethnicity &&
+                      user.ethnicity.length > 0 &&
+                      user.ethnicity.map((ethnicity: string, index: number) => {
+                        if (ethnicity !== preferNotToSay) {
+                          return (
+                            <Row
+                              key={index}
+                              gap={10}
+                              alignItems="center"
+                              style={styles.chip}
+                            >
+                              <Image
+                                style={styles.chipIcon}
+                                source={require('../../../../../assets/images/vitalIcons/ethincity.png')}
+                              />
+                              <Text style={styles.chipText}>{ethnicity}</Text>
+                            </Row>
+                          );
+                        }
+                        return null;
+                      })}
+
+                    {user.relationship &&
+                      user.relationship.length > 0 &&
                       user.relationship.map(
-                        (relationship: String, index: number) => (
-                          <Row
-                            key={index}
-                            gap={10}
-                            alignItems="center"
-                            style={styles.chip}
-                          >
-                            <Image
-                              style={styles.chipIcon}
-                              source={require('../../../../../assets/images/vitalIcons/relationship.png')}
-                            />
-                            <Text style={styles.chipText}>{relationship}</Text>
-                          </Row>
-                        ),
+                        (relationship: string, index: number) => {
+                          if (relationship !== preferNotToSay) {
+                            return (
+                              <Row
+                                key={index}
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../../../../assets/images/vitalIcons/relationship.png')}
+                                />
+                                <Text style={styles.chipText}>
+                                  {relationship}
+                                </Text>
+                              </Row>
+                            );
+                          }
+                          return null;
+                        },
                       )}
-                    {user.maritalStatus && (
-                      <Row gap={10} alignItems="center" style={styles.chip}>
-                        <Image
-                          style={styles.chipIcon}
-                          source={require('../../../../../assets/images/vitalIcons/married.png')}
-                        />
-                        <Text style={styles.chipText}>
-                          {user.maritalStatus}
-                        </Text>
-                      </Row>
-                    )}
-                    {user.kids &&
-                      (user.kids === ' Prefer not to say' ? null : (
+
+                    {user.maritalStatus &&
+                      user.maritalStatus !== preferNotToSay && (
                         <Row gap={10} alignItems="center" style={styles.chip}>
                           <Image
                             style={styles.chipIcon}
-                            source={require('../../../../../assets/images/vitalIcons/haveKid.png')}
+                            source={require('../../../../../assets/images/vitalIcons/married.png')}
                           />
-                          <Text style={styles.chipText}>{user.kids}</Text>
+                          <Text style={styles.chipText}>
+                            {user.maritalStatus}
+                          </Text>
                         </Row>
-                      ))}
-                    {user.familyPlan && (
+                      )}
+                    {user.kids && user.kids !== preferNotToSay && (
+                      <Row gap={10} alignItems="center" style={styles.chip}>
+                        <Image
+                          style={styles.chipIcon}
+                          source={require('../../../../../assets/images/vitalIcons/haveKid.png')}
+                        />
+                        <Text style={styles.chipText}>{user.kids}</Text>
+                      </Row>
+                    )}
+
+                    {user.familyPlan && user.familyPlan !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
@@ -202,7 +223,7 @@ export const PreviewScreen = () => {
                         <Text style={styles.chipText}>{user.familyPlan}</Text>
                       </Row>
                     )}
-                    {user.religion && (
+                    {user.religion && user.religion !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
@@ -212,7 +233,7 @@ export const PreviewScreen = () => {
                         <Text style={styles.chipText}>{user.religion}</Text>
                       </Row>
                     )}
-                    {user.politics && (
+                    {user.politics && user.politics !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
@@ -221,18 +242,19 @@ export const PreviewScreen = () => {
                         <Text style={styles.chipText}>{user.politics}</Text>
                       </Row>
                     )}
-                    {user.covidVaccineStatus && (
-                      <Row gap={10} alignItems="center" style={styles.chip}>
-                        <Image
-                          style={styles.chipIcon}
-                          source={require('../../../../../assets/images/vitalIcons/corona.png')}
-                        />
-                        <Text style={styles.chipText}>
-                          {user.covidVaccineStatus}
-                        </Text>
-                      </Row>
-                    )}
-                    {user.diet && (
+                    {user.covidVaccineStatus &&
+                      user.covidVaccineStatus !== preferNotToSay && (
+                        <Row gap={10} alignItems="center" style={styles.chip}>
+                          <Image
+                            style={styles.chipIcon}
+                            source={require('../../../../../assets/images/vitalIcons/corona.png')}
+                          />
+                          <Text style={styles.chipText}>
+                            {user.covidVaccineStatus}
+                          </Text>
+                        </Row>
+                      )}
+                    {user.diet && user.diet !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
@@ -241,7 +263,7 @@ export const PreviewScreen = () => {
                         <Text style={styles.chipText}>{user.diet}</Text>
                       </Row>
                     )}
-                    {user.drinking && (
+                    {user.drinking && user.drinking !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
@@ -250,7 +272,7 @@ export const PreviewScreen = () => {
                         <Text style={styles.chipText}>{user.drinking}</Text>
                       </Row>
                     )}
-                    {user.excercise && (
+                    {user.excercise && user.excercise !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
@@ -259,7 +281,7 @@ export const PreviewScreen = () => {
                         <Text style={styles.chipText}>{user.excercise}</Text>
                       </Row>
                     )}
-                    {user.smoking && (
+                    {user.smoking && user.smoking !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
@@ -269,7 +291,7 @@ export const PreviewScreen = () => {
                       </Row>
                     )}
 
-                    {user.pets && (
+                    {user.pets && user.pets !== preferNotToSay && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}

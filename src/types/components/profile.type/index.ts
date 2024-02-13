@@ -27,17 +27,17 @@ export type UserProfile = {
   state: string;
   country: string;
   drinking: string;
-  maritalStatus: string[];
+  maritalStatus: string;
   sexualPreference: string;
   showSexualPreference: string;
-  userHeight: {
+  height: {
     feet: string;
     inch: string;
   };
   religion: string;
   politics: string;
   kids: string;
-  covidVaccineStatus: boolean;
+  covidVaccineStatus: string | boolean;
   bio: string;
 };
 export type profileProps = {

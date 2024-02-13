@@ -22,6 +22,7 @@ import {
 import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
 import { styles } from './style';
 import { AlertScreen } from '../alert';
+import { preferNotToSay } from '../../utils/constanst';
 
 export const ProfileModal = (props: profileProps) => {
   const {
@@ -187,7 +188,7 @@ export const ProfileModal = (props: profileProps) => {
                               </Row>
                             )}
 
-                          {user.userHeight && (
+                          {user?.height && (
                             <Row
                               gap={10}
                               alignItems="center"
@@ -198,7 +199,7 @@ export const ProfileModal = (props: profileProps) => {
                                 source={require('../../assets/images/vitalIcons/height.png')}
                               />
                               <Text style={styles.chipText}>
-                                {user.userHeight.feet}"{user.userHeight.inch}'
+                                {user.height.feet}"{user.height.inch}'
                               </Text>
                             </Row>
                           )}
@@ -222,54 +223,8 @@ export const ProfileModal = (props: profileProps) => {
                                 </Row>
                               ),
                             )}
-                          {user.maritalStatus && (
-                            <Row
-                              gap={10}
-                              alignItems="center"
-                              style={styles.chip}
-                            >
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/vitalIcons/married.png')}
-                              />
-                              <Text style={styles.chipText}>
-                                {user.maritalStatus}
-                              </Text>
-                            </Row>
-                          )}
-                          {user.religion && (
-                            <Row
-                              gap={10}
-                              alignItems="center"
-                              style={styles.chip}
-                            >
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/vitalIcons/Religion.png')}
-                              />
-
-                              <Text style={styles.chipText}>
-                                {user.religion}
-                              </Text>
-                            </Row>
-                          )}
-                          {user.politics && (
-                            <Row
-                              gap={10}
-                              alignItems="center"
-                              style={styles.chip}
-                            >
-                              <Image
-                                style={cardStyles.chipIcon}
-                                source={require('../../assets/images/vitalIcons/politics.png')}
-                              />
-                              <Text style={styles.chipText}>
-                                {user.politics}
-                              </Text>
-                            </Row>
-                          )}
-                          {user.kids &&
-                            (user.kids === ' Prefer not to say' ? null : (
+                          {user.maritalStatus &&
+                            user.maritalStatus !== preferNotToSay && (
                               <Row
                                 gap={10}
                                 alignItems="center"
@@ -277,12 +232,47 @@ export const ProfileModal = (props: profileProps) => {
                               >
                                 <Image
                                   style={styles.chipIcon}
-                                  source={require('../../assets/images/vitalIcons/wantKids.png')}
+                                  source={require('../../assets/images/vitalIcons/married.png')}
                                 />
-                                <Text style={styles.chipText}>{user.kids}</Text>
+                                <Text style={styles.chipText}>
+                                  {user.maritalStatus}
+                                </Text>
                               </Row>
-                            ))}
-                          {user.covidVaccineStatus && (
+                            )}
+                          {user.religion &&
+                            user.religion !== preferNotToSay && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/Religion.png')}
+                                />
+
+                                <Text style={styles.chipText}>
+                                  {user.religion}
+                                </Text>
+                              </Row>
+                            )}
+                          {user.politics &&
+                            user.politics !== preferNotToSay && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                <Image
+                                  style={cardStyles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/politics.png')}
+                                />
+                                <Text style={styles.chipText}>
+                                  {user.politics}
+                                </Text>
+                              </Row>
+                            )}
+                          {user.kids && user.kids !== preferNotToSay && (
                             <Row
                               gap={10}
                               alignItems="center"
@@ -290,28 +280,43 @@ export const ProfileModal = (props: profileProps) => {
                             >
                               <Image
                                 style={styles.chipIcon}
-                                source={require('../../assets/images/vitalIcons/corona.png')}
+                                source={require('../../assets/images/vitalIcons/wantKids.png')}
                               />
-                              <Text style={styles.chipText}>
-                                {user.covidVaccineStatus}
-                              </Text>
+                              <Text style={styles.chipText}>{user.kids}</Text>
                             </Row>
                           )}
-                          {user.drinking && (
-                            <Row
-                              gap={10}
-                              alignItems="center"
-                              style={styles.chip}
-                            >
-                              <Image
-                                style={styles.chipIcon}
-                                source={require('../../assets/images/vitalIcons/drinks.png')}
-                              />
-                              <Text style={styles.chipText}>
-                                {user.drinking}
-                              </Text>
-                            </Row>
-                          )}
+                          {user.covidVaccineStatus &&
+                            user.covidVaccineStatus !== preferNotToSay && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/corona.png')}
+                                />
+                                <Text style={styles.chipText}>
+                                  {user.covidVaccineStatus}
+                                </Text>
+                              </Row>
+                            )}
+                          {user.drinking &&
+                            user.drinking !== preferNotToSay && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={styles.chip}
+                              >
+                                <Image
+                                  style={styles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/drinks.png')}
+                                />
+                                <Text style={styles.chipText}>
+                                  {user.drinking}
+                                </Text>
+                              </Row>
+                            )}
                         </Row>
                       </View>
                     </View>
