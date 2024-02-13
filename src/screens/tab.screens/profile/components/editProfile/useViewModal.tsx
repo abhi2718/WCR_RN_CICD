@@ -23,7 +23,6 @@ import {
   primaryDegree,
   relationship,
   religion,
-  sexualOrientationArray,
   smoking,
   statesOption,
   userDegree,
@@ -119,7 +118,7 @@ export const useViewModal = () => {
     'state',
   );
   const ethnicityList = generateList(ethnicity, 'ethnicity');
-  const hobbyList = generateList(hobbies, 'interests');
+
   const maritalStatusList = generateList(maritalStatus, 'maritalStatus');
   const relationshipLevelList = generateList(relationship, 'relationshipLevel');
   const religionList = generateList(religion, 'religion');
@@ -364,7 +363,7 @@ export const useViewModal = () => {
       const allPhotos = [...sidePicUri!, ...bottomUris!];
       for (let i = 0; i < allPhotos.length; i++) {
         const isOldUrl = user?.photos?.find(
-          ({ url }) => url === allPhotos[i]?.path,
+          ({url}) => url === allPhotos[i]?.path,
         );
         const cloudURL = isOldUrl
           ? isOldUrl.url
@@ -541,8 +540,6 @@ export const useViewModal = () => {
           },
         },
       };
-      console.log(payload.update);
-      return
       const data = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         payload,
