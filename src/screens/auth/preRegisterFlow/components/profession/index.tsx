@@ -24,6 +24,7 @@ const Profession = (props: ScreenParams) => {
     primaryDegreeOption,
     validationErrors,
     changePrimaryDegreeOption,
+    HandleError,
   } = useProfessionModal(props);
   return (
     <Pressable style={profession.innerView} onPress={Keyboard.dismiss}>
@@ -55,10 +56,11 @@ const Profession = (props: ScreenParams) => {
                 )}
                 <SearchableDropdownInput
                   data={primaryDegreeOption}
-                  onFocus={() => {}}
-                  maxHeight={500}
+                  // onFocus={() => {}}
+                  maxHeight={200}
                   labelField="label"
                   valueField="value"
+                  onFocus={HandleError}
                   placeholder={professionForm.primaryDegree}
                   searchPlaceholder="Search"
                   value={professionForm.primaryDegree}

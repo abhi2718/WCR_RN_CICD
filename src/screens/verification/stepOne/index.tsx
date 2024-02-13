@@ -1,6 +1,6 @@
 import React from 'react';
-import { Pressable, Text, View,Keyboard } from 'react-native';
-import { Row, ScreenContainer } from '../../../components/tools';
+import { Pressable, Text, View,Keyboard, KeyboardAvoidingView } from 'react-native';
+import { Row, ScreenContainer, isAndroid } from '../../../components/tools';
 import { HeaderBar } from '../../../components/header';
 import { RadioButton } from 'react-native-paper';
 import { colors } from '../../../infrastructure/theme/colors';
@@ -25,7 +25,12 @@ const VerificationStepOne = (props: ScreenParams) => {
     closeModal,
   } = useVerificationViewModal(props);
   return (
-    <ScreenContainer>
+    <KeyboardAvoidingView
+      style={verificationStyle.wrapper}
+      enabled
+      behavior={isAndroid ? 'height' : 'padding'}
+    >
+       <ScreenContainer>
        <VerificationInfoModal
           isVisible={isVerificationInfoModalVisible}
           onClose={closeModal}
@@ -114,7 +119,7 @@ const VerificationStepOne = (props: ScreenParams) => {
                 <ErrorText>{validationErrors.teritory}</ErrorText>
               </View>
             </>
-          )}
+          )}          
           {country === 'USA' && (
             <Row style={verificationStyle.rowView} alignItems="center">
               <RadioButton.Android
@@ -167,6 +172,7 @@ const VerificationStepOne = (props: ScreenParams) => {
       </View>
       </Pressable>
     </ScreenContainer>
+    </KeyboardAvoidingView>
   );
 };
  

@@ -29,6 +29,7 @@ export const useViewModal = () => {
   const userProfileRepository = useMemo(() => new UserProfileRepository(), []);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const [isPrimaryDegreeValid, setIsPrimaryDegreeValid] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [showHeightModal,setShowHeightModal] = useState(false);
   const isPrefrenceCreated = useRef(false);
@@ -445,6 +446,8 @@ export const useViewModal = () => {
     handleAgeSliderChange,
     submitLoading,
     showHeightModal,
+    isPrimaryDegreeValid,
+    setIsPrimaryDegreeValid,
     handleHeightModal,
     heightRange,
     setHeightRange,

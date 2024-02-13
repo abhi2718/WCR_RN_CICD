@@ -10,6 +10,7 @@ import { HeaderBar } from '../../../../../components/header';
 import { formatNumber } from '../../../../../utils/common.functions';
 import { PreferenceyModal } from '../../../../../components/preferenceModal';
 import { HeightPrefrence } from './components/heightPrefrence';
+import { ErrorText } from '../../../../auth/signin/signInStyle';
 export const PreferencesScreen = () => {
   const {
     answer,
@@ -23,6 +24,8 @@ export const PreferencesScreen = () => {
     handleAgeSliderChange,
     submitLoading,
     showHeightModal,
+    isPrimaryDegreeValid,
+    setIsPrimaryDegreeValid,
     handleHeightModal,
     openModal,
     closeModal,
@@ -169,6 +172,65 @@ export const PreferencesScreen = () => {
                 >
                   <Text style={styles.headerText}>Healthcare Professional</Text>
                 </Row>
+              );
+            }
+
+            if (index === 7) {
+              return (
+                <Column
+                  key={index}
+                  style={styles.itemRow}
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                >
+                  <Text style={[styles.textColor, styles.optionName]}>
+                    {item.title}
+                  </Text>
+
+                  <SafeAreaView>
+                    <Row
+                      style={styles.selectRow}
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      {item.option!.length > 0 ? (
+                        <ModalSelector
+                          data={item.option!}
+                          initValue={answer[item.initValue]}
+                          onChange={handleInputChange}
+                          style={styles.modalSelector}
+                          optionContainerStyle={styles.optionContainer}
+                          optionTextStyle={styles.optionText}
+                          cancelStyle={styles.cancelButton}
+                          selectedItemTextStyle={styles.selectedItem}
+                          initValueTextStyle={styles.initValueTextStyle}
+                          selectStyle={styles.selectStyle}
+                          overlayStyle={styles.overlayStyle}
+                          cancelTextStyle={styles.cancelTextStyle}
+                          optionStyle={styles.optionStyle}
+                        />
+                      ) : isPrimaryDegreeValid ? (
+                        <ErrorText>
+                          Please Select the Degree Category first
+                        </ErrorText>
+                      ) : (
+                        <Pressable
+                          onPress={() => {
+                            setIsPrimaryDegreeValid(true);
+                          }}
+                        >
+                          <Text > No Preference </Text>
+                        </Pressable>
+                      )}
+
+                      <Image
+                        resizeMode="contain"
+                        style={styles.selectArrow}
+                        source={require('../../../../../assets/images/settings/Next.png')}
+                      />
+                    </Row>
+                  </SafeAreaView>
+                </Column>
               );
             }
             if (index === 8) {
