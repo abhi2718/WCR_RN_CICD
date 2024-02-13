@@ -17,8 +17,6 @@ import { colors } from '../../../../../../../infrastructure/theme/colors';
 
 export const ContactUs = () => {
   const {
-    user,
-    goBack,
     handleSubject,
     handleMessage,
     handleSubmit,
@@ -27,7 +25,7 @@ export const ContactUs = () => {
     message,
   } = useViewModal();
   return (
-    <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
+    <Pressable onPress={Keyboard.dismiss} style={styles.wrapper}>
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
           <View>
@@ -40,9 +38,8 @@ export const ContactUs = () => {
               onChangeText={handleSubject}
               value={subject}
             />
-
             <Spacer position="top" size={20}>
-              <Text style={styles.text}>Subject</Text>
+              <Text style={styles.text}>Message</Text>
             </Spacer>
             <Spacer position="top" size={20}>
               <TextInput
@@ -56,7 +53,6 @@ export const ContactUs = () => {
                 returnKeyType="done"
                 blurOnSubmit={true}
                 onSubmitEditing={() => {
-                  //updateUserDetails()
                 }}
                 placeholderTextColor={colors.ui.placeholder}
               />

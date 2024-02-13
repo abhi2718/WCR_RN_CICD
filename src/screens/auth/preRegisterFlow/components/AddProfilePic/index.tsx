@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Image,
   Text,
-  ImageProps,
   TouchableOpacity,
   View,
   Modal,
@@ -13,23 +12,15 @@ import {
   Logo,
   Row,
   ScreenContainer,
-  Spacer,
 } from '../../../../../components/tools';
 import { addPicture, modalStyles } from './AddProfilePicStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { HeaderBar } from '../../../../../components/header';
-import { ImageOrVideo } from 'react-native-image-crop-picker';
 import { useAddProfilePicViewModal } from './addProfilePic.ViewModal';
 import { ProfilePicInfoModal } from '../../../../../components/profilePicInfoModal';
+import { AddProfilePicScreenProps } from '../../../../../types/screen.type/preRegister.type';
 
-export interface AvatarProps extends ImageProps {
-  onChange?: (image: ImageOrVideo) => void;
-  navigation?: any;
-  route?: any;
-  showHeader?: boolean;
-}
-
-const AddProfilePicScreen = (props: any) => {
+const AddProfilePicScreen = (props: AddProfilePicScreenProps) => {
   const {
     loading,
     closeModal,
@@ -82,7 +73,6 @@ const AddProfilePicScreen = (props: any) => {
                     <TouchableOpacity onPress={pickProfilePicture}>
                       <Image
                         style={addPicture.profilePic}
-                        {...props}
                         source={
                           profilePicUri
                             ? { uri: profilePicUri.path }
@@ -113,7 +103,6 @@ const AddProfilePicScreen = (props: any) => {
                     </View>
                   </TouchableOpacity>
                 )}
-
                 <Column style={addPicture.columnOne}>
                   {sidePicUri?.map((sidePic, index) => (
                     <View key={index}>
@@ -130,7 +119,6 @@ const AddProfilePicScreen = (props: any) => {
                           >
                             <Image
                               style={addPicture.photo}
-                              {...props}
                               source={{ uri: sidePic?.path }}
                             />
                           </TouchableOpacity>
@@ -172,7 +160,6 @@ const AddProfilePicScreen = (props: any) => {
                   ))}
                 </Column>
               </Row>
-
               <Row justifyContent="space-between" style={addPicture.row}>
                 {bottomUris?.map((bottomUri, index) => (
                   <View key={index}>
@@ -224,7 +211,6 @@ const AddProfilePicScreen = (props: any) => {
           )}
         </View>
       </ScreenContainer>
-
       <View>
         <Modal
           animationType="slide"

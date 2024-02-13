@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { ScreenContainer, dimensions } from '../../../../../components/tools';
-import { Text, View, StyleSheet, Pressable, Keyboard } from 'react-native';
+import React from 'react';
+import { ScreenContainer } from '../../../../../components/tools';
+import { Text, View, Pressable, Keyboard } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { profession } from './professionStyle';
 import {
-  DropdownInput,
   FlatInput,
   SearchableDropdownInput,
 } from '../../../../../components/inputBox';
@@ -13,7 +12,8 @@ import { ScreenParams } from '../../../../../types/services.types/firebase.servi
 import { useProfessionModal } from './professionViewModal';
 import { ErrorText } from '../../../signin/signInStyle';
 import { HeaderBar } from '../../../../../components/header';
-import { Dropdown } from 'react-native-element-dropdown';
+import { OptionType } from '../../../../../types/components/input.type';
+
 const Profession = (props: ScreenParams) => {
   const {
     loading,
@@ -24,13 +24,14 @@ const Profession = (props: ScreenParams) => {
     primaryDegreeOption,
     validationErrors,
     changePrimaryDegreeOption,
+    HandleError,
   } = useProfessionModal(props);
   return (
-    <Pressable style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+    <Pressable style={profession.innerView} onPress={Keyboard.dismiss}>
       <ScreenContainer>
         <View style={profession.container}>
           <View style={profession.innerView}>
-            <View style={{ flex: 1 }}>
+            <View style={profession.innerView}>
               <HeaderBar></HeaderBar>
               <Text style={profession.subHeader}>
                 Tell us about your profession
@@ -40,11 +41,12 @@ const Profession = (props: ScreenParams) => {
                   data={userDegree}
                   onFocus={() => setIsFocus(true)}
                   labelField="label"
+                  maxHeight={500}
                   valueField="value"
-                  placeholder="Select degree category"
-                  searchPlaceholder="Search degree category"
+                  placeholder="Select Degree Category"
+                  searchPlaceholder="Search"
                   value={professionForm.userDegree}
-                  onChange={(item: any) => {
+                  onChange={(item: OptionType) => {
                     changePrimaryDegreeOption(item.value);
                     handleInputChange('userDegree', item.value);
                   }}
@@ -54,28 +56,28 @@ const Profession = (props: ScreenParams) => {
                 )}
                 <SearchableDropdownInput
                   data={primaryDegreeOption}
-                  onFocus={() => {}}
+                  // onFocus={() => {}}
                   maxHeight={200}
                   labelField="label"
                   valueField="value"
+                  onFocus={HandleError}
                   placeholder={professionForm.primaryDegree}
-                  searchPlaceholder="Search degree type"
+                  searchPlaceholder="Search"
                   value={professionForm.primaryDegree}
                   placeholderStyle={{
-                    color: 'black',
-                    fontSize: 16,
+                    ...profession.placeHolderStyle,
                     fontWeight:
                       professionForm.primaryDegree === 'Select Degree Type'
                         ? '300'
                         : '400',
                   }}
-                  onChange={(item: any) => {
+                  onChange={(item: OptionType) => {
                     handleInputChange('primaryDegree', item.value);
                   }}
-                  style={styles.dropdown}
+                  style={profession.dropdown}
                 />
                 {validationErrors.primaryDegree && (
-                  <ErrorText> {validationErrors.primaryDegree}</ErrorText>
+                  <ErrorText>{validationErrors.primaryDegree}</ErrorText>
                 )}
                 <FlatInput
                   label="Job Title"
@@ -86,7 +88,7 @@ const Profession = (props: ScreenParams) => {
                   error={validationErrors.title}
                 />
                 {validationErrors.title && (
-                  <ErrorText> {validationErrors.title}</ErrorText>
+                  <ErrorText>{validationErrors.title}</ErrorText>
                 )}
                 <FlatInput
                   label="Institution/School/Practice Name"
@@ -112,25 +114,3 @@ const Profession = (props: ScreenParams) => {
 };
 
 export default Profession;
-
-const styles = StyleSheet.create({
-  label: {
-    backgroundColor: 'white',
-    left: 3,
-    top: 20,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 12,
-  },
-  dropdown: {
-    height: 50,
-    //borderColor: 'gray',
-    //borderWidth: 0.5,
-    borderRadius: 8,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'gray',
-    paddingRight: 6,
-    paddingLeft: 16,
-    width: dimensions.width - 26,
-  },
-});

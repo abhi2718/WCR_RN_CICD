@@ -1,11 +1,12 @@
 import React from 'react';
 import { Image, SafeAreaView, Text, View } from 'react-native';
-import { Column, Logo, Row, ScreenContainer } from '../../../components/tools';
-import { ErrorScreenHeader, HeaderDeck } from '../../../components/header';
+import { Column } from '../../../components/tools';
+import { ErrorScreenHeader } from '../../../components/header';
 import { PrimaryButton } from '../../../components/button';
 import { pendingStyle } from './pendingStyle';
 import { usePandingStateViewModal } from './pendingState.ViewModal';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
+import VerificationDeclined from '../verificationDeclined';
 
 const VerificationPending = (props: ScreenParams) => {
   const { state, isFormSubmitted, navigateToGender,declineReason } =
@@ -48,7 +49,6 @@ const VerificationPending = (props: ScreenParams) => {
           </Column>
         </View>
       )}
-
       {state === 'Rejected' && (
         <View style={pendingStyle.contentDeclined}>
           <Column gap={25} alignItems="center">

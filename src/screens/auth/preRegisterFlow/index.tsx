@@ -2,10 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
 import { PrimaryButton } from '../../../components/button';
-import {
-  Row,
-  ScreenContainer,
-} from '../../../components/tools';
+import { Row, ScreenContainer } from '../../../components/tools';
 import { genderStyle } from './genderStyle';
 import { genderArray } from '../../../utils/constanst';
 import { useGenderViewModal } from './gender.ViewModal';
@@ -18,9 +15,9 @@ const Gender = (props: ScreenParams) => {
     gender,
     handleGenderValue,
     updateUserDetails,
-    checkboxState,
     handleCheckboxChange,
     loading,
+    checkboxState
   } = useGenderViewModal(props);
 
   return (
@@ -55,8 +52,6 @@ const Gender = (props: ScreenParams) => {
               <CheckBox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
-                fillColor={colors.ui.primary}
-                unfillColor="#FFFFFF"
               />
               <Text style={genderStyle.btnText}>Visible on profile</Text>
             </Row>

@@ -1,9 +1,6 @@
 import {
   Text,
-  View,
   Pressable,
-  StatusBar,
-  FlatList,
   StyleSheet,
   Image,
 } from 'react-native';
@@ -13,6 +10,7 @@ import { Row } from '../tools';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
 import { fonts } from '../../infrastructure/theme/fonts';
+import { CustomCheckBoxProps } from '../../types/components/checkbox.type';
 export const CustomCheckboxWrapper = styled.View`
   width: 20px;
   height: 20px;
@@ -22,7 +20,8 @@ export const CustomCheckboxWrapper = styled.View`
   border-radius: 2px;
   border: 2px solid #49454f;
 `;
-export const CustomCheckBox = (props) => {
+
+export const CustomCheckBox = (props:CustomCheckBoxProps) => {
   const { onPress, isChecked, label } = props;
 
   return (

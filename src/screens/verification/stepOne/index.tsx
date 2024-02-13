@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Pressable, Text, View,Keyboard } from 'react-native';
-import { Row, ScreenContainer } from '../../../components/tools';
+import React from 'react';
+import { Pressable, Text, View,Keyboard, KeyboardAvoidingView } from 'react-native';
+import { Row, ScreenContainer, isAndroid } from '../../../components/tools';
 import { HeaderBar } from '../../../components/header';
 import { RadioButton } from 'react-native-paper';
 import { colors } from '../../../infrastructure/theme/colors';
@@ -8,11 +8,8 @@ import { verificationStyle } from './verificationSteps';
 import { FlatInput } from '../../../components/inputBox';
 import { ErrorText } from '../../auth/signin/signInStyle';
 import { PrimaryButton } from '../../../components/button';
-import { useNavigation } from '@react-navigation/native';
-import VerificationStepTwo from '../stepTwo';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { useVerificationViewModal } from './stepOne.ViewModal';
-import { cleanSingle } from 'react-native-image-crop-picker';
 import { VerificationInfoModal } from '../../../components/verificationModal';
 
 const VerificationStepOne = (props: ScreenParams) => {
@@ -28,14 +25,19 @@ const VerificationStepOne = (props: ScreenParams) => {
     closeModal,
   } = useVerificationViewModal(props);
   return (
-    <ScreenContainer>
+    <KeyboardAvoidingView
+      style={verificationStyle.wrapper}
+      enabled
+      behavior={isAndroid ? 'height' : 'padding'}
+    >
+       <ScreenContainer>
        <VerificationInfoModal
           isVisible={isVerificationInfoModalVisible}
           onClose={closeModal}
-        ></VerificationInfoModal>
+        />
       <HeaderBar isVerificartionScreen={true} flagType={country} />
       <Text style={verificationStyle.subHeader}>ID Verification (Step I)</Text>
-      <Pressable style={{flex:1}} onPress={() => {
+      <Pressable style={verificationStyle.wrapper} onPress={() => {
         Keyboard.dismiss()
       }}>
       <View style={verificationStyle.container}>
@@ -117,8 +119,7 @@ const VerificationStepOne = (props: ScreenParams) => {
                 <ErrorText>{validationErrors.teritory}</ErrorText>
               </View>
             </>
-          )}
-
+          )}          
           {country === 'USA' && (
             <Row style={verificationStyle.rowView} alignItems="center">
               <RadioButton.Android
@@ -160,7 +161,6 @@ const VerificationStepOne = (props: ScreenParams) => {
             <RadioButton.Android color={colors.ui.primary} value="Student" />
             <Text style={verificationStyle.btnText}>Student</Text>
           </Row>
-
           <Row style={verificationStyle.rowView} alignItems="center">
             <RadioButton.Android color={colors.ui.primary} value="Others" />
             <Text style={verificationStyle.btnText}>All Other Users</Text>
@@ -172,7 +172,8 @@ const VerificationStepOne = (props: ScreenParams) => {
       </View>
       </Pressable>
     </ScreenContainer>
+    </KeyboardAvoidingView>
   );
 };
-
+ 
 export default VerificationStepOne;

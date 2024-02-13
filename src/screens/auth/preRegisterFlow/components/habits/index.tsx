@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { ChipStyle } from '../maritalStatus/chipStyle';
 import { PrimaryButton } from '../../../../../components/button';
@@ -35,8 +35,8 @@ const Habits = (props: ScreenParams) => {
       <View style={ChipStyle.container}>
         <View style={ChipStyle.scrollContainer}>
           <HeaderBar
-            skip={() => navigateToAboutScreen()}
-          ></HeaderBar>
+            skip={navigateToAboutScreen}
+          />
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <Text style={ChipStyle.subHeader}>Drinking Habits</Text>

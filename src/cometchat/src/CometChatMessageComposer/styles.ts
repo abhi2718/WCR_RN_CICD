@@ -51,10 +51,22 @@ export const Style = StyleSheet.create({
     color: theme.colors.ui.textAccent,
     fontFamily: fonts.body,
   },
+  closeMentionList: {
+    position: 'absolute',
+    right: 20,
+    top: 15,
+  },
+  closeIcon: {
+    width: 10,
+    height: 10,
+  },
   mentionListBox: {
     backgroundColor: theme.colors.ui.white,
     padding: 12,
     marginHorizontal: 12,
+    maxHeight: 250,
+    borderColor: '#D7DADF',
+    borderWidth: 1,
     borderRadius: 10,
     ...Platform.select({
       ios: {

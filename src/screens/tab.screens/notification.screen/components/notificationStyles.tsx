@@ -12,8 +12,6 @@ export const notificationStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     width: '100%',
-    // borderColor: 'blue',
-    // borderWidth: 2,
   },
   profileImageStyle: {
     width: 45,

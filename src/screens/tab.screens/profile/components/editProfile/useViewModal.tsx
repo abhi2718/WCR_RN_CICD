@@ -1,5 +1,4 @@
-import moment from 'moment';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   FlashMessageType,
@@ -8,6 +7,7 @@ import {
 import { CloudinaryRepository } from '../../../../../repository/cloudinary.repo';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { addUser } from '../../../../../store/reducers/user.reducer';
+import { Measurement } from '../../../../../types/commonFunction.type';
 import { handleInputChangeType } from '../../../../../types/screen.type/profile.type';
 import {
   diet,
@@ -30,12 +30,7 @@ import {
   covidVaccineStatus,
   hobbies,
 } from '../../../../../utils/constanst';
-import { ImageDataType } from '../../../../auth/preRegisterFlow/components/AddProfilePic/addProfilePic.ViewModal';
-interface Measurement {
-  feet: number;
-  inch: number;
-  heightInCm?: number;
-}
+
 export const useViewModal = () => {
   const dispatch = useDispatch();
   const updateUserDetailsRepository = useMemo(
@@ -142,7 +137,6 @@ export const useViewModal = () => {
     sexualOrientationArray,
     'sexualPreference',
   );
-  const [distanceRange, setDistanceRange] = useState([0]);
   const [ageRange, setAgeRange] = useState([20, 60]);
   const [heightRange, setHeightRange] = useState([5]);
   const savedHeight: Measurement = user.height;
@@ -339,7 +333,7 @@ export const useViewModal = () => {
   };
   const [allPics, setAllPics] = useState<any>({});
   const uploadImageToCloudinary = async (
-    imageData: ImageDataType,
+    imageData: any,
   ): Promise<string | undefined> => {
     const verificationFolder = 'verificationProof';
     try {
@@ -433,7 +427,7 @@ export const useViewModal = () => {
   const editProfile = async () => {
     try {
       if (!userProfile.city.length || !userProfile.zipcode.length) {
-        ShowFlashMessage('City and zipcode both required ', '', 'success');
+        ShowFlashMessage('City and zipcode both required ', '', 'danger');
         return;
       }
       const phonePattern = /\(\d{3}\) \d{3}-\d{4}/;
@@ -441,7 +435,7 @@ export const useViewModal = () => {
         ShowFlashMessage(
           'Please enter a valid 10-digit phone number!',
           '',
-          'success',
+          'danger',
         );
         return;
       }
@@ -451,7 +445,7 @@ export const useViewModal = () => {
         isValid?.user &&
         isValid?.user['address.zipcode']['message'] === 'Zip code is not valid'
       ) {
-        ShowFlashMessage('Zip code is not valid!', '', 'success');
+        ShowFlashMessage('Zip code is not valid!', '', 'danger');
         setSubmitLoading(false);
         return;
       }
@@ -574,6 +568,7 @@ export const useViewModal = () => {
           },
         },
       };
+      console.log(payload.update);
       const data = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         payload,
@@ -623,15 +618,7 @@ export const useViewModal = () => {
 
     return result;
   };
-  const handleDateChange = (newDate: Date) => {
-    setUserProfile((oldState) => {
-      const date = newDate ? moment(newDate).format('MM/DD/YYYY') : 'N/A';
-      return {
-        ...oldState,
-        dob: date,
-      };
-    });
-  };
+
   const _handleInputChange = (text: string, key: string) => {
     if (key === 'aboutMe') {
       setLetterCount(() => {
@@ -701,17 +688,12 @@ export const useViewModal = () => {
   }, []);
   const _setShowHeightModal = (state: boolean = true) =>
     setShowHeightModal(true);
+  const voidFun = useCallback(() => {}, []);
   return {
     answer,
     optionsList,
     handleInputChange,
     editProfile,
-    distanceRange,
-    handleDistanceSliderChange,
-    ageRange,
-    handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     ethnicity,
     handleItemSelected,
     closeModal,
@@ -725,20 +707,19 @@ export const useViewModal = () => {
     _handleInputChange,
     user,
     formatMobile,
-    openAgePickerModal,
-    handleDateChange,
     setAllPics,
     openHobbyModal,
     hobbiesList,
     statesList,
     setUserProfile,
     submitLoading,
-    hobbies,
     letterCount,
+    hobbies,
     showHeightModal,
     setShowHeightModal,
     _setShowHeightModal,
     height,
     setheight,
+    voidFun,
   };
 };

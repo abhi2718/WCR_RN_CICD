@@ -59,7 +59,7 @@ export const SearchableDropdownInput: React.FC<InputProps> = (props) => {
   return (
     <DropdownChildContainer
       {...props}
-      search
+      search={props.data.length > 0 ? true : false}
       selectedTextStyle={inputBoxStyle.selectedTextStyle}
       style={inputBoxStyle.dropdown}
       placeholderStyle={inputBoxStyle.placeholderStyle}

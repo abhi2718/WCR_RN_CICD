@@ -4,6 +4,9 @@ import { colors } from '../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 export const genderPronounStyle = StyleSheet.create({
+  wrapper: {
+    flex: 1
+  },
   container: {
     flex: 1,
     justifyContent: 'space-between',
@@ -44,7 +47,6 @@ export const genderPronounStyle = StyleSheet.create({
     maxWidth: '100%',
   },
   btnText: {
-    marginLeft: sizes[3],
     fontSize: sizes[3],
     fontWeight: '500',
     color: colors.ui.text,

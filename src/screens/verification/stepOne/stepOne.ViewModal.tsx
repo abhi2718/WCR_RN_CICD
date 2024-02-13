@@ -13,7 +13,6 @@ import { useNavigateToScreen } from '../../../utils/common.functions';
 
 export const useVerificationViewModal = (props: ScreenParams) => {
   const { navigation } = props;
-
   const { user } = useSelector((state: any) => state.userState);
   const [verificationOption, setVerificationOption] = useState('');
   const country = user.address.country;
@@ -35,23 +34,20 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   useEffect(() => {
     setVerificationOptionState();
   }, []);
-  const {resetState} = useNavigateToScreen();
+  const { resetState } = useNavigateToScreen();
   const navigateToVerificationState = () => {
     resetState(ROUTES.VerificationPending);
   };
-
   useEffect(() => {
     if (user.verificationId.submitted) {
       navigateToVerificationState();
     }
   }, []);
-
   const handleInputChange = (name: keyof verificationIdType, value: any) => {
     setFormData((oldState) => {
       return { ...oldState, [name]: value };
     });
   };
-
   const [validationErrors, setValidationErrors] = useState<
     Partial<verificationIdType>
   >({});
@@ -108,15 +104,13 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   };
 
   useEffect(() => {
-    if(!user.verificationId.submitted){
+    if (!user.verificationId.submitted) {
       openModal();
     }
-    
-  },[])
+  }, []);
 
   const handleIdType = () => {
     const errors: Partial<verificationIdType> = {};
-
     if (verificationOption === 'NPI Number') {
       if (!optionData?.npiNumber) {
         errors.npiNumber = 'Please enter a valid NPI number';

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import { PrimaryButton } from '../../../../../components/button';
 import { Row, ScreenContainer } from '../../../../../components/tools';
 import { HeightStyle } from './heightStyle';
-import { HeaderBar, headerStyle } from '../../../../../components/header';
+import { HeaderBar } from '../../../../../components/header';
 import { Picker } from 'react-native-wheel-pick';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import SwitchSelector from 'react-native-switch-selector';
@@ -35,7 +35,7 @@ const Height = (props: ScreenParams) => {
                 isShowSelectBackground={false}
                 selectTextColor={colors.ui.black}
                 style={HeightStyle.picker}
-                isShowSelectLine={false} // Default is true
+                isShowSelectLine={false}
                 pickerData={heightFormat === 'feet' ? feetValues : cmValues}
                 selectedValue={currentHeight}
                 onValueChange={handleValueChange}
@@ -56,7 +56,7 @@ const Height = (props: ScreenParams) => {
               bold={true}
               options={options}
               initial={0}
-              onPress={(value: string) => handleFormatChange(value)}
+              onPress={handleFormatChange}
             />
           </View>
           <PrimaryButton

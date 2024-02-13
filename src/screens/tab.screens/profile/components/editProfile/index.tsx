@@ -12,19 +12,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
 import MultiSelectModal from '../../../../../components/multiSelectModal';
-import {
-  Column,
-  Row,
-  Spacer,
-  dimensions,
-} from '../../../../../components/tools';
+import { Column, Row, Spacer } from '../../../../../components/tools';
 import AddProfilePicScreen from '../../../../auth/preRegisterFlow/components/AddProfilePic';
-import MultiSlider from '../preferences/components/MultiSlider';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { formatNumber } from '../../../../../utils/common.functions';
 import { HeightModal } from './components/heightModal';
 
 export const EditProfile = () => {
@@ -33,12 +26,6 @@ export const EditProfile = () => {
     optionsList,
     handleInputChange,
     editProfile,
-    distanceRange,
-    handleDistanceSliderChange,
-    ageRange,
-    handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     ethnicity,
     handleItemSelected,
     closeModal,
@@ -52,8 +39,6 @@ export const EditProfile = () => {
     _handleInputChange,
     user,
     formatMobile,
-    openAgePickerModal,
-    handleDateChange,
     setAllPics,
     openHobbyModal,
     hobbiesList,
@@ -67,6 +52,7 @@ export const EditProfile = () => {
     _setShowHeightModal,
     height,
     setheight,
+    voidFun,
   } = useViewModal();
   return (
     <SafeAreaView style={styles.editInfoContainer}>
@@ -76,7 +62,7 @@ export const EditProfile = () => {
           isText={true}
           isLoading={submitLoading}
           text="Edit info"
-          button={submitLoading ? () => {} : editProfile}
+          button={submitLoading ? voidFun : editProfile}
         />
       </View>
       <ScrollView>

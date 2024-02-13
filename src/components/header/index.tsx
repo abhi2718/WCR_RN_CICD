@@ -7,7 +7,7 @@ import {
   View,
   BackHandler,
 } from 'react-native';
-import { Row, Logo } from '../tools';
+import { Row, Logo, isAndroid } from '../tools';
 import { useNavigation, useNavigationState } from '@react-navigation/native';
 import { sizes } from '../../infrastructure/theme/sizes';
 import { colors } from '../../infrastructure/theme/colors';
@@ -19,7 +19,6 @@ import {
   fonts,
 } from '../../infrastructure/theme/fonts';
 import { ActivityIndicator } from 'react-native-paper';
-
 interface HeaderBarProps {
   skip?: () => void;
   info?: () => void;
@@ -47,6 +46,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
   } = props;
   const navigation = useNavigation();
   const navigationState = useNavigationState((state) => state);
+  const [hideBackButton, setHideBackButton] = useState(false);
   const handleGoBack = () => {
     if (navigationState?.routes?.length === 1) {
       BackHandler.exitApp();
@@ -54,15 +54,22 @@ export const HeaderBar = (props: HeaderBarProps) => {
     }
     navigation.goBack();
   };
+  useEffect(() => {
+    if (navigationState?.routes?.length === 1 && !isAndroid) {
+      setHideBackButton(true);
+    }
+  }, []);
   const _goBack = goBack ? goBack : handleGoBack;
   return (
-    <Row justifyContent="space-between" alignItems="center">
-      <Pressable onPress={_goBack}>
+    <Row justifyContent={'space-between'} alignItems="center">
+      <Pressable onPress={hideBackButton ? () => {} : _goBack}>
         <View style={headerStyle.arrowContainer}>
-          <Image
-            style={headerStyle.arrow}
-            source={require('../../assets/images/icons/back-arrow.png')}
-          />
+          {!hideBackButton && (
+            <Image
+              style={headerStyle.arrow}
+              source={require('../../assets/images/icons/back-arrow.png')}
+            />
+          )}
         </View>
       </Pressable>
       {isLogo && <Logo width={50} height={35} />}
@@ -164,8 +171,7 @@ interface HeaderDeckProps {
   toggleSearchModal?: any;
   goToNotification?: any;
   isPrefrence?: boolean;
-  isSearchIcon?: boolean;
-  toggleSearchInput?: any;
+  handleUnDoFeature?: () => void;
 }
 
 export const HeaderDeck = (props: HeaderDeckProps) => {
@@ -174,8 +180,7 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
     toggleSearchModal,
     goToNotification,
     isPrefrence = true,
-    isSearchIcon = false,
-    toggleSearchInput,
+    handleUnDoFeature,
   } = props;
   const { navigate } = useNavigation();
   const goToPrefrence = () => navigate(ROUTES.Preferences);
@@ -202,6 +207,22 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
               source={require('../../assets/images/icons/notificationIcon.png')}
             />
           </Pressable>
+          {handleUnDoFeature && (
+            <Pressable onPress={handleUnDoFeature}>
+              <Image
+                style={headerDeckStyle.undoIcon}
+                source={require('../../assets/images/icons/undo-icon.png')}
+              />
+            </Pressable>
+          )}
+        </Row>
+        <Logo width={45} height={45} />
+        <Row
+          alignItems="center"
+          justifyContent="flex-end"
+          gap={24}
+          style={headerDeckStyle.row}
+        >
           {toggleSearchModal && (
             <Pressable onPress={toggleSearchModal}>
               <Image
@@ -210,27 +231,15 @@ export const HeaderDeck = (props: HeaderDeckProps) => {
               />
             </Pressable>
           )}
+          {isPrefrence && (
+            <Pressable onPress={goToPrefrence}>
+              <Image
+                style={headerDeckStyle.searchIcon}
+                source={require('../../assets/images/Filter.png')}
+              />
+            </Pressable>
+          )}
         </Row>
-        <Logo width={45} height={45} />
-        {isPrefrence && (
-          <Pressable onPress={goToPrefrence}>
-            <Image
-              style={headerDeckStyle.searchIcon}
-              source={require('../../assets/images/Filter.png')}
-            />
-          </Pressable>
-        )}
-        {isSearchIcon && (
-          <Pressable onPress={toggleSearchInput}>
-            <Image
-              style={headerDeckStyle.searchIcon}
-              source={require('../../assets/images/Magnifier.png')}
-            />
-          </Pressable>
-        )}
-        {!isPrefrence && !isSearchIcon && (
-          <View style={headerDeckStyle.searchIcon} />
-        )}
       </Row>
     </View>
   );
@@ -244,6 +253,10 @@ export const headerDeckStyle = StyleSheet.create({
   searchIcon: {
     width: sizes[6],
     height: sizes[6],
+  },
+  undoIcon: {
+    width: 24,
+    height: 24,
   },
   count: {
     position: 'absolute',
@@ -265,7 +278,7 @@ export const headerDeckStyle = StyleSheet.create({
     fontFamily: fonts.body,
   },
   row: {
-    width: sizes[10],
+    width: '35%',
   },
 });
 
@@ -284,11 +297,15 @@ export const ErrorScreenHeader = () => {
         <View style={errorScreenHeaderStyle.emptyView} />
         <Logo width={40} height={40} />
         <Pressable onPress={modalShow}>
-          <Image
-            style={errorScreenHeaderStyle.threeDots}
-            resizeMode="contain"
-            source={require('../../assets/images/icons/threeDots.png')}
-          />
+          <View
+            style={errorScreenHeaderStyle.threeDotWrapper}
+          >
+            <Image
+              style={errorScreenHeaderStyle.threeDots}
+              resizeMode="contain"
+              source={require('../../assets/images/icons/threeDots.png')}
+            />
+          </View>
         </Pressable>
       </Row>
       <DltLogOutModal
@@ -300,6 +317,12 @@ export const ErrorScreenHeader = () => {
 };
 
 export const errorScreenHeaderStyle = StyleSheet.create({
+  threeDotWrapper: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerRow: {
     width: '100%',
     paddingHorizontal: sizes[3],

@@ -21,6 +21,9 @@ import { CometChatFormBubble, CometChatCardBubble } from "../views";
 import { CardMessage, FormMessage } from "../modals/InteractiveData";
 import { FormBubbleStyle } from "../views/CometChatFormBubble/FormBubbleStyle";
 import { CardBubbleStyle } from "../views/CometChatCardBubble/CardBubbleStyle";
+import { getExtentionData } from "../../extensions/ExtensionModerator";
+import { ExtensionConstants } from "@cometchat/chat-uikit-react-native";
+import { Empty } from "../../extensions/ThumbnailGeneration/resources";
 
 function isAudioMessage(message: CometChat.BaseMessage): message is CometChat.MediaMessage {
     return message.getCategory() == CometChat.CATEGORY_MESSAGE &&
@@ -283,9 +286,10 @@ export class MessageDataSource implements DataSource {
 
     getVideoMessageBubble(videoUrl: string, thumbnailUrl: string, message: CometChat.MediaMessage, theme: CometChatTheme, videoBubbleStyle: VideoBubbleStyleInterface) {
         if (isVideoMessage(message)) {
+          const image = this.checkThumbnail(message);
             return <CometChatVideoBubble
                 videoUrl={videoUrl}
-                thumbnailUrl={{ uri: thumbnailUrl }}
+                thumbnailUrl={{ uri: image.uri }}
                 style={{ height: 200, width: 200, borderRadius: 8, ...videoBubbleStyle }}
             />
         }
@@ -451,6 +455,33 @@ export class MessageDataSource implements DataSource {
             },
             options: (loggedInuser, message, group) => ChatConfigurator.dataSource.getCardMessageOptions(loggedInuser, message, group),
         });
+    }
+
+
+    checkThumbnail(message: any) {
+      let image: { uri: string } = { uri: null };
+      let thumbnailData = getExtentionData(
+        message,
+        ExtensionConstants.thumbnailGeneration,
+      );
+      if (thumbnailData == undefined) {
+        image = message.getType() === 'image' ? message?.data?.url : Empty; //default image for type video
+      } else {
+        let attachmentData = thumbnailData['attachments'];
+        if (attachmentData.length == 1) {
+          let dataObj = attachmentData[0];
+  
+          if (!dataObj['error']) {
+            let imageLink = dataObj?.['data']?.['thumbnails']?.['url_small'];
+            image = imageLink
+              ? { uri: dataObj['data']['thumbnails']['url_small'] }
+              : Empty; //if imageLink is empty or does not exist then load default image
+          } else {
+            image = Empty; //default image
+          }
+        }
+      }
+      return image;
     }
 
     getAudioMessageTemplate(theme: CometChatTheme): CometChatMessageTemplate {

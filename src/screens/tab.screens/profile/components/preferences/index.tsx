@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Pressable, SafeAreaView, Image } from 'react-native';
 import { Column, FullLoader, Row } from '../../../../../components/tools';
 import { useViewModal } from './useViewModal';
@@ -9,18 +9,10 @@ import MultiSlider from './components/MultiSlider';
 import { HeaderBar } from '../../../../../components/header';
 import { formatNumber } from '../../../../../utils/common.functions';
 import { PreferenceyModal } from '../../../../../components/preferenceModal';
+import { HeightPrefrence } from './components/heightPrefrence';
+import { ErrorText } from '../../../../auth/signin/signInStyle';
 export const PreferencesScreen = () => {
-  const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
-    useState(false);
-  const closeModal = () => {
-    setVerificvationInfoModalVisible(false);
-  };
-  const openModal = () => {
-    setVerificvationInfoModalVisible(true);
-  };
-
   const {
-    goBack,
     answer,
     handleInputChange,
     optionsList,
@@ -30,9 +22,17 @@ export const PreferencesScreen = () => {
     handleDistanceSliderChange,
     ageRange,
     handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     submitLoading,
+    showHeightModal,
+    isPrimaryDegreeValid,
+    setIsPrimaryDegreeValid,
+    handleHeightModal,
+    openModal,
+    closeModal,
+    isVerificationInfoModalVisible,
+    heightRange,
+    setHeightRange,
+    voidFun,
   } = useViewModal();
 
   if (loading) {
@@ -44,14 +44,14 @@ export const PreferencesScreen = () => {
       <PreferenceyModal
         isVisible={isVerificationInfoModalVisible}
         onClose={closeModal}
-      ></PreferenceyModal>
+      />
       <View style={styles.padding16}>
         <HeaderBar
           isText={true}
           text="Dating Preference"
           isLogo={false}
           isLoading={submitLoading}
-          button={submitLoading ? () => {} : createPrefrences}
+          button={submitLoading ? voidFun : createPrefrences}
         />
       </View>
       <View>
@@ -142,24 +142,23 @@ export const PreferencesScreen = () => {
             if (index === 4) {
               return (
                 <View key={index} style={styles.multiSelector}>
-                  <Row justifyContent="space-between">
-                    <Text style={[styles.textColor, styles.optionName]}>
-                      Height Preference
-                    </Text>
-                    <Text style={styles.silderSubText}>
-                      {formatNumber(heightRange[0])} -{' '}
-                      {formatNumber(heightRange[1])}
-                    </Text>
-                  </Row>
-                  <Column justifyContent="center" alignItems="center">
-                    <MultiSlider
-                      values={heightRange}
-                      min={3}
-                      max={7}
-                      step={0.1}
-                      onValuesChange={handleHeightSliderChange}
-                    />
-                  </Column>
+                  <Pressable onPress={handleHeightModal}>
+                    <Row justifyContent="space-between">
+                      <Text style={[styles.textColor, styles.optionName]}>
+                        Height Preference
+                      </Text>
+                      <Text style={styles.silderSubText}>
+                        {formatNumber(heightRange[0])} -{' '}
+                        {formatNumber(heightRange[1])}
+                      </Text>
+                    </Row>
+                  </Pressable>
+                  <HeightPrefrence
+                    visible={showHeightModal}
+                    handleHeightModal={handleHeightModal}
+                    heightRange={heightRange}
+                    setHeightRange={setHeightRange}
+                  />
                 </View>
               );
             }
@@ -173,6 +172,65 @@ export const PreferencesScreen = () => {
                 >
                   <Text style={styles.headerText}>Healthcare Professional</Text>
                 </Row>
+              );
+            }
+
+            if (index === 7) {
+              return (
+                <Column
+                  key={index}
+                  style={styles.itemRow}
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                >
+                  <Text style={[styles.textColor, styles.optionName]}>
+                    {item.title}
+                  </Text>
+
+                  <SafeAreaView>
+                    <Row
+                      style={styles.selectRow}
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      {item.option!.length > 0 ? (
+                        <ModalSelector
+                          data={item.option!}
+                          initValue={answer[item.initValue]}
+                          onChange={handleInputChange}
+                          style={styles.modalSelector}
+                          optionContainerStyle={styles.optionContainer}
+                          optionTextStyle={styles.optionText}
+                          cancelStyle={styles.cancelButton}
+                          selectedItemTextStyle={styles.selectedItem}
+                          initValueTextStyle={styles.initValueTextStyle}
+                          selectStyle={styles.selectStyle}
+                          overlayStyle={styles.overlayStyle}
+                          cancelTextStyle={styles.cancelTextStyle}
+                          optionStyle={styles.optionStyle}
+                        />
+                      ) : isPrimaryDegreeValid ? (
+                        <ErrorText>
+                          Please Select the Degree Category first
+                        </ErrorText>
+                      ) : (
+                        <Pressable
+                          onPress={() => {
+                            setIsPrimaryDegreeValid(true);
+                          }}
+                        >
+                          <Text > No Preference </Text>
+                        </Pressable>
+                      )}
+
+                      <Image
+                        resizeMode="contain"
+                        style={styles.selectArrow}
+                        source={require('../../../../../assets/images/settings/Next.png')}
+                      />
+                    </Row>
+                  </SafeAreaView>
+                </Column>
               );
             }
             if (index === 8) {
@@ -197,7 +255,6 @@ export const PreferencesScreen = () => {
                 <Text style={[styles.textColor, styles.optionName]}>
                   {item.title}
                 </Text>
-
                 <SafeAreaView>
                   <Row
                     style={styles.selectRow}
@@ -209,6 +266,9 @@ export const PreferencesScreen = () => {
                       initValue={answer[item.initValue]}
                       onChange={handleInputChange}
                       style={styles.modalSelector}
+                      header={
+                        <Text style={styles.modalHeading}>{item.title}</Text>
+                      }
                       optionContainerStyle={styles.optionContainer}
                       optionTextStyle={styles.optionText}
                       cancelStyle={styles.cancelButton}

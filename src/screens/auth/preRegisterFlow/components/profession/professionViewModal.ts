@@ -1,6 +1,5 @@
 import { ROUTES } from './../../../../../navigation/index';
-import { useNavigation } from '@react-navigation/native';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ScreenParams,
@@ -65,6 +64,18 @@ export const useProfessionModal = (props: ScreenParams) => {
     navigation.navigate(ROUTES.ProfilePic);
   };
 
+  const HandleError = () => {
+    const errors: Partial<professionTypes> = {};
+    if (!professionForm?.userDegree) {
+      errors.primaryDegree = 'Please Select the Degree Category first ';
+    }
+    if (Object.keys(errors).length) {
+      return setValidationErrors(errors);
+    } else {
+      setValidationErrors({});
+    }
+  };
+
   const handleSubmit = async () => {
     const errors: Partial<professionTypes> = {};
 
@@ -97,7 +108,7 @@ export const useProfessionModal = (props: ScreenParams) => {
           title: professionForm.title,
         },
         institution: professionForm.institution,
-        steps:5
+        steps: 5,
       };
       if (
         user?.designation?.userDegree === professionForm.userDegree &&
@@ -140,6 +151,7 @@ export const useProfessionModal = (props: ScreenParams) => {
     primaryDegreeOption,
     handleSubmit,
     handleInputChange,
-    changePrimaryDegreeOption
+    changePrimaryDegreeOption,
+    HandleError,
   };
 };

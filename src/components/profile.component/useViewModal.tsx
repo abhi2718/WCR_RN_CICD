@@ -1,5 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import Share from 'react-native-share';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -40,14 +46,13 @@ export const useViewModal = (props: profileProps) => {
         { text: 'OK', onPress: () => console.log('OK Pressed') },
         // Add more buttons if needed
       ],
-      { cancelable: false }
+      { cancelable: false },
     );
   };
   const handleShare = () => {
     try {
       const shareOptions = {
-        message: `White Coat Romance profile share
-            Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you `,
+        message: `Hey! I came across this profile on the White Coat Romance dating app and thought it would be perfect for you `,
         url: 'https://staging.whitecoatromance.com/assets/images/e-wcr.png',
       };
       Share.open(shareOptions);
@@ -138,7 +143,7 @@ export const useViewModal = (props: profileProps) => {
         },
       };
       setLoading(true);
-      await homeDeckRepository.blockUser(payLoad);
+      let data = await homeDeckRepository.blockUser(payLoad);
       setLoading(false);
       toggleModal();
     } catch (error) {}
@@ -161,11 +166,13 @@ export const useViewModal = (props: profileProps) => {
       });
     }
   };
-  const handleReport = () => {
-    setShowBlockModal(false);
-    // Need to handle this functionality
-    // navigation.navigate(ROUTES.Report, { userId: item._id, name: first });
-  };
+  const handleReport = useCallback(() => {
+    toggleModal();
+    navigation.navigate(ROUTES.Report, {
+      userId: user?._id,
+      name: user?.first,
+    });
+  },[user]);
   return {
     showModal,
     toggleModal,
@@ -186,6 +193,6 @@ export const useViewModal = (props: profileProps) => {
     handleReport,
     showBlockModal,
     setShowBlockModal,
-    showAlert
+    showAlert,
   };
 };

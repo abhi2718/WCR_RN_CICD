@@ -9,7 +9,7 @@ import { useNavigateToScreen } from '../../../utils/common.functions';
 export const usePandingStateViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
-  const { user } = useSelector((state: any) => state.userState);
+  const { user } = useSelector(({ userState }) => userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
   const state = user?.verification?.status;

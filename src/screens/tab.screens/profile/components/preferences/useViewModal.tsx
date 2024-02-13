@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ShowFlashMessage } from '../../../../../components/flashBar';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector} from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 import { UserProfileRepository } from '../../../../../repository/userProfile.repo';
 import { handleInputChangeType } from '../../../../../types/screen.type/profile.type';
@@ -19,7 +18,6 @@ import {
   primaryDegree,
   relationship,
   religion,
-  sexualOrientationArray,
   smoking,
   userDegree,
   covidVaccineStatus,
@@ -31,8 +29,9 @@ export const useViewModal = () => {
   const userProfileRepository = useMemo(() => new UserProfileRepository(), []);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const [isPrimaryDegreeValid, setIsPrimaryDegreeValid] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState(false);
-  const goBack = () => navigation.goBack();
+  const [showHeightModal,setShowHeightModal] = useState(false);
   const isPrefrenceCreated = useRef(false);
   const [answer, setAnswer] = useState({
     degreeCategory: 'No Preference',
@@ -88,7 +87,6 @@ export const useViewModal = () => {
     generateList([], 'degreeType'),
   );
   const genderList = generateList(genderArray, 'gender');
-
   const ethnicityList = generateList(ethnicity, 'ethnicity');
   const maritalStatusList = generateList(maritalStatus, 'maritalStatus');
   const relationshipLevelList = generateList(relationship, 'relationshipLevel');
@@ -205,6 +203,7 @@ export const useViewModal = () => {
     try {
       setLoading(true);
       const { data } = await userProfileRepository.getPreference(user._id);
+     // console.log('initial data of prefrence -->', data);
       if (data) {
         isPrefrenceCreated.current = true;
         setAnswer((oldState) => {
@@ -368,7 +367,7 @@ export const useViewModal = () => {
             };
           }
         }
-        if (typeOfKey === 'string' && !value?.includes('No Preference')) {
+        if (typeOfKey === 'string') {
           updates = {
             ...updates,
             [key]: value,
@@ -378,7 +377,7 @@ export const useViewModal = () => {
             ...updates,
             [key]: value,
           };
-        } else if (Array.isArray(value) && !value.includes('No Preference')) {
+        } else if (Array.isArray(value)) {
           updates = {
             ...updates,
             [key]: value,
@@ -410,12 +409,6 @@ export const useViewModal = () => {
   const handleAgeSliderChange = (values: React.SetStateAction<number[]>) => {
     setAgeRange(values);
   };
-  const handleHeightSliderChange = (values: any) => {
-    const roundedArray = values.map(
-      (number: number) => Math.round(number * 10) / 10,
-    );
-    setHeightRange(roundedArray);
-  };
   useEffect(() => {
     getPrefrences();
   }, []);
@@ -426,8 +419,22 @@ export const useViewModal = () => {
       );
     }
   }, [answer.degreeCategory]);
+  const handleHeightModal = useCallback(() => {
+    setShowHeightModal(oldValue => !oldValue);
+  }, []);
+  const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
+    useState(false);
+  const closeModal = () => {
+    setVerificvationInfoModalVisible(false);
+  };
+  const openModal = () => {
+    setVerificvationInfoModalVisible(true);
+  };
+  const voidFun = () => { }
   return {
-    goBack,
+    openModal,
+    closeModal,
+    isVerificationInfoModalVisible,
     answer,
     handleInputChange,
     optionsList,
@@ -437,8 +444,13 @@ export const useViewModal = () => {
     handleDistanceSliderChange,
     ageRange,
     handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     submitLoading,
+    showHeightModal,
+    isPrimaryDegreeValid,
+    setIsPrimaryDegreeValid,
+    handleHeightModal,
+    heightRange,
+    setHeightRange,
+    voidFun
   };
 };

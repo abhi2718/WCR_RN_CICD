@@ -3,10 +3,8 @@ import {
   View,
   Text,
   Pressable,
-  ScrollView,
-  Image,
   SafeAreaView,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import { Switch } from 'react-native-paper';
 import { AlertScreen } from '../../../../../../../components/alert';
@@ -19,14 +17,13 @@ import { colors } from '../../../../../../../infrastructure/theme/colors';
 export const AccountSettingScreen = () => {
   const {
     user,
-    goBack,
     onToggleSwitch,
-    pauseUser,
     isSwitchOn,
     showModal,
     setShowModal,
     deleteUser,
-    loading
+    loading,
+    voidFunc,
   } = useViewModal();
   return (
     <SafeAreaView style={styles.container}>
@@ -58,12 +55,10 @@ export const AccountSettingScreen = () => {
             alignItems="center"
           >
             <Text style={styles.text}>Delete my account</Text>
-            <Pressable onPress={loading?()=>{}:() => setShowModal(true)}>
+            <Pressable onPress={loading ? voidFunc : () => setShowModal(true)}>
               <Text style={styles.deletBtn}>Delete</Text>
-              {
-              loading && <ActivityIndicator color='red' />
-            }
-            </Pressable> 
+              {loading && <ActivityIndicator color="red" />}
+            </Pressable>
           </Row>
         </Spacer>
         <AlertScreen

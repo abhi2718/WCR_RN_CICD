@@ -1,18 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import  { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ROUTES } from '../../../../../navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 import { cmValues, feetValues } from '../../../../../utils/constanst';
-interface Measurement {
-  feet: number;
-  inch: number;
-  heightInCm?: number;
-}
+import { Measurement } from '../../../../../types/commonFunction.type';
+
 export const useheightViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
   const { user } = useSelector((state: any) => state.userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const savedHeight: Measurement = user.height;
@@ -23,7 +19,6 @@ export const useheightViewModal = (props: ScreenParams) => {
   );
   const [loading, setLoading] = useState(false);
   const { navigation } = props;
-
   const getSelectedHeight = (): string => {
     if (heightValue?.feet || heightValue?.inch) {
       return heightFormat === 'feet'
@@ -66,11 +61,9 @@ export const useheightViewModal = (props: ScreenParams) => {
   function convertCmToFeetAndInches(cm: number): Measurement {
     // 1 inch is approximately 2.54 cm
     const inches = cm / 2.54;
-
     // 1 foot is 12 inches
     const feet = Math.floor(inches / 12); 
     const remainingInches = Math.floor(inches % 12);
-
     return {
       feet: feet,
       inch: remainingInches,

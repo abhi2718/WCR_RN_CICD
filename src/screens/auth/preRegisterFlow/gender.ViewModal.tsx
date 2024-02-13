@@ -15,10 +15,10 @@ export const useGenderViewModal = (props: ScreenParams) => {
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
   const { navigation } = props;
-  const updatedGender = user?.profile?.gender ?? 'Man';
+  const updatedGender = user?.profile?.gender ?? '';
   const token = useRef(user?.token ? user?.token : null).current;
   const [gender, setGender] = useState(updatedGender);
-  const [checkboxState, setCheckboxState] = useState(true);
+  const [checkboxState, setCheckboxState] = useState(user?.profile?.showGender);
   const handleGenderValue = (value: string) => {
     setGender(value);
   };
@@ -31,19 +31,6 @@ export const useGenderViewModal = (props: ScreenParams) => {
 
   const updateUserDetails = async () => {
     try {
-      const genderData = {
-        profile: {
-          gender: gender,
-          showGender: checkboxState,
-        },
-        steps:1
-      };
-
-      if (user.profile.gender === gender) {
-        navigateToGenderPronounScreen();
-        return
-      }
-
       if (!gender) {
         return ShowFlashMessage(
           'Warning',
@@ -51,6 +38,17 @@ export const useGenderViewModal = (props: ScreenParams) => {
           FlashMessageType.DANGER,
         );
       }
+      if (user.profile.gender === gender) {
+        navigateToGenderPronounScreen();
+        return
+      }
+      const genderData = {
+        profile: {
+          gender: gender,
+          showGender: checkboxState,
+        },
+        steps:1
+      };
       setLoading(true);
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,

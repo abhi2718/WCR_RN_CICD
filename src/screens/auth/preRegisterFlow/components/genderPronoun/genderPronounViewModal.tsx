@@ -11,28 +11,22 @@ import {
 export const useGenderPronounViewModal = (props: any) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const [loading, setLoading] = useState(false);
-
   const { user } = useSelector((state: any) => state.userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
-
   const { navigation } = props;
   const updateGenderPronoun = user?.profile?.genderPronoun ?? '';
   const [genderPronoun, setGenderPrPronoun] = useState(updateGenderPronoun);
-  const [checkboxState, setCheckboxState] = useState(true);
-
+  const [checkboxState, setCheckboxState] = useState(user?.profile?.showGenderPronoun);
   const handleGenderPronounValue = (value: string) => {
     setGenderPrPronoun(value);
   };
-
   const handleCheckboxChange = () => {
     setCheckboxState(!checkboxState);
   };
-
   const navigateToSexualOrientationScreen = () => {
     navigation.navigate(ROUTES.SexualOrientation);
   };
-
   const updateUserDetails = async () => {
     try {
       if (!genderPronoun) {
@@ -42,11 +36,9 @@ export const useGenderPronounViewModal = (props: any) => {
           FlashMessageType.DANGER,
         );
       }
-
-      
       if (user.profile.genderPronoun === genderPronoun) {
         navigateToSexualOrientationScreen();
-        return
+        return;
       }
       setLoading(true);
       const genderPronounData = {
@@ -54,22 +46,26 @@ export const useGenderPronounViewModal = (props: any) => {
           genderPronoun: genderPronoun,
           showGenderPronoun: checkboxState,
         },
-        steps:2
+        steps: 2,
       };
-      const userData = await updateUserDetailsRepository.updateUserDetails(user._id, {
-        update: genderPronounData,
-      });
-      const data = token ? {
-        user: {
-          ...userData,
-          token
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update: genderPronounData,
         },
-      }  :{
-        user: userData,
-      };
+      );
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
       dispatch(addUser(data));
       setLoading(false);
-
       navigateToSexualOrientationScreen();
     } catch (err: any) {
       setLoading(false);

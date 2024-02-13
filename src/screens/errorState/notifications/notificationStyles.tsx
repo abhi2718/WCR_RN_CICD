@@ -17,8 +17,6 @@ export const notificationStyles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    // borderColor: 'red',
-    // borderWidth: 1,
     width: '100%',
     padding: sizes[3],
     justifyContent: 'space-around',

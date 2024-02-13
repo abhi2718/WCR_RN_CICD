@@ -15,20 +15,13 @@ export default function CommunityChat() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.paddingH8}>
-        <HeaderDeck
-          isSearchIcon={false}
-          isPrefrence={false}
-          count={count}
-          toggleSearchInput={toggleSearchInput}
-        />
+        <HeaderDeck isPrefrence={false} count={count} />
         <SwitchButton stage={state} setStage={setState} />
       </View>
       {state === 0 ? (
         <CometChatConversationsWithMessages isUserWindow={false} />
       ) : (
-        <AllGroups
-          toggleSearchInput={toggleSearchInput}
-        />
+        <AllGroups />
       )}
     </SafeAreaView>
   );
