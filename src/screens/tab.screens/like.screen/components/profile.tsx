@@ -6,7 +6,10 @@ import { Column, Row, Spacer, dimensions } from '../../../../components/tools';
 import { ProfileViewProps } from '../../../../types/screen.type/like.type';
 import { theme } from '../../../../infrastructure/theme';
 import LinearGradient from 'react-native-linear-gradient';
-import { calculateAge } from '../../../../utils/common.functions';
+import {
+  calculateAge,
+  showDisplayOrFirstName,
+} from '../../../../utils/common.functions';
 import { fonts } from '../../../../infrastructure/theme/fonts';
 
 export const ProfileView = (props: ProfileViewProps) => {
@@ -45,7 +48,10 @@ export const ProfileView = (props: ProfileViewProps) => {
       }
       startChat({
         senderId: item?._id,
-        name: item.profile.displayName ?? item.profile.name.first,
+        name: showDisplayOrFirstName(
+          item?.profile?.displayName,
+          item?.profile?.name?.first,
+        ),
       });
     }
   };
@@ -135,8 +141,10 @@ export const ProfileView = (props: ProfileViewProps) => {
                   <Row justifyContent="space-between" alignItems="center">
                     <Column>
                       <Text style={styles.textName}>
-                        {item?.profile?.displayName ??
-                          item?.profile?.name?.first}
+                        {showDisplayOrFirstName(
+                          item?.profile?.displayName,
+                          item?.profile?.name?.first,
+                        )}
                         , {calculateAge(item?.profile?.dob)}
                       </Text>
                       <Text style={styles.textDegree}>
@@ -193,7 +201,10 @@ export const ProfileView = (props: ProfileViewProps) => {
             <Column>
               <Spacer position="bottom" size={10}>
                 <Text style={styles.textName}>
-                  {item?.profile?.displayName ?? item?.profile?.name?.first}{' '}
+                  {showDisplayOrFirstName(
+                    item?.profile?.displayName,
+                    item?.profile?.name?.first,
+                  )},{' '}
                   {calculateAge(item?.profile?.dob)}
                 </Text>
                 <Text style={styles.textDegree}>
@@ -249,7 +260,10 @@ export const ProfileView = (props: ProfileViewProps) => {
             <Column justifyContent="center" alignItems="center">
               <Spacer position="bottom" size={10}>
                 <Text style={styles.textName}>
-                  {item?.profile?.displayName ?? item?.profile?.name?.first},{' '}
+                {showDisplayOrFirstName(
+                          item?.profile?.displayName,
+                          item?.profile?.name?.first,
+                        )},{' '}
                   {calculateAge(item?.profile?.dob)}
                 </Text>
                 <Text style={styles.textDegree}>

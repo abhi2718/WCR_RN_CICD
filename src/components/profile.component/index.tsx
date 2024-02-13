@@ -14,7 +14,11 @@ import { FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
-import { addInitials, calculateAge } from '../../utils/common.functions';
+import {
+  addInitials,
+  calculateAge,
+  showDisplayOrFirstName,
+} from '../../utils/common.functions';
 import { MatchScreen } from '../../screens/tab.screens/home/components/deck/components/matchScreen';
 import { styles } from './style';
 import { AlertScreen } from '../alert';
@@ -93,7 +97,10 @@ export const ProfileModal = (props: profileProps) => {
                             style={styles.gradient}
                           />
                           <Text style={styles.userNameText}>
-                            {user.displayName ?? user.first}{' '}
+                            {showDisplayOrFirstName(
+                              user?.displayName,
+                              user?.first,
+                            )}{' '}
                             {user?.genderPronoun !== 'Prefer not to say' &&
                               `(${user?.genderPronoun})`}
                             , {calculateAge(user?.dob)}

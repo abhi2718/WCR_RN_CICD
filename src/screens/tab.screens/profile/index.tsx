@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import  YourComponent from '../../subscribe/components';
 import { HeaderDeck } from '../../../components/header';
+import { showDisplayOrFirstName } from '../../../utils/common.functions';
 
 
 export const ProfileScreen = ({}) => {
@@ -53,7 +54,7 @@ export const ProfileScreen = ({}) => {
               />
               <Column gap={5}>
                 <Text style={styles.userName}>
-                  {user.profile.displayName ?? user.profile.name?.first}
+                  {showDisplayOrFirstName(user?.profile?.displayName , user?.profile?.name?.first)}
                 </Text>
                 <Text style={styles.address}>{user?.address?.city},</Text>
                 <Text style={styles.address}>

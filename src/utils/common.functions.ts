@@ -356,3 +356,7 @@ export const validateEmail = (email: string) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
+
+export const showDisplayOrFirstName = (displayName:string,name: string) => {
+   return displayName?.length?displayName:name
+}

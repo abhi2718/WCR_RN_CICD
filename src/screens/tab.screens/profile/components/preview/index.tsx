@@ -9,10 +9,11 @@ import { HeaderBar } from '../../../../../components/header';
 import {
   separateWords,
   addInitials,
+  showDisplayOrFirstName,
 } from '../../../../../utils/common.functions';
 
 export const PreviewScreen = () => {
-  const { user} = useViewModal();
+  const { user } = useViewModal();
   return (
     <ScreenWrapper>
       <View>
@@ -45,7 +46,7 @@ export const PreviewScreen = () => {
                     />
                     <Row alignItems="center" gap={15} style={styles.nameRow}>
                       <Text style={styles.name}>
-                        {user.profile.displayName ?? user.profile.name.first}
+                        {showDisplayOrFirstName(user?.profile?.displayName,user?.profile?.name?.first)}
                         {user.profile.genderPronoun !== 'Prefer not to say' &&
                           ` (${user.profile.genderPronoun})`}
                         , {user.age}
