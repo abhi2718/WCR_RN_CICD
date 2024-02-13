@@ -19,7 +19,10 @@ export const useViewModal = (item:Profile, cardRef: any) => {
     genderPronoun,
     designation,
     state,
+    country,
+    city,
     dob,
+    institution,
     gender,
     drinking,
     ethnicity,
@@ -84,6 +87,7 @@ export const useViewModal = (item:Profile, cardRef: any) => {
     genderPronoun,
     designation,
     state,
+    country,
     _handleLike,
     _handleDisLike,
     addFavourite,
@@ -98,5 +102,6 @@ export const useViewModal = (item:Profile, cardRef: any) => {
     showModal,
     setShowModal,
     handleReport,
+    city,institution
   };
 };

@@ -25,6 +25,7 @@ const About = (props: ScreenParams) => {
     updateUserDetails,
     loading,
     maxLength,
+    letterCount
   } = useAboutViewModal(props);
 
   return (
@@ -45,21 +46,23 @@ const About = (props: ScreenParams) => {
                   Tell us a bit about yourself
                 </Text>
                 <TextInput
-                  style={AboutStyle.input}
-                  multiline={true}
-                  maxLength={maxLength}
-                  numberOfLines={10}
-                  placeholder="Enter here"
-                  textAlignVertical="top"
-                  value={aboutText}
-                  returnKeyType="done"
-                  blurOnSubmit={true}
-                  onSubmitEditing={() => {
-                    //updateUserDetails()
-                  }}
-                  onChangeText={handleText}
-                  placeholderTextColor={colors.ui.placeholder}
-                />
+              placeholder="About Me"
+              value={aboutText}
+              onChangeText={(text: string) =>
+                handleText(text)
+              }
+              textAlignVertical="top"
+              style={AboutStyle.input}
+              multiline={true}
+              maxLength={maxLength}
+              numberOfLines={10}
+              returnKeyLabel="go"
+              onSubmitEditing={() => {
+                //updateUserDetails()
+              }}
+              placeholderTextColor={colors.ui.placeholder}
+            />
+            <Text style={AboutStyle.charCount}>{letterCount}/500</Text>
               </View>
             </ScrollView>
           </View>
