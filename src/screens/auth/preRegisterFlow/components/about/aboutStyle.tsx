@@ -22,6 +22,15 @@ export const AboutStyle = StyleSheet.create({
     height: sizes[8],
     overflow: 'visible',
   },
+
+  charCount: {
+    position: 'absolute',
+    bottom: 0,
+    right: 16,
+    color: colors.ui.primary,
+    fontSize: fontSizes.text,
+    fontFamily: fonts.body,
+  },
   skipBtn: {
     fontSize: sizes[4],
     color: colors.ui.text,

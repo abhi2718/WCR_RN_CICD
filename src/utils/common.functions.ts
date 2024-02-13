@@ -12,7 +12,7 @@ export const calculateDateLessThan18YearsAgo = (inputDate: Date): Date => {
   return eighteenYearsAgo;
 };
 export function isDate18YearsOrAbove(date: string): boolean {
-  const [month, day, year] = date.split('-').map(Number);
+  const [year, month, day] = date.split('-').map(Number);
   const dateObj = new Date(year, month - 1, day);
   const currentDate = moment();
   const inputDate = moment(dateObj);
@@ -186,6 +186,120 @@ export const createNotifications = (
       };
   }
 };
+
+export function separateWords(inputString: string) {
+  const hyphenIndex: number = inputString.indexOf('(');
+
+  if (hyphenIndex !== -1) {
+    let afterHyphen = inputString.slice(hyphenIndex).trim();
+
+    return afterHyphen;
+  } else {
+    return inputString.trim();
+  }
+}
+
+const provinces = [
+  { name: 'Alberta', initials: 'AB' },
+  { name: 'British Columbia', initials: 'BC' },
+  { name: 'Manitoba', initials: 'MB' },
+  { name: 'New Brunswick', initials: 'NB' },
+  { name: 'Newfoundland and Labrador', initials: 'NL' },
+  { name: 'Northwest Territories', initials: 'NT' },
+  { name: 'Nova Scotia', initials: 'NS' },
+  { name: 'Nunavut', initials: 'NU' },
+  { name: 'Ontario', initials: 'ON' },
+  { name: 'Prince Edward Island', initials: 'PE' },
+  { name: 'Quebec', initials: 'QB' },
+  { name: 'Saskatchewan', initials: 'SK' },
+  { name: 'Yukon', initials: 'YT' },
+];
+
+const convertedArray = [
+  { name: 'PhD Audiology', initials: '(AuD)' },
+  { name: 'PhD Biochemistry', initials: '(PhD Biochem)' },
+  { name: 'PhD Biochemical Engineering', initials: '(PhD BMEN)' },
+  { name: 'PhD Biology', initials: '(PhD Biol)' },
+  { name: 'PhD Biomedical Engineering', initials: '(PhD BME)' },
+  { name: 'PhD Biomedical Science', initials: '(PhD BMS)' },
+  { name: 'PhD Bioscience', initials: '(PhD Biosci)' },
+  { name: 'PhD Chemical Engineering', initials: '(PhD ChemE)' },
+  { name: 'PhD Chemistry', initials: '(PhD Chem)' },
+  { name: 'PhD Genetics', initials: '(PhD Genet)' },
+  { name: 'PhD Healthcare Administration', initials: '(PhD HA)' },
+  { name: 'PhD Immunology', initials: '(PhD Immunol)' },
+  { name: 'PhD Kinesiology', initials: '(PhD Kinesiol)' },
+  { name: 'PhD Microbiology', initials: '(PhD Microbiol)' },
+  { name: 'PhD Molecular Biology', initials: '(PhD Mol Biol)' },
+  { name: 'PhD Neuroscience', initials: '(PhD Neurosci)' },
+  { name: 'PhD Nursing Education', initials: '(PhD Nurs Ed)' },
+  { name: 'PhD Nutrition', initials: '(PhD Nutr)' },
+  { name: 'PhD Occupational and Environmental Health', initials: '(PhD OEH)' },
+  { name: 'PhD Pharmacology', initials: '(PhD Pharmacol)' },
+  { name: 'PhD Physiology', initials: '(PhD Physiol)' },
+  { name: 'PhD Physics', initials: '(PhD Phys)' },
+  { name: 'PhD Psychology', initials: '(PhD Psych)' },
+  { name: 'PhD Public Health', initials: '(DrPH)' },
+  { name: 'PhD degree with Health Focus', initials: '(PhD Health Focus)' },
+];
+
+const convertedArr = [
+  { name: 'PhD Audiology', initials: '(AuD Student)' },
+  { name: 'PhD Biochemistry', initials: '(PhD Biochem Student)' },
+  { name: 'PhD Biochemical Engineering', initials: '(PhD BMEN Student)' },
+  { name: 'PhD Biology', initials: '(PhD Biol Student)' },
+  { name: 'PhD Biomedical Engineering', initials: '(PhD BME Student)' },
+  { name: 'PhD Biomedical Science', initials: '(PhD BMS Student)' },
+  { name: 'PhD Bioscience', initials: '(PhD Biosci Student)' },
+  { name: 'PhD Chemical Engineering', initials: '(PhD ChemE Student)' },
+  { name: 'PhD Chemistry', initials: '(PhD Chem Student)' },
+  { name: 'PhD Genetics', initials: '(PhD Genet Student)' },
+  { name: 'PhD Healthcare Administration', initials: '(PhD HA Student)' },
+  { name: 'PhD Immunology', initials: '(PhD Immunol Student)' },
+  { name: 'PhD Kinesiology', initials: '(PhD Kinesiol Student)' },
+  { name: 'PhD Microbiology', initials: '(PhD Microbiol Student)' },
+  { name: 'PhD Molecular Biology', initials: '(PhD Mol Biol Student)' },
+  { name: 'PhD Neuroscience', initials: '(PhD Neurosci Student)' },
+  { name: 'PhD Nursing Education', initials: '(PhD Nurs Ed Student)' },
+  { name: 'PhD Nutrition', initials: '(PhD Nutr Student)' },
+  {
+    name: 'PhD Occupational and Environmental Health',
+    initials: '(PhD OEH Student)',
+  },
+  { name: 'PhD Pharmacology', initials: '(PhD Pharmacol Student)' },
+  { name: 'PhD Physiology', initials: '(PhD Physiol Student)' },
+  { name: 'PhD Physics', initials: '(PhD Phys Student)' },
+  { name: 'PhD Psychology', initials: '(PhD Psych Student)' },
+  { name: 'PhD Public Health', initials: '(DrPH Student)' },
+  {
+    name: 'PhD degree with Health Focus',
+    initials: '(PhD Health Focus Student)',
+  },
+];
+
+export function addInitials(userDegree: string, primaryDegree: string) {
+  if (userDegree === 'PhD in Health-Related Field') {
+    for (let i = 0; i < convertedArray.length; i++) {
+      if (primaryDegree.includes(convertedArray[i].name)) {
+        return convertedArray[i].initials;
+      }
+    }
+  } else if (userDegree === 'Doctoral Student in Health-Related Field') {
+    for (let i = 0; i < convertedArr.length; i++) {
+      if (primaryDegree.includes(convertedArr[i].name)) {
+        return convertedArr[i].initials;
+      }
+    }
+  } else if (userDegree === 'Canada') {
+    for (let i = 0; i < convertedArr.length; i++) {
+      if (primaryDegree.includes(provinces[i].name)) {
+        return provinces[i].initials;
+      }
+    }
+  } else {
+    return separateWords(primaryDegree);
+  }
+}
 export function parseMeasurement(
   measurementString: string,
 ): Measurement | null {

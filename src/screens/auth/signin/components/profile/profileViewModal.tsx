@@ -46,7 +46,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
 
   const handleDateChange = (newDate: Date) => {
     setSelectedDate(newDate);
-    const date = newDate ? moment(newDate).format('MM-DD-YYYY') : 'N/A';
+    const date = newDate ? moment(newDate).format('YYYY-MM-DD') : 'N/A';
     handleInputChange('dob', date);
   };
 

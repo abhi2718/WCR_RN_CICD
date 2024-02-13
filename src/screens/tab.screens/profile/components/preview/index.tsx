@@ -6,6 +6,10 @@ import { useViewModal } from './previewViewModal';
 import { styles } from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import { HeaderBar } from '../../../../../components/header';
+import {
+  separateWords,
+  addInitials,
+} from '../../../../../utils/common.functions';
 
 export const PreviewScreen = () => {
   const { user} = useViewModal();
@@ -61,7 +65,10 @@ export const PreviewScreen = () => {
                     />
                     <Text style={styles.userInfoText}>
                       {user.designation?.userDegree},{' '}
-                      {user.designation?.primaryDegree}
+                      {addInitials(
+                        user.designation?.userDegree,
+                        user.designation?.primaryDegree,
+                      )}
                     </Text>
                   </Row>
                   <Row alignItems="center" style={styles.userInfoRow} gap={15}>
@@ -70,7 +77,7 @@ export const PreviewScreen = () => {
                       source={require('../../../../../assets/images/icons/degTitle.png')}
                     />
                     <Text style={styles.userInfoText}>
-                      {user.designation?.title}
+                      {user.designation?.title}, {user.institution}
                     </Text>
                   </Row>
                   <Row alignItems="center" style={styles.userInfoRow} gap={15}>
@@ -79,7 +86,8 @@ export const PreviewScreen = () => {
                       source={require('../../../../../assets/images/icons/location.png')}
                     />
                     <Text style={styles.userInfoText}>
-                      {user.address?.city}, {user.address?.state}
+                      {user.address?.city},{' '}
+                      {addInitials(user.address.country, user.address?.state)}
                     </Text>
                   </Row>
                 </View>

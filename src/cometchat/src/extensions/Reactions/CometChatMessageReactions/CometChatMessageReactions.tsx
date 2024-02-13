@@ -97,13 +97,13 @@ const CometChatMessageReactions = (props: MessageReactionsInterface) => {
     if (messageObject?.['type'] === 'text') {
       if (messageObject?.['sender']?.['uid'] === loggedInUser?.['uid']) {
         if (reactionData?.hasOwnProperty(loggedInUser?.['uid'])) {
-          countcolor = theme?.palette?.getPrimary();
+          countcolor = 'black';
         }
       } else {
         if (reactionData?.hasOwnProperty(loggedInUser?.['uid'])) {
           countcolor = theme?.palette?.getBackgroundColor();
         } else {
-          countcolor = theme?.palette?.getAccent700();
+          countcolor = theme?.palette?.getPrimary();
         }
       }
     } else {
@@ -113,14 +113,14 @@ const CometChatMessageReactions = (props: MessageReactionsInterface) => {
             ? theme?.palette?.getPrimary()
             : theme?.palette?.getBackgroundColor();
       } else {
-        countcolor = theme?.palette?.getAccent700();
+        countcolor = theme?.palette?.getPrimary();
       }
     }
     let Count = (
       <Text
         style={[
           Styles.reactionCountStyle,
-          { color: countcolor },
+          { color: countcolor},
           theme?.typography?.caption1,
         ]}
       >
@@ -128,7 +128,7 @@ const CometChatMessageReactions = (props: MessageReactionsInterface) => {
       </Text>
     );
 
-    let messageReactionsbackgroundColor = { backgroundColor: 'transparent' },
+    let messageReactionsbackgroundColor = { backgroundColor: theme?.palette?.getPrimary() },
       border = {
         borderWidth: 1,
         borderColor: theme?.palette?.getAccent200(),
@@ -144,6 +144,7 @@ const CometChatMessageReactions = (props: MessageReactionsInterface) => {
         if (reactionData?.hasOwnProperty(loggedInUser?.['uid'])) {
           messageReactionsbackgroundColor = {
             backgroundColor: theme?.palette?.getPrimary(),
+          
           };
           border = {
             borderWidth: 1,
@@ -191,7 +192,7 @@ const CometChatMessageReactions = (props: MessageReactionsInterface) => {
           border,
         ]}
       >
-        <Text style={[Styles.reactionListStyle, style.textFont]}>
+        <Text style={[Styles.reactionListStyle, Styles.textFont]}>
           {Emoji}&nbsp;{Count}
         </Text>
       </TouchableOpacity>
