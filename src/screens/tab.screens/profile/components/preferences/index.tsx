@@ -39,11 +39,9 @@ export const PreferencesScreen = () => {
     setHeightRange,
     voidFun,
   } = useViewModal();
-
   if (loading) {
     return <FullLoader />;
   }
-
   return (
     <SafeAreaView style={styles.container}>
       <PreferenceyModal
