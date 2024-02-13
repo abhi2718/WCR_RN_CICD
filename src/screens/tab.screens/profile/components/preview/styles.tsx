@@ -96,6 +96,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
     fontFamily: fonts.body,
+    flex: 1,
   },
   headingText: {
     marginTop: sizes[2],
