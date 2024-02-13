@@ -30,12 +30,11 @@ export class LikeRepository {
     const url = `${AppUrl.matchEndPoint}`;
     return this.apiService.getGetApiResponse(url);
   }
-  async removefromMatched(id:any) {
+  async removefromMatched(id: string) {
     const url = `${AppUrl.matchEndPoint}/${id}`;
-    return this.apiService.getDeleteApiResponse(url,{});
+    return await this.apiService.getDeleteApiResponse(url,{});
   }
-  async addFriend(uid: string) {
-  }
+  async addFriend(uid: string) {}
   async getFriends(
     userId: string,
     conversationType: string = 'user',
