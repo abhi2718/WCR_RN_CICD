@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../../../infrastructure/theme/colors';
 import { fonts } from '../../../../../../infrastructure/theme/fonts';
+import { theme } from '../../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   safeAreaViewStyle: {
@@ -53,13 +54,14 @@ export const modalStyle = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 14,
     color: colors.ui.primary,
-    fontWeight: '700',
+    fontSize: theme.fontSizes.text,
+    fontWeight: theme.fontWeights.bold,
     fontFamily: fonts.body,
   },
   profileBtn: {
-    fontWeight: '700',
-    backgroundColor: colors.ui.primary,
-    borderColor: colors.ui.primary,
+    fontWeight: theme.fontWeights.bold,
+    backgroundColor: theme.colors.ui.primary,
+    borderColor: theme.colors.ui.primary,
     borderRadius: 25,
     borderWidth: 1,
     overflow: 'hidden',
@@ -67,5 +69,6 @@ export const modalStyle = StyleSheet.create({
     paddingVertical: 14,
     color: colors.ui.white,
     fontFamily: fonts.body,
+    fontSize: theme.fontSizes.text,
   },
 });
