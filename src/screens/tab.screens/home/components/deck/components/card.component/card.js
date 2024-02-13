@@ -85,7 +85,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Text style={cardStyles.userInfoText}>{designation.title}</Text>
               </Row>
-
               <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
@@ -153,7 +152,6 @@ export default function CardCompoent({ item, height, cardRef }) {
                       <Text style={cardStyles.chipText}>{ethnicity}</Text>
                     </Row>
                   ))}
-
                 {maritalStatus && maritalStatus !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image

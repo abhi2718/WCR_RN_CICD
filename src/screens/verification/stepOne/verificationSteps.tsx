@@ -9,6 +9,7 @@ import { sizes } from '../../../infrastructure/theme/sizes';
 import { dimensions } from '../../../components/tools';
 
 export const verificationStyle = StyleSheet.create({
+  
   backButtonWrapper: {
     padding:16
   },
@@ -43,7 +44,7 @@ export const verificationStyle = StyleSheet.create({
     marginBottom: sizes[1],
   },
   textBox: {
-    marginBottom: sizes[2],
+    marginBottom: sizes[0],
     fontFamily: fonts.body,
   },
   footerDiv: {
