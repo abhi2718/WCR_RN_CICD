@@ -13,8 +13,8 @@ export type ModalImageSelectedType = {
   };
 
   export type AddProfilePicScreenProps = {
-    navigation: any;
-    source: any;
+    navigation?: any;
+    source?: any;
     setAllPics: (payload: any) => void;
     showHeader?: boolean;
   };

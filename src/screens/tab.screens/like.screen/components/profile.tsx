@@ -173,8 +173,10 @@ export const ProfileView = (props: ProfileViewProps) => {
           userId={item?._id}
           toggleModal={toggleModal}
           showLike={false}
-          showDisLike={false}
+          showDisLike={true}
           showSave={false}
+          matchedDocId={item?.matchedDocId}
+          isMatched={true}
         />
       </View>
     );
@@ -291,8 +293,8 @@ export const ProfileView = (props: ProfileViewProps) => {
           userId={item?._id}
           toggleModal={toggleModal}
           showLike={isFavourite ? true : false}
-          showDisLike={isFavourite ? true : false}
-          showSave={false}
+          showDisLike={true}
+          showSave={isFavourite ? false : true}
         />
       </View>
     );

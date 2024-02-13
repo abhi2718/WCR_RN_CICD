@@ -18,6 +18,7 @@ import {
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 import { useViewModal } from './useViewModal';
 import { searchStyle } from './searchStyle';
+import { calculateAge } from '../../../../../../../utils/common.functions';
 
 export const SearchModal = (props: SearchModalProps) => {
   const {
@@ -99,7 +100,7 @@ export const SearchModal = (props: SearchModalProps) => {
                         />
                         <Column gap={5}>
                           <Text style={searchStyle.firstName}>
-                            {user.first}
+                            {user.first}, {calculateAge(user.dob)}
                           </Text>
                           <Row>
                             <Text style={searchStyle.ctiy}>

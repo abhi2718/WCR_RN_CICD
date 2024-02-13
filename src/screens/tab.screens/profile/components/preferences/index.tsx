@@ -254,7 +254,7 @@ export const PreferencesScreen = () => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text style={styles.headerText}>Basic Info</Text>
+                  <Text style={styles.headerText}>Vital Signs</Text>
                 </Row>
               );
             }
