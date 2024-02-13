@@ -64,6 +64,18 @@ export const useProfessionModal = (props: ScreenParams) => {
     navigation.navigate(ROUTES.ProfilePic);
   };
 
+  const HandleError = () => {
+    const errors: Partial<professionTypes> = {};
+    if (!professionForm?.userDegree) {
+      errors.primaryDegree = 'Please Select the Degree Category first ';
+    }
+    if (Object.keys(errors).length) {
+      return setValidationErrors(errors);
+    } else {
+      setValidationErrors({});
+    }
+  };
+
   const handleSubmit = async () => {
     const errors: Partial<professionTypes> = {};
 
@@ -140,5 +152,6 @@ export const useProfessionModal = (props: ScreenParams) => {
     handleSubmit,
     handleInputChange,
     changePrimaryDegreeOption,
+    HandleError,
   };
 };
