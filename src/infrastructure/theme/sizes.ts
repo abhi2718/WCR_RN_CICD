@@ -46,4 +46,7 @@ export const units = {
     200: 200,
     300: 300,
   },
+  borderSize: {
+    headerBorderWidth: 0.5,
+  },
 };

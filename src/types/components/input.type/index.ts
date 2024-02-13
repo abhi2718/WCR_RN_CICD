@@ -34,4 +34,10 @@ export type InputProps = {
   maxLength?: number;
   onPress?: any;
   searchPlaceholder?: string;
+  isChecked?: boolean;
+};
+export type OptionType = {
+  _index: number;
+  label: string;
+  value: string;
 };

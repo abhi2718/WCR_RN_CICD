@@ -1,25 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ShowFlashMessage } from '../../../../../../../components/flashBar';
 import { AuthRepository } from '../../../../../../../repository/auth.repo';
-import { UserProfileRepository } from '../../../../../../../repository/userProfile.repo';
+import { OptionType } from '../../../../../../../types/screen.type/profile.type';
+import { ScreenParams } from '../../../../../../../types/services.types/firebase.service';
 import { report } from '../../../../../../../utils/constanst';
-type OptionType = {
-  _index: number;
-  label: string;
-  value: string;
-};
-export const useViewModal = (props:any) => {
-  const { user } = useSelector(({ userState }) => userState);
+
+export const useViewModal = (props:ScreenParams) => {
   const authRepository = useMemo(() => new AuthRepository(),[]);
-  const dispatch = useDispatch();
   const subjectRef = useRef('');
   const messageRef = useRef('');
   const [loading, setLoading] = useState(false);
-  const userProfileRepository = new UserProfileRepository();
   const navigation = useNavigation();
-  const goBack = () => navigation.goBack();
   const reasonOfReport = report.map((item)=>({label: item, value: item }))
   const handleSubject = (option: OptionType) => {
     subjectRef.current = option.value;
@@ -33,9 +26,9 @@ export const useViewModal = (props:any) => {
   }
   const handleSubmit = async () => {
     const { userId, name } = props?.route?.params;
-    if (!messageRef?.current?.length || !subjectRef?.current?.length) {
+    if (!subjectRef?.current?.length) {
       return ShowFlashMessage(
-        'Subject and message both fields required!',
+        'Reason is required!',
         '',
         'danger',
       );
@@ -64,8 +57,6 @@ export const useViewModal = (props:any) => {
     }
   };
   return {
-    user,
-    goBack,
     handleSubject,
     handleMessage,
     handleSubmit,

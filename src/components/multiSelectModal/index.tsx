@@ -76,7 +76,7 @@ const MultiSelectModal: React.FC<MultiSelectModalProps> = ({
                 <Text
                   style={[
                     styles.text,
-                    selected.includes(item) ? styles.selectedText : '',
+                    selected.includes(item) ? styles.selectedText : {},
                   ]}
                 >
                   {item}

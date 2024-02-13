@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { dimensions } from '../../../../../components/tools';
 
 export const ChipStyle = StyleSheet.create({
   container: {
@@ -12,7 +11,6 @@ export const ChipStyle = StyleSheet.create({
   scrollContainer: {
     height: '90%',
   },
-
   arrow: {
     height: sizes[4],
   },

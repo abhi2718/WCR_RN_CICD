@@ -11,7 +11,7 @@ export const useViewModal = (props: SearchModalProps) => {
   const textRef = useRef('');
   const handleSearch = async (text: string) => {
     textRef.current = text;
-      if (text.length) {
+      if (text.length) { 
         try {
           const query = {
             searchValue: text,

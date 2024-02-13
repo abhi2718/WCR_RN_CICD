@@ -17,8 +17,6 @@ export const pendingStyle = StyleSheet.create({
   },
   content: {
     flex: 1,
-    // borderColor: 'red',
-    // borderWidth: 1,
     width: '100%',
     padding: 16,
     justifyContent: 'space-around',
@@ -43,7 +41,6 @@ export const pendingStyle = StyleSheet.create({
     width: '80%',
     fontFamily: fonts.body,
   },
-
   mainContainerDeclined: {
     justifyContent: 'center',
     flex: 1,
@@ -53,8 +50,6 @@ export const pendingStyle = StyleSheet.create({
   },
   contentDeclined: {
     flex: 1,
-    // borderColor: 'red',
-    // borderWidth: 1,
     width: '100%',
     padding: 16,
     justifyContent: 'space-around',

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import  { useContext, useEffect, useState } from 'react';
 import { NotificationCountContext } from '../../../contexts/notificationCount.context';
 import { NotificationRepository } from '../../../repository/notification.repo';
 import { NotificationType } from '../../../types/screen.type/notification.type';
@@ -6,7 +6,6 @@ import { NotificationType } from '../../../types/screen.type/notification.type';
 export const useViewModal = () => {
   const notificationRepository = new NotificationRepository();
   const [notificationLoading, setNotificationLoading] = useState(false);
-  const flatListRef = useRef(null);
   const [notifications, setNotifications] = useState<{
     notifications: NotificationType[];
     currentIndex: number;
@@ -15,14 +14,12 @@ export const useViewModal = () => {
     currentIndex: 0,
   });
   const { _setCount, count } = useContext(NotificationCountContext);
-  const [unReadCount, setUnReadCount] = useState(0);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const getNotifiactionCount = async () => {
     try {
       const { data } = await notificationRepository.getNotificationCount();
       if (data && data > 0) {
         _setCount(data);
-        setUnReadCount(data);
       }
     } catch (error) {
     }
@@ -54,8 +51,8 @@ export const useViewModal = () => {
       setNotificationLoading(false);
     }
   };
-  const onDeleteItem = (key) => {
-
+  const onDeleteItem = () => {
+    // need to implement in future
   };
   const markAsRead = async (id: string) => {
     const payload = { update: { isRead: true } };
@@ -79,16 +76,6 @@ export const useViewModal = () => {
       }
     } catch (error) {}
   };
-  const scrollToIndex = (index) => {
-    flatListRef.current.scrollToIndex({ animated: true, index });
-  };
-  const handleEndReached = () => {
-    // if (!notificationLoading) {
-    //   setPage((oldPage) => oldPage + 1);
-    //   getNotifiaction(page + 1, true);
-    // }
-    getNotifiaction(1)
-  };
   const htmlTextConvertPlainText = (data : string)=>{
     const item =  data.replace(/<\/?[^>]+>/ig, '');
       if(item.length > 100){
@@ -102,13 +89,10 @@ export const useViewModal = () => {
     getNotifiactionCount();
   }, []);
   return {
-    notificationLoading,
-    notifications,
-    unReadCount,
     onDeleteItem,
+    notifications,
+    notificationLoading,
     markAsRead,
-    handleEndReached,
-    flatListRef,
-    htmlTextConvertPlainText
+    htmlTextConvertPlainText,
   };
 };

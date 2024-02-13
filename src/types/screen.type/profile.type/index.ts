@@ -146,3 +146,36 @@ export interface heightPrefrenceProps{
   heightRange:number[],
   setHeightRange:Dispatch<SetStateAction<number[]>>
 }
+
+export type BlockedProfile = {
+  _id: string;
+  age: number;
+  designation: {
+    title: string;
+  };
+  id: string;
+  isAdmin: boolean;
+  profile: {
+    dob: string;
+    name: {
+      first: string
+    } 
+  };
+  profilePicture: {
+    caption: string;
+    url: string;
+  };
+}
+export type BlockedUserProps = {
+  id: string;
+  profileUrl: string;
+  name: string;
+  onPress:(id:string)=>void;
+};
+export type ChipProps = {
+  item: {
+    label: string;
+    value: string;
+  };
+  onPress: () => void;
+};

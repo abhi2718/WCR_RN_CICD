@@ -12,11 +12,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ModalSelector from 'react-native-modal-selector';
 import { CustomCheckBox } from '../../../../../components/customCheckBox';
 import MultiSelectModal from '../../../../../components/multiSelectModal';
-import {
-  Column,
-  Row,
-  Spacer,
-} from '../../../../../components/tools';
+import { Column, Row, Spacer } from '../../../../../components/tools';
 import AddProfilePicScreen from '../../../../auth/preRegisterFlow/components/AddProfilePic';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
@@ -30,12 +26,6 @@ export const EditProfile = () => {
     optionsList,
     handleInputChange,
     editProfile,
-    distanceRange,
-    handleDistanceSliderChange,
-    ageRange,
-    handleAgeSliderChange,
-    handleHeightSliderChange,
-    heightRange,
     ethnicity,
     handleItemSelected,
     closeModal,
@@ -49,8 +39,6 @@ export const EditProfile = () => {
     _handleInputChange,
     user,
     formatMobile,
-    openAgePickerModal,
-    handleDateChange,
     setAllPics,
     openHobbyModal,
     hobbiesList,
@@ -64,6 +52,7 @@ export const EditProfile = () => {
     _setShowHeightModal,
     height,
     setheight,
+    voidFun,
   } = useViewModal();
   return (
     <SafeAreaView style={styles.editInfoContainer}>
@@ -73,7 +62,7 @@ export const EditProfile = () => {
           isText={true}
           isLoading={submitLoading}
           text="Edit info"
-          button={submitLoading ? () => {} : editProfile}
+          button={submitLoading ? voidFun : editProfile}
         />
       </View>
       <ScrollView>
@@ -218,6 +207,9 @@ export const EditProfile = () => {
                     _handleInputChange('', 'city');
                     _handleInputChange('', 'zipcode');
                   }}
+                  header={
+                    <Text style={styles.modalHeading}>State/Territory</Text>
+                  }
                   style={styles.modalSelector}
                   cancelText="Close"
                   optionContainerStyle={styles.optionContainer}
@@ -332,27 +324,6 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-              if (index === 4) {
-                return (
-                  <Spacer key={index} position="top" size={20}>
-                    {/* <Row justifyContent="space-between">
-                      <Text style={styles.fieldName}>Height</Text>
-                      <Text style={styles.fieldName}>
-                        {formatNumber(heightRange[0])}
-                      </Text>
-                    </Row>
-                    <Column justifyContent="center" alignItems="center">
-                      <MultiSlider
-                        values={heightRange}
-                        min={4}
-                        max={7}
-                        step={0.1}
-                        onValuesChange={handleHeightSliderChange}
-                      />
-                    </Column> */}
-                  </Spacer>
-                );
-              }
               if (item.title === 'Ethnicity') {
                 return (
                   <Spacer key={index} position="top" size={10}>
@@ -452,7 +423,7 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-              if (item.title === 'Relationship level') {
+              if (item.title === 'Relationship Level') {
                 return (
                   <Spacer key={index} position="top" size={10}>
                     <Spacer position="top" size={10}>
@@ -507,7 +478,6 @@ export const EditProfile = () => {
                   </Spacer>
                 );
               }
-
               return (
                 <View key={index}>
                   <Spacer position="top" size={10}>
@@ -521,6 +491,9 @@ export const EditProfile = () => {
                         data={item.option!}
                         initValue={answer[item.initValue]}
                         onChange={handleInputChange}
+                        header={
+                          <Text style={styles.modalHeading}>{item.title}</Text>
+                        }
                         style={styles.modalSelector}
                         cancelText="Close"
                         optionContainerStyle={styles.optionContainer}

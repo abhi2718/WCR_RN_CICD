@@ -8,7 +8,7 @@ interface LoaderProps {
 
 const Loader: React.FC<LoaderProps> = ({ isLoading }) => {
   if (!isLoading) {
-    return null; // Do not render anything if not loading
+    return null; 
   }
 
   return (

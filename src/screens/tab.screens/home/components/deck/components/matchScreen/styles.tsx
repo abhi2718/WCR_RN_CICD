@@ -5,7 +5,6 @@ import {
   fontWeights,
   fonts,
 } from '../../../../../../../infrastructure/theme/fonts';
-import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 
 export const styles = StyleSheet.create({

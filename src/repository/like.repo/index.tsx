@@ -35,8 +35,6 @@ export class LikeRepository {
     return this.apiService.getDeleteApiResponse(url,{});
   }
   async addFriend(uid: string) {
-    //const url = `${AppUrl.addFriendEndPoint}${uid}/friends`;
-    // return this.apiService.getGetApiResponse(url);
   }
   async getFriends(
     userId: string,

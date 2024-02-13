@@ -2,7 +2,7 @@ import { CometChat } from '@cometchat/chat-sdk-react-native';
 import { ReactNode } from 'react';
 
 export type GroupsListProps = {
-  groups: [] | CometChat.Group[];
+  groups: CometChat.Group[] | [] ;
   handleJoinGroup: (guid: string) => Promise<void>;
 };
 export type GroupProps = {
@@ -11,7 +11,6 @@ export type GroupProps = {
 };
 export type SearchGroupProps = {
   handleTextChange: (text: string) => void;
-  toggleSearchInput: () => void;
 };
 export type SwitchButtonProps = {
   stage: number;

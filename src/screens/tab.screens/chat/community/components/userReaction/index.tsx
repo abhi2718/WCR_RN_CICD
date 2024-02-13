@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View,StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ProfileModal } from '../../../../../../components/profile.component';
 import { Row, Spacer } from '../../../../../../components/tools';
@@ -17,10 +17,10 @@ export const UserList = (props: UserListProps) => {
         <Pressable onPress={() => setShowModal(true)}>
           <FastImage
             source={{ uri: user.avatar }}
-            style={{ width: 40, height: 40, borderRadius: 20 }}
+            style={styles.imageStyle}
           />
         </Pressable>
-        <Text style={{ fontFamily: 'Urbanist-Regular' }}>{user.name}</Text>
+        <Text style={styles.container}>{user.name}</Text>
       </Row>
       {showModal && (
         <ProfileModal
@@ -50,10 +50,10 @@ export const UserReaction = (props: UserReactionProps) => {
             <Spacer position={'right'} size={5}>
               <View>
                 <Row>
-                  <Text style={{ fontFamily: 'Urbanist-Regular' }}>
+                  <Text style={styles.container}>
                     {item.emoji}
                   </Text>
-                  <Text style={{ fontFamily: 'Urbanist-Regular' }}>
+                  <Text style={styles.container}>
                     {item.count}
                   </Text>
                 </Row>
@@ -65,3 +65,8 @@ export const UserReaction = (props: UserReactionProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: { fontFamily: 'Urbanist-Regular' },
+  imageStyle:{ width: 40, height: 40, borderRadius: 20 }
+});

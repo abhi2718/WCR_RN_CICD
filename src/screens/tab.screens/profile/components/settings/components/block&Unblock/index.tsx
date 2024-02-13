@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, SafeAreaView, Pressable, Image } from 'react-native';
+import { View, Text, SafeAreaView,ScrollView } from 'react-native';
 import { DropdownInput } from '../../../../../../../components/inputBox';
 import {
   Column,
@@ -7,16 +7,13 @@ import {
   Row,
   Spacer,
 } from '../../../../../../../components/tools';
-import { Chip } from './components';
+import { BlockedUser, Chip } from './components';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../../../components/header';
-import { ScrollView } from 'react-native-gesture-handler';
 
 export const BlockAndUnBlock = () => {
   const {
-    user,
-    goBack,
     country,
     handleSelectCountry,
     selectedCountry,
@@ -31,7 +28,10 @@ export const BlockAndUnBlock = () => {
     _selectedUserDegreeType,
     loading,
     cometChatBlockedUsers,
-    handleUserUnBlock,
+    handleCometChatUserUnBlock,
+    voidFunc,
+    inAppBlockedUsers,
+    unBlockInAppBlockUser,
   } = useViewModal();
   if (loading) {
     return <FullLoader />;
@@ -39,14 +39,16 @@ export const BlockAndUnBlock = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Spacer position="left" size={16}>
+        <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
+      </Spacer>
       <ScrollView>
         <View style={styles.container}>
-          <HeaderBar isLogo={false} isText={true} text="Block & Unblock" />
           <Spacer style={styles.rowOne} position="top" size={20}>
             <Text style={styles.text}>Block by Country</Text>
             <DropdownInput
               data={country}
-              onFocus={() => {}}
+              onFocus={voidFunc}
               labelField="label"
               valueField="value"
               placeholder="Country"
@@ -66,7 +68,7 @@ export const BlockAndUnBlock = () => {
             <Text style={styles.text}>Block by Degree Category/ Type</Text>
             <DropdownInput
               data={_userDegree}
-              onFocus={() => {}}
+              onFocus={voidFunc}
               labelField="label"
               valueField="value"
               placeholder="Select Degree Category"
@@ -75,14 +77,13 @@ export const BlockAndUnBlock = () => {
             <Spacer style={styles.rowOne} position="bottom" size={10}>
               <DropdownInput
                 data={selectedUserDegreeType}
-                onFocus={() => {}}
+                onFocus={voidFunc}
                 labelField="label"
                 valueField="value"
                 placeholder="Select Degree Type"
                 onChange={handleselectedUserDegreeType}
               />
             </Spacer>
-
             <Row style={styles.rowWrap} alignItems="center">
               {selecteduserDegree.map((item, index) => (
                 <Chip
@@ -104,26 +105,22 @@ export const BlockAndUnBlock = () => {
           </Spacer>
           <Text style={styles.blockedListText}>Blocked Users</Text>
           {cometChatBlockedUsers.map((user) => (
-            <View key={user.getUid()} style={styles.blockUserWrapper}>
-              <Row justifyContent="space-between" alignItems="center">
-                <Row alignItems="center" gap={10}>
-                  <Image
-                    style={styles.blockUserAvatar}
-                    source={{ uri: user.getAvatar() }}
-                  />
-                  <Column>
-                    <Text style={styles.blockUserText}>{user.getName()}</Text>
-                    <Text style={styles.blockedText}>Blocked</Text>
-                  </Column>
-                </Row>
-                <Pressable
-                  onPress={() => handleUserUnBlock(user.getUid())}
-                  style={styles.blockedButton}
-                >
-                  <Text style={styles.blockButtonText}>UnBlock</Text>
-                </Pressable>
-              </Row>
-            </View>
+            <BlockedUser
+              key={user.getUid()}
+              id={user.getUid()}
+              name={user.getName()}
+              profileUrl={user.getAvatar()}
+              onPress={handleCometChatUserUnBlock}
+            />
+          ))}
+          {inAppBlockedUsers.map(({ profile, _id, profilePicture }) => (
+            <BlockedUser
+              key={_id}
+              id={_id}
+              name={profile.name.first}
+              profileUrl={profilePicture.url}
+              onPress={unBlockInAppBlockUser}
+            />
           ))}
         </View>
       </ScrollView>

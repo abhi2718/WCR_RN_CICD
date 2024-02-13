@@ -4,6 +4,7 @@ import { theme } from '../../../../../../infrastructure/theme';
 import { dimensions } from '../../../../../../components/tools';
 
 export const styles = StyleSheet.create({
+  wrapper:{ height: 400 },
   container: {
     height: 500,
     backgroundColor: theme.colors.ui.white,

@@ -101,7 +101,7 @@ const ImageMessage = (props: MediaMessageProps) => {
             columnWrapperStyle={styles.galleryWrapper}
             renderItem={({ item, index }) => {
               if (index === images.length - 1) {
-                return <View style={{ height: 400 }}></View>;
+                return <View style={styles.wrapper}></View>;
               }
               return (
                 <FastImage

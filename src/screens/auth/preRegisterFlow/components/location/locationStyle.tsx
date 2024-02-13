@@ -3,7 +3,6 @@ import { dimensions } from '../../../../../components/tools';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import {
   fontSizes,
-  fontWeights,
   fonts,
 } from '../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
@@ -25,7 +24,6 @@ export const location = StyleSheet.create({
     height: sizes[8],
     overflow: 'visible',
   },
-
   subHeader: {
     fontSize: fontSizes.title,
     fontWeight: '700',
@@ -34,7 +32,6 @@ export const location = StyleSheet.create({
     marginBottom: sizes[3],
     fontFamily: fonts.body,
   },
-
   innerView: {
     flex: 1,
   },

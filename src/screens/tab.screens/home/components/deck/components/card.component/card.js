@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, ScrollView, Text, Pressable, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Row, Spacer } from '../../../../../../../components/tools';
@@ -8,9 +8,6 @@ import { useViewModal } from './useViewModal';
 import { calculateAge } from '../../../../../../../utils/common.functions';
 import LinearGradient from 'react-native-linear-gradient';
 import { AlertScreen } from '../../../../../../../components/alert';
-import { colors } from '../../../../../../../infrastructure/theme/colors';
-import { sizes } from '../../../../../../../infrastructure/theme/sizes';
-import { fontSizes } from '../../../../../../../infrastructure/theme/fonts';
 export default function CardCompoent({ item, height, cardRef }) {
   const heightStyle = { height, ...cardStyles.imageStyle };
   const {
@@ -77,9 +74,10 @@ export default function CardCompoent({ item, height, cardRef }) {
                   source={require('../../../../../../../assets/images/icons/degree.png')}
                 />
                 <Text style={cardStyles.userInfoText}>
-                  {designation.userDegree}
+                  {designation.userDegree}, {designation.primaryDegree}
                 </Text>
               </Row>
+
               <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
@@ -87,12 +85,15 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Text style={cardStyles.userInfoText}>{designation.title}</Text>
               </Row>
+
               <Row alignItems="center" style={cardStyles.userInfoRow} gap={10}>
                 <Image
                   style={cardStyles.userInfoIcon}
                   source={require('../../../../../../../assets/images/icons/location.png')}
                 />
-                <Text style={cardStyles.userInfoText}>{state}</Text>
+                <Text style={cardStyles.userInfoText}>
+                  {item.city}, {state}
+                </Text>
               </Row>
             </View>
             <View style={[cardStyles.ph16]}>
@@ -104,53 +105,21 @@ export default function CardCompoent({ item, height, cardRef }) {
               >
                 {gender && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    {gender === 'Female' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/femailAvatar.png')}
-                      />
-                    )}
-                    {gender === 'Male' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/maleAvatar.png')}
-                      />
-                    )}
-                    {gender === 'Transman' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/transmanAvatar.png')}
-                      />
-                    )}
-                    {gender === 'Transwomen' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/transwomenAvator.png')}
-                      />
-                    )}
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/Gender.png')}
+                    />
+
                     <Text style={cardStyles.chipText}>{gender}</Text>
                   </Row>
                 )}
                 {item.showSexualPreference && item.sexualPreference && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    {item.sexualPreference === 'Straight' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/straight.png')}
-                      />
-                    )}
-                    {item.sexualPreference === 'Lesbian' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/lesbian.png')}
-                      />
-                    )}
-                    {item.sexualPreference === 'Gay' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/gay.png')}
-                      />
-                    )}
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/love.png')}
+                    />
+
                     <Text style={cardStyles.chipText}>
                       {item.sexualPreference}
                     </Text>
@@ -161,7 +130,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
-                      source={require('../../../../../../../assets/images/icons/heightScale.png')}
+                      source={require('../../../../../../../assets/images/vitalIcons/height.png')}
                     />
                     <Text style={cardStyles.chipText}>
                       {userHeight.feet}"{userHeight.inch}'
@@ -169,14 +138,18 @@ export default function CardCompoent({ item, height, cardRef }) {
                   </Row>
                 )}
 
-                {ethnicity.length >= 0 &&
-                  ethnicity.map((ethnicity, index) => (
+                {ethnicity?.length >= 0 &&
+                  ethnicity?.map((ethnicity, index) => (
                     <Row
                       key={index}
                       gap={10}
                       alignItems="center"
                       style={cardStyles.chip}
                     >
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/vitalIcons/ethincity.png')}
+                      />
                       <Text style={cardStyles.chipText}>{ethnicity}</Text>
                     </Row>
                   ))}
@@ -185,7 +158,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
-                      source={require('../../../../../../../assets/images/icons/heartVitialSign.png')}
+                      source={require('../../../../../../../assets/images/vitalIcons/married.png')}
                     />
                     <Text style={cardStyles.chipText}>{maritalStatus}</Text>
                   </Row>
@@ -193,53 +166,44 @@ export default function CardCompoent({ item, height, cardRef }) {
 
                 {item.religion && item.religion !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
-                    {item.religion === 'Christian' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/Christian.png')}
-                      />
-                    )}
-                    {item.religion === 'Muslim' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/Muslim.png')}
-                      />
-                    )}
-                    {item.religion === 'Hindu' && (
-                      <Image
-                        style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/hindu.png')}
-                      />
-                    )}
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/Religion.png')}
+                    />
+
                     <Text style={cardStyles.chipText}>{item.religion}</Text>
                   </Row>
                 )}
-                {item.politics && item.politics !== 'Prefer not to say' && (
+                {item?.politics && item?.politics !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/politics.png')}
+                    />
                     <Text style={cardStyles.chipText}>{item.politics}</Text>
                   </Row>
                 )}
-                {item.kids &&
-                  item.kids !== 'Prefer not to say' &&
-                  (item.kids === ' Prefer not to say' ? null : (
+                {item?.kids &&
+                  item?.kids !== 'Prefer not to say' &&
+                  (item?.kids === ' Prefer not to say' ? null : (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
                       <Image
                         style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/kids.png')}
+                        source={require('../../../../../../../assets/images/vitalIcons/haveKid.png')}
                       />
-                      <Text style={cardStyles.chipText}>{item.kids}</Text>
+                      <Text style={cardStyles.chipText}>{item?.kids}</Text>
                     </Row>
                   ))}
 
-                {item.covidVaccineStatus &&
-                  item.covidVaccineStatus !== 'Prefer not to say' && (
+                {item?.covidVaccineStatus &&
+                  item?.covidVaccineStatus !== 'Prefer not to say' && (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
                       <Image
                         style={cardStyles.chipIcon}
-                        source={require('../../../../../../../assets/images/icons/vaccinated.png')}
+                        source={require('../../../../../../../assets/images/vitalIcons/corona.png')}
                       />
                       <Text style={cardStyles.chipText}>
-                        {item.covidVaccineStatus}
+                        {item?.covidVaccineStatus}
                       </Text>
                     </Row>
                   )}
@@ -248,7 +212,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
-                      source={require('../../../../../../../assets/images/icons/drinks.png')}
+                      source={require('../../../../../../../assets/images/vitalIcons/drinks.png')}
                     />
                     <Text style={cardStyles.chipText}>{drinking}</Text>
                   </Row>
@@ -271,11 +235,10 @@ export default function CardCompoent({ item, height, cardRef }) {
                     <View style={[cardStyles.ph16]}>
                       {item?.interests?.length > 0 && (
                         <>
-                          {/* <Spacer position="top" size={5} /> */}
                           <Text style={cardStyles.aboutHeading}>
                             Interests & Hobbies
                           </Text>
-                          <Spacer position="top" size={15} />
+                          <Spacer position="top" size={5} />
                           <Row
                             gap={10}
                             alignItems="center"
@@ -302,7 +265,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                         {bio && (
                           <View>
                             <Text style={cardStyles.aboutHeading}>About</Text>
-                            <Spacer position="top" size={8} />
+                            <Spacer position="top" size={5} />
                             <Text style={cardStyles.aboutText}>{bio}</Text>
                             <Spacer position="bottom" size={12} />
                           </View>
@@ -312,11 +275,10 @@ export default function CardCompoent({ item, height, cardRef }) {
                         <View style={[cardStyles.ph16]}>
                           {item?.interests?.length > 0 && (
                             <>
-                              {/* <Spacer position="top" size={5} /> */}
                               <Text style={cardStyles.aboutHeading}>
                                 Interests & Hobbies
                               </Text>
-                              <Spacer position="top" size={12} />
+                              <Spacer position="top" size={5} />
                               <Row
                                 gap={10}
                                 alignItems="center"

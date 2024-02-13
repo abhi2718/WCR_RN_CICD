@@ -1,15 +1,14 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
-import { Column, Logo, Row, ScreenContainer } from '../../../components/tools';
-import { ErrorScreenHeader, HeaderDeck } from '../../../components/header';
+import { Column } from '../../../components/tools';
 import { declinedStyle } from './declinedStyle';
 import { PrimaryButton } from '../../../components/button';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { VerificationDeclinedProps } from '../../../types/screen.type/errorState.type';
 
-const VerificationDeclined = () => {
+const VerificationDeclined = (props:VerificationDeclinedProps) => {
+  const {declineReason,navigateToGender} = props;
   return (
     <View style={declinedStyle.mainContainer}>
-      <ErrorScreenHeader />
       <View style={declinedStyle.content}>
         <Column gap={25} alignItems="center">
           <Text style={declinedStyle.subHeading}>
@@ -32,9 +31,7 @@ const VerificationDeclined = () => {
             See the following reason:
           </Text>
           <Text style={declinedStyle.redBoxText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            eget volutpat arcu.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Curabitur eget volutpat arcu.{' '}
+          {declineReason}
           </Text>
         </View>
         <Column gap={25} alignItems="center">
@@ -44,7 +41,10 @@ const VerificationDeclined = () => {
             your account verification.
           </Text>
           <View style={declinedStyle.primaryButton}>
-            <PrimaryButton title="Update profile" />
+            <PrimaryButton
+              title="Update profile"
+              onPress={navigateToGender}
+            />
           </View>
         </Column>
       </View>
