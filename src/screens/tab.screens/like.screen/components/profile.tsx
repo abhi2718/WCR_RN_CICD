@@ -167,6 +167,8 @@ export const ProfileView = (props: ProfileViewProps) => {
           showLike={false}
           showDisLike={true}
           showSave={false}
+          matchedDocId={item?.matchedDocId}
+          isMatched={true}
         />
       </View>
     );

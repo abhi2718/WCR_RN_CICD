@@ -47,4 +47,6 @@ export type profileProps = {
   showDisLike: boolean;
   showSave: boolean;
   showBlock?: boolean;
+  matchedDocId?: string;
+  isMatched?: boolean;
 };

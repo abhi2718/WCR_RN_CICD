@@ -1,11 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Share from 'react-native-share';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -16,9 +10,11 @@ import { NotificationRepository } from '../../repository/notification.repo';
 import { UserProfileRepository } from '../../repository/userProfile.repo';
 import { profileProps, UserProfile } from '../../types/components/profile.type';
 import { createNotifications } from '../../utils/common.functions';
+import { LikeRepository } from '../../repository/like.repo';
 export const useViewModal = (props: profileProps) => {
   const userProfileRepository = useMemo(() => new UserProfileRepository(), []);
   const homeDeckRepository = new HomeDeckRepository();
+  const likeRepository = new LikeRepository();
   const notificationRepository = new NotificationRepository();
   const { fetchAll } = useContext(LikeContext);
   const [loading, setLoading] = useState(false);
@@ -37,6 +33,7 @@ export const useViewModal = (props: profileProps) => {
     showDisLike,
     showSave,
     showBlock,
+    isMatched,
   } = props;
   const showAlert = () => {
     Alert.alert(
@@ -68,6 +65,11 @@ export const useViewModal = (props: profileProps) => {
       setLoading(false);
     }
   };
+  const unmatchUser = async () => {
+    await likeRepository.removefromMatched(props?.matchedDocId!);
+    toggleModal()
+  };
+
   useEffect(() => {
     if (showModal) {
       fetchUser();
@@ -111,6 +113,12 @@ export const useViewModal = (props: profileProps) => {
   const handleDisLike = async () => {
     try {
       setLoading(true);
+
+      if (isMatched) {
+        await unmatchUser();
+        setLoading(false);
+        return;
+      }
       const payLoad = createPayLoafForUserAction('Dislike');
       await homeDeckRepository.userReactin(payLoad);
       setLoading(false);
@@ -172,7 +180,7 @@ export const useViewModal = (props: profileProps) => {
       userId: user?._id,
       name: user?.first,
     });
-  },[user]);
+  }, [user]);
   return {
     showModal,
     toggleModal,

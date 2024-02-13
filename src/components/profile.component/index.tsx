@@ -42,7 +42,6 @@ export const ProfileModal = (props: profileProps) => {
     handleReport,
     showAlert,
   } = useViewModal(props);
-
   return (
     <Modal visible={showModal}>
       <SafeAreaView style={styles.containerWrapperStyle}>
