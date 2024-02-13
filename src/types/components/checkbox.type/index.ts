@@ -15,3 +15,8 @@ export type CheckBoxProps = {
   id: number;
   handleChange: (id: number) => void;
 };
+export type CustomCheckBoxProps = {
+  onPress: () => void;
+  isChecked: boolean;
+  label: string;
+}

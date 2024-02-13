@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { profileProps } from '../../types/components/profile.type';
-import {  FullLoader, Row, Spacer } from '../tools';
+import { FullLoader, Row, Spacer } from '../tools';
 import { useViewModal } from './useViewModal';
 import LinearGradient from 'react-native-linear-gradient';
 import { cardStyles } from '../../screens/tab.screens/home/components/deck/components/card.component/cardStyle';
@@ -198,6 +198,10 @@ export const ProfileModal = (props: profileProps) => {
                                   alignItems="center"
                                   style={styles.chip}
                                 >
+                                  <Image
+                                    style={cardStyles.chipIcon}
+                                    source={require('../../assets/images/vitalIcons/ethincity.png')}
+                                  />
                                   <Text style={styles.chipText}>
                                     {ethnicity}
                                   </Text>
@@ -241,6 +245,10 @@ export const ProfileModal = (props: profileProps) => {
                               alignItems="center"
                               style={styles.chip}
                             >
+                              <Image
+                                style={cardStyles.chipIcon}
+                                source={require('../../assets/images/vitalIcons/politics.png')}
+                              />
                               <Text style={styles.chipText}>
                                 {user.politics}
                               </Text>
@@ -322,9 +330,6 @@ export const ProfileModal = (props: profileProps) => {
                     </View>
                     <View style={styles.shareWrapper}>
                       <Row justifyContent="center" gap={32}>
-                        {/* <Pressable onPress={showAlert}>
-                              <Text>Press </Text>
-                            </Pressable> */}
                         {showDisLike && (
                           <Pressable onPress={handleDisLike}>
                             <Image

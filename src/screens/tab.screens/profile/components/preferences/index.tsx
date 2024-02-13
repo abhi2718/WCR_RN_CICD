@@ -1,6 +1,11 @@
 import React from 'react';
 import { View, Text, Pressable, SafeAreaView, Image } from 'react-native';
-import { Column, FullLoader, Row } from '../../../../../components/tools';
+import {
+  Column,
+  FullLoader,
+  Row,
+  Spacer,
+} from '../../../../../components/tools';
 import { useViewModal } from './useViewModal';
 import { styles } from './styles';
 import ModalSelector from 'react-native-modal-selector';
@@ -10,6 +15,7 @@ import { HeaderBar } from '../../../../../components/header';
 import { formatNumber } from '../../../../../utils/common.functions';
 import { PreferenceyModal } from '../../../../../components/preferenceModal';
 import { HeightPrefrence } from './components/heightPrefrence';
+import { ErrorText } from '../../../../auth/signin/signInStyle';
 export const PreferencesScreen = () => {
   const {
     answer,
@@ -23,6 +29,8 @@ export const PreferencesScreen = () => {
     handleAgeSliderChange,
     submitLoading,
     showHeightModal,
+    isPrimaryDegreeValid,
+    setIsPrimaryDegreeValid,
     handleHeightModal,
     openModal,
     closeModal,
@@ -169,6 +177,75 @@ export const PreferencesScreen = () => {
                 >
                   <Text style={styles.headerText}>Healthcare Professional</Text>
                 </Row>
+              );
+            }
+
+            if (index === 7) {
+              return (
+                <Column
+                  key={index}
+                  style={styles.itemRow}
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                >
+                  <Text style={[styles.textColor, styles.optionName]}>
+                    {item.title}
+                  </Text>
+
+                  <SafeAreaView>
+                    <Row
+                      style={styles.selectRow}
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      {item.option!.length > 0 ? (
+                        <ModalSelector
+                          data={item.option!}
+                          initValue={answer[item.initValue]}
+                          onChange={handleInputChange}
+                          style={styles.modalSelector}
+                          optionContainerStyle={styles.optionContainer}
+                          optionTextStyle={styles.optionText}
+                          cancelStyle={styles.cancelButton}
+                          selectedItemTextStyle={styles.selectedItem}
+                          initValueTextStyle={styles.initValueTextStyle}
+                          selectStyle={styles.selectStyle}
+                          overlayStyle={styles.overlayStyle}
+                          cancelTextStyle={styles.cancelTextStyle}
+                          optionStyle={styles.optionStyle}
+                        />
+                      ) : isPrimaryDegreeValid ? (
+                        <Row style={styles.degreeTypeWrapper}>
+                          <ErrorText>
+                            Please Select the Degree Category first
+                          </ErrorText>
+                        </Row>
+                      ) : (
+                        <Row
+                          style={styles.degreeTypeWrapper}
+                          justifyContent="space-between"
+                        >
+                          <Pressable
+                            onPress={() => {
+                              setIsPrimaryDegreeValid(true);
+                            }}
+                          >
+                            <Spacer position="left" size={10}>
+                              <Text style={styles.degreeTypeFont}>
+                                No Preference
+                              </Text>
+                            </Spacer>
+                          </Pressable>
+                          <Image
+                            resizeMode="contain"
+                            style={styles.selectArrow}
+                            source={require('../../../../../assets/images/settings/Next.png')}
+                          />
+                        </Row>
+                      )}
+                    </Row>
+                  </SafeAreaView>
+                </Column>
               );
             }
             if (index === 8) {

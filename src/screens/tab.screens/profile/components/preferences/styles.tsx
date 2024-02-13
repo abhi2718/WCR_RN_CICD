@@ -7,6 +7,7 @@ import {
 } from '../../../../../infrastructure/theme/fonts';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { dimensions } from '../../../../../components/tools';
+import { theme } from '../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -84,7 +85,19 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.ui.primary,
     marginHorizontal: 20,
   },
-
+  degreeTypeWrapper: {
+    marginTop: 10,
+    marginBottom:8,
+    width: dimensions.width -32,
+  },
+  degreeTypeFont: {
+    color: '#676161',
+    marginLeft: -8,
+    textAlign: 'left',
+    height: 20,
+    fontFamily: fonts.body,
+    fontSize:theme.fontSizes.text
+  },
   initValueTextStyle: {
     color: '#676161',
     marginLeft: -8,
