@@ -98,8 +98,15 @@ export const useViewModal = () => {
     zipcode: user?.address?.state ? user?.address?.zipcode : '',
     showSexualOrientation: user?.profile?.showSexualPreference
       ? user?.profile?.showSexualPreference
-      : false,
-    showGender: user?.profile.showGender ? user?.profile.showGender : false,
+      : true,
+    sexualPreference: user?.profile.sexualPreference
+      ? user?.profile.sexualPreference
+      : '',
+    showGender: user?.profile.showGender ? user?.profile.showGender : true,
+    showGenderPronoun: user?.profile?.showGenderPronoun ?? true,
+    genderProunoun: user?.profile.genderPronoun
+      ? user?.profile.genderPronoun
+      : '',
   });
   const [_primaryDegree, setPrimaryDegree] = useState(
     generateList([], 'degreeType'),
@@ -125,11 +132,6 @@ export const useViewModal = () => {
   const kidsList = generateList(kids, 'kids');
   const familyPlanList = generateList(familyPlan, 'familyPlan');
   const petsList = generateList(pets, 'pets');
-  const genderPronounList = generateList(genderPronounArray, 'genderPronoun');
-  const sexualOrientationArrayList = generateList(
-    sexualOrientationArray,
-    'sexualPreference',
-  );
   const [ageRange, setAgeRange] = useState([20, 60]);
   const [heightRange, setHeightRange] = useState([5]);
   const savedHeight: Measurement = user.height;
@@ -189,52 +191,42 @@ export const useViewModal = () => {
       setHobbies(selected);
     }
   };
-  const optionsList = [
+
+  const healthcareProfessionals = [
     {
       title: 'Degree Category',
       option: _userDegree,
       initValue: 'degreeCategory',
+      isArrow: true,
     },
     {
       title: 'Degree Type',
       option: _primaryDegree,
       initValue: 'degreeType',
+      isArrow: true,
     },
-    {  // index 2
-      initValue: 'Job Title',
-    },
-    { // index 3
-      initValue: 'Institution/School/Practice Name'
-    },
+    {},
+    {},
+  ];
+
+ 
+
+  const vitalSigns = [
     {
       title: 'Ethnicity',
       option: ethnicityList,
       initValue: 'ethnicity',
     },
     {
-      title: 'Hobby',
-      option: hobbyList,
-      initValue: 'interests',
+      title: 'Relationship Level',
+      option: relationshipLevelList,
+      initValue: 'relationshipLevel',
     },
+    {},
     {
       title: 'Marital Status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
-    },
-    {
-      title: 'Gender Pronoun',
-      option: genderPronounList,
-      initValue: 'genderPronoun',
-    },
-    {
-      title: 'Sexual Orientation',
-      option: sexualOrientationArrayList,
-      initValue: 'sexualPreference',
-    },
-    {
-      title: 'Relationship Level',
-      option: relationshipLevelList,
-      initValue: 'relationshipLevel',
     },
     {
       title: 'Religion',
@@ -247,9 +239,19 @@ export const useViewModal = () => {
       initValue: 'politics',
     },
     {
-      title: 'Exercise',
-      option: excerciseList,
-      initValue: 'excercise',
+      title: 'Kids',
+      option: kidsList,
+      initValue: 'kids',
+    },
+    {
+      title: 'Family Plan',
+      option: familyPlanList,
+      initValue: 'familyPlan',
+    },
+    {
+      title: 'Covid',
+      option: covidList,
+      initValue: 'covidVaccineStatus',
     },
     {
       title: 'Diet',
@@ -262,24 +264,14 @@ export const useViewModal = () => {
       initValue: 'drinking',
     },
     {
-      title: 'Covid',
-      option: covidList,
-      initValue: 'covidVaccineStatus',
-    },
-    {
       title: 'Smoking',
       option: smokingList,
       initValue: 'smoking',
     },
     {
-      title: 'Kids',
-      option: kidsList,
-      initValue: 'kids',
-    },
-    {
-      title: 'Family Plan',
-      option: familyPlanList,
-      initValue: 'familyPlan',
+      title: 'Exercise',
+      option: excerciseList,
+      initValue: 'excercise',
     },
     {
       title: 'Pets',
@@ -287,9 +279,31 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
   ];
+
+  const optionsList = [
+    {
+      title: 'Healthcare Professionals',
+      mainTitle: true,
+      values: healthcareProfessionals,
+    },
+    {
+      title: 'Location Details',
+      mainTitle: true,
+      values: [],
+    },
+    {
+      title: 'Vital signs',
+      mainTitle: true,
+      values: vitalSigns,
+    },
+  ];
   const [letterCount, setLetterCount] = useState(
-    userProfile?.aboutMe?.length ? 500 - userProfile.aboutMe.length : 500,
+    userProfile?.aboutMe?.length ? userProfile.aboutMe.length : 0,
   );
+  useEffect(() => {
+    setLetterCount(userProfile?.aboutMe.length)
+  },[userProfile?.aboutMe])
+ 
   const [allPics, setAllPics] = useState<any>({});
   const uploadImageToCloudinary = async (
     imageData: any,
@@ -510,6 +524,7 @@ export const useViewModal = () => {
             genderPronoun: answer.genderPronoun,
             sexualPreference: answer.sexualPreference,
             showSexualPreference: userProfile.showSexualOrientation,
+            showGenderPronoun: userProfile.showGenderPronoun,
             showGender: userProfile.showGender,
             phone: userProfile.phone,
           },
@@ -527,6 +542,7 @@ export const useViewModal = () => {
         },
       };
       console.log(payload.update);
+      return
       const data = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         payload,
@@ -542,6 +558,7 @@ export const useViewModal = () => {
       );
       setSubmitLoading(false);
     } catch (error) {
+      console.log(error)
       setSubmitLoading(false);
     }
   };
