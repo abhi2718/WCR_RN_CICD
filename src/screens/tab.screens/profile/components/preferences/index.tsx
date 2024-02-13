@@ -1,6 +1,11 @@
 import React from 'react';
 import { View, Text, Pressable, SafeAreaView, Image } from 'react-native';
-import { Column, FullLoader, Row } from '../../../../../components/tools';
+import {
+  Column,
+  FullLoader,
+  Row,
+  Spacer,
+} from '../../../../../components/tools';
 import { useViewModal } from './useViewModal';
 import { styles } from './styles';
 import ModalSelector from 'react-native-modal-selector';
@@ -210,24 +215,34 @@ export const PreferencesScreen = () => {
                           optionStyle={styles.optionStyle}
                         />
                       ) : isPrimaryDegreeValid ? (
-                        <ErrorText>
-                          Please Select the Degree Category first
-                        </ErrorText>
+                        <Row style={styles.degreeTypeWrapper}>
+                          <ErrorText>
+                            Please Select the Degree Category first
+                          </ErrorText>
+                        </Row>
                       ) : (
-                        <Pressable
-                          onPress={() => {
-                            setIsPrimaryDegreeValid(true);
-                          }}
+                        <Row
+                          style={styles.degreeTypeWrapper}
+                          justifyContent="space-between"
                         >
-                          <Text > No Preference </Text>
-                        </Pressable>
+                          <Pressable
+                            onPress={() => {
+                              setIsPrimaryDegreeValid(true);
+                            }}
+                          >
+                            <Spacer position="left" size={10}>
+                              <Text style={styles.degreeTypeFont}>
+                                No Preference
+                              </Text>
+                            </Spacer>
+                          </Pressable>
+                          <Image
+                            resizeMode="contain"
+                            style={styles.selectArrow}
+                            source={require('../../../../../assets/images/settings/Next.png')}
+                          />
+                        </Row>
                       )}
-
-                      <Image
-                        resizeMode="contain"
-                        style={styles.selectArrow}
-                        source={require('../../../../../assets/images/settings/Next.png')}
-                      />
                     </Row>
                   </SafeAreaView>
                 </Column>
