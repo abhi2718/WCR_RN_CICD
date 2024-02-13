@@ -297,10 +297,12 @@ export const useViewModal = () => {
     },
   ];
   const [letterCount, setLetterCount] = useState(
-    userProfile?.aboutMe?.length ? userProfile.aboutMe.length : 0,
+    userProfile?.aboutMe?.length ? userProfile.aboutMe.length : 500,
   );
   useEffect(() => {
-    setLetterCount(userProfile?.aboutMe.length)
+    if (userProfile?.aboutMe?.length) {
+      setLetterCount(500 - userProfile?.aboutMe.length)
+    }
   },[userProfile?.aboutMe])
  
   const [allPics, setAllPics] = useState<any>({});

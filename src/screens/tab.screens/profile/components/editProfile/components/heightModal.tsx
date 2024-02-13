@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Modal,
   SafeAreaView,
-  Pressable,
 } from 'react-native';
 import { Picker } from 'react-native-wheel-pick';
 import SwitchSelector from 'react-native-switch-selector';
