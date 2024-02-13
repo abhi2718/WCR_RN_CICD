@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, Modal, Text, SafeAreaView, Pressable, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Modal,
+  Text,
+  SafeAreaView,
+  Pressable,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import { Column, Row } from '../../../../../../../components/tools';
 import { modalStyle } from '../styles';
 import { useViewMdal } from './useviewModal';
@@ -12,9 +20,16 @@ import { CometChatMessages } from '../../../../../../../cometchat/src';
 import { ScreenParams } from '../../../../../../../types/services.types/firebase.service';
 
 export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
-  const { visible, toggleVisiblity, image, name, navigateToPrivateChat,senderId, toggleModal,
-    showModal } =
-    useViewMdal(props);
+  const {
+    visible,
+    toggleVisiblity,
+    image,
+    name,
+    navigateToPrivateChat,
+    senderId,
+    toggleModal,
+    showModal,
+  } = useViewMdal(props);
   return (
     <Modal visible={visible}>
       <SafeAreaView style={modalStyle.safeAreaViewStyle}>
@@ -37,15 +52,15 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
 
             {name && <Text style={modalStyle.userNameStyle}> {name} </Text>}
             <Row gap={30}>
-              <Pressable onPress={navigateToPrivateChat}>
-                <Text style={modalStyle.messageBtn}> Message </Text>
+              <Pressable onPress={() => toggleModal()}>
+                <Text style={modalStyle.profileBtn}>View Profile</Text>
               </Pressable>
-              <Pressable onPress={()=>toggleModal()}>
-                <Text style={modalStyle.profileBtn}>Check Profile </Text>
+              <Pressable onPress={navigateToPrivateChat}>
+                <Text style={modalStyle.messageBtn}>Message</Text>
               </Pressable>
               <ProfileModal
-                showModal={showModal }
-                toggleModal={toggleModal }
+                showModal={showModal}
+                toggleModal={toggleModal}
                 userId={senderId}
                 showDisLike={true}
                 showLike={true}
@@ -59,27 +74,27 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
   );
 };
 
-export const PrivateChatWindowWrapper = (props:ScreenParams) => {
+export const PrivateChatWindowWrapper = (props: ScreenParams) => {
   const { senderId, name } = props?.route?.params;
   const navigation = useNavigation();
   let user = new CometChat.User(senderId, name);
   return (
     <SafeAreaView style={styles.container}>
-       <View style={styles.container}>
-      <CometChatMessages
-        handleBackBtn={() => {
-          navigation.navigate(ROUTES.PrivateChatTab);
-        }}
-        user={user}
-      />
-    </View>
-   </SafeAreaView>
+      <View style={styles.container}>
+        <CometChatMessages
+          handleBackBtn={() => {
+            navigation.navigate(ROUTES.PrivateChatTab);
+          }}
+          user={user}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#fff'
-  }
-})
+    backgroundColor: '#fff',
+  },
+});
