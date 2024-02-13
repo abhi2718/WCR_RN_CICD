@@ -30,8 +30,8 @@ export const AlertScreen = (props: AlertScreenType) => {
     <Modal transparent={true} visible={showModal}>
       <SafeAreaView style={styles.container}>
         <View style={styles.mainContainer}>
-          <View style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
+          <View style={styles.wrapper}>
+            <View style={styles.wrapper}>
               <Row justifyContent="center">
                 <Text style={styles.title}>{title}</Text>
               </Row>
@@ -59,6 +59,7 @@ export const AlertScreen = (props: AlertScreenType) => {
 };
 
 const styles = StyleSheet.create({
+  wrapper:{ flex: 1 },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    // marginTop: sizes[10] + 1,
     borderTopColor: '#00000026',
     borderTopWidth: 1,
   },

@@ -3,10 +3,8 @@ import {
   pickPhotoFromCammera,
   pickPhotoFromGallary,
 } from '../../../utils/uploads';
-import { AvatarProps } from '../../auth/preRegisterFlow/components/AddProfilePic';
 import { Image } from 'react-native-image-crop-picker';
 import { CloudinaryRepository } from '../../../repository/cloudinary.repo';
-import { ImageDataType } from '../../auth/preRegisterFlow/components/AddProfilePic/addProfilePic.ViewModal';
 import {
   FlashMessageType,
   ShowFlashMessage,
@@ -16,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../store/reducers/user.reducer';
 import { ROUTES } from '../../../navigation';
 import { useNavigateToScreen } from '../../../utils/common.functions';
+import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 
 export const useVerificationViewModal = (props: AvatarProps) => {
   const { optionData, verificationOption } =
@@ -33,20 +32,18 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         user.verificationId?.userWebsite
       : '';
 
-  const { navigation } = props;
   const [visibleModal, setVisibleModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [website, setWebsite] = useState(userWebsite ? userWebsite : '');
   const cloudinaryRepository = new CloudinaryRepository();
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
 
-  const [documentImage, setdocumentImage] = useState<ImageDataType | null>(
+  const [documentImage, setdocumentImage] = useState<any>(
     props.source?.uri || undefined,
   );
-  const [PhdOptionImage, setPhdOptionImage] = useState<ImageDataType | null>(
+  const [PhdOptionImage, setPhdOptionImage] = useState<any>(
     props.source?.uri || undefined,
   );
-
   const alreadySetVerificationOption = () => {
     let result;
     if (user.verificationId?.idType === 'npi') {
@@ -75,17 +72,14 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       setWebsite('');
     }
   }, [previousSetVerificationOption]);
-
   const dispatch = useDispatch();
   const [validationErrorMessage, setValidationErrorMessage] = useState('');
-
   const toggleModal = () => setVisibleModal(!visibleModal);
-
   const clickPicture = async (source: string) => {
     if (source === 'camera') {
       const image: Image = await pickPhotoFromCammera(undefined, true);
       if (image?.cropRect) {
-        const resultImage: ImageDataType = {
+        const resultImage = {
           path: image?.path,
           mime: image?.mime,
           name: image?.path?.split('/').pop()!,
@@ -94,12 +88,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         props.onChange?.(image);
         openPicModal();
       }
-
       openPicModal();
     } else if (source === 'library') {
       const image: Image = await pickPhotoFromGallary(undefined, false);
       if (image) {
-        const resultImage: ImageDataType = {
+        const resultImage = {
           path: image?.path,
           mime: image?.mime,
           name: image?.path?.split('/').pop()!,
@@ -114,7 +107,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const uploadPhdOptionPhotos = async () => {
     const image: Image = await pickPhotoFromGallary(null, false);
     if (image) {
-      const resultImage: ImageDataType = {
+      const resultImage = {
         path: image?.path,
         mime: image?.mime,
         name: image?.path?.split('/').pop()!,
@@ -128,15 +121,12 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const handleWebsite = (website: string) => {
     setWebsite(website);
   };
-
   const [visiblePicModal, setVisiblePicModal] = useState(false);
   const closePicModal = () => setVisiblePicModal(false);
   const openPicModal = () => setVisiblePicModal(true);
-
   const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
   const closePhdOptionModalModal = () => setVisiblePhdOptionModal(false);
   const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
-
   const [PhdOptionPicUploadingModal, setPhdOptionPicUploadingModal] =
     useState(false);
   const closePhdOptionPicUploadingModal = () =>
@@ -144,15 +134,13 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const openPhdOptionPicUploadingModal = () =>
     setPhdOptionPicUploadingModal(true);
   const [isSelfie, setIsSelfie] = useState(false);
-
-  const [selfie, setSelfie] = useState<ImageDataType | null>(
+  const [selfie, setSelfie] = useState<any>(
     props.source?.uri || undefined,
   );
-
   const clickSelfieImage = async () => {
     const image: Image = await pickPhotoFromCammera(undefined, true);
     if (image?.cropRect) {
-      const resultImage: ImageDataType = {
+      const resultImage = {
         path: image?.path,
         mime: image?.mime,
         name: image?.path?.split('/').pop()!,
@@ -163,7 +151,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   type imageObject = {
-    photo: ImageDataType;
+    photo: any;
     caption: string;
   };
 
@@ -264,7 +252,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const uploadImageToCloudinary = async (
-    imageData: ImageDataType,
+    imageData: any,
   ): Promise<string | undefined> => {
     const verificationFolder = 'verificationProof';
     try {

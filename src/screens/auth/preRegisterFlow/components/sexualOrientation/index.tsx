@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import { Image, View } from 'react-native';
-import { Checkbox, RadioButton, Text } from 'react-native-paper';
+import React from 'react';
+import { View } from 'react-native';
+import { RadioButton, Text } from 'react-native-paper';
 import { PrimaryButton } from '../../../../../components/button';
 import {
-  ImageContainer,
   Row,
   ScreenContainer,
-  Spacer,
 } from '../../../../../components/tools';
 import { SexualOrientationStyle } from './sexualorientationStyle';
 import { useSexualOrientationViewModal } from './sexualorientationViewModal';
 import { sexualOrientationArray } from '../../../../../utils/constanst';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeaderBar } from '../../../../../components/header';
@@ -32,8 +28,8 @@ const SexualOrientation = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={SexualOrientationStyle.container}>
         <View style={SexualOrientationStyle.innerView}>
-          <View style={{ flex: 1 }}>
-            <HeaderBar></HeaderBar>
+          <View style={SexualOrientationStyle.wrapper}>
+            <HeaderBar/>
             <Text style={SexualOrientationStyle.subHeader}>
               Your flavor of love
             </Text>
@@ -63,8 +59,6 @@ const SexualOrientation = (props: ScreenParams) => {
               <CheckBox
                 onPress={handleCheckboxChange}
                 isChecked={checkboxState}
-                fillColor={colors.ui.primary}
-                unfillColor="#FFFFFF"
               />
               <Text style={SexualOrientationStyle.btnText}>
                 Visible on profile

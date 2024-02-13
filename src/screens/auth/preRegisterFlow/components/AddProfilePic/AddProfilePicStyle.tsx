@@ -34,6 +34,7 @@ export const addPicture = StyleSheet.create({
     width: dimensions.width / 1.7,
     justifyContent: 'center',
     alignItems: 'center',
+    height: dimensions.width / 1.65,
   },
   profilePic: {
     borderRadius: sizes[4],
@@ -46,7 +47,7 @@ export const addPicture = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: colors.ui.primary,
-    height: sizes[6] * 4,
+    height: dimensions.width / 3.5,
     width: dimensions.width / 3.5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -93,6 +94,9 @@ export const addPicture = StyleSheet.create({
 });
 
 export const modalStyles = StyleSheet.create({
+  logoWrapper: {
+    marginLeft: -40
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -105,7 +109,7 @@ export const modalStyles = StyleSheet.create({
   },
   arrow: {
     height: sizes[4],
-    width: sizes[2],
+    width: sizes[4],
   },
   logo: {
     marginLeft: -25,
@@ -119,6 +123,12 @@ export const modalStyles = StyleSheet.create({
     backgroundColor: 'white',
     padding: sizes[4],
     borderRadius: sizes[1],
+    alignItems: 'center',
+  },
+  backButtonWrapper:{
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   row: {

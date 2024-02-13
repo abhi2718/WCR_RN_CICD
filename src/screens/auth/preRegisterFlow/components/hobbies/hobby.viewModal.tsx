@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
@@ -16,9 +16,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>(
     hobbies ?? [],
   );
-
   const [loading, setLoading] = useState(false);
-
   const handleHobbies = (option: string) => {
     if (selectedHobbies.includes(option)) {
       setSelectedHobbies(selectedHobbies.filter((item) => item !== option));
@@ -32,23 +30,23 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       );
     }
   };
-
   const navigateToVerificationScreen = () => {
     navigation.navigate(ROUTES.VerificationStepOne);
   };
-
+  function arrayContainsAllElements(arr1:string[], arr2:string[]) {
+    return arr2.every(element => arr1.includes(element));
+}
   const updateUserDetails = async () => {
     try {
       const selectedInterests = {
         interests: selectedHobbies,
-        steps:14
+        steps: 14,
       };
-      if (user?.interests === selectedHobbies) {
+      if (arrayContainsAllElements(user?.interests,selectedHobbies)) {
         navigateToVerificationScreen();
-       // navigation.navigate(ROUTES.Tab)
         return;
       }
-      setLoading(true);     
+      setLoading(true);
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         {
@@ -68,12 +66,10 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       dispatch(addUser(data));
       setLoading(false);
       navigateToVerificationScreen();
-      // navigation.navigate(ROUTES.Tab)
     } catch (err: any) {
       setLoading(false);
     }
   };
-
   return {
     selectedHobbies,
     handleHobbies,

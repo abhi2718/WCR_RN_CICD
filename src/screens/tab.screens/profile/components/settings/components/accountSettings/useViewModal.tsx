@@ -1,9 +1,7 @@
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserProfileRepository } from '../../../../../../../repository/userProfile.repo';
 import { addUser } from '../../../../../../../store/reducers/user.reducer';
-import { ROUTES } from '../../../../../../../navigation';
 import { useLogOutViewModal } from '../../../../../../../utils/logOut';
 
 export const useViewModal = () => {
@@ -11,8 +9,6 @@ export const useViewModal = () => {
   const { logOut } = useLogOutViewModal();
   const dispatch = useDispatch();
   const userProfileRepository = new UserProfileRepository();
-  const navigation = useNavigation();
-  const goBack = () => navigation.goBack();
   const [showModal, setShowModal] = useState(false);
   const [isSwitchOn, setIsSwitchOn] = useState<boolean>(!user.isVisible);
   const [loading, setLoading] = useState(false);
@@ -49,15 +45,15 @@ export const useViewModal = () => {
       }, 2000);
     } catch (error) {}
   };
+  const voidFunc = useCallback(() => { }, []);
   return {
     user,
-    goBack,
     onToggleSwitch,
     isSwitchOn,
-    pauseUser,
     showModal,
     setShowModal,
     deleteUser,
     loading,
+    voidFunc
   };
 };

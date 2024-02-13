@@ -22,5 +22,5 @@ export class AppUrl {
   public static preferenceEndPoint = `${this.BASE_URL}/preference`;
   public static reportEndPoint = `${this.BASE_URL}/report`;
   public static notificationCountEndPoint = `${this.notificationEndPoint}/user/notification/count`;
-  public static stripeEndPoint = `${this.BASE_URL}/stripe`;
+  public static stripeEndPoint = `${this.BASE_URL}/payment/intent`;
 }

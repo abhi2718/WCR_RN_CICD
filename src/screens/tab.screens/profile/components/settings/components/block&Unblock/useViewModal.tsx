@@ -1,9 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { CometChat } from '../../../../../../../cometchat/sdk/CometChat';
+import { BlockRepository } from '../../../../../../../repository/block.repo';
 import { UserProfileRepository } from '../../../../../../../repository/userProfile.repo';
-import { OptionType } from '../../../../../../../types/screen.type/profile.type';
+import {
+  BlockedProfile,
+  OptionType,
+} from '../../../../../../../types/screen.type/profile.type';
 import {
   primaryDegree,
   userDegree,
@@ -11,14 +15,17 @@ import {
 
 export const useViewModal = () => {
   const { user } = useSelector(({ userState }) => userState);
-  const dispatch = useDispatch();
   const userProfileRepository = new UserProfileRepository();
+  const bockRepository = useMemo(() => new BlockRepository(), []);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const goBack = () => navigation.goBack();
   const [selecteduserDegree, setSelectedUserDegree] = useState<any[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<OptionType[]>([]);
   const [_userDegree, setUserDegree] = useState(userDegree);
+  const [inAppBlockedUsers, setInAppBlockedUsers] = useState<
+    BlockedProfile[] | []
+  >([]);
   const [country, setCountry] = useState([
     { label: 'USA', value: 'USA' },
     { label: 'Canada', value: 'Canada' },
@@ -31,8 +38,10 @@ export const useViewModal = () => {
   const [_selectedUserDegreeType, _setSelectedUserDegreeType] = useState<any[]>(
     [],
   );
-  const [cometChatBlockedUsers, setCometChatBlockedUsers] = useState<CometChat.User[] | []>([]);
-  const fetchGetblockByScope = async () => {
+  const [cometChatBlockedUsers, setCometChatBlockedUsers] = useState<
+    CometChat.User[] | []
+  >([]);
+  const fetchblockByScope = async () => {
     setLoading(true);
     try {
       const { data } = await userProfileRepository.getAllBlockedUser();
@@ -58,12 +67,10 @@ export const useViewModal = () => {
         }));
         _setSelectedUserDegreeType(primaryDegreeList);
       }
-      setLoading(false);
     } catch (error) {
       setLoading(false);
     }
   };
-
   const handleSelectCountry = (item: OptionType) => {
     const filterCountry = country.filter(({ label }) => label !== item.label);
     setCountry(filterCountry);
@@ -111,7 +118,6 @@ export const useViewModal = () => {
     );
     setSelectedUserDegree(filteredUserDegree);
   };
-
   const handleselectedUserDegreeType = (item: OptionType) => {
     const filterselectedUserDegreeType = selectedUserDegreeType.filter(
       ({ label }) => label !== item.label,
@@ -150,29 +156,36 @@ export const useViewModal = () => {
       await userProfileRepository.blockByScope(payload);
     } catch (error) {}
   };
-  useEffect(() => {
-    fetchGetblockByScope();
+  const fetchAllBlockedUsers = useCallback(async () => {
+    try {
+      const { data } = await bockRepository.getAllBlockUser();
+      setInAppBlockedUsers(data.blockedIds);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   }, []);
-  const fetchCometChatBlockedUsers = async() => {
+  const fetchCometChatBlockedUsers = async () => {
     try {
       let limit: number = 30;
-    let blockedUsersRequest: CometChat.BlockedUsersRequest =
-      new CometChat.BlockedUsersRequestBuilder().setLimit(limit).build();
+      let blockedUsersRequest: CometChat.BlockedUsersRequest =
+        new CometChat.BlockedUsersRequestBuilder().setLimit(limit).build();
       const blockedList = await blockedUsersRequest.fetchNext();
-      setCometChatBlockedUsers(blockedList)
+      setCometChatBlockedUsers(blockedList);
     } catch (error) {
+      setLoading(false);
     }
-  }
-  const handleUserUnBlock = async (uid:string) => {
+  };
+  const handleCometChatUserUnBlock = async (uid: string) => {
     try {
-      const blockList = await CometChat.unblockUsers([uid]);
+      await CometChat.unblockUsers([uid]);
       fetchCometChatBlockedUsers();
-    } catch (error) {
-       
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     fetchCometChatBlockedUsers();
+    fetchblockByScope();
+    fetchAllBlockedUsers();
   }, []);
   useEffect(() => {
     if (
@@ -183,6 +196,18 @@ export const useViewModal = () => {
       handleBlockByCountry();
     }
   }, [selectedCountry, selecteduserDegree, _selectedUserDegreeType]);
+  const unBlockInAppBlockUser = useCallback(async(id:string) => {
+    try {
+      const payload = {unblockedId:id}
+      const data = await bockRepository.unBlockUser(payload);
+      setInAppBlockedUsers(blockedUsers => {
+        return blockedUsers.filter(({_id})=> _id !== id)
+      })
+    } catch (error) {
+      
+    }
+   },[]);
+  const voidFunc = () => {};
   return {
     user,
     goBack,
@@ -200,6 +225,9 @@ export const useViewModal = () => {
     _selectedUserDegreeType,
     loading,
     cometChatBlockedUsers,
-    handleUserUnBlock
+    handleCometChatUserUnBlock,
+    voidFunc,
+    inAppBlockedUsers,
+    unBlockInAppBlockUser
   };
 };

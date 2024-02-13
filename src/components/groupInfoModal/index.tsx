@@ -32,7 +32,6 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
             <Text style={modalStyle.subHeader}>Last updated on 12/06/2023</Text>
             <Spacer position="top" size={15} />
           </View>
-          {/* ------Content--------- */}
           <ScrollView style={modalStyle.flex}>
             <Text style={modalStyle.header}>
               To ensure a respectful and enjoyable experience for everyone,

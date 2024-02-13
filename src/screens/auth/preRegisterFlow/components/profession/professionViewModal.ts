@@ -1,6 +1,5 @@
 import { ROUTES } from './../../../../../navigation/index';
-import { useNavigation } from '@react-navigation/native';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ScreenParams,

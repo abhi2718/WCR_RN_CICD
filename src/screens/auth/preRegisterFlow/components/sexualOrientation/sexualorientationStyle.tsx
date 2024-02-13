@@ -8,6 +8,7 @@ import {
   fonts,
 } from '../../../../../infrastructure/theme/fonts';
 export const SexualOrientationStyle = StyleSheet.create({
+  wrapper:{ flex: 1 },
   container: {
     flex: 1,
     justifyContent: 'space-between',
@@ -49,7 +50,6 @@ export const SexualOrientationStyle = StyleSheet.create({
     maxWidth: '100%',
   },
   btnText: {
-    marginLeft: sizes[3],
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
     color: colors.ui.text,

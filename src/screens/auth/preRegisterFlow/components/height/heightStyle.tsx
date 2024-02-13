@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { dimensions } from '../../../../../components/tools';
+import { theme } from '../../../../../infrastructure/theme';
 
 export const HeightStyle = StyleSheet.create({
   container: {
@@ -33,5 +33,22 @@ export const HeightStyle = StyleSheet.create({
   },
   switch: {
     width: 150,
+  },
+  heightHeader: {
+    height: 58,
+    borderBottomWidth: 0.5,
+    borderBottomColor: theme.colors.border,
+    paddingVertical: 12,
+  },
+  heightHeaderTitle: {
+    fontSize: 24,
+    fontWeight: theme.fontWeights.semiBold,
+    color: colors.ui.text,
+    textAlign: 'center',
+  },
+  heightFooter: {
+    paddingTop: 16,
+    paddingBottom: 40,
+    paddingHorizontal: 16,
   },
 });

@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { dimensions, Row, Spacer } from '../../../../../components/tools';
+import { Row, Spacer } from '../../../../../components/tools';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
@@ -47,7 +47,7 @@ export const SettingScreen = () => {
       </View>
       <Modal visible={showModal}>
         <SafeAreaView>
-          <View style={{ height: dimensions.height, width: dimensions.width }}>
+          <View style={styles.wrapper}>
             <Row>
               <Spacer position="left" size={15}>
                 <Pressable onPress={handleToggleModal}>
@@ -61,10 +61,7 @@ export const SettingScreen = () => {
             </Row>
             <WebView
               source={{ uri: link }}
-              style={{
-                height: dimensions.height - 100,
-                width: dimensions.width,
-              }}
+              style={styles.webViewWrapper}
             />
           </View>
         </SafeAreaView>

@@ -1,17 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { ShowFlashMessage } from '../../../../../../../components/flashBar';
 import { UserProfileRepository } from '../../../../../../../repository/userProfile.repo';
 
 export const useViewModal = () => {
-  const { user } = useSelector(({ userState }) => userState);
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const userProfileRepository = new UserProfileRepository();
   const navigation = useNavigation();
-  const goBack = () => navigation.goBack();
   const handleSubject = (text: string) => setSubject(text);
   const handleMessage = (text: string) => setMessage(text);
 
@@ -40,13 +37,12 @@ export const useViewModal = () => {
         '',
         'success',
       );
+      navigation.goBack();
     } catch (error) {
       setLoading(false);
     }
   };
   return {
-    user,
-    goBack,
     handleSubject,
     handleMessage,
     handleSubmit,

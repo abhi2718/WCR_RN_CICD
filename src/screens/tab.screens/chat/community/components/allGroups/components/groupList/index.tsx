@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, FlatList, Text, Image, Pressable } from 'react-native';
+import { View, FlatList, Text, Pressable } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Column, Row, Spacer } from '../../../../../../../../components/tools';
 import {

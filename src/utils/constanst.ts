@@ -1,8 +1,8 @@
 export const genderArray = [
   'Man',
   'Woman',
-  'Trans-man',
-  'Trans-woman',
+  'Trans-Man',
+  'Trans-Woman',
   'Non-Binary',
   'Everyone',
 ];
@@ -511,7 +511,7 @@ export const feetValues = [
   `7'9"`,
   `7'10"`,
   `7'11"`,
-  `7'12"`
+  `7'12"`,
 ];
 
 export const options = [

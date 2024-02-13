@@ -4,12 +4,10 @@ import {
   Text,
   TouchableOpacity,
   Animated,
-  useWindowDimensions,
   StyleSheet,
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
-import RenderHtml from 'react-native-render-html';
 import { NotificationType } from '../../../../types/screen.type/notification.type';
 import { notificationStyles } from './notificationStyles';
 import { Column, Row } from '../../../../components/tools';
@@ -38,8 +36,8 @@ export const SwipeableListItem: React.FC<SwipeableListItemProps> = ({
     markAsRead(item._id);
   };
   const renderRightActions = (
-    progress: Animated.AnimatedInterpolation,
-    dragX: Animated.AnimatedInterpolation,
+    progress: Animated.AnimatedInterpolation<any>,
+    dragX: Animated.AnimatedInterpolation<any>,
   ) => {
     const trans = dragX.interpolate({
       inputRange: [-100, 0],

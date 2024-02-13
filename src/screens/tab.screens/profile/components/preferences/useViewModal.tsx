@@ -18,7 +18,6 @@ import {
   primaryDegree,
   relationship,
   religion,
-  sexualOrientationArray,
   smoking,
   userDegree,
   covidVaccineStatus,
@@ -204,6 +203,7 @@ export const useViewModal = () => {
     try {
       setLoading(true);
       const { data } = await userProfileRepository.getPreference(user._id);
+     // console.log('initial data of prefrence -->', data);
       if (data) {
         isPrefrenceCreated.current = true;
         setAnswer((oldState) => {
@@ -367,7 +367,7 @@ export const useViewModal = () => {
             };
           }
         }
-        if (typeOfKey === 'string' && !value?.includes('No Preference')) {
+        if (typeOfKey === 'string') {
           updates = {
             ...updates,
             [key]: value,
@@ -377,7 +377,7 @@ export const useViewModal = () => {
             ...updates,
             [key]: value,
           };
-        } else if (Array.isArray(value) && !value.includes('No Preference')) {
+        } else if (Array.isArray(value)) {
           updates = {
             ...updates,
             [key]: value,
@@ -430,6 +430,7 @@ export const useViewModal = () => {
   const openModal = () => {
     setVerificvationInfoModalVisible(true);
   };
+  const voidFun = () => { }
   return {
     openModal,
     closeModal,
@@ -450,5 +451,6 @@ export const useViewModal = () => {
     handleHeightModal,
     heightRange,
     setHeightRange,
+    voidFun
   };
 };

@@ -1,7 +1,6 @@
 import { AppUrl } from '../../utils/appUrl';
 import { ApiService } from '../../data/network/apiService';
 import { config } from '../../utils/config';
-import { ImageDataType } from '../../screens/auth/preRegisterFlow/components/AddProfilePic/addProfilePic.ViewModal';
 
 export class CloudinaryRepository {
   apiService = new ApiService();
@@ -17,7 +16,7 @@ export class CloudinaryRepository {
     signature,
   }: {
     folder: string;
-    imageData: ImageDataType;
+    imageData: any;
     timestamp: number;
     signature: string;
   }) {
