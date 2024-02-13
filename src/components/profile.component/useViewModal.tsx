@@ -116,6 +116,7 @@ export const useViewModal = (props: profileProps) => {
 
       if (isMatched) {
         await unmatchUser();
+        fetchAll(me._id);
         setLoading(false);
         return;
       }
