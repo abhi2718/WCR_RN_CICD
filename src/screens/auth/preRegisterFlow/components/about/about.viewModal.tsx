@@ -11,7 +11,7 @@ export const useAboutViewModal = (props: ScreenParams) => {
   const { user } = useSelector((state: any) => state.userState);
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
-  const maxLength = 150;
+  const maxLength = 500;
   let bio = user?.bio;
   const [aboutText, setAboutText] = useState<string>(bio ?? '');
   const [letterCount, setLetterCount] = useState(
