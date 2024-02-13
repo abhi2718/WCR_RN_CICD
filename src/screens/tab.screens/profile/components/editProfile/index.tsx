@@ -89,7 +89,7 @@ export const EditProfile = () => {
           </Column>
 
           <Spacer position="top" size={10}>
-            <Spacer position="top" size={10}>
+            <View style={{ paddingHorizontal: 16 }}>
               <Text style={styles.fieldName}>Interests & Hobbies</Text>
               <TouchableOpacity onPress={() => openModal('hobby')}>
                 <Row
@@ -122,7 +122,7 @@ export const EditProfile = () => {
                   />
                 </Row>
               </TouchableOpacity>
-            </Spacer>
+            </View>
             <MultiSelectModal
               isVisible={openHobbyModal}
               data={hobbies}
@@ -201,6 +201,7 @@ export const EditProfile = () => {
               </View>
             </Spacer>
           </Column>
+          <Spacer position="top" size={14} />
           <Text style={styles.headingText}>Identity/Orientation</Text>
           <Column style={styles.ph16}>
             <Spacer position="top" size={10}>
@@ -274,6 +275,7 @@ export const EditProfile = () => {
             {optionsList.map((item, index) => {
               return (
                 <View key={index}>
+                  <Spacer position="top" size={14} />
                   <Text style={styles.headingText}>{item?.title}</Text>
                   <Column style={styles.ph16}>
                     {item.title == 'Location Details' && (
@@ -508,6 +510,7 @@ export const EditProfile = () => {
                           </Spacer>
                         );
                       }
+
                       if (
                         item.title === 'Healthcare Professionals' &&
                         index === 3
