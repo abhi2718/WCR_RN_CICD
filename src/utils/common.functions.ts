@@ -83,55 +83,43 @@ export function formatNumber(inputNumber: number) {
 export const useNavigateToScreen = () => {
   const navigation = useNavigation();
   const resetState = (route: string) => {
-  const resetState = (route: string) => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
         routes: [{ name: route }],
-        routes: [{ name: route }],
       }),
-    );
-  };
     );
   };
   const navigateToScreen = (user: User) => {
     if (user.verification.status === 'Verified') {
       resetState(ROUTES.Tab);
-      resetState(ROUTES.Tab);
     } else {
       if (user.verificationId.submitted) {
-        resetState(ROUTES.VerificationPending);
         resetState(ROUTES.VerificationPending);
       } else {
         switch (user.steps) {
           case 1:
             user.steps = 1;
             resetState(ROUTES.GenderPronoun);
-            resetState(ROUTES.GenderPronoun);
             break;
           case 2:
             user.steps = 2;
-            resetState(ROUTES.SexualOrientation);
             resetState(ROUTES.SexualOrientation);
             break;
           case 3:
             user.steps = 3;
             resetState(ROUTES.Location);
-            resetState(ROUTES.Location);
             break;
           case 4:
             user.steps = 4;
-            resetState(ROUTES.Profession);
             resetState(ROUTES.Profession);
             break;
           case 5:
             user.steps = 5;
             resetState(ROUTES.ProfilePic);
-            resetState(ROUTES.ProfilePic);
             break;
           case 6:
             user.steps = 6;
-            resetState(ROUTES.Height);
             resetState(ROUTES.Height);
             break;
           case 7:
@@ -171,7 +159,6 @@ export const useNavigateToScreen = () => {
       }
     }
   };
-  return { navigateToScreen, resetState };
   return { navigateToScreen, resetState };
 };
 
@@ -313,7 +300,9 @@ export function addInitials(userDegree: string, primaryDegree: string) {
     return separateWords(primaryDegree);
   }
 }
-export function parseMeasurement(measurementString: string): Measurement | null {
+export function parseMeasurement(
+  measurementString: string,
+): Measurement | null {
   const regex = /^(\d+)\'(\d+)\"$/;
   const match = measurementString.match(regex);
   if (match) {
