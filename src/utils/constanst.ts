@@ -271,22 +271,6 @@ export const statesOption: any = {
   ],
 };
 
-
-// Alberta: AB
-// British Columbia: BC
-// Manitoba: MB
-// New Brunswick: NB
-// Newfoundland and Labrador: NL
-// Nova Scotia: NS
-// Ontario: ON
-// Prince Edward Island: PE
-// Quebec: QC
-// Saskatchewan: SK
-// As for the territories:
-// Northwest Territories: NT
-// Nunavut: NU
-// Yukon: YT
-
 export const userDegree = [
   {
     label: 'Healthcare Doctorate Degree',
@@ -540,39 +524,6 @@ export const cmValues = feetValues.map(height => {
   return Math.round(totalCm);
 });
 
-// export const cmValues = [
-//   `121`,
-//   `124`,
-//   `128`,
-//   `131`,
-//   `134`,
-//   `137`,
-//   `134`,
-//   `140`,
-//   `143`,
-//   `146`,
-//   `152`,
-//   `155`,
-//   `158`,
-//   `161`,
-//   `164`,
-//   `167`,
-//   `170`,
-//   `173`,
-//   `176`,
-//   `179`,
-//   `125`,
-//   `158`,
-//   `188`,
-//   `192`,
-//   `195`,
-//   `198`,
-//   `201`,
-//   `204`,
-//   `207`,
-//   `210`,
-//   `213`,
-// ];
 export const report = [
   'Fake account',
   'Spam',
@@ -581,3 +532,4 @@ export const report = [
   'Contains illegal content or activity',
   'Other',
 ];
+export const noPreference = 'No preference';

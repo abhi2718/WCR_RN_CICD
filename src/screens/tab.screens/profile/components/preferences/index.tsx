@@ -215,7 +215,7 @@ export const PreferencesScreen = () => {
                       ) : isPrimaryDegreeValid ? (
                         <Row style={styles.degreeTypeWrapper}>
                           <ErrorText>
-                            Please Select the Degree Category first
+                            Please select the degree category first
                           </ErrorText>
                         </Row>
                       ) : (

@@ -22,6 +22,7 @@ import {
   userDegree,
   covidVaccineStatus,
   preferNotToSay,
+  noPreference,
 } from '../../../../../utils/constanst';
 
 export const useViewModal = () => {
@@ -34,23 +35,23 @@ export const useViewModal = () => {
   const [showHeightModal,setShowHeightModal] = useState(false);
   const isPrefrenceCreated = useRef(false);
   const [answer, setAnswer] = useState({
-    degreeCategory: 'No Preference',
-    degreeType: 'No Preference',
+    degreeCategory: noPreference,
+    degreeType: noPreference,
     gender: 'Everyone',
-    ethnicity: 'No Preference',
-    maritalStatus: 'No Preference',
-    relationshipLevel: 'No Preference',
-    religion: 'No Preference',
-    politics: 'No Preference',
-    exercise: 'No Preference',
-    diet: 'No Preference',
-    drinking: 'No Preference',
-    smoking: 'No Preference',
-    kids: 'No Preference',
-    familyPlan: 'No Preference',
-    pets: 'No Preference',
-    sexualPreference: 'No Preference',
-    covidVaccineStatus: 'No Preference',
+    ethnicity: noPreference,
+    maritalStatus: noPreference,
+    relationshipLevel: noPreference,
+    religion: noPreference,
+    politics: noPreference,
+    exercise: noPreference,
+    diet: noPreference,
+    drinking: noPreference,
+    smoking: noPreference,
+    kids: noPreference,
+    familyPlan: noPreference,
+    pets: noPreference,
+    sexualPreference: noPreference,
+    covidVaccineStatus: noPreference,
   });
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
@@ -64,7 +65,7 @@ export const useViewModal = () => {
     if (isContainPreferNotToSay) {
       return [
         ...list.filter((item) => item !== preferNotToSay),
-        'No Preference',
+        noPreference,
       ];
     }
     return list;
@@ -284,7 +285,7 @@ export const useViewModal = () => {
       setSubmitLoading(true);
       const preferences: any = {
         gender: answer.gender,
-        //  sexualPreference: answer.sexualPreference,
+        //sexualPreference: answer.sexualPreference,
         healthcareProfessionals: {
           userDegree: answer.degreeCategory,
           primaryDegree: answer.degreeType,
@@ -326,7 +327,7 @@ export const useViewModal = () => {
         if (key === 'healthcareProfessionals') {
           if (
             !preferences.healthcareProfessionals.userDegree.includes(
-              'No Preference',
+              noPreference,
             )
           ) {
             updates = {
@@ -338,7 +339,7 @@ export const useViewModal = () => {
           }
           if (
             !preferences.healthcareProfessionals.primaryDegree.includes(
-              'No Preference',
+              noPreference,
             )
           ) {
             updates = {
@@ -351,10 +352,10 @@ export const useViewModal = () => {
           }
           if (
             !preferences.healthcareProfessionals.userDegree.includes(
-              'No Preference',
+              noPreference,
             ) &&
             !preferences.healthcareProfessionals.primaryDegree.includes(
-              'No Preference',
+              noPreference,
             )
           ) {
             updates = {
@@ -385,6 +386,7 @@ export const useViewModal = () => {
         }
       }
       let payload = { update: updates };
+      console.log(payload.update);
       if (isPrefrenceCreated.current) {
         await userProfileRepository.updatePreference(payload);
       } else {
@@ -396,6 +398,7 @@ export const useViewModal = () => {
         loadProfile: true,
       });
     } catch (error) {
+      console.log(error);
       setSubmitLoading(false);
     }
   };
@@ -413,7 +416,7 @@ export const useViewModal = () => {
     getPrefrences();
   }, []);
   useEffect(() => {
-    if (!answer.degreeCategory.includes('No Preference')) {
+    if (!answer.degreeCategory.includes(noPreference)) {
       setPrimaryDegree(
         generateList(primaryDegree[answer.degreeCategory], 'degreeType'),
       );
