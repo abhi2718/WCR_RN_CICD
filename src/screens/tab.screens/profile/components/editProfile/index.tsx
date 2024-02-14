@@ -19,6 +19,7 @@ import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeightModal } from './components/heightModal';
+import { OrientationModal } from './components/orientationModal/orientationModal';
 
 export const EditProfile = () => {
   const {
@@ -50,6 +51,9 @@ export const EditProfile = () => {
     showHeightModal,
     setShowHeightModal,
     _setShowHeightModal,
+    showOrientationModal,
+    setShowOrientationModal,
+    _setOrientationModal,
     height,
     setheight,
     voidFun,
@@ -67,9 +71,7 @@ export const EditProfile = () => {
       </View>
       <ScrollView>
         <Text style={styles.headingText}>Photos</Text>
-        <AddProfilePicScreen
-          showHeader={false} setAllPics={setAllPics}
-        />
+        <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
           <Text style={styles.headingText}>About Me</Text>
           <Column>
@@ -205,10 +207,24 @@ export const EditProfile = () => {
           <Text style={styles.headingText}>Identity/Orientation</Text>
           <Column style={styles.ph16}>
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Gender</Text>
-              <View style={styles.fieldValueContainer}>
-                <Text style={styles.fieldValue}>{userProfile.gender}</Text>
-              </View>
+              <Pressable onPress={() => _setOrientationModal()}>
+                <OrientationModal
+                  showOrientationModal={showOrientationModal}
+                  setShowOrientationModal={setShowOrientationModal}
+                />
+                <Text style={styles.fieldName}>Gender</Text>
+                <Row style={styles.fieldValueContainer}>
+                  <Text style={styles.fieldValue}>{userProfile.gender}</Text>
+                  <View>
+                    <Text style={styles.fieldValueText}>Visible</Text>
+                    <Image
+                      resizeMode="contain"
+                      style={styles.nextArrow}
+                      source={require('../../../../../assets/images/settings/Next.png')}
+                    />
+                  </View>
+                </Row>
+              </Pressable>
               <Spacer position="top" size={10}>
                 <CustomCheckBox
                   onPress={() => {
@@ -226,11 +242,21 @@ export const EditProfile = () => {
             </Spacer>
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Gender Pronoun</Text>
-              <View style={styles.fieldValueContainer}>
+              <Row style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>
                   {userProfile.genderProunoun}
                 </Text>
-              </View>
+                <View>
+                  <Text style={[styles.fieldValue, styles.fieldValueText]}>
+                    Hidden
+                  </Text>
+                  <Image
+                    resizeMode="contain"
+                    style={styles.nextArrow}
+                    source={require('../../../../../assets/images/settings/Next.png')}
+                  />
+                </View>
+              </Row>
               <Spacer position="top" size={10}>
                 <CustomCheckBox
                   onPress={() => {
@@ -248,11 +274,20 @@ export const EditProfile = () => {
             </Spacer>
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Sexual Orientation</Text>
-              <View style={styles.fieldValueContainer}>
+
+              <Row style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>
                   {userProfile.sexualPreference}
                 </Text>
-              </View>
+                <View>
+                  <Text style={styles.fieldValueText}>Hidden</Text>
+                  <Image
+                    resizeMode="contain"
+                    style={styles.nextArrow}
+                    source={require('../../../../../assets/images/settings/Next.png')}
+                  />
+                </View>
+              </Row>
               <Spacer position="top" size={10}>
                 <CustomCheckBox
                   onPress={() => {

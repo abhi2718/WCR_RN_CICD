@@ -68,6 +68,11 @@ export const styles = StyleSheet.create({
     right: 0,
     bottom: 8,
   },
+  fieldValueText: {
+    position: 'absolute',
+    right: 20,
+    bottom: 6,
+  },
   label: {
     fontSize: 16,
     marginBottom: 8,

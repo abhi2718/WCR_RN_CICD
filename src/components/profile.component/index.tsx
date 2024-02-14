@@ -47,6 +47,7 @@ export const ProfileModal = (props: profileProps) => {
     handleReport,
     showAlert,
   } = useViewModal(props);
+  console.log(isMatch);
   return (
     <Modal visible={showModal}>
       <SafeAreaView style={styles.containerWrapperStyle}>
@@ -77,6 +78,12 @@ export const ProfileModal = (props: profileProps) => {
               <Image
                 style={styles.shareIconTop}
                 source={require('../../assets/images/icons/Share.png')}
+              />
+            </Pressable>
+            <Pressable style={styles.chatIconIconView} onPress={startChat}>
+              <Image
+                style={styles.shareIconTop}
+                source={require('../../assets/images/icons/chatIcon.png')}
               />
             </Pressable>
             <View style={styles.sectionWhite}>
@@ -114,11 +121,11 @@ export const ProfileModal = (props: profileProps) => {
                             source={require('../../assets/images/icons/degree.png')}
                           />
                           <Text style={styles.userInfoText}>
-                            {user.designation.userDegree},{' '}
+                            {user.designation.userDegree},
                             {addInitials(
                               user.designation.userDegree,
                               user.designation.primaryDegree,
-                            )}
+                            )}{' '}
                           </Text>
                         </Row>
                         <Row alignItems="center">
@@ -363,12 +370,14 @@ export const ProfileModal = (props: profileProps) => {
                               source={require('../../assets/images/icons/like.png')}
                             />
                           </Pressable>
-                        ) :  <View>
-                        <Image
-                          style={cardStyles.shareIcon}
-                          source={require('../../assets/images/icons/disabledLike.png')}
-                        />
-                      </View>}
+                        ) : (
+                          <View>
+                            <Image
+                              style={cardStyles.shareIcon}
+                              source={require('../../assets/images/icons/disabledLike.png')}
+                            />
+                          </View>
+                        )}
                         {showSave ? (
                           <Pressable onPress={addFavourite}>
                             <Image
@@ -376,12 +385,14 @@ export const ProfileModal = (props: profileProps) => {
                               source={require('../../assets/images/icons/save.png')}
                             />
                           </Pressable>
-                        ) : <View >
-                        <Image
-                          style={styles.shareIcon}
-                          source={require('../../assets/images/icons/disabledFav.png')}
-                        />
-                      </View> }
+                        ) : (
+                          <View>
+                            <Image
+                              style={styles.shareIcon}
+                              source={require('../../assets/images/icons/disabledFav.png')}
+                            />
+                          </View>
+                        )}
                       </Row>
                       <Spacer position="top" size={20} />
                       <View style={cardStyles.blockReportView}>

@@ -65,6 +65,8 @@ export const useViewModal = () => {
       : 'Select',
   });
   const [showHeightModal, setShowHeightModal] = useState(false);
+  const [showOrientationModal, setShowOrientationModal] = useState(false);
+
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
       return { ...oldState, [option.type]: option.value };
@@ -208,8 +210,6 @@ export const useViewModal = () => {
     {},
   ];
 
- 
-
   const vitalSigns = [
     {
       title: 'Ethnicity',
@@ -301,10 +301,10 @@ export const useViewModal = () => {
   );
   useEffect(() => {
     if (userProfile?.aboutMe?.length) {
-      setLetterCount(500 - userProfile?.aboutMe.length)
+      setLetterCount(500 - userProfile?.aboutMe.length);
     }
-  },[userProfile?.aboutMe])
- 
+  }, [userProfile?.aboutMe]);
+
   const [allPics, setAllPics] = useState<any>({});
   const uploadImageToCloudinary = async (
     imageData: any,
@@ -365,7 +365,7 @@ export const useViewModal = () => {
       const allPhotos = [...sidePicUri!, ...bottomUris!];
       for (let i = 0; i < allPhotos.length; i++) {
         const isOldUrl = user?.photos?.find(
-          ({url}) => url === allPhotos[i]?.path,
+          ({ url }) => url === allPhotos[i]?.path,
         );
         const cloudURL = isOldUrl
           ? isOldUrl.url
@@ -557,7 +557,7 @@ export const useViewModal = () => {
       );
       setSubmitLoading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setSubmitLoading(false);
     }
   };
@@ -662,6 +662,10 @@ export const useViewModal = () => {
   }, []);
   const _setShowHeightModal = (state: boolean = true) =>
     setShowHeightModal(true);
+
+  const _setOrientationModal = (state: boolean = true) =>
+    setShowOrientationModal(true);
+
   const voidFun = useCallback(() => {}, []);
   return {
     answer,
@@ -692,6 +696,9 @@ export const useViewModal = () => {
     showHeightModal,
     setShowHeightModal,
     _setShowHeightModal,
+    showOrientationModal,
+    setShowOrientationModal,
+    _setOrientationModal,
     height,
     setheight,
     voidFun,
