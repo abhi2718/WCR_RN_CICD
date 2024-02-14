@@ -179,3 +179,15 @@ export type ChipProps = {
   };
   onPress: () => void;
 };
+
+export interface OrientationModalProps {
+  showOrientationModal: boolean;
+  setShowOrientationModal: (key: string, value: boolean) => void;
+  optionList: string[];
+  heading: string;
+  objectKey: string;
+  selectedValue: string;
+  setAnswer: Dispatch<SetStateAction<any>>;
+  isChecked: boolean;
+  handleCheckboxChange:()=>void;
+}

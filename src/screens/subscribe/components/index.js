@@ -33,11 +33,11 @@ const YourComponent = () => {
           }),
         },
       ).then((res) => res.json());
-      console.log('response --->', response);
+      //console.log('response --->', response);
       const confirmPay = await confirmPayment(response.clientSecret);
-      console.log('confirmPay --->', confirmPay);
+      //console.log('confirmPay --->', confirmPay);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
   return (
@@ -57,11 +57,11 @@ const YourComponent = () => {
           marginVertical: 30,
         }}
         onCardChange={(cardDetails) => {
-          console.log(cardDetails);
+          //console.log(cardDetails);
           cardInfo.current = cardDetails;
         }}
         onFocus={(focusedField) => {
-          console.log('focusField', focusedField);
+          //console.log('focusField', focusedField);
         }}
       />
       <Button title="Subscribe" onPress={handleSubscription} />

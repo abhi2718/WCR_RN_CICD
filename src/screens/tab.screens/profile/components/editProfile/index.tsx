@@ -19,6 +19,11 @@ import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../components/header';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { HeightModal } from './components/heightModal';
+import { OrientationModal } from './components/orientationModal/orientationModal';
+import {
+  genderPronounArray,
+  sexualOrientationArray,
+} from '../../../../../utils/constanst';
 
 export const EditProfile = () => {
   const {
@@ -50,9 +55,13 @@ export const EditProfile = () => {
     showHeightModal,
     setShowHeightModal,
     _setShowHeightModal,
+    showOrientationModal,
+    setShowOrientationModal,
+    _setOrientationModal,
     height,
     setheight,
     voidFun,
+    setAnswer,
   } = useViewModal();
   return (
     <SafeAreaView style={styles.editInfoContainer}>
@@ -67,9 +76,7 @@ export const EditProfile = () => {
       </View>
       <ScrollView>
         <Text style={styles.headingText}>Photos</Text>
-        <AddProfilePicScreen
-          showHeader={false} setAllPics={setAllPics}
-        />
+        <AddProfilePicScreen showHeader={false} setAllPics={setAllPics} />
         <View style={styles.container}>
           <Text style={styles.headingText}>About Me</Text>
           <Column>
@@ -206,9 +213,9 @@ export const EditProfile = () => {
           <Column style={styles.ph16}>
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Gender</Text>
-              <View style={styles.fieldValueContainer}>
+              <Row style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>{userProfile.gender}</Text>
-              </View>
+              </Row>
               <Spacer position="top" size={10}>
                 <CustomCheckBox
                   onPress={() => {
@@ -226,14 +233,19 @@ export const EditProfile = () => {
             </Spacer>
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Gender Pronoun</Text>
-              <View style={styles.fieldValueContainer}>
-                <Text style={styles.fieldValue}>
-                  {userProfile.genderProunoun}
-                </Text>
-              </View>
-              <Spacer position="top" size={10}>
-                <CustomCheckBox
-                  onPress={() => {
+              <Pressable
+                onPress={() => _setOrientationModal('showGenderPronoun', true)}
+              >
+                <OrientationModal
+                  showOrientationModal={showOrientationModal.showGenderPronoun}
+                  setShowOrientationModal={_setOrientationModal}
+                  optionList={genderPronounArray}
+                  heading="Gender Pronoun"
+                  objectKey="showGenderPronoun"
+                  selectedValue={answer.genderPronoun}
+                  setAnswer={setAnswer}
+                  isChecked={userProfile.showGenderPronoun}
+                  handleCheckboxChange={() => {
                     setUserProfile((oldstate) => {
                       return {
                         ...oldstate,
@@ -241,21 +253,41 @@ export const EditProfile = () => {
                       };
                     });
                   }}
-                  isChecked={userProfile.showGenderPronoun}
-                  label="Show Gender Pronoun on profile"
                 />
-              </Spacer>
+                <Row style={styles.fieldValueContainer}>
+                  <Text style={styles.fieldValue}>{answer.genderPronoun}</Text>
+                  <View>
+                    <Text style={styles.fieldValueText}>
+                      {userProfile.showGenderPronoun ? 'Visible' : 'Hidden'}
+                    </Text>
+                    <Image
+                      resizeMode="contain"
+                      style={styles.nextArrow}
+                      source={require('../../../../../assets/images/settings/Next.png')}
+                    />
+                  </View>
+                </Row>
+              </Pressable>
             </Spacer>
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Sexual Orientation</Text>
-              <View style={styles.fieldValueContainer}>
-                <Text style={styles.fieldValue}>
-                  {userProfile.sexualPreference}
-                </Text>
-              </View>
-              <Spacer position="top" size={10}>
-                <CustomCheckBox
-                  onPress={() => {
+              <Pressable
+                onPress={() =>
+                  _setOrientationModal('showSexualOrientation', true)
+                }
+              >
+                <OrientationModal
+                  showOrientationModal={
+                    showOrientationModal.showSexualOrientation
+                  }
+                  setShowOrientationModal={_setOrientationModal}
+                  optionList={sexualOrientationArray}
+                  heading="Sexual Orientation"
+                  objectKey="showSexualOrientation"
+                  selectedValue={answer.sexualPreference}
+                  setAnswer={setAnswer}
+                  isChecked={userProfile.showSexualOrientation}
+                  handleCheckboxChange={() => {
                     setUserProfile((oldstate) => {
                       return {
                         ...oldstate,
@@ -264,10 +296,23 @@ export const EditProfile = () => {
                       };
                     });
                   }}
-                  isChecked={userProfile.showSexualOrientation}
-                  label="Show Sexual Orientation on profile"
                 />
-              </Spacer>
+                <Row style={styles.fieldValueContainer}>
+                  <Text style={styles.fieldValue}>
+                    {answer.sexualPreference}
+                  </Text>
+                  <View>
+                    <Text style={styles.fieldValueText}>
+                      {userProfile.showSexualOrientation ? 'Visible' : 'Hidden'}
+                    </Text>
+                    <Image
+                      resizeMode="contain"
+                      style={styles.nextArrow}
+                      source={require('../../../../../assets/images/settings/Next.png')}
+                    />
+                  </View>
+                </Row>
+              </Pressable>
             </Spacer>
           </Column>
 
@@ -591,11 +636,11 @@ export const EditProfile = () => {
                                 cancelTextStyle={styles.cancelTextStyle}
                                 optionStyle={styles.optionStyle}
                               />
-                               <Image
-                                  resizeMode="contain"
-                                  style={styles.nextArrow}
-                                  source={require('../../../../../assets/images/settings/Next.png')}
-                                />
+                              <Image
+                                resizeMode="contain"
+                                style={styles.nextArrow}
+                                source={require('../../../../../assets/images/settings/Next.png')}
+                              />
                             </Row>
                           </Spacer>
                         </View>

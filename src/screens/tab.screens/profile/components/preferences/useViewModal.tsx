@@ -204,7 +204,6 @@ export const useViewModal = () => {
     try {
       setLoading(true);
       const { data } = await userProfileRepository.getPreference(user._id);
-     // console.log('initial data of prefrence -->', data);
       if (data) {
         isPrefrenceCreated.current = true;
         setAnswer((oldState) => {
@@ -397,7 +396,6 @@ export const useViewModal = () => {
         loadProfile: true,
       });
     } catch (error) {
-      console.log(error);
       setSubmitLoading(false);
     }
   };

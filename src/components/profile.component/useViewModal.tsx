@@ -167,13 +167,18 @@ export const useViewModal = (props: profileProps) => {
   };
   const navigation = useNavigation();
   const startChat = () => {
-    if (isMatch?.matchUser) {
-      handleHideOfIsMatchScreen();
-      navigation.navigate(ROUTES.CommunityPrivateChat, {
-        senderId: isMatch?.matchUser?._id,
-        name: isMatch?.matchUser?.first,
-      });
-    }
+    handleHideOfIsMatchScreen();
+    navigation.navigate(ROUTES.CommunityPrivateChat, {
+      senderId: isMatch?.matchUser?._id,
+      name: isMatch?.matchUser?.first,
+    });
+  };
+  const _startChat = (senderId:string,name:string) => {
+    toggleModal();
+    navigation.navigate(ROUTES.CommunityPrivateChat, {
+      senderId,
+      name,
+    });
   };
   const handleReport = useCallback(() => {
     toggleModal();
@@ -203,5 +208,7 @@ export const useViewModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     showAlert,
+    isMatched,
+    _startChat
   };
 };
