@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import {
+  defaultPhotoDimension,
   pickPhotoFromCammera,
   pickPhotoFromGallary,
 } from '../../../utils/uploads';
@@ -90,7 +91,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       }
       openPicModal();
     } else if (source === 'library') {
-      const image: Image = await pickPhotoFromGallary(undefined, false);
+      const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
       if (image) {
         const resultImage = {
           path: image?.path,
@@ -105,7 +106,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     toggleModal();
   };
   const uploadPhdOptionPhotos = async () => {
-    const image: Image = await pickPhotoFromGallary(null, false);
+    const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
     if (image) {
       const resultImage = {
         path: image?.path,

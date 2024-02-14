@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
+  defaultPhotoDimension,
   pickPhotoFromGallary,
   pickPhotoFromUrl,
 } from '../../../../../utils/uploads';
@@ -45,7 +46,11 @@ export const useAddProfilePicViewModal = (props: AddProfilePicScreenProps) => {
     props.source?.uri || undefined,
   );
   const pickProfilePicture = async () => {
-    const image: Image = await pickPhotoFromGallary(null, true);
+   const options = {
+      width: 800,
+      height:800
+    }
+    const image: Image = await pickPhotoFromGallary(options, true);
     if (image?.cropRect) {
       const resultImage: ImageDataType = {
         path: image?.path,
@@ -62,7 +67,7 @@ export const useAddProfilePicViewModal = (props: AddProfilePicScreenProps) => {
     Array(2).fill(null),
   );
   const sidePickPhoto = async (index: number) => {
-    const image: Image = await pickPhotoFromGallary(null, false);
+    const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
     const updatedUris = [...sidePicUri!];
     const resultImage: ImageDataType = {
       path: image?.path,
@@ -76,7 +81,7 @@ export const useAddProfilePicViewModal = (props: AddProfilePicScreenProps) => {
     Array(3).fill(null),
   );
   const bottomPicPhoto = async (index: number) => {
-    const image: Image = await pickPhotoFromGallary(null, false);
+    const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
     const resultImage: ImageDataType = {
       path: image?.path,
       mime: image?.mime,

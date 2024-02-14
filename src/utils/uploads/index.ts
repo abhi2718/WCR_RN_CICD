@@ -1,10 +1,10 @@
 import ImagePicker from 'react-native-image-crop-picker';
-
+export const defaultPhotoDimension = {
+  width: 300,
+  height: 400,
+}
 export const pickPhotoFromGallary = async (
-  options = {
-    width: 300,
-    height: 400,
-  },
+  options = defaultPhotoDimension,
   cropping = false,
   cropperCircleOverlay = true,
 ) => {

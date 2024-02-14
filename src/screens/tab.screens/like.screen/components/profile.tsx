@@ -204,10 +204,10 @@ export const ProfileView = (props: ProfileViewProps) => {
               <Spacer position="bottom" size={10}>
                 <Text style={styles.textName}>
                   {showDisplayOrFirstName(
-                    item?.profile?.displayName,
-                    item?.profile?.name?.first,
-                  )},{' '}
-                  {calculateAge(item?.profile?.dob)}
+                    item?.userId?.profile?.displayName,
+                    item?.userId?.profile?.name?.first,
+                  )}
+                  , {calculateAge(item?.userId?.profile?.dob)}
                 </Text>
                 <Text style={styles.textDegree}>
                   {item?.userId?.designation?.title}
@@ -262,11 +262,11 @@ export const ProfileView = (props: ProfileViewProps) => {
             <Column justifyContent="center" alignItems="center">
               <Spacer position="bottom" size={10}>
                 <Text style={styles.textName}>
-                {showDisplayOrFirstName(
-                          item?.profile?.displayName,
-                          item?.profile?.name?.first,
-                        )},{' '}
-                  {calculateAge(item?.profile?.dob)}
+                  {showDisplayOrFirstName(
+                    item?.profile?.displayName,
+                    item?.profile?.name?.first,
+                  )}
+                  , {calculateAge(item?.profile?.dob)}
                 </Text>
                 <Text style={styles.textDegree}>
                   {item?.designation?.title}

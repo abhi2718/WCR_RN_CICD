@@ -207,9 +207,6 @@ export const useViewModal = () => {
     {},
     {},
   ];
-
- 
-
   const vitalSigns = [
     {
       title: 'Ethnicity',

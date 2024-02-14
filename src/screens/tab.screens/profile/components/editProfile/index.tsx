@@ -591,13 +591,11 @@ export const EditProfile = () => {
                                 cancelTextStyle={styles.cancelTextStyle}
                                 optionStyle={styles.optionStyle}
                               />
-                              {value?.isArrow ? (
-                                <Image
+                               <Image
                                   resizeMode="contain"
                                   style={styles.nextArrow}
                                   source={require('../../../../../assets/images/settings/Next.png')}
                                 />
-                              ) : null}
                             </Row>
                           </Spacer>
                         </View>

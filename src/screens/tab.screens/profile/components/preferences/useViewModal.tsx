@@ -386,7 +386,6 @@ export const useViewModal = () => {
         }
       }
       let payload = { update: updates };
-      console.log(payload.update);
       if (isPrefrenceCreated.current) {
         await userProfileRepository.updatePreference(payload);
       } else {
