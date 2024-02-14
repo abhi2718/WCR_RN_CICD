@@ -99,7 +99,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
     ) {
       ShowFlashMessage(
         'Error',
-        `Please enter state , zipcode `,
+        `Please enter state, zipcode `,
         FlashMessageType.DANGER,
       );
       return;
@@ -115,7 +115,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
       );
       return;
     } else if (!locationForm.state?.trim()?.length) {
-      ShowFlashMessage('Error', `Please enter state `, FlashMessageType.DANGER);
+      ShowFlashMessage('Error', `Please select state`, FlashMessageType.DANGER);
       return;
     }
     // if (Object.keys(errors).length) {
