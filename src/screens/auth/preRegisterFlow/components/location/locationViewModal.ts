@@ -67,7 +67,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
       // errors.country = 'Please enter country';
       ShowFlashMessage(
         'Error',
-        `please enter state , city , zipcode `,
+        `Please enter state, city, zipcode. `,
         FlashMessageType.DANGER,
       );
       return;
@@ -77,7 +77,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
     ) {
       ShowFlashMessage(
         'Error',
-        `please enter state , city `,
+        `Please enter state, city `,
         FlashMessageType.DANGER,
       );
       return;
@@ -88,7 +88,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
     ) {
       ShowFlashMessage(
         'Error',
-        `please enter zipcode , city `,
+        `Please enter zipcode, city `,
         FlashMessageType.DANGER,
       );
       return;
@@ -99,23 +99,23 @@ export const useLocationViewModal = (props: ScreenParams) => {
     ) {
       ShowFlashMessage(
         'Error',
-        `please enter state , zipcode `,
+        `Please enter state , zipcode `,
         FlashMessageType.DANGER,
       );
       return;
       //  errors.state = 'Please enter state';
     } else if (!locationForm.city?.trim()?.length) {
-      ShowFlashMessage('Error', `please enter  city `, FlashMessageType.DANGER);
+      ShowFlashMessage('Error', `Please enter city `, FlashMessageType.DANGER);
       return;
     } else if (!locationForm.zipcode?.trim()?.length) {
       ShowFlashMessage(
         'Error',
-        `please enter  zipcode `,
+        `Please enter  zipcode `,
         FlashMessageType.DANGER,
       );
       return;
     } else if (!locationForm.state?.trim()?.length) {
-      ShowFlashMessage('Error', `please enter state `, FlashMessageType.DANGER);
+      ShowFlashMessage('Error', `Please enter state `, FlashMessageType.DANGER);
       return;
     }
     // if (Object.keys(errors).length) {
