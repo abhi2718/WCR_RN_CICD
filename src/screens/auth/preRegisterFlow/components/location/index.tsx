@@ -11,7 +11,6 @@ import {
 import { country } from '../../../../../utils/constanst';
 import { useLocationViewModal } from './locationViewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
-import { ErrorText } from '../../../signin/signInStyle';
 import { HeaderBar } from '../../../../../components/header';
 import { OptionType } from '../../../../../types/components/input.type';
 
@@ -48,9 +47,9 @@ const LocationScreen = (props: ScreenParams) => {
                   value={locationForm.country}
                   onChange={(text: OptionType) => handleCountry(text.value)}
                 />
-                {validationErrors.country && (
+                {/* {validationErrors.country && (
                   <ErrorText> {validationErrors.country}</ErrorText>
-                )}
+                )} */}
                 <SearchableDropdownInput
                   data={getStatesOptions()}
                   onFocus={() => setIsFocus(true)}
@@ -63,20 +62,20 @@ const LocationScreen = (props: ScreenParams) => {
                     handleInputChange('state', text.value);
                   }}
                 />
-                {validationErrors.state && (
+                {/* {validationErrors.state && (
                   <ErrorText> {validationErrors.state}</ErrorText>
-                )}
+                )} */}
                 <FlatInput
                   label="City"
                   value={locationForm.city}
                   onChangeText={(text: string) =>
                     handleInputChange('city', text)
                   }
-                  error={validationErrors.city}
+                 // error={validationErrors.city}
                 />
-                {validationErrors.city && (
+                {/* {validationErrors.city && (
                   <ErrorText> {validationErrors.city}</ErrorText>
-                )}
+                )} */}
                 <FlatInput
                   label="Zip code"
                   placeholder={zipPlaceHolder}
@@ -85,11 +84,11 @@ const LocationScreen = (props: ScreenParams) => {
                   onChangeText={(text: string) =>
                     handleInputChange('zipcode', text)
                   }
-                  error={validationErrors.zipcode}
+                 // error={validationErrors.zipcode}
                 />
-                {validationErrors.zipcode && (
+                {/* {validationErrors.zipcode && (
                   <ErrorText>{validationErrors.zipcode}</ErrorText>
-                )}
+                )} */}
               </View>
             </View>
             <View>
