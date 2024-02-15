@@ -10,11 +10,14 @@ import {
 import { ROUTES } from '../../../navigation';
 import { useSelector } from 'react-redux';
 import { useNavigateToScreen } from '../../../utils/common.functions';
+import { WebsiteModalProps } from '../../../types/components/modal.type';
 
 export const useVerificationViewModal = (props: ScreenParams) => {
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
   const [verificationOption, setVerificationOption] = useState('');
+  const [openVerificationWebsiteModal, setVerificationWebsiteModal] =
+    useState(false);
   const country = user.address.country;
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
@@ -53,9 +56,22 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   >({});
 
   const navigateToVerificationStepTwo = () => {
+    setVerificationWebsiteModal(false);
     navigation.navigate(ROUTES.VerificationStepTwo, {
       data: { optionData, verificationOption },
     });
+  };
+
+  const showVerificationWebsiteModal = () => {
+    if (verificationOption === 'NPI Number') {
+      navigateToVerificationStepTwo();
+    } else {
+      console.log(`Verificationclicked`);
+      setVerificationWebsiteModal(true);
+    }
+  };
+  const closeVerificationWebsiteModal = () => {
+    setVerificationWebsiteModal(false);
   };
 
   const setVerificationOptionState = () => {
@@ -99,8 +115,12 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleIdType();
     }
     if (verificationOption === 'Student' || verificationOption === 'Others') {
-      navigateToVerificationStepTwo();
+      showVerificationWebsiteModal();
     }
+  };
+
+  const navigateSecondStep = () => {
+    navigation.navigate(ROUTES.VerificationStepTwo);
   };
 
   useEffect(() => {
@@ -146,7 +166,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       setValidationErrors({});
     }
 
-    navigateToVerificationStepTwo();
+    showVerificationWebsiteModal();
   };
 
   const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
@@ -173,7 +193,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleInputChange('idType', 'medicalLicense');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', false);
-      handleInputChange('licenceWebsite', 'licenceWebsite');
+      handleInputChange('licenceWebsite', '');
       handleInputChange('userWebsite', '');
       handleInputChange('state', '');
       handleInputChange('npiNumber', '');
@@ -181,7 +201,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     } else if (option === 'Student') {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', true);
-      handleInputChange('studentEmail', 'studentEmail');
+      handleInputChange('studentEmail', '');
       handleInputChange('userWebsite', '');
       handleInputChange('licenceWebsite', '');
       handleInputChange('state', '');
@@ -229,5 +249,9 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     optionData,
     isVerificationInfoModalVisible,
     closeModal,
+    openVerificationWebsiteModal,
+    closeVerificationWebsiteModal,
+    showVerificationWebsiteModal,
+    navigateToVerificationStepTwo,
   };
 };
