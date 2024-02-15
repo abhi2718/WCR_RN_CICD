@@ -166,8 +166,10 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   chipText: {
-    color: colors.ui.text,
-    fontSize: fontSizes.button,
+    color: theme.colors.ui.text,
+    fontSize: theme.fontSizes.button,
+    fontWeight: theme.fontWeights.medium,
+    fontFamily: theme.fontFamily.body,
   },
   headingText: {
     marginTop: sizes[2],

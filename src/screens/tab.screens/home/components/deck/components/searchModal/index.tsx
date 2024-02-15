@@ -10,15 +10,14 @@ import {
   Image,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {
-  Column,
-  FullLoader,
-  Row,
-} from '../../../../../../../components/tools';
+import { Column, FullLoader, Row } from '../../../../../../../components/tools';
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 import { useViewModal } from './useViewModal';
 import { searchStyle } from './searchStyle';
-import { calculateAge } from '../../../../../../../utils/common.functions';
+import {
+  calculateAge,
+  showDisplayOrFirstName,
+} from '../../../../../../../utils/common.functions';
 
 export const SearchModal = (props: SearchModalProps) => {
   const {
@@ -42,7 +41,7 @@ export const SearchModal = (props: SearchModalProps) => {
                 <TextInput
                   style={searchStyle.searchBox}
                   onChangeText={handleSearch}
-                    placeholder="Search"
+                  placeholder="Search"
                 />
                 <Pressable onPress={handleClose} style={searchStyle.crossBox}>
                   <Image
@@ -100,7 +99,11 @@ export const SearchModal = (props: SearchModalProps) => {
                         />
                         <Column gap={5}>
                           <Text style={searchStyle.firstName}>
-                            {user.first}, {calculateAge(user.dob)}
+                            {showDisplayOrFirstName(
+                              user.displayName,
+                              user.first,
+                            )}
+                            , {calculateAge(user.dob)}
                           </Text>
                           <Row>
                             <Text style={searchStyle.ctiy}>

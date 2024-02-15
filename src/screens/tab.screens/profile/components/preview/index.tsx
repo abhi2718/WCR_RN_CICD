@@ -132,14 +132,14 @@ export const PreviewScreen = () => {
                         </Text>
                       </Row>
                     )}
-                    {user.userHeight && (
+                    {user.height && (
                       <Row gap={10} alignItems="center" style={styles.chip}>
                         <Image
                           style={styles.chipIcon}
                           source={require('../../../../../assets/images/vitalIcons/height.png')}
                         />
                         <Text style={styles.chipText}>
-                          {user.userHeight.feet}"{user.userHeight.inch}'
+                          {user.height.feet}' {user.height.inch} ft
                         </Text>
                       </Row>
                     )}
