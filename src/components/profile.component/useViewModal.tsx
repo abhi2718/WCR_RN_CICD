@@ -35,17 +35,6 @@ export const useViewModal = (props: profileProps) => {
     showBlock,
     isMatched,
   } = props;
-  const showAlert = () => {
-    Alert.alert(
-      'Custom Alert Title',
-      'This is a custom alert message.',
-      [
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-        // Add more buttons if needed
-      ],
-      { cancelable: false },
-    );
-  };
   const handleShare = () => {
     try {
       const shareOptions = {
@@ -69,7 +58,6 @@ export const useViewModal = (props: profileProps) => {
     await likeRepository.removefromMatched(props?.matchedDocId!);
     toggleModal()
   };
-
   useEffect(() => {
     if (showModal) {
       fetchUser();
@@ -207,7 +195,6 @@ export const useViewModal = (props: profileProps) => {
     handleReport,
     showBlockModal,
     setShowBlockModal,
-    showAlert,
     isMatched,
     _startChat
   };

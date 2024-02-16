@@ -539,7 +539,6 @@ export const useViewModal = () => {
           },
         },
       };
-      console.log(payload.update)
       const data = await updateUserDetailsRepository.updateUserDetails(
         user._id,
         payload,

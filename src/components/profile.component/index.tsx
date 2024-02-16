@@ -45,7 +45,6 @@ export const ProfileModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     handleReport,
-    showAlert,
     isMatched,
     _startChat,
   } = useViewModal(props);
@@ -198,13 +197,11 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/love.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.sexualPreference}
                                 </Text>
                               </Row>
                             )}
-
                           {user?.height && (
                             <Row
                               gap={10}
@@ -220,7 +217,6 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.ethnicity.length >= 0 &&
                             user.ethnicity.map(
                               (ethnicity: String, key: number) => (
@@ -267,7 +263,6 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/Religion.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.religion}
                                 </Text>

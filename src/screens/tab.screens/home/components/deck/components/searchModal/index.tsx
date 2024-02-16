@@ -100,8 +100,8 @@ export const SearchModal = (props: SearchModalProps) => {
                         <Column gap={5}>
                           <Text style={searchStyle.firstName}>
                             {showDisplayOrFirstName(
-                              user.displayName,
-                              user.first,
+                              user?.displayName,
+                              user?.first,
                             )}
                             , {calculateAge(user.dob)}
                           </Text>
