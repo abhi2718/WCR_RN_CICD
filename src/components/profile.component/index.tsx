@@ -47,7 +47,7 @@ export const ProfileModal = (props: profileProps) => {
     handleReport,
     showAlert,
     isMatched,
-    _startChat
+    _startChat,
   } = useViewModal(props);
   return (
     <Modal visible={showModal}>
@@ -74,23 +74,28 @@ export const ProfileModal = (props: profileProps) => {
                   />
                 </View>
               </Pressable>
-                </Row>
-                <Pressable style={styles.shareIconView} onPress={handleShare}>
-                <Image
-                  style={styles.shareIconTop}
-                  source={require('../../assets/images/icons/Share.png')}
-                />
-              </Pressable>
-            {isMatched && (
-              <Pressable style={styles.chatIconIconView} onPress={()=>_startChat(user?._id,showDisplayOrFirstName(
-                user?.displayName!,
-                user?.first!,
-              ))}>
+            </Row>
+            <Pressable style={styles.shareIconView} onPress={handleShare}>
               <Image
                 style={styles.shareIconTop}
-                source={require('../../assets/images/icons/chatIcon.png')}
+                source={require('../../assets/images/icons/Share.png')}
               />
             </Pressable>
+            {isMatched && (
+              <Pressable
+                style={styles.chatIconIconView}
+                onPress={() =>
+                  _startChat(
+                    user?._id,
+                    showDisplayOrFirstName(user?.displayName!, user?.first!),
+                  )
+                }
+              >
+                <Image
+                  style={styles.shareIconTop}
+                  source={require('../../assets/images/icons/chatIcon.png')}
+                />
+              </Pressable>
             )}
             <View style={styles.sectionWhite}>
               <View>
@@ -193,13 +198,11 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/love.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.sexualPreference}
                                 </Text>
                               </Row>
                             )}
-
                           {user?.height && (
                             <Row
                               gap={10}
@@ -215,7 +218,6 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.ethnicity.length >= 0 &&
                             user.ethnicity.map(
                               (ethnicity: String, key: number) => (
@@ -262,7 +264,6 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/Religion.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.religion}
                                 </Text>

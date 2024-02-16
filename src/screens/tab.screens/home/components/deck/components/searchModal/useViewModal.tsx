@@ -10,6 +10,7 @@ export const useViewModal = (props: SearchModalProps) => {
   const [isSearchActive, setSearchActive] = useState(false);
   const textRef = useRef('');
   const handleSearch = async (text: string) => {
+   
     textRef.current = text;
       if (text.length) { 
         try {
@@ -17,6 +18,7 @@ export const useViewModal = (props: SearchModalProps) => {
             searchValue: text,
           };
           const data = await homeDeckRepository.searchUser(query);
+          console.log(data.map(({ first }) => first));
           setUser(() => {
             return textRef.current.length
               ? data.filter(({first}) =>first.toLowerCase().startsWith(text.toLowerCase()))

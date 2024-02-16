@@ -69,7 +69,6 @@ export const useViewModal = (props: profileProps) => {
     await likeRepository.removefromMatched(props?.matchedDocId!);
     toggleModal()
   };
-
   useEffect(() => {
     if (showModal) {
       fetchUser();
