@@ -1,4 +1,4 @@
-import { verificationIdType } from "../../services.types/firebase.service";
+import { verificationIdType } from '../../services.types/firebase.service';
 
 export interface ModalProps {
   isVisible: boolean;
@@ -12,7 +12,7 @@ export interface ProfilePicInfoModalProps {
 
 export interface WebsiteModalProps {
   isVisible: boolean;
-  handleInputChange: (name:string,value:any) => void;
+  handleInputChange: (name: keyof verificationIdType, value: any) => void;
   verificationOption: string;
   optionData: verificationIdType;
   onClose: () => void;
