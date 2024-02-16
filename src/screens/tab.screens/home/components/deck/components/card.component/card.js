@@ -5,13 +5,13 @@ import { Row, Spacer } from '../../../../../../../components/tools';
 import { cardStyles } from './cardStyle';
 import { Card } from '../swiper';
 import { useViewModal } from './useViewModal';
-import { calculateAge } from '../../../../../../../utils/common.functions';
+import {
+  calculateAge,
+  showDisplayOrFirstName,
+} from '../../../../../../../utils/common.functions';
 import LinearGradient from 'react-native-linear-gradient';
 import { AlertScreen } from '../../../../../../../components/alert';
-import { colors } from '../../../../../../../infrastructure/theme/colors';
-import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 import { addInitials } from '../../../../../../../utils/common.functions';
-import { fontSizes } from '../../../../../../../infrastructure/theme/fonts';
 export default function CardCompoent({ item, height, cardRef }) {
   const heightStyle = { height, ...cardStyles.imageStyle };
   const {
@@ -61,7 +61,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Row alignItems="center" gap={15} style={cardStyles.nameRow}>
                   <Text style={cardStyles.name}>
-                    {first}{' '}
+                    {showDisplayOrFirstName(item.displayName, first)}{' '}
                     {genderPronoun !== 'Prefer not to say' &&
                       `(${genderPronoun})`}
                     , {calculateAge(dob)}
@@ -94,7 +94,9 @@ export default function CardCompoent({ item, height, cardRef }) {
                   source={require('../../../../../../../assets/images/icons/degTitle.png')}
                 />
                 <Text style={cardStyles.userInfoText}>
-                  {designation.title}
+                  <Text style={cardStyles.designation}>
+                    {designation.title}
+                  </Text>
                   {institution ? `, ${institution}` : ''}
                 </Text>
               </Row>
@@ -104,7 +106,8 @@ export default function CardCompoent({ item, height, cardRef }) {
                   source={require('../../../../../../../assets/images/icons/location.png')}
                 />
                 <Text style={cardStyles.userInfoText}>
-                  {city}, {addInitials(country, state)}
+                  <Text style={cardStyles.designation}>{city},</Text>{' '}
+                  {addInitials(country, state)}
                 </Text>
               </Row>
             </View>
@@ -115,7 +118,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 gap={6}
                 alignItems="center"
               >
-                {gender && (
+                {gender && item.showGender && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
@@ -145,7 +148,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                       source={require('../../../../../../../assets/images/vitalIcons/height.png')}
                     />
                     <Text style={cardStyles.chipText}>
-                      {userHeight.feet}"{userHeight.inch}'
+                      {userHeight.feet}' {userHeight.inch} ft
                     </Text>
                   </Row>
                 )}
