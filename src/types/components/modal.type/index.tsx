@@ -18,6 +18,16 @@ export interface WebsiteModalProps {
   onClose: () => void;
   navigateToVerificationStepTwo: () => void;
 }
+export interface WebsitePhdModalProps {
+  isVisible: boolean;
+  uploadPhdOptionPhotos: () => void;
+  validationErrorMessage: string;
+  onClose: () => void;
+  sumbitVerificationForm: () => void;
+  loading: boolean;
+  website: string;
+  handleWebsite: () => void;
+}
 
 export interface VerificationInfoProps {
   isVisible: boolean;

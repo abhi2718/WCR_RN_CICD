@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  ScreenParams,
   verificationIdType,
 } from '../../../types/services.types/firebase.service';
 import {
@@ -10,14 +9,26 @@ import {
 import { ROUTES } from '../../../navigation';
 import { useSelector } from 'react-redux';
 import { useNavigateToScreen } from '../../../utils/common.functions';
-import { WebsiteModalProps } from '../../../types/components/modal.type';
+import { useVerificationViewModalStepTwo } from '../stepTwo/stepTwo.ViewModal';
+import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 
-export const useVerificationViewModal = (props: ScreenParams) => {
+export const useVerificationViewModal = (props: AvatarProps) => {
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
   const [verificationOption, setVerificationOption] = useState('');
   const [openVerificationWebsiteModal, setVerificationWebsiteModal] =
     useState(false);
+  const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
+  const closePhdOptionModal = () => setVisiblePhdOptionModal(false);
+  const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
+  const {
+    validationErrorMessage,
+    uploadPhdOptionPhotos,
+    website,
+    sumbitVerificationForm,
+    loading,
+    handleWebsite,
+  } = useVerificationViewModalStepTwo(props);
   const country = user.address.country;
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
@@ -65,8 +76,11 @@ export const useVerificationViewModal = (props: ScreenParams) => {
   const showVerificationWebsiteModal = () => {
     if (verificationOption === 'NPI Number') {
       navigateToVerificationStepTwo();
-    } else {
-      console.log(`Verificationclicked`);
+    } 
+   else if (verificationOption === 'Others') {
+    openPhdOptionModal();
+    }
+    else {
       setVerificationWebsiteModal(true);
     }
   };
@@ -246,6 +260,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     validationErrors,
     handleInputChange,
     country,
+    PhdOptionModal,
     optionData,
     isVerificationInfoModalVisible,
     closeModal,
@@ -253,5 +268,12 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     closeVerificationWebsiteModal,
     showVerificationWebsiteModal,
     navigateToVerificationStepTwo,
+    closePhdOptionModal,
+    validationErrorMessage,
+    uploadPhdOptionPhotos,
+    website,
+    sumbitVerificationForm,
+    loading,
+    handleWebsite,
   };
 };

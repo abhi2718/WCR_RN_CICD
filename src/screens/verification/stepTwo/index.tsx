@@ -13,6 +13,7 @@ import {
   Logo,
   Row,
   ScreenContainer,
+  Spacer,
   dimensions,
   isAndroid,
 } from '../../../components/tools';
@@ -24,7 +25,7 @@ import {
 import { FlatInput } from '../../../components/inputBox';
 import { PrimaryButton } from '../../../components/button';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
-import { useVerificationViewModal } from './stepTwo.ViewModal';
+import { useVerificationViewModalStepTwo } from './stepTwo.ViewModal';
 import {
   IdverifyModal,
   IdverifyStudentModal,
@@ -32,6 +33,8 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 import { ScrollView } from 'react-native-gesture-handler';
+import { insModalStyle } from '../../../components/profilePicInfoModal/profileInfoStyle';
+import { VerificationImagePreviewModal } from './component/verificationImagePreview';
 
 const VerificationStepTwo = (props: AvatarProps) => {
   const {
@@ -47,14 +50,12 @@ const VerificationStepTwo = (props: AvatarProps) => {
     loading,
     validationErrorMessage,
     closePicModal,
-    PhdOptionModal,
     toggleModal,
     visiblePicModal,
+    navigateToVerificationImagePreview,
     sumbitVerificationForm,
     isSelfie,
     uploadPhdOptionPhotos,
-    closePhdOptionModalModal,
-    openPhdOptionModal,
     setIsSelfie,
     PhdOptionImage,
     closePhdOptionPicUploadingModal,
@@ -67,7 +68,11 @@ const VerificationStepTwo = (props: AvatarProps) => {
     closeStudentInfoModal,
     openStudentInfoModal,
     isStudentInfoModalVisible,
-  } = useVerificationViewModal(props);
+    isVerificationImagePreviewVisible,
+    onCloseVerificationImagePreview,
+    removeDocument,
+    removeSelfie,
+  } = useVerificationViewModalStepTwo(props);
   const { top, bottom } = useSafeAreaInsets();
   return (
     <Pressable onPress={Keyboard.dismiss} style={verificationStyle.wrapper}>
@@ -80,6 +85,21 @@ const VerificationStepTwo = (props: AvatarProps) => {
           isVisible={isStudentInfoModalVisible}
           onClose={closeStudentInfoModal}
         ></IdverifyStudentModal>
+        <VerificationImagePreviewModal
+          sumbitVerificationForm={sumbitVerificationForm}
+          clickSelfieImage={clickSelfieImage}
+          removeDocument={removeDocument}
+          removeSelfie={removeSelfie}
+          onCloseVerificationImagePreview={onCloseVerificationImagePreview}
+          openModal={openModal}
+          documentImage={documentImage}
+          selfie={selfie}
+          loading={loading}
+          isVerificationImagePreviewVisible={isVerificationImagePreviewVisible}
+          clickPicture={clickPicture}
+          toggleModal={toggleModal}
+          visibleModal={visibleModal}
+        ></VerificationImagePreviewModal>
         <HeaderBar isVerificartionScreen={false} info={openModal} />
         <KeyboardAvoidingView
           enabled
@@ -99,12 +119,26 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 Take a photo of your Student photo ID.
               </Text>
             ) : (
-              <Text style={verificationStyle.subText}>
-                Take a photo of ONE of the following that clearly displays your
-                name on it.
-              </Text>
+              <>
+                <Text style={verificationStyle.subText}>
+                  Take a photo of ONE of the following that clearly displays
+                  your name on it.
+                </Text>
+                <Text style={verificationStyle.subText}>
+                  White Coat/scrubs/jacket, work ID badge, business/license
+                  card, desk/door nameplate
+                </Text>
+              </>
             )}
-            {verificationOption === 'Student' ? null : (
+
+            <ScrollView>
+              <Image
+                resizeMode="center"
+                style={insModalStyle.rowOneImg}
+                source={require('../../../assets/images/virificationModal1.png')}
+              />
+            </ScrollView>
+            {/* {verificationOption === 'Student' ? null : (
               <View>
                 <Row style={verificationStyle.pointsRow} alignItems="center">
                   <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
@@ -135,10 +169,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   </Text>
                 </Row>
               </View>
-            )}
+            )} */}
           </View>
           <View style={{ ...verificationStyle.footerDiv }}>
-            {verificationOption === 'License Number' && (
+            {/* {verificationOption === 'License Number' && (
               <View style={verificationStyle.white}>
                 <Text>
                   <Text style={verificationStyle.optionalText}>Optional: </Text>
@@ -207,7 +241,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 We may request additional proof of degree if needed, depending
                 on the type of degree.
               </Text>
-            )}
+            )} */}
             <KeyboardAvoidingView
               enabled
               behavior={isAndroid ? 'height' : 'padding'}
@@ -306,7 +340,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                         onPress={
                           verificationOption === 'Others'
                             ? openPhdOptionModal
-                            : () => sumbitVerificationForm()
+                            : () => navigateToVerificationImagePreview()
                         }
                       />
                     </>
@@ -364,7 +398,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 />
                 <PrimaryButton
                   style={modalStyles.button}
-                  onPress={() => sumbitVerificationForm()}
+                  onPress={() => navigateToVerificationImagePreview()}
                   isLoading={loading}
                   title="Submit"
                 />
@@ -372,7 +406,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
             </View>
           </Modal>
 
-          <Modal
+          {/* <Modal
             animationType="slide"
             transparent={true}
             visible={PhdOptionModal}
@@ -449,7 +483,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 </View>
               </ScrollView>
             </KeyboardAvoidingView>
-          </Modal>
+          </Modal> */}
         </View>
       </ScreenContainer>
     </Pressable>

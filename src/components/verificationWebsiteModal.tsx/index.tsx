@@ -2,14 +2,10 @@ import React from 'react';
 import { KeyboardAvoidingView, Modal, Text, View } from 'react-native';
 import { WebsiteModalProps } from '../../types/components/modal.type';
 import { HeaderBar } from '../header';
-import { useNavigation } from '@react-navigation/native';
-import { ROUTES } from '../../navigation';
 import { FlatInput } from '../inputBox';
 import { PrimaryButton } from '../button';
 import { isAndroid } from '../tools';
 import { verificationStyle } from '../../screens/verification/stepOne/verificationSteps';
-import { useVerificationViewModal } from '../../screens/verification/stepOne/stepOne.ViewModal';
-import { ScreenParams } from '../../types/services.types/firebase.service';
 
 export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
   const {
@@ -108,7 +104,7 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
         >
           <PrimaryButton
             onPress={navigateToVerificationStepTwo}
-            title="Camera"
+            title="Next"
           />
         </KeyboardAvoidingView>
       </View>

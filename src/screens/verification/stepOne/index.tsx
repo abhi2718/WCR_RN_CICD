@@ -20,8 +20,10 @@ import { useVerificationViewModal } from './stepOne.ViewModal';
 import { VerificationInfoModal } from '../../../components/verificationModal';
 import { WebsiteModalProps } from '../../../types/components/modal.type';
 import { VerificationWebsiteModal } from '../../../components/verificationWebsiteModal.tsx';
+import { AvatarProps } from '../../../types/screen.type/preRegister.type';
+import { VerificationWebsitePhdMdal } from '../../../components/verificationWebsitePhdModal';
 
-const VerificationStepOne = (props: ScreenParams) => {
+const VerificationStepOne = (props: AvatarProps) => {
   const {
     verificationOption,
     handleVerificationOption,
@@ -35,6 +37,14 @@ const VerificationStepOne = (props: ScreenParams) => {
     closeVerificationWebsiteModal,
     closeModal,
     navigateToVerificationStepTwo,
+    closePhdOptionModal,
+    validationErrorMessage,
+    uploadPhdOptionPhotos,
+    website,
+    sumbitVerificationForm,
+    loading,
+    handleWebsite,
+    PhdOptionModal
   } = useVerificationViewModal(props);
   return (
     <KeyboardAvoidingView
@@ -56,7 +66,7 @@ const VerificationStepOne = (props: ScreenParams) => {
           onClose={closeVerificationWebsiteModal}
           navigateToVerificationStepTwo={navigateToVerificationStepTwo}
         />
-
+        <VerificationWebsitePhdMdal isVisible={PhdOptionModal} uploadPhdOptionPhotos={uploadPhdOptionPhotos} onClose={closePhdOptionModal} loading={loading} handleWebsite={() =>handleWebsite} sumbitVerificationForm={sumbitVerificationForm}  validationErrorMessage={ validationErrorMessage} website={website}/>
         <Text style={verificationStyle.subHeader}>
           ID Verification (Step I)
         </Text>

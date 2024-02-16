@@ -17,7 +17,7 @@ import { ROUTES } from '../../../navigation';
 import { useNavigateToScreen } from '../../../utils/common.functions';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 
-export const useVerificationViewModal = (props: AvatarProps) => {
+export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   const { optionData, verificationOption } =
     props.route?.params?.data || 'No optionData received';
   const { user } = useSelector((state: any) => state.userState);
@@ -60,9 +60,12 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
     return result;
   };
-  const {resetState} = useNavigateToScreen();
+  const { resetState } = useNavigateToScreen();
   const navigateToVerificationState = () => {
     resetState(ROUTES.VerificationPending);
+  };
+  const navigateToVerificationImagePreview = () => {
+    setIsVerificationImagePreviewVisible(true);
   };
 
   const [previousSetVerificationOption, setPreviousSetVerificationOption] =
@@ -91,7 +94,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       }
       openPicModal();
     } else if (source === 'library') {
-      const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
+      const image: Image = await pickPhotoFromGallary(
+        defaultPhotoDimension,
+        false,
+      );
       if (image) {
         const resultImage = {
           path: image?.path,
@@ -106,7 +112,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     toggleModal();
   };
   const uploadPhdOptionPhotos = async () => {
-    const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
+    const image: Image = await pickPhotoFromGallary(
+      defaultPhotoDimension,
+      false,
+    );
     if (image) {
       const resultImage = {
         path: image?.path,
@@ -125,9 +134,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [visiblePicModal, setVisiblePicModal] = useState(false);
   const closePicModal = () => setVisiblePicModal(false);
   const openPicModal = () => setVisiblePicModal(true);
-  const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
-  const closePhdOptionModalModal = () => setVisiblePhdOptionModal(false);
-  const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
   const [PhdOptionPicUploadingModal, setPhdOptionPicUploadingModal] =
     useState(false);
   const closePhdOptionPicUploadingModal = () =>
@@ -135,9 +141,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const openPhdOptionPicUploadingModal = () =>
     setPhdOptionPicUploadingModal(true);
   const [isSelfie, setIsSelfie] = useState(false);
-  const [selfie, setSelfie] = useState<any>(
-    props.source?.uri || undefined,
-  );
+  const [selfie, setSelfie] = useState<any>(props.source?.uri || undefined);
   const clickSelfieImage = async () => {
     const image: Image = await pickPhotoFromCammera(undefined, true);
     if (image?.cropRect) {
@@ -149,6 +153,13 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       setSelfie(resultImage);
       props.onChange?.(image);
     }
+  };
+
+  const removeSelfie = () => {
+    setSelfie(null);
+  };
+  const removeDocument = () => {
+    setdocumentImage(null);
   };
 
   type imageObject = {
@@ -200,6 +211,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       const verificationData = await updateImagesInDatabase(imageUrls);
       closePicModal();
       closePhdOptionPicUploadingModal();
+      onCloseVerificationImagePreview();
       navigateToVerificationState();
     } catch (err) {}
   };
@@ -292,6 +304,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [isStudentInfoModalVisible, setStudentInfoModalVisible] =
     useState(false);
 
+  const [
+    isVerificationImagePreviewVisible,
+    setIsVerificationImagePreviewVisible,
+  ] = useState(false);
+
   const closeStudentInfoModal = () => {
     setStudentInfoModalVisible(false);
   };
@@ -301,6 +318,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   const openInfoModal = () => {
     setStudentInfoModalVisible(true);
+  };
+  const onCloseVerificationImagePreview = () => {
+    setIsVerificationImagePreviewVisible(false);
   };
 
   const openModal = () => {
@@ -313,6 +333,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   return {
     loading,
+    removeDocument,
+    removeSelfie,
+    onCloseVerificationImagePreview,
+    isVerificationImagePreviewVisible,
     verificationOption,
     clickSelfieImage,
     visibleModal,
@@ -323,6 +347,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     selfie,
     setSelfie,
     closePicModal,
+    navigateToVerificationImagePreview,
     openPicModal,
     toggleModal,
     visiblePicModal,
@@ -331,9 +356,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     handleWebsite,
     setIsSelfie,
     sumbitVerificationForm,
-    closePhdOptionModalModal,
-    openPhdOptionModal,
-    PhdOptionModal,
     closePhdOptionPicUploadingModal,
     openPhdOptionPicUploadingModal,
     PhdOptionPicUploadingModal,
