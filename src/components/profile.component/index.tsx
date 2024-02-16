@@ -170,7 +170,7 @@ export const ProfileModal = (props: profileProps) => {
                           gap={6}
                           alignItems="center"
                         >
-                          {user.gender && (
+                          {user.gender && user.showGender && (
                             <Row
                               gap={10}
                               alignItems="center"
@@ -213,7 +213,7 @@ export const ProfileModal = (props: profileProps) => {
                                 source={require('../../assets/images/vitalIcons/height.png')}
                               />
                               <Text style={styles.chipText}>
-                                {user.height.feet}"{user.height.inch}'
+                                {user.height.feet}' {user.height.inch} ft
                               </Text>
                             </Row>
                           )}
