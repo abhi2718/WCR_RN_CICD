@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { ShowFlashMessage } from '../../../../../components/flashBar';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 import { addUser } from '../../../../../store/reducers/user.reducer';
-
+import { hobbies as hobbyList } from '../../../../../utils/constanst';
 export const useHobbyViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
@@ -13,6 +13,8 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
   let hobbies = user?.interests;
+  console.log('hobbies ---->', hobbies);
+  const [customCreatedHobby, setCustomCreatedHobby] = useState<string[]>([]);
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>(
     hobbies ?? [],
   );
@@ -30,6 +32,15 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       );
     }
   };
+  const filterUserCreatedHobbies = useCallback(() => { 
+    const userCreatedHobbies = hobbies.filter((hobby:string) => {
+      return !hobbyList.find((element:string) => element == hobby);
+    })
+    setCustomCreatedHobby(userCreatedHobbies);
+  }, []);
+  useEffect(() => {
+    filterUserCreatedHobbies()
+  },[]);
   const navigateToVerificationScreen = () => {
     navigation.navigate(ROUTES.VerificationStepOne);
   };

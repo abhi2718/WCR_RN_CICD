@@ -45,7 +45,6 @@ export const ProfileModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     handleReport,
-    showAlert,
     isMatched,
     _startChat,
   } = useViewModal(props);

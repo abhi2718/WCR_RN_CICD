@@ -26,11 +26,11 @@ export const useViewModal = () => {
   };
   const _inviteOthers = () => {};
   const _privacypolicy = () => {
-    setLink('https://whitecoatromance.com/Privacy');
+    setLink('https://www.whitecoatromance.com/Privacy');
     setShowModal(true);
   };
   const _termsConditions = () => {
-    setLink('https://whitecoatromance.com/Terms');
+    setLink('https://www.whitecoatromance.com/Terms');
     setShowModal(true);
   };
   const _contactUs = () => {

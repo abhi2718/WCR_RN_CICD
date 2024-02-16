@@ -51,7 +51,6 @@ export const useViewModal = (route: RouteType) => {
     setLoading(true);
     try {
       const data = await homeDeckRepository.getProfiles();
-      console.log(data[0])
       if (path) {
         const _lastDisLikeProfile = lastDisLikeProfile;
         const remaningProfileToShow = data.filter(

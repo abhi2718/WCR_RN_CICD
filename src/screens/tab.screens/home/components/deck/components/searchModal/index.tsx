@@ -10,11 +10,7 @@ import {
   Image,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {
-  Column,
-  FullLoader,
-  Row,
-} from '../../../../../../../components/tools';
+import { Column, FullLoader, Row } from '../../../../../../../components/tools';
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 import { useViewModal } from './useViewModal';
 import { searchStyle } from './searchStyle';
@@ -42,7 +38,7 @@ export const SearchModal = (props: SearchModalProps) => {
                 <TextInput
                   style={searchStyle.searchBox}
                   onChangeText={handleSearch}
-                    placeholder="Search"
+                  placeholder="Search"
                 />
                 <Pressable onPress={handleClose} style={searchStyle.crossBox}>
                   <Image
@@ -100,7 +96,10 @@ export const SearchModal = (props: SearchModalProps) => {
                         />
                         <Column gap={5}>
                           <Text style={searchStyle.firstName}>
-                            {user.first}, {calculateAge(user.dob)}
+                            {user?.displayName
+                              ? user?.displayName
+                              : user?.first}
+                            , {calculateAge(user.dob)}
                           </Text>
                           <Row>
                             <Text style={searchStyle.ctiy}>
