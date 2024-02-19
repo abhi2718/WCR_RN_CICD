@@ -49,7 +49,7 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
               />
               {!isValidWebsiteUrl && optionData?.licenceWebsite?.length ? (
               <ErrorText>
-                Please enter a valid email address.
+                Please enter a valid Website.
               </ErrorText>
             ) : (
               <View />

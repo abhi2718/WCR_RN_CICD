@@ -24,13 +24,19 @@ export interface WebsiteModalProps {
 }
 export interface WebsitePhdModalProps {
   isVisible: boolean;
-  uploadPhdOptionPhotos: () => void;
+  uploadPhdOptionPhotos: (source:string) => void;
   validationErrorMessage: string;
+  PhdOptionImage: any;
   onClose: () => void;
-  sumbitVerificationForm: () => void;
+  navigateToVerificationStepTwo: () => void;
   loading: boolean;
   website: string;
-  handleWebsite: () => void;
+  visibleModal:boolean
+  handleWebsite: (website:string) => void;
+  toggleModal: () => void;
+  optionData: verificationIdType;
+  isValidWebsiteUrlPhduser:boolean,
+  validateUserWebsiteUrlPhdUser: (websiteUrl:string) => void;
 }
 
 export interface VerificationInfoProps {

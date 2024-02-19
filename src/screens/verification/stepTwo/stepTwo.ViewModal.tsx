@@ -111,20 +111,37 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     }
     toggleModal();
   };
-  const uploadPhdOptionPhotos = async () => {
-    const image: Image = await pickPhotoFromGallary(
-      defaultPhotoDimension,
-      false,
-    );
-    if (image) {
-      const resultImage = {
-        path: image?.path,
-        mime: image?.mime,
-        name: image?.path?.split('/').pop()!,
-      };
-      setPhdOptionImage(resultImage);
-      props.onChange?.(image);
+  const uploadPhdOptionPhotos = async (source: string) => {
+    if (source === 'camera') {
+      const image: Image = await pickPhotoFromCammera(undefined, true);
+      if (image?.cropRect) {
+        const resultImage = {
+          path: image?.path,
+          mime: image?.mime,
+          name: image?.path?.split('/').pop()!,
+        };
+        setPhdOptionImage(resultImage);
+        props.onChange?.(image);
+        openPicModal();
+      }
+      openPicModal();
+    } else if (source === 'library') {
+      const image: Image = await pickPhotoFromGallary(
+        defaultPhotoDimension,
+        false,
+      );
+      if (image) {
+        const resultImage = {
+          path: image?.path,
+          mime: image?.mime,
+          name: image?.path?.split('/').pop()!,
+        };
+        setPhdOptionImage(resultImage);
+        props.onChange?.(image);
+      }
+      openPicModal();
     }
+    toggleModal()
     openPhdOptionPicUploadingModal();
   };
 

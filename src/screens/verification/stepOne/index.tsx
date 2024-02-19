@@ -41,14 +41,18 @@ const VerificationStepOne = (props: AvatarProps) => {
     closePhdOptionModal,
     validationErrorMessage,
     uploadPhdOptionPhotos,
+    PhdOptionImage,
     website,
-    sumbitVerificationForm,
     loading,
     handleWebsite,
     PhdOptionModal,
     isValidStudentEmail,
     isValidWebsiteUrl,
     validateUserWebsiteUrl,
+    toggleModal,
+    visibleModal,
+    isValidWebsiteUrlPhduser,
+    validateUserWebsiteUrlPhdUser,
   } = useVerificationViewModal(props);
   return (
     <KeyboardAvoidingView
@@ -75,14 +79,20 @@ const VerificationStepOne = (props: AvatarProps) => {
           navigateToVerificationStepTwo={navigateToVerificationStepTwo}
         />
         <VerificationWebsitePhdMdal
+          optionData={optionData}
+          isValidWebsiteUrlPhduser={isValidWebsiteUrlPhduser}
+          validateUserWebsiteUrlPhdUser={validateUserWebsiteUrlPhdUser}
           isVisible={PhdOptionModal}
+          PhdOptionImage={PhdOptionImage}
           uploadPhdOptionPhotos={uploadPhdOptionPhotos}
           onClose={closePhdOptionModal}
           loading={loading}
-          handleWebsite={() => handleWebsite}
-          sumbitVerificationForm={sumbitVerificationForm}
+          handleWebsite={handleWebsite}
+          navigateToVerificationStepTwo={navigateToVerificationStepTwo}
           validationErrorMessage={validationErrorMessage}
           website={website}
+          visibleModal={visibleModal}
+          toggleModal={toggleModal}
         />
         <Text style={verificationStyle.subHeader}>
           ID Verification (Step I)

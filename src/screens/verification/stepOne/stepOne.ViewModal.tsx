@@ -23,15 +23,19 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [isValidStudentEmail, setIsValidStudentEmail] =
     useState<boolean>(false);
   const [isValidWebsiteUrl, setIsValidWebsiteUrl] = useState<boolean>(false);
+  const [isValidWebsiteUrlPhduser, setIsValidWebsiteUrlPhdUser] = useState<boolean>(false);
   const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
   const closePhdOptionModal = () => setVisiblePhdOptionModal(false);
   const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
   const {
     validationErrorMessage,
     uploadPhdOptionPhotos,
+    PhdOptionImage,
     website,
     sumbitVerificationForm,
     loading,
+    toggleModal,
+    visibleModal,
     handleWebsite,
   } = useVerificationViewModalStepTwo(props);
   const country = user.address.country;
@@ -73,16 +77,27 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   >({});
 
   const navigateToVerificationStepTwo = () => {
-    if (!isValidStudentEmail && !isValidWebsiteUrl) {
-      return;
-    } else {
-      setVerificationWebsiteModal(false);
-      setIsValidStudentEmail(false);
-      setIsValidWebsiteUrl(false);
-      navigation.navigate(ROUTES.VerificationStepTwo, {
-        data: { optionData, verificationOption },
-      });
+    if(verificationOption==='Student' || verificationOption==='License Number'){
+      if (!isValidStudentEmail && !isValidWebsiteUrl) {
+        return;
+      } else {
+        setVerificationWebsiteModal(false);
+        setIsValidStudentEmail(false);
+        setIsValidWebsiteUrl(false);
+        navigation.navigate(ROUTES.VerificationStepTwo, {
+          data: { optionData, verificationOption },
+        });
+      }
+    }else if ( verificationOption==='Others'){
+      if (!isValidWebsiteUrlPhduser ) {
+        return;
     }
+  }
+    setVisiblePhdOptionModal(false);
+    navigation.navigate(ROUTES.VerificationStepTwo, {
+      data: { optionData, verificationOption },
+    });
+  
   };
 
   const validateUserEmail = (email: string) => {
@@ -94,6 +109,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     const isValid = isValidURL(email);
     handleInputChange('licenceWebsite', email);
     setIsValidWebsiteUrl(isValid);
+  };
+  const validateUserWebsiteUrlPhdUser = (websiteUrl: string) => {
+    const isValid = isValidURL(websiteUrl);
+    handleInputChange('userWebsite', websiteUrl);
+    setIsValidWebsiteUrlPhdUser(isValid);
   };
 
   const showVerificationWebsiteModal = () => {
@@ -246,7 +266,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', true);
-      handleInputChange('userWebsite', 'userWebsite');
+      handleInputChange('userWebsite', '');
       handleInputChange('state', '');
       handleInputChange('studentEmail', '');
       handleInputChange('licenceWebsite', '');
@@ -300,5 +320,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     isValidStudentEmail,
     validateUserWebsiteUrl,
     isValidWebsiteUrl,
+    PhdOptionImage,
+    toggleModal,
+    visibleModal,
+    isValidWebsiteUrlPhduser,
+    validateUserWebsiteUrlPhdUser
   };
 };
