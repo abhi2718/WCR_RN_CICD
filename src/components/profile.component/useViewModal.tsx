@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Share from 'react-native-share';
-import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { LikeContext } from '../../contexts/likes.context';
 import { ROUTES } from '../../navigation';
@@ -21,7 +20,10 @@ export const useViewModal = (props: profileProps) => {
   const { user: me } = useSelector(({ userState }) => userState);
   const [user, setUser] = useState<null | UserProfile>(null);
   const [showBlockModal, setShowBlockModal] = useState(false);
-  const [isMatch, setIsMatch] = useState({
+  const [isMatch, setIsMatch] = useState<{
+    status: boolean;
+    matchUser: null | UserProfile;
+  }>({
     status: false,
     matchUser: null,
   });
@@ -34,6 +36,7 @@ export const useViewModal = (props: profileProps) => {
     showSave,
     showBlock,
     isMatched,
+    showOnlyProfileView,
   } = props;
   const handleShare = () => {
     try {
@@ -56,7 +59,7 @@ export const useViewModal = (props: profileProps) => {
   };
   const unmatchUser = async () => {
     await likeRepository.removefromMatched(props?.matchedDocId!);
-    toggleModal()
+    toggleModal();
   };
   useEffect(() => {
     if (showModal) {
@@ -85,13 +88,13 @@ export const useViewModal = (props: profileProps) => {
           matchUser: user,
         });
         await notificationRepository.createNotification(
-          createNotifications('match', user._id, me.fullName),
+          createNotifications('match', user?._id!, me.fullName),
         );
       } else {
         toggleModal();
         fetchAll(me._id);
         await notificationRepository.createNotification(
-          createNotifications('like', user._id, me.fullName),
+          createNotifications('like', user?._id!, me.fullName),
         );
       }
     } catch (error) {
@@ -101,7 +104,6 @@ export const useViewModal = (props: profileProps) => {
   const handleDisLike = async () => {
     try {
       setLoading(true);
-
       if (isMatched) {
         await unmatchUser();
         fetchAll(me._id);
@@ -161,7 +163,7 @@ export const useViewModal = (props: profileProps) => {
       name: isMatch?.matchUser?.first,
     });
   };
-  const _startChat = (senderId:string,name:string) => {
+  const _startChat = (senderId: string, name: string) => {
     toggleModal();
     navigation.navigate(ROUTES.CommunityPrivateChat, {
       senderId,
@@ -196,6 +198,7 @@ export const useViewModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     isMatched,
-    _startChat
+    _startChat,
+    showOnlyProfileView,
   };
 };

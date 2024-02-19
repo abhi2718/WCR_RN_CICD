@@ -41,7 +41,7 @@ export type UserProfile = {
   bio: string;
 };
 export type profileProps = {
-  showModal: boolean;
+  showModal?: boolean;
   toggleModal: (state?: boolean) => void;
   userId: string;
   showLike: boolean;
@@ -50,4 +50,5 @@ export type profileProps = {
   showBlock?: boolean;
   matchedDocId?: string;
   isMatched?: boolean;
+  showOnlyProfileView?: boolean;
 };

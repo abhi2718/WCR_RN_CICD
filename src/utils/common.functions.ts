@@ -193,9 +193,9 @@ export function separateWords(inputString: string) {
   if (hyphenIndex !== -1) {
     let afterHyphen = inputString.slice(hyphenIndex).trim();
 
-    return afterHyphen;
+    return removeParentheses(afterHyphen);
   } else {
-    return inputString.trim();
+    return removeParentheses(inputString.trim());
   }
 }
 
@@ -276,24 +276,26 @@ const convertedArr = [
     initials: '(PhD Health Focus Student)',
   },
 ];
-
+function removeParentheses(str:string) {
+  return str.replace(/[()]/g, '');
+}
 export function addInitials(userDegree: string, primaryDegree: string) {
   if (userDegree === 'PhD in Health-Related Field') {
     for (let i = 0; i < convertedArray.length; i++) {
       if (primaryDegree.includes(convertedArray[i].name)) {
-        return convertedArray[i].initials;
+        return removeParentheses(convertedArray[i].initials);
       }
     }
   } else if (userDegree === 'Doctoral Student in Health-Related Field') {
     for (let i = 0; i < convertedArr.length; i++) {
       if (primaryDegree.includes(convertedArr[i].name)) {
-        return convertedArr[i].initials;
+        return removeParentheses(convertedArr[i].initials);
       }
     }
   } else if (userDegree === 'Canada') {
     for (let i = 0; i < convertedArr.length; i++) {
       if (primaryDegree.includes(provinces[i].name)) {
-        return provinces[i].initials;
+        return removeParentheses(provinces[i].initials);
       }
     }
   } else {

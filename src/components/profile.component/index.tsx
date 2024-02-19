@@ -47,9 +47,10 @@ export const ProfileModal = (props: profileProps) => {
     handleReport,
     isMatched,
     _startChat,
+    showOnlyProfileView,
   } = useViewModal(props);
-  return (
-    <Modal visible={showModal}>
+  const profileView = () => {
+    return (
       <SafeAreaView style={styles.containerWrapperStyle}>
         {loading ? (
           <View style={styles.containerWrapperStyle}>
@@ -85,7 +86,7 @@ export const ProfileModal = (props: profileProps) => {
                 style={styles.chatIconIconView}
                 onPress={() =>
                   _startChat(
-                    user?._id,
+                    user?._id!,
                     showDisplayOrFirstName(user?.displayName!, user?.first!),
                   )
                 }
@@ -436,6 +437,10 @@ export const ProfileModal = (props: profileProps) => {
           onPress={handleBlockUser}
         />
       </SafeAreaView>
-    </Modal>
-  );
+    );
+  };
+  if (showOnlyProfileView) {
+    return <>{profileView()}</>;
+  }
+  return <Modal visible={showModal}>{profileView()}</Modal>;
 };
