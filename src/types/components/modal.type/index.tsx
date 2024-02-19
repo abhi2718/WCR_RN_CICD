@@ -22,6 +22,8 @@ export interface WebsiteModalProps {
   validateUserWebsiteUrl: (email:string) => void;
   isValidEmail: boolean;
   isValidWebsiteUrl: boolean;
+  validateUserWebsiteUrlHealthCare: (email:string) => void;,
+    isValidWebsiteUrlHealthCare:boolean
 }
 export interface WebsitePhdModalProps {
   isVisible: boolean;

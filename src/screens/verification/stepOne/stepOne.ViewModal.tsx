@@ -23,6 +23,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [isValidStudentEmail, setIsValidStudentEmail] =
     useState<boolean>(false);
   const [isValidWebsiteUrl, setIsValidWebsiteUrl] = useState<boolean>(false);
+  const [isValidWebsiteUrlHealthCare, setIsValidWebsiteUrlHealthCare] =
+    useState<boolean>(false);
   const [isValidWebsiteUrlPhduser, setIsValidWebsiteUrlPhdUser] =
     useState<boolean>(false);
   const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
@@ -107,6 +109,12 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       }
     } else if (verificationOption === 'NPI Number') {
       navigateToVerificationStepTwo();
+    } else if (verificationOption === 'HealthCare') {
+      if (!isValidWebsiteUrlHealthCare) {
+        return;
+      } else {
+        navigateToVerificationStepTwo();
+      }
     } else {
       navigateToVerificationStepTwo();
     }
@@ -134,6 +142,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     const isValid = isValidURL(websiteUrl);
     handleInputChange('userWebsite', websiteUrl);
     setIsValidWebsiteUrlPhdUser(isValid);
+  };
+  const validateUserWebsiteUrlHealthCare = (websiteUrl: string) => {
+    const isValid = isValidURL(websiteUrl);
+    handleInputChange('healthCareProfessionalEmail', websiteUrl);
+    setIsValidWebsiteUrlHealthCare(isValid);
   };
 
   const showVerificationWebsiteModal = () => {
@@ -296,10 +309,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', false);
-      handleInputChange(
-        'healthCareProfessionalEmail',
-        'healthCareProfessionalEmail',
-      );
+      handleInputChange('healthCareProfessionalEmail', '');
       handleInputChange('state', '');
       handleInputChange('licenseNumber', '');
       handleInputChange('npiNumber', '');
@@ -346,5 +356,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     isValidWebsiteUrlPhduser,
     validateUserWebsiteUrlPhdUser,
     navigateOptions,
+    validateUserWebsiteUrlHealthCare,
+    isValidWebsiteUrlHealthCare,
   };
 };

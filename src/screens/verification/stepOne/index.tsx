@@ -54,6 +54,8 @@ const VerificationStepOne = (props: AvatarProps) => {
     validateUserWebsiteUrlPhdUser,
     verificationWebsiteValid,
     navigateOptions,
+    validateUserWebsiteUrlHealthCare,
+    isValidWebsiteUrlHealthCare,
   } = useVerificationViewModal(props);
   return (
     <KeyboardAvoidingView
@@ -79,6 +81,8 @@ const VerificationStepOne = (props: AvatarProps) => {
           onClose={closeVerificationWebsiteModal}
           navigateToVerificationStepTwo={navigateOptions}
           skip={navigateToVerificationStepTwo}
+          validateUserWebsiteUrlHealthCare={validateUserWebsiteUrlHealthCare}
+          isValidWebsiteUrlHealthCare={isValidWebsiteUrlHealthCare}
         />
         <VerificationWebsitePhdMdal
           optionData={optionData}

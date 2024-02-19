@@ -20,7 +20,9 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
     isValidEmail,
     isValidWebsiteUrl,
     validateUserWebsiteUrl,
-    skip
+    skip,
+    validateUserWebsiteUrlHealthCare,
+    isValidWebsiteUrlHealthCare,
   } = props;
 
   return (
@@ -75,9 +77,16 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
                 label="Enter website"
                 value={optionData.healthCareProfessionalEmail}
                 onChangeText={(text: string) =>
-                  handleInputChange('healthCareProfessionalEmail', text)
+                  validateUserWebsiteUrlHealthCare(text)
                 }
               />
+              {!isValidWebsiteUrlHealthCare && optionData?.healthCareProfessionalEmail?.length ? (
+              <ErrorText>
+                Please enter a valid Website.
+              </ErrorText>
+            ) : (
+              <View />
+            )}
             </KeyboardAvoidingView>
           </View>
         )}

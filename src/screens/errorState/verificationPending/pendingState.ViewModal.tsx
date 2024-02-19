@@ -47,12 +47,12 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
     if (user.verification.status !== 'Rejected') {
       return;
     }
-    const reason = user.verification.ROR[user.verification.ROR.length - 1]
-      .reason
-      ? user.verification.ROR[user.verification.ROR.length - 1].reason
-      : Object.values(
-          user.verification.ROR[user.verification.ROR.length - 1],
-        ).join('');
+    const rorObject =
+      user?.verification?.ROR.length > 0
+        ? user?.verification?.ROR[user.verification.ROR.length - 1]
+        : null;
+    const reason =
+      rorObject != null ? rorObject.reason :'';
     setDeclineReason(reason);
   };
   const navigateToGender = () => {
