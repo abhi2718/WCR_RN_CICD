@@ -16,7 +16,6 @@ export type UserItemProps = {
 export type SearchModalProps = {
   showSearchModal: boolean;
   toggleSearchModal: () => void;
-  handleSetProfiles: (item:any) => void;
 };
 export type AppBarDropDownProps = {
   user: CometChat.User;

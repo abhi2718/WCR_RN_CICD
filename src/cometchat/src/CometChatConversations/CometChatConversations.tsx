@@ -666,7 +666,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
     );
   };
 
-  const TailView = (params: {
+const TailView = (params: {
     timestamp: number;
     unreadCount: number;
     customPattern: Function;
@@ -696,7 +696,7 @@ export const CometChatConversations = (props: ConversationInterface) => {
         )}
       </View>
     );
-  };
+};
 
   const ConfirmDeletionDialog = () => {
     if (confirmDelete == undefined) return null;

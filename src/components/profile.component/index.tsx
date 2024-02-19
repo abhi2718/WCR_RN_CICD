@@ -45,12 +45,12 @@ export const ProfileModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     handleReport,
-    showAlert,
     isMatched,
     _startChat,
+    showOnlyProfileView,
   } = useViewModal(props);
-  return (
-    <Modal visible={showModal}>
+  const profileView = () => {
+    return (
       <SafeAreaView style={styles.containerWrapperStyle}>
         {loading ? (
           <View style={styles.containerWrapperStyle}>
@@ -86,7 +86,7 @@ export const ProfileModal = (props: profileProps) => {
                 style={styles.chatIconIconView}
                 onPress={() =>
                   _startChat(
-                    user?._id,
+                    user?._id!,
                     showDisplayOrFirstName(user?.displayName!, user?.first!),
                   )
                 }
@@ -198,13 +198,11 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/love.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.sexualPreference}
                                 </Text>
                               </Row>
                             )}
-
                           {user?.height && (
                             <Row
                               gap={10}
@@ -220,7 +218,6 @@ export const ProfileModal = (props: profileProps) => {
                               </Text>
                             </Row>
                           )}
-
                           {user.ethnicity.length >= 0 &&
                             user.ethnicity.map(
                               (ethnicity: String, key: number) => (
@@ -267,7 +264,6 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/Religion.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.religion}
                                 </Text>
@@ -441,6 +437,10 @@ export const ProfileModal = (props: profileProps) => {
           onPress={handleBlockUser}
         />
       </SafeAreaView>
-    </Modal>
-  );
+    );
+  };
+  if (showOnlyProfileView) {
+    return <>{profileView()}</>;
+  }
+  return <Modal visible={showModal}>{profileView()}</Modal>;
 };

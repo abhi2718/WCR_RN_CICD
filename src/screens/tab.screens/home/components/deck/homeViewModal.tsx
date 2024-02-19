@@ -101,9 +101,6 @@ export const useViewModal = (route: RouteType) => {
   useEffect(() => {
     fetchToken();
   }, []);
-  const handleSetProfiles = (profile: Profile) => {
-    setProfiles([profile, ...profiles])
-  };
   const clearProfile = () => setProfiles([]);
   const updateIsNewUser = async () => {
     updateUserDetails();
@@ -222,7 +219,6 @@ export const useViewModal = (route: RouteType) => {
     toggleSearchModal,
     showSearchModal,
     handleCloseModal,
-    handleSetProfiles,
     goToNotification,
     count,
     user,
