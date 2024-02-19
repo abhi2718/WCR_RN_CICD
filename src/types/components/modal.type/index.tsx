@@ -17,6 +17,7 @@ export interface WebsiteModalProps {
   optionData: verificationIdType;
   onClose: () => void;
   navigateToVerificationStepTwo: () => void;
+  skip: () => void;
   validateEmail: (email:string) => void;
   validateUserWebsiteUrl: (email:string) => void;
   isValidEmail: boolean;
@@ -24,8 +25,8 @@ export interface WebsiteModalProps {
 }
 export interface WebsitePhdModalProps {
   isVisible: boolean;
+  verificationWebsiteValid: boolean;
   uploadPhdOptionPhotos: (source:string) => void;
-  validationErrorMessage: string;
   PhdOptionImage: any;
   onClose: () => void;
   navigateToVerificationStepTwo: () => void;

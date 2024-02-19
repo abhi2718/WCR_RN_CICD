@@ -48,7 +48,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
     clickPicture,
     selfie,
     loading,
-    validationErrorMessage,
     closePicModal,
     toggleModal,
     visiblePicModal,
@@ -332,16 +331,10 @@ const VerificationStepTwo = (props: AvatarProps) => {
                       <PrimaryButton
                         style={modalStyles.button}
                         title={
-                          verificationOption === 'Others'
-                            ? 'Continue'
-                            : 'Submit'
+                          'Continue'
                         }
                         isLoading={loading}
-                        onPress={
-                          verificationOption === 'Others'
-                            ? openPhdOptionModal
-                            : () => navigateToVerificationImagePreview()
-                        }
+                        onPress={() => navigateToVerificationImagePreview()}
                       />
                     </>
                   ) : (

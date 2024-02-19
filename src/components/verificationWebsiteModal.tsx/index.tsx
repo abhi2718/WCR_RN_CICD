@@ -19,12 +19,13 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
     validateEmail,
     isValidEmail,
     isValidWebsiteUrl,
-    validateUserWebsiteUrl
+    validateUserWebsiteUrl,
+    skip
   } = props;
 
   return (
     <Modal visible={isVisible}>
-      <HeaderBar goBack={onClose} skip={navigateToVerificationStepTwo} />
+      <HeaderBar goBack={onClose} skip={skip} />
 
       <View style={{ ...verificationStyle.footerDiv }}>
         {verificationOption === 'License Number' && (

@@ -23,12 +23,12 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [isValidStudentEmail, setIsValidStudentEmail] =
     useState<boolean>(false);
   const [isValidWebsiteUrl, setIsValidWebsiteUrl] = useState<boolean>(false);
-  const [isValidWebsiteUrlPhduser, setIsValidWebsiteUrlPhdUser] = useState<boolean>(false);
+  const [isValidWebsiteUrlPhduser, setIsValidWebsiteUrlPhdUser] =
+    useState<boolean>(false);
   const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
   const closePhdOptionModal = () => setVisiblePhdOptionModal(false);
   const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
   const {
-    validationErrorMessage,
     uploadPhdOptionPhotos,
     PhdOptionImage,
     website,
@@ -75,29 +75,49 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [validationErrors, setValidationErrors] = useState<
     Partial<verificationIdType>
   >({});
+  const [verificationWebsiteValid, setVerificationWebsiteValid] =
+    useState(false);
 
-  const navigateToVerificationStepTwo = () => {
-    if(verificationOption==='Student' || verificationOption==='License Number'){
+  const navigateOptions = () => {
+    if (
+      verificationOption === 'Student' ||
+      verificationOption === 'License Number'
+    ) {
       if (!isValidStudentEmail && !isValidWebsiteUrl) {
         return;
       } else {
-        setVerificationWebsiteModal(false);
         setIsValidStudentEmail(false);
         setIsValidWebsiteUrl(false);
-        navigation.navigate(ROUTES.VerificationStepTwo, {
-          data: { optionData, verificationOption },
-        });
+        navigateToVerificationStepTwo();
       }
-    }else if ( verificationOption==='Others'){
-      if (!isValidWebsiteUrlPhduser ) {
+    } else if (verificationOption === 'Others') {
+      if (!PhdOptionImage?.path && !optionData.userWebsite) {
+        setVerificationWebsiteValid(true);
+      } else if (
+        PhdOptionImage?.path ||
+        (optionData?.userWebsite && isValidWebsiteUrlPhduser)
+      ) {
+        setVerificationWebsiteValid(false);
+        navigateToVerificationStepTwo();
+      } else if (!isValidWebsiteUrlPhduser) {
+        setVerificationWebsiteValid(false);
         return;
+      } else {
+        navigateToVerificationStepTwo();
+      }
+    } else if (verificationOption === 'NPI Number') {
+      navigateToVerificationStepTwo();
+    } else {
+      navigateToVerificationStepTwo();
     }
-  }
+  };
+
+  const navigateToVerificationStepTwo = () => {
+    setVerificationWebsiteModal(false);
     setVisiblePhdOptionModal(false);
     navigation.navigate(ROUTES.VerificationStepTwo, {
-      data: { optionData, verificationOption },
+      data: { optionData, verificationOption, PhdImage: PhdOptionImage },
     });
-  
   };
 
   const validateUserEmail = (email: string) => {
@@ -310,7 +330,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     showVerificationWebsiteModal,
     navigateToVerificationStepTwo,
     closePhdOptionModal,
-    validationErrorMessage,
+    verificationWebsiteValid,
     uploadPhdOptionPhotos,
     website,
     sumbitVerificationForm,
@@ -324,6 +344,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     toggleModal,
     visibleModal,
     isValidWebsiteUrlPhduser,
-    validateUserWebsiteUrlPhdUser
+    validateUserWebsiteUrlPhdUser,
+    navigateOptions,
   };
 };

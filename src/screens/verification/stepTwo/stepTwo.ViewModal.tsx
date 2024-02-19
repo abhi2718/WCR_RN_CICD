@@ -18,7 +18,7 @@ import { useNavigateToScreen } from '../../../utils/common.functions';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 
 export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
-  const { optionData, verificationOption } =
+  const { optionData, verificationOption, PhdImage } =
     props.route?.params?.data || 'No optionData received';
   const { user } = useSelector((state: any) => state.userState);
   const token = useRef(user?.token ? user?.token : null).current;
@@ -43,7 +43,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     props.source?.uri || undefined,
   );
   const [PhdOptionImage, setPhdOptionImage] = useState<any>(
-    props.source?.uri || undefined,
+    props.source?.uri || (PhdImage ?? undefined),
   );
   const alreadySetVerificationOption = () => {
     let result;
@@ -77,7 +77,6 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     }
   }, [previousSetVerificationOption]);
   const dispatch = useDispatch();
-  const [validationErrorMessage, setValidationErrorMessage] = useState('');
   const toggleModal = () => setVisibleModal(!visibleModal);
   const clickPicture = async (source: string) => {
     if (source === 'camera') {
@@ -122,9 +121,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setPhdOptionImage(resultImage);
         props.onChange?.(image);
-        openPicModal();
       }
-      openPicModal();
     } else if (source === 'library') {
       const image: Image = await pickPhotoFromGallary(
         defaultPhotoDimension,
@@ -139,9 +136,8 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         setPhdOptionImage(resultImage);
         props.onChange?.(image);
       }
-      openPicModal();
     }
-    toggleModal()
+    toggleModal();
     openPhdOptionPicUploadingModal();
   };
 
@@ -193,17 +189,6 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
           FlashMessageType.DANGER,
         );
       }
-      if (
-        verificationOption === 'Others' &&
-        !PhdOptionImage?.path &&
-        !website
-      ) {
-        return setValidationErrorMessage(
-          'Message: website or id image either of two is required',
-        );
-      } else {
-        setValidationErrorMessage('');
-      }
 
       const photos: imageObject[] = PhdOptionImage
         ? [
@@ -248,11 +233,17 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
                   : '',
               isDoctoralCandidate: optionData?.isDoctoralCandidate,
               isPhd: optionData.isPhd,
-              licenceWebsite: optionData.licenceWebsite ? website : '',
-              studentEmail: optionData.studentEmail ? website : '',
-              userWebsite: optionData.userWebsite ? website : '',
+              licenceWebsite: optionData.licenceWebsite
+                ? optionData.licenceWebsite
+                : '',
+              studentEmail: optionData.studentEmail
+                ? optionData.studentEmail
+                : '',
+              userWebsite: optionData.userWebsite ? optionData.userWebsite : '',
               healthCareProfessionalEmail:
-                optionData.healthCareProfessionalEmail ? website : '',
+                optionData.healthCareProfessionalEmail
+                  ? optionData.healthCareProfessionalEmail
+                  : '',
               degreeIdentifierType: optionData?.degreeIdentifierType,
               territory: optionData?.teritory,
               degreeIdentifier: optionData?.degreeIdentifier,
@@ -378,7 +369,6 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     PhdOptionPicUploadingModal,
     uploadPhdOptionPhotos,
     PhdOptionImage,
-    validationErrorMessage,
     website,
     isVerificationInfoModalVisible,
     openInfoModal,

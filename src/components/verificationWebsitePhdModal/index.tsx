@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -26,7 +26,6 @@ export const VerificationWebsitePhdMdal = (props: WebsitePhdModalProps) => {
     isVisible,
     uploadPhdOptionPhotos,
     onClose,
-    validationErrorMessage,
     website,
     navigateToVerificationStepTwo,
     loading,
@@ -36,6 +35,7 @@ export const VerificationWebsitePhdMdal = (props: WebsitePhdModalProps) => {
     toggleModal,
     isValidWebsiteUrlPhduser,
     optionData,
+    verificationWebsiteValid,
     validateUserWebsiteUrlPhdUser,
   } = props;
 
@@ -102,8 +102,14 @@ export const VerificationWebsitePhdMdal = (props: WebsitePhdModalProps) => {
             <View />
           </Row>
           <View style={verificationStyle.container}>
-            <Text>{validationErrorMessage}</Text>
             <View style={verificationStyle.wrapper}>
+              {verificationWebsiteValid ? (
+                <ErrorText>
+                  Please select any of the either two fields
+                </ErrorText>
+              ) : (
+                <View />
+              )}
               <Text style={verificationStyle.subHeader}>
                 Provide The Following Degree Verification (Step III)
               </Text>
