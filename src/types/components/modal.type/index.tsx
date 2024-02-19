@@ -17,6 +17,10 @@ export interface WebsiteModalProps {
   optionData: verificationIdType;
   onClose: () => void;
   navigateToVerificationStepTwo: () => void;
+  validateEmail: (email:string) => void;
+  validateUserWebsiteUrl: (email:string) => void;
+  isValidEmail: boolean;
+  isValidWebsiteUrl: boolean;
 }
 export interface WebsitePhdModalProps {
   isVisible: boolean;

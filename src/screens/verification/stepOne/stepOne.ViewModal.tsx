@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import {
-  verificationIdType,
-} from '../../../types/services.types/firebase.service';
+import { verificationIdType } from '../../../types/services.types/firebase.service';
 import {
   FlashMessageType,
   ShowFlashMessage,
 } from '../../../components/flashBar';
 import { ROUTES } from '../../../navigation';
 import { useSelector } from 'react-redux';
-import { useNavigateToScreen } from '../../../utils/common.functions';
+import {
+  isValidURL,
+  useNavigateToScreen,
+  validateEmail,
+} from '../../../utils/common.functions';
 import { useVerificationViewModalStepTwo } from '../stepTwo/stepTwo.ViewModal';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 
@@ -18,6 +20,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [verificationOption, setVerificationOption] = useState('');
   const [openVerificationWebsiteModal, setVerificationWebsiteModal] =
     useState(false);
+  const [isValidStudentEmail, setIsValidStudentEmail] =
+    useState<boolean>(false);
+  const [isValidWebsiteUrl, setIsValidWebsiteUrl] = useState<boolean>(false);
   const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
   const closePhdOptionModal = () => setVisiblePhdOptionModal(false);
   const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
@@ -62,25 +67,41 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       return { ...oldState, [name]: value };
     });
   };
+
   const [validationErrors, setValidationErrors] = useState<
     Partial<verificationIdType>
   >({});
 
   const navigateToVerificationStepTwo = () => {
-    setVerificationWebsiteModal(false);
-    navigation.navigate(ROUTES.VerificationStepTwo, {
-      data: { optionData, verificationOption },
-    });
+    if (!isValidStudentEmail && !isValidWebsiteUrl) {
+      return;
+    } else {
+      setVerificationWebsiteModal(false);
+      setIsValidStudentEmail(false);
+      setIsValidWebsiteUrl(false);
+      navigation.navigate(ROUTES.VerificationStepTwo, {
+        data: { optionData, verificationOption },
+      });
+    }
+  };
+
+  const validateUserEmail = (email: string) => {
+    const isValid = validateEmail(email);
+    handleInputChange('studentEmail', email);
+    setIsValidStudentEmail(isValid);
+  };
+  const validateUserWebsiteUrl = (email: string) => {
+    const isValid = isValidURL(email);
+    handleInputChange('licenceWebsite', email);
+    setIsValidWebsiteUrl(isValid);
   };
 
   const showVerificationWebsiteModal = () => {
     if (verificationOption === 'NPI Number') {
       navigateToVerificationStepTwo();
-    } 
-   else if (verificationOption === 'Others') {
-    openPhdOptionModal();
-    }
-    else {
+    } else if (verificationOption === 'Others') {
+      openPhdOptionModal();
+    } else {
       setVerificationWebsiteModal(true);
     }
   };
@@ -275,5 +296,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     sumbitVerificationForm,
     loading,
     handleWebsite,
+    validateUserEmail,
+    isValidStudentEmail,
+    validateUserWebsiteUrl,
+    isValidWebsiteUrl,
   };
 };

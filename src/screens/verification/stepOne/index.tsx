@@ -26,6 +26,7 @@ import { VerificationWebsitePhdMdal } from '../../../components/verificationWebs
 const VerificationStepOne = (props: AvatarProps) => {
   const {
     verificationOption,
+    validateUserEmail,
     handleVerificationOption,
     validationErrors,
     changeVerificationOption,
@@ -45,6 +46,9 @@ const VerificationStepOne = (props: AvatarProps) => {
     loading,
     handleWebsite,
     PhdOptionModal,
+    isValidStudentEmail,
+    isValidWebsiteUrl,
+    validateUserWebsiteUrl,
   } = useVerificationViewModal(props);
   return (
     <KeyboardAvoidingView
@@ -59,6 +63,10 @@ const VerificationStepOne = (props: AvatarProps) => {
         />
         <HeaderBar isVerificartionScreen={true} flagType={country} />
         <VerificationWebsiteModal
+          isValidWebsiteUrl={isValidWebsiteUrl}
+          validateUserWebsiteUrl={validateUserWebsiteUrl}
+          isValidEmail={isValidStudentEmail}
+          validateEmail={validateUserEmail}
           isVisible={openVerificationWebsiteModal}
           handleInputChange={handleInputChange}
           verificationOption={verificationOption}

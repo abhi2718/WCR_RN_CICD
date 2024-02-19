@@ -6,6 +6,7 @@ import { FlatInput } from '../inputBox';
 import { PrimaryButton } from '../button';
 import { isAndroid } from '../tools';
 import { verificationStyle } from '../../screens/verification/stepOne/verificationSteps';
+import { ErrorText } from '../../screens/auth/signin/signInStyle';
 
 export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
   const {
@@ -15,6 +16,10 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
     verificationOption,
     navigateToVerificationStepTwo,
     optionData,
+    validateEmail,
+    isValidEmail,
+    isValidWebsiteUrl,
+    validateUserWebsiteUrl
   } = props;
 
   return (
@@ -39,9 +44,16 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
                 label="Enter website"
                 value={optionData.licenceWebsite}
                 onChangeText={(text: string) =>
-                  handleInputChange('licenceWebsite', text)
+                  validateUserWebsiteUrl(text)
                 }
               />
+              {!isValidWebsiteUrl && optionData?.licenceWebsite?.length ? (
+              <ErrorText>
+                Please enter a valid email address.
+              </ErrorText>
+            ) : (
+              <View />
+            )}
             </KeyboardAvoidingView>
           </View>
         )}
@@ -85,10 +97,17 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
               <FlatInput
                 label="Enter student email"
                 onChangeText={(text: string) =>
-                  handleInputChange('studentEmail', text)
+                  validateEmail(text)
                 }
                 value={optionData.studentEmail}
               />
+              {!isValidEmail && optionData?.studentEmail?.length ? (
+              <ErrorText>
+                Please enter a valid email address.
+              </ErrorText>
+            ) : (
+              <View />
+            )}
             </KeyboardAvoidingView>
           </View>
         )}
@@ -102,10 +121,7 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
           enabled
           behavior={isAndroid ? 'height' : 'padding'}
         >
-          <PrimaryButton
-            onPress={navigateToVerificationStepTwo}
-            title="Next"
-          />
+          <PrimaryButton onPress={navigateToVerificationStepTwo} title="Next" />
         </KeyboardAvoidingView>
       </View>
     </Modal>
