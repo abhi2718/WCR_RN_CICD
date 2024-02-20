@@ -31,7 +31,9 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
               user: userdata.user,
             };
         dispatch(addUser(data));
-        if (userdata.user.verification.status === 'Verified') {
+        if (userdata.user.verification.status === 'Verified' && !userdata.user.welcomeHome) {
+          resetState(ROUTES.HomeWelcome);
+        }else if (userdata.user.verification.status === 'Verified'){
           resetState(ROUTES.Tab);
         }
       } catch (err) {}

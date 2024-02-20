@@ -66,8 +66,8 @@ export type navigateToProfilepagepayload = {
   appleId?: string;
 };
 export type ScreenParams = {
-  navigation: any;
-  route: any;
+  navigation?: any;
+  route?: any;
 };
 export type SocialSignInSignUp = {
   socialSignInSignUp: ({
