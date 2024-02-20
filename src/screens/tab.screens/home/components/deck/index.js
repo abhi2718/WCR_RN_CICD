@@ -25,7 +25,6 @@ export default function Deck({ route }) {
     androidActualHeight,
     toggleSearchModal,
     showSearchModal,
-    handleSetProfiles,
     goToNotification,
     count,
     user,
@@ -122,7 +121,6 @@ export default function Deck({ route }) {
       <SearchModal
         showSearchModal={showSearchModal}
         toggleSearchModal={toggleSearchModal}
-        handleSetProfiles={handleSetProfiles}
       />
     </View>
   );

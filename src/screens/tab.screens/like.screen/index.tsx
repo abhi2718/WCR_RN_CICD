@@ -94,7 +94,9 @@ export const LikeScreen = () => {
                       <Text
                         style={[styles.noDataListText, styles.paddingMatches]}
                       >
-                        No matches so far; begin swiping to find new connections
+                        No matches so far. Check daily for new profiles.
+                        Discover new connections in our community interest
+                        groups.
                       </Text>
                     </View>
                   </View>
@@ -143,13 +145,12 @@ export const LikeScreen = () => {
                       <Text
                         style={[styles.noDataListText, styles.paddingMatches]}
                       >
-                        Someone Liked you, Unlock the Premium feature to
-                        discover who's interested in you.
+                        A like is around the corner! Make sure your profile
+                        stands out.
                       </Text>
                     </View>
                   </View>
                 )}
-
                 <Spacer position="top" size={10} />
                 {data?.liked?.length > 0 ? (
                   <View>

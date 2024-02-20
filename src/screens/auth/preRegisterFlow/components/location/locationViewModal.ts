@@ -47,7 +47,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
   const [zipPlaceHolder, setPlaceholder] = useState('Ex: 55555');
   useEffect(() => {
     getStatesOptions();
-    handleZipPlaceHolder(user.address.country)
+    handleZipPlaceHolder(user.address.country);
   }, []);
   useEffect(() => {
     setStatesOption(statesOption[locationForm.country]);
@@ -58,24 +58,71 @@ export const useLocationViewModal = (props: ScreenParams) => {
     handleZipPlaceHolder(selectedItem);
   };
   const handleSubmit = async () => {
-    const errors: Partial<addressTypes> = {};
-    if (!locationForm?.country) {
-      errors.country = 'Please enter country';
+//const errors: Partial<addressTypes> = {};
+    if (
+      !locationForm.state?.trim()?.length &&
+      !locationForm.city?.trim()?.length &&
+      !locationForm.zipcode?.trim()?.length
+    ) {
+      // errors.country = 'Please enter country';
+      ShowFlashMessage(
+        'Error',
+        `Please enter state, city, zipcode. `,
+        FlashMessageType.DANGER,
+      );
+      return;
+    } else if (
+      !locationForm.state?.trim()?.length &&
+      !locationForm.city?.trim()?.length
+    ) {
+      ShowFlashMessage(
+        'Error',
+        `Please enter state, city `,
+        FlashMessageType.DANGER,
+      );
+      return;
+      //  errors.state = 'Please enter state';
+    } else if (
+      !locationForm.zipcode?.trim()?.length &&
+      !locationForm.city?.trim()?.length
+    ) {
+      ShowFlashMessage(
+        'Error',
+        `Please enter zipcode, city `,
+        FlashMessageType.DANGER,
+      );
+      return;
+      //  errors.state = 'Please enter state';
+    } else if (
+      !locationForm.zipcode?.trim()?.length &&
+      !locationForm.state?.trim()?.length
+    ) {
+      ShowFlashMessage(
+        'Error',
+        `Please enter state, zipcode `,
+        FlashMessageType.DANGER,
+      );
+      return;
+      //  errors.state = 'Please enter state';
+    } else if (!locationForm.city?.trim()?.length) {
+      ShowFlashMessage('Error', `Please enter city `, FlashMessageType.DANGER);
+      return;
+    } else if (!locationForm.zipcode?.trim()?.length) {
+      ShowFlashMessage(
+        'Error',
+        `Please enter  zipcode `,
+        FlashMessageType.DANGER,
+      );
+      return;
+    } else if (!locationForm.state?.trim()?.length) {
+      ShowFlashMessage('Error', `Please select state`, FlashMessageType.DANGER);
+      return;
     }
-    if (!locationForm.state?.trim()?.length) {
-      errors.state = 'Please enter state';
-    }
-    if (!locationForm.city?.trim()?.length) {
-      errors.city = 'Please enter city';
-    }
-    if (!locationForm.zipcode?.trim()?.length) {
-      errors.zipcode = 'Please enter zipcode';
-    }
-    if (Object.keys(errors).length) {
-      return setValidationErrors(errors);
-    } else {
-      setValidationErrors({});
-    }
+    // if (Object.keys(errors).length) {
+    //   return setValidationErrors(errors);
+    // } else {
+    //   setValidationErrors({});
+    // }
     await updateUserDetails();
   };
 
@@ -101,7 +148,7 @@ export const useLocationViewModal = (props: ScreenParams) => {
     return await updateUserDetailsRepository.validateZipcode({ user: USER });
   };
 
-  const getStatesOptions = () => {      
+  const getStatesOptions = () => {
     const states = statesOption[locationForm.country];
     if (states === null || states?.length === 0) {
       return [];
@@ -126,12 +173,17 @@ export const useLocationViewModal = (props: ScreenParams) => {
           zipcode: locationForm.zipcode,
           location: {},
         },
-        steps:4
+        steps: 4,
       };
 
-      if(Country === locationForm.country && State === locationForm.state && City === locationForm.city && Zipcode === locationForm.zipcode) {
+      if (
+        Country === locationForm.country &&
+        State === locationForm.state &&
+        City === locationForm.city &&
+        Zipcode === locationForm.zipcode
+      ) {
         navigateToProfessionScreen();
-        return
+        return;
       }
       setLoading(true);
       const validateZipcodeData = await validateZipcode();

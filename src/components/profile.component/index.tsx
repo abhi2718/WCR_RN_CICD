@@ -45,10 +45,12 @@ export const ProfileModal = (props: profileProps) => {
     showBlockModal,
     setShowBlockModal,
     handleReport,
-    showAlert,
+    isMatched,
+    _startChat,
+    showOnlyProfileView,
   } = useViewModal(props);
-  return (
-    <Modal visible={showModal}>
+  const profileView = () => {
+    return (
       <SafeAreaView style={styles.containerWrapperStyle}>
         {loading ? (
           <View style={styles.containerWrapperStyle}>
@@ -79,6 +81,22 @@ export const ProfileModal = (props: profileProps) => {
                 source={require('../../assets/images/icons/Share.png')}
               />
             </Pressable>
+            {isMatched && (
+              <Pressable
+                style={styles.chatIconIconView}
+                onPress={() =>
+                  _startChat(
+                    user?._id!,
+                    showDisplayOrFirstName(user?.displayName!, user?.first!),
+                  )
+                }
+              >
+                <Image
+                  style={styles.shareIconTop}
+                  source={require('../../assets/images/icons/chatIcon.png')}
+                />
+              </Pressable>
+            )}
             <View style={styles.sectionWhite}>
               <View>
                 {user && (
@@ -114,11 +132,11 @@ export const ProfileModal = (props: profileProps) => {
                             source={require('../../assets/images/icons/degree.png')}
                           />
                           <Text style={styles.userInfoText}>
-                            {user.designation.userDegree},{' '}
+                            {user.designation.userDegree},
                             {addInitials(
                               user.designation.userDegree,
                               user.designation.primaryDegree,
-                            )}
+                            )}{' '}
                           </Text>
                         </Row>
                         <Row alignItems="center">
@@ -153,7 +171,7 @@ export const ProfileModal = (props: profileProps) => {
                           gap={6}
                           alignItems="center"
                         >
-                          {user.gender && (
+                          {user.gender && user.showGender && (
                             <Row
                               gap={10}
                               alignItems="center"
@@ -180,13 +198,11 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/love.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.sexualPreference}
                                 </Text>
                               </Row>
                             )}
-
                           {user?.height && (
                             <Row
                               gap={10}
@@ -198,11 +214,10 @@ export const ProfileModal = (props: profileProps) => {
                                 source={require('../../assets/images/vitalIcons/height.png')}
                               />
                               <Text style={styles.chipText}>
-                                {user.height.feet}"{user.height.inch}'
+                                {user.height.feet}' {user.height.inch} ft
                               </Text>
                             </Row>
                           )}
-
                           {user.ethnicity.length >= 0 &&
                             user.ethnicity.map(
                               (ethnicity: String, key: number) => (
@@ -249,7 +264,6 @@ export const ProfileModal = (props: profileProps) => {
                                   style={styles.chipIcon}
                                   source={require('../../assets/images/vitalIcons/Religion.png')}
                                 />
-
                                 <Text style={styles.chipText}>
                                   {user.religion}
                                 </Text>
@@ -363,12 +377,14 @@ export const ProfileModal = (props: profileProps) => {
                               source={require('../../assets/images/icons/like.png')}
                             />
                           </Pressable>
-                        ) :  <View>
-                        <Image
-                          style={cardStyles.shareIcon}
-                          source={require('../../assets/images/icons/disabledLike.png')}
-                        />
-                      </View>}
+                        ) : (
+                          <View>
+                            <Image
+                              style={cardStyles.shareIcon}
+                              source={require('../../assets/images/icons/disabledLike.png')}
+                            />
+                          </View>
+                        )}
                         {showSave ? (
                           <Pressable onPress={addFavourite}>
                             <Image
@@ -376,12 +392,14 @@ export const ProfileModal = (props: profileProps) => {
                               source={require('../../assets/images/icons/save.png')}
                             />
                           </Pressable>
-                        ) : <View >
-                        <Image
-                          style={styles.shareIcon}
-                          source={require('../../assets/images/icons/disabledFav.png')}
-                        />
-                      </View> }
+                        ) : (
+                          <View>
+                            <Image
+                              style={styles.shareIcon}
+                              source={require('../../assets/images/icons/disabledFav.png')}
+                            />
+                          </View>
+                        )}
                       </Row>
                       <Spacer position="top" size={20} />
                       <View style={cardStyles.blockReportView}>
@@ -419,6 +437,10 @@ export const ProfileModal = (props: profileProps) => {
           onPress={handleBlockUser}
         />
       </SafeAreaView>
-    </Modal>
-  );
+    );
+  };
+  if (showOnlyProfileView) {
+    return <>{profileView()}</>;
+  }
+  return <Modal visible={showModal}>{profileView()}</Modal>;
 };

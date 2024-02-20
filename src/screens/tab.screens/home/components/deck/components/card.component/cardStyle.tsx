@@ -7,6 +7,7 @@ import {
 } from '../../../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
+import { theme } from '../../../../../../../infrastructure/theme';
 
 export const cardStyles = StyleSheet.create({
   deckContainer: {
@@ -77,6 +78,10 @@ export const cardStyles = StyleSheet.create({
     fontSize: fontSizes.text,
     fontWeight: fontWeights.medium,
     fontFamily: fonts.body,
+    flex: 1,
+  },
+  designation: {
+    textTransform: 'capitalize',
   },
   headingText: {
     marginTop: sizes[1],
@@ -114,6 +119,7 @@ export const cardStyles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.button,
     fontFamily: fonts.body,
+    fontWeight: theme.fontWeights.medium,
   },
   aboutText: {
     color: colors.ui.text,

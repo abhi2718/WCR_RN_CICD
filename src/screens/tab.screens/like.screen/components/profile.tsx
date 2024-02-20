@@ -96,8 +96,11 @@ export const ProfileView = (props: ProfileViewProps) => {
                         <Row justifyContent="space-between" alignItems="center">
                           <Column style={styles.columnWrapper}>
                             <Text style={styles.userNameText}>
-                              {item?.profile?.name?.first},{' '}
-                              {calculateAge(item?.profile?.dob)}
+                              {showDisplayOrFirstName(
+                                item?.profile?.displayName,
+                                item?.profile?.name?.first,
+                              )}
+                              , {calculateAge(item?.profile?.dob)}
                             </Text>
                             <Text
                               style={[
@@ -345,7 +348,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.body,
   },
   textDegree: {
-    color: theme.colors.ui.primary,
+    color: theme.colors.ui.text,
     fontSize: theme.fontSizes.caption,
     fontWeight: theme.fontWeights.medium,
     lineHeight: 14,
@@ -371,6 +374,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.ui.white,
     fontWeight: theme.fontWeights.bold,
     fontFamily: fonts.body,
+    textTransform: 'capitalize',
   },
   chatButton: {
     padding: theme.units.sizes[3],

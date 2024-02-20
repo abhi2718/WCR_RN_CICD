@@ -57,6 +57,7 @@ export const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.medium,
     fontSize: theme.fontSizes.text,
     paddingLeft: 6,
+    flex: 1,
   },
   aboutText: {
     color: theme.colors.ui.text,
@@ -115,6 +116,12 @@ export const styles = StyleSheet.create({
     right: 15,
     top: 60,
   },
+  chatIconIconView: {
+    position: 'absolute',
+    zIndex: 20,
+    right: 15,
+    top: 105,
+  },
   shareIcon: {
     width: 48,
     height: 48,
@@ -159,8 +166,10 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   chipText: {
-    color: colors.ui.text,
-    fontSize: fontSizes.button,
+    color: theme.colors.ui.text,
+    fontSize: theme.fontSizes.button,
+    fontWeight: theme.fontWeights.medium,
+    fontFamily: theme.fontFamily.body,
   },
   headingText: {
     marginTop: sizes[2],

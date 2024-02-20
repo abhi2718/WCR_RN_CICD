@@ -1,60 +1,72 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { HomeDeckRepository } from '../../../../../../../repository/homeDeck.repo';
 import { SearchModalProps } from '../../../../../../../types/screen.type/home.type';
 
 export const useViewModal = (props: SearchModalProps) => {
   const homeDeckRepository = new HomeDeckRepository();
-  const { showSearchModal, toggleSearchModal, handleSetProfiles } = props;
-  const [loading, setLoading] = useState(false);
+  const { showSearchModal, toggleSearchModal } = props;
   const [users, setUser] = useState<any[]>([]);
   const [isSearchActive, setSearchActive] = useState(false);
   const textRef = useRef('');
+  const [selectedProfile, setSelectedProfile] = useState<{
+    userId: string | null;
+    state: boolean;
+  }>({
+    userId: null,
+    state: false,
+  });
+  const _setSelectedProfile = useCallback((userId: string) => {
+    setSelectedProfile((oldState) => ({
+      userId,
+      state: !oldState.state,
+    }));
+  }, []);
+  const clearSelectedProfile = useCallback(() => {
+    setSelectedProfile((oldState) => ({
+      userId:null,
+      state: false,
+    }));
+  },[])
   const handleSearch = async (text: string) => {
-    textRef.current = text;
-      if (text.length) { 
-        try {
-          const query = {
-            searchValue: text,
-          };
-          const data = await homeDeckRepository.searchUser(query);
-          setUser(() => {
-            return textRef.current.length
-              ? data.filter(({first}) =>first.toLowerCase().startsWith(text.toLowerCase()))
-              : [];
-          });
-          if (!data.length) {
-            setSearchActive(true);
-          }
-        } catch (error) {
+    textRef.current = text.trim();
+    if (text.trim().length) {
+      try {
+        const query = {
+          searchValue: text.trim(),
+        };
+        const data = await homeDeckRepository.searchUser(query);
+        setUser(() => {
+          return textRef.current.length
+            ? data.filter((user: { displayName: string; first: string }) => {
+                const name = user?.displayName
+                  ? user?.displayName
+                  : user?.first;
+                return name.toLowerCase().startsWith(text.trim().toLowerCase());
+              })
+            : [];
+        });
+        if (!data.length) {
+          setSearchActive(true);
         }
-      } else {
-        setSearchActive(false);
-        setUser([]);
-      }
+      } catch (error) {}
+    } else {
+      setSearchActive(false);
+      setUser([]);
+    }
   };
   const handleClose = () => {
     setSearchActive(false);
     toggleSearchModal();
     setUser([]);
   };
-  const fetchSelectedUser = async (userId: string) => {
-    try {
-      setLoading(true);
-      const data = await homeDeckRepository.getUser(userId);
-      handleSetProfiles(data.user);
-      handleClose();
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  };
   return {
     handleSearch,
     users,
     handleClose,
     showSearchModal,
-    fetchSelectedUser,
-    loading,
     isSearchActive,
+    _setSelectedProfile,
+    selectedProfile,
+    clearSelectedProfile,
   };
 };

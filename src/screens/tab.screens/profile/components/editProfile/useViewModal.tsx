@@ -15,7 +15,6 @@ import {
   ethnicity,
   exercise,
   familyPlan,
-  genderPronounArray,
   kids,
   maritalStatus,
   pets,
@@ -65,6 +64,11 @@ export const useViewModal = () => {
       : 'Select',
   });
   const [showHeightModal, setShowHeightModal] = useState(false);
+  const [showOrientationModal, setShowOrientationModal] = useState({
+    showGenderPronoun: false,
+    showSexualOrientation:false
+  });
+
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
       return { ...oldState, [option.type]: option.value };
@@ -95,13 +99,11 @@ export const useViewModal = () => {
     state: user?.address?.state ? user?.address?.state : 'Select',
     city: user?.address?.city ? user?.address?.city : '',
     zipcode: user?.address?.state ? user?.address?.zipcode : '',
-    showSexualOrientation: user?.profile?.showSexualPreference
-      ? user?.profile?.showSexualPreference
-      : true,
+    showSexualOrientation: user?.profile?.showSexualPreference??true,
     sexualPreference: user?.profile.sexualPreference
       ? user?.profile.sexualPreference
       : '',
-    showGender: user?.profile.showGender ? user?.profile.showGender : true,
+    showGender: user?.profile?.showGender ?? true,
     showGenderPronoun: user?.profile?.showGenderPronoun ?? true,
     genderProunoun: user?.profile.genderPronoun
       ? user?.profile.genderPronoun
@@ -118,7 +120,6 @@ export const useViewModal = () => {
     'state',
   );
   const ethnicityList = generateList(ethnicity, 'ethnicity');
-
   const maritalStatusList = generateList(maritalStatus, 'maritalStatus');
   const relationshipLevelList = generateList(relationship, 'relationshipLevel');
   const religionList = generateList(religion, 'religion');
@@ -190,7 +191,6 @@ export const useViewModal = () => {
       setHobbies(selected);
     }
   };
-
   const healthcareProfessionals = [
     {
       title: 'Degree Category',
@@ -298,10 +298,10 @@ export const useViewModal = () => {
   );
   useEffect(() => {
     if (userProfile?.aboutMe?.length) {
-      setLetterCount(500 - userProfile?.aboutMe.length)
+      setLetterCount(500 - userProfile?.aboutMe.length);
     }
-  },[userProfile?.aboutMe])
- 
+  }, [userProfile?.aboutMe]);
+
   const [allPics, setAllPics] = useState<any>({});
   const uploadImageToCloudinary = async (
     imageData: any,
@@ -362,7 +362,7 @@ export const useViewModal = () => {
       const allPhotos = [...sidePicUri!, ...bottomUris!];
       for (let i = 0; i < allPhotos.length; i++) {
         const isOldUrl = user?.photos?.find(
-          ({url}) => url === allPhotos[i]?.path,
+          ({ url }) => url === allPhotos[i]?.path,
         );
         const cloudURL = isOldUrl
           ? isOldUrl.url
@@ -554,7 +554,6 @@ export const useViewModal = () => {
       );
       setSubmitLoading(false);
     } catch (error) {
-      console.log(error)
       setSubmitLoading(false);
     }
   };
@@ -659,6 +658,15 @@ export const useViewModal = () => {
   }, []);
   const _setShowHeightModal = (state: boolean = true) =>
     setShowHeightModal(true);
+
+  const _setOrientationModal = (key: string, value: boolean) => {
+    setShowOrientationModal(oldState => {
+      return {
+        ...oldState,
+        [key]: value
+      }
+    });
+  }
   const voidFun = useCallback(() => {}, []);
   return {
     answer,
@@ -689,8 +697,12 @@ export const useViewModal = () => {
     showHeightModal,
     setShowHeightModal,
     _setShowHeightModal,
+    showOrientationModal,
+    setShowOrientationModal,
+    _setOrientationModal,
     height,
     setheight,
     voidFun,
+    setAnswer,
   };
 };
