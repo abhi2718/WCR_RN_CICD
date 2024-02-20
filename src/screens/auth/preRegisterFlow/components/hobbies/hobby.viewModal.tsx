@@ -13,7 +13,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
   let hobbies = user?.interests;
-  console.log('hobbies ---->', hobbies);
   const [customCreatedHobby, setCustomCreatedHobby] = useState<string[]>([]);
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>(
     hobbies ?? [],
