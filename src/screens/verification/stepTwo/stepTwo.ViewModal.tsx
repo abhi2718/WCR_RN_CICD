@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   defaultPhotoDimension,
   pickPhotoFromCammera,
@@ -38,13 +38,55 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   const [website, setWebsite] = useState(userWebsite ? userWebsite : '');
   const cloudinaryRepository = new CloudinaryRepository();
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
+  const savedDocImage = user.verificationId.photo.filter(
+    (image: any) => image.section === 'userIdUpload',
+  );
+  const savedSelfieImage = user.verificationId.photo.filter(
+    (image: any) => image.section === 'cameraImage',
+  );
+  const getSavedImage = (savedImage: any) => {
+    if (savedImage?.length > 0) {
+      const resultImage = {
+        path: savedImage[0]?.url,
+        mime: 'image/jpeg',
+        name: savedImage[0]?.url?.split('/').pop()!,
+      };
+      return resultImage;
+    } else {
+      return undefined;
+    }
+  };
   const [documentImage, setdocumentImage] = useState<any>(
-    props.source?.uri || undefined,
+    props.source?.uri || getSavedImage(savedDocImage),
   );
   const [PhdOptionImage, setPhdOptionImage] = useState<any>(
     props.source?.uri || (PhdImage ?? undefined),
   );
+
+  const isShowPreview = (): boolean => {
+    return savedDocImage.length > 0 && savedSelfieImage.length > 0;
+  };
+
+  // useLayoutEffect(() => {
+  //   if (savedDocImage.length > 0) {
+  //     const resultImage = {
+  //       path: savedDocImage[0]?.url,
+  //       mime: 'image/jpeg',
+  //       name: savedDocImage[0]?.url?.split('/').pop()!,
+  //     };
+  //     setdocumentImage(resultImage);
+  //   }
+
+  //   if (savedSelfieImage.length > 0) {
+  //     const resultImage = {
+  //       path: savedSelfieImage[0]?.url,
+  //       mime: 'image/jpeg',
+  //       name: savedSelfieImage[0]?.url?.split('/').pop()!,
+  //     };
+  //     setSelfie(resultImage);
+  //   }
+  // }, []);
+
   const alreadySetVerificationOption = () => {
     let result;
     if (user.verificationId?.idType === 'npi') {
@@ -65,6 +107,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     resetState(ROUTES.VerificationPending);
   };
   const navigateToVerificationImagePreview = () => {
+    closePicModal();
     setIsVerificationImagePreviewVisible(true);
   };
 
@@ -89,9 +132,13 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setdocumentImage(resultImage);
         props.onChange?.(image);
+        if (!selfie) {
+          openPicModal();
+        }
+      }
+      if (!selfie) {
         openPicModal();
       }
-      openPicModal();
     } else if (source === 'library') {
       const image: Image = await pickPhotoFromGallary(
         defaultPhotoDimension,
@@ -106,7 +153,9 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         setdocumentImage(resultImage);
         props.onChange?.(image);
       }
-      openPicModal();
+      if (!selfie) {
+        openPicModal();
+      }
     }
     toggleModal();
   };
@@ -154,7 +203,9 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   const openPhdOptionPicUploadingModal = () =>
     setPhdOptionPicUploadingModal(true);
   const [isSelfie, setIsSelfie] = useState(false);
-  const [selfie, setSelfie] = useState<any>(props.source?.uri || undefined);
+  const [selfie, setSelfie] = useState<any>(
+    props.source?.uri || getSavedImage(savedSelfieImage),
+  );
   const clickSelfieImage = async () => {
     const image: Image = await pickPhotoFromCammera(undefined, true);
     if (image?.cropRect) {
@@ -249,6 +300,9 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
               degreeIdentifier: optionData?.degreeIdentifier,
               photo: photos,
               submitted: true,
+            },
+            verification: {
+              status: 'Pending',
             },
           },
         },
@@ -377,5 +431,6 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     closeStudentInfoModal,
     openStudentInfoModal,
     isStudentInfoModalVisible,
+    isShowPreview,
   };
 };

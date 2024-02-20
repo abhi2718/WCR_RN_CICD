@@ -50,13 +50,16 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     npiNumber: '',
     state: '',
     licenseNumber: '',
-    isDoctoralCandidate: false,
-    isPhd: false,
-    idType: '',
-    licenceWebsite: '',
-    studentEmail: '',
-    userWebsite: '',
-    healthCareProfessionalEmail: '',
+    isDoctoralCandidate:
+      user?.verificationId?.isDoctoralCandidate == true ? true : false,
+    isPhd: user?.verificationId?.isPhd == true ? true : false,
+
+    idType: user?.verificationId?.idType ?? '',
+    licenceWebsite: user?.verificationId?.licenceWebsite ?? '',
+    studentEmail: user?.verificationId?.studentEmail ?? '',
+    userWebsite: user?.verificationId?.userWebsite ?? '',
+    healthCareProfessionalEmail:
+      user?.verificationId?.healthCareProfessionalEmail ?? '',
     teritory: '',
     degreeIdentifier: '',
     degreeIdentifierType: '',
@@ -175,10 +178,13 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       setVerificationOption('License Number');
       handleInputChange('state', user.verificationId.state);
       handleInputChange('licenseNumber', user.verificationId.idNumber);
+      validateUserWebsiteUrl(user.verificationId.licenceWebsite);
     } else if (user.verificationId.isPhd) {
       setVerificationOption('Others');
+      validateUserWebsiteUrlPhdUser(user.verificationId.userWebsite);
     } else if (user.verificationId.isDoctoralCandidate) {
       setVerificationOption('Student');
+      validateUserEmail(user.verificationId.studentEmail);
     } else if (user.verificationId.territory) {
       setVerificationOption('HealthCare');
       handleInputChange('teritory', user.verificationId.territory);
@@ -189,6 +195,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       handleInputChange(
         'degreeIdentifier',
         user.verificationId.degreeIdentifier,
+      );
+      validateUserWebsiteUrlHealthCare(
+        user.verificationId.user.verificationId.degreeIdentifier,
       );
     }
   };
@@ -363,6 +372,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     navigateOptions,
     validateUserWebsiteUrlHealthCare,
     isValidWebsiteUrlHealthCare,
-    degreeIdentifierTypeList
+    degreeIdentifierTypeList,
   };
 };

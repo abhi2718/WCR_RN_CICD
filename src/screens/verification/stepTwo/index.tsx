@@ -71,6 +71,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
     onCloseVerificationImagePreview,
     removeDocument,
     removeSelfie,
+    isShowPreview,
   } = useVerificationViewModalStepTwo(props);
   const { top, bottom } = useSafeAreaInsets();
   return (
@@ -245,7 +246,16 @@ const VerificationStepTwo = (props: AvatarProps) => {
               enabled
               behavior={isAndroid ? 'height' : 'padding'}
             >
-              <PrimaryButton onPress={toggleModal} title="Camera" />
+              <PrimaryButton
+                onPress={() => {
+                  if (isShowPreview()) {
+                    navigateToVerificationImagePreview();
+                  } else {
+                    toggleModal();
+                  }
+                }}
+                title="Camera"
+              />
             </KeyboardAvoidingView>
           </View>
         </KeyboardAvoidingView>
@@ -330,9 +340,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                       />
                       <PrimaryButton
                         style={modalStyles.button}
-                        title={
-                          'Continue'
-                        }
+                        title={'Continue'}
                         isLoading={loading}
                         onPress={() => navigateToVerificationImagePreview()}
                       />
@@ -393,7 +401,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                   style={modalStyles.button}
                   onPress={() => navigateToVerificationImagePreview()}
                   isLoading={loading}
-                  title="Submit"
+                  title="Next"
                 />
               </View>
             </View>
