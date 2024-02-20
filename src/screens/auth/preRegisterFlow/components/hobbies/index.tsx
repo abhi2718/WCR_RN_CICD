@@ -29,9 +29,14 @@ const Hobbies = (props: ScreenParams) => {
     <ScreenContainer>
       <View style={ChipStyle.container}>
         <View style={styles.scrollContainer}>
-          <HeaderBar skip={navigateToVerificationScreen} />
+          {props?.route?.params?.isCommingFromEditScreen ? (
+            <HeaderBar />
+          ) : (
+            <HeaderBar skip={navigateToVerificationScreen} />
+          )}
           <Text style={ChipStyle.subHeader}>
-            What are your interests and hobbies?  {selectedHobbies.length + customCreatedHobby.length}/10
+            What are your interests and hobbies?{' '}
+            {selectedHobbies.length + customCreatedHobby.length}/10
           </Text>
           <ScrollView showsVerticalScrollIndicator={false}>
             <Spacer position="bottom" size={100}>

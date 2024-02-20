@@ -12,7 +12,7 @@ import { hobbies as hobbyList } from '../../../../../utils/constanst';
 export const useHobbyViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
-  const { user } = useSelector((state: any) => state.userState);
+  const { user } = useSelector(({ userState }) => userState);
   const dispatch = useDispatch();
   const token = useRef(user?.token ? user?.token : null).current;
   let hobbies = user?.interests;
@@ -53,17 +53,30 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   const navigateToVerificationScreen = () => {
     navigation.navigate(ROUTES.VerificationStepOne);
   };
+  const navigateToEditInfo = useCallback(() => {
+    navigation.navigate(ROUTES.EditProfile);
+  }, []);
   function arrayContainsAllElements(arr1: string[], arr2: string[]) {
     return arr2.every((element) => arr1.includes(element));
   }
+  const handleNavigation = useCallback(() => {
+    if (props?.route?.params?.isCommingFromEditScreen) {
+      navigateToEditInfo();
+    } else {
+      navigateToVerificationScreen();
+    }
+  }, []);
   const updateUserDetails = async () => {
     try {
+      const interests = [...selectedHobbies, ...customCreatedHobby];
       const selectedInterests = {
-        interests: [...selectedHobbies, ...customCreatedHobby],
+        interests,
         steps: 14,
       };
-      if (arrayContainsAllElements(user?.interests, selectedHobbies)) {
-        navigateToVerificationScreen();
+      if (
+        arrayContainsAllElements(user?.interests, interests)
+      ) {
+        handleNavigation();
         return;
       }
       setLoading(true);
@@ -85,8 +98,9 @@ export const useHobbyViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-      navigateToVerificationScreen();
+      handleNavigation();
     } catch (err: any) {
+      console.log(err);
       setLoading(false);
     }
   };
@@ -96,22 +110,25 @@ export const useHobbyViewModal = (props: ScreenParams) => {
   }, []);
   const addCustomHobby = useCallback(() => {
     if (!customHobby.length) {
-      return
+      return;
     }
-    if (customCreatedHobby.includes(customHobby) || selectedHobbies.includes(customHobby)) {
+    if (
+      customCreatedHobby.includes(customHobby) ||
+      selectedHobbies.includes(customHobby)
+    ) {
       ShowFlashMessage(
         'Alert!',
         `${customHobby} already exists in your list`,
         FlashMessageType.DANGER,
       );
       return;
-     }
+    }
     if (customCreatedHobby.length < 10 - selectedHobbies.length) {
-      setCustomCreatedHobby(oldState => {
+      setCustomCreatedHobby((oldState) => {
         const update = [...oldState, customHobby];
         setCustomHobby('');
         return update;
-      })
+      });
     } else {
       ShowFlashMessage(
         'Exceeded Selection Limit',
@@ -119,9 +136,11 @@ export const useHobbyViewModal = (props: ScreenParams) => {
         FlashMessageType.DANGER,
       );
     }
-  }, [selectedHobbies,customCreatedHobby,customHobby]);
-  const removeCustomHobby = useCallback((hobby:string) => {
-    setCustomCreatedHobby(oldState=> oldState.filter(oldHobby=>oldHobby!== hobby))
+  }, [selectedHobbies, customCreatedHobby, customHobby]);
+  const removeCustomHobby = useCallback((hobby: string) => {
+    setCustomCreatedHobby((oldState) =>
+      oldState.filter((oldHobby) => oldHobby !== hobby),
+    );
   }, []);
   return {
     selectedHobbies,
@@ -133,6 +152,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     addCustomHobby,
     customCreatedHobby,
     removeCustomHobby,
-    customHobby
+    customHobby,
   };
 };
