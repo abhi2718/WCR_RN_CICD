@@ -13,6 +13,7 @@ import {
 } from '../../../utils/common.functions';
 import { useVerificationViewModalStepTwo } from '../stepTwo/stepTwo.ViewModal';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
+import { degreeIdentifierType } from '../../../utils/constanst';
 
 export const useVerificationViewModal = (props: AvatarProps) => {
   const { navigation } = props;
@@ -41,6 +42,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     handleWebsite,
   } = useVerificationViewModalStepTwo(props);
   const country = user.address.country;
+  const degreeIdentifierTypeList = degreeIdentifierType.map((val) => ({
+    label: val,
+    value: val,
+  }));
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
     state: '',
@@ -358,5 +363,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     navigateOptions,
     validateUserWebsiteUrlHealthCare,
     isValidWebsiteUrlHealthCare,
+    degreeIdentifierTypeList
   };
 };

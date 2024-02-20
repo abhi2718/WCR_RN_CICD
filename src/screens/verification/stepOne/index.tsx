@@ -12,7 +12,7 @@ import { HeaderBar } from '../../../components/header';
 import { RadioButton } from 'react-native-paper';
 import { colors } from '../../../infrastructure/theme/colors';
 import { verificationStyle } from './verificationSteps';
-import { FlatInput } from '../../../components/inputBox';
+import { DropdownInput, FlatInput } from '../../../components/inputBox';
 import { ErrorText } from '../../auth/signin/signInStyle';
 import { PrimaryButton } from '../../../components/button';
 import { ScreenParams } from '../../../types/services.types/firebase.service';
@@ -56,6 +56,7 @@ const VerificationStepOne = (props: AvatarProps) => {
     navigateOptions,
     validateUserWebsiteUrlHealthCare,
     isValidWebsiteUrlHealthCare,
+    degreeIdentifierTypeList,
   } = useVerificationViewModal(props);
   return (
     <KeyboardAvoidingView
@@ -153,13 +154,16 @@ const VerificationStepOne = (props: AvatarProps) => {
               {verificationOption === 'HealthCare' && (
                 <>
                   <View style={verificationStyle.textBox}>
-                    <FlatInput
-                      label="Degree Identifier Type"
+                    <DropdownInput
+                      data={degreeIdentifierTypeList}
+                      onFocus={() => {}}
+                      labelField="label"
+                      valueField="value"
+                      placeholder="Degree Identifier Type"
                       value={optionData.degreeIdentifierType}
-                      onChangeText={(text: string) =>
-                        handleInputChange('degreeIdentifierType', text)
-                      }
-                      error={validationErrors.degreeIdentifierType}
+                      onChange={(data: any) => {
+                        handleInputChange('degreeIdentifierType', data.value);
+                      }}
                     />
                     <ErrorText>
                       {validationErrors.degreeIdentifierType}
