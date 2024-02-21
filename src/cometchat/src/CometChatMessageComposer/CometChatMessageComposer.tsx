@@ -678,7 +678,6 @@ export const CometChatMessageComposer = React.forwardRef(
         );
       }
     };
-   
 
     const liveReactionHandler = () => {
       if (hideLiveReaction) return;
@@ -1254,31 +1253,33 @@ export const CometChatMessageComposer = React.forwardRef(
     };
     const [groupMembers, setGroupMembers] = useState<
       CometChat.GroupMember[] | []
-      >([]);
-      const [showMentionModal, setShowMentationModal] = useState(false);
-      const memberRef = useRef<CometChat.GroupMember[] | []>([]);
-      const textChangeHandler = (txt: string) => {
+    >([]);
+    const [showMentionModal, setShowMentationModal] = useState(false);
+    const memberRef = useRef<CometChat.GroupMember[] | []>([]);
+    const textChangeHandler = (txt: string) => {
+      if (txt?.length <=1) {
         setShowMentationModal(txt.includes('@'));
-        const regex = /@(\w+)/;
-        onChangeText && onChangeText(txt);
-        startTyping();
-        setInputMessage(txt);
-        if (txt) {
-          const result = txt.match(regex);
-          const username = result ? result[1]?.toLowerCase() : null;
-          if (!username) {
-            return setGroupMembers(memberRef?.current);
-          }
-          const filteredList = memberRef?.current?.filter((member) => {
-            return member?.getName()?.toLowerCase()?.startsWith(username);
-          });
-          if (!filteredList?.length) {
-            setShowMentationModal(false)
-            return setGroupMembers([]);
-          }
-          setGroupMembers(filteredList);
+      }
+      const regex = /@(\w+)/;
+      onChangeText && onChangeText(txt);
+      startTyping();
+      setInputMessage(txt);
+      if (txt) {
+        const result = txt.match(regex);
+        const username = result ? result[1]?.toLowerCase() : null;
+        if (!username) {
+          return setGroupMembers(memberRef?.current);
         }
-      };
+        const filteredList = memberRef?.current?.filter((member) => {
+          return member?.getName()?.toLowerCase()?.startsWith(username);
+        });
+        if (!filteredList?.length) {
+          setShowMentationModal(false);
+          return setGroupMembers([]);
+        }
+        setGroupMembers(filteredList);
+      }
+    };
     useEffect(() => {
       const getGroupMembersList = () => {
         let groupMembersRequest = new CometChat.GroupMembersRequestBuilder(
@@ -1310,39 +1311,24 @@ export const CometChatMessageComposer = React.forwardRef(
             data={groupMembers}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <Row alignItems="center" gap={10} style={Style.spaceAvatarY}>
-                <Pressable
-                  onPress={() => {
-                    setInputMessage((message) => `${message}${item.getName()}`);
-                    setShowMentationModal(false);
-                  }}
-                >
+              <Pressable
+                onPress={() => {
+                  setInputMessage((message) => `@${item.getName()}`);
+                  setShowMentationModal(false);
+                }}
+              >
+                <Row alignItems="center" gap={10} style={Style.spaceAvatarY}>
                   <Image
                     style={Style.avatarSize}
                     source={{ uri: item.getAvatar() }}
                   />
-                </Pressable>
-                <Text
-                  style={[Style.darkText, Style.textCapitalize]}
-                  onPress={() => {
-                    setInputMessage((message) => `${message}${item.getName()}`);
-                    setShowMentationModal(false);
-                  }}
-                >
-                  {item.getName()}
-                </Text>
-              </Row>
+                  <Text style={[Style.darkText, Style.textCapitalize]}>
+                    {item.getName()}
+                  </Text>
+                </Row>
+              </Pressable>
             )}
           />
-          {/* <Pressable
-            onPress={() => setShowMentationModal(false)}
-            style={Style.closeMentionList}
-          >
-            <Image
-              style={Style.closeIcon}
-              source={require('../../../assets/images/icons/crossIcon.png')}
-            />
-          </Pressable> */}
         </View>
       );
     };

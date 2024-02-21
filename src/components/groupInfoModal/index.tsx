@@ -1,13 +1,51 @@
-import React from 'react';
-import { Image, Modal, Pressable, ScrollView, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  Image,
+  Modal,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import { Row, Spacer } from '../tools';
 import { PrimaryButton } from '../button';
 import { ProfilePicInfoModalProps } from '../../types/components/modal.type';
 import { modalStyle } from './groupInStyle';
-
+import { colors } from '../../infrastructure/theme/colors';
+export type ScrollViewRef = ScrollView & {
+  flashScrollIndicators: () => void;
+};
 export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
   const { isVisible, onClose, joinGroup } = props;
+  const scrollViewRef = useRef<ScrollViewRef | null>(null);
+  const [isEndReached, setIsEndReached] = useState(false);
+  useEffect(() => {
+    if (isVisible && scrollViewRef.current) {
+      setTimeout(function () {
+        scrollViewRef.current?.flashScrollIndicators();
+      }, 10);
+    }
+    return () => {
+      setIsEndReached(false);
+    }
+  }, [isVisible]);
 
+  const handleScroll = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const { layoutMeasurement, contentOffset, contentSize } =
+        event.nativeEvent;
+      const paddingToBottom = 20;
+      setIsEndReached(oldState => {
+        if (!oldState) {
+          return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
+        }
+        return true;
+      });
+    },
+    [],
+  );
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={modalStyle.centeredView}>
@@ -32,7 +70,14 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
             <Text style={modalStyle.subHeader}>Last updated on 12/06/2023</Text>
             <Spacer position="top" size={15} />
           </View>
-          <ScrollView style={modalStyle.flex}>
+          <ScrollView
+            style={modalStyle.flex}
+            scrollIndicatorInsets={{ right: 10 }}
+            persistentScrollbar={true}
+            ref={scrollViewRef}
+            onScroll={handleScroll}
+            scrollEventThrottle={16}
+          >
             <Text style={modalStyle.header}>
               To ensure a respectful and enjoyable experience for everyone,
               please review and accept before participating.
@@ -119,7 +164,11 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
               White Coat Romance Team
             </Text>
             <Spacer position="top" size={20} />
-            {joinGroup && <PrimaryButton onPress={joinGroup} title="Join" />}
+            {joinGroup && <PrimaryButton
+              onPress={joinGroup}
+              title="Join"
+              btnColor={!isEndReached?colors.ui.placeholder:colors.ui.primary}
+            />}
           </View>
         </View>
       </View>
