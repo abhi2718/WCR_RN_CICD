@@ -4,10 +4,13 @@ import { ReactNode } from 'react';
 export type GroupsListProps = {
   groups: CometChat.Group[] | [] ;
   handleJoinGroup: (guid: string) => Promise<void>;
+  handleLeaveGroup: (guid: string) => Promise<void>;
 };
 export type GroupProps = {
   group: CometChat.Group;
   handleJoinGroup: (guid: string) => Promise<void>;
+  handleLeaveGroup: (guid: string) => Promise<void>;
+
 };
 export type SearchGroupProps = {
   handleTextChange: (text: string) => void;
