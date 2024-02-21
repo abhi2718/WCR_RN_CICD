@@ -35,9 +35,11 @@ const Group = (props: GroupProps) => {
   const [showAlertModal, setShowAlertModal] = useState(false);
   const closeModal = () => {
     setisGroupInfoModalVisible(false);
+    
   };
   const openAlertModal = () => {
     setShowAlertModal(true);
+    setisGroupInfoModalVisible(false)
   };
   return (
     <View style={styles.singleRow}>
