@@ -35,11 +35,10 @@ const Group = (props: GroupProps) => {
   const [showAlertModal, setShowAlertModal] = useState(false);
   const closeModal = () => {
     setisGroupInfoModalVisible(false);
-    
   };
   const openAlertModal = () => {
     setShowAlertModal(true);
-    setisGroupInfoModalVisible(false)
+    setisGroupInfoModalVisible(false);
   };
   return (
     <View style={styles.singleRow}>
@@ -63,8 +62,7 @@ const Group = (props: GroupProps) => {
             showModal={showAlertModal}
             setShowModal={setShowAlertModal}
             title="Leave Group"
-            description={`Are you sure you want to 
-                Leave the Group ?`}
+            description={`Are you sure you want to Leave the Group ?`}
             onPress={() => handleLeaveGroup(group.getGuid())}
           />
           {group.getHasJoined() && (
