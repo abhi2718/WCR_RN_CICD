@@ -8,15 +8,20 @@ import {
 } from '../../../../../../../../types/screen.type/communityChat';
 import { styles } from './styles';
 import { GroupInfoModal } from '../../../../../../../../components/groupInfoModal';
+import { AlertScreen } from '../../../../../../../../components/alert';
 
 const GroupsList = (props: GroupsListProps) => {
-  const { groups, handleJoinGroup } = props;
+  const { groups, handleJoinGroup, handleLeaveGroup } = props;
   return (
     <View style={styles.container}>
       <FlatList
         data={groups}
         renderItem={({ item }) => (
-          <Group group={item} handleJoinGroup={handleJoinGroup} />
+          <Group
+            group={item}
+            handleJoinGroup={handleJoinGroup}
+            handleLeaveGroup={handleLeaveGroup}
+          />
         )}
         keyExtractor={(item) => item.getGuid()}
       />
@@ -25,10 +30,16 @@ const GroupsList = (props: GroupsListProps) => {
 };
 
 const Group = (props: GroupProps) => {
-  const { group, handleJoinGroup } = props;
+  const { group, handleJoinGroup, handleLeaveGroup } = props;
   const [isGroupInfoModalVisible, setisGroupInfoModalVisible] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
   const closeModal = () => {
     setisGroupInfoModalVisible(false);
+    
+  };
+  const openAlertModal = () => {
+    setShowAlertModal(true);
+    setisGroupInfoModalVisible(false)
   };
   return (
     <View style={styles.singleRow}>
@@ -48,9 +59,19 @@ const Group = (props: GroupProps) => {
           </Spacer>
         </Row>
         <Column justifyContent="center">
+          <AlertScreen
+            showModal={showAlertModal}
+            setShowModal={setShowAlertModal}
+            title="Leave Group"
+            description={`Are you sure you want to 
+                Leave the Group ?`}
+            onPress={() => handleLeaveGroup(group.getGuid())}
+          />
           {group.getHasJoined() && (
             <>
-              <Text style={styles.joinedBtn}>Joined</Text>
+              <Text style={styles.joinedBtn} onPress={openAlertModal}>
+                Leave
+              </Text>
             </>
           )}
           {!group.getHasJoined() && (
