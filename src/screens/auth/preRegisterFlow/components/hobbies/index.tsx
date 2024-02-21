@@ -66,24 +66,32 @@ const Hobbies = (props: ScreenParams) => {
           </ScrollView>
         </View>
         <View style={styles.customHobbyConatiner}>
-          <Row>
+          <Row
+            style={styles.inputBox}
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <TextInput
               onChangeText={handleCustomHobbyChange}
-              placeholder="Enter a custom hobby"
+              placeholder="Football"
               value={customHobby}
+              style={styles.input}
+              placeholderTextColor="rgba(29, 27, 32, 0.3)"
             />
             <Pressable onPress={addCustomHobby}>
-              <Text>Add</Text>
+              <Text style={styles.addbutton}>Add</Text>
             </Pressable>
           </Row>
           <ScrollView>
-            {customCreatedHobby.map((hobby, index) => (
-              <CustomChip
-                key={index}
-                title={hobby}
-                onPress={removeCustomHobby}
-              />
-            ))}
+            <Row gap={10} style={styles.customChipRow}>
+              {customCreatedHobby.map((hobby, index) => (
+                <CustomChip
+                  key={index}
+                  title={hobby}
+                  onPress={removeCustomHobby}
+                />
+              ))}
+            </Row>
           </ScrollView>
         </View>
         <View>

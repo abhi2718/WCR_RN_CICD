@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
+import { styles } from './styles';
+
 import { Row, Spacer } from '../tools';
+
 export type CustomChipProps = {
   title: string;
   onPress: (item: string) => void;
@@ -10,13 +13,14 @@ export const CustomChip = (props: CustomChipProps) => {
   const handlePress = useCallback(() => onPress(title), [title]);
   return (
     <View>
-      <Row>
-        <Text>{title}</Text>
-        <Spacer position="left" size={10}>
-          <Pressable onPress={handlePress}>
-            <Text>X</Text>
-          </Pressable>
-        </Spacer>
+      <Row gap={10} style={styles.chip} alignItems="center">
+        <Text style={styles.text}>{title}</Text>
+        <Pressable onPress={handlePress}>
+          <Image
+            style={styles.crossIcon}
+            source={require('../../assets/images/icons/crossIcon.png')}
+          />
+        </Pressable>
       </Row>
     </View>
   );
