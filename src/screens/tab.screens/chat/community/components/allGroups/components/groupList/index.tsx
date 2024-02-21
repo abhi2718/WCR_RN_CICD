@@ -10,13 +10,17 @@ import { styles } from './styles';
 import { GroupInfoModal } from '../../../../../../../../components/groupInfoModal';
 
 const GroupsList = (props: GroupsListProps) => {
-  const { groups, handleJoinGroup } = props;
+  const { groups, handleJoinGroup, handleLeaveGroup } = props;
   return (
     <View style={styles.container}>
       <FlatList
         data={groups}
         renderItem={({ item }) => (
-          <Group group={item} handleJoinGroup={handleJoinGroup} />
+          <Group
+            group={item}
+            handleJoinGroup={handleJoinGroup}
+            handleLeaveGroup={handleLeaveGroup}
+          />
         )}
         keyExtractor={(item) => item.getGuid()}
       />
@@ -25,7 +29,7 @@ const GroupsList = (props: GroupsListProps) => {
 };
 
 const Group = (props: GroupProps) => {
-  const { group, handleJoinGroup } = props;
+  const { group, handleJoinGroup, handleLeaveGroup } = props;
   const [isGroupInfoModalVisible, setisGroupInfoModalVisible] = useState(false);
   const closeModal = () => {
     setisGroupInfoModalVisible(false);
@@ -50,7 +54,12 @@ const Group = (props: GroupProps) => {
         <Column justifyContent="center">
           {group.getHasJoined() && (
             <>
-              <Text style={styles.joinedBtn}>Joined</Text>
+              <Text
+                style={styles.joinedBtn}
+                onPress={() => handleLeaveGroup(group.getGuid())}
+              >
+                Leave
+              </Text>
             </>
           )}
           {!group.getHasJoined() && (
