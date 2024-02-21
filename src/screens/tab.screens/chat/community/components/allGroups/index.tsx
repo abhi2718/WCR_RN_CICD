@@ -6,14 +6,14 @@ import SearchGroup from './components/searchGroup';
 import { styles, searchStyle } from './styles';
 import { useViewModal } from './useViewModal';
 import { WelocmeGroupModal } from '../../../../../../components/modal/welocmeGroupModal';
-export type AllGroupsProps = {
-};
+export type AllGroupsProps = {};
 const AllGroups = (props: AllGroupsProps) => {
   const {
     groups,
     handleTextChange,
     loading,
     handleJoinGroup,
+    handleLeaveGroup,
     closeModal,
     isModalVisible,
   } = useViewModal();
@@ -23,13 +23,15 @@ const AllGroups = (props: AllGroupsProps) => {
   }
   return (
     <View style={styles.container}>
-        <WelocmeGroupModal isVisible={!isModalVisible} onClose={closeModal} />
+      <WelocmeGroupModal isVisible={!isModalVisible} onClose={closeModal} />
       <View style={styles.container}>
-        <SearchGroup
-          handleTextChange={handleTextChange}
-        />
+        <SearchGroup handleTextChange={handleTextChange} />
         {groups?.length > 0 ? (
-          <GroupsList groups={groups} handleJoinGroup={handleJoinGroup} />
+          <GroupsList
+            groups={groups}
+            handleJoinGroup={handleJoinGroup}
+            handleLeaveGroup={handleLeaveGroup}
+          />
         ) : (
           <View style={searchStyle.content}>
             <Column gap={25} alignItems="center">
