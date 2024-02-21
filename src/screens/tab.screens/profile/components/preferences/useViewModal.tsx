@@ -1,6 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector} from 'react-redux';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 import { UserProfileRepository } from '../../../../../repository/userProfile.repo';
 import { handleInputChangeType } from '../../../../../types/screen.type/profile.type';
@@ -30,9 +36,10 @@ export const useViewModal = () => {
   const userProfileRepository = useMemo(() => new UserProfileRepository(), []);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
-  const [isPrimaryDegreeValid, setIsPrimaryDegreeValid] = useState<boolean>(false);
+  const [isPrimaryDegreeValid, setIsPrimaryDegreeValid] =
+    useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [showHeightModal,setShowHeightModal] = useState(false);
+  const [showHeightModal, setShowHeightModal] = useState(false);
   const isPrefrenceCreated = useRef(false);
   const [answer, setAnswer] = useState({
     degreeCategory: noPreference,
@@ -63,10 +70,7 @@ export const useViewModal = () => {
       (item) => item === preferNotToSay,
     );
     if (isContainPreferNotToSay) {
-      return [
-        ...list.filter((item) => item !== preferNotToSay),
-        noPreference,
-      ];
+      return [...list.filter((item) => item !== preferNotToSay), noPreference];
     }
     return list;
   };
@@ -110,7 +114,7 @@ export const useViewModal = () => {
   const optionsList = [
     {},
     {
-      title: 'Gender Of Interest',
+      title: 'Gender of Interest',
       option: genderList,
       initValue: 'gender',
     },
@@ -420,7 +424,7 @@ export const useViewModal = () => {
     }
   }, [answer.degreeCategory]);
   const handleHeightModal = useCallback(() => {
-    setShowHeightModal(oldValue => !oldValue);
+    setShowHeightModal((oldValue) => !oldValue);
   }, []);
   const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
     useState(false);
@@ -430,7 +434,7 @@ export const useViewModal = () => {
   const openModal = () => {
     setVerificvationInfoModalVisible(true);
   };
-  const voidFun = () => { }
+  const voidFun = () => {};
   return {
     openModal,
     closeModal,
@@ -451,6 +455,6 @@ export const useViewModal = () => {
     handleHeightModal,
     heightRange,
     setHeightRange,
-    voidFun
+    voidFun,
   };
 };

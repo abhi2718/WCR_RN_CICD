@@ -188,14 +188,14 @@ export const createNotifications = (
 };
 
 export function separateWords(inputString: string) {
-  const hyphenIndex: number = inputString.indexOf('(');
+  const hyphenIndex: number = inputString?.indexOf('(');
 
   if (hyphenIndex !== -1) {
-    let afterHyphen = inputString.slice(hyphenIndex).trim();
+    let afterHyphen = inputString?.slice(hyphenIndex)?.trim();
 
     return removeParentheses(afterHyphen);
   } else {
-    return removeParentheses(inputString.trim());
+    return removeParentheses(inputString?.trim());
   }
 }
 
@@ -276,8 +276,8 @@ const convertedArr = [
     initials: '(PhD Health Focus Student)',
   },
 ];
-function removeParentheses(str:string) {
-  return ` ${str.replace(/[()]/g, '')}`;
+function removeParentheses(str: string) {
+  return ` ${str?.replace(/[()]/g, '')}`;
 }
 export function addInitials(userDegree: string, primaryDegree: string) {
   if (userDegree === 'PhD in Health-Related Field') {
@@ -359,6 +359,6 @@ export const validateEmail = (email: string) => {
   return emailRegex.test(email);
 };
 
-export const showDisplayOrFirstName = (displayName:string,name: string) => {
-   return displayName?.length?displayName:name
-}
+export const showDisplayOrFirstName = (displayName: string, name: string) => {
+  return displayName?.length ? displayName : name;
+};

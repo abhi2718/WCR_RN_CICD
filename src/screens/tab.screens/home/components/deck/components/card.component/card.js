@@ -12,6 +12,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { AlertScreen } from '../../../../../../../components/alert';
 import { addInitials } from '../../../../../../../utils/common.functions';
+import { preferNotToSay } from '../../../../../../../utils/constanst';
 export default function CardCompoent({ item, height, cardRef }) {
   const heightStyle = { height, ...cardStyles.imageStyle };
   const {
@@ -62,9 +63,8 @@ export default function CardCompoent({ item, height, cardRef }) {
                 <Row alignItems="center" gap={15} style={cardStyles.nameRow}>
                   <Text style={cardStyles.name}>
                     {showDisplayOrFirstName(item.displayName, first)}{' '}
-                    {genderPronoun !== 'Prefer not to say' &&
-                      `(${genderPronoun})`}
-                    , {calculateAge(dob)}
+                    {genderPronoun !== preferNotToSay && `(${genderPronoun})`},{' '}
+                    {calculateAge(dob)}
                   </Text>
                   <Image
                     style={cardStyles.badge}
@@ -95,7 +95,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Text style={cardStyles.userInfoText}>
                   <Text style={cardStyles.designation}>
-                    {designation.title}
+                    {designation?.title}
                   </Text>
                   {institution ? `, ${institution}` : ''}
                 </Text>
@@ -168,7 +168,24 @@ export default function CardCompoent({ item, height, cardRef }) {
                       <Text style={cardStyles.chipText}>{ethnicity}</Text>
                     </Row>
                   ))}
-                {maritalStatus && maritalStatus !== 'Prefer not to say' && (
+
+                {item?.relationship?.length >= 0 &&
+                  item?.relationship?.map((relationship, index) => (
+                    <Row
+                      key={index}
+                      gap={10}
+                      alignItems="center"
+                      style={cardStyles.chip}
+                    >
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/vitalIcons/relationship.png')}
+                      />
+                      <Text style={cardStyles.chipText}>{relationship}</Text>
+                    </Row>
+                  ))}
+
+                {maritalStatus && maritalStatus !== preferNotToSay && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
@@ -178,17 +195,17 @@ export default function CardCompoent({ item, height, cardRef }) {
                   </Row>
                 )}
 
-                {item.religion && item.religion !== 'Prefer not to say' && (
+                {item?.religion && item?.religion !== preferNotToSay && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
                       source={require('../../../../../../../assets/images/vitalIcons/Religion.png')}
                     />
 
-                    <Text style={cardStyles.chipText}>{item.religion}</Text>
+                    <Text style={cardStyles.chipText}>{item?.religion}</Text>
                   </Row>
                 )}
-                {item?.politics && item?.politics !== 'Prefer not to say' && (
+                {item?.politics && item?.politics !== preferNotToSay && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
@@ -198,8 +215,8 @@ export default function CardCompoent({ item, height, cardRef }) {
                   </Row>
                 )}
                 {item?.kids &&
-                  item?.kids !== 'Prefer not to say' &&
-                  (item?.kids === ' Prefer not to say' ? null : (
+                  item?.kids !== preferNotToSay &&
+                  (item?.kids === preferNotToSay ? null : (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
                       <Image
                         style={cardStyles.chipIcon}
@@ -209,8 +226,19 @@ export default function CardCompoent({ item, height, cardRef }) {
                     </Row>
                   ))}
 
+                {item?.familyPlan && item?.familyPlan !== preferNotToSay && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/wantKids.png')}
+                    />
+
+                    <Text style={cardStyles.chipText}>{item?.familyPlan}</Text>
+                  </Row>
+                )}
+
                 {item?.covidVaccineStatus &&
-                  item?.covidVaccineStatus !== 'Prefer not to say' && (
+                  item?.covidVaccineStatus !== preferNotToSay && (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
                       <Image
                         style={cardStyles.chipIcon}
@@ -222,13 +250,43 @@ export default function CardCompoent({ item, height, cardRef }) {
                     </Row>
                   )}
 
-                {drinking && drinking !== 'Prefer not to say' && (
+                {item?.diet && item?.diet !== preferNotToSay && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/diet.png')}
+                    />
+                    <Text style={cardStyles.chipText}>{item?.diet}</Text>
+                  </Row>
+                )}
+
+                {drinking && drinking !== preferNotToSay && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
                       source={require('../../../../../../../assets/images/vitalIcons/drinks.png')}
                     />
                     <Text style={cardStyles.chipText}>{drinking}</Text>
+                  </Row>
+                )}
+
+                {item?.excercise && item?.excercise !== preferNotToSay && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/workout.png')}
+                    />
+                    <Text style={cardStyles.chipText}>{item?.excercise}</Text>
+                  </Row>
+                )}
+
+                {item?.smoking && item?.smoking !== preferNotToSay && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/smoking.png')}
+                    />
+                    <Text style={cardStyles.chipText}>{item?.smoking}</Text>
                   </Row>
                 )}
               </Row>
