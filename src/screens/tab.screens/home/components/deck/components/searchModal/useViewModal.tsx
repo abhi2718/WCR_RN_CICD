@@ -20,9 +20,10 @@ export const useViewModal = (props: SearchModalProps) => {
       userId,
       state: !oldState.state,
     }));
+    setUser([])
   }, []);
   const clearSelectedProfile = useCallback(() => {
-    setSelectedProfile((oldState) => ({
+    setSelectedProfile(() => ({
       userId:null,
       state: false,
     }));

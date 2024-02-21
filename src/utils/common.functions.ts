@@ -277,7 +277,7 @@ const convertedArr = [
   },
 ];
 function removeParentheses(str: string) {
-  return str?.replace(/[()]/g, '');
+  return ` ${str?.replace(/[()]/g, '')}`;
 }
 export function addInitials(userDegree: string, primaryDegree: string) {
   if (userDegree === 'PhD in Health-Related Field') {
