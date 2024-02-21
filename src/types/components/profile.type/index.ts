@@ -39,6 +39,11 @@ export type UserProfile = {
   kids: string;
   covidVaccineStatus: string | boolean;
   bio: string;
+  relationship: string[];
+  familyPlan: string;
+  diet: string;
+  excercise: string;
+  smoking: string;
 };
 export type profileProps = {
   showModal?: boolean;

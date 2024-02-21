@@ -95,7 +95,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                 />
                 <Text style={cardStyles.userInfoText}>
                   <Text style={cardStyles.designation}>
-                    {designation.title}
+                    {designation?.title}
                   </Text>
                   {institution ? `, ${institution}` : ''}
                 </Text>
@@ -168,6 +168,23 @@ export default function CardCompoent({ item, height, cardRef }) {
                       <Text style={cardStyles.chipText}>{ethnicity}</Text>
                     </Row>
                   ))}
+
+                {item?.relationship?.length >= 0 &&
+                  item?.relationship?.map((relationship, index) => (
+                    <Row
+                      key={index}
+                      gap={10}
+                      alignItems="center"
+                      style={cardStyles.chip}
+                    >
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/vitalIcons/relationship.png')}
+                      />
+                      <Text style={cardStyles.chipText}>{relationship}</Text>
+                    </Row>
+                  ))}
+
                 {maritalStatus && maritalStatus !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
@@ -178,14 +195,14 @@ export default function CardCompoent({ item, height, cardRef }) {
                   </Row>
                 )}
 
-                {item.religion && item.religion !== 'Prefer not to say' && (
+                {item?.religion && item?.religion !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
                       style={cardStyles.chipIcon}
                       source={require('../../../../../../../assets/images/vitalIcons/Religion.png')}
                     />
 
-                    <Text style={cardStyles.chipText}>{item.religion}</Text>
+                    <Text style={cardStyles.chipText}>{item?.religion}</Text>
                   </Row>
                 )}
                 {item?.politics && item?.politics !== 'Prefer not to say' && (
@@ -209,6 +226,20 @@ export default function CardCompoent({ item, height, cardRef }) {
                     </Row>
                   ))}
 
+                {item?.familyPlan &&
+                  item?.familyPlan !== 'Prefer not to say' && (
+                    <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                      <Image
+                        style={cardStyles.chipIcon}
+                        source={require('../../../../../../../assets/images/vitalIcons/wantKids.png')}
+                      />
+
+                      <Text style={cardStyles.chipText}>
+                        {item?.familyPlan}
+                      </Text>
+                    </Row>
+                  )}
+
                 {item?.covidVaccineStatus &&
                   item?.covidVaccineStatus !== 'Prefer not to say' && (
                     <Row gap={10} alignItems="center" style={cardStyles.chip}>
@@ -222,6 +253,16 @@ export default function CardCompoent({ item, height, cardRef }) {
                     </Row>
                   )}
 
+                {item?.diet && item?.diet !== 'Prefer not to say' && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/diet.png')}
+                    />
+                    <Text style={cardStyles.chipText}>{item?.diet}</Text>
+                  </Row>
+                )}
+
                 {drinking && drinking !== 'Prefer not to say' && (
                   <Row gap={10} alignItems="center" style={cardStyles.chip}>
                     <Image
@@ -229,6 +270,26 @@ export default function CardCompoent({ item, height, cardRef }) {
                       source={require('../../../../../../../assets/images/vitalIcons/drinks.png')}
                     />
                     <Text style={cardStyles.chipText}>{drinking}</Text>
+                  </Row>
+                )}
+
+                {item?.excercise && item?.excercise !== 'Prefer not to say' && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/workout.png')}
+                    />
+                    <Text style={cardStyles.chipText}>{item?.excercise}</Text>
+                  </Row>
+                )}
+
+                {item?.smoking && item?.smoking !== 'Prefer not to say' && (
+                  <Row gap={10} alignItems="center" style={cardStyles.chip}>
+                    <Image
+                      style={cardStyles.chipIcon}
+                      source={require('../../../../../../../assets/images/vitalIcons/smoking.png')}
+                    />
+                    <Text style={cardStyles.chipText}>{item?.smoking}</Text>
                   </Row>
                 )}
               </Row>

@@ -180,7 +180,7 @@ export const PreferencesScreen = () => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text style={styles.headerText}>Healthcare Professional</Text>
+                  <Text style={styles.headerText}>Healthcare profession</Text>
                 </Row>
               );
             }

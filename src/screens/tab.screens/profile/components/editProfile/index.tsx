@@ -70,7 +70,7 @@ export const EditProfile = () => {
           isLogo={false}
           isText={true}
           isLoading={submitLoading}
-          text="Edit info"
+          text="Edit Profile"
           button={submitLoading ? voidFun : editProfile}
         />
       </View>
@@ -536,7 +536,7 @@ export const EditProfile = () => {
                       }
 
                       if (
-                        item.title === 'Healthcare Professionals' &&
+                        item.title === 'Healthcare Profession' &&
                         index === 2
                       ) {
                         return (
@@ -557,7 +557,7 @@ export const EditProfile = () => {
                       }
 
                       if (
-                        item.title === 'Healthcare Professionals' &&
+                        item.title === 'Healthcare Profession' &&
                         index === 3
                       ) {
                         return (

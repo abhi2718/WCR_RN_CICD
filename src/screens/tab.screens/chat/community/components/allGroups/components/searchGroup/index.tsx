@@ -5,7 +5,7 @@ import { styles } from './style';
 import { Row } from '../../../../../../../../components/tools';
 
 const SearchGroup = (props: SearchGroupProps) => {
-  const { handleTextChange} = props;
+  const { handleTextChange } = props;
   return (
     <Row
       style={styles.searchBarContainer}
@@ -14,7 +14,8 @@ const SearchGroup = (props: SearchGroupProps) => {
     >
       <TextInput
         style={styles.searchInput}
-        placeholder="Search"
+        placeholder="Group Search"
+        placeholderTextColor="#999"
         onChangeText={handleTextChange}
       />
     </Row>
