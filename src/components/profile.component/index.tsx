@@ -119,7 +119,7 @@ export const ProfileModal = (props: profileProps) => {
                               user?.displayName,
                               user?.first,
                             )}{' '}
-                            {user?.genderPronoun !== 'Prefer not to say' &&
+                            {user?.genderPronoun !== preferNotToSay &&
                               `(${user?.genderPronoun})`}
                             , {calculateAge(user?.dob)}
                           </Text>
@@ -319,7 +319,7 @@ export const ProfileModal = (props: profileProps) => {
                           )}
 
                           {user?.familyPlan &&
-                            user?.familyPlan !== 'Prefer not to say' && (
+                            user?.familyPlan !== preferNotToSay && (
                               <Row
                                 gap={10}
                                 alignItems="center"
@@ -353,7 +353,7 @@ export const ProfileModal = (props: profileProps) => {
                               </Row>
                             )}
 
-                          {user?.diet && user?.diet !== 'Prefer not to say' && (
+                          {user?.diet && user?.diet !== preferNotToSay && (
                             <Row
                               gap={10}
                               alignItems="center"
@@ -387,7 +387,7 @@ export const ProfileModal = (props: profileProps) => {
                             )}
 
                           {user?.excercise &&
-                            user?.excercise !== 'Prefer not to say' && (
+                            user?.excercise !== preferNotToSay && (
                               <Row
                                 gap={10}
                                 alignItems="center"
@@ -404,7 +404,7 @@ export const ProfileModal = (props: profileProps) => {
                             )}
 
                           {user?.smoking &&
-                            user?.smoking !== 'Prefer not to say' && (
+                            user?.smoking !== preferNotToSay && (
                               <Row
                                 gap={10}
                                 alignItems="center"
