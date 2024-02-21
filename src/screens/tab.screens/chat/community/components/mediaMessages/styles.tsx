@@ -9,17 +9,14 @@ export const styles = StyleSheet.create({
     height: 500,
     backgroundColor: theme.colors.ui.white,
   },
-
   galleryContainer: {
     paddingHorizontal: sizes[3],
     paddingTop: sizes[3],
   },
-
   galleryImage: {
     width: (dimensions.width - 32) / 3,
     height: 120,
   },
-
   galleryWrapper: {
     flex: 1,
     flexDirection: 'row',
@@ -28,4 +25,11 @@ export const styles = StyleSheet.create({
     marginHorizontal: 8,
     marginVertical: 4,
   },
+  innerWrapper: {
+    height: 300,
+    flex: 1
+  },
+  scrollViewStyle: {
+    backgroundColor: '#fff'
+  }
 });

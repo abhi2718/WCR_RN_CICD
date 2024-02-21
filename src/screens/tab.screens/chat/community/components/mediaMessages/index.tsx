@@ -62,16 +62,17 @@ const ViedoMessage = (props: MediaMessageProps) => {
         <FullLoader />
       ) : (
         <>
-          <ScrollView style={{ backgroundColor: '#fff' }}>
-            {/* {['https://vjs.zencdn.net/v/oceans.mp4'].map((imgUrl, index) => (
-              <Spacer key={index} position="bottom" size={10}>
-                <View style={{ height: 300, flex: 1 }}>
-                  <View style={{ height: 300, flex: 1 }}>
-                    <VedioPlayer url="https://vjs.zencdn.net/v/oceans.mp4" />
+            <ScrollView style={styles.scrollViewStyle}>
+              {
+                videos.map((url: string, index: number) => (
+                  <Spacer key={index} position="bottom" size={10}>
+                <View style={styles.innerWrapper}>
+                  <View style={styles.innerWrapper}>
+                    <VedioPlayer url={url} />
                   </View>
                 </View>
-              </Spacer>
-            ))} */}
+              </Spacer>))
+              }
           </ScrollView>
         </>
       )}
