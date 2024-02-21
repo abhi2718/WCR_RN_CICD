@@ -1,9 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   FlashMessageType,
   ShowFlashMessage,
 } from '../../../../../components/flashBar';
+import { ROUTES } from '../../../../../navigation';
 import { CloudinaryRepository } from '../../../../../repository/cloudinary.repo';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { addUser } from '../../../../../store/reducers/user.reducer';
@@ -68,7 +70,6 @@ export const useViewModal = () => {
     showGenderPronoun: false,
     showSexualOrientation:false
   });
-
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
       return { ...oldState, [option.type]: option.value };
@@ -667,7 +668,13 @@ export const useViewModal = () => {
       }
     });
   }
-  const voidFun = useCallback(() => {}, []);
+  const voidFun = useCallback(() => { }, []);
+  const navigation = useNavigation()
+  const navigateToHobby = useCallback(() => {
+    navigation.navigate(ROUTES.Hobbies, {
+      isCommingFromEditScreen:true
+    })
+  }, []);
   return {
     answer,
     optionsList,
@@ -704,5 +711,6 @@ export const useViewModal = () => {
     setheight,
     voidFun,
     setAnswer,
+    navigateToHobby
   };
 };

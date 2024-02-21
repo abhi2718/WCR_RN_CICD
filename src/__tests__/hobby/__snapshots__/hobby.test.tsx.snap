@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hobby stylesheet should match snapshot 1`] = `
+{
+  "customHobbyConatiner": {
+    "flex": 1,
+  },
+  "scrollContainer": {
+    "height": 567,
+  },
+  "wrapper": {
+    "backgroundColor": "red",
+    "flex": 1,
+    "justifyContent": "space-between",
+  },
+}
+`;

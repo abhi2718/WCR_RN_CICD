@@ -62,6 +62,7 @@ export const EditProfile = () => {
     setheight,
     voidFun,
     setAnswer,
+    navigateToHobby
   } = useViewModal();
   return (
     <SafeAreaView style={styles.editInfoContainer}>
@@ -97,9 +98,9 @@ export const EditProfile = () => {
             <Text style={styles.charCount}>{letterCount}/500</Text>
           </Column>
           <Spacer position="top" size={10}>
-            <View style={{ paddingHorizontal: 16 }}>
-              <Text style={styles.fieldName}>Interests & Hobbies</Text>
-              <TouchableOpacity onPress={() => openModal('hobby')}>
+            <View style={styles.ph16}>
+            <Text style={styles.fieldName}>Interests & Hobbies</Text>
+             <TouchableOpacity onPress={navigateToHobby}>
                 <Row
                   style={[styles.selectRow, styles.fieldValueContainer]}
                   justifyContent="space-between"
@@ -128,7 +129,7 @@ export const EditProfile = () => {
                     source={require('../../../../../assets/images/settings/Next.png')}
                   />
                 </Row>
-              </TouchableOpacity>
+              </TouchableOpacity> 
             </View>
             <MultiSelectModal
               isVisible={openHobbyModal}
@@ -315,7 +316,6 @@ export const EditProfile = () => {
               </Pressable>
             </Spacer>
           </Column>
-
           <Column>
             {optionsList.map((item, index) => {
               return (
