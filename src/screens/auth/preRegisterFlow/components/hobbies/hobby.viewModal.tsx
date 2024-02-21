@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 import { hobbies as hobbyList } from '../../../../../utils/constanst';
+import { Keyboard } from 'react-native';
 export const useHobbyViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
@@ -100,7 +101,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       setLoading(false);
       handleNavigation();
     } catch (err: any) {
-      console.log(err);
       setLoading(false);
     }
   };
@@ -142,6 +142,22 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       oldState.filter((oldHobby) => oldHobby !== hobby),
     );
   }, []);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => setIsKeyboardOpen(true)
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => setIsKeyboardOpen(false)
+    );
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
   return {
     selectedHobbies,
     handleHobbies,
@@ -153,5 +169,6 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     customCreatedHobby,
     removeCustomHobby,
     customHobby,
+    isKeyboardOpen
   };
 };

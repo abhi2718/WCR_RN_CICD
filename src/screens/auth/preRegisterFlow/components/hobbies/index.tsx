@@ -24,11 +24,13 @@ const Hobbies = (props: ScreenParams) => {
     customCreatedHobby,
     removeCustomHobby,
     customHobby,
+    isKeyboardOpen
   } = useHobbyViewModal(props);
+  
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
-        <View style={styles.scrollContainer}>
+        <View style={isKeyboardOpen?{height:200}:styles.scrollContainer}>
           {props?.route?.params?.isCommingFromEditScreen ? (
             <HeaderBar />
           ) : (

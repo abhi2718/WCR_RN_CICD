@@ -26,6 +26,8 @@ export const styles = StyleSheet.create({
   },
   input: {
     fontSize: theme.fontSizes.text,
+    width: '75%',
+    height: 50,
   },
   addbutton: {
     backgroundColor: theme.colors.ui.primary,
