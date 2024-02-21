@@ -68,7 +68,7 @@ export const useViewModal = () => {
   const [showHeightModal, setShowHeightModal] = useState(false);
   const [showOrientationModal, setShowOrientationModal] = useState({
     showGenderPronoun: false,
-    showSexualOrientation:false
+    showSexualOrientation: false,
   });
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
@@ -100,7 +100,7 @@ export const useViewModal = () => {
     state: user?.address?.state ? user?.address?.state : 'Select',
     city: user?.address?.city ? user?.address?.city : '',
     zipcode: user?.address?.state ? user?.address?.zipcode : '',
-    showSexualOrientation: user?.profile?.showSexualPreference??true,
+    showSexualOrientation: user?.profile?.showSexualPreference ?? true,
     sexualPreference: user?.profile.sexualPreference
       ? user?.profile.sexualPreference
       : '',
@@ -279,7 +279,7 @@ export const useViewModal = () => {
 
   const optionsList = [
     {
-      title: 'Healthcare Professionals',
+      title: 'Healthcare Profession',
       mainTitle: true,
       values: healthcareProfessionals,
     },
@@ -661,19 +661,19 @@ export const useViewModal = () => {
     setShowHeightModal(true);
 
   const _setOrientationModal = (key: string, value: boolean) => {
-    setShowOrientationModal(oldState => {
+    setShowOrientationModal((oldState) => {
       return {
         ...oldState,
-        [key]: value
-      }
+        [key]: value,
+      };
     });
-  }
-  const voidFun = useCallback(() => { }, []);
-  const navigation = useNavigation()
+  };
+  const voidFun = useCallback(() => {}, []);
+  const navigation = useNavigation();
   const navigateToHobby = useCallback(() => {
     navigation.navigate(ROUTES.Hobbies, {
-      isCommingFromEditScreen:true
-    })
+      isCommingFromEditScreen: true,
+    });
   }, []);
   return {
     answer,
@@ -711,6 +711,6 @@ export const useViewModal = () => {
     setheight,
     voidFun,
     setAnswer,
-    navigateToHobby
+    navigateToHobby,
   };
 };

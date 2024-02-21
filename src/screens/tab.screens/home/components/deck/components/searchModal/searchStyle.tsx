@@ -28,7 +28,7 @@ export const searchStyle = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginBottom: 10,
-    fontSize: fontSizes.title,
+    fontSize: fontSizes.text,
     backgroundColor: colors.ui.inputBg,
     fontFamily: fonts.body,
   },

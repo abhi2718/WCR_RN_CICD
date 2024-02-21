@@ -59,7 +59,7 @@ export const PreferencesScreen = () => {
       </View>
       <View>
         <ScrollView
-          style={[styles.padding16, styles.scrollSection]}
+          style={[styles.scrollSection]}
           showsVerticalScrollIndicator={false}
         >
           {optionsList.map((item, index) => {
@@ -71,9 +71,7 @@ export const PreferencesScreen = () => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text style={styles.headerText}>
-                    Tap here for more information
-                  </Text>
+                  <Text style={styles.headerText}>Tap here for more info</Text>
                   <Pressable onPress={openModal}>
                     <Image
                       style={styles.questionMarkIcon}
@@ -86,7 +84,10 @@ export const PreferencesScreen = () => {
             }
             if (index === 2) {
               return (
-                <View key={index} style={styles.multiSelector}>
+                <View
+                  key={index}
+                  style={[styles.multiSelector, styles.padding16]}
+                >
                   <Row alignItems="center" justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
                       Distance Preference
@@ -121,7 +122,10 @@ export const PreferencesScreen = () => {
             }
             if (index === 3) {
               return (
-                <View key={index} style={styles.multiSelector}>
+                <View
+                  key={index}
+                  style={[styles.multiSelector, styles.padding16]}
+                >
                   <Row justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
                       Age Preference
@@ -144,7 +148,10 @@ export const PreferencesScreen = () => {
             }
             if (index === 4) {
               return (
-                <View key={index} style={styles.multiSelector}>
+                <View
+                  key={index}
+                  style={[styles.multiSelector, styles.padding16]}
+                >
                   <Pressable onPress={handleHeightModal}>
                     <Row justifyContent="space-between">
                       <Text style={[styles.textColor, styles.optionName]}>
@@ -173,7 +180,7 @@ export const PreferencesScreen = () => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text style={styles.headerText}>Healthcare Professional</Text>
+                  <Text style={styles.headerText}>Healthcare profession</Text>
                 </Row>
               );
             }
