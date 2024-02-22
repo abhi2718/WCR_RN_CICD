@@ -8,11 +8,8 @@ import {
   View,
 } from 'react-native';
 import { HeaderBar } from '../../../../components/header';
-import { useVerificationViewModalStepTwo } from '../stepTwo.ViewModal';
-import {
-  AvatarProps,
-  VerificationImagePreviewProps,
-} from '../../../../types/screen.type/preRegister.type';
+
+import { VerificationImagePreviewProps } from '../../../../types/screen.type/preRegister.type';
 import {
   firstModalStyle,
   verificationStyle,
@@ -77,7 +74,7 @@ export const VerificationImagePreviewModal = (
           </TouchableOpacity>
         </View>
       </Modal>
-      <View>
+      <View style={{ padding: 16 }}>
         <HeaderBar
           isVerificartionScreen={false}
           info={openModal}
@@ -86,25 +83,24 @@ export const VerificationImagePreviewModal = (
       </View>
       <ScrollView>
         <Column>
-          <View style={{ margin: 12 }}>
+          <View>
             <View>
               {documentImage ? (
-                <View style={verificationImageUploaderStyle.imageViewProfile}>
-                  <TouchableOpacity>
+                <View style={verificationImageUploaderStyle.uploadeFinalImg}>
+                  <Image
+                    style={verificationImageUploaderStyle.profilePic}
+                    source={
+                      documentImage ? { uri: documentImage.path } : props.source
+                    }
+                  />
+                  <TouchableOpacity
+                    style={verificationImageUploaderStyle.deletImgWrapper}
+                    onPress={removeDocument}
+                  >
                     <Image
-                      style={verificationImageUploaderStyle.profilePic}
-                      source={
-                        documentImage
-                          ? { uri: documentImage.path }
-                          : props.source
-                      }
+                      style={verificationImageUploaderStyle.deletImg}
+                      source={require('../../../../assets/images/icons/redCrossIcon.png')}
                     />
-                    <TouchableOpacity onPress={removeDocument}>
-                      <Image
-                        style={verificationImageUploaderStyle.deletImg}
-                        source={require('../../../../assets/images/icons/redCrossIcon.png')}
-                      />
-                    </TouchableOpacity>
                   </TouchableOpacity>
                 </View>
               ) : (
@@ -121,18 +117,19 @@ export const VerificationImagePreviewModal = (
             <View>
               <View>
                 {selfie ? (
-                  <View style={verificationImageUploaderStyle.imageViewProfile}>
-                    <TouchableOpacity>
+                  <View style={verificationImageUploaderStyle.uploadeFinalImg}>
+                    <Image
+                      style={verificationImageUploaderStyle.profilePic}
+                      source={selfie ? { uri: selfie.path } : props.source}
+                    />
+                    <TouchableOpacity
+                      style={verificationImageUploaderStyle.deletImgWrapper}
+                      onPress={removeSelfie}
+                    >
                       <Image
-                        style={verificationImageUploaderStyle.profilePic}
-                        source={selfie ? { uri: selfie.path } : props.source}
+                        style={verificationImageUploaderStyle.deletImg}
+                        source={require('../../../../assets/images/icons/redCrossIcon.png')}
                       />
-                      <TouchableOpacity onPress={removeSelfie}>
-                        <Image
-                          style={verificationImageUploaderStyle.deletImg}
-                          source={require('../../../../assets/images/icons/redCrossIcon.png')}
-                        />
-                      </TouchableOpacity>
                     </TouchableOpacity>
                   </View>
                 ) : (
@@ -149,12 +146,13 @@ export const VerificationImagePreviewModal = (
             </View>
           </View>
         </Column>
-
-        <PrimaryButton
-          onPress={() => sumbitVerificationForm()}
-          title="Submit"
-          isLoading={loading}
-        />
+        <View style={{ paddingHorizontal: 16 }}>
+          <PrimaryButton
+            onPress={() => sumbitVerificationForm()}
+            title="Submit"
+            isLoading={loading}
+          />
+        </View>
       </ScrollView>
     </Modal>
   );
@@ -170,22 +168,39 @@ export const verificationImageUploaderStyle = StyleSheet.create({
     height: 300,
     alignItems: 'center',
     marginBottom: 20,
+    marginHorizontal: 16,
+  },
+  uploadeFinalImg: {
+    borderRadius: sizes[4],
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   profilePic: {
     borderRadius: sizes[4],
     paddingTop: sizes[4],
-    width: dimensions.width / 1.65,
-    height: dimensions.width / 1.65,
+    width: dimensions.width - 20,
+    height: 300,
+    resizeMode: 'cover',
+  },
+  uploaderPic: {
+    borderRadius: sizes[4],
+    paddingTop: sizes[4],
+    height: 300,
+    resizeMode: 'contain',
   },
   deletImg: {
-    position: 'absolute',
-    top: -sizes[7],
-    backgroundColor: '#fff',
-    right: sizes[3],
-    width: sizes[4],
-    height: sizes[10],
+    width: sizes[6],
+    height: sizes[6],
     padding: sizes[0],
     borderRadius: sizes[10],
+  },
+  deletImgWrapper: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    overflow: 'hidden',
   },
   imageIcon: {
     width: sizes[8],
@@ -197,7 +212,6 @@ export const verificationImageUploaderStyle = StyleSheet.create({
     height: 200,
     marginBottom: 20,
   },
-
   cancelButton: {
     borderRadius: 23,
     paddingVertical: 16,

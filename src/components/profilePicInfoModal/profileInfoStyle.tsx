@@ -109,6 +109,12 @@ export const insModalStyle = StyleSheet.create({
     height: 300,
     resizeMode: 'contain',
   },
+  stepTwoImg: {
+    marginTop: 5,
+    width: '100%',
+    height: 400,
+    resizeMode: 'contain',
+  },
   text: {
     fontSize: fontSizes.text,
     fontWeight: fontWeights.reqular,

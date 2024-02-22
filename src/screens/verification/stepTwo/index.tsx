@@ -10,6 +10,7 @@ import {
   Keyboard,
 } from 'react-native';
 import {
+  Column,
   Logo,
   Row,
   ScreenContainer,
@@ -101,18 +102,14 @@ const VerificationStepTwo = (props: AvatarProps) => {
           visibleModal={visibleModal}
         ></VerificationImagePreviewModal>
         <HeaderBar isVerificartionScreen={false} info={openModal} />
-        <KeyboardAvoidingView
-          enabled
-          behavior={isAndroid ? 'height' : 'padding'}
-          keyboardVerticalOffset={100}
-          style={{
-            ...verificationStyle.container,
-            height: dimensions.height - (top + bottom + 110),
-          }}
+
+        <Column
+          justifyContent="space-between"
+          style={verificationStyle.wrapper}
         >
           <View style={verificationStyle.wrapper}>
             <Text style={verificationStyle.subHeader}>
-              Photo Verification (Step II)
+              Step II - Photo Verification
             </Text>
             {verificationOption === 'Student' ? (
               <Text style={verificationStyle.subText}>
@@ -130,14 +127,20 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 </Text>
               </>
             )}
-
-            <ScrollView>
+            {verificationOption === 'Student' ? (
               <Image
-                resizeMode="center"
-                style={insModalStyle.rowOneImg}
+                // resizeMode="contain"
+                style={insModalStyle.stepTwoImg}
+                source={require('../../../assets/images/virificationModal3.png')}
+              />
+            ) : (
+              <Image
+                // resizeMode="contain"
+                style={insModalStyle.stepTwoImg}
                 source={require('../../../assets/images/virificationModal1.png')}
               />
-            </ScrollView>
+            )}
+
             {/* {verificationOption === 'Student' ? null : (
               <View>
                 <Row style={verificationStyle.pointsRow} alignItems="center">
@@ -171,7 +174,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
               </View>
             )} */}
           </View>
-          <View style={{ ...verificationStyle.footerDiv }}>
+          <View style={verificationStyle.footerDiv}>
             {/* {verificationOption === 'License Number' && (
               <View style={verificationStyle.white}>
                 <Text>
@@ -242,23 +245,23 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 on the type of degree.
               </Text>
             )} */}
-            <KeyboardAvoidingView
+            {/* <KeyboardAvoidingView
               enabled
               behavior={isAndroid ? 'height' : 'padding'}
-            >
-              <PrimaryButton
-                onPress={() => {
-                  if (isShowPreview()) {
-                    navigateToVerificationImagePreview();
-                  } else {
-                    toggleModal();
-                  }
-                }}
-                title="Camera"
-              />
-            </KeyboardAvoidingView>
+            > */}
+            <PrimaryButton
+              onPress={() => {
+                if (isShowPreview()) {
+                  navigateToVerificationImagePreview();
+                } else {
+                  toggleModal();
+                }
+              }}
+              title="Camera"
+            />
+            {/* </KeyboardAvoidingView> */}
           </View>
-        </KeyboardAvoidingView>
+        </Column>
         <View>
           <Modal
             animationType="slide"
@@ -309,9 +312,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     />
                   </View>
                 </Pressable>
-                <View style={modalStyles.logoWrapper}>
+                {/* <View style={modalStyles.logoWrapper}>
                   <Logo width={50} height={35} />
-                </View>
+                </View> */}
                 <View />
               </Row>
               {!isSelfie ? (
@@ -330,7 +333,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
               ) : (
                 <View style={modalStyles.content}>
                   <Text style={modalStyles.subText}>
-                    Take a selfie wearing or holding the SAME item.
+                    Take a selfie wearing or holding the{' '}
+                    <Text style={modalStyles.subTextInner}>SAME</Text> item as
+                    photo captured.
                   </Text>
                   {selfie ? (
                     <>
@@ -347,18 +352,23 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     </>
                   ) : (
                     <>
-                      <View style={verificationStyle.imageViewProfile}>
-                        <TouchableOpacity onPress={clickSelfieImage}>
-                          <Image
-                            style={verificationStyle.imageIcon}
-                            source={require('../../../assets/images/icons/addImg.png')}
-                          />
-                        </TouchableOpacity>
+                      <View style={modalStyles.flex1}>
+                        {/* <TouchableOpacity onPress={clickSelfieImage}> */}
+                        <Image
+                          resizeMode="center"
+                          style={modalStyles.verificationStepTwoSelfieImg}
+                          source={require('../../../assets/images/verificationStepTwoSelfie.png')}
+                        />
+                        <Text style={modalStyles.subTextImg}>
+                          Make sure the photo is clear, without any shades,
+                          masks, or obstructions.
+                        </Text>
+                        {/* </TouchableOpacity> */}
                       </View>
                       <PrimaryButton
                         onPress={clickSelfieImage}
                         style={modalStyles.button}
-                        title="Click Selfie"
+                        title="Camera"
                       />
                     </>
                   )}
@@ -386,9 +396,9 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     />
                   </Pressable>
                 </View>
-                <View style={modalStyles.logoWrapper}>
+                {/* <View style={modalStyles.logoWrapper}>
                   <Logo width={50} height={35} />
-                </View>
+                </View> */}
                 <View />
               </Row>
               <View style={modalStyles.content}>

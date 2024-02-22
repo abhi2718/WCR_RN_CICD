@@ -3,11 +3,15 @@ import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../infrastructure/theme/colors';
 import { dimensions } from '../../../../../components/tools';
+import { theme } from '../../../../../infrastructure/theme';
 
 export const addPicture = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
+  },
+  flex1: {
+    flex: 1,
   },
   subHeader: {
     fontSize: fontSizes.title,
@@ -94,9 +98,18 @@ export const addPicture = StyleSheet.create({
 });
 
 export const modalStyles = StyleSheet.create({
-  backButtonWrapper:{width:40,height:40,backgroundColor:'red',justifyContent:'center',alignItems:'center'},
+  flex1: {
+    flex: 1,
+  },
+  backButtonWrapper: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   logoWrapper: {
-    marginLeft: -40
+    marginLeft: -40,
   },
   container: {
     flex: 1,
@@ -124,9 +137,8 @@ export const modalStyles = StyleSheet.create({
     backgroundColor: 'white',
     padding: sizes[4],
     borderRadius: sizes[1],
-   // alignItems: 'center',
   },
-  backButtonWrapper:{
+  backButtonWrapper: {
     width: 50,
     height: 50,
     justifyContent: 'center',
@@ -152,6 +164,23 @@ export const modalStyles = StyleSheet.create({
     color: colors.ui.text,
     fontSize: fontSizes.text,
     marginBottom: sizes[1],
+    fontWeight: theme.fontWeights.medium,
+  },
+  subTextImg: {
+    textAlign: 'center',
+    color: colors.ui.text,
+    fontSize: fontSizes.text,
+    paddingHorizontal: sizes[5],
+    marginTop: sizes[5],
+    fontWeight: theme.fontWeights.medium,
+  },
+  verificationStepTwoSelfieImg: {
+    width: '100%',
+    height: 400,
+  },
+  subTextInner: {
+    color: theme.colors.ui.primary,
+    fontWeight: theme.fontWeights.bold,
   },
   picture: {
     flex: 1,
