@@ -299,7 +299,7 @@ export const useViewModal = () => {
   );
   useEffect(() => {
     if (userProfile?.aboutMe?.length) {
-      setLetterCount(500 - userProfile?.aboutMe.length);
+      setLetterCount(userProfile?.aboutMe.length);
     }
   }, [userProfile?.aboutMe]);
 

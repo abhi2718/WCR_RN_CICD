@@ -12,7 +12,7 @@ export class UpdateUserDetailsRepository {
     const url = `${AppUrl.userUpdatedetails}/validate-zipcode`;
     return await this.apiService.getPostApiResponse(url, user);
   }
-  async me(userId:string): Promise<any> {
+  async me(userId: string): Promise<any> {
     const url = `${AppUrl.userUpdatedetails}/getprofile?userId=${userId}`;
     return await this.apiService.getGetApiResponse(url);
   }

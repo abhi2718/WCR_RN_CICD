@@ -15,6 +15,7 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
   const state = user?.verification?.status;
   const [declineReason, setDeclineReason] = useState('');
   const isFormSubmitted = user?.verificationId?.submitted;
+  const [loading, setLoading] = useState(false);
   const { resetState } = useNavigateToScreen();
   useEffect(() => {
     const me = async () => {
@@ -47,16 +48,48 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
     if (user.verification.status !== 'Rejected') {
       return;
     }
-    const reason = user.verification.ROR[user.verification.ROR.length - 1]
-      .reason
-      ? user.verification.ROR[user.verification.ROR.length - 1].reason
-      : Object.values(
-          user.verification.ROR[user.verification.ROR.length - 1],
-        ).join('');
+    const rorObject =
+      user?.verification?.ROR.length > 0
+        ? user?.verification?.ROR[user.verification.ROR.length - 1]
+        : null;
+    const reason = rorObject != null ? rorObject.reason : '';
     setDeclineReason(reason);
   };
-  const navigateToGender = () => {
-    navigation.navigate(ROUTES.Gender);
+
+  const updateUserDetails = async () => {
+    try {
+      const update = {
+        verificationId: {
+          submitted: false,
+        },
+      };
+      setLoading(true);
+      const userData = await updateUserDetailsRepository.updateUserDetails(
+        user._id,
+        {
+          update,
+        },
+      );
+      const data = token
+        ? {
+            user: {
+              ...userData,
+              token,
+            },
+          }
+        : {
+            user: userData,
+          };
+      dispatch(addUser(data));
+      setLoading(false);
+      navigateToGender();
+    } catch (err: any) {
+      setLoading(false);
+    }
   };
-  return { state, isFormSubmitted, navigateToGender, declineReason };
+
+  const navigateToGender = () => {
+    navigation.navigate(ROUTES.About);
+  };
+  return { state, isFormSubmitted, updateUserDetails, declineReason, loading };
 };

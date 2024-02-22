@@ -1307,13 +1307,14 @@ export const CometChatMessageComposer = React.forwardRef(
       return (
         <View>
           <FlatList
+             keyboardShouldPersistTaps="always"
             style={Style.mentionListBox}
             data={groupMembers}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => {
-                  setInputMessage((message) => `@${item.getName()}`);
+                  setInputMessage(() => `@${item.getName()}`);
                   setShowMentationModal(false);
                 }}
               >

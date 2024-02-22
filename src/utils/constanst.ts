@@ -461,6 +461,18 @@ export const primaryDegree: any = {
   ],
 };
 
+export const degreeIdentifierType = [
+  'CPSO',
+  'CNO',
+  'MINC',
+  'MSP',
+  'Licence',
+  'Registration',
+  'Permit',
+  'Training Card Number',
+  'Other Identifier',
+];
+
 export const feetValues = [
   `4'0"`,
   `4'1"`,
@@ -517,7 +529,7 @@ export const options = [
   { label: 'Feet', value: 'feet' },
   { label: 'Cm', value: 'cm' },
 ];
-export const cmValues = feetValues.map(height => {
+export const cmValues = feetValues.map((height) => {
   const [feet, inches] = height.split("'");
   const totalInches = parseInt(feet) * 12 + parseInt(inches.replace('"', ''));
   const totalCm = totalInches * 2.54;
