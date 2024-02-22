@@ -65,6 +65,7 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
                 showDisLike={true}
                 showLike={true}
                 showSave={true}
+                isMatched={true}
               />
             </Row>
           </Column>
