@@ -7,6 +7,7 @@ import { PrimaryButton } from '../button';
 import { isAndroid } from '../tools';
 import { verificationStyle } from '../../screens/verification/stepOne/verificationSteps';
 import { ErrorText } from '../../screens/auth/signin/signInStyle';
+import style from '../../cometchat/src/shared/views/CometChatReceipt/style';
 
 export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
   const {
@@ -27,11 +28,16 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
 
   return (
     <Modal visible={isVisible}>
-      <HeaderBar goBack={onClose} skip={skip} />
+      <View style={verificationStyle.paddingH}>
+        <HeaderBar goBack={onClose} skip={skip} />
+      </View>
 
-      <View style={{ ...verificationStyle.footerDiv }}>
+      <View
+        style={[verificationStyle.paddingH, verificationStyle.wrapperContainer]}
+      >
         {verificationOption === 'License Number' && (
-          <View style={verificationStyle.white}>
+          <View>
+            <Text style={verificationStyle.headingText}>Step I</Text>
             <Text>
               <Text style={verificationStyle.optionalText}>Optional: </Text>
               <Text style={verificationStyle.pointText}>
@@ -46,18 +52,18 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
               <FlatInput
                 label="Enter website"
                 value={optionData.licenceWebsite}
-                onChangeText={(text: string) =>
-                  validateUserWebsiteUrl(text)
-                }
+                onChangeText={(text: string) => validateUserWebsiteUrl(text)}
               />
               {!isValidWebsiteUrl && optionData?.licenceWebsite?.length ? (
-              <ErrorText>
-                Please enter a valid Website.
-              </ErrorText>
-            ) : (
-              <View />
-            )}
+                <ErrorText>Please enter a valid Website.</ErrorText>
+              ) : (
+                <View />
+              )}
             </KeyboardAvoidingView>
+            <Text style={verificationStyle.footerText}>
+              We may request additional proof of degree if needed, depending on
+              the type of degree.
+            </Text>
           </View>
         )}
         {verificationOption === 'HealthCare' && (
@@ -80,18 +86,18 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
                   validateUserWebsiteUrlHealthCare(text)
                 }
               />
-              {!isValidWebsiteUrlHealthCare && optionData?.healthCareProfessionalEmail?.length ? (
-              <ErrorText>
-                Please enter a valid Website.
-              </ErrorText>
-            ) : (
-              <View />
-            )}
+              {!isValidWebsiteUrlHealthCare &&
+              optionData?.healthCareProfessionalEmail?.length ? (
+                <ErrorText>Please enter a valid Website.</ErrorText>
+              ) : (
+                <View />
+              )}
             </KeyboardAvoidingView>
           </View>
         )}
         {verificationOption === 'Student' && (
-          <View style={verificationStyle.white}>
+          <View>
+            <Text style={verificationStyle.headingText}>Step I</Text>
             <Text>
               <Text style={verificationStyle.optionalText}>Optional: </Text>
               <Text style={verificationStyle.pointText}>
@@ -106,33 +112,29 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
             >
               <FlatInput
                 label="Enter student email"
-                onChangeText={(text: string) =>
-                  validateEmail(text)
-                }
+                onChangeText={(text: string) => validateEmail(text)}
                 value={optionData.studentEmail}
               />
               {!isValidEmail && optionData?.studentEmail?.length ? (
-              <ErrorText>
-                Please enter a valid email address.
-              </ErrorText>
-            ) : (
-              <View />
-            )}
+                <ErrorText>Please enter a valid email address.</ErrorText>
+              ) : (
+                <View />
+              )}
             </KeyboardAvoidingView>
           </View>
         )}
-        {verificationOption === 'License Number' && (
-          <Text style={verificationStyle.footerText}>
-            We may request additional proof of degree if needed, depending on
-            the type of degree.
-          </Text>
-        )}
-        <KeyboardAvoidingView
-          enabled
-          behavior={isAndroid ? 'height' : 'padding'}
-        >
-          <PrimaryButton onPress={navigateToVerificationStepTwo} title="Next" />
-        </KeyboardAvoidingView>
+
+        <View style={verificationStyle.footerButton}>
+          <KeyboardAvoidingView
+            enabled
+            behavior={isAndroid ? 'height' : 'padding'}
+          >
+            <PrimaryButton
+              onPress={navigateToVerificationStepTwo}
+              title="Next"
+            />
+          </KeyboardAvoidingView>
+        </View>
       </View>
     </Modal>
   );

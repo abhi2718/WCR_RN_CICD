@@ -111,7 +111,7 @@ export const VerificationWebsitePhdMdal = (props: WebsitePhdModalProps) => {
                 <View />
               )}
               <Text style={verificationStyle.subHeader}>
-                Provide The Following Degree Verification (Step III)
+                Step II - Provide The Following Degree Verification
               </Text>
               <Text style={verificationStyle.subText}>
                 Upload Proof of Degree from USA showing name, institution,
@@ -125,13 +125,13 @@ export const VerificationWebsitePhdMdal = (props: WebsitePhdModalProps) => {
                 style={verificationStyle.uploadBtn}
                 onPress={() => toggleModal()}
               >
-                <Text style={verificationStyle.uploadBtnText}>Uplpoad</Text>
+                <Text style={verificationStyle.uploadBtnText}>Upload</Text>
               </TouchableOpacity>
               {PhdOptionImage ? (
                 <View>
                   <TouchableOpacity>
                     <Image
-                      style={verificationImageUploaderStyle.profilePic}
+                      style={verificationImageUploaderStyle.uploaderPic}
                       source={
                         PhdOptionImage
                           ? { uri: PhdOptionImage.path }
@@ -143,6 +143,7 @@ export const VerificationWebsitePhdMdal = (props: WebsitePhdModalProps) => {
               ) : (
                 <View />
               )}
+              <Text style={verificationStyle.headSubText}>OR</Text>
               <Text style={verificationStyle.subText}>
                 Enter website to show proof of degree (e.g., Professional
                 licensing website, Institution website showing name and year of
