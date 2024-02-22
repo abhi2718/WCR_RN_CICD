@@ -1995,6 +1995,7 @@ export const CometChatMessageList = forwardRef<
           <CometChatActionSheet
             actions={showMessageOptions}
             style={_actionStyle}
+            showReportIcon={true}
           />
         )}
       </CometChatBottomSheet>
