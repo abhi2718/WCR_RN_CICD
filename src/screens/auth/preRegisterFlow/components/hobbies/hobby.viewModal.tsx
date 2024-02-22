@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../../../navigation';
 import { addUser } from '../../../../../store/reducers/user.reducer';
 import { hobbies as hobbyList } from '../../../../../utils/constanst';
-import { Keyboard } from 'react-native';
+import { Keyboard,ScrollView } from 'react-native';
+export type ScrollViewRef = ScrollView & {
+  flashScrollIndicators: () => void;
+};
 export const useHobbyViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
   const { navigation } = props;
@@ -158,6 +161,12 @@ export const useHobbyViewModal = (props: ScreenParams) => {
       keyboardDidHideListener.remove();
     };
   }, []);
+  const scrollViewRef = useRef<ScrollViewRef | null>(null);
+  useEffect(() => {
+    setTimeout(function () {
+      scrollViewRef.current?.flashScrollIndicators();
+    }, 10);
+  }, []);
   return {
     selectedHobbies,
     handleHobbies,
@@ -169,6 +178,7 @@ export const useHobbyViewModal = (props: ScreenParams) => {
     customCreatedHobby,
     removeCustomHobby,
     customHobby,
-    isKeyboardOpen
+    isKeyboardOpen,
+    scrollViewRef
   };
 };

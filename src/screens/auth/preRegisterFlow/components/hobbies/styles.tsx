@@ -3,6 +3,7 @@ import { dimensions } from '../../../../../components/tools';
 import { theme } from '../../../../../infrastructure/theme';
 
 export const styles = StyleSheet.create({
+  innerHeight:{ height: 200 },
   wrapper: {
     flex: 1,
     backgroundColor: 'red',

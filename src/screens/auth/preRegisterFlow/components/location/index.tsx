@@ -47,9 +47,6 @@ const LocationScreen = (props: ScreenParams) => {
                   value={locationForm.country}
                   onChange={(text: OptionType) => handleCountry(text.value)}
                 />
-                {/* {validationErrors.country && (
-                  <ErrorText> {validationErrors.country}</ErrorText>
-                )} */}
                 <SearchableDropdownInput
                   data={getStatesOptions()}
                   onFocus={() => setIsFocus(true)}
@@ -62,20 +59,13 @@ const LocationScreen = (props: ScreenParams) => {
                     handleInputChange('state', text.value);
                   }}
                 />
-                {/* {validationErrors.state && (
-                  <ErrorText> {validationErrors.state}</ErrorText>
-                )} */}
                 <FlatInput
                   label="City"
                   value={locationForm.city}
                   onChangeText={(text: string) =>
                     handleInputChange('city', text)
                   }
-                 // error={validationErrors.city}
                 />
-                {/* {validationErrors.city && (
-                  <ErrorText> {validationErrors.city}</ErrorText>
-                )} */}
                 <FlatInput
                   label="Zip code"
                   placeholder={zipPlaceHolder}
@@ -84,11 +74,7 @@ const LocationScreen = (props: ScreenParams) => {
                   onChangeText={(text: string) =>
                     handleInputChange('zipcode', text)
                   }
-                 // error={validationErrors.zipcode}
                 />
-                {/* {validationErrors.zipcode && (
-                  <ErrorText>{validationErrors.zipcode}</ErrorText>
-                )} */}
               </View>
             </View>
             <View>

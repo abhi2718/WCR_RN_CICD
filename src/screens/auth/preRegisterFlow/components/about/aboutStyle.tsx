@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { sizes } from '../../../../../infrastructure/theme/sizes';
 import { fontSizes, fonts } from '../../../../../infrastructure/theme/fonts';
 import { colors } from '../../../../../infrastructure/theme/colors';
-import { dimensions } from '../../../../../components/tools';
+
 
 export const AboutStyle = StyleSheet.create({
   container: {

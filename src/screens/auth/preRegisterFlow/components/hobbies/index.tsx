@@ -12,6 +12,7 @@ import { useHobbyViewModal } from './hobby.viewModal';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 import { styles } from './styles';
 import { CustomChip } from '../../../../../components/customChip';
+
 const Hobbies = (props: ScreenParams) => {
   const {
     selectedHobbies,
@@ -24,23 +25,23 @@ const Hobbies = (props: ScreenParams) => {
     customCreatedHobby,
     removeCustomHobby,
     customHobby,
-    isKeyboardOpen
+    isKeyboardOpen,
+    scrollViewRef,
   } = useHobbyViewModal(props);
-  
+
   return (
     <ScreenContainer>
       <View style={ChipStyle.container}>
-        <View style={isKeyboardOpen?{height:200}:styles.scrollContainer}>
+        <View style={isKeyboardOpen ? styles.innerHeight : styles.scrollContainer}>
           {props?.route?.params?.isCommingFromEditScreen ? (
             <HeaderBar />
           ) : (
             <HeaderBar skip={navigateToVerificationScreen} />
           )}
           <Text style={ChipStyle.subHeader}>
-            What are your interests and hobbies?{' '}
-            {selectedHobbies.length + customCreatedHobby.length}/10
+            What are your interests and hobbies?
           </Text>
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView persistentScrollbar={true} ref={scrollViewRef}>
             <Spacer position="bottom" size={100}>
               <View>
                 <Row style={ChipStyle.chipRow} gap={10}>

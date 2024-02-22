@@ -9,7 +9,7 @@ import { Measurement } from '../../../../../types/commonFunction.type';
 
 export const useheightViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-  const { user } = useSelector((state: any) => state.userState);
+  const { user } = useSelector(({userState}) => userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const savedHeight: Measurement = user.height;
   const dispatch = useDispatch();

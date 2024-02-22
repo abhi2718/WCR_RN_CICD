@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { ScreenParams } from '../../../../../types/services.types/firebase.service';
 
 export const useUploadPicViewModal = (props: ScreenParams) => {

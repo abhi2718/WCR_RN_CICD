@@ -72,7 +72,6 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
           </View>
           <ScrollView
             style={modalStyle.flex}
-            scrollIndicatorInsets={{ right: 10 }}
             persistentScrollbar={true}
             ref={scrollViewRef}
             onScroll={handleScroll}

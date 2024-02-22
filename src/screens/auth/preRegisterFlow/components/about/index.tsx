@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Image,
   Keyboard,
   Pressable,
   Text,
   TextInput,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { Row, ScreenContainer } from '../../../../../components/tools';
+import { ScreenContainer } from '../../../../../components/tools';
 import { AboutStyle } from './aboutStyle';
 import { PrimaryButton } from '../../../../../components/button';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -58,7 +56,6 @@ const About = (props: ScreenParams) => {
               numberOfLines={10}
               returnKeyLabel="go"
               onSubmitEditing={() => {
-                //updateUserDetails()
               }}
               placeholderTextColor={colors.ui.placeholder}
             />

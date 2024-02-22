@@ -7,7 +7,7 @@ import { ROUTES } from '../../../../../navigation';
 
 export const useHabitViewModal = (props: ScreenParams) => {
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-  const { user } = useSelector((state: any) => state.userState);
+  const { user } = useSelector(({userState}) => userState);
   const token = useRef(user?.token ? user?.token : null).current;
   const dispatch = useDispatch();
   const { navigation } = props;
