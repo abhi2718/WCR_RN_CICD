@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { ShowFlashMessage } from '../../../../../../../components/flashBar';
 import { AuthRepository } from '../../../../../../../repository/auth.repo';
 import { OptionType } from '../../../../../../../types/screen.type/profile.type';

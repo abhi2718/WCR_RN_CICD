@@ -58,6 +58,7 @@ export const ReportScreen = (props: ScreenParams) => {
                 placeholderTextColor={colors.ui.placeholder}
                 onSubmitEditing={() => {}}
                 blurOnSubmit={true}
+                maxLength={500}
               />
             </Spacer>
           </View>
