@@ -106,7 +106,7 @@ export default function CardCompoent({ item, height, cardRef }) {
                   source={require('../../../../../../../assets/images/icons/location.png')}
                 />
                 <Text style={cardStyles.userInfoText}>
-                  <Text style={cardStyles.designation}>{city},</Text>{' '}
+                  <Text style={cardStyles.designation}>{city},</Text>
                   {addInitials(country, state)}
                 </Text>
               </Row>

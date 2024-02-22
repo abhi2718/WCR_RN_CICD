@@ -132,7 +132,7 @@ export const ProfileModal = (props: profileProps) => {
                             source={require('../../assets/images/icons/degree.png')}
                           />
                           <Text style={styles.userInfoText}>
-                            {user.designation.userDegree},
+                            {user.designation.userDegree},{' '}
                             {addInitials(
                               user.designation.userDegree,
                               user.designation.primaryDegree,
@@ -154,7 +154,7 @@ export const ProfileModal = (props: profileProps) => {
                             source={require('../../assets/images/icons/location.png')}
                           />
                           <Text style={styles.userInfoText}>
-                            {user?.city},
+                            {user?.city},{' '}
                             {addInitials(user?.country, user?.state)}
                           </Text>
                         </Row>
