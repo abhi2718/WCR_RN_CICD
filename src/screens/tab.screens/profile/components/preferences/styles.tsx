@@ -20,10 +20,9 @@ export const styles = StyleSheet.create({
   heading: {
     height: 40,
     backgroundColor: colors.bg.secondary,
-    paddingHorizontal: 16,
     paddingVertical: 0,
     color: colors.ui.textHead,
-    marginHorizontal: -16,
+    // marginHorizontal: -16,
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.text,
     marginVertical: 10,
@@ -34,14 +33,17 @@ export const styles = StyleSheet.create({
     fontWeight: fontWeights.bold,
     fontSize: fontSizes.text,
     fontFamily: fonts.body,
+    paddingHorizontal: 16,
   },
   questionMarkIcon: {
     width: 25,
+    marginRight: 16,
   },
   itemRow: {
     marginVertical: 5,
     borderBottomColor: colors.ui.disabled,
     borderBottomWidth: 1,
+    paddingHorizontal: 16,
   },
   iconStyle: {
     width: 20,
@@ -87,8 +89,8 @@ export const styles = StyleSheet.create({
   },
   degreeTypeWrapper: {
     marginTop: 10,
-    marginBottom:8,
-    width: dimensions.width -32,
+    marginBottom: 8,
+    width: dimensions.width - 32,
   },
   degreeTypeFont: {
     color: '#676161',
@@ -96,7 +98,7 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     height: 20,
     fontFamily: fonts.body,
-    fontSize:theme.fontSizes.text
+    fontSize: theme.fontSizes.text,
   },
   initValueTextStyle: {
     color: '#676161',

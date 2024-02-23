@@ -29,6 +29,7 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
     senderId,
     toggleModal,
     showModal,
+    _toggleModal
   } = useViewMdal(props);
   return (
     <Modal visible={visible}>
@@ -49,7 +50,6 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
                 source={image}
               />
             )}
-
             {name && <Text style={modalStyle.userNameStyle}> {name} </Text>}
             <Row gap={30}>
               <Pressable onPress={() => toggleModal()}>
@@ -60,11 +60,12 @@ export const ProfileModalSheet = (props: ProfileModalSheetProps) => {
               </Pressable>
               <ProfileModal
                 showModal={showModal}
-                toggleModal={toggleModal}
+                toggleModal={_toggleModal}
                 userId={senderId}
                 showDisLike={true}
                 showLike={true}
                 showSave={true}
+                isMatched={true}
               />
             </Row>
           </Column>

@@ -134,6 +134,7 @@ export const LikeScreen = () => {
                   </View>
                 ) : (
                   <View>
+                    <Spacer position="top" size={15} />
                     <Text style={styles.matchHeading}>Likes Received</Text>
                     <Spacer position="top" size={15} />
                     <View style={[styles.noDataList]}>
@@ -145,8 +146,8 @@ export const LikeScreen = () => {
                       <Text
                         style={[styles.noDataListText, styles.paddingMatches]}
                       >
-                        A like is around the corner! Make sure your profile
-                        stands out.
+                        A like is around the corner! {'\n'} Make sure your
+                        profile stands out.
                       </Text>
                     </View>
                   </View>
@@ -197,7 +198,7 @@ export const LikeScreen = () => {
                       <Text
                         style={[styles.noDataListText, styles.paddingMatches]}
                       >
-                        Start swiping and giving likes to view profiles here.
+                        Start connections by liking profiles.
                       </Text>
                       {/* <BlurView
                         style={styles.likedTextBlur}
@@ -254,7 +255,7 @@ export const LikeScreen = () => {
                       <Text
                         style={[styles.noDataListText, styles.paddingMatches]}
                       >
-                        Start saving profiles to like them later.
+                        Undecided? Save your favorite profiles for later.
                       </Text>
                     </View>
                   </View>

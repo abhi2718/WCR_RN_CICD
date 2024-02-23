@@ -40,7 +40,10 @@ export const useViewModal = (route: RouteType) => {
   notificationuseViewModal();
   useCometChatInit();
   const [lastDisLikeProfile, setLastDisLikeProfile] = useState<any>(null);
-  const [isMatch, setIsMatch] = useState({
+  const [isMatch, setIsMatch] = useState<{
+    status: boolean;
+    matchUser: null | Profile;
+  }>({
     status: false,
     matchUser: null,
   });
@@ -89,7 +92,7 @@ export const useViewModal = (route: RouteType) => {
       //console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
     messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-     // console.log('Message handled in the background!', remoteMessage);
+      // console.log('Message handled in the background!', remoteMessage);
     });
     return unsubscribe;
   }, []);

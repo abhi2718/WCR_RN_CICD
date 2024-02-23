@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ROUTES } from '../../../../../../../navigation';
 import { ProfileModalSheetProps } from '../../../../../../../types/screen.type/privateChat';
 export const useViewMdal = (props: ProfileModalSheetProps) => {
@@ -12,6 +12,10 @@ export const useViewMdal = (props: ProfileModalSheetProps) => {
     navigation.navigate(ROUTES.CommunityPrivateChat, { senderId, name });
     toggleVisiblity();
   };
+  const _toggleModal = useCallback(() => {
+    toggleModal();
+    toggleVisiblity();
+  },[])
   return {
     visible,
     toggleVisiblity,
@@ -20,6 +24,7 @@ export const useViewMdal = (props: ProfileModalSheetProps) => {
     senderId,
     navigateToPrivateChat,
     toggleModal,
-    showModal
+    showModal,
+    _toggleModal
   };
 };

@@ -120,19 +120,22 @@ export const useViewModal = (props: profileProps) => {
     }
   };
   const addFavourite = async () => {
-    const payLoad = {
-      favouriteData: {
-        userId: me._id,
-        favourite: user?._id,
-      },
-    };
     try {
+      const payLoad = {
+        favouriteData: {
+          userId: me._id,
+          favourite: user?._id,
+        },
+      };
       setLoading(true);
       await homeDeckRepository.addFavourite(payLoad);
       setLoading(false);
       toggleModal();
       fetchAll(me._id);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
   const handleBlockUser = async () => {
     try {
@@ -145,7 +148,9 @@ export const useViewModal = (props: profileProps) => {
       let data = await homeDeckRepository.blockUser(payLoad);
       setLoading(false);
       toggleModal();
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false)
+    }
   };
   const handleHideOfIsMatchScreen = () => {
     setIsMatch({

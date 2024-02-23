@@ -11,6 +11,10 @@ import { ICONS } from './resources';
 import { CometChatContextType } from '../../base/Types';
 import { ActionItemInterface } from './ActionItem';
 import { fonts } from '../../../../../infrastructure/theme/fonts';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../../../../navigation';
+import { colors } from '../../../../../infrastructure/theme/colors';
+import { Spacer } from '../../../../../components/tools';
 const layoutType = Object.freeze({
   list: 'list',
   grid: 'grid',
@@ -155,6 +159,8 @@ interface CometChatActionSheetInterface {
   actions: ActionItemInterface[];
   style: ActionSheetStyles;
   hideHeader?: boolean;
+  showReportIcon?: boolean;
+  isMe?: boolean;
 }
 export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
   const { theme } = useContext<CometChatContextType>(CometChatContext);
@@ -170,10 +176,9 @@ export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
     }),
     ...props.style,
   };
-
   const [listMode, setListMode] = React.useState(true);
   const [actionList, setActionList] = React.useState(props.actions);
-
+  const navigation = useNavigation();
   Hooks(props, setActionList);
 
   const _render = ({ item }) => {
@@ -202,6 +207,46 @@ export const CometChatActionSheet = (props: CometChatActionSheetInterface) => {
     if (listMode) {
       return (
         <View style={Style.listContainer}>
+          {props?.showReportIcon && (
+            <TouchableOpacity
+              onPress={() => {
+                const copyMessageAction = actionList.find(
+                  (item) => item.id === 'copyMessage',
+                );
+                copyMessageAction?.onPress();
+                navigation.navigate(ROUTES.Report, {
+                  userId:'cometChatUser'
+                });
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: '#f8f8f8',
+                  height: 50,
+                  alignItems:"center",
+                  paddingLeft: 16,
+                  borderBottomColor: 'rgba(0,0,0,0.1)',
+                  borderBottomWidth: 1,
+                  flexDirection:"row"
+                }}
+              >
+                <Image style={{
+                  width: 24,
+                  height: 24
+                }}
+                  source={require('../../../../../assets/Report_icon/report.png')}
+                />
+                <Spacer position='left' size={10}>
+                <Text style={{
+                  fontFamily: fonts.body,
+                  fontSize: 16,
+                  fontWeight: "500",
+                  color:"rgba(0,0,0,0.8)"
+                }}>Report</Text>
+                </Spacer>
+              </View>
+            </TouchableOpacity>
+          )}
           <FlatList
             key={'list'}
             keyExtractor={(item) => item.id}

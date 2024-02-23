@@ -119,7 +119,7 @@ export const ProfileModal = (props: profileProps) => {
                               user?.displayName,
                               user?.first,
                             )}{' '}
-                            {user?.genderPronoun !== 'Prefer not to say' &&
+                            {user?.genderPronoun !== preferNotToSay &&
                               `(${user?.genderPronoun})`}
                             , {calculateAge(user?.dob)}
                           </Text>
@@ -132,7 +132,7 @@ export const ProfileModal = (props: profileProps) => {
                             source={require('../../assets/images/icons/degree.png')}
                           />
                           <Text style={styles.userInfoText}>
-                            {user.designation.userDegree},
+                            {user.designation.userDegree},{' '}
                             {addInitials(
                               user.designation.userDegree,
                               user.designation.primaryDegree,
@@ -154,7 +154,7 @@ export const ProfileModal = (props: profileProps) => {
                             source={require('../../assets/images/icons/location.png')}
                           />
                           <Text style={styles.userInfoText}>
-                            {user?.city},
+                            {user?.city},{' '}
                             {addInitials(user?.country, user?.state)}
                           </Text>
                         </Row>
@@ -237,6 +237,25 @@ export const ProfileModal = (props: profileProps) => {
                                 </Row>
                               ),
                             )}
+
+                          {user?.relationship?.length >= 0 &&
+                            user?.relationship?.map((relationship, index) => (
+                              <Row
+                                key={index}
+                                gap={10}
+                                alignItems="center"
+                                style={cardStyles.chip}
+                              >
+                                <Image
+                                  style={cardStyles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/relationship.png')}
+                                />
+                                <Text style={cardStyles.chipText}>
+                                  {relationship}
+                                </Text>
+                              </Row>
+                            ))}
+
                           {user.maritalStatus &&
                             user.maritalStatus !== preferNotToSay && (
                               <Row
@@ -293,11 +312,30 @@ export const ProfileModal = (props: profileProps) => {
                             >
                               <Image
                                 style={styles.chipIcon}
-                                source={require('../../assets/images/vitalIcons/wantKids.png')}
+                                source={require('../../assets/images/vitalIcons/haveKid.png')}
                               />
                               <Text style={styles.chipText}>{user.kids}</Text>
                             </Row>
                           )}
+
+                          {user?.familyPlan &&
+                            user?.familyPlan !== preferNotToSay && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={cardStyles.chip}
+                              >
+                                <Image
+                                  style={cardStyles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/wantKids.png')}
+                                />
+
+                                <Text style={cardStyles.chipText}>
+                                  {user?.familyPlan}
+                                </Text>
+                              </Row>
+                            )}
+
                           {user.covidVaccineStatus &&
                             user.covidVaccineStatus !== preferNotToSay && (
                               <Row
@@ -314,6 +352,23 @@ export const ProfileModal = (props: profileProps) => {
                                 </Text>
                               </Row>
                             )}
+
+                          {user?.diet && user?.diet !== preferNotToSay && (
+                            <Row
+                              gap={10}
+                              alignItems="center"
+                              style={cardStyles.chip}
+                            >
+                              <Image
+                                style={cardStyles.chipIcon}
+                                source={require('../../assets/images/vitalIcons/diet.png')}
+                              />
+                              <Text style={cardStyles.chipText}>
+                                {user?.diet}
+                              </Text>
+                            </Row>
+                          )}
+
                           {user.drinking &&
                             user.drinking !== preferNotToSay && (
                               <Row
@@ -327,6 +382,40 @@ export const ProfileModal = (props: profileProps) => {
                                 />
                                 <Text style={styles.chipText}>
                                   {user.drinking}
+                                </Text>
+                              </Row>
+                            )}
+
+                          {user?.excercise &&
+                            user?.excercise !== preferNotToSay && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={cardStyles.chip}
+                              >
+                                <Image
+                                  style={cardStyles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/workout.png')}
+                                />
+                                <Text style={cardStyles.chipText}>
+                                  {user?.excercise}
+                                </Text>
+                              </Row>
+                            )}
+
+                          {user?.smoking &&
+                            user?.smoking !== preferNotToSay && (
+                              <Row
+                                gap={10}
+                                alignItems="center"
+                                style={cardStyles.chip}
+                              >
+                                <Image
+                                  style={cardStyles.chipIcon}
+                                  source={require('../../assets/images/vitalIcons/smoking.png')}
+                                />
+                                <Text style={cardStyles.chipText}>
+                                  {user?.smoking}
                                 </Text>
                               </Row>
                             )}
@@ -350,10 +439,80 @@ export const ProfileModal = (props: profileProps) => {
                                 style={styles.gradient}
                               />
                             </FastImage>
+                            {index === 1 && (
+                              <View style={[cardStyles.ph16]}>
+                                {user?.interests?.length > 0 && (
+                                  <>
+                                    <Text style={cardStyles.aboutHeading}>
+                                      Interests & Hobbies
+                                    </Text>
+                                    <Spacer position="top" size={5} />
+                                    <Row
+                                      gap={10}
+                                      alignItems="center"
+                                      style={cardStyles.flexWrap}
+                                    >
+                                      {user?.interests?.map((item, index) => (
+                                        <View
+                                          key={index}
+                                          style={cardStyles.intrestView}
+                                        >
+                                          <Text
+                                            style={cardStyles.intrestText}
+                                            key={index}
+                                          >
+                                            {item}
+                                          </Text>
+                                        </View>
+                                      ))}
+                                    </Row>
+                                  </>
+                                )}
+                              </View>
+                            )}
+
                             {index === 0 && user?.bio?.length > 0 && (
-                              <View style={styles.inBtwnText}>
-                                <Text style={styles.headingText}>About</Text>
-                                <Text style={styles.aboutText}>{user.bio}</Text>
+                              <View key={index}>
+                                <View style={styles.inBtwnText}>
+                                  <Text style={styles.headingText}>About</Text>
+                                  <Text style={styles.aboutText}>
+                                    {user.bio}
+                                  </Text>
+                                </View>
+
+                                {user?.photos?.length === 1 && (
+                                  <View style={[cardStyles.ph16]}>
+                                    {user?.interests?.length > 0 && (
+                                      <>
+                                        <Text style={cardStyles.aboutHeading}>
+                                          Interests & Hobbies
+                                        </Text>
+                                        <Spacer position="top" size={5} />
+                                        <Row
+                                          gap={10}
+                                          alignItems="center"
+                                          style={cardStyles.flexWrap}
+                                        >
+                                          {user?.interests?.map(
+                                            (item, index) => (
+                                              <View
+                                                key={index}
+                                                style={cardStyles.intrestView}
+                                              >
+                                                <Text
+                                                  style={cardStyles.intrestText}
+                                                  key={index}
+                                                >
+                                                  {item}
+                                                </Text>
+                                              </View>
+                                            ),
+                                          )}
+                                        </Row>
+                                      </>
+                                    )}
+                                  </View>
+                                )}
                               </View>
                             )}
                           </View>

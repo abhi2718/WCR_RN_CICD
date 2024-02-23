@@ -84,19 +84,24 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
 
   const formateDOB = (text: string) => {
     if (!text) return '';
-    const numericText = text.replace(/[^0-9]/g, '');
-    let formattedDate = '';
-    if (numericText.length <= 2) {
-      formattedDate = numericText;
-    } else if (numericText.length <= 4) {
-      formattedDate = `${numericText.slice(0, 2)}-${numericText.slice(2)}`;
+    const formattedDate = text.replace(/[^0-9]/g, '');
+
+    if (formattedDate.length <= 4) {
+      // Format as YYYY
+      return formattedDate;
+    } else if (formattedDate.length <= 6) {
+      // Format as YYYY-MM
+      return formattedDate.slice(0, 4) + '-' + formattedDate.slice(4);
     } else {
-      formattedDate = `${numericText.slice(0, 2)}-${numericText.slice(
-        2,
-        4,
-      )}-${numericText.slice(4, 8)}`;
+      // Format as YYYY-MM-DD
+      return (
+        formattedDate.slice(0, 4) +
+        '-' +
+        formattedDate.slice(4, 6) +
+        '-' +
+        formattedDate.slice(6, 8)
+      );
     }
-    return formattedDate;
   };
 
   const [formData, setFormData] = useState<profileTypes>({
@@ -156,7 +161,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
   };
 
   const getFormatteddate = (date: string): string => {
-    const dob = moment(date, 'MM-DD-YYYY').format('MM-DD-YYYY');
+    const dob = moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD');
     return dob;
   };
 
@@ -241,8 +246,7 @@ export const useProfileUseViewModal = (props: ScreenParams) => {
       };
       dispatch(addUser(payload));
       setLoading(false);
-      if (dataMango?.token)
-        navigateToGenderScreen(dataMango?.user?._id);
+      if (dataMango?.token) navigateToGenderScreen(dataMango?.user?._id);
     } catch (error) {
       setLoading(false);
     }

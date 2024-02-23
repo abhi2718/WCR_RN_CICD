@@ -59,7 +59,7 @@ export const PreferencesScreen = () => {
       </View>
       <View>
         <ScrollView
-          style={[styles.padding16, styles.scrollSection]}
+          style={[styles.scrollSection]}
           showsVerticalScrollIndicator={false}
         >
           {optionsList.map((item, index) => {
@@ -71,9 +71,7 @@ export const PreferencesScreen = () => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text style={styles.headerText}>
-                    Tap here for more information
-                  </Text>
+                  <Text style={styles.headerText}>Tap here for more info</Text>
                   <Pressable onPress={openModal}>
                     <Image
                       style={styles.questionMarkIcon}
@@ -86,10 +84,13 @@ export const PreferencesScreen = () => {
             }
             if (index === 2) {
               return (
-                <View key={index} style={styles.multiSelector}>
+                <View
+                  key={index}
+                  style={[styles.multiSelector, styles.padding16]}
+                >
                   <Row alignItems="center" justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Distance Preference
+                      Distance preference
                     </Text>
                     {distanceRange[0] === 600 ? (
                       <Text style={styles.silderSubText}>No Max</Text>
@@ -121,10 +122,13 @@ export const PreferencesScreen = () => {
             }
             if (index === 3) {
               return (
-                <View key={index} style={styles.multiSelector}>
+                <View
+                  key={index}
+                  style={[styles.multiSelector, styles.padding16]}
+                >
                   <Row justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Age Preference
+                      Age preference
                     </Text>
                     <Text style={styles.silderSubText}>
                       {ageRange[0]} - {ageRange[1]}
@@ -144,11 +148,14 @@ export const PreferencesScreen = () => {
             }
             if (index === 4) {
               return (
-                <View key={index} style={styles.multiSelector}>
+                <View
+                  key={index}
+                  style={[styles.multiSelector, styles.padding16]}
+                >
                   <Pressable onPress={handleHeightModal}>
                     <Row justifyContent="space-between">
                       <Text style={[styles.textColor, styles.optionName]}>
-                        Height Preference
+                        Height preference
                       </Text>
                       <Text style={styles.silderSubText}>
                         {formatNumber(heightRange[0])} -{' '}
@@ -173,7 +180,7 @@ export const PreferencesScreen = () => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Text style={styles.headerText}>Healthcare Professional</Text>
+                  <Text style={styles.headerText}>Healthcare profession</Text>
                 </Row>
               );
             }
@@ -230,7 +237,7 @@ export const PreferencesScreen = () => {
                           >
                             <Spacer position="left" size={10}>
                               <Text style={styles.degreeTypeFont}>
-                                No Preference
+                                No preference
                               </Text>
                             </Spacer>
                           </Pressable>

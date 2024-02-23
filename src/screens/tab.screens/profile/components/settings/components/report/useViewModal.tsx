@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { ShowFlashMessage } from '../../../../../../../components/flashBar';
 import { AuthRepository } from '../../../../../../../repository/auth.repo';
 import { OptionType } from '../../../../../../../types/screen.type/profile.type';
@@ -33,6 +32,15 @@ export const useViewModal = (props:ScreenParams) => {
         'danger',
       );
     }
+    if (userId === "cometChatUser") {
+      ShowFlashMessage(
+        'Reported succesfully!',
+        '',
+        'success',
+      );
+      navigation.goBack();
+      return;
+    }
     const payload = {
       document: {
         reportedUserName: name,
@@ -43,7 +51,7 @@ export const useViewModal = (props:ScreenParams) => {
     };
     try {
       setLoading(true);
-      const data = await authRepository.reportUser(payload)
+      await authRepository.reportUser(payload)
       setLoading(false);
       clearAllField();
       ShowFlashMessage(

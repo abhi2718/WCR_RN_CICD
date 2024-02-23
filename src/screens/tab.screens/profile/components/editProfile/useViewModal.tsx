@@ -1,9 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   FlashMessageType,
   ShowFlashMessage,
 } from '../../../../../components/flashBar';
+import { ROUTES } from '../../../../../navigation';
 import { CloudinaryRepository } from '../../../../../repository/cloudinary.repo';
 import { UpdateUserDetailsRepository } from '../../../../../repository/pregisterFlow.repo';
 import { addUser } from '../../../../../store/reducers/user.reducer';
@@ -66,9 +68,8 @@ export const useViewModal = () => {
   const [showHeightModal, setShowHeightModal] = useState(false);
   const [showOrientationModal, setShowOrientationModal] = useState({
     showGenderPronoun: false,
-    showSexualOrientation:false
+    showSexualOrientation: false,
   });
-
   const handleInputChange = (option: handleInputChangeType) => {
     setAnswer((oldState) => {
       return { ...oldState, [option.type]: option.value };
@@ -99,7 +100,7 @@ export const useViewModal = () => {
     state: user?.address?.state ? user?.address?.state : 'Select',
     city: user?.address?.city ? user?.address?.city : '',
     zipcode: user?.address?.state ? user?.address?.zipcode : '',
-    showSexualOrientation: user?.profile?.showSexualPreference??true,
+    showSexualOrientation: user?.profile?.showSexualPreference ?? true,
     sexualPreference: user?.profile.sexualPreference
       ? user?.profile.sexualPreference
       : '',
@@ -193,13 +194,13 @@ export const useViewModal = () => {
   };
   const healthcareProfessionals = [
     {
-      title: 'Degree Category',
+      title: 'Degree category',
       option: _userDegree,
       initValue: 'degreeCategory',
       isArrow: true,
     },
     {
-      title: 'Degree Type',
+      title: 'Degree type',
       option: _primaryDegree,
       initValue: 'degreeType',
       isArrow: true,
@@ -214,13 +215,13 @@ export const useViewModal = () => {
       initValue: 'ethnicity',
     },
     {
-      title: 'Relationship Level',
+      title: 'Relationship level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
     {},
     {
-      title: 'Marital Status',
+      title: 'Marital status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
@@ -240,12 +241,12 @@ export const useViewModal = () => {
       initValue: 'kids',
     },
     {
-      title: 'Family Plan',
+      title: 'Family plan',
       option: familyPlanList,
       initValue: 'familyPlan',
     },
     {
-      title: 'Covid',
+      title: 'Covid vaccine',
       option: covidList,
       initValue: 'covidVaccineStatus',
     },
@@ -278,7 +279,7 @@ export const useViewModal = () => {
 
   const optionsList = [
     {
-      title: 'Healthcare Professionals',
+      title: 'Healthcare Profession',
       mainTitle: true,
       values: healthcareProfessionals,
     },
@@ -288,7 +289,7 @@ export const useViewModal = () => {
       values: [],
     },
     {
-      title: 'Vital signs',
+      title: 'Vital Signs',
       mainTitle: true,
       values: vitalSigns,
     },
@@ -660,14 +661,20 @@ export const useViewModal = () => {
     setShowHeightModal(true);
 
   const _setOrientationModal = (key: string, value: boolean) => {
-    setShowOrientationModal(oldState => {
+    setShowOrientationModal((oldState) => {
       return {
         ...oldState,
-        [key]: value
-      }
+        [key]: value,
+      };
     });
-  }
+  };
   const voidFun = useCallback(() => {}, []);
+  const navigation = useNavigation();
+  const navigateToHobby = useCallback(() => {
+    navigation.navigate(ROUTES.Hobbies, {
+      isCommingFromEditScreen: true,
+    });
+  }, []);
   return {
     answer,
     optionsList,
@@ -704,5 +711,6 @@ export const useViewModal = () => {
     setheight,
     voidFun,
     setAnswer,
+    navigateToHobby,
   };
 };

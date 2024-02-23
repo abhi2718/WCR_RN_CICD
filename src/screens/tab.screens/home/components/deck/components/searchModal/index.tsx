@@ -46,96 +46,90 @@ export const SearchModal = (props: SearchModalProps) => {
       ) : (
         <SafeAreaView style={searchStyle.container}>
           <View style={searchStyle.container}>
-          <View style={searchStyle.container}>
-                <Row style={searchStyle.header} alignItems="center" gap={15}>
-                  <TextInput
-                    style={searchStyle.searchBox}
-                    onChangeText={handleSearch}
-                    placeholder="Search"
+            <View style={searchStyle.container}>
+              <Row style={searchStyle.header} alignItems="center" gap={15}>
+                <TextInput
+                  style={searchStyle.searchBox}
+                  onChangeText={handleSearch}
+                  placeholder="Search"
+                  placeholderTextColor="#999"
+                />
+                <Pressable onPress={handleClose} style={searchStyle.crossBox}>
+                  <Image
+                    resizeMode="contain"
+                    style={searchStyle.crossImg}
+                    source={require('../../../../../../../assets/images/icons/crossIcon.png')}
                   />
-                  <Pressable onPress={handleClose} style={searchStyle.crossBox}>
+                </Pressable>
+              </Row>
+              {isSearchActive && users.length === 0 ? (
+                <View style={searchStyle.content}>
+                  <Column gap={25} alignItems="center">
+                    <Text style={searchStyle.subHeading}>No results found</Text>
                     <Image
+                      style={searchStyle.pendingIcon}
                       resizeMode="contain"
-                      style={searchStyle.crossImg}
-                      source={require('../../../../../../../assets/images/icons/crossIcon.png')}
+                      source={require('../../../../../../../assets/images/icons/noSearchResultIcon.png')}
                     />
-                  </Pressable>
-                </Row>
-                {isSearchActive && users.length === 0 ? (
-                  <View style={searchStyle.content}>
-                    <Column gap={25} alignItems="center">
-                      <Text style={searchStyle.subHeading}>
-                        No results found
-                      </Text>
-                      <Image
-                        style={searchStyle.pendingIcon}
-                        resizeMode="contain"
-                        source={require('../../../../../../../assets/images/icons/noSearchResultIcon.png')}
-                      />
-                      <Text style={searchStyle.text}>
-                        We could not find what you {`\n`} were searching for.
-                        Please try again.
-                      </Text>
-                    </Column>
-                  </View>
-                ) : users.length === 0 ? (
-                  <View style={searchStyle.content}>
-                    <Column gap={25} alignItems="center">
-                      <Image
-                        style={searchStyle.pendingIcon}
-                        resizeMode="contain"
-                        source={require('../../../../../../../assets/images/icons/searchBlank.png')}
-                      />
-                      <Text style={searchStyle.text}>
-                        Discover new users! Use keywords to {`\n`} find your
-                        match. Happy searching!
-                      </Text>
-                    </Column>
-                  </View>
-                ) : (
-                  <ScrollView style={searchStyle.container}>
-                    <Text style={searchStyle.subHeadingInner}>
-                      Search Results
+                    <Text style={searchStyle.text}>
+                      We could not find what you {`\n`} were searching for.
+                      Please try again.
                     </Text>
-                    {users.map((user) => (
-                      <Pressable
-                        onPress={() => _setSelectedProfile(user._id)}
-                        key={user._id}
-                      >
-                        <Row
-                          alignItems="center"
-                          style={searchStyle.row}
-                          gap={12}
-                        >
-                          <FastImage
-                            style={searchStyle.imageStyle}
-                            source={{
-                              uri: user.profilePicture.url,
-                            }}
-                          />
-                          <Column gap={5}>
-                            <Text style={searchStyle.firstName}>
-                              {showDisplayOrFirstName(
-                                user?.displayName,
-                                user?.first,
-                              )}
-                              , {calculateAge(user.dob)}
+                  </Column>
+                </View>
+              ) : users.length === 0 ? (
+                <View style={searchStyle.content}>
+                  <Column gap={25} alignItems="center">
+                    <Image
+                      style={searchStyle.pendingIcon}
+                      resizeMode="contain"
+                      source={require('../../../../../../../assets/images/icons/searchBlank.png')}
+                    />
+                    <Text style={searchStyle.text}>
+                      Discover new connections! {`\n`}
+                      Simply type a name into the search bar to find {`\n`} and
+                      connect with other users.
+                    </Text>
+                  </Column>
+                </View>
+              ) : (
+                <ScrollView style={searchStyle.container}>
+                  <Text style={searchStyle.subHeadingInner}>
+                    Search Results
+                  </Text>
+                  {users.map((user) => (
+                    <Pressable
+                      onPress={() => _setSelectedProfile(user._id)}
+                      key={user._id}
+                    >
+                      <Row alignItems="center" style={searchStyle.row} gap={12}>
+                        <FastImage
+                          style={searchStyle.imageStyle}
+                          source={{
+                            uri: user.profilePicture.url,
+                          }}
+                        />
+                        <Column gap={5}>
+                          <Text style={searchStyle.firstName}>
+                            {showDisplayOrFirstName(
+                              user?.displayName,
+                              user?.first,
+                            )}
+                            , {calculateAge(user.dob)}
+                          </Text>
+                          <Row>
+                            <Text style={searchStyle.ctiy}>
+                              {user.designation.title}
                             </Text>
-                            <Row>
-                              <Text style={searchStyle.ctiy}>
-                                {user.designation.title}
-                              </Text>
-                              <Text style={searchStyle.ctiy}>
-                                , {user.city}
-                              </Text>
-                            </Row>
-                          </Column>
-                        </Row>
-                      </Pressable>
-                    ))}
-                  </ScrollView>
-                )}
-              </View>
+                            <Text style={searchStyle.ctiy}>, {user.city}</Text>
+                          </Row>
+                        </Column>
+                      </Row>
+                    </Pressable>
+                  ))}
+                </ScrollView>
+              )}
+            </View>
           </View>
         </SafeAreaView>
       )}
