@@ -64,7 +64,10 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   );
 
   const isShowPreview = (): boolean => {
-    return savedDocImage.length > 0 && savedSelfieImage.length > 0;
+    return (
+      (documentImage != undefined || savedDocImage.length > 0) &&
+      (selfie != undefined || savedSelfieImage.length > 0)
+    );
   };
 
   // useLayoutEffect(() => {
@@ -132,11 +135,11 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setdocumentImage(resultImage);
         props.onChange?.(image);
-        if (!selfie) {
+        if (!isSelfie) {
           openPicModal();
         }
       }
-      if (!selfie) {
+      if (!isSelfie) {
         openPicModal();
       }
     } else if (source === 'library') {
@@ -153,7 +156,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         setdocumentImage(resultImage);
         props.onChange?.(image);
       }
-      if (!selfie) {
+      if (!isSelfie) {
         openPicModal();
       }
     }
@@ -170,6 +173,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setPhdOptionImage(resultImage);
         props.onChange?.(image);
+        setIsSelfie(false);
       }
     } else if (source === 'library') {
       const image: Image = await pickPhotoFromGallary(
@@ -184,6 +188,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setPhdOptionImage(resultImage);
         props.onChange?.(image);
+        setIsSelfie(false);
       }
     }
     toggleModal();
@@ -221,9 +226,15 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
 
   const removeSelfie = () => {
     setSelfie(null);
+    closePicModal();
+    if (documentImage) {
+      setIsSelfie(false);
+    }
   };
   const removeDocument = () => {
     setdocumentImage(null);
+    setIsSelfie(false);
+    closePicModal();
   };
 
   type imageObject = {
@@ -233,10 +244,17 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
 
   const sumbitVerificationForm = async () => {
     try {
-      if (!documentImage?.path && !selfie?.path) {
+      if (!documentImage?.path) {
         return ShowFlashMessage(
           'Warning',
-          'Pictures are not selected!',
+          'Document is not selected!',
+          FlashMessageType.DANGER,
+        );
+      }
+      if (!selfie?.path) {
+        return ShowFlashMessage(
+          'Warning',
+          'Selfie is not selected!',
           FlashMessageType.DANGER,
         );
       }

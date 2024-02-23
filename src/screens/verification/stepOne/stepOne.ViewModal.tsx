@@ -19,6 +19,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
   const [verificationOption, setVerificationOption] = useState('');
+  const [error, setError] = useState<boolean>(false);
   const [openVerificationWebsiteModal, setVerificationWebsiteModal] =
     useState(false);
   const [isValidStudentEmail, setIsValidStudentEmail] =
@@ -90,6 +91,16 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   const navigateOptions = () => {
     if (
+      !optionData.healthCareProfessionalEmail ||
+      !optionData.studentEmail ||
+      !optionData.licenceWebsite
+    ){
+      console.log('inside if')
+      setError((oldState:boolean)=>{
+        return true
+      })
+    }
+    if (
       verificationOption === 'Student' ||
       verificationOption === 'License Number'
     ) {
@@ -129,7 +140,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const navigateToVerificationStepTwo = () => {
-    setVerificationWebsiteModal(false);
+    console.log('called')
+    
+      setVerificationWebsiteModal(false);
     setVisiblePhdOptionModal(false);
     navigation.navigate(ROUTES.VerificationStepTwo, {
       data: { optionData, verificationOption, PhdImage: PhdOptionImage },
@@ -373,5 +386,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     validateUserWebsiteUrlHealthCare,
     isValidWebsiteUrlHealthCare,
     degreeIdentifierTypeList,
+    error,
+    setError
   };
 };

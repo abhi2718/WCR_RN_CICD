@@ -37,6 +37,7 @@ const VerificationStepOne = (props: AvatarProps) => {
     isVerificationInfoModalVisible,
     closeVerificationWebsiteModal,
     closeModal,
+    setError,
     navigateToVerificationStepTwo,
     closePhdOptionModal,
     uploadPhdOptionPhotos,
@@ -57,6 +58,7 @@ const VerificationStepOne = (props: AvatarProps) => {
     validateUserWebsiteUrlHealthCare,
     isValidWebsiteUrlHealthCare,
     degreeIdentifierTypeList,
+    error,
   } = useVerificationViewModal(props);
   return (
     <KeyboardAvoidingView
@@ -71,6 +73,7 @@ const VerificationStepOne = (props: AvatarProps) => {
         />
         <HeaderBar isVerificartionScreen={true} flagType={country} />
         <VerificationWebsiteModal
+          setError={setError}
           isValidWebsiteUrl={isValidWebsiteUrl}
           validateUserWebsiteUrl={validateUserWebsiteUrl}
           isValidEmail={isValidStudentEmail}
@@ -84,6 +87,7 @@ const VerificationStepOne = (props: AvatarProps) => {
           skip={navigateToVerificationStepTwo}
           validateUserWebsiteUrlHealthCare={validateUserWebsiteUrlHealthCare}
           isValidWebsiteUrlHealthCare={isValidWebsiteUrlHealthCare}
+          error={error}
         />
         <VerificationWebsitePhdMdal
           optionData={optionData}
