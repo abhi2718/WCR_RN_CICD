@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { PrimaryButton } from '../../../../../../../components/button';
 import { DropdownInput } from '../../../../../../../components/inputBox';
-import { Spacer } from '../../../../../../../components/tools';
+import { Row, Spacer } from '../../../../../../../components/tools';
 import { styles } from './styles';
 import { useViewModal } from './useViewModal';
 import { HeaderBar } from '../../../../../../../components/header';
@@ -23,6 +23,8 @@ export const ReportScreen = (props: ScreenParams) => {
     handleSubmit,
     loading,
     reasonOfReport,
+    message,
+    subjectRef
   } = useViewModal(props);
   return (
     <SafeAreaView style={styles.container}>
@@ -40,7 +42,7 @@ export const ReportScreen = (props: ScreenParams) => {
               onFocus={() => {}}
               labelField="label"
               valueField="value"
-              placeholder="Select Reason"
+              placeholder={subjectRef.current}
               onChange={handleSubject}
             />
             <Spacer position="top" size={20}>
@@ -61,6 +63,9 @@ export const ReportScreen = (props: ScreenParams) => {
                 maxLength={500}
               />
             </Spacer>
+            <Row justifyContent='flex-end'>
+            <Text style={styles.limitText}>{message.length}/500</Text>
+           </Row>
           </View>
           <Spacer position="top" size={20}>
             <PrimaryButton

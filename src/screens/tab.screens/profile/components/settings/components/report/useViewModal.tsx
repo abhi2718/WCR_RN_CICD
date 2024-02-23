@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ShowFlashMessage } from '../../../../../../../components/flashBar';
 import { AuthRepository } from '../../../../../../../repository/auth.repo';
 import { OptionType } from '../../../../../../../types/screen.type/profile.type';
@@ -8,8 +8,8 @@ import { report } from '../../../../../../../utils/constanst';
 
 export const useViewModal = (props:ScreenParams) => {
   const authRepository = useMemo(() => new AuthRepository(),[]);
-  const subjectRef = useRef('');
-  const messageRef = useRef('');
+  const subjectRef = useRef(report[0]);
+  const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const reasonOfReport = report.map((item)=>({label: item, value: item }))
@@ -17,12 +17,17 @@ export const useViewModal = (props:ScreenParams) => {
     subjectRef.current = option.value;
   };
   const handleMessage = (text: string) => {
-    messageRef.current = text;
+    setMessage(text);
   };
   const clearAllField = () => {
     subjectRef.current = '';
-    messageRef.current = '';
   }
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('clearAllField');
+  //     setMessage('');
+  //   }
+  // },[])
   const handleSubmit = async () => {
     const { userId, name } = props?.route?.params;
     if (!subjectRef?.current?.length) {
@@ -46,9 +51,9 @@ export const useViewModal = (props:ScreenParams) => {
         reportedUserName: name,
         reportedUser: userId,
         reason: subjectRef?.current,
-        message: messageRef?.current
+        message: message
       }
-    };
+    };;
     try {
       setLoading(true);
       await authRepository.reportUser(payload)
@@ -69,6 +74,8 @@ export const useViewModal = (props:ScreenParams) => {
     handleMessage,
     handleSubmit,
     loading,
-    reasonOfReport
+    reasonOfReport,
+    message,
+    subjectRef
   };
 };

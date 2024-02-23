@@ -53,7 +53,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     isDoctoralCandidate:
       user?.verificationId?.isDoctoralCandidate == true ? true : false,
     isPhd: user?.verificationId?.isPhd == true ? true : false,
-
     idType: user?.verificationId?.idType ?? '',
     licenceWebsite: user?.verificationId?.licenceWebsite ?? '',
     studentEmail: user?.verificationId?.studentEmail ?? '',

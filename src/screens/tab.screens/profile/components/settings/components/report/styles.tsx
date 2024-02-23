@@ -8,6 +8,12 @@ import { colors } from '../../../../../../../infrastructure/theme/colors';
 import { sizes } from '../../../../../../../infrastructure/theme/sizes';
 
 export const styles = StyleSheet.create({
+  limitText: {
+    position: "absolute",
+    bottom: 20,
+    right: 16,
+    color: colors.ui.primary
+  },
   wrapper: {
     flex:1,
   },
