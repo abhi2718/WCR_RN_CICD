@@ -167,7 +167,6 @@ export const VerificationImagePreviewModal = (
 
 export const verificationImageUploaderStyle = StyleSheet.create({
   imageViewProfile: {
-    
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: colors.ui.primary,
