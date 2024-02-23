@@ -11,6 +11,7 @@ import {
   showDisplayOrFirstName,
 } from '../../../../utils/common.functions';
 import { fonts } from '../../../../infrastructure/theme/fonts';
+import { AlertScreen } from '../../../../components/alert';
 
 export const ProfileView = (props: ProfileViewProps) => {
   const {
@@ -34,6 +35,11 @@ export const ProfileView = (props: ProfileViewProps) => {
       deleteLiked(item._id);
     }
   };
+  const [removeLikeModal, setRemoveLikeModal] = useState(false);
+  const togleRemoveLikeModal = () => {
+    setRemoveLikeModal((oldValue) => !oldValue);
+  };
+
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
     if (handleToggleOuterModal && showModal) {
@@ -282,12 +288,24 @@ export const ProfileView = (props: ProfileViewProps) => {
               </Spacer>
             </Column>
             {showDeleteIcon && (
-              <Pressable onPress={handleRemove} style={styles.removeIcon}>
-                <Image
+              <>
+                <Pressable
+                  onPress={togleRemoveLikeModal}
                   style={styles.removeIcon}
-                  source={require('../../../../assets/images/icons/trash.png')}
+                >
+                  <Image
+                    style={styles.removeIcon}
+                    source={require('../../../../assets/images/icons/trash.png')}
+                  />
+                </Pressable>
+                <AlertScreen
+                  showModal={removeLikeModal}
+                  setShowModal={setRemoveLikeModal}
+                  title="Remove Profile?"
+                  description="Are you sure you want to remove this profile?"
+                  onPress={handleRemove}
                 />
-              </Pressable>
+              </>
             )}
           </Column>
         </Pressable>

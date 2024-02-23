@@ -86,8 +86,9 @@ export const SearchModal = (props: SearchModalProps) => {
                       source={require('../../../../../../../assets/images/icons/searchBlank.png')}
                     />
                     <Text style={searchStyle.text}>
-                      Discover new users! Use keywords to {`\n`} find your
-                      match. Happy searching!
+                      Discover new connections! {`\n`}
+                      Simply type a name into the search bar to find {`\n`} and
+                      connect with other users.
                     </Text>
                   </Column>
                 </View>

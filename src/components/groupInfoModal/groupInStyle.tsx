@@ -35,7 +35,7 @@ export const modalStyle = StyleSheet.create({
     elevation: sizes[0],
   },
   logo: {
-    width: 55,
+    width: 300,
   },
   closeIcon: {
     width: 20,
@@ -54,6 +54,15 @@ export const modalStyle = StyleSheet.create({
     fontSize: fontSizes.button,
     fontWeight: fontWeights.regular,
     fontFamily: fonts.body,
+  },
+
+  hrLine: {
+    borderBottomColor: '#333',
+    borderBottomWidth: 0.5,
+    width: dimensions.width,
+    left: -16,
+    position: 'absolute',
+    bottom: -8,
   },
   contentHeader: {
     color: colors.ui.textHead,

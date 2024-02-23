@@ -114,7 +114,7 @@ export const useViewModal = () => {
   const optionsList = [
     {},
     {
-      title: 'Gender of Interest',
+      title: 'Gender of interest',
       option: genderList,
       initValue: 'gender',
     },
@@ -123,12 +123,12 @@ export const useViewModal = () => {
     {}, // height prefrence
     {},
     {
-      title: 'Degree Category',
+      title: 'Degree category',
       option: _userDegree,
       initValue: 'degreeCategory',
     },
     {
-      title: 'Degree Type',
+      title: 'Degree type',
       option: _primaryDegree,
       initValue: 'degreeType',
     },
@@ -139,12 +139,12 @@ export const useViewModal = () => {
       initValue: 'ethnicity',
     },
     {
-      title: 'Marital Status',
+      title: 'Marital status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
     {
-      title: 'Relationship Level',
+      title: 'Relationship level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
@@ -189,7 +189,7 @@ export const useViewModal = () => {
       initValue: 'kids',
     },
     {
-      title: 'Family Plan',
+      title: 'Family plan',
       option: familyPlanList,
       initValue: 'familyPlan',
     },
@@ -199,7 +199,7 @@ export const useViewModal = () => {
       initValue: 'pets',
     },
     {
-      title: 'Covid',
+      title: 'Covid vaccine',
       option: covidVaccineStatusList,
       initValue: 'covidVaccineStatus',
     },

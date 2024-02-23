@@ -9,7 +9,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Row, Spacer } from '../tools';
+import { Row, Spacer, dimensions } from '../tools';
 import { PrimaryButton } from '../button';
 import { ProfilePicInfoModalProps } from '../../types/components/modal.type';
 import { modalStyle } from './groupInStyle';
@@ -29,7 +29,7 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
     }
     return () => {
       setIsEndReached(false);
-    }
+    };
   }, [isVisible]);
 
   const handleScroll = useCallback(
@@ -37,9 +37,12 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
       const { layoutMeasurement, contentOffset, contentSize } =
         event.nativeEvent;
       const paddingToBottom = 20;
-      setIsEndReached(oldState => {
+      setIsEndReached((oldState) => {
         if (!oldState) {
-          return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
+          return (
+            layoutMeasurement.height + contentOffset.y >=
+            contentSize.height - paddingToBottom
+          );
         }
         return true;
       });
@@ -54,7 +57,7 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
             <Image
               style={modalStyle.logo}
               resizeMode="contain"
-              source={require('../../assets/images/logo.png')}
+              source={require('../../assets/images/icons/fullLogo.png')}
             />
             <Pressable onPress={onClose}>
               <Image
@@ -64,12 +67,12 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
               />
             </Pressable>
           </Row>
-          <Spacer position="top" size={10} />
           <View>
             <Text style={modalStyle.header}>Community Group Rules</Text>
-            <Text style={modalStyle.subHeader}>Last updated on 12/06/2023</Text>
-            <Spacer position="top" size={15} />
+            <Text style={modalStyle.subHeader}>Last update 12/6/23</Text>
+            <View style={modalStyle.hrLine} />
           </View>
+          <Spacer position="top" size={15} />
           <ScrollView
             style={modalStyle.flex}
             persistentScrollbar={true}
@@ -163,11 +166,15 @@ export const GroupInfoModal = (props: ProfilePicInfoModalProps) => {
               White Coat Romance Team
             </Text>
             <Spacer position="top" size={20} />
-            {joinGroup && <PrimaryButton
-              onPress={joinGroup}
-              title="Join"
-              btnColor={!isEndReached?colors.ui.placeholder:colors.ui.primary}
-            />}
+            {joinGroup && (
+              <PrimaryButton
+                onPress={joinGroup}
+                title="Join"
+                btnColor={
+                  !isEndReached ? colors.ui.placeholder : colors.ui.primary
+                }
+              />
+            )}
           </View>
         </View>
       </View>

@@ -90,7 +90,7 @@ export const PreferencesScreen = () => {
                 >
                   <Row alignItems="center" justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Distance Preference
+                      Distance preference
                     </Text>
                     {distanceRange[0] === 600 ? (
                       <Text style={styles.silderSubText}>No Max</Text>
@@ -128,7 +128,7 @@ export const PreferencesScreen = () => {
                 >
                   <Row justifyContent="space-between">
                     <Text style={[styles.textColor, styles.optionName]}>
-                      Age Preference
+                      Age preference
                     </Text>
                     <Text style={styles.silderSubText}>
                       {ageRange[0]} - {ageRange[1]}
@@ -155,7 +155,7 @@ export const PreferencesScreen = () => {
                   <Pressable onPress={handleHeightModal}>
                     <Row justifyContent="space-between">
                       <Text style={[styles.textColor, styles.optionName]}>
-                        Height Preference
+                        Height preference
                       </Text>
                       <Text style={styles.silderSubText}>
                         {formatNumber(heightRange[0])} -{' '}
@@ -237,7 +237,7 @@ export const PreferencesScreen = () => {
                           >
                             <Spacer position="left" size={10}>
                               <Text style={styles.degreeTypeFont}>
-                                No Preference
+                                No preference
                               </Text>
                             </Spacer>
                           </Pressable>

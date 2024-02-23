@@ -194,13 +194,13 @@ export const useViewModal = () => {
   };
   const healthcareProfessionals = [
     {
-      title: 'Degree Category',
+      title: 'Degree category',
       option: _userDegree,
       initValue: 'degreeCategory',
       isArrow: true,
     },
     {
-      title: 'Degree Type',
+      title: 'Degree type',
       option: _primaryDegree,
       initValue: 'degreeType',
       isArrow: true,
@@ -215,13 +215,13 @@ export const useViewModal = () => {
       initValue: 'ethnicity',
     },
     {
-      title: 'Relationship Level',
+      title: 'Relationship level',
       option: relationshipLevelList,
       initValue: 'relationshipLevel',
     },
     {},
     {
-      title: 'Marital Status',
+      title: 'Marital status',
       option: maritalStatusList,
       initValue: 'maritalStatus',
     },
@@ -241,12 +241,12 @@ export const useViewModal = () => {
       initValue: 'kids',
     },
     {
-      title: 'Family Plan',
+      title: 'Family plan',
       option: familyPlanList,
       initValue: 'familyPlan',
     },
     {
-      title: 'Covid',
+      title: 'Covid vaccine',
       option: covidList,
       initValue: 'covidVaccineStatus',
     },
@@ -289,7 +289,7 @@ export const useViewModal = () => {
       values: [],
     },
     {
-      title: 'Vital signs',
+      title: 'Vital Signs',
       mainTitle: true,
       values: vitalSigns,
     },
