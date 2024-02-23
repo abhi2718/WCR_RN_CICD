@@ -82,7 +82,7 @@ export const useViewModal = (props: profileProps) => {
       const payLoad = createPayLoafForUserAction('Like');
       const { data } = await homeDeckRepository.userReactin(payLoad);
       setLoading(false);
-      if (data?.isMatch) {
+      if (data?.isMatched) {
         setIsMatch({
           status: true,
           matchUser: user,

@@ -129,7 +129,7 @@ export const useViewModal = (route: RouteType) => {
       const payLoad = createPayLoafForUserAction(index, 'Like');
       const { data } = await homeDeckRepository.userReactin(payLoad);
       fetchAll(user._id);
-      if (data?.isMatch) {
+      if (data?.isMatched) {
         setIsMatch({
           status: true,
           matchUser: profiles[index],
