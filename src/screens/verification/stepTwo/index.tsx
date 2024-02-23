@@ -181,7 +181,12 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Pressable onPress={closePicModal}>
+                <Pressable
+                  onPress={() => {
+                    setIsSelfie(false);
+                    closePicModal();
+                  }}
+                >
                   <View style={modalStyles.backButtonWrapper}>
                     <Image
                       style={modalStyles.arrow}
