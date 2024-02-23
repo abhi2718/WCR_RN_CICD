@@ -56,4 +56,6 @@ export type profileProps = {
   matchedDocId?: string;
   isMatched?: boolean;
   showOnlyProfileView?: boolean;
+  isCalledFromSearchModdal?: boolean;
+  closeSearchModal?:()=>void;
 };

@@ -203,11 +203,16 @@ export const useViewModal = (route: RouteType) => {
   };
   const navigation = useNavigation();
   const startChat = () => {
-    if (isMatch?.matchUser) {
-      navigation.navigate(ROUTES.CommunityPrivateChat, {
-        senderId: isMatch?.matchUser?._id,
-        name: isMatch?.matchUser?.profile?.name?.first,
-      });
+    try {
+      if (isMatch?.matchUser) {
+        handleHideOfIsMatchScreen();
+        navigation.navigate(ROUTES.CommunityPrivateChat, {
+          senderId: isMatch?.matchUser?._id,
+          name: isMatch?.matchUser?.first,
+        });
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
   return {

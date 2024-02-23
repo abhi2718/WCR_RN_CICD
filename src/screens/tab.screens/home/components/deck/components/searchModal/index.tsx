@@ -42,6 +42,8 @@ export const SearchModal = (props: SearchModalProps) => {
           showLike={true}
           showDisLike={true}
           showSave={true}
+          isCalledFromSearchModdal={true}
+          closeSearchModal = {handleClose}
         />
       ) : (
         <SafeAreaView style={searchStyle.container}>

@@ -37,6 +37,8 @@ export const useViewModal = (props: profileProps) => {
     showBlock,
     isMatched,
     showOnlyProfileView,
+    closeSearchModal,
+    isCalledFromSearchModdal
   } = props;
   const handleShare = () => {
     try {
@@ -162,6 +164,9 @@ export const useViewModal = (props: profileProps) => {
   };
   const navigation = useNavigation();
   const startChat = () => {
+    if (isCalledFromSearchModdal && closeSearchModal) {
+      closeSearchModal()
+    }
     handleHideOfIsMatchScreen();
     navigation.navigate(ROUTES.CommunityPrivateChat, {
       senderId: isMatch?.matchUser?._id,
