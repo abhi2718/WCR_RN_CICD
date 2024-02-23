@@ -103,7 +103,7 @@ export const VerificationWebsitePhdMdal = (props: WebsitePhdModalProps) => {
             <View style={verificationStyle.wrapper}>
               {verificationWebsiteValid ? (
                 <ErrorText style={{marginTop:10}}>
-                  Please select any of the either two fields
+                 Upload diploma photo or add website to continue
                 </ErrorText>
               ) : (
                 <View />

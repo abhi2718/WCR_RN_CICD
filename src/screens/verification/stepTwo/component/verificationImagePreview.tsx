@@ -38,7 +38,7 @@ export const VerificationImagePreviewModal = (
     toggleModal,
     visibleModal,
     clickPicture,
-    error
+    error,
   } = props;
 
   return (
@@ -154,13 +154,11 @@ export const VerificationImagePreviewModal = (
             title="Submit"
             isLoading={loading}
           />
-           {error ? (
-                <ErrorText>
-                  Please upload both selfie and document
-                </ErrorText>
-              ) : (
-                <View />
-              )}
+          {error ? (
+            <ErrorText>Both photos required. Please upload.</ErrorText>
+          ) : (
+            <View />
+          )}
         </View>
       </ScrollView>
     </Modal>
@@ -169,7 +167,7 @@ export const VerificationImagePreviewModal = (
 
 export const verificationImageUploaderStyle = StyleSheet.create({
   imageViewProfile: {
-    borderRadius: sizes[4],
+    
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: colors.ui.primary,
@@ -178,6 +176,8 @@ export const verificationImageUploaderStyle = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     marginHorizontal: 16,
+    overflow: 'hidden',
+    borderRadius: 20,
   },
   uploadeFinalImg: {
     borderRadius: sizes[4],
