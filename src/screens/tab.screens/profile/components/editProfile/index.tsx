@@ -62,7 +62,7 @@ export const EditProfile = () => {
     setheight,
     voidFun,
     setAnswer,
-    navigateToHobby
+    navigateToHobby,
   } = useViewModal();
   return (
     <SafeAreaView style={styles.editInfoContainer}>
@@ -99,8 +99,8 @@ export const EditProfile = () => {
           </Column>
           <Spacer position="top" size={10}>
             <View style={styles.ph16}>
-            <Text style={styles.fieldName}>Interests & Hobbies</Text>
-             <TouchableOpacity onPress={navigateToHobby}>
+              <Text style={styles.fieldName}>Interests & Hobbies</Text>
+              <TouchableOpacity onPress={navigateToHobby}>
                 <Row
                   style={[styles.selectRow, styles.fieldValueContainer]}
                   justifyContent="space-between"
@@ -129,7 +129,7 @@ export const EditProfile = () => {
                     source={require('../../../../../assets/images/settings/Next.png')}
                   />
                 </Row>
-              </TouchableOpacity> 
+              </TouchableOpacity>
             </View>
             <MultiSelectModal
               isVisible={openHobbyModal}
@@ -146,14 +146,14 @@ export const EditProfile = () => {
           <Text style={styles.headingText}>Personal Info</Text>
           <Spacer position="bottom" size={10} />
           <Column style={styles.ph16}>
-            <Text style={styles.fieldName}>First Name</Text>
+            <Text style={styles.fieldName}>First name</Text>
             <View style={styles.fieldValueContainer}>
               <Text style={styles.fieldValue}>
                 {user?.profile?.name?.first}
               </Text>
             </View>
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Last Name</Text>
+              <Text style={styles.fieldName}>Last name</Text>
               <View style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>
                   {user?.profile?.name?.last}
@@ -161,13 +161,13 @@ export const EditProfile = () => {
               </View>
             </Spacer>
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Email Address</Text>
+              <Text style={styles.fieldName}>Email address</Text>
               <View style={styles.fieldValueContainer}>
                 <Text style={styles.fieldValue}>{user?.profile?.email}</Text>
               </View>
             </Spacer>
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Display Name</Text>
+              <Text style={styles.fieldName}>Display name</Text>
               <View style={styles.fieldValueContainer}>
                 <TextInput
                   placeholder="Display Name"
@@ -185,7 +185,7 @@ export const EditProfile = () => {
               </View>
             </Spacer>
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Phone No</Text>
+              <Text style={styles.fieldName}>Phone #</Text>
               <View style={styles.fieldValueContainer}>
                 <TextInput
                   placeholder="Phone No"
@@ -210,7 +210,7 @@ export const EditProfile = () => {
             </Spacer>
           </Column>
           <Spacer position="top" size={14} />
-          <Text style={styles.headingText}>Identity/Orientation</Text>
+          <Text style={styles.headingText}>Identity & Orientation</Text>
           <Column style={styles.ph16}>
             <Spacer position="top" size={10}>
               <Text style={styles.fieldName}>Gender</Text>
@@ -233,7 +233,7 @@ export const EditProfile = () => {
               </Spacer>
             </Spacer>
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Gender Pronoun</Text>
+              <Text style={styles.fieldName}>Gender pronoun</Text>
               <Pressable
                 onPress={() => _setOrientationModal('showGenderPronoun', true)}
               >
@@ -271,7 +271,7 @@ export const EditProfile = () => {
               </Pressable>
             </Spacer>
             <Spacer position="top" size={10}>
-              <Text style={styles.fieldName}>Sexual Orientation</Text>
+              <Text style={styles.fieldName}>Sexual orientation</Text>
               <Pressable
                 onPress={() =>
                   _setOrientationModal('showSexualOrientation', true)
@@ -334,7 +334,9 @@ export const EditProfile = () => {
                           </View>
                         </Spacer>
                         <Spacer position="top" size={10}>
-                          <Text style={styles.fieldName}>State/Territory</Text>
+                          <Text style={styles.fieldName}>
+                            State & Territory
+                          </Text>
                           <Row
                             style={[
                               styles.selectRow,
@@ -464,7 +466,7 @@ export const EditProfile = () => {
                         );
                       }
 
-                      if (value.title === 'Relationship Level') {
+                      if (value.title === 'Relationship level') {
                         return (
                           <Spacer key={index} position="top" size={10}>
                             <Spacer position="top" size={10}>
@@ -541,7 +543,7 @@ export const EditProfile = () => {
                       ) {
                         return (
                           <Spacer key={index} position="top" size={10}>
-                            <Text style={styles.fieldName}>Job Title</Text>
+                            <Text style={styles.fieldName}>Job title</Text>
                             <View style={styles.fieldValueContainer}>
                               <TextInput
                                 placeholder="Job Title"
@@ -579,7 +581,7 @@ export const EditProfile = () => {
                         );
                       }
 
-                      if (item.title === 'Vital signs' && index === 2) {
+                      if (item.title === 'Vital Signs' && index === 2) {
                         return (
                           <Spacer key={index} position="top" size={10}>
                             <HeightModal
