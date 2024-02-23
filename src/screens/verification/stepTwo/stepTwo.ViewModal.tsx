@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect,  useRef, useState } from 'react';
 import {
   defaultPhotoDimension,
   pickPhotoFromCammera,
@@ -6,10 +6,6 @@ import {
 } from '../../../utils/uploads';
 import { Image } from 'react-native-image-crop-picker';
 import { CloudinaryRepository } from '../../../repository/cloudinary.repo';
-import {
-  FlashMessageType,
-  ShowFlashMessage,
-} from '../../../components/flashBar';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../store/reducers/user.reducer';
@@ -21,6 +17,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   const { optionData, verificationOption, PhdImage } =
     props.route?.params?.data || 'No optionData received';
   const { user } = useSelector((state: any) => state.userState);
+  const [error, setError] = useState<boolean>(false);
   const token = useRef(user?.token ? user?.token : null).current;
   const userWebsite =
     user.verificationId?.licenceWebsite ||
@@ -64,28 +61,12 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   );
 
   const isShowPreview = (): boolean => {
-    return savedDocImage.length > 0 && savedSelfieImage.length > 0;
+    return (
+      (documentImage != undefined || savedDocImage.length > 0) &&
+      (selfie != undefined || savedSelfieImage.length > 0)
+    );
   };
 
-  // useLayoutEffect(() => {
-  //   if (savedDocImage.length > 0) {
-  //     const resultImage = {
-  //       path: savedDocImage[0]?.url,
-  //       mime: 'image/jpeg',
-  //       name: savedDocImage[0]?.url?.split('/').pop()!,
-  //     };
-  //     setdocumentImage(resultImage);
-  //   }
-
-  //   if (savedSelfieImage.length > 0) {
-  //     const resultImage = {
-  //       path: savedSelfieImage[0]?.url,
-  //       mime: 'image/jpeg',
-  //       name: savedSelfieImage[0]?.url?.split('/').pop()!,
-  //     };
-  //     setSelfie(resultImage);
-  //   }
-  // }, []);
 
   const alreadySetVerificationOption = () => {
     let result;
@@ -132,11 +113,11 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setdocumentImage(resultImage);
         props.onChange?.(image);
-        if (!selfie) {
+        if (!isSelfie) {
           openPicModal();
         }
       }
-      if (!selfie) {
+      if (!isSelfie) {
         openPicModal();
       }
     } else if (source === 'library') {
@@ -151,9 +132,13 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
           name: image?.path?.split('/').pop()!,
         };
         setdocumentImage(resultImage);
+        if(isSelfie){
+          setError(false)
+        }
+         setError(true)
         props.onChange?.(image);
       }
-      if (!selfie) {
+      if (!isSelfie) {
         openPicModal();
       }
     }
@@ -170,6 +155,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setPhdOptionImage(resultImage);
         props.onChange?.(image);
+        setIsSelfie(false);
       }
     } else if (source === 'library') {
       const image: Image = await pickPhotoFromGallary(
@@ -184,6 +170,7 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         };
         setPhdOptionImage(resultImage);
         props.onChange?.(image);
+        setIsSelfie(false);
       }
     }
     toggleModal();
@@ -215,15 +202,24 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         name: image?.path?.split('/').pop()!,
       };
       setSelfie(resultImage);
+      if(documentImage){
+        setError(false)
+      }
       props.onChange?.(image);
     }
   };
 
   const removeSelfie = () => {
     setSelfie(null);
+    closePicModal();
+    if (documentImage) {
+      setIsSelfie(false);
+    }
   };
   const removeDocument = () => {
     setdocumentImage(null);
+    setIsSelfie(false);
+    closePicModal();
   };
 
   type imageObject = {
@@ -233,12 +229,11 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
 
   const sumbitVerificationForm = async () => {
     try {
-      if (!documentImage?.path && !selfie?.path) {
-        return ShowFlashMessage(
-          'Warning',
-          'Pictures are not selected!',
-          FlashMessageType.DANGER,
-        );
+      if (!documentImage?.path) {
+        return  setError(true)
+      }
+      if (!selfie?.path) {
+        return setError(true)
       }
 
       const photos: imageObject[] = PhdOptionImage
@@ -432,5 +427,6 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     openStudentInfoModal,
     isStudentInfoModalVisible,
     isShowPreview,
+    error
   };
 };

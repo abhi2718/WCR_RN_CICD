@@ -22,6 +22,7 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
     isValidWebsiteUrl,
     validateUserWebsiteUrl,
     skip,
+    error,
     validateUserWebsiteUrlHealthCare,
     isValidWebsiteUrlHealthCare,
   } = props;
@@ -59,6 +60,13 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
               ) : (
                 <View />
               )}
+              {error ? (
+                <ErrorText>
+                  Enter your website or click 'Skip' to proceed without it..
+                </ErrorText>
+              ) : (
+                <View />
+              )}
             </KeyboardAvoidingView>
             <Text style={verificationStyle.footerText}>
               We may request additional proof of degree if needed, depending on
@@ -92,6 +100,13 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
               ) : (
                 <View />
               )}
+              {error ? (
+                <ErrorText>
+                  Enter your website or click 'Skip' to proceed without it...
+                </ErrorText>
+              ) : (
+                <View />
+              )}
             </KeyboardAvoidingView>
           </View>
         )}
@@ -117,6 +132,13 @@ export const VerificationWebsiteModal = (props: WebsiteModalProps) => {
               />
               {!isValidEmail && optionData?.studentEmail?.length ? (
                 <ErrorText>Please enter a valid email address.</ErrorText>
+              ) : (
+                <View />
+              )}
+              {error ? (
+                <ErrorText>
+                  Enter your email ID or click 'Skip' to proceed without it..
+                </ErrorText>
               ) : (
                 <View />
               )}

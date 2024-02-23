@@ -19,6 +19,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
   const [verificationOption, setVerificationOption] = useState('');
+  const [error, setError] = useState<boolean>(false);
   const [openVerificationWebsiteModal, setVerificationWebsiteModal] =
     useState(false);
   const [isValidStudentEmail, setIsValidStudentEmail] =
@@ -89,6 +90,15 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   const navigateOptions = () => {
     if (
+      !optionData.healthCareProfessionalEmail ||
+      !optionData.studentEmail ||
+      !optionData.licenceWebsite
+    ){
+      setError((oldState:boolean)=>{
+        return true
+      })
+    }
+    if (
       verificationOption === 'Student' ||
       verificationOption === 'License Number'
     ) {
@@ -128,7 +138,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const navigateToVerificationStepTwo = () => {
-    setVerificationWebsiteModal(false);
+    
+      setVerificationWebsiteModal(false);
     setVisiblePhdOptionModal(false);
     navigation.navigate(ROUTES.VerificationStepTwo, {
       data: { optionData, verificationOption, PhdImage: PhdOptionImage },
@@ -202,6 +213,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const handleVerificationOption = () => {
+    setError(false)
+    setVerificationWebsiteValid(false)
     if (!verificationOption) {
       return ShowFlashMessage(
         'Warning',
@@ -220,9 +233,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
   };
 
-  const navigateSecondStep = () => {
-    navigation.navigate(ROUTES.VerificationStepTwo);
-  };
 
   useEffect(() => {
     if (!user.verificationId.submitted) {
@@ -372,5 +382,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     validateUserWebsiteUrlHealthCare,
     isValidWebsiteUrlHealthCare,
     degreeIdentifierTypeList,
+    error,
+    setError
   };
 };

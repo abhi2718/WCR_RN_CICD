@@ -36,5 +36,6 @@ export type ModalImageSelectedType = {
     visibleModal: boolean;
     documentImage?: any;
     selfie?: any;
+    error?: boolean;
     loading?: boolean;
   }

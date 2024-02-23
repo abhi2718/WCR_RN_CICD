@@ -18,28 +18,30 @@ export interface WebsiteModalProps {
   onClose: () => void;
   navigateToVerificationStepTwo: () => void;
   skip: () => void;
-  validateEmail: (email:string) => void;
-  validateUserWebsiteUrl: (email:string) => void;
+  validateEmail: (email: string) => void;
+  validateUserWebsiteUrl: (email: string) => void
   isValidEmail: boolean;
   isValidWebsiteUrl: boolean;
-  validateUserWebsiteUrlHealthCare: (email:string) => void;,
-    isValidWebsiteUrlHealthCare:boolean
+  validateUserWebsiteUrlHealthCare: (email: string) => void;
+  isValidWebsiteUrlHealthCare: boolean;
+  error: boolean;
+  setError:(value:boolean)=>void;
 }
 export interface WebsitePhdModalProps {
   isVisible: boolean;
   verificationWebsiteValid: boolean;
-  uploadPhdOptionPhotos: (source:string) => void;
+  uploadPhdOptionPhotos: (source: string) => void;
   PhdOptionImage: any;
   onClose: () => void;
   navigateToVerificationStepTwo: () => void;
   loading: boolean;
   website: string;
-  visibleModal:boolean
-  handleWebsite: (website:string) => void;
+  visibleModal: boolean;
+  handleWebsite: (website: string) => void;
   toggleModal: () => void;
   optionData: verificationIdType;
-  isValidWebsiteUrlPhduser:boolean,
-  validateUserWebsiteUrlPhdUser: (websiteUrl:string) => void;
+  isValidWebsiteUrlPhduser: boolean;
+  validateUserWebsiteUrlPhdUser: (websiteUrl: string) => void;
 }
 
 export interface VerificationInfoProps {

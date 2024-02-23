@@ -6,24 +6,14 @@ import {
   Pressable,
   TouchableOpacity,
   Image,
-  KeyboardAvoidingView,
   Keyboard,
 } from 'react-native';
-import {
-  Column,
-  Logo,
-  Row,
-  ScreenContainer,
-  Spacer,
-  dimensions,
-  isAndroid,
-} from '../../../components/tools';
+import { Column, Row, ScreenContainer } from '../../../components/tools';
 import { HeaderBar } from '../../../components/header';
 import {
   firstModalStyle,
   verificationStyle,
 } from '../stepOne/verificationSteps';
-import { FlatInput } from '../../../components/inputBox';
 import { PrimaryButton } from '../../../components/button';
 import { modalStyles } from '../../auth/preRegisterFlow/components/AddProfilePic/AddProfilePicStyle';
 import { useVerificationViewModalStepTwo } from './stepTwo.ViewModal';
@@ -33,7 +23,6 @@ import {
 } from '../../../components/verificationModal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
-import { ScrollView } from 'react-native-gesture-handler';
 import { insModalStyle } from '../../../components/profilePicInfoModal/profileInfoStyle';
 import { VerificationImagePreviewModal } from './component/verificationImagePreview';
 
@@ -42,10 +31,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
     verificationOption,
     clickSelfieImage,
     visibleModal,
-    handleWebsite,
-    website,
     documentImage,
-    setdocumentImage,
     clickPicture,
     selfie,
     loading,
@@ -55,24 +41,21 @@ const VerificationStepTwo = (props: AvatarProps) => {
     navigateToVerificationImagePreview,
     sumbitVerificationForm,
     isSelfie,
-    uploadPhdOptionPhotos,
     setIsSelfie,
     PhdOptionImage,
     closePhdOptionPicUploadingModal,
-    openPhdOptionPicUploadingModal,
     PhdOptionPicUploadingModal,
-    openInfoModal,
     isVerificationInfoModalVisible,
     closeModal,
     openModal,
     closeStudentInfoModal,
-    openStudentInfoModal,
     isStudentInfoModalVisible,
     isVerificationImagePreviewVisible,
     onCloseVerificationImagePreview,
     removeDocument,
     removeSelfie,
     isShowPreview,
+    error,
   } = useVerificationViewModalStepTwo(props);
   const { top, bottom } = useSafeAreaInsets();
   return (
@@ -87,6 +70,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
           onClose={closeStudentInfoModal}
         ></IdverifyStudentModal>
         <VerificationImagePreviewModal
+          error={error}
           sumbitVerificationForm={sumbitVerificationForm}
           clickSelfieImage={clickSelfieImage}
           removeDocument={removeDocument}
@@ -140,115 +124,8 @@ const VerificationStepTwo = (props: AvatarProps) => {
                 source={require('../../../assets/images/virificationModal1.png')}
               />
             )}
-
-            {/* {verificationOption === 'Student' ? null : (
-              <View>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>White Coat</Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>Scrubs</Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>Jacket</Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>Work ID badge</Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>
-                    Business/license card
-                  </Text>
-                </Row>
-                <Row style={verificationStyle.pointsRow} alignItems="center">
-                  <Text style={verificationStyle.redDot}>{'\u2B24'}</Text>
-                  <Text style={verificationStyle.pointText}>
-                    Desk/door nameplate
-                  </Text>
-                </Row>
-              </View>
-            )} */}
           </View>
           <View style={verificationStyle.footerDiv}>
-            {/* {verificationOption === 'License Number' && (
-              <View style={verificationStyle.white}>
-                <Text>
-                  <Text style={verificationStyle.optionalText}>Optional: </Text>
-                  <Text style={verificationStyle.pointText}>
-                    For quicker verification, please provide a website to verify
-                    your degree.
-                  </Text>
-                </Text>
-                <KeyboardAvoidingView
-                  enabled
-                  behavior={isAndroid ? 'height' : 'padding'}
-                >
-                  <FlatInput
-                    label="Enter website"
-                    value={website}
-                    onChangeText={handleWebsite}
-                  />
-                </KeyboardAvoidingView>
-              </View>
-            )}
-            {verificationOption === 'HealthCare' && (
-              <View style={verificationStyle.white}>
-                <Text>
-                  <Text style={verificationStyle.optionalText}>Optional: </Text>
-                  <Text style={verificationStyle.pointText}>
-                    For quicker verification, please provide a website to verify
-                    your degree.
-                  </Text>
-                </Text>
-                <KeyboardAvoidingView
-                  enabled
-                  behavior={isAndroid ? 'height' : 'padding'}
-                >
-                  <FlatInput
-                    label="Enter website"
-                    value={website}
-                    onChangeText={handleWebsite}
-                  />
-                </KeyboardAvoidingView>
-              </View>
-            )}
-            {verificationOption === 'Student' && (
-              <View style={verificationStyle.white}>
-                <Text>
-                  <Text style={verificationStyle.optionalText}>Optional: </Text>
-                  <Text style={verificationStyle.pointText}>
-                    For faster verification, please provide your student email.
-                    We may send an email to confirm your student status and
-                    request further verification if necessary.
-                  </Text>
-                </Text>
-                <KeyboardAvoidingView
-                  enabled
-                  behavior={isAndroid ? 'height' : 'padding'}
-                >
-                  <FlatInput
-                    label="Enter student email"
-                    onChangeText={handleWebsite}
-                    value={website}
-                  />
-                </KeyboardAvoidingView>
-              </View>
-            )}
-            {verificationOption === 'License Number' && (
-              <Text style={verificationStyle.footerText}>
-                We may request additional proof of degree if needed, depending
-                on the type of degree.
-              </Text>
-            )} */}
-            {/* <KeyboardAvoidingView
-              enabled
-              behavior={isAndroid ? 'height' : 'padding'}
-            > */}
             <PrimaryButton
               onPress={() => {
                 if (isShowPreview()) {
@@ -312,9 +189,7 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     />
                   </View>
                 </Pressable>
-                {/* <View style={modalStyles.logoWrapper}>
-                  <Logo width={50} height={35} />
-                </View> */}
+
                 <View />
               </Row>
               {!isSelfie ? (
@@ -396,9 +271,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
                     />
                   </Pressable>
                 </View>
-                {/* <View style={modalStyles.logoWrapper}>
-                  <Logo width={50} height={35} />
-                </View> */}
                 <View />
               </Row>
               <View style={modalStyles.content}>
@@ -416,85 +288,6 @@ const VerificationStepTwo = (props: AvatarProps) => {
               </View>
             </View>
           </Modal>
-
-          {/* <Modal
-            animationType="slide"
-            transparent={true}
-            visible={PhdOptionModal}
-            onRequestClose={closePhdOptionModalModal}
-          >
-            <KeyboardAvoidingView
-              style={verificationStyle.wrapper}
-              enabled
-              behavior={isAndroid ? 'height' : 'padding'}
-            >
-              <ScrollView style={modalStyles.modalContent}>
-                <Row
-                  style={modalStyles.row}
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <View style={modalStyles.backButtonWrapper}>
-                    <Pressable onPress={closePhdOptionModalModal}>
-                      <View style={modalStyles.backButtonWrapper}>
-                      <Image
-                        style={modalStyles.arrow}
-                        source={require('../../../assets/images/icons/arrow.png')}
-                      />
-                      </View>
-                    </Pressable>
-                  </View>
-                  <View style={modalStyles.logoWrapper}>
-                    <Logo width={50} height={35} />
-                  </View>
-                  <View />
-                </Row>
-                <View style={verificationStyle.container}>
-                  <Text>{validationErrorMessage}</Text>
-                  <View style={verificationStyle.wrapper}>
-                    <Text style={verificationStyle.subHeader}>
-                      Provide The Following Degree Verification (Step III)
-                    </Text>
-                    <Text style={verificationStyle.subText}>
-                      Upload Proof of Degree from USA showing name, institution,
-                      degree, date degree awarded
-                    </Text>
-                    <Text style={verificationStyle.subText}>
-                      ( e.g., Diploma, Transcript, Certificate of Completion,
-                      Degree Verification )
-                    </Text>
-                    <TouchableOpacity
-                      style={verificationStyle.uploadBtn}
-                      onPress={() => uploadPhdOptionPhotos()}
-                    >
-                      <Text style={verificationStyle.uploadBtnText}>
-                        Uplpoad
-                      </Text>
-                    </TouchableOpacity>
-                    <Text style={verificationStyle.subText}>
-                      Enter website to show proof of degree (e.g., Professional
-                      licensing website, Institution website showing name and
-                      year of graduation, Work website showing name and title).
-                      We may request additional proof of degree if needed.
-                    </Text>
-                  </View>
-                  <View style={verificationStyle.footerDiv}>
-                    <FlatInput
-                      label="Enter website"
-                      placeholder="Enter website"
-                      value={website}
-                      onChangeText={handleWebsite}
-                    />
-                    <PrimaryButton
-                      onPress={() => sumbitVerificationForm()}
-                      title="Submit"
-                      isLoading={loading}
-                    />
-                  </View>
-                </View>
-              </ScrollView>
-            </KeyboardAvoidingView>
-          </Modal> */}
         </View>
       </ScreenContainer>
     </Pressable>
