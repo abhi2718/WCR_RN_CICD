@@ -95,7 +95,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       !optionData.studentEmail ||
       !optionData.licenceWebsite
     ){
-      console.log('inside if')
       setError((oldState:boolean)=>{
         return true
       })
@@ -140,7 +139,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const navigateToVerificationStepTwo = () => {
-    console.log('called')
     
       setVerificationWebsiteModal(false);
     setVisiblePhdOptionModal(false);
@@ -216,6 +214,8 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   };
 
   const handleVerificationOption = () => {
+    setError(false)
+    setVerificationWebsiteValid(false)
     if (!verificationOption) {
       return ShowFlashMessage(
         'Warning',
@@ -234,9 +234,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
   };
 
-  const navigateSecondStep = () => {
-    navigation.navigate(ROUTES.VerificationStepTwo);
-  };
 
   useEffect(() => {
     if (!user.verificationId.submitted) {
