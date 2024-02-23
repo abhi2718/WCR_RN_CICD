@@ -2,7 +2,7 @@ import { ScreenParams } from '../../../types/services.types/firebase.service';
 import { ROUTES } from '../../../navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { addUser } from '../../../store/reducers/user.reducer';
 
 export const useViewModal = (props: ScreenParams) => {
@@ -16,6 +16,12 @@ export const useViewModal = (props: ScreenParams) => {
   const navigateToHomeDeck = () => {
     navigation.navigate(ROUTES.Tab);
   };
+
+  useEffect(() => {
+    if (user?.welcomeHome) {
+      navigateToHomeDeck();
+    }
+  }, []);
 
   const updateUserDetails = async () => {
     try {
@@ -51,6 +57,6 @@ export const useViewModal = (props: ScreenParams) => {
 
   return {
     updateUserDetails,
-    loading
+    loading,
   };
 };
