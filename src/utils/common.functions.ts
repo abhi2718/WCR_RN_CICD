@@ -359,6 +359,12 @@ export const validateEmail = (email: string) => {
   return emailRegex.test(email);
 };
 
-export const showDisplayOrFirstName = (displayName: string, name: string) => {
-  return displayName?.length ? displayName : name;
+export const showDisplayOrFirstName = (displayName:string,name: string) => {
+   return displayName?.length?displayName:name
+}
+
+export const isValidURL = (url: string): boolean => {
+  const urlRegex = /^(?:\w+\.)+\w+(?:\/\S*)?$/;
+
+  return urlRegex.test(url);
 };

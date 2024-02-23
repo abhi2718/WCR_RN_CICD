@@ -1,32 +1,66 @@
 import { useEffect, useState } from 'react';
-import {
-  ScreenParams,
-  verificationIdType,
-} from '../../../types/services.types/firebase.service';
+import { verificationIdType } from '../../../types/services.types/firebase.service';
 import {
   FlashMessageType,
   ShowFlashMessage,
 } from '../../../components/flashBar';
 import { ROUTES } from '../../../navigation';
 import { useSelector } from 'react-redux';
-import { useNavigateToScreen } from '../../../utils/common.functions';
+import {
+  isValidURL,
+  useNavigateToScreen,
+  validateEmail,
+} from '../../../utils/common.functions';
+import { useVerificationViewModalStepTwo } from '../stepTwo/stepTwo.ViewModal';
+import { AvatarProps } from '../../../types/screen.type/preRegister.type';
+import { degreeIdentifierType } from '../../../utils/constanst';
 
-export const useVerificationViewModal = (props: ScreenParams) => {
+export const useVerificationViewModal = (props: AvatarProps) => {
   const { navigation } = props;
   const { user } = useSelector((state: any) => state.userState);
   const [verificationOption, setVerificationOption] = useState('');
+  const [error, setError] = useState<boolean>(false);
+  const [openVerificationWebsiteModal, setVerificationWebsiteModal] =
+    useState(false);
+  const [isValidStudentEmail, setIsValidStudentEmail] =
+    useState<boolean>(false);
+  const [isValidWebsiteUrl, setIsValidWebsiteUrl] = useState<boolean>(false);
+  const [isValidWebsiteUrlHealthCare, setIsValidWebsiteUrlHealthCare] =
+    useState<boolean>(false);
+  const [isValidWebsiteUrlPhduser, setIsValidWebsiteUrlPhdUser] =
+    useState<boolean>(false);
+  const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
+  const closePhdOptionModal = () => setVisiblePhdOptionModal(false);
+  const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
+  const {
+    uploadPhdOptionPhotos,
+    PhdOptionImage,
+    website,
+    sumbitVerificationForm,
+    loading,
+    toggleModal,
+    visibleModal,
+    handleWebsite,
+  } = useVerificationViewModalStepTwo(props);
   const country = user.address.country;
+  const degreeIdentifierTypeList = degreeIdentifierType.map((val) => ({
+    label: val,
+    value: val,
+  }));
   const [optionData, setFormData] = useState<verificationIdType>({
     npiNumber: '',
     state: '',
     licenseNumber: '',
-    isDoctoralCandidate: false,
-    isPhd: false,
-    idType: '',
-    licenceWebsite: '',
-    studentEmail: '',
-    userWebsite: '',
-    healthCareProfessionalEmail: '',
+    isDoctoralCandidate:
+      user?.verificationId?.isDoctoralCandidate == true ? true : false,
+    isPhd: user?.verificationId?.isPhd == true ? true : false,
+
+    idType: user?.verificationId?.idType ?? '',
+    licenceWebsite: user?.verificationId?.licenceWebsite ?? '',
+    studentEmail: user?.verificationId?.studentEmail ?? '',
+    userWebsite: user?.verificationId?.userWebsite ?? '',
+    healthCareProfessionalEmail:
+      user?.verificationId?.healthCareProfessionalEmail ?? '',
     teritory: '',
     degreeIdentifier: '',
     degreeIdentifierType: '',
@@ -48,14 +82,103 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       return { ...oldState, [name]: value };
     });
   };
+
   const [validationErrors, setValidationErrors] = useState<
     Partial<verificationIdType>
   >({});
+  const [verificationWebsiteValid, setVerificationWebsiteValid] =
+    useState(false);
+
+  const navigateOptions = () => {
+    if (
+      !optionData.healthCareProfessionalEmail ||
+      !optionData.studentEmail ||
+      !optionData.licenceWebsite
+    ){
+      setError((oldState:boolean)=>{
+        return true
+      })
+    }
+    if (
+      verificationOption === 'Student' ||
+      verificationOption === 'License Number'
+    ) {
+      if (!isValidStudentEmail && !isValidWebsiteUrl) {
+        return;
+      } else {
+        setIsValidStudentEmail(false);
+        setIsValidWebsiteUrl(false);
+        navigateToVerificationStepTwo();
+      }
+    } else if (verificationOption === 'Others') {
+      if (!PhdOptionImage?.path && !optionData.userWebsite) {
+        setVerificationWebsiteValid(true);
+      } else if (
+        PhdOptionImage?.path ||
+        (optionData?.userWebsite && isValidWebsiteUrlPhduser)
+      ) {
+        setVerificationWebsiteValid(false);
+        navigateToVerificationStepTwo();
+      } else if (!isValidWebsiteUrlPhduser) {
+        setVerificationWebsiteValid(false);
+        return;
+      } else {
+        navigateToVerificationStepTwo();
+      }
+    } else if (verificationOption === 'NPI Number') {
+      navigateToVerificationStepTwo();
+    } else if (verificationOption === 'HealthCare') {
+      if (!isValidWebsiteUrlHealthCare) {
+        return;
+      } else {
+        navigateToVerificationStepTwo();
+      }
+    } else {
+      navigateToVerificationStepTwo();
+    }
+  };
 
   const navigateToVerificationStepTwo = () => {
+    
+      setVerificationWebsiteModal(false);
+    setVisiblePhdOptionModal(false);
     navigation.navigate(ROUTES.VerificationStepTwo, {
-      data: { optionData, verificationOption },
+      data: { optionData, verificationOption, PhdImage: PhdOptionImage },
     });
+  };
+
+  const validateUserEmail = (email: string) => {
+    const isValid = validateEmail(email);
+    handleInputChange('studentEmail', email);
+    setIsValidStudentEmail(isValid);
+  };
+  const validateUserWebsiteUrl = (email: string) => {
+    const isValid = isValidURL(email);
+    handleInputChange('licenceWebsite', email);
+    setIsValidWebsiteUrl(isValid);
+  };
+  const validateUserWebsiteUrlPhdUser = (websiteUrl: string) => {
+    const isValid = isValidURL(websiteUrl);
+    handleInputChange('userWebsite', websiteUrl);
+    setIsValidWebsiteUrlPhdUser(isValid);
+  };
+  const validateUserWebsiteUrlHealthCare = (websiteUrl: string) => {
+    const isValid = isValidURL(websiteUrl);
+    handleInputChange('healthCareProfessionalEmail', websiteUrl);
+    setIsValidWebsiteUrlHealthCare(isValid);
+  };
+
+  const showVerificationWebsiteModal = () => {
+    if (verificationOption === 'NPI Number') {
+      navigateToVerificationStepTwo();
+    } else if (verificationOption === 'Others') {
+      openPhdOptionModal();
+    } else {
+      setVerificationWebsiteModal(true);
+    }
+  };
+  const closeVerificationWebsiteModal = () => {
+    setVerificationWebsiteModal(false);
   };
 
   const setVerificationOptionState = () => {
@@ -66,10 +189,13 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       setVerificationOption('License Number');
       handleInputChange('state', user.verificationId.state);
       handleInputChange('licenseNumber', user.verificationId.idNumber);
+      validateUserWebsiteUrl(user.verificationId.licenceWebsite);
     } else if (user.verificationId.isPhd) {
       setVerificationOption('Others');
+      validateUserWebsiteUrlPhdUser(user.verificationId.userWebsite);
     } else if (user.verificationId.isDoctoralCandidate) {
       setVerificationOption('Student');
+      validateUserEmail(user.verificationId.studentEmail);
     } else if (user.verificationId.territory) {
       setVerificationOption('HealthCare');
       handleInputChange('teritory', user.verificationId.territory);
@@ -81,10 +207,15 @@ export const useVerificationViewModal = (props: ScreenParams) => {
         'degreeIdentifier',
         user.verificationId.degreeIdentifier,
       );
+      validateUserWebsiteUrlHealthCare(
+        user.verificationId.user.verificationId.degreeIdentifier,
+      );
     }
   };
 
   const handleVerificationOption = () => {
+    setError(false)
+    setVerificationWebsiteValid(false)
     if (!verificationOption) {
       return ShowFlashMessage(
         'Warning',
@@ -99,9 +230,10 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleIdType();
     }
     if (verificationOption === 'Student' || verificationOption === 'Others') {
-      navigateToVerificationStepTwo();
+      showVerificationWebsiteModal();
     }
   };
+
 
   useEffect(() => {
     if (!user.verificationId.submitted) {
@@ -146,7 +278,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       setValidationErrors({});
     }
 
-    navigateToVerificationStepTwo();
+    showVerificationWebsiteModal();
   };
 
   const [isVerificationInfoModalVisible, setVerificvationInfoModalVisible] =
@@ -173,7 +305,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleInputChange('idType', 'medicalLicense');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', false);
-      handleInputChange('licenceWebsite', 'licenceWebsite');
+      handleInputChange('licenceWebsite', '');
       handleInputChange('userWebsite', '');
       handleInputChange('state', '');
       handleInputChange('npiNumber', '');
@@ -181,7 +313,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     } else if (option === 'Student') {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', true);
-      handleInputChange('studentEmail', 'studentEmail');
+      handleInputChange('studentEmail', '');
       handleInputChange('userWebsite', '');
       handleInputChange('licenceWebsite', '');
       handleInputChange('state', '');
@@ -191,7 +323,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', true);
-      handleInputChange('userWebsite', 'userWebsite');
+      handleInputChange('userWebsite', '');
       handleInputChange('state', '');
       handleInputChange('studentEmail', '');
       handleInputChange('licenceWebsite', '');
@@ -201,10 +333,7 @@ export const useVerificationViewModal = (props: ScreenParams) => {
       handleInputChange('idType', '');
       handleInputChange('isDoctoralCandidate', false);
       handleInputChange('isPhd', false);
-      handleInputChange(
-        'healthCareProfessionalEmail',
-        'healthCareProfessionalEmail',
-      );
+      handleInputChange('healthCareProfessionalEmail', '');
       handleInputChange('state', '');
       handleInputChange('licenseNumber', '');
       handleInputChange('npiNumber', '');
@@ -226,8 +355,35 @@ export const useVerificationViewModal = (props: ScreenParams) => {
     validationErrors,
     handleInputChange,
     country,
+    PhdOptionModal,
     optionData,
     isVerificationInfoModalVisible,
     closeModal,
+    openVerificationWebsiteModal,
+    closeVerificationWebsiteModal,
+    showVerificationWebsiteModal,
+    navigateToVerificationStepTwo,
+    closePhdOptionModal,
+    verificationWebsiteValid,
+    uploadPhdOptionPhotos,
+    website,
+    sumbitVerificationForm,
+    loading,
+    handleWebsite,
+    validateUserEmail,
+    isValidStudentEmail,
+    validateUserWebsiteUrl,
+    isValidWebsiteUrl,
+    PhdOptionImage,
+    toggleModal,
+    visibleModal,
+    isValidWebsiteUrlPhduser,
+    validateUserWebsiteUrlPhdUser,
+    navigateOptions,
+    validateUserWebsiteUrlHealthCare,
+    isValidWebsiteUrlHealthCare,
+    degreeIdentifierTypeList,
+    error,
+    setError
   };
 };

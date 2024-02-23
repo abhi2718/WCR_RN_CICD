@@ -23,3 +23,19 @@ export type ModalImageSelectedType = {
     navigation: any;
     route: any;
   }
+  export interface VerificationImagePreviewProps {
+    clickPicture: (type:string) => void;
+    sumbitVerificationForm: () => void;
+    removeDocument: () => void;
+    removeSelfie: () => void;
+    clickSelfieImage: () => void;
+    onCloseVerificationImagePreview: () => void;
+    openModal: () => void;
+    toggleModal: () => void;
+    isVerificationImagePreviewVisible: boolean;
+    visibleModal: boolean;
+    documentImage?: any;
+    selfie?: any;
+    error?: boolean;
+    loading?: boolean;
+  }

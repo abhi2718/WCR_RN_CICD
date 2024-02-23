@@ -9,7 +9,7 @@ import { ScreenParams } from '../../../types/services.types/firebase.service';
 import VerificationDeclined from '../verificationDeclined';
 
 const VerificationPending = (props: ScreenParams) => {
-  const { state, isFormSubmitted, navigateToGender,declineReason } =
+  const { state, isFormSubmitted, updateUserDetails, declineReason, loading } =
     usePandingStateViewModal(props);
   return (
     <SafeAreaView style={pendingStyle.mainContainer}>
@@ -43,7 +43,8 @@ const VerificationPending = (props: ScreenParams) => {
             <View style={pendingStyle.primaryButton}>
               <PrimaryButton
                 title="Review Profile"
-                onPress={navigateToGender}
+                onPress={updateUserDetails}
+                isLoading={loading}
               />
             </View>
           </Column>
@@ -71,9 +72,7 @@ const VerificationPending = (props: ScreenParams) => {
             <Text style={pendingStyle.redBoxSubText}>
               See the following reason:
             </Text>
-            <Text style={pendingStyle.redBoxText}>
-            {declineReason}
-            </Text>
+            <Text style={pendingStyle.redBoxText}>{declineReason}</Text>
           </View>
           <Column gap={25} alignItems="center">
             <Text style={pendingStyle.textDeclined}>
@@ -82,8 +81,10 @@ const VerificationPending = (props: ScreenParams) => {
               complete your account verification.
             </Text>
             <View style={pendingStyle.primaryButton}>
-              <PrimaryButton title="Update profile"
-              onPress={navigateToGender}
+              <PrimaryButton
+                title="Update profile"
+                onPress={updateUserDetails}
+                isLoading={loading}
               />
             </View>
           </Column>

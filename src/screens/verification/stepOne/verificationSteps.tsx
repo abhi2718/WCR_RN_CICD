@@ -7,12 +7,31 @@ import {
 import { colors } from '../../../infrastructure/theme/colors';
 import { sizes } from '../../../infrastructure/theme/sizes';
 import { dimensions } from '../../../components/tools';
+import { theme } from '../../../infrastructure/theme';
 
 export const verificationStyle = StyleSheet.create({
-  
   backButtonWrapper: {
-    padding:16
+    padding: 16,
   },
+  paddingH: {
+    paddingHorizontal: 16,
+  },
+  wrapperContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  footerButton: {
+    marginBottom: 20,
+  },
+  headingText: {
+    fontSize: fontSizes.h5,
+    color: colors.ui.text,
+    marginTop: sizes[5],
+    fontFamily: fonts.body,
+    fontWeight: theme.fontWeights.bold,
+    marginBottom: 42,
+  },
+
   wrapper: {
     flex: 1,
   },
@@ -53,13 +72,12 @@ export const verificationStyle = StyleSheet.create({
     marginHorizontal: -16,
     paddingHorizontal: 16,
     gap: 15,
-    flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: '#fff',
+    marginBottom: 16,
   },
   white: {
     backgroundColor: '#fff',
-    paddingTop: 10
+    paddingTop: 10,
   },
   subText: {
     fontSize: fontSizes.text,
@@ -105,6 +123,7 @@ export const verificationStyle = StyleSheet.create({
     width: sizes[8],
     height: sizes[6],
   },
+
   uploadBtn: {
     borderColor: colors.ui.primary,
     paddingVertical: 15,
@@ -119,6 +138,13 @@ export const verificationStyle = StyleSheet.create({
     textAlign: 'center',
     color: colors.ui.primary,
     fontFamily: fonts.body,
+  },
+  headSubText: {
+    color: theme.colors.ui.textHead,
+    textAlign: 'center',
+    fontWeight: theme.fontWeights.bold,
+    fontSize: theme.fontSizes.h4,
+    marginVertical: 10,
   },
 });
 

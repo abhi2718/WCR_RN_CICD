@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect,  useRef, useState } from 'react';
 import {
   defaultPhotoDimension,
   pickPhotoFromCammera,
@@ -6,10 +6,6 @@ import {
 } from '../../../utils/uploads';
 import { Image } from 'react-native-image-crop-picker';
 import { CloudinaryRepository } from '../../../repository/cloudinary.repo';
-import {
-  FlashMessageType,
-  ShowFlashMessage,
-} from '../../../components/flashBar';
 import { UpdateUserDetailsRepository } from '../../../repository/pregisterFlow.repo';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../../store/reducers/user.reducer';
@@ -17,10 +13,11 @@ import { ROUTES } from '../../../navigation';
 import { useNavigateToScreen } from '../../../utils/common.functions';
 import { AvatarProps } from '../../../types/screen.type/preRegister.type';
 
-export const useVerificationViewModal = (props: AvatarProps) => {
-  const { optionData, verificationOption } =
+export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
+  const { optionData, verificationOption, PhdImage } =
     props.route?.params?.data || 'No optionData received';
   const { user } = useSelector((state: any) => state.userState);
+  const [error, setError] = useState<boolean>(false);
   const token = useRef(user?.token ? user?.token : null).current;
   const userWebsite =
     user.verificationId?.licenceWebsite ||
@@ -38,13 +35,39 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [website, setWebsite] = useState(userWebsite ? userWebsite : '');
   const cloudinaryRepository = new CloudinaryRepository();
   const updateUserDetailsRepository = new UpdateUserDetailsRepository();
-
+  const savedDocImage = user.verificationId.photo.filter(
+    (image: any) => image.section === 'userIdUpload',
+  );
+  const savedSelfieImage = user.verificationId.photo.filter(
+    (image: any) => image.section === 'cameraImage',
+  );
+  const getSavedImage = (savedImage: any) => {
+    if (savedImage?.length > 0) {
+      const resultImage = {
+        path: savedImage[0]?.url,
+        mime: 'image/jpeg',
+        name: savedImage[0]?.url?.split('/').pop()!,
+      };
+      return resultImage;
+    } else {
+      return undefined;
+    }
+  };
   const [documentImage, setdocumentImage] = useState<any>(
-    props.source?.uri || undefined,
+    props.source?.uri || getSavedImage(savedDocImage),
   );
   const [PhdOptionImage, setPhdOptionImage] = useState<any>(
-    props.source?.uri || undefined,
+    props.source?.uri || (PhdImage ?? undefined),
   );
+
+  const isShowPreview = (): boolean => {
+    return (
+      (documentImage != undefined || savedDocImage.length > 0) &&
+      (selfie != undefined || savedSelfieImage.length > 0)
+    );
+  };
+
+
   const alreadySetVerificationOption = () => {
     let result;
     if (user.verificationId?.idType === 'npi') {
@@ -60,9 +83,13 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
     return result;
   };
-  const {resetState} = useNavigateToScreen();
+  const { resetState } = useNavigateToScreen();
   const navigateToVerificationState = () => {
     resetState(ROUTES.VerificationPending);
+  };
+  const navigateToVerificationImagePreview = () => {
+    closePicModal();
+    setIsVerificationImagePreviewVisible(true);
   };
 
   const [previousSetVerificationOption, setPreviousSetVerificationOption] =
@@ -74,7 +101,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     }
   }, [previousSetVerificationOption]);
   const dispatch = useDispatch();
-  const [validationErrorMessage, setValidationErrorMessage] = useState('');
   const toggleModal = () => setVisibleModal(!visibleModal);
   const clickPicture = async (source: string) => {
     if (source === 'camera') {
@@ -87,11 +113,18 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         };
         setdocumentImage(resultImage);
         props.onChange?.(image);
+        if (!isSelfie) {
+          openPicModal();
+        }
+      }
+      if (!isSelfie) {
         openPicModal();
       }
-      openPicModal();
     } else if (source === 'library') {
-      const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
+      const image: Image = await pickPhotoFromGallary(
+        defaultPhotoDimension,
+        false,
+      );
       if (image) {
         const resultImage = {
           path: image?.path,
@@ -99,23 +132,48 @@ export const useVerificationViewModal = (props: AvatarProps) => {
           name: image?.path?.split('/').pop()!,
         };
         setdocumentImage(resultImage);
+        if(isSelfie){
+          setError(false)
+        }
+         setError(true)
         props.onChange?.(image);
       }
-      openPicModal();
+      if (!isSelfie) {
+        openPicModal();
+      }
     }
     toggleModal();
   };
-  const uploadPhdOptionPhotos = async () => {
-    const image: Image = await pickPhotoFromGallary(defaultPhotoDimension, false);
-    if (image) {
-      const resultImage = {
-        path: image?.path,
-        mime: image?.mime,
-        name: image?.path?.split('/').pop()!,
-      };
-      setPhdOptionImage(resultImage);
-      props.onChange?.(image);
+  const uploadPhdOptionPhotos = async (source: string) => {
+    if (source === 'camera') {
+      const image: Image = await pickPhotoFromCammera(undefined, true);
+      if (image?.cropRect) {
+        const resultImage = {
+          path: image?.path,
+          mime: image?.mime,
+          name: image?.path?.split('/').pop()!,
+        };
+        setPhdOptionImage(resultImage);
+        props.onChange?.(image);
+        setIsSelfie(false);
+      }
+    } else if (source === 'library') {
+      const image: Image = await pickPhotoFromGallary(
+        defaultPhotoDimension,
+        false,
+      );
+      if (image) {
+        const resultImage = {
+          path: image?.path,
+          mime: image?.mime,
+          name: image?.path?.split('/').pop()!,
+        };
+        setPhdOptionImage(resultImage);
+        props.onChange?.(image);
+        setIsSelfie(false);
+      }
     }
+    toggleModal();
     openPhdOptionPicUploadingModal();
   };
 
@@ -125,9 +183,6 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [visiblePicModal, setVisiblePicModal] = useState(false);
   const closePicModal = () => setVisiblePicModal(false);
   const openPicModal = () => setVisiblePicModal(true);
-  const [PhdOptionModal, setVisiblePhdOptionModal] = useState(false);
-  const closePhdOptionModalModal = () => setVisiblePhdOptionModal(false);
-  const openPhdOptionModal = () => setVisiblePhdOptionModal(true);
   const [PhdOptionPicUploadingModal, setPhdOptionPicUploadingModal] =
     useState(false);
   const closePhdOptionPicUploadingModal = () =>
@@ -136,7 +191,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     setPhdOptionPicUploadingModal(true);
   const [isSelfie, setIsSelfie] = useState(false);
   const [selfie, setSelfie] = useState<any>(
-    props.source?.uri || undefined,
+    props.source?.uri || getSavedImage(savedSelfieImage),
   );
   const clickSelfieImage = async () => {
     const image: Image = await pickPhotoFromCammera(undefined, true);
@@ -147,8 +202,24 @@ export const useVerificationViewModal = (props: AvatarProps) => {
         name: image?.path?.split('/').pop()!,
       };
       setSelfie(resultImage);
+      if(documentImage){
+        setError(false)
+      }
       props.onChange?.(image);
     }
+  };
+
+  const removeSelfie = () => {
+    setSelfie(null);
+    closePicModal();
+    if (documentImage) {
+      setIsSelfie(false);
+    }
+  };
+  const removeDocument = () => {
+    setdocumentImage(null);
+    setIsSelfie(false);
+    closePicModal();
   };
 
   type imageObject = {
@@ -158,23 +229,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   const sumbitVerificationForm = async () => {
     try {
-      if (!documentImage?.path && !selfie?.path) {
-        return ShowFlashMessage(
-          'Warning',
-          'Pictures are not selected!',
-          FlashMessageType.DANGER,
-        );
+      if (!documentImage?.path) {
+        return  setError(true)
       }
-      if (
-        verificationOption === 'Others' &&
-        !PhdOptionImage?.path &&
-        !website
-      ) {
-        return setValidationErrorMessage(
-          'Message: website or id image either of two is required',
-        );
-      } else {
-        setValidationErrorMessage('');
+      if (!selfie?.path) {
+        return setError(true)
       }
 
       const photos: imageObject[] = PhdOptionImage
@@ -200,6 +259,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
       const verificationData = await updateImagesInDatabase(imageUrls);
       closePicModal();
       closePhdOptionPicUploadingModal();
+      onCloseVerificationImagePreview();
       navigateToVerificationState();
     } catch (err) {}
   };
@@ -219,16 +279,25 @@ export const useVerificationViewModal = (props: AvatarProps) => {
                   : '',
               isDoctoralCandidate: optionData?.isDoctoralCandidate,
               isPhd: optionData.isPhd,
-              licenceWebsite: optionData.licenceWebsite ? website : '',
-              studentEmail: optionData.studentEmail ? website : '',
-              userWebsite: optionData.userWebsite ? website : '',
+              licenceWebsite: optionData.licenceWebsite
+                ? optionData.licenceWebsite
+                : '',
+              studentEmail: optionData.studentEmail
+                ? optionData.studentEmail
+                : '',
+              userWebsite: optionData.userWebsite ? optionData.userWebsite : '',
               healthCareProfessionalEmail:
-                optionData.healthCareProfessionalEmail ? website : '',
+                optionData.healthCareProfessionalEmail
+                  ? optionData.healthCareProfessionalEmail
+                  : '',
               degreeIdentifierType: optionData?.degreeIdentifierType,
               territory: optionData?.teritory,
               degreeIdentifier: optionData?.degreeIdentifier,
               photo: photos,
               submitted: true,
+            },
+            verification: {
+              status: 'Pending',
             },
           },
         },
@@ -292,6 +361,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
   const [isStudentInfoModalVisible, setStudentInfoModalVisible] =
     useState(false);
 
+  const [
+    isVerificationImagePreviewVisible,
+    setIsVerificationImagePreviewVisible,
+  ] = useState(false);
+
   const closeStudentInfoModal = () => {
     setStudentInfoModalVisible(false);
   };
@@ -301,6 +375,9 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   const openInfoModal = () => {
     setStudentInfoModalVisible(true);
+  };
+  const onCloseVerificationImagePreview = () => {
+    setIsVerificationImagePreviewVisible(false);
   };
 
   const openModal = () => {
@@ -313,6 +390,10 @@ export const useVerificationViewModal = (props: AvatarProps) => {
 
   return {
     loading,
+    removeDocument,
+    removeSelfie,
+    onCloseVerificationImagePreview,
+    isVerificationImagePreviewVisible,
     verificationOption,
     clickSelfieImage,
     visibleModal,
@@ -323,6 +404,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     selfie,
     setSelfie,
     closePicModal,
+    navigateToVerificationImagePreview,
     openPicModal,
     toggleModal,
     visiblePicModal,
@@ -331,15 +413,11 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     handleWebsite,
     setIsSelfie,
     sumbitVerificationForm,
-    closePhdOptionModalModal,
-    openPhdOptionModal,
-    PhdOptionModal,
     closePhdOptionPicUploadingModal,
     openPhdOptionPicUploadingModal,
     PhdOptionPicUploadingModal,
     uploadPhdOptionPhotos,
     PhdOptionImage,
-    validationErrorMessage,
     website,
     isVerificationInfoModalVisible,
     openInfoModal,
@@ -348,5 +426,7 @@ export const useVerificationViewModal = (props: AvatarProps) => {
     closeStudentInfoModal,
     openStudentInfoModal,
     isStudentInfoModalVisible,
+    isShowPreview,
+    error
   };
 };
