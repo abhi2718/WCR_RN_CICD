@@ -1,4 +1,4 @@
-import { useEffect,  useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   defaultPhotoDimension,
   pickPhotoFromCammera,
@@ -67,7 +67,6 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     );
   };
 
-
   const alreadySetVerificationOption = () => {
     let result;
     if (user.verificationId?.idType === 'npi') {
@@ -103,6 +102,8 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   const dispatch = useDispatch();
   const toggleModal = () => setVisibleModal(!visibleModal);
   const clickPicture = async (source: string) => {
+    toggleModal();
+
     if (source === 'camera') {
       const image: Image = await pickPhotoFromCammera(undefined, true);
       if (image?.cropRect) {
@@ -116,6 +117,14 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         if (!isSelfie) {
           openPicModal();
         }
+        if (selfie) {
+          setError((oldState)=>{
+            return false
+          });
+        }
+      }
+      if (selfie) {
+        setError(false);
       }
       if (!isSelfie) {
         openPicModal();
@@ -131,18 +140,23 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
           mime: image?.mime,
           name: image?.path?.split('/').pop()!,
         };
-        setdocumentImage(resultImage);
-        if(isSelfie){
-          setError(false)
-        }
-         setError(true)
         props.onChange?.(image);
+
+        setdocumentImage(resultImage);
+        if (selfie) {
+          setError(false);
+        }
+        if (!isSelfie) {
+          openPicModal();
+        }
+      }
+      if (selfie) {
+        setError(false);
       }
       if (!isSelfie) {
         openPicModal();
       }
     }
-    toggleModal();
   };
   const uploadPhdOptionPhotos = async (source: string) => {
     if (source === 'camera') {
@@ -202,8 +216,8 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
         name: image?.path?.split('/').pop()!,
       };
       setSelfie(resultImage);
-      if(documentImage){
-        setError(false)
+      if (documentImage) {
+        setError(false);
       }
       props.onChange?.(image);
     }
@@ -230,10 +244,10 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
   const sumbitVerificationForm = async () => {
     try {
       if (!documentImage?.path) {
-        return  setError(true)
+        return setError(true);
       }
       if (!selfie?.path) {
-        return setError(true)
+        return setError(true);
       }
 
       const photos: imageObject[] = PhdOptionImage
@@ -427,6 +441,6 @@ export const useVerificationViewModalStepTwo = (props: AvatarProps) => {
     openStudentInfoModal,
     isStudentInfoModalVisible,
     isShowPreview,
-    error
+    error,
   };
 };

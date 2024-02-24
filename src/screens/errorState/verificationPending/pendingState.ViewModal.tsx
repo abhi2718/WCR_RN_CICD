@@ -89,7 +89,7 @@ export const usePandingStateViewModal = (props: ScreenParams) => {
   };
 
   const navigateToGender = () => {
-    navigation.navigate(ROUTES.About);
+    navigation.navigate(ROUTES.Gender);
   };
   return { state, isFormSubmitted, updateUserDetails, declineReason, loading };
 };
