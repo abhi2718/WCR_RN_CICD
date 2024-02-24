@@ -103,6 +103,7 @@ export interface User {
   firebaseUid: string;
   fullName: string;
   hasPassword: boolean;
+  welcomeHome: boolean;
   height: Height;
   homeInfoModal: boolean;
   id: string;

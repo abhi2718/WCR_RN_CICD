@@ -38,6 +38,7 @@ import { EditProfile } from '../../screens/tab.screens/profile/components/editPr
 import VerificationPending from '../../screens/errorState/verificationPending';
 import { MessageList } from '../../screens/tab.screens/chat/components/chatList';
 import { PrivteChatMediaScreen } from '../../screens/tab.screens/chat/private/compnents/media';
+import { WelcomeHomeScreen } from '../../screens/tab.screens/welcomeHome';
 
 const options = { headerShown: false };
 export const StackNavigator = () => {
@@ -83,6 +84,11 @@ export const StackNavigator = () => {
         options={options}
         name={ROUTES.VerificationStepTwo}
         component={VerificationStepTwo}
+      />
+      <Stack.Screen
+        options={options}
+        name={ROUTES.HomeWelcome}
+        component={WelcomeHomeScreen}
       />
       <Stack.Screen
         options={options}

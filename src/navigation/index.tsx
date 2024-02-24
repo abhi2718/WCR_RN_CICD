@@ -6,6 +6,7 @@ export enum ROUTES {
   SignIn = 'SignIn',
   Profile = '/profile',
   Gender = '/gender',
+  HomeWelcome = '/homeWelcome',
   GenderPronoun = '/genderPronoun',
   SexualOrientation = '/sexualOrientation',
   SignUp = 'SignUp',
