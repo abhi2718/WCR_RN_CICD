@@ -1,5 +1,5 @@
 import { CLIENTID } from '@env';
-const isProduction = true;
+const isProduction = !true;
 export const config = {
   API_URL: isProduction
     ? 'https://app.whitecoatromance.com/api'
