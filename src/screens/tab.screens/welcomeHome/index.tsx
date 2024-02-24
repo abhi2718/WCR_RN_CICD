@@ -34,8 +34,8 @@ export const WelcomeHomeScreen = (props: ScreenParams) => {
           </Column>
           <Image
             source={require('../../../assets/images/welcomeImg.png')}
-            resizeMode="contain"
             style={styles.welcomeImg}
+            resizeMode="contain"
           />
           <Text style={styles.infohead}>Here's how our app works:</Text>
 
