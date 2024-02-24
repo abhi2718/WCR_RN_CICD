@@ -1,7 +1,9 @@
 import { CLIENTID } from '@env';
-const isProduction = !true;
+const isProduction = true;
 export const config = {
-  API_URL: isProduction? 'https://app.whitecoatromance.com/api':'https://staging.whitecoatromance.com/api',
+  API_URL: isProduction
+    ? 'https://app.whitecoatromance.com/api'
+    : 'https://staging.whitecoatromance.com/api',
   //'http:/192.168.1.3:8000/api',
   CLIENTID,
   WEBCLIENTID:
