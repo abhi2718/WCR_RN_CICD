@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { fontWeights, fonts } from '../../../infrastructure/theme/fonts';
 import { sizes } from '../../../infrastructure/theme/sizes';
-import { dimensions } from '../../../components/tools/index';
+
 
 export const styles = StyleSheet.create({
   welcomeHead: {

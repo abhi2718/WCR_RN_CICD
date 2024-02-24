@@ -28,7 +28,6 @@ export const useViewModal = (props: ScreenParams) => {
       const update = {
         welcomeHome: true,
       };
-
       setLoading(true);
       const userData = await updateUserDetailsRepository.updateUserDetails(
         user._id,
@@ -48,7 +47,6 @@ export const useViewModal = (props: ScreenParams) => {
           };
       dispatch(addUser(data));
       setLoading(false);
-
       navigateToHomeDeck();
     } catch (err: any) {
       setLoading(false);
