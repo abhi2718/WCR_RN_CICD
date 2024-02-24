@@ -21,10 +21,7 @@ export const WelcomeHomeScreen = (props: ScreenParams) => {
             <Image
               source={require('../../../assets/images/welcomeHead.png')}
               resizeMode="contain"
-              style={{
-                height: 25,
-                width: 300,
-              }}
+              style={styles.welcomeHeadImg}
             />
             <Column alignItems="center">
               <Text style={styles.welcomeText}>
@@ -38,10 +35,7 @@ export const WelcomeHomeScreen = (props: ScreenParams) => {
           <Image
             source={require('../../../assets/images/welcomeImg.png')}
             resizeMode="contain"
-            style={{
-              height: '25%',
-              width: '100%',
-            }}
+            style={styles.welcomeImg}
           />
           <Text style={styles.infohead}>Here's how our app works:</Text>
 
@@ -49,10 +43,7 @@ export const WelcomeHomeScreen = (props: ScreenParams) => {
             <Image
               source={require('../../../assets/images/icons/checkIcon.png')}
               resizeMode="contain"
-              style={{
-                height: 20,
-                width: 20,
-              }}
+              style={styles.checkIcon}
             />
             <Column>
               <Text style={styles.listHead}>Quality Matches</Text>
@@ -67,10 +58,7 @@ export const WelcomeHomeScreen = (props: ScreenParams) => {
             <Image
               source={require('../../../assets/images/icons/checkIcon.png')}
               resizeMode="contain"
-              style={{
-                height: 20,
-                width: 20,
-              }}
+              style={styles.checkIcon}
             />
             <Column>
               <Text style={styles.listHead}>Engage freely</Text>
@@ -84,10 +72,7 @@ export const WelcomeHomeScreen = (props: ScreenParams) => {
             <Image
               source={require('../../../assets/images/icons/checkIcon.png')}
               resizeMode="contain"
-              style={{
-                height: 20,
-                width: 20,
-              }}
+              style={styles.checkIcon}
             />
             <Column>
               <Text style={styles.listHead}>

@@ -38,4 +38,16 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     width: '90%',
   },
+  welcomeHeadImg: {
+    height: 25,
+    width: 300,
+  },
+  welcomeImg: {
+    height: '25%',
+    width: '100%',
+  },
+  checkIcon: {
+    height: 20,
+    width: 20,
+  },
 });
