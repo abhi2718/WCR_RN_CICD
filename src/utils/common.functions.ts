@@ -92,7 +92,7 @@ export const useNavigateToScreen = () => {
   };
   const navigateToScreen = (user: User) => {
     if (user.verification.status === 'Verified') {
-      resetState(ROUTES.Tab);
+      resetState(ROUTES.HomeWelcome);
     } else {
       if (user.verificationId.submitted) {
         resetState(ROUTES.VerificationPending);

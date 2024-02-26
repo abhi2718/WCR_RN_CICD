@@ -79,7 +79,7 @@ export const HeaderBar = (props: HeaderBarProps) => {
           <Text style={headerStyle.skipBtn}>Skip</Text>
         </Pressable>
       ) : props.info ? (
-        <Pressable onPress={info}>
+        <Pressable onPress={info} style={headerStyle.InfoView}>
           <Image
             style={headerStyle.infoIcon}
             source={require('../../assets/images/icons/infoIcon.png')}
@@ -133,6 +133,10 @@ export const headerStyle = StyleSheet.create({
     fontSize: sizes[4],
     color: colors.ui.text,
     fontFamily: fonts.body,
+  },
+  InfoView: {
+    width: sizes[11],
+    alignItems: 'flex-end',
   },
   infoIcon: {
     height: sizes[4],
@@ -297,9 +301,7 @@ export const ErrorScreenHeader = () => {
         <View style={errorScreenHeaderStyle.emptyView} />
         <Logo width={40} height={40} />
         <Pressable onPress={modalShow}>
-          <View
-            style={errorScreenHeaderStyle.threeDotWrapper}
-          >
+          <View style={errorScreenHeaderStyle.threeDotWrapper}>
             <Image
               style={errorScreenHeaderStyle.threeDots}
               resizeMode="contain"
