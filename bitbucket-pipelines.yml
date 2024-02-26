@@ -4,5 +4,5 @@ pipelines:
       - step:
           name: Deploy to Testflight
           script:
-            - npm install 
-           
+            - echo "Running pipeline on PR merge to develop..."
+            - npm install
