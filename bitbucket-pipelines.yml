@@ -1,0 +1,8 @@
+pipelines:
+  branches:
+    develop:
+      - step:
+          name: Deploy to Testflight
+          script:
+            - npm install 
+            - fastlane deploy
