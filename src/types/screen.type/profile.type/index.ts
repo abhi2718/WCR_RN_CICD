@@ -145,7 +145,7 @@ export interface heightPrefrenceProps{
   visible:boolean,
   handleHeightModal:()=>void,
   heightRange:number[],
-  setHeightRange:Dispatch<SetStateAction<number[]>>
+  setHeightRange:Dispatch<SetStateAction<(number)[]>>
 }
 
 export type BlockedProfile = {
