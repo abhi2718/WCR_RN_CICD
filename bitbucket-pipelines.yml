@@ -1,8 +1,8 @@
 pipelines:
   branches:
-    master:
+    develop:
       - step:
           name: Deploy to Testflight
           script:
-            - npm install 
-            - fastlane deploy
+            - echo "Running pipeline on PR merge to develop..."
+            - npm install
