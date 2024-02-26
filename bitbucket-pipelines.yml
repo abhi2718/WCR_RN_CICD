@@ -5,4 +5,4 @@ pipelines:
           name: Deploy to Testflight
           script:
             - npm install 
-            - fastlane deploy
+           
