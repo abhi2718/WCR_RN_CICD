@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "ios:beta": "fastlane beta"
   },
   "dependencies": {
     "@cometchat/chat-sdk-react-native": "^4.0.5",
