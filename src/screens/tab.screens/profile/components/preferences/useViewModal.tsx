@@ -110,7 +110,7 @@ export const useViewModal = () => {
   );
   const [distanceRange, setDistanceRange] = useState<any[]>(['No Max']);
   const [ageRange, setAgeRange] = useState([18, 100]);
-  const [heightRange, setHeightRange] = useState([3, 7]);
+  const [heightRange, setHeightRange] = useState([3, 8]);
   const optionsList = [
     {},
     {
