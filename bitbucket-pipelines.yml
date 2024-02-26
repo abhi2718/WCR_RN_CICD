@@ -1,7 +1,8 @@
 pipelines:
   branches:
-    fastlane:
+    master:
       - step:
-          name: Just a simple echo!
+          name: Deploy to Testflight
           script:
-            - echo "Hello world! "
+            - npm install 
+            - fastlane deploy
