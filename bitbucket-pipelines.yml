@@ -5,7 +5,7 @@ pipelines:
           name: Install Node modules
           image: node:18
           script:
-            - npm install
+            - npm install  --legacy-peer-deps
       - step:
           name: Install CocoaPods
           image: node:18
