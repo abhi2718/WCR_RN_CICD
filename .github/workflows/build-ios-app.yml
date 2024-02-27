@@ -8,6 +8,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm install  --legacy-peer-deps
+      - name: Install pods
+        run: cd ios && pod install 
       - run: fastlane beta
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
