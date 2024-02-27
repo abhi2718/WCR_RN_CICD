@@ -22,7 +22,7 @@ pipelines:
             - command -v brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             # Install Ruby dependencies for Fastlane
             - gem install bundler
-            # Install Fastlane
+            # Install Fastlane 123
             - gem install fastlane
       - step: 
           name: Make build and release to testflight
