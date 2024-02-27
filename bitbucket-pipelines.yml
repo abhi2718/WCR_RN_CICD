@@ -22,7 +22,7 @@ pipelines:
             # - cd ios && pod install
             # # Install Homebrew if not already installed
             # - command -v brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            # Install Ruby dependencies for Fastlane
+            # Install Ruby dependencies for Fastlane 123
             - gem install bundler
             # Install Fastlane
             - gem install fastlane
