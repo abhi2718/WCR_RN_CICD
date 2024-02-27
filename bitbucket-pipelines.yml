@@ -18,10 +18,10 @@ pipelines:
           name: Install CocoaPods dependencies and Fastlane
           image: ruby:latest
           script:
-            # Navigate to iOS directory and run pod install
-            - cd ios && pod install
-            # Install Homebrew if not already installed
-            - command -v brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            # # Navigate to iOS directory and run pod install
+            # - cd ios && pod install
+            # # Install Homebrew if not already installed
+            # - command -v brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             # Install Ruby dependencies for Fastlane
             - gem install bundler
             # Install Fastlane
