@@ -29,4 +29,5 @@ pipelines:
       - step: 
           name: Make build and release to testflight
           script:
-            - npm run ios:beta
+            # - npm run ios:beta
+            - fastlane beta
