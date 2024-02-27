@@ -21,6 +21,8 @@ pipelines:
             - gem install bundler
             # Install Fastlane
             - gem install fastlane
+            # Set up PATH
+            - export PATH="$HOME/.fastlane/bin:$PATH"
       - step: 
           name: Make build and release to testflight
           script:
