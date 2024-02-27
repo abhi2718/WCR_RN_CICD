@@ -7,9 +7,11 @@ pipelines:
           script:
             - npm install
       - step:
-          name: Install CocoaPods
-          image: node:18
+          name: Install RubyGems and CocoaPods
+          image: ruby:latest
           script:
+            # Install RubyGems
+            - apt-get update && apt-get install -y rubygems
             # Install CocoaPods
             - gem install cocoapods
       - step:
@@ -22,7 +24,7 @@ pipelines:
             - command -v brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
             # Install Ruby dependencies for Fastlane
             - gem install bundler
-            # Install Fastlane 123
+            # Install Fastlane
             - gem install fastlane
       - step: 
           name: Make build and release to testflight
