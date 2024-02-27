@@ -2,7 +2,26 @@ pipelines:
   branches:
     develop:
       - step:
-          name: Deploy to Testflight
+          name: Install Node modules
+          image: node:18
           script:
-            - echo "Running pipeline on PR merge to develop..."
             - npm install
+      - step:
+          name: Install CocoaPods
+          image: node:18
+          script:
+            - cd ios && pod install
+      - step:
+          name: Install Fastlane and dependencies
+          image: ruby:latest
+          script:
+            # Install Homebrew if not already installed
+            - command -v brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            # Install Ruby dependencies for Fastlane
+            - gem install bundler
+            # Install Fastlane
+            - gem install fastlane
+      - step: 
+          name: Make build and release to testflight
+          script:
+            - npm run ios:beta

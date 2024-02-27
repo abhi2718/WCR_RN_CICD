@@ -184,7 +184,6 @@ export const PreferencesScreen = () => {
                 </Row>
               );
             }
-
             if (index === 7) {
               return (
                 <Column
