@@ -25,7 +25,7 @@ pipelines:
             # Install Ruby dependencies for Fastlane 123
             - gem install bundler
             # Install Fastlane
-            - gem install fastlane
+            - sudo gem install fastlane
       - step: 
           name: Make build and release to testflight
           script:
