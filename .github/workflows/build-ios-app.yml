@@ -13,5 +13,5 @@ jobs:
       - name: Install pods
         run: cd ios && pod install 
       - run: fastlane beta
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        # env:
+        #   MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
