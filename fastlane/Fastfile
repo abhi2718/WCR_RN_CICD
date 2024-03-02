@@ -15,11 +15,22 @@
 
 default_platform(:ios)
 
+# platform :ios do
+#   desc "Push a new beta build to TestFlight"
+#   lane :beta do
+#     increment_build_number(xcodeproj: "./ios/wcr.xcodeproj")
+#     build_app(workspace: "./ios/wcr.xcworkspace", scheme: "wcr")
+#     upload_to_testflight
+#   end
+# end
+
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
+    setup_ci if ENV['CI']
+    match(type: 'appstore')
     increment_build_number(xcodeproj: "./ios/wcr.xcodeproj")
     build_app(workspace: "./ios/wcr.xcworkspace", scheme: "wcr")
-    upload_to_testflight
+    upload_to_testflight(skip_waiting_for_build_processing: true)
   end
 end
