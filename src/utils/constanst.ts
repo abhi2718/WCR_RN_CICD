@@ -12,7 +12,6 @@ export const genderPronounArray = [
   'They/Them',
   'Prefer not to say',
 ];
-
 export const maritalStatus = [
   'Never Married',
   'Divorced',
