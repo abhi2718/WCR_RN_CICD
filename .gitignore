@@ -103,11 +103,11 @@ node_modules/
 .idea
 
 # Android-specific
-android/build/
-android/app/build/
-android/temp/
-android/.gradle/
-android/captures/
+# android/build/
+# android/app/build/
+# android/temp/
+# android/.gradle/
+# android/captures/
 
 # iOS-specific
 ios/build/
