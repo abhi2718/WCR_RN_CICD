@@ -1,0 +1,17 @@
+appId: com.whitecoatromance.app
+---
+- launchApp
+- tapOn: "Next"
+- tapOn: "Next"
+- tapOn: "Next"
+- tapOn: "Continue"
+- tapOn: "Email"
+- inputText: "test@gmail.com"
+- tapOn: "Continue"
+- tapOn:
+    point: "50%,85%"
+
+
+
+
+
