@@ -12,4 +12,4 @@ jobs:
       - uses: mobile-dev-inc/action-maestro-cloud@v1.0.0
         with:
          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-         app-file: ./android/app/build/outputs/apk/release
+         app-file: app-release.apk
